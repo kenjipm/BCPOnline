@@ -24,7 +24,7 @@ date_default_timezone_set('Asia/Jakarta');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'localhost';
+$config['base_url'] = '/BCPOnline';
 
 /*
 |--------------------------------------------------------------------------
@@ -65,7 +65,7 @@ $config['uri_protocol']	= 'REQUEST_URI';
 |
 | https://codeigniter.com/user_guide/general/urls.html
 */
-$config['url_suffix'] = '.aspx';
+$config['url_suffix'] = '';
 
 /*
 |--------------------------------------------------------------------------

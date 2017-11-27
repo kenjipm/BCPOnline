@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Login extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,8 +26,7 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "ALOHA";
-		$this->load->view('dashboard_main', $data);
+		$this->load->view('login_main');
 		
 		// Load Footer
 		$this->load->view('footer');

@@ -32,10 +32,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="#"><?=COMPANY_NAME?></a>
+				<a class="navbar-brand" href="<?=site_url('dashboard')?>"><?=COMPANY_NAME?></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="#">Home</a></li>
+				<li><a href="<?=site_url('dashboard')?>">Home</a></li>
 				<li><a href="#">Page 1</a></li>
 				<li><a href="#">Page 2</a></li> 
 				<li><a href="#">Page 3</a></li>
@@ -52,7 +52,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</form>
 			<form class="navbar-form navbar-right">
-				<a href="#" class="btn btn-default">Login</a>
+				<a href="<?=site_url('login')?>" class="btn btn-default">Login</a>
 			</form>
 		</div>
 	</nav>
