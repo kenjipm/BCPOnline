@@ -52,7 +52,7 @@
 				
 				<div class="form-group">
 					<div class="col-xs-offset-3">
-						<button class="btn btn-success">Sign Up</button>
+						<a href="#" class="btn btn-default">Sign Up</a>
 					</div>
 				</div>
 				
