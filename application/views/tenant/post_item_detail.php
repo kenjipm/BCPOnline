@@ -70,7 +70,7 @@
 					<div class="col-xs-9"><input type="text" class="form-control" id="tag" readonly></div>
 				</div>
 				<div class="form-group">
-					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Edit</button></div>
+					<div class="pull-right"><button class="btn btn-default" onclick="setNegoPrice()">Tambah Customer</button></div>
 				</div>
 			</form>
 		</div>
