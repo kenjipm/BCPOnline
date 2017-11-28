@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Tenant extends CI_Controller {
+class Post_Item_List extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,8 +26,23 @@ class Tenant extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "AHOLA";
-		$this->load->view('tenant/dashboard_main', $data);
+		$data['echo'] = "Daftar Item";
+		$this->load->view('tenant/post_item_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function detail($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['echo'] = "Daftar Item";
+		$this->load->view('tenant/post_item_detail', $data);
 		
 		// Load Footer
 		$this->load->view('footer');

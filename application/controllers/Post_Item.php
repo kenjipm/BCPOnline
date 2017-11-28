@@ -26,8 +26,8 @@ class Post_Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "Post Item";
-		$this->load->view('post_item', $data);
+		$data['echo'] = "Tambah Item Baru";
+		$this->load->view('tenant/post_item', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
