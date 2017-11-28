@@ -66,6 +66,10 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="tag">Tag:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput"></div>
+				</div>
+				<div class="form-group">
 					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
 				</div>
 			</form>
