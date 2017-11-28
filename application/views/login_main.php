@@ -12,8 +12,8 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-offset-3">
-						<button class="btn btn-primary">Login</button>
-						<button class="btn btn-success">Sign Up</button>
+						<a href="#" class="btn btn-primary">Login</a>
+						<a href="<?=site_url('signup')?>" class="btn btn-success">Sign Up</a>
 					</div>
 				</div>
 			</form>
