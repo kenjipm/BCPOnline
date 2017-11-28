@@ -7,22 +7,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <title><?=COMPANY_NAME?></title>
 	<link rel="icon" href="<?=base_url('img/favicon.gif');?>" type="image/gif">
     <!-- SET CSS -->
-    <link rel='stylesheet' href='css/bootstrap/css/bootstrap.min.css' type='text/css' media='screen'/>
-    <link rel='stylesheet' href='css/default.css' type='text/css' media='screen'/>
+    <link rel='stylesheet' href='<?=site_url('css/bootstrap/css/bootstrap.min.css')?>' type='text/css' media='screen'/>
+    <link rel='stylesheet' href='<?=site_url('css/default.css')?>' type='text/css' media='screen'/>
     
     <!-- SET JS -->
-    <script type='text/javascript' src='js/jquery-3.2.1.min.js'></script>
-    <script type='text/javascript' src='js/bootstrap.min.js'></script>
-    <script type='text/javascript' src='js/default.js'></script>
+    <script type='text/javascript' src='<?=site_url('js/jquery-3.2.1.min.js')?>'></script>
+    <script type='text/javascript' src='<?=site_url('js/bootstrap.min.js')?>'></script>
+    <script type='text/javascript' src='<?=site_url('js/default.js')?>'></script>
 
     <?php
         //SET CUSTOM CSS
         if (isset($css_list)) { foreach ($css_list as $css) {
-            ?><link rel='stylesheet' href='css/<?=$css?>.css' type='text/css'/><?php } }
+            ?><link rel='stylesheet' href='<?=site_url('css/'.$css.'.css')?>' type='text/css'/><?php } }
         
         //SET CUSTOM JS
         if (isset($js_list)) { foreach ($js_list as $js) {
-            ?><script type='text/javascript' src='js/<?=$js?>.js'></script><?php } }
+            ?><script type='text/javascript' src='<?=site_url('js/'.$js.'.js')?>'></script><?php } }
     ?>
     
 </head>
