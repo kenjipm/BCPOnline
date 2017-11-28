@@ -36,10 +36,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="<?=site_url('dashboard')?>">Home</a></li>
-				<li><a href="#">Page 1</a></li>
-				<li><a href="#">Page 2</a></li> 
-				<li><a href="#">Page 3</a></li>
-				<li><a href="#">Page 4</a></li>
+				<li><a href="<?=site_url('dashboard')?>">Page 1</a></li>
+				<li><a href="<?=site_url('dashboard')?>">Page 2</a></li> 
+				<li><a href="<?=site_url('dashboard')?>">Page 3</a></li>
+				<li><a href="<?=site_url('profile')?>">Profile</a></li>
 			</ul>
 			<form class="navbar-form navbar-left">
 				<div class="input-group">
