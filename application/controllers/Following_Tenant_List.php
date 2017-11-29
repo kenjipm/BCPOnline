@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
+class Following_Tenant_List extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -26,10 +26,11 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "ALOHA";
-		$this->load->view('dashboard_main', $data);
+		$data['echo'] = "Daftar Tenant yang Diikuti";
+		$this->load->view('customer/following_tenant_list', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
 	}
+
 }
