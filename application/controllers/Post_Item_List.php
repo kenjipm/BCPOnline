@@ -42,6 +42,7 @@ class Post_Item_List extends CI_Controller {
 		
 		// Load Body
 		$data['echo'] = "Daftar Item";
+		$data['model'] = new class{};
 		$this->load->view('tenant/post_item_detail', $data);
 		
 		// Load Footer
