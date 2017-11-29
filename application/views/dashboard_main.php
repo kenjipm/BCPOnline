@@ -23,16 +23,19 @@
 	$model->top_pick_items = array();
 	
 	$model->top_pick_items[0] = new class{};
+	$model->top_pick_items[0]->id = 1;
 	$model->top_pick_items[0]->name = "Charger Samsung";
 	$model->top_pick_items[0]->price = "Rp 250.000";
 	$model->top_pick_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
 	
 	$model->top_pick_items[1] = new class{};
+	$model->top_pick_items[1]->id = 2;
 	$model->top_pick_items[1]->name = "Charger Wireless";
 	$model->top_pick_items[1]->price = "Rp 350.000";
 	$model->top_pick_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
 	
 	$model->top_pick_items[2] = new class{};
+	$model->top_pick_items[2]->id = 3;
 	$model->top_pick_items[2]->name = "Dompet Doraemon";
 	$model->top_pick_items[2]->price = "Rp 40.000";
 	$model->top_pick_items[2]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
@@ -74,7 +77,7 @@
 						?>
 							<div class="col-md-4">
 								<div class="panel panel-default">
-									<a href="<?=site_url('item')?>">
+									<a href="<?=site_url('item/'.$top_pick_item->id)?>">
 										<div class="panel-body">
 											<img class="col-md-12" src="<?=$top_pick_item->image_one_name?>" alt="<?=$top_pick_item->name?>"/>
 										</div>

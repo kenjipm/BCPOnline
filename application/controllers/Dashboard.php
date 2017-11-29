@@ -33,4 +33,19 @@ class Dashboard extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	public function show_404()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['model'] = new class{};
+		$this->load->view('error_404', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
 }

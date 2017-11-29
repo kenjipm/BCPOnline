@@ -1,0 +1,17 @@
+for order
+1. Queued   OR 2. Refunded -> stop here
+2. Picking from Tenant
+3. Delivering to Cust
+4. Received
+
+for repair
+1. Queued
+2. Picking from Cust
+3. Delivering to Tenant
+4. Tenant Received
+5. Cost Calculated   OR  6. RepCancelled -> skip to No 8
+6. Repairing
+7. Repair Finished   OR  8. Refunded -> stop here
+8. Picking from Tenant
+9. Delivering to Cust
+10. Received
