@@ -26,10 +26,52 @@ class Login extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$data['message'] = "";
+		if ($this->input->get('err') !== null)
+		{
+			$data['message'] = $this->get_error_message($this->input->get('err'));
+		}
 		$data['model'] = new class{};
 		$this->load->view('login_main', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function validate()
+	{
+		$username = $this->input->post('username');
+		$password = $this->input->post('password');
+		
+		if ($username == "member")
+		{
+			redirect('dashboard');
+		}
+		else if ($username == "tenant")
+		{
+			redirect('tenant');
+		}
+		else if ($username == "admin")
+		{
+			redirect('admin');
+		}
+		else if ($username == "delivery")
+		{
+			redirect('delivery');
+		}
+		
+		redirect('login?err=1');
+	}
+	
+	private function get_error_message($error_code)
+	{
+		if ($error_code == 1)
+		{
+			return "Username / Password salah";
+		}
+		else
+		{
+			return "Unknown Error";
+		}
 	}
 }
