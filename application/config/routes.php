@@ -50,7 +50,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |		my-controller/my-method	-> my_controller/my_method
 */
 
-// $route['post_item_nego/(:any)'] = 'post_item_nego/index/';
+$route['(:any)/(:num)'] = '$1/index/$2';
 
 $route['default_controller'] = 'dashboard';
 $route['404_override'] = '';
