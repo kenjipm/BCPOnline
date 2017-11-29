@@ -4,7 +4,7 @@
 	<div class="row">
 		<div class="col-xs-4">
 			<div class="thumbnail">
-				<a href="#">
+				<a href="list_of_item/1">
 					<img src="img/favicon.gif" alt="Image1" style="width:50%">
 					<div class="caption text-center">
 						<p>Tenant 1</p>
@@ -20,7 +20,7 @@
 		</div>
 		<div class="col-xs-4">
 			<div class="thumbnail">
-				<a href="#">
+				<a href="list_of_item/2">
 					<img src="img/favicon.gif" alt="Image2" style="width:50%">
 					<div class="caption text-center">
 						<p>Tenant 2</p>
@@ -34,7 +34,7 @@
 		</div>
 		<div class="col-xs-4">
 			<div class="thumbnail">
-				<a href="#">
+				<a href="list_of_item/3">
 					<img src="img/favicon.gif" alt="Image3" style="width:50%">
 					<div class="caption text-center">
 						<p>Tenant 3</p>
