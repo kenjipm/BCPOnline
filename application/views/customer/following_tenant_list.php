@@ -1,9 +1,3 @@
-<?php
-	$accounts[0]['username'] = 'vanji';
-	$accounts[0]['address'] = 'sudirman';
-	$accounts[1]['username'] = 'kenji';
-	$accounts[1]['address'] = 'sudirman';
-?>
 
 <h1><?=$echo?></h1>
 <div class="container">
@@ -13,8 +7,13 @@
 				<a href="#">
 					<img src="img/favicon.gif" alt="Image1" style="width:50%">
 					<div class="caption text-center">
-						<p>Image 1</p>
-						<p>Order</p>
+						<p>Tenant 1</p>
+						<p>
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+						</p>
 					</div>
 				</a>
 			</div>
@@ -24,8 +23,11 @@
 				<a href="#">
 					<img src="img/favicon.gif" alt="Image2" style="width:50%">
 					<div class="caption text-center">
-						<p>Image 2</p>
-						<p>Repair</p>
+						<p>Tenant 2</p>
+						<p>
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+							<img src="img/favicon.gif" alt="Image1" style="width:10%">
+						</p>
 					</div>
 				</a>
 			</div>
@@ -35,8 +37,9 @@
 				<a href="#">
 					<img src="img/favicon.gif" alt="Image3" style="width:50%">
 					<div class="caption text-center">
-						<p>Image 3</p>
-						<p>Bid</p>
+						<p>Tenant 3</p>
+						<p>
+						</p>
 					</div>
 				</a>
 			</div>

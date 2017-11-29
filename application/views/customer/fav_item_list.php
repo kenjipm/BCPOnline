@@ -1,9 +1,3 @@
-<?php
-	$accounts[0]['username'] = 'vanji';
-	$accounts[0]['address'] = 'sudirman';
-	$accounts[1]['username'] = 'kenji';
-	$accounts[1]['address'] = 'sudirman';
-?>
 
 <h1><?=$echo?></h1>
 <div class="container">

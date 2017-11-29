@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Login extends CI_Controller {
+class Profile extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -18,7 +18,7 @@ class Login extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
-	public function index()
+	public function index($id)
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -26,9 +26,11 @@ class Login extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->view('login_main');
+		$data['echo'] = "Profile";
+		$this->load->view('customer/profile_main', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
 }

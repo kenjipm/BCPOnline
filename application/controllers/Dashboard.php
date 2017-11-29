@@ -27,7 +27,6 @@ class Dashboard extends CI_Controller {
 		
 		// Load Body
 		$data['echo'] = "ALOHA";
-		$data['model'] = new class{};
 		$this->load->view('dashboard_main', $data);
 		
 		// Load Footer
