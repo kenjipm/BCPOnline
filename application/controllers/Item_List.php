@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class List_of_Item extends CI_Controller {
+class Item_List extends CI_Controller {
 
 	/**
 	 * Index Page for this controller.
@@ -28,7 +28,7 @@ class List_of_Item extends CI_Controller {
 		// Load Body
 		$data['echo'] = "Daftar Item";
 		$data['model'] = new class{};
-		$this->load->view('customer/list_of_item', $data);
+		$this->load->view('customer/item_list', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
