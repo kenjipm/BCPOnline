@@ -1,9 +1,9 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Item extends CI_Controller {
+class Order extends CI_Controller {
 
-	public function index($id)
+	public function index()
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -12,7 +12,7 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		$data['model'] = new class{};
-		$this->load->view('item_main', $data);
+		$this->load->view('', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
