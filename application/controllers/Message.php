@@ -1,8 +1,8 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Dashboard extends CI_Controller {
-
+class Message extends CI_Controller {
+	
 	public function index()
 	{
 		// Load Header
@@ -11,24 +11,23 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "ALOHA";
 		$data['model'] = new class{};
-		$this->load->view('dashboard_main', $data);
+		$this->load->view('message_main', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
 	}
 	
-	public function show_404()
+	public function detail($id)
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('message_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
 		$data['model'] = new class{};
-		$this->load->view('error_404', $data);
+		$this->load->view('message_detail', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
