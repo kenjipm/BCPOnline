@@ -69,8 +69,20 @@
 					<div class="col-xs-9"><input type="text" class="form-control" id="tag" 
 						value="<?=$model->posted_items[0]->tag?>" readonly></div>
 				</div>
+				<h4>Daftar Diskon Customer</h4>
+				<div id="add_customer" style="display:none">
+					<div class="form-group">
+						<label class="control-label col-xs-3">ID Customer:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" name="customer_id_0"></div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Harga Diskon:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" name="discounted_price_0"></div>
+					</div>
+				</div>
 				<div class="form-group">
-					<div class="pull-right"><button class="btn btn-default" onclick="setNegoPrice()">Tambah Customer</button></div>
+					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()">Tambah Customer</a></div>
+					<div class="col-xs-3"><a class="btn btn-default">Submit</a></div>
 				</div>
 			</form>
 		</div>
