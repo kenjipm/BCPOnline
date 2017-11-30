@@ -36,14 +36,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="<?=site_url('dashboard')?>">Home</a></li>
-				<li><a href="<?=site_url('dashboard')?>">Page 1</a></li>
-				<li><a href="<?=site_url('dashboard')?>">Page 2</a></li> 
-				<li><a href="<?=site_url('dashboard')?>">Page 3</a></li>
-				<li><a href="<?=site_url('profile')?>">Profile</a></li>
+				<li><a href="<?=site_url('tenant_favorite')?>">Tenant</a></li>
+				<li><a href="<?=site_url('item_favorite')?>">Favorit</a></li>
+				<li><a href="<?=site_url('reward')?>">Reward</a></li>
 			</ul>
-			<form class="navbar-form navbar-left">
+			<form action="<?=site_url('search')?>" method="post" class="navbar-form navbar-left">
 				<div class="input-group">
-					<input type="text" class="form-control" placeholder="Search Items...">
+					<input name="search_keywords" type="text" class="form-control" placeholder="Search Items...">
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							<i class="glyphicon glyphicon-search"></i>
@@ -54,6 +53,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<form class="navbar-form navbar-right">
 				<a href="<?=site_url('login')?>" class="btn btn-default">Login</a>
 			</form>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<?=site_url('cart')?>">Cart</a></li>
+				<li><a href="<?=site_url('billing')?>">Billing</a></li>
+				<li><a href="<?=site_url('reward')?>">Reward</a></li>
+				<li><a href="<?=site_url('message')?>">Inbox</a></li> 
+				<li><a href="<?=site_url('profile/1')?>">Profile</a></li>
+			</ul>
 		</div>
 	</nav>
 	
