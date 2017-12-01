@@ -85,8 +85,8 @@
 								<div class="col-xs-4 list-group-item">
 									<?=$order->posted_item[0]->price?> </div>
 								<div class="col-xs-1">
-									<a href="<?=site_url('transaction_detail/'.$order->id)?>">
-										<button class="btn btn-default">Lihat Order</button>
+									<a class="btn btn-default" href="<?=site_url('Order/transaction_detail/'.$order->id)?>">
+										Lihat Order
 									</a></div>	
 							</div>
 						</div>
