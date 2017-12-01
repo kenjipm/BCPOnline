@@ -30,39 +30,43 @@
 	$model->bills[2]->total_payable = "Rp 180.000,-";
 	
 ?>
-
-<h1><?=$echo?></h1>
-<div class="container">
-	<div class="row list-group">
-		<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
-		<div class="col-xs-2"> <label for="customer">Customer</label> </div>
-		<div class="col-xs-3"> <label for="address">Alamat</label> </div>
-		<div class="col-xs-2"> <label for="add_fee">Ongkos Kirim</label>	</div>
-		<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
-	</div>
-	<?php
-	foreach($model->bills as $bill)
-	{
-		?>
-		<div class="row list-group">
-			<div class="col-xs-2 list-group-item">
-				<?=$bill->date_created?> </div>
-			<div class="col-xs-2 list-group-item">
-				<?=$bill->customer?> </div>
-			<div class="col-xs-3 list-group-item">
-				<?=$bill->address?> </div>
-			<div class="col-xs-2 list-group-item">
-				<?=$bill->add_fee?> </div>
-			<div class="col-xs-2 list-group-item">
-				<?=$bill->total_payable?> </div>
-			<div class="col-xs-1">
-				<a href="<?=site_url('billing/'.$bill->id)?>">
-					<button class="btn btn-default">Lihat Order</button>
-				</a></div>	
-				
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Billing</h3>
 		</div>
-		<?php
-	}
-	?>
-	
+		<div class="panel-body">
+			<div class="row list-group">
+				<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
+				<div class="col-xs-2"> <label for="customer">Customer</label> </div>
+				<div class="col-xs-3"> <label for="address">Alamat</label> </div>
+				<div class="col-xs-2"> <label for="add_fee">Ongkos Kirim</label>	</div>
+				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
+			</div>
+			<?php
+			foreach($model->bills as $bill)
+			{
+				?>
+				<div class="row list-group">
+					<div class="col-xs-2 list-group-item">
+						<?=$bill->date_created?> </div>
+					<div class="col-xs-2 list-group-item">
+						<?=$bill->customer?> </div>
+					<div class="col-xs-3 list-group-item">
+						<?=$bill->address?> </div>
+					<div class="col-xs-2 list-group-item">
+						<?=$bill->add_fee?> </div>
+					<div class="col-xs-2 list-group-item">
+						<?=$bill->total_payable?> </div>
+					<div class="col-xs-1">
+						<a href="<?=site_url('billing/'.$bill->id)?>">
+							<button class="btn btn-default">Lihat</button>
+						</a></div>	
+						
+				</div>
+				<?php
+			}
+			?>
+		</div>
+	</div>
 </div>
