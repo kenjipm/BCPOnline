@@ -49,4 +49,22 @@ class Billing extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	public function transaction_detail($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['model'] = new class{};
+		if ($this->session->userdata('username') == "tenant") // dummy
+		{
+			$this->load->view('tenant/transaction_detail', $data);
+		}
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
 }
