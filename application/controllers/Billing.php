@@ -19,7 +19,7 @@ class Billing extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('billing_list', $data);
+			$this->load->view('customer/billing_list', $data);
 		}
 		
 		// Load Footer
@@ -43,9 +43,26 @@ class Billing extends CI_Controller {
 		}
 		else
 		{
-			$this->load->view('billing', $data);
+			$this->load->view('customer/billing', $data);
 		}
 		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function cart()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['title'] = "Billing";
+		$data['model'] = new class{}; // bedanya sama detail, modelnya pake session
+		
+		$this->load->view('customer/billing', $data);
+			
 		// Load Footer
 		$this->load->view('footer');
 	}

@@ -54,7 +54,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<a href="<?=site_url('login')?>" class="btn btn-default">Login</a>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<?=site_url('cart')?>">Cart</a></li>
+				<li><a href="<?=site_url('customer/cart')?>">Cart</a></li>
 				<li><a href="<?=site_url('billing')?>">Billing</a></li>
 				<li><a href="<?=site_url('reward')?>">Reward</a></li>
 				<li><a href="<?=site_url('message')?>">Inbox</a></li> 
