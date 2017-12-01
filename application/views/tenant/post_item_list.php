@@ -1,45 +1,50 @@
 <?php
-	$accounts[0]['username'] = 'vanji';
-	$accounts[0]['address'] = 'sudirman';
-	$accounts[1]['username'] = 'kenji';
-	$accounts[1]['address'] = 'sudirman';
+
+	// Model Dummy Untuk Posted Item List
+	$model->posted_items = array();
+	
+	$model->posted_items[0] = new class{};
+	$model->posted_items[0]->id = 1;
+	$model->posted_items[0]->name = "Djisamsung Galaksih";
+	$model->posted_items[0]->type = "Order";
+	$model->posted_items[1] = new class{};
+	$model->posted_items[1]->id = 2;
+	$model->posted_items[1]->name = "Si Yaoming Handphone";
+	$model->posted_items[1]->type = "Repair";
+	$model->posted_items[2] = new class{};
+	$model->posted_items[2]->id = 3;
+	$model->posted_items[2]->name = "Snsv Laptop";
+	$model->posted_items[2]->type = "Bid";
+	$model->posted_items[3] = new class{};
+	$model->posted_items[3]->id = 4;
+	$model->posted_items[3]->name = "Tos Ibak TV";
+	$model->posted_items[3]->type = "Order";
 ?>
 
-<h1><?=$echo?></h1>
-<div class="container">
-	<div class="row">
-		<div class="col-xs-4">
-			<div class="thumbnail">
-				<a href="#">
-					<img src="<?=site_url('img/favicon.gif')?>" alt="Image1" style="width:50%">
-					<div class="caption text-center">
-						<p>Image 1</p>
-						<p>Order</p>
-					</div>
-				</a>
-			</div>
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Item</h3>
 		</div>
-		<div class="col-xs-4">
-			<div class="thumbnail">
-				<a href="#">
-					<img src="<?=site_url('img/favicon.gif')?>" alt="Image2" style="width:50%">
-					<div class="caption text-center">
-						<p>Image 2</p>
-						<p>Repair</p>
+		<div class="panel-body">
+			<?php
+			foreach($model->posted_items as $posted_item)
+			{
+				?>
+				<div class="col-xs-4">
+					<div class="thumbnail">
+						<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
+							<img src="<?=site_url('img/favicon.gif')?>" alt="Image" style="width:50%">
+							<div class="caption text-center">
+								<p><?=$posted_item->name?></p>
+								<p><?=$posted_item->type?></p>
+							</div>
+						</a>
 					</div>
-				</a>
-			</div>
-		</div>
-		<div class="col-xs-4">
-			<div class="thumbnail">
-				<a href="#">
-					<img src="<?=site_url('img/favicon.gif')?>" alt="Image3" style="width:50%">
-					<div class="caption text-center">
-						<p>Image 3</p>
-						<p>Bid</p>
-					</div>
-				</a>
-			</div>
+				</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 	

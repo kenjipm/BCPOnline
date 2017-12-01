@@ -43,7 +43,7 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3><?=$title?></h3>
+			<h3>Billing Detail</h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal">
@@ -86,7 +86,7 @@
 									<?=$order->posted_item[0]->price?> </div>
 								<div class="col-xs-1">
 									<a href="<?=site_url('transaction_detail/'.$order->id)?>">
-										<button type="button" class="btn btn-default">Lihat Order</button>
+										<button class="btn btn-default">Lihat Order</button>
 									</a></div>	
 							</div>
 						</div>
