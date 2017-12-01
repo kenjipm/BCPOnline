@@ -29,7 +29,8 @@ class Login extends CI_Controller {
 		$password = $this->input->post('password');
 		
 		$userdata = array(
-			'username' => $username
+			'username' => $username,
+			'cart' => array()
 		);
 		$this->session->set_userdata($userdata);
 		
