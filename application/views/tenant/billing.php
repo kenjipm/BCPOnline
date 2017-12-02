@@ -19,24 +19,24 @@
 	$model->orders[0] = new class{};
 	$model->orders[0]->id = 1;
 	$model->orders[0]->quantity = 1;
-	$model->orders[0]->posted_item = array();
-	$model->orders[0]->posted_item[0] = new class{};
-	$model->orders[0]->posted_item[0]->name = "Djisamsung Galaksih";
-	$model->orders[0]->posted_item[0]->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item = new class{};
+	$model->orders[0]->posted_item->name = "Djisamsung Galaksih";
+	$model->orders[0]->posted_item->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item->type = "Order";
 	$model->orders[1] = new class{};
 	$model->orders[1]->id = 2;
 	$model->orders[1]->quantity = 1;
-	$model->orders[1]->posted_item = array();
-	$model->orders[1]->posted_item[0] = new class{};
-	$model->orders[1]->posted_item[0]->name = "Kesing Appa Kamera";
-	$model->orders[1]->posted_item[0]->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item = new class{};
+	$model->orders[1]->posted_item->name = "Appa Kamera";
+	$model->orders[1]->posted_item->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item->type = "Repair";
 	$model->orders[2] = new class{};
 	$model->orders[2]->id = 3;
 	$model->orders[2]->quantity = 2;
-	$model->orders[2]->posted_item = array();
-	$model->orders[2]->posted_item[0] = new class{};
-	$model->orders[2]->posted_item[0]->name = "Kesing Djisamsung";
-	$model->orders[2]->posted_item[0]->price = "Rp 50.000,-";
+	$model->orders[2]->posted_item = new class{};
+	$model->orders[2]->posted_item->name = "Kesing Djisamsung";
+	$model->orders[2]->posted_item->price = "Rp 50.000,-";
+	$model->orders[2]->posted_item->type = "Bid";
 	
 ?>
 
@@ -79,15 +79,26 @@
 						<div class="col-xs-9 pull-right">
 							<div class="row list-group">
 								<div class="col-xs-4 list-group-item">
-									<?=$order->posted_item[0]->name?> </div>
+									<?=$order->posted_item->name?> </div>
 								<div class="col-xs-1 list-group-item">
 									<?=$order->quantity?> </div>
-								<div class="col-xs-4 list-group-item">
-									<?=$order->posted_item[0]->price?> </div>
+								<div class="col-xs-3 list-group-item">
+									<?=$order->posted_item->price?> </div>
 								<div class="col-xs-1">
 									<a class="btn btn-default" href="<?=site_url('Order/transaction_detail/'.$order->id)?>">
-										Lihat Order
+										Lihat
 									</a></div>	
+								<?php
+									if ($order->posted_item->type != "Repair"){
+										$show_div = false;
+									} else {
+										$show_div = true;
+									}
+								?>
+								<div class="col-xs-2" id="repair_status" <?php if ($show_div ==false){?> style="display:none"<?php } ?>>
+									<input type="checkbox" name="repair" value="repair_finished">Selesai
+								</div>
+								
 							</div>
 						</div>
 						<?php
@@ -104,10 +115,39 @@
 					<label class="control-label col-xs-3" for="total_payable">Total Harga:</label>
 					<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 						value="<?=$model->billings[0]->total_payable?>" readonly></div>
-					<div class="col-xs-1">
+					<div class="col-xs-2">
 						<a class="btn btn-default" href="">
 							Masukkan OTP
-						</a></div>	
+						</a>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-10">
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_repair_finished')">Servis Selesai</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_repair_finished" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Selesai Servis
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label>Kirim notifikasi bahwa servis sudah selesai?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_repair_finished')">Batal</button>
+					</div>
 				</div>
 			</form>
 		</div>

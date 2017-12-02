@@ -16,6 +16,7 @@
 	$model->order_details->item_name = "Djisamsung Galaksih";
 	$model->order_details->deliverer_name = "Dori";
 	$model->order_details->voucher_cut_price = "Rp 15.000,-";
+	$model->order_details->feedback = "Bagus lah mantep pokonya recommended banget :)";
 	
 ?>
 
@@ -76,14 +77,18 @@
 					<div class="col-xs-9"><input type="text" class="form-control" id="sold_price" 
 						value="<?=$model->order_details->sold_price?>" readonly></div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="sold_price">Total Harga:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="sold_price" 
+						value="<?=$model->order_details->feedback?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-9 col-xs-offset-3">
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')">Lihat Ulasan</button>
+					</div>
+				</div>
 				<a href="">
 					<button class="btn btn-default">Masukkan Harga Servis</button>
-				</a>
-				<a href="">
-					<button class="btn btn-default">Servis Selesai</button>
-				</a>
-				<a href="">
-					<button class="btn btn-default">Balas Feedback</button>
 				</a>
 				<a href="<?=site_url('dispute/'.$model->order_details->cust_rec_code)?>">
 					<button class="btn btn-default">Komplain</button>
@@ -94,6 +99,40 @@
 				<a href="<?=site_url('customer/profile/'.$model->order_details->cust_rec_code)?>">
 					<button class="btn btn-default">Lihat Customer</button>
 				</a>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_review" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Ulas Barang
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Ulasan</label>
+					</div>
+					<div class="col-sm-10">
+						<textarea class="form-control" placeholder="Mantep gan barang sampai dengan selamat" readonly></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Balas Ulasan</label>
+					</div>
+					<div class="col-sm-10">
+						<textarea class="form-control" placeholder="Tulis balasan..."></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Batal</button>
+					</div>
+				</div>
 			</form>
 		</div>
 	</div>
