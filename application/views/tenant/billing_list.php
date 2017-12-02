@@ -59,7 +59,7 @@
 					<div class="col-xs-2 list-group-item">
 						<?=$bill->total_payable?> </div>
 					<div class="col-xs-1">
-						<a href="<?=site_url('billing/'.$bill->id)?>">
+						<a href="<?=site_url('billing/detail/'.$bill->id)?>">
 							<button class="btn btn-default">Lihat</button>
 						</a></div>	
 						

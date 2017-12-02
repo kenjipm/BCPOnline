@@ -76,6 +76,24 @@
 					<div class="col-xs-9"><input type="text" class="form-control" id="sold_price" 
 						value="<?=$model->order_details->sold_price?>" readonly></div>
 				</div>
+				<a href="">
+					<button class="btn btn-default">Masukkan Harga Servis</button>
+				</a>
+				<a href="">
+					<button class="btn btn-default">Servis Selesai</button>
+				</a>
+				<a href="">
+					<button class="btn btn-default">Balas Feedback</button>
+				</a>
+				<a href="<?=site_url('dispute/'.$model->order_details->cust_rec_code)?>">
+					<button class="btn btn-default">Komplain</button>
+				</a>
+				<a href="<?=site_url('message/'.$model->order_details->cust_rec_code)?>">
+					<button class="btn btn-default">Kirim Pesan</button>
+				</a>
+				<a href="<?=site_url('customer/profile/'.$model->order_details->cust_rec_code)?>">
+					<button class="btn btn-default">Lihat Customer</button>
+				</a>
 			</form>
 		</div>
 	</div>
