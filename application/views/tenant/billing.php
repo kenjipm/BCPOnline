@@ -104,6 +104,10 @@
 					<label class="control-label col-xs-3" for="total_payable">Total Harga:</label>
 					<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 						value="<?=$model->billings[0]->total_payable?>" readonly></div>
+					<div class="col-xs-1">
+						<a class="btn btn-default" href="">
+							Masukkan OTP
+						</a></div>	
 				</div>
 			</form>
 		</div>
