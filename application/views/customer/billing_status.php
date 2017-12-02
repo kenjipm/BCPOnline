@@ -44,17 +44,19 @@
 	$model->payments[0]->id = 1;
 	$model->payments[0]->paid = true;
 	$model->payments[0]->payment_method = "KlikBCA";
+	$model->payments[0]->payment_method_description = "<b>KlikBCA: </b>Pembayaran dilakukan melalui www.klikbca.com";
 	$model->payments[0]->payment_date = "2 Dec 17";
 	$model->payments[0]->paid_amount = "Rp 25.000,-";
-	$model->payments[0]->keterangan = "-"; // informasi credit card dll
+	$model->payments[0]->description = "-"; // informasi credit card dll
 	
 	$model->payments[1] = new class{};
 	$model->payments[1]->id = 2;
 	$model->payments[1]->paid = false;
 	$model->payments[1]->payment_method = "CoD";
+	$model->payments[1]->payment_method_description = "<b>Cash on Delivery: </b>Pembayaran dilakukan setelah barang tiba di tujuan";
 	$model->payments[1]->payment_date = "-";
 	$model->payments[1]->paid_amount = "-";
-	$model->payments[1]->keterangan = "Menunggu Pembayaran"; // informasi credit card dll
+	$model->payments[1]->description = "Menunggu Pembayaran"; // informasi credit card dll
 ?>
 
 <div class="row">
@@ -138,7 +140,21 @@
 										<div class="col-xs-2 list-group-item"><?=$payment->payment_date?></div>
 										<div class="col-xs-2 list-group-item"><?=$payment->payment_method?></div>
 										<div class="col-xs-3 list-group-item"><?=$payment->paid_amount?></div>
-										<div class="col-xs-3 list-group-item"><?=$payment->keterangan?></div>
+										<div class="col-xs-3 list-group-item"><?=$payment->description?></div>
+										<div class="col-xs-2">
+											<button data-toggle="collapse" data-target="#payment_description-<?=$payment->id?>" class="btn btn-default" type="button">?</button>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-xs-10">
+											<div id="payment_description-<?=$payment->id?>" class="collapse">
+												<div class="panel panel-default">
+													<div class="panel-body">
+														<?=$payment->payment_method_description?>
+													</div>
+												</div>
+											</div>
+										</div>
 									</div>
 								</div>
 								<?php

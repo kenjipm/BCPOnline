@@ -54,6 +54,7 @@ class Billing extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	// view billing dari shopping cart
 	public function cart()
 	{
 		// Load Header
@@ -62,7 +63,7 @@ class Billing extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Shopping Cart";
+		$data['title'] = "Keranjang Belanja";
 		$data['model'] = new class{}; // bedanya sama detail, modelnya pake session
 		$this->load->view('customer/billing', $data);
 		

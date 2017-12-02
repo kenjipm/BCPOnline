@@ -38,8 +38,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			</div>
 			<ul class="nav navbar-nav">
 				<li><a href="<?=site_url('dashboard')?>">Home</a></li>
-				<li><a href="<?=site_url('tenant_favorite')?>">Tenant</a></li>
-				<li><a href="<?=site_url('item_favorite')?>">Favorit</a></li>
+				<li><a href="<?=site_url('customer/followed_tenant')?>">Tenant</a></li>
+				<li><a href="<?=site_url('item/favorite')?>">Favorit</a></li>
 				<li><a href="<?=site_url('reward')?>">Reward</a></li>
 			</ul>
 			<form action="<?=site_url('search')?>" method="post" class="navbar-form navbar-left">

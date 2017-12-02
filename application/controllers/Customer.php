@@ -27,8 +27,25 @@ class Customer extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$data['title'] = "Keranjang Belanja";
 		$data['model'] = new class{};
 		$this->load->view('customer/cart', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function followed_tenant()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['title'] = "Tenant Diikuti";
+		$data['model'] = new class{};
+		$this->load->view('customer/followed_tenant', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
