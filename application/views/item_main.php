@@ -34,7 +34,7 @@
 		<div class="panel panel-default">
 			<div class="panel-body text-center">
 				<h3><?=$model->item->price?></h3>
-				<a href="#" class="btn btn-default col-md-12">Beli</a>
+				<a href="<?=site_url('customer/cart')?>" class="btn btn-default col-md-12">Beli</a>
 				<a href="#" class="btn btn-default col-md-12">Tambah Ke Favorit</a>
 			</div>
 		</div>

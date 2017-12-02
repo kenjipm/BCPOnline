@@ -18,7 +18,10 @@
 	$model->items[1]->price_total = "Rp 40.000";
 	$model->items[1]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
 	
-	$model->price_total = "Rp 540.000";
+	$model->price_subtotal = "Rp 540.000";
+	$model->add_fee = "Rp 11.000";
+	$model->address = "Jalan Perjuangan Raya, Marga Mulya, Bekasi Utara, Kota Bks, Jawa Barat 17143";
+	$model->price_total = "Rp 551.000";
 ?>
 
 <div class="row">
@@ -63,6 +66,30 @@
 					<?php
 				}
 				?>
+				<div class="row">
+					<div class="col-md-8">
+						<div class="panel panel-default">
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<label>Alamat Kirim</label>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-12">
+										<?=$model->address?>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-2">
+						<label>Ongkos Kirim</label>
+					</div>
+					<div class="col-md-2">
+						<?=$model->add_fee?>
+					</div>
+				</div>
 				<hr/>
 				<div class="row">
 					<div class="col-md-2">
@@ -79,8 +106,8 @@
 			</div>
 			<div class="panel-footer">
 				<div class="row">
-					<div class="col-md-2 col-md-offset-10">
-						<a href="<?=site_url('billing/cart')?>" class="btn btn-default">Lanjut ke Checkout</a>
+					<div class="col-md-3 col-md-offset-9">
+						<a href="<?=site_url('billing/cart')?>" class="btn btn-default">Pilih Metode Pembayaran</a>
 					</div>
 				</div>
 			</div>

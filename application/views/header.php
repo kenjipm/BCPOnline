@@ -27,7 +27,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
 </head>
 <body>
+<div id="overlay">
 
+</div> <!-- div overlay -->
 	<!-- NAVIGATION -->
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
@@ -56,7 +58,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<ul class="nav navbar-nav navbar-right">
 				<li><a href="<?=site_url('customer/cart')?>">Cart</a></li>
 				<li><a href="<?=site_url('billing')?>">Billing</a></li>
-				<li><a href="<?=site_url('reward')?>">Reward</a></li>
 				<li><a href="<?=site_url('message')?>">Inbox</a></li> 
 				<li><a href="<?=site_url('profile/1')?>">Profile</a></li>
 			</ul>

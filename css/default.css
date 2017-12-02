@@ -17,6 +17,31 @@ body {
 	border: 1px solid #e7e7e7;
 }
 
+#overlay {
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0,0,0,0.5);
+	z-index: 999;
+	display: none;
+}
+
+.popup {
+	display: none;
+	position: fixed;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	z-index: 1000;
+}
+
+.popup-sm { width: 300px; }
+.popup-md { width: 500px; }
+.popup-lg { width: 700px; }
+
 .template {
 	display: none;
 }
+
+.hoverdiv.hoverdiv-white {background: #fff;}
+.hoverdiv.hoverdiv-white:hover {background: #eee;}

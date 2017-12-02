@@ -23,13 +23,21 @@ class Order extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('transaction_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "Detail Transaksi";
+		$data['title'] = "Detail Transaksi";
 		$data['model'] = new class{};
-		$this->load->view('tenant/transaction_detail', $data);
+		
+		if ($this->session->userdata('username') == "tenant") // dummy
+		{
+			$this->load->view('tenant/transaction_detail', $data);
+		}
+		else
+		{
+			$this->load->view('customer/transaction_detail', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');

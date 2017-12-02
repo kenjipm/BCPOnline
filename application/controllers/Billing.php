@@ -30,7 +30,7 @@ class Billing extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('billing');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -43,7 +43,11 @@ class Billing extends CI_Controller {
 		}
 		else
 		{
+			// if not paid
 			$this->load->view('customer/billing', $data);
+			
+			// if paid
+			// redirect('billing/status');
 		}
 		
 		// Load Footer
@@ -54,15 +58,50 @@ class Billing extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
+        $data_header['js_list'] = array('billing');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['title'] = "Shopping Cart";
+		$data['model'] = new class{}; // bedanya sama detail, modelnya pake session
+		$this->load->view('customer/billing', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	//
+	public function status($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
         $data_header['js_list'] = array();
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Billing";
-		$data['model'] = new class{}; // bedanya sama detail, modelnya pake session
+		$data['title'] = "Status Pembayaran";
+		$data['model'] = new class{};
+		$this->load->view('customer/billing_status', $data);
 		
-		$this->load->view('customer/billing', $data);
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function create()
+	{
+		// create new bill here
+		
+		// redirect to confirmation page
+		$id = 0;
+		redirect('billing/status/'.$id);
+	}
+	
+	public function edit()
+	{
+		// edit bill here
+		
+		// redirect to confirmation page
+		$id = 0;
+		redirect('billing/status/'.$id);
 	}
 }
