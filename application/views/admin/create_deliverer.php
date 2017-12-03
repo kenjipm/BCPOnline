@@ -10,7 +10,7 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Daftarkan Tenant Baru</h3>
+			<h3>Daftarkan Deliverer Baru</h3>
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal">
