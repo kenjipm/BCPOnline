@@ -30,13 +30,15 @@
 	$model->orders[1]->posted_item->name = "Appa Kamera";
 	$model->orders[1]->posted_item->price = "Rp 25.000,-";
 	$model->orders[1]->posted_item->type = "Repair";
+	$model->orders[1]->posted_item->order_status = "Repairing";
 	$model->orders[2] = new class{};
 	$model->orders[2]->id = 3;
 	$model->orders[2]->quantity = 2;
 	$model->orders[2]->posted_item = new class{};
-	$model->orders[2]->posted_item->name = "Kesing Djisamsung";
+	$model->orders[2]->posted_item->name = "Djisamsung Galaksih";
 	$model->orders[2]->posted_item->price = "Rp 50.000,-";
-	$model->orders[2]->posted_item->type = "Bid";
+	$model->orders[2]->posted_item->type = "Repair";
+	$model->orders[2]->posted_item->order_status = "Tenant Received";
 	
 ?>
 
@@ -90,15 +92,27 @@
 									</a></div>	
 								<?php
 									if ($order->posted_item->type != "Repair"){
-										$show_div = false;
+										$show_div_repair_status = false;
+										$show_div_repair_cost = false;
 									} else {
-										$show_div = true;
+										if ($order->posted_item->order_status == "Tenant Received"){
+											$show_div_repair_status = false;
+											$show_div_repair_cost = true;
+										} else if($order->posted_item->order_status == "Repairing") {
+											$show_div_repair_status = true;
+											$show_div_repair_cost = false;
+										} else {
+											$show_div_repair_status = false;
+											$show_div_repair_cost = false;
+										}
 									}
 								?>
-								<div class="col-xs-2" id="repair_status" <?php if ($show_div ==false){?> style="display:none"<?php } ?>>
+								<div class="col-xs-2" id="repair_status" <?php if ($show_div_repair_status ==false){?> style="display:none"<?php } ?>>
 									<input type="checkbox" name="repair" value="repair_finished">Selesai
 								</div>
-								
+								<div class="col-xs-2" id="repair_cost" <?php if ($show_div_repair_cost ==false){?> style="display:none"<?php } ?>>
+									<button type="button" class="btn btn-default" onclick="popup.open('popup_repair_cost')">Masukkan Biaya</button>
+								</div>
 							</div>
 						</div>
 						<?php
@@ -147,6 +161,32 @@
 					<div class="col-sm-8 col-sm-offset-4">
 						<button type="button" class="btn btn-default">Kirim</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_repair_finished')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_repair_cost" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Masukkan Biaya Servis
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-4">
+						<label>Biaya Servis:</label>
+					</div>
+					<div class="col-sm-8">
+						<input type="text" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_repair_cost')">Batal</button>
 					</div>
 				</div>
 			</form>
