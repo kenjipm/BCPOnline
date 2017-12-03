@@ -8,21 +8,21 @@
 	$model->bills[0]->id = 1;
 	$model->bills[0]->date_created = "03-12-2017";
 	$model->bills[0]->date_closed = "07-12-2017";
-	$model->bills[0]->address = "Jalan Moh. Toha no 194";
+	$model->bills[0]->address = "Jalan Perjuangan Raya 17";
 	$model->bills[0]->add_fee = "Rp 25.000,-";
 	$model->bills[0]->total_payable = "Rp 275.000,-";
 	$model->bills[1] = new class{};
 	$model->bills[1]->id = 2;
 	$model->bills[1]->date_created = "05-12-2017";
 	$model->bills[1]->date_closed = "08-12-2017";
-	$model->bills[1]->address = "Jalan Soekarno Hatta no 22";
+	$model->bills[1]->address = "Jalan Perjuangan Raya 17";
 	$model->bills[1]->add_fee = "Rp 15.000,-";
 	$model->bills[1]->total_payable = "Rp 165.000,-";
 	$model->bills[2] = new class{};
 	$model->bills[2]->id = 3;
 	$model->bills[2]->date_created = "08-12-2017";
 	$model->bills[2]->date_closed = "09-12-2017";
-	$model->bills[2]->address = "Jalan Pajajaran no 14";
+	$model->bills[2]->address = "Jalan Perjuangan Raya 17";
 	$model->bills[2]->add_fee = "Rp 20.000,-";
 	$model->bills[2]->total_payable = "Rp 180.000,-";
 	

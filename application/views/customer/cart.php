@@ -20,7 +20,7 @@
 	
 	$model->price_subtotal = "Rp 540.000";
 	$model->add_fee = "Rp 11.000";
-	$model->address = "Jalan Perjuangan Raya, Marga Mulya, Bekasi Utara, Kota Bks, Jawa Barat 17143";
+	$model->address = "Jalan Perjuangan Raya 17, Marga Mulya, Bekasi Utara, Kota Bks, Jawa Barat 17143";
 	$model->price_total = "Rp 551.000";
 ?>
 
@@ -51,11 +51,11 @@
 							<div class="col-md-2">
 								<div class="input-group">
 									<span class="input-group-btn">
-										<button class="btn btn-secondary" type="button">-</button>
+										<button class="btn btn-secondary" type="button" onclick="">-</button>
 									</span>
 									<input type="text" value="<?=$item->quantity?>" class="form-control text-center"/>
 									<span class="input-group-btn">
-										<button class="btn btn-secondary" type="button">+</button>
+										<button class="btn btn-secondary" type="button" onclick="">+</button>
 									</span>
 								</div>
 							</div>

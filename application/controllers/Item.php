@@ -64,8 +64,7 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	//Customer View
-	public function favorite()
+	public function search()
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -73,9 +72,9 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Daftar Barang Favorit";
+		$data['title'] = "Hasil Pencarian";
 		$data['model'] = new class{};
-		$this->load->view('customer/favorite', $data);
+		$this->load->view('search', $data);
 		
 		// Load Footer
 		$this->load->view('footer');

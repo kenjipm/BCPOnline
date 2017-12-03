@@ -29,6 +29,7 @@ class Login extends CI_Controller {
 		$password = $this->input->post('password');
 		
 		$userdata = array(
+			'id' => 1,
 			'username' => $username,
 			'cart' => array()
 		);
@@ -53,6 +54,12 @@ class Login extends CI_Controller {
 		
 		$this->session->sess_destroy();
 		redirect('login?err=1');
+	}
+	
+	public function logout()
+	{
+		$this->session->sess_destroy();
+		redirect('');
 	}
 	
 	private function get_error_message($error_code)

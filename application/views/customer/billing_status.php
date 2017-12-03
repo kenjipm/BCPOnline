@@ -18,23 +18,26 @@
 	$model->orders[0]->id = 1;
 	$model->orders[0]->quantity = 1;
 	$model->orders[0]->posted_item = array();
-	$model->orders[0]->posted_item[0] = new class{};
-	$model->orders[0]->posted_item[0]->name = "Djisamsung Galaksih";
-	$model->orders[0]->posted_item[0]->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item = new class{};
+	$model->orders[0]->posted_item->name = "Djisamsung Galaksih";
+	$model->orders[0]->posted_item->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item->order_status = "Queued";
 	$model->orders[1] = new class{};
 	$model->orders[1]->id = 2;
 	$model->orders[1]->quantity = 1;
 	$model->orders[1]->posted_item = array();
-	$model->orders[1]->posted_item[0] = new class{};
-	$model->orders[1]->posted_item[0]->name = "Kesing Appa Kamera";
-	$model->orders[1]->posted_item[0]->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item = new class{};
+	$model->orders[1]->posted_item->name = "Repair HP Xiaomi";
+	$model->orders[1]->posted_item->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item->order_status = "Queued";
 	$model->orders[2] = new class{};
 	$model->orders[2]->id = 3;
 	$model->orders[2]->quantity = 2;
 	$model->orders[2]->posted_item = array();
-	$model->orders[2]->posted_item[0] = new class{};
-	$model->orders[2]->posted_item[0]->name = "Kesing Djisamsung";
-	$model->orders[2]->posted_item[0]->price = "Rp 50.000,-";
+	$model->orders[2]->posted_item = new class{};
+	$model->orders[2]->posted_item->name = "Kesing Djisamsung";
+	$model->orders[2]->posted_item->price = "Rp 50.000,-";
+	$model->orders[2]->posted_item->order_status = "Queued";
 	
 	$model->billing->is_paid = false;
 	
@@ -47,7 +50,7 @@
 	$model->payments[0]->payment_method_description = "<b>KlikBCA: </b>Pembayaran dilakukan melalui www.klikbca.com";
 	$model->payments[0]->payment_date = "2 Dec 17";
 	$model->payments[0]->paid_amount = "Rp 25.000,-";
-	$model->payments[0]->description = "-"; // informasi credit card dll
+	$model->payments[0]->description = "Lunas"; // informasi credit card dll
 	
 	$model->payments[1] = new class{};
 	$model->payments[1]->id = 2;
@@ -57,6 +60,10 @@
 	$model->payments[1]->payment_date = "-";
 	$model->payments[1]->paid_amount = "-";
 	$model->payments[1]->description = "Menunggu Pembayaran"; // informasi credit card dll
+	
+	$model->otps = array();
+	$model->otps[0] = "AF08-EJW3";
+	$model->otps[1] = "AF08-EJW4";
 ?>
 
 <div class="row">
@@ -81,9 +88,10 @@
 						<label class="control-label col-xs-3" for="orders">Order List:</label>
 						<div class="col-xs-9 pull-right">
 							<div class="row list-group">
-								<div class="col-xs-5">Nama </div>
+								<div class="col-xs-4">Nama </div>
 								<div class="col-xs-1">Jml </div>
-								<div class="col-xs-4">Harga </div>
+								<div class="col-xs-3">Harga </div>
+								<div class="col-xs-2">Status </div>
 							</div>
 						</div>
 						<div class="row">
@@ -93,12 +101,14 @@
 								?>
 								<div class="col-xs-9 col-xs-offset-3">
 									<div class="row list-group">
-										<div class="col-xs-5 list-group-item">
-											<?=$order->posted_item[0]->name?> </div>
+										<div class="col-xs-4 list-group-item">
+											<?=$order->posted_item->name?> </div>
 										<div class="col-xs-1 list-group-item">
 											<?=$order->quantity?> </div>
-										<div class="col-xs-4 list-group-item">
-											<?=$order->posted_item[0]->price?> </div>
+										<div class="col-xs-3 list-group-item">
+											<?=$order->posted_item->price?> </div>
+										<div class="col-xs-2 list-group-item">
+											<?=$order->posted_item->order_status?> </div>
 										<div class="col-xs-1">
 											<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 												Lihat
@@ -167,8 +177,64 @@
 						<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 							value="<?=$model->billing->total_not_paid?>" readonly></div>
 					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Kode OTP:</label>
+						<?php 
+							$i = 0;
+							foreach ($model->otps as $otp)
+							{
+								?>
+								<div class="col-xs-2">
+									<div class="panel panel-default">
+										<div class="panel-body">
+											<label><?=$otp?></label>
+										</div>
+									</div>
+								</div>
+								<?php
+								$i++;
+								if ($i % 4 == 0)
+								{
+									?>
+									<div class="col-xs-3"></div>
+									<?php
+								}
+							}
+						?>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-3 col-xs-offset-3">
+							<button type="button" onclick="popup.open('popup_OTP')" class="form-control">Input Kode OTP</button>
+						</div>
+					</div>
 				</form>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="popup_OTP" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Input Kode OTP
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kode OTP</label>
+					</div>
+					<div class="col-sm-9">
+						<textarea class="form-control" placeholder="Masukkan Kode OTP..."></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-9 col-sm-offset-3">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_OTP')">Batal</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

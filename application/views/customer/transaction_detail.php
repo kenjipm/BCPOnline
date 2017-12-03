@@ -78,6 +78,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-3">
+						<button type="button" class="btn btn-default" onclick="">Terima Perbaikan</button>
 						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')">Ulas Barang</button>
 					</div>
 				</div>

@@ -25,6 +25,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             ?><script type='text/javascript' src='<?=site_url('js/'.$js.'.js')?>'></script><?php } }
     ?>
     
+	<?php //pre-calculation
+		$is_logged_in = $this->session->userdata('id') !== null;
+	?>
+	
 </head>
 <body>
 <div id="overlay">
@@ -34,15 +38,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<nav class="navbar navbar-default">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<?=site_url('dashboard')?>"><?=COMPANY_NAME?></a>
+				<a class="navbar-brand" href="<?=site_url('')?>"><?=COMPANY_NAME?></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<li><a href="<?=site_url('dashboard')?>">Home</a></li>
-				<li><a href="<?=site_url('customer/followed_tenant')?>">Tenant</a></li>
-				<li><a href="<?=site_url('item/favorite')?>">Favorit</a></li>
-				<li><a href="<?=site_url('reward')?>">Reward</a></li>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/followed_tenant')?>">Tenant</a></li> <?php } ?>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/favorite_item')?>">Favorit</a></li> <?php } ?>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('reward')?>">Reward</a></li> <?php } ?>
 			</ul>
-			<form action="<?=site_url('search')?>" method="post" class="navbar-form navbar-left">
+			<form action="<?=site_url('item/search')?>" method="post" class="navbar-form navbar-left">
 				<div class="input-group">
 					<input name="search_keywords" type="text" class="form-control" placeholder="Search Items...">
 					<div class="input-group-btn">
@@ -53,13 +56,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 			</form>
 			<form class="navbar-form navbar-right">
-				<a href="<?=site_url('login')?>" class="btn btn-default">Login</a>
+				<?php if (!$is_logged_in) { ?><a href="<?=site_url('login')?>" class="btn btn-default">Login</a> <?php }
+									 else { ?><a href="<?=site_url('login/logout')?>" class="btn btn-default">Logout</a> <?php } ?>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<li><a href="<?=site_url('customer/cart')?>">Cart</a></li>
-				<li><a href="<?=site_url('billing')?>">Billing</a></li>
-				<li><a href="<?=site_url('message')?>">Inbox</a></li> 
-				<li><a href="<?=site_url('profile/1')?>">Profile</a></li>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/cart')?>">Cart</a></li> <?php } ?>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('billing')?>">Billing</a></li> <?php } ?>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('message')?>">Inbox</a></li> <?php } ?>
+				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/profile')?>">Profile</a></li> <?php } ?>
 			</ul>
 		</div>
 	</nav>
