@@ -14,6 +14,7 @@
 	$model->tenants[0]->tenant_name = "Henpon Senter";
 	$model->tenants[0]->email = "yessy@gmail.com";
 	$model->tenants[0]->date_joined = "03-12-2017";
+	$model->tenants[0]->status = "Verified";
 	$model->tenants[1] = new class{};
 	$model->tenants[1]->id = 2;
 	$model->tenants[1]->tenant_id = "17120577704";
@@ -21,6 +22,7 @@
 	$model->tenants[1]->tenant_name = "Leptop Canggih";
 	$model->tenants[1]->email = "tesi@gmail.com";
 	$model->tenants[1]->date_joined = "05-12-2017";
+	$model->tenants[1]->status = "Unverified";
 	$model->tenants[2] = new class{};
 	$model->tenants[2]->id = 3;
 	$model->tenants[2]->tenant_id = "17120877794";
@@ -28,6 +30,7 @@
 	$model->tenants[2]->tenant_name = "Kamera Terkenal";
 	$model->tenants[2]->email = "nosy@gmail.com";
 	$model->tenants[2]->date_joined = "08-12-2017";
+	$model->tenants[2]->status = "Verified";
 	
 	// Model dummy customer
 	$model->customers[0] = new class{};
@@ -88,21 +91,31 @@
 			{
 				?>
 				<div class="row list-group">
-					<div class="col-xs-2 list-group-item">
-						<?=$tenant->tenant_id?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$tenant->tenant_name?> </div>
-					<div class="col-xs-3 list-group-item">
-						<?=$tenant->account_name?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$tenant->email?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$tenant->date_joined?> </div>
-					<div class="col-xs-1">
-						<a href="<?=site_url('admin/account_detail/'.$tenant->id)?>">
-							<button class="btn btn-default">Lihat</button>
-						</a></div>	
-						
+					<a href="<?=site_url('admin/account_detail/'.$tenant->id)?>">
+						<div class="col-xs-2 list-group-item">
+							<?=$tenant->tenant_id?> </div>
+						<div class="col-xs-2 list-group-item">
+							<?=$tenant->tenant_name?> </div>
+						<div class="col-xs-3 list-group-item">
+							<?=$tenant->account_name?> </div>
+						<div class="col-xs-2 list-group-item">
+							<?=$tenant->email?> </div>
+						<div class="col-xs-2 list-group-item">
+							<?=$tenant->date_joined?> </div>
+					</a>
+					<?php
+						if ($tenant->status == "Verified"){
+							$show_div_verify = false;
+						} else {
+							$show_div_verify = true;
+						}
+					?>
+					<div class="col-xs-1" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+					</div>
+					<div class="col-xs-1" id="block">
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+					</div>
 				</div>
 				<?php
 			}
@@ -189,6 +202,53 @@
 			<a class="btn btn-default" href="<?=site_url('admin/create_deliverer')?>">
 				Buat Akun
 			</a>	
+		</div>
+	</div>
+</div>
+
+
+<div id="popup_verify" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Verifikasi Akun
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label>Verifikasi akun ini?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="button" class="btn btn-default">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_verify')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_block" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Blokir Akun
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-12">
+						<label>Apakah Anda yakin untuk memblokir akun ini?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_block')">Batal</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

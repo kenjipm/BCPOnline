@@ -180,7 +180,7 @@
 						<label>Biaya Servis:</label>
 					</div>
 					<div class="col-sm-8">
-						<input type="text" class="form-control"/>
+						<input type="text" class="form-control" id="repair_cost_price"/>
 					</div>
 				</div>
 				<div class="form-group">
