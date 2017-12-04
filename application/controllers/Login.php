@@ -28,6 +28,12 @@ class Login extends CI_Controller {
 		$username = $this->input->post('username');
 		$password = $this->input->post('password');
 		
+		$this->load->model('Account_model');
+		$user = $this->Account_model->get_user_login($username, $password);
+		
+		print_r($user);
+		return true;
+		
 		$userdata = array(
 			'id' => 1,
 			'username' => $username,
