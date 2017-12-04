@@ -17,4 +17,35 @@ class Voucher extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	// Admin view
+	public function voucher_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['model'] = new class{};
+		$this->load->view('admin/voucher_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function create_voucher()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['model'] = new class{};
+		$this->load->view('admin/create_voucher', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
 }
