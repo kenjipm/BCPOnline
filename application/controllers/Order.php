@@ -30,14 +30,15 @@ class Order extends CI_Controller {
 		$data['title'] = "Detail Transaksi";
 		$data['model'] = new class{};
 		
-		if ($this->session->userdata('username') == "tenant") // dummy
+		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
 			$this->load->view('tenant/transaction_detail', $data);
 		}
-		else if ($this->session->userdata('username') == "member")
+		else if ($this->session->userdata('type') == "CUSTOMER")
 		{
 			$this->load->view('customer/transaction_detail', $data);
-		} else // Deliverer
+		}
+		else // Deliverer
 		{
 			$this->load->view('deliverer/transaction_detail', $data);
 		}

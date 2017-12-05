@@ -13,7 +13,7 @@ class Billing extends CI_Controller {
 		$data['model'] = new class{};
 		$data['title'] = "Daftar Billing";
 		
-		if ($this->session->userdata('username') == "tenant") // dummy
+		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
 			$this->load->view('tenant/billing_list', $data);
 		}
@@ -37,7 +37,7 @@ class Billing extends CI_Controller {
 		$data['title'] = "Billing";
 		$data['model'] = new class{};
 		
-		if ($this->session->userdata('username') == "tenant") // dummy
+		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
 			$this->load->view('tenant/billing', $data);
 		}
