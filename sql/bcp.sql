@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 27, 2017 at 10:41 AM
+-- Generation Time: Dec 04, 2017 at 10:31 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -66,6 +66,7 @@ CREATE TABLE `additional_fee` (
 CREATE TABLE `admin` (
   `id` int(10) NOT NULL,
   `admin_id` varchar(15) NOT NULL DEFAULT '',
+  `account_id` int(15) NOT NULL,
   `hour_avalaible` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -134,6 +135,7 @@ CREATE TABLE `category` (
 CREATE TABLE `customer` (
   `id` int(10) NOT NULL,
   `customer_id` varchar(15) NOT NULL DEFAULT '',
+  `account_id` int(15) NOT NULL,
   `verified_mark` varchar(100) NOT NULL DEFAULT '',
   `credit_amount` double NOT NULL DEFAULT '0',
   `reward_points` int(10) NOT NULL DEFAULT '0'
@@ -148,6 +150,7 @@ CREATE TABLE `customer` (
 CREATE TABLE `deliverer` (
   `id` int(10) NOT NULL,
   `deliverer_id` varchar(15) NOT NULL DEFAULT '',
+  `account_id` int(15) NOT NULL,
   `license_plate` varchar(20) NOT NULL DEFAULT '',
   `vehicle_desc` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -450,6 +453,7 @@ CREATE TABLE `tag` (
 CREATE TABLE `tenant` (
   `id` int(10) NOT NULL,
   `tenant_id` varchar(15) NOT NULL DEFAULT '',
+  `account_id` int(15) NOT NULL,
   `unit_number` varchar(20) NOT NULL DEFAULT '',
   `floor` varchar(10) NOT NULL DEFAULT '',
   `selling_category` varchar(500) NOT NULL DEFAULT '',
@@ -530,7 +534,8 @@ ALTER TABLE `additional_fee`
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `adminID` (`admin_id`);
+  ADD UNIQUE KEY `adminID` (`admin_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `bidding`
@@ -569,14 +574,16 @@ ALTER TABLE `category`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `customerID` (`customer_id`);
+  ADD UNIQUE KEY `customerID` (`customer_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `deliverer`
 --
 ALTER TABLE `deliverer`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `delivererID` (`deliverer_id`);
+  ADD UNIQUE KEY `delivererID` (`deliverer_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `dispute`
@@ -740,7 +747,8 @@ ALTER TABLE `tag`
 --
 ALTER TABLE `tenant`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `tenantID` (`tenant_id`);
+  ADD UNIQUE KEY `tenantID` (`tenant_id`),
+  ADD KEY `account_id` (`account_id`);
 
 --
 -- Indexes for table `tenant_bill`
@@ -964,6 +972,12 @@ ALTER TABLE `voucher`
 --
 
 --
+-- Constraints for table `admin`
+--
+ALTER TABLE `admin`
+  ADD CONSTRAINT `admin_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`);
+
+--
 -- Constraints for table `bidding`
 --
 ALTER TABLE `bidding`
@@ -977,6 +991,18 @@ ALTER TABLE `billing`
   ADD CONSTRAINT `billing_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
   ADD CONSTRAINT `billing_ibfk_2` FOREIGN KEY (`add_fee_id`) REFERENCES `additional_fee` (`id`),
   ADD CONSTRAINT `billing_ibfk_3` FOREIGN KEY (`shipping_address_id`) REFERENCES `shipping_address` (`id`);
+
+--
+-- Constraints for table `customer`
+--
+ALTER TABLE `customer`
+  ADD CONSTRAINT `customer_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`);
+
+--
+-- Constraints for table `deliverer`
+--
+ALTER TABLE `deliverer`
+  ADD CONSTRAINT `deliverer_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`);
 
 --
 -- Constraints for table `dispute`
@@ -1092,6 +1118,12 @@ ALTER TABLE `redeem_voucher`
 --
 ALTER TABLE `shipping_address`
   ADD CONSTRAINT `shipping_address_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`);
+
+--
+-- Constraints for table `tenant`
+--
+ALTER TABLE `tenant`
+  ADD CONSTRAINT `tenant_ibfk_1` FOREIGN KEY (`account_id`) REFERENCES `account` (`id`);
 
 --
 -- Constraints for table `tenant_bill`

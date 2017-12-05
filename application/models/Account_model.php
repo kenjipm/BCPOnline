@@ -25,7 +25,7 @@ class Account_model extends CI_Model {
 		$this->db->where($where);
 		$query = $this->db->get($this->table_account, 1);
 		
-		return $query->result()[0];
+		return $query->row();
 	}
 }
 

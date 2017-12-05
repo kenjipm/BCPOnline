@@ -31,31 +31,32 @@ class Login extends CI_Controller {
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_user_login($username, $password);
 		
-		print_r($user);
-		return true;
-		
-		$userdata = array(
-			'id' => 1,
-			'username' => $username,
-			'cart' => array()
-		);
-		$this->session->set_userdata($userdata);
-		
-		if ($username == "member")
+		//if ($user !== null)
 		{
-			redirect('dashboard');
-		}
-		else if ($username == "tenant")
-		{
-			redirect('tenant');
-		}
-		else if ($username == "admin")
-		{
-			redirect('admin');
-		}
-		else if ($username == "delivery")
-		{
-			redirect('delivery');
+			$userdata = array(
+				'id' => 1,
+				'username' => $username,
+				'cart' => array()
+			);
+			
+			$this->session->set_userdata($userdata);
+			
+			if ($username == "member")
+			{
+				redirect('dashboard');
+			}
+			else if ($username == "tenant")
+			{
+				redirect('tenant');
+			}
+			else if ($username == "admin")
+			{
+				redirect('admin');
+			}
+			else if ($username == "delivery")
+			{
+				redirect('delivery');
+			}
 		}
 		
 		$this->session->sess_destroy();
