@@ -18,7 +18,7 @@ class Order extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	// Tenant View
+	// View Detail
 	public function transaction_detail($id)
 	{
 		// Load Header
@@ -34,10 +34,31 @@ class Order extends CI_Controller {
 		{
 			$this->load->view('tenant/transaction_detail', $data);
 		}
-		else
+		else if ($this->session->userdata('username') == "member")
 		{
 			$this->load->view('customer/transaction_detail', $data);
+		} else // Deliverer
+		{
+			$this->load->view('deliverer/transaction_detail', $data);
 		}
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function order_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('billing');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['title'] = "Daftar Order";
+		$data['model'] = new class{};
+
+		$this->load->view('deliverer/order_list', $data);
+
 		
 		// Load Footer
 		$this->load->view('footer');
