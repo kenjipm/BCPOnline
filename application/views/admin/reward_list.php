@@ -11,21 +11,21 @@
 	$model->rewards[0]->date_added = "03-12-2017";
 	$model->rewards[0]->date_expired = "04-01-2018";
 	$model->rewards[0]->points_needed = "20";
-	$model->rewards[0]->reward_description = "Dapet Ujung Earphone";
+	$model->rewards[0]->reward_description = "Mouse Lojiteq";
 	$model->rewards[1] = new class{};
 	$model->rewards[1]->id = 2;
 	$model->rewards[1]->reward_id = "17120877702";
 	$model->rewards[1]->date_added = "08-12-2017";
 	$model->rewards[1]->date_expired = "01-01-2018";
 	$model->rewards[1]->points_needed = "100";
-	$model->rewards[1]->reward_description = "Kamera Tanpa Lensa";
+	$model->rewards[1]->reward_description = "Keyboard Rejer";
 	$model->rewards[2] = new class{};
 	$model->rewards[2]->id = 3;
 	$model->rewards[2]->reward_id = "17120577709";
 	$model->rewards[2]->date_added = "05-12-2017";
 	$model->rewards[2]->date_expired = "04-02-2018";
 	$model->rewards[2]->points_needed = "200";
-	$model->rewards[2]->reward_description = "Hape Abal-abal";
+	$model->rewards[2]->reward_description = "Handphone Pipo";
 	
 	// Model dummy redeem Redeem Reward
 	$model->redeems = array();
