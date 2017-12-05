@@ -25,35 +25,44 @@ class Login extends CI_Controller {
 	
 	public function validate()
 	{
-		$username = $this->input->post('username');
+		$email = $this->input->post('email');
 		$password = $this->input->post('password');
 		
 		$this->load->model('Account_model');
-		$user = $this->Account_model->get_user_login($username, $password);
+		$user = $this->Account_model->get_from_login($email, $password);
+		$account_id = "";
+		$type = $email; //""; dummy buat bypass kalo mau login type lain
 		
-		//if ($user !== null)
+		if ($user !== null)
+		{
+			$account_id = $user->account_id;
+			$type = $user->get_type();
+		}
+		
+		// if ($user !== null)
 		{
 			$userdata = array(
 				'id' => 1,
-				'username' => $username,
+				'account_id' => $account_id,
+				'type' => $type,
 				'cart' => array()
 			);
 			
 			$this->session->set_userdata($userdata);
 			
-			if ($username == "member")
+			if ($type == "CUSTOMER")
 			{
 				redirect('dashboard');
 			}
-			else if ($username == "tenant")
+			else if ($type == "TENANT")
 			{
 				redirect('tenant');
 			}
-			else if ($username == "admin")
+			else if ($type == "ADMIN")
 			{
 				redirect('admin');
 			}
-			else if ($username == "delivery")
+			else if ($type == "DELIVERY")
 			{
 				redirect('delivery');
 			}
