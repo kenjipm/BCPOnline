@@ -18,7 +18,7 @@ class Deliverer_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function insert($account_id, $deliverer_id)
+	public function insert_from_account($account_id, $deliverer_id)
 	{
 		$this->account_id			= $account_id;
 		$this->deliverer_id			= $deliverer_id;

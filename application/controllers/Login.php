@@ -36,7 +36,7 @@ class Login extends CI_Controller {
 		if ($user !== null)
 		{
 			$account_id = $user->account_id;
-			$type = $user->get_type();
+			$type = $user->type;
 		}
 		
 		// if ($user !== null)

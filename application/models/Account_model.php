@@ -3,16 +3,14 @@
 class Account_model extends CI_Model {
 	
 	private $table_account = 'account';
-	// private $table_customer = 'customer';
-	// private $table_tenant = 'tenant';
-	// private $table_deliverer = 'deliverer';
-	// private $table_admin = 'admin';
 
+	// status account
 	const STATUS = array(
 		'ACTIVE' => 'ACTIVE',
 		'BLOCKED' => 'BLOCKED'
 	);
 
+	// type account
 	const TYPE = array(
 		'CUSTOMER' => 'CUSTOMER',
 		'TENANT' => 'TENANT',
@@ -20,6 +18,7 @@ class Account_model extends CI_Model {
 		'ADMIN' => 'ADMIN'
 	);
 
+	// nama model dari masing2 type account
 	const TYPE_MODEL = array(
 		'CUSTOMER' => 'Customer_model',
 		'TENANT' => 'Tenant_model',
@@ -27,8 +26,10 @@ class Account_model extends CI_Model {
 		'ADMIN' => 'Admin_model'
 	);
 	
+	// table attribute
 	public $id;
 	public $account_id;
+	public $name;
 	public $address;
 	public $date_of_birth;
 	public $phone_number;
@@ -40,14 +41,41 @@ class Account_model extends CI_Model {
 	public $date_joined;
 	public $profile_pic;
 	
+	// stub attribute
+	public $type;
+	
 	// constructor
-	public function Get_stub_from_db($db_item)
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->id					= NULL;
+		$this->account_id			= "";
+		$this->name					= "";
+		$this->address				= "";
+		$this->date_of_birth		= "";
+		$this->phone_number			= "";
+		$this->email				= "";
+		$this->password				= "";
+		$this->identification_no	= "";
+		$this->identification_pic	= "";
+		$this->status				= "";
+		$this->date_joined			= "";
+		$this->profile_pic			= "";
+		
+		$this->type					= "";
+	}
+	
+	// constructor from database object
+	public function get_stub_from_db($db_item)
 	{
 		$this->id					= $db_item->id;
 		$this->account_id			= $db_item->account_id;
+		$this->name					= $db_item->name;
 		$this->address				= $db_item->address;
 		$this->date_of_birth		= $db_item->date_of_birth;
 		$this->phone_number			= $db_item->phone_number;
+		$this->email				= $db_item->email;
 		$this->password				= $db_item->password;
 		$this->identification_no	= $db_item->identification_no;
 		$this->identification_pic	= $db_item->identification_pic;
@@ -55,19 +83,44 @@ class Account_model extends CI_Model {
 		$this->date_joined			= $db_item->date_joined;
 		$this->profile_pic			= $db_item->profile_pic;
 		
+		$this->type					= $this->get_type();
+		
 		return $this;
 	}
 	
+	// get db from this model
+	public function get_db_from_stub()
+	{
+		$db_item = new class{};
+		
+		$db_item->id					= $this->id;
+		$db_item->account_id			= $this->account_id;
+		$db_item->name					= $this->name;
+		$db_item->address				= $this->address;
+		$db_item->date_of_birth			= $this->date_of_birth;
+		$db_item->phone_number			= $this->phone_number;
+		$db_item->email					= $this->email;
+		$db_item->password				= $this->password;
+		$db_item->identification_no		= $this->identification_no;
+		$db_item->identification_pic	= $this->identification_pic;
+		$db_item->status				= $this->status;
+		$db_item->date_joined			= $this->date_joined;
+		$db_item->profile_pic			= $this->profile_pic;
+		
+		return $db_item;
+	}
+	
+	// get stub from login
 	public function get_from_login($email, $password)
 	{
 		$where['email'] = $email;
-		$where['password'] = $password;
+		$where['password'] = md5($password);
 		
 		$this->db->where($where);
 		$query = $this->db->get($this->table_account, 1);
 		$item = $query->row();
 		
-		return ($item !== null) ? $this->Get_stub_from_db($item) : null;
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
 	// insert new account from form post
@@ -81,32 +134,33 @@ class Account_model extends CI_Model {
 		$this->identification_pic	= $this->input->post('identification_pic');
 		$this->profile_pic			= $this->input->post('profile_pic');
 		$this->email				= $this->input->post('email');
-		$this->password				= $this->input->post('password');
-		$this->account_id			= "";
+		$this->password				= md5($this->input->post('password'));
 		
+		$this->account_id			= "";
 		$this->status				= $this::STATUS['ACTIVE'];
 		$this->date_joined			= time();
 		
 		// insert data, then generate [account_id] based on [id]
-		$this->db->trans_start();
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
-		if ($this->db->insert($this->table_account, $this))
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_account, $db_item))
 		{
 			$this->load->library('Id_Generator');
 			
-			$this->id			= $this->db->insert_id();
-			$this->account_id	= $this->id_generator->generate($type, $this->id);
+			$db_item->id			= $this->db->insert_id();
+			$db_item->account_id	= $this->id_generator->generate($type, $db_item->id);
 			
-			$this->db->where('id', $this->id);
-			if ($this->db->update($this->table_account, $this))
+			$this->db->where('id', $db_item->id);
+			if ($this->db->update($this->table_account, $db_item)) // update account_id natural key yang udah di generate "ADM0001"
 			{
 				// insert data ke tabel customer / tenant / deliverer / admin
 				$this->load->model($this::TYPE_MODEL[$type], 'child_model');
-				$this->child_model->insert($this->id, $this->account_id);
+				$this->child_model->insert_from_account($db_item->id, $db_item->account_id);
 			}
 		}
 		
-		$this->db->trans_complete();
+		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
 	public function get_type()

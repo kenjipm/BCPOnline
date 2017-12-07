@@ -20,7 +20,7 @@ class Tenant_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function insert($account_id, $tenant_id)
+	public function insert_from_account($account_id, $tenant_id)
 	{
 		$this->account_id			= $account_id;
 		$this->tenant_id			= $tenant_id;
