@@ -3,6 +3,39 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
+| Application Constants
+|--------------------------------------------------------------------------
+*/
+defined('TYPE') OR define('TYPE', array(
+		'CUSTOMER' => array(
+			'name'		=> 'CUSTOMER',
+			'initial'	=> 'CUS',
+			'id_length'	=> 8,
+			'model'		=> 'Customer_model'
+		),
+		'TENANT' => array(
+			'name'		=> 'TENANT',
+			'initial'	=> 'TNT',
+			'id_length'	=> 5,
+			'model'		=> 'Tenant_model'
+		),
+		'DELIVERER' => array(
+			'name'		=> 'DELIVERER',
+			'initial'	=> 'DLV',
+			'id_length'	=> 5,
+			'model'		=> 'Deliverer_model'
+		),
+		'ADMIN' => array(
+			'name'		=> 'ADMIN',
+			'initial'	=> 'ADM',
+			'id_length'	=> 5,
+			'model'		=> 'Admin_model'
+		),
+	)
+);
+
+/*
+|--------------------------------------------------------------------------
 | Application Production
 |--------------------------------------------------------------------------
 */
