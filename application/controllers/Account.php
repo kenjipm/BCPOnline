@@ -112,7 +112,7 @@ class Account extends CI_Controller {
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->load->model('Account_model');
-			$this->Account_model->insert_from_post("CUSTOMER");
+			$this->Account_model->insert_from_post(TYPE['name']['CUSTOMER']);
 			
 			redirect('account/signup_success');
 		}

@@ -50,19 +50,19 @@ class Login extends CI_Controller {
 			
 			$this->session->set_userdata($userdata);
 			
-			if ($type == "CUSTOMER")
+			if ($type == TYPE['name']['CUSTOMER'])
 			{
 				redirect('dashboard');
 			}
-			else if ($type == "TENANT")
+			else if ($type == TYPE['name']['TENANT'])
 			{
 				redirect('tenant');
 			}
-			else if ($type == "ADMIN")
+			else if ($type == TYPE['name']['ADMIN'])
 			{
 				redirect('admin');
 			}
-			else if ($type == "DELIVERY")
+			else if ($type == TYPE['name']['DELIVERER'])
 			{
 				redirect('delivery');
 			}
