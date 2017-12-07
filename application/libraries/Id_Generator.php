@@ -19,7 +19,7 @@ class Id_Generator {
 
 	public function generate($type, $id)
 	{
-		return TYPE[$type]['initial'] . str_pad($id, TYPE[$type]['id_length'], '0', STR_PAD_LEFT);
+		return TYPE['initial'][$type] . str_pad($id, TYPE['id_length'][$type], '0', STR_PAD_LEFT);
 	}
 }
 

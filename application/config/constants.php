@@ -7,30 +7,54 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |--------------------------------------------------------------------------
 */
 defined('TYPE') OR define('TYPE', array(
-		'CUSTOMER' => array(
-			'name'		=> 'CUSTOMER',
-			'initial'	=> 'CUS',
-			'id_length'	=> 8,
-			'model'		=> 'Customer_model'
+		'name' => array(
+			'CUSTOMER'	=> 'CUSTOMER',
+			'TENANT'	=> 'TENANT',
+			'DELIVERER'	=> 'DELIVERER',
+			'ADMIN'		=> 'ADMIN'
 		),
-		'TENANT' => array(
-			'name'		=> 'TENANT',
-			'initial'	=> 'TNT',
-			'id_length'	=> 5,
-			'model'		=> 'Tenant_model'
+		'initial' => array(
+			'CUSTOMER'	=> 'CUS',
+			'TENANT'	=> 'TNT',
+			'DELIVERER'	=> 'DLV',
+			'ADMIN'		=> 'ADM'
 		),
-		'DELIVERER' => array(
-			'name'		=> 'DELIVERER',
-			'initial'	=> 'DLV',
-			'id_length'	=> 5,
-			'model'		=> 'Deliverer_model'
+		'id_length' => array(
+			'CUSTOMER'	=> 8,
+			'TENANT'	=> 5,
+			'DELIVERER'	=> 5,
+			'ADMIN'		=> 5
 		),
-		'ADMIN' => array(
-			'name'		=> 'ADMIN',
-			'initial'	=> 'ADM',
-			'id_length'	=> 5,
-			'model'		=> 'Admin_model'
+		'model' => array(
+			'CUSTOMER'	=> 'Customer_model',
+			'TENANT'	=> 'Tenant_model',
+			'DELIVERER'	=> 'Deliverer_model',
+			'ADMIN'		=> 'Admin_model'
 		),
+		// 'CUSTOMER' => array(
+			// 'name'		=> 'CUSTOMER',
+			// 'initial'	=> 'CUS',
+			// 'id_length'	=> 8,
+			// 'model'		=> 'Customer_model'
+		// ),
+		// 'TENANT' => array(
+			// 'name'		=> 'TENANT',
+			// 'initial'	=> 'TNT',
+			// 'id_length'	=> 5,
+			// 'model'		=> 'Tenant_model'
+		// ),
+		// 'DELIVERER' => array(
+			// 'name'		=> 'DELIVERER',
+			// 'initial'	=> 'DLV',
+			// 'id_length'	=> 5,
+			// 'model'		=> 'Deliverer_model'
+		// ),
+		// 'ADMIN' => array(
+			// 'name'		=> 'ADMIN',
+			// 'initial'	=> 'ADM',
+			// 'id_length'	=> 5,
+			// 'model'		=> 'Admin_model'
+		// ),
 	)
 );
 

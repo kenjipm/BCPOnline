@@ -155,7 +155,7 @@ class Account_model extends CI_Model {
 			if ($this->db->update($this->table_account, $db_item)) // update account_id natural key yang udah di generate "ADM0001"
 			{
 				// insert data ke tabel customer / tenant / deliverer / admin
-				$this->load->model(TYPE[$type]['model'], 'child_model');
+				$this->load->model(TYPE['model'][$type], 'child_model');
 				$this->child_model->insert_from_account($db_item->id, $db_item->account_id);
 			}
 		}
@@ -166,14 +166,14 @@ class Account_model extends CI_Model {
 	public function get_type()
 	{
 		$this->db->where('account_id', $this->id);
-		foreach(TYPE as $type)
+		foreach(TYPE['model'] as $type => $model)
 		{
-			$this->load->model($type['model']);
-			$item = $this->{$type['model']}->get_by_account_id($this->id);
+			$this->load->model($model);
+			$item = $this->{$model}->get_by_account_id($this->id);
 			
 			if ($item !== null)
 			{
-				return $type['name'];
+				return $type;
 			}
 		}
 	}
