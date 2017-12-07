@@ -4,70 +4,90 @@
 			<h3>Tambah Item Baru</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" id="name"></div>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_name" value="<?= set_value('posted_item_name'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('posted_item_name'); ?></span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="price">Harga:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" id="price"></div>
+					<div class="col-xs-3"><input type="text" class="form-control" name="price" value="<?= set_value('price'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('price'); ?></span>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="type">Tipe:</label>
+					<label class="control-label col-xs-3" for="item_type">Tipe:</label>
 					<div class="col-xs-9">
 						<label class="control-label">
-							<input type="radio" name="type" id="type_order"> Order
+							<input type="radio" name="item_type" name="type_order" value="ORDER" <?= set_value('item_type')=="ORDER"? "selected='selected'":"" ?>/>
+							Barang
 						</label>
 						<label class="control-label">
-							<input type="radio" name="type" id="type_repair"> Repair
+							<input type="radio" name="item_type" name="type_repair" value="REPAIR" <?= set_value('item_type')=="REPAIR"? "selected='selected'":"" ?>/>
+							Servis
 						</label>
 						<label class="control-label">
-							<input type="radio" name="type" id="type_bid"> Bid
+							<input type="radio" name="item_type" name="type_bid" value="BID" <?= set_value('item_type')=="BID"? "selected='selected'":"" ?>>
+							Lelang
 						</label>
 					</div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="quantity_avalaible">Jumlah Stok:</label>
-					<div class="col-xs-2"><input type="text" class="form-control" id="quantity_avalaible"></div>
+					<div class="col-xs-2"><input type="text" class="form-control" name="quantity_avalaible" value="<?= set_value('quantity_avalaible'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('quantity_avalaible'); ?></span>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="unit_weight">Berat(kg):</label>
-					<div class="col-xs-2"><input type="text" class="form-control" id="unit_weight"></div>
+					<label class="control-label col-xs-3" for="unit_weight">Berat(g):</label>
+					<div class="col-xs-2"><input type="text" class="form-control" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="description">Deskripsi:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" id="description"></div>
+					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('posted_item_description'); ?></span>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="image">Unggah Gambar:</label>
-					<div class="col-xs-9"><input type="file" class="form-control" id="image_one_name"></div>
+					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
+					<div class="col-xs-9"><input type="file" class="form-control" name="image_one_name" value="<?= set_value('image_one_name'); ?>"/></div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="image2">Unggah Gambar:</label>
+					<div class="col-xs-9"><input type="file" class="form-control" name="image_two_name" value="<?= set_value('image_two_name'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="image3">Unggah Gambar:</label>
+					<div class="col-xs-9"><input type="file" class="form-control" name="image_three_name" value="<?= set_value('image_three_name'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="image4">Unggah Gambar:</label>
+					<div class="col-xs-9"><input type="file" class="form-control" name="image_four_name" value="<?= set_value('image_four_name'); ?>"/></div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
 					<div class="col-xs-6">
-						<select class="form-control" id="category">
-							<option>Kategori 1</option>
-							<option>Kategori 2</option>
-							<option>Kategori 3</option>
-							<option>Kategori 4</option>
+						<select class="form-control" name="category_id">
+							<option value="1">Kategori 1</option>
+							<option value="2">Kategori 2</option>
+							<option value="3">Kategori 3</option>
+							<option value="4">Kategori 4</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="brand">Brand:</label>
 					<div class="col-xs-6">
-						<select class="form-control" id="brand">
-							<option>Brand 1</option>
-							<option>Brand 2</option>
-							<option>Brand 3</option>
-							<option>Brand 4</option>
+						<select class="form-control" name="brand_id">
+							<option value="1">Brand 1</option>
+							<option value="2">Brand 2</option>
+							<option value="3">Brand 3</option>
+							<option value="4">Brand 4</option>
 						</select>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput"></div>
+					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput" name="tag" value="<?= set_value('tag'); ?>"/></div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
