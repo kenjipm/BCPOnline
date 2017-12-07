@@ -7,11 +7,11 @@ class Item_model extends CI_Model {
 	// status account
 
 	// type account
-	const TYPE = array(
+	/*const TYPE = array(
 		'ORDER' => 'ORDER',
 		'REPAIR' => 'REPAIR',
 		'BID' => 'REPAIR'
-	);
+	);*/
 
 	// nama model dari masing2 type account
 	/*const TYPE_MODEL = array(
@@ -40,9 +40,6 @@ class Item_model extends CI_Model {
 	public $category_id;
 	public $tenant_id;
 	public $brand_id;
-	
-	// stub attribute
-	public $type;
 	
 	// constructor
 	public function __construct()
@@ -140,9 +137,9 @@ class Item_model extends CI_Model {
 		$this->posted_item_id			= "";
 		$this->posted_item_name			= $this->input->post('posted_item_name');
 		$this->price					= $this->input->post('price');
-		$this->date_posted				= $this->input->post('date_posted');
-		$this->date_updated				= $this->input->post('date_updated');
-		$this->date_expired				= $this->input->post('date_expired');
+		$this->date_posted				= date("d-m-Y");
+		$this->date_updated				= date("d-m-Y");
+		$this->date_expired				= NULL;
 		$this->item_type				= $this->input->post('item_type');
 		$this->quantity_avalaible		= $this->input->post('quantity_avalaible');
 		$this->unit_weight				= $this->input->post('unit_weight');
@@ -152,27 +149,23 @@ class Item_model extends CI_Model {
 		$this->image_three_name			= $this->input->post('image_three_name');
 		$this->image_four_name			= $this->input->post('image_four_name');
 		$this->category_id				= $this->input->post('category_id');
-		$this->tenant_id				= $this->input->post('tenant_id');
+		$this->tenant_id				= $this->session->userdata('id');
 		$this->brand_id					= $this->input->post('brand_id');
+	
 		
 		// insert data, then generate [account_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-		if ($this->db->insert($this->table_account, $db_item))
+		if ($this->db->insert($this->table_item, $db_item))
 		{
 			$this->load->library('Id_Generator');
 			
 			$db_item->id				= $this->db->insert_id();
-			$db_item->posted_item_id	= $this->id_generator->generate($type, $db_item->id);
+			$db_item->posted_item_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM'], $db_item->id);
 			
 			$this->db->where('id', $db_item->id);
-			if ($this->db->update($this->table_account, $db_item)) // update account_id natural key yang udah di generate "ADM0001"
-			{
-				// insert data ke tabel customer / tenant / deliverer / admin
-				$this->load->model($this::TYPE_MODEL[$type], 'child_model');
-				$this->child_model->insert_from_account($db_item->id, $db_item->account_id);
-			}
+			$this->db->update($this->table_item, $db_item);
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction

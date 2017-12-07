@@ -30,11 +30,13 @@ class Login extends CI_Controller {
 		
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_from_login($email, $password);
+		$id = "";
 		$account_id = "";
 		$type = $email; //""; dummy buat bypass kalo mau login type lain
 		
 		if ($user !== null)
 		{
+			$id = $user->id;
 			$account_id = $user->account_id;
 			$type = $user->type;
 		}
@@ -42,7 +44,7 @@ class Login extends CI_Controller {
 		// if ($user !== null)
 		{
 			$userdata = array(
-				'id' => 1,
+				'id' => $id,
 				'account_id' => $account_id,
 				'type' => $type,
 				'cart' => array()

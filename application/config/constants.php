@@ -80,7 +80,7 @@ defined('TYPE') OR define('TYPE', array(
 			'TENANT_PAY_RECEIPT'=> 8,
 			'ADDITIONAL_FEE'	=> 10,
 			'REDEEM_VOUCHER'	=> 8,
-			'REDEEM_REWARD'		=> 8'
+			'REDEEM_REWARD'		=> 8
 		),
 		'model' => array(
 			'CUSTOMER'			=> 'Customer_model',
