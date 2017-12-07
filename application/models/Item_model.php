@@ -134,6 +134,9 @@ class Item_model extends CI_Model {
 	// insert new account from form post
 	public function insert_from_post()
 	{
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		
 		$this->posted_item_id			= "";
 		$this->posted_item_name			= $this->input->post('posted_item_name');
 		$this->price					= $this->input->post('price');
@@ -149,7 +152,7 @@ class Item_model extends CI_Model {
 		$this->image_three_name			= $this->input->post('image_three_name');
 		$this->image_four_name			= $this->input->post('image_four_name');
 		$this->category_id				= $this->input->post('category_id');
-		$this->tenant_id				= $this->session->userdata('id');
+		$this->tenant_id				= $cur_tenant->id;
 		$this->brand_id					= $this->input->post('brand_id');
 	
 		
