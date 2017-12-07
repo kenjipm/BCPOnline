@@ -59,18 +59,21 @@
 	$model->deliverers[0]->deliverer_name = "Dori";
 	$model->deliverers[0]->email = "dori@gmail.com";
 	$model->deliverers[0]->date_joined = "03-12-2017";
+	$model->deliverers[0]->status = "Kosong";
 	$model->deliverers[1] = new class{};
 	$model->deliverers[1]->id = 2;
 	$model->deliverers[1]->deliverer_id = "17120588804";
 	$model->deliverers[1]->deliverer_name = "Rido";
 	$model->deliverers[1]->email = "rido@gmail.com";
 	$model->deliverers[1]->date_joined = "05-12-2017";
+	$model->deliverers[1]->status = "Sibuk";
 	$model->deliverers[2] = new class{};
 	$model->deliverers[2]->id = 3;
 	$model->deliverers[2]->deliverer_id = "17120888898";
 	$model->deliverers[2]->deliverer_name = "Rodi";
 	$model->deliverers[2]->email = "rodi@gmail.com";
 	$model->deliverers[2]->date_joined = "08-12-2017";
+	$model->deliverers[2]->status = "Kosong";
 	
 ?>
 <div class="col-sm-10 col-sm-offset-1">
@@ -143,6 +146,7 @@
 			foreach($model->customers as $customer)
 			{
 				?>
+				<a href="<?=site_url('admin/account_detail/'.$customer->id)?>">
 				<div class="row list-group">
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->customer_id?> </div>
@@ -152,12 +156,8 @@
 						<?=$customer->email?> </div>
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->date_joined?> </div>
-					<div class="col-xs-1">
-						<a href="<?=site_url('admin/account_detail/'.$customer->id)?>">
-							<button class="btn btn-default">Lihat</button>
-						</a></div>	
-						
 				</div>
+				</a>
 				<?php
 			}
 			?>
@@ -181,6 +181,7 @@
 			foreach($model->deliverers as $deliverer)
 			{
 				?>
+				<a href="<?=site_url('admin/account_detail/'.$deliverer->id)?>">
 				<div class="row list-group">
 					<div class="col-xs-2 list-group-item">
 						<?=$deliverer->deliverer_id?> </div>
@@ -189,12 +190,18 @@
 					<div class="col-xs-3 list-group-item">
 						<?=$deliverer->email?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->date_joined?> </div>
-					<div class="col-xs-1">
-						<a href="<?=site_url('admin/account_detail/'.$deliverer->id)?>">
-							<button class="btn btn-default">Lihat</button>
-						</a></div>	
-						
+						<?=$deliverer->date_joined?> </div>								
+				</a>
+				<?php
+					if ($deliverer->status == "Sibuk"){
+						$show_div_assign = false;
+					} else {
+						$show_div_assign = true;
+					}
+				?>
+					<div class="col-xs-1" id="assign" <?php if ($show_div_assign == false){?> style="display:none"<?php } ?>>
+						<a class="btn btn-default" href="<?=site_url('admin/account_detail/'.$deliverer->id)?>">Beri Tugas</a>
+					</div>
 				</div>
 				<?php
 			}
