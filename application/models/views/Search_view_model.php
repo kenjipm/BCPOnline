@@ -1,6 +1,6 @@
 <?php
 
-class Search_view_model extends CI_Model{
+class Search_view_model extends CI_Model {
 	
 	public $search_items;
 	

@@ -2,6 +2,7 @@
 
 class Deliverer_model extends CI_Model {
 	
+	private $table_default = 'deliverer';
 	private $table_deliverer = 'deliverer';
 	
 	public $id;
@@ -18,10 +19,10 @@ class Deliverer_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function insert_from_account($account_id, $deliverer_id)
+	public function insert_from_account($account_id)
 	{
 		$this->account_id			= $account_id;
-		$this->deliverer_id			= $deliverer_id;
+		$this->deliverer_id			= "";
 		$this->license_plate		= "";
 		$this->vehicle_desc			= "";
 		
@@ -31,6 +32,19 @@ class Deliverer_model extends CI_Model {
 		{
 			$this->id	= $this->db->insert_id();
 		}
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->deliverer_id = $natural_id;
+		
+		$this->db->trans_start();
+		
+		$this->db->set('deliverer_id', $natural_id);
+		$this->db->where('id', $this->id);
+		$this->db->update($this->table_deliverer);
 		
 		$this->db->trans_complete();
 	}

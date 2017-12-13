@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Item extends CI_Controller {
 
-	public function index($id)
+	public function index($id) // load view item untuk customer
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -11,7 +11,13 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('item_model');
+		$item = $this->item_model->get_from_id($id);
+		
+		$item_main_view = $this->load->model('views/item_main_view_model');
+		$this->item_main_view_model->get($item);
+		
+		$data['model'] = $this->item_main_view_model;
 		$this->load->view('item_main', $data);
 		
 		// Load Footer

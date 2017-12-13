@@ -2,6 +2,7 @@
 
 class Admin_model extends CI_Model {
 	
+	private $table_default = 'admin';
 	private $table_admin = 'admin';
 	
 	public $id;
@@ -17,10 +18,10 @@ class Admin_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function insert_from_account($account_id, $admin_id)
+	public function insert_from_account($account_id)
 	{
 		$this->account_id			= $account_id;
-		$this->admin_id				= $admin_id;
+		$this->admin_id				= "";
 		$this->hour_available		= "";
 		
 		$this->db->trans_start();
@@ -29,6 +30,19 @@ class Admin_model extends CI_Model {
 		{
 			$this->id	= $this->db->insert_id();
 		}
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->admin_id = $natural_id;
+		
+		$this->db->trans_start();
+		
+		$this->db->set('admin_id', $natural_id);
+		$this->db->where('id', $this->id);
+		$this->db->update($this->table_admin);
 		
 		$this->db->trans_complete();
 	}

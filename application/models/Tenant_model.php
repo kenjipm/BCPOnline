@@ -2,6 +2,7 @@
 
 class Tenant_model extends CI_Model {
 	
+	private $table_default = 'tenant';
 	private $table_tenant = 'tenant';
 	
 	public $id;
@@ -20,10 +21,10 @@ class Tenant_model extends CI_Model {
 		return $query->row();
 	}
 	
-	public function insert_from_account($account_id, $tenant_id)
+	public function insert_from_account($account_id)
 	{
 		$this->account_id			= $account_id;
-		$this->tenant_id			= $tenant_id;
+		$this->tenant_id			= "";
 		$this->unit_number			= "";
 		$this->floor				= "";
 		$this->selling_category		= "";
@@ -35,6 +36,19 @@ class Tenant_model extends CI_Model {
 		{
 			$this->id	= $this->db->insert_id();
 		}
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->tenant_id = $natural_id;
+		
+		$this->db->trans_start();
+		
+		$this->db->set('tenant_id', $natural_id);
+		$this->db->where('id', $this->id);
+		$this->db->update($this->table_tenant);
 		
 		$this->db->trans_complete();
 	}

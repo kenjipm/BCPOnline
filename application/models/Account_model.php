@@ -83,7 +83,7 @@ class Account_model extends CI_Model {
 		$this->date_joined			= $db_item->date_joined;
 		$this->profile_pic			= $db_item->profile_pic;
 		
-		$this->type					= $this->get_type();
+		$this->type					= $this->get_type($this->id);
 		
 		return $this;
 	}
@@ -146,30 +146,35 @@ class Account_model extends CI_Model {
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		if ($this->db->insert($this->table_account, $db_item))
 		{
-			$this->load->library('Id_Generator');
+			$db_item->id	= $this->db->insert_id();
 			
-			$db_item->id			= $this->db->insert_id();
-			$db_item->account_id	= $this->id_generator->generate($type, $db_item->id);
+			// insert data ke tabel customer / tenant / deliverer / admin
+			$this->load->model(TYPE['model'][$type], 'child_model');
+			$this->child_model->insert_from_account($db_item->id);
 			
-			$this->db->where('id', $db_item->id);
-			if ($this->db->update($this->table_account, $db_item)) // update account_id natural key yang udah di generate "ADM0001"
+			if ($this->child_model->id) // kalau berhasil masukin child
 			{
-				// insert data ke tabel customer / tenant / deliverer / admin
-				$this->load->model(TYPE['model'][$type], 'child_model');
-				$this->child_model->insert_from_account($db_item->id, $db_item->account_id);
+				$this->load->library('Id_Generator');
+				$natural_id	= $this->id_generator->generate($type, $this->child_model->id);
+				$this->child_model->update_natural_id($natural_id);
+				
+				$db_item->account_id	= $natural_id;
+				
+				$this->db->where('id', $db_item->id);
+				$this->db->update($this->table_account, $db_item); // update account_id natural key yang udah di generate "ADM0001"
 			}
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
-	public function get_type()
+	public function get_type($id)
 	{
-		$this->db->where('account_id', $this->id);
+		$this->db->where('account_id', $id);
 		foreach(TYPE['model'] as $type => $model)
 		{
 			$this->load->model($model);
-			$item = $this->{$model}->get_by_account_id($this->id);
+			$item = $this->{$model}->get_by_account_id($id);
 			
 			if ($item !== null)
 			{
