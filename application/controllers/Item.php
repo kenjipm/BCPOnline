@@ -45,7 +45,12 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Item_model');
+		$items = $this->Item_model->get_all();
+		$this->load->model('views/tenant/post_item_list_view_model');
+		$this->post_item_list_view_model->get($items);
+		$data['model'] = $this->post_item_list_view_model;
+		
 		$this->load->view('tenant/post_item_list', $data);
 		
 		// Load Footer
@@ -104,4 +109,5 @@ class Item extends CI_Controller {
 			redirect('Item/post_item_list');
 		}
 	}
+	
 }
