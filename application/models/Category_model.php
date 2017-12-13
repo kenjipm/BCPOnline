@@ -1,8 +1,8 @@
 <?php
 
-class Cateogry_model extends CI_Model {
+class Category_model extends CI_Model {
 	
-	private $table_cateogry = 'category';
+	private $table_category = 'category';
 	
 	// table attribute
 	public $id;
@@ -57,10 +57,10 @@ class Cateogry_model extends CI_Model {
 	// insert new account from form post
 	public function insert_from_post()
 	{
-		$this->load->model('Admin_model');
+		$this->load->model('Category_model');
 		
-		$this->category_name		= "";
-		$this->category_description	= "";
+		$this->category_name		= $this->input->post('category_name');
+		$this->category_description	= $this->input->post('category_description');
 	
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		

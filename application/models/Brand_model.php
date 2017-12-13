@@ -1,9 +1,9 @@
 <?php
 
-class Item_model extends CI_Model {
+class Brand_model extends CI_Model {
 	
 	// Nama tabel di DB
-	private $table_brand = 'posted_item';
+	private $table_brand = 'brand';
 	
 	// table attribute
 	public $id;
@@ -79,7 +79,7 @@ class Item_model extends CI_Model {
 			$this->load->library('Id_Generator');
 			
 			$db_item->id				= $this->db->insert_id();
-			$db_item->posted_item_id	= $this->id_generator->generate(TYPE['name']['BRAND'], $db_item->id);
+			$db_item->brand_id	= $this->id_generator->generate(TYPE['name']['BRAND'], $db_item->id);
 			
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_brand, $db_item);
