@@ -1,6 +1,6 @@
 <?php
 
-class Post_Item_Detail_View_Model {
+class Post_Item_Detail_View_Model extends CI_Model{
 	
 	public $posted_item;
 	// constructor
@@ -11,10 +11,11 @@ class Post_Item_Detail_View_Model {
 	public function get($item)
 	{
 		$this->posted_item = new class{};
-		
+		$this->load->library('Text_renderer');
+			
 		$this->posted_item->id 						= $item->id;
 		$this->posted_item->posted_item_name 		= $item->posted_item_name;
-		$this->posted_item->price					= 'Rp. ' . number_format( $item->price, 0 , '' , '.' ) . ',-';
+		$this->posted_item->price					= $this->text_renderer->to_rupiah($item->price);
 		$this->posted_item->item_type 				= $item->item_type;
 		$this->posted_item->quantity_avalaible		= $item->quantity_avalaible;
 		$this->posted_item->unit_weight				= $item->unit_weight;
