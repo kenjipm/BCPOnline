@@ -65,7 +65,12 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Item_model');
+		$item = $this->Item_model->get_from_id($id);
+		$this->load->model('views/tenant/post_item_detail_view_model');
+		$this->post_item_detail_view_model->get($item);
+		$data['model'] = $this->post_item_detail_view_model;
+		
 		$this->load->view('tenant/post_item_detail', $data);
 		
 		// Load Footer
