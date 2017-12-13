@@ -1,0 +1,44 @@
+<?php
+
+class Post_Item_Detail_View_Model {
+	
+	public $posted_item;
+	// constructor
+	public function __construct()
+	{	
+	}
+	
+	public function get($item)
+	{
+		$this->posted_item = new class{};
+		
+		$this->posted_item->id 						= $item->id;
+		$this->posted_item->posted_item_name 		= $item->posted_item_name;
+		$this->posted_item->price					= 'Rp. ' . number_format( $item->price, 0 , '' , '.' ) . ',-';
+		$this->posted_item->item_type 				= $item->item_type;
+		$this->posted_item->quantity_avalaible		= $item->quantity_avalaible;
+		$this->posted_item->unit_weight				= $item->unit_weight;
+		$this->posted_item->posted_item_description	= $item->posted_item_description;
+		$this->posted_item->category_id				= $item->category_id;
+		$this->posted_item->brand_id				= $item->brand_id;
+		
+	}
+	
+	public function get_category_name($id)
+	{
+		
+	}
+	
+	public function get_brand_name($id)
+	{
+		
+	}
+	
+	public function get_all_tag($id)
+	{
+		
+	}
+	
+}
+
+?>
