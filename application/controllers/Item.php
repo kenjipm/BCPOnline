@@ -80,8 +80,15 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Hasil Pencarian";
-		$data['model'] = new class{};
+		$keywords = $this->input->get('keywords');
+		
+		$this->load->model('item_model');
+		$items = $this->item_model->get_from_search($keywords);
+		$this->load->model('views/search_view_model');
+		$this->search_view_model->get($items);
+		
+		$data['title'] = 'Hasil Pencarian';
+		$data['model'] = $this->search_view_model;
 		$this->load->view('search', $data);
 		
 		// Load Footer

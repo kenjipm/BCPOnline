@@ -45,9 +45,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/favorite_item')?>">Favorit</a></li> <?php } ?>
 				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('reward')?>">Reward</a></li> <?php } ?>
 			</ul>
-			<form action="<?=site_url('item/search')?>" method="post" class="navbar-form navbar-left">
+			<form action="<?=site_url('item/search')?>" method="get" class="navbar-form navbar-left">
 				<div class="input-group">
-					<input name="search_keywords" type="text" class="form-control" placeholder="Search Items...">
+					<input name="keywords" type="text" class="form-control" placeholder="Search Items...">
 					<div class="input-group-btn">
 						<button class="btn btn-default" type="submit">
 							<i class="glyphicon glyphicon-search"></i>

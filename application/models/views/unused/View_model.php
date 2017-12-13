@@ -1,6 +1,6 @@
 <?php
 
-class View_model {
+class View_model extends CI_Model {
 	
 	public $title;
 	

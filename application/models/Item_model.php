@@ -149,6 +149,19 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
+	public function get_from_search($keywords)
+	{
+		$this->db->like('posted_item_name', $keywords);
+		// foreach (explode(" ", $keywords) as $keyword) // untuk search per word
+		// {
+			// $this->db->or_like('name', $keyword);
+		// }
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
 	// insert new account from form post
 	public function insert_from_post()
 	{
