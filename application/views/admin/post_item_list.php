@@ -5,19 +5,19 @@
 	
 	$model->posted_items[0] = new class{};
 	$model->posted_items[0]->id = 1;
-	$model->posted_items[0]->name = "Djisamsung Galaksih";
+	$model->posted_items[0]->posted_item_name = "Djisamsung Galaksih";
 	$model->posted_items[0]->type = "Order";
 	$model->posted_items[1] = new class{};
 	$model->posted_items[1]->id = 2;
-	$model->posted_items[1]->name = "Si Yaoming Handphone";
+	$model->posted_items[1]->posted_item_name = "Si Yaoming Handphone";
 	$model->posted_items[1]->type = "Repair";
 	$model->posted_items[2] = new class{};
 	$model->posted_items[2]->id = 3;
-	$model->posted_items[2]->name = "Snsv Laptop";
+	$model->posted_items[2]->posted_item_name = "Snsv Laptop";
 	$model->posted_items[2]->type = "Bid";
 	$model->posted_items[3] = new class{};
 	$model->posted_items[3]->id = 4;
-	$model->posted_items[3]->name = "Tos Ibak TV";
+	$model->posted_items[3]->posted_item_name = "Tos Ibak TV";
 	$model->posted_items[3]->type = "Order";
 ?>
 
@@ -36,8 +36,8 @@
 						<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
 							<img src="<?=site_url('img/favicon.gif')?>" alt="Image" style="width:50%">
 							<div class="caption text-center">
-								<p><?=$posted_item->name?></p>
-								<p><?=$posted_item->type?></p>
+								<p><?=$posted_item->posted_item_name?></p>
+								<p><?=$posted_item->item_type?></p>
 							</div>
 						</a>
 					</div>
