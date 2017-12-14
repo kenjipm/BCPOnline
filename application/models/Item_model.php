@@ -3,23 +3,6 @@
 class Item_model extends CI_Model {
 	
 	private $table_item = 'posted_item';
-
-	// status account
-
-	// type account
-	/*const TYPE = array(
-		'ORDER' => 'ORDER',
-		'REPAIR' => 'REPAIR',
-		'BID' => 'REPAIR'
-	);*/
-
-	// nama model dari masing2 type account
-	/*const TYPE_MODEL = array(
-		'CUSTOMER' => 'Customer_model',
-		'TENANT' => 'Tenant_model',
-		'DELIVERER' => 'Deliverer_model',
-		'ADMIN' => 'Admin_model'
-	);*/
 	
 	// table attribute
 	public $id;

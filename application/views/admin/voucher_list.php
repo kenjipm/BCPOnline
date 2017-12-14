@@ -1,33 +1,33 @@
 <?php
 	// Model untuk customer
 	
-	// dummy voucher list
-	$model->vouchers = array();
+	// // dummy voucher list
+	// $model->vouchers = array();
 	
-	// Model dummy voucher
-	$model->vouchers[0] = new class{};
-	$model->vouchers[0]->id = 1;
-	$model->vouchers[0]->voucher_id = "17120377701";
-	$model->vouchers[0]->voucher_stock = "10";
-	$model->vouchers[0]->voucher_brand = "Djisamsung";
-	$model->vouchers[0]->voucher_description = "Deskripsi voucher Djisamsung";
-	$model->vouchers[0]->date_added = "03-12-2017";
-	$model->vouchers[0]->voucher_worth = "Djisamsung";
-	$model->vouchers[0]->voucher_code = "Deskripsi voucher Djisamsung";
-	$model->vouchers[1] = new class{};
-	$model->vouchers[1]->id = 2;
-	$model->vouchers[1]->voucher_id = "17120577701";
-	$model->vouchers[1]->voucher_stock = "39";
-	$model->vouchers[1]->voucher_brand = "Appa";
-	$model->vouchers[1]->voucher_description = "Deskripsi voucher Appa";
-	$model->vouchers[1]->date_added = "05-12-2017";
-	$model->vouchers[2] = new class{};
-	$model->vouchers[2]->id = 3;
-	$model->vouchers[2]->voucher_id = "17120977701";
-	$model->vouchers[2]->voucher_stock = "40";
-	$model->vouchers[2]->voucher_brand = "Tos Ibak";
-	$model->vouchers[2]->voucher_description = "Deskripsi voucher Tos Ibak";
-	$model->vouchers[2]->date_added = "09-12-2017";
+	// // Model dummy voucher
+	// $model->vouchers[0] = new class{};
+	// $model->vouchers[0]->id = 1;
+	// $model->vouchers[0]->voucher_id = "17120377701";
+	// $model->vouchers[0]->voucher_stock = "10";
+	// $model->vouchers[0]->voucher_brand = "Djisamsung";
+	// $model->vouchers[0]->voucher_description = "Deskripsi voucher Djisamsung";
+	// $model->vouchers[0]->date_added = "03-12-2017";
+	// $model->vouchers[0]->voucher_worth = "Djisamsung";
+	// $model->vouchers[0]->voucher_code = "Deskripsi voucher Djisamsung";
+	// $model->vouchers[1] = new class{};
+	// $model->vouchers[1]->id = 2;
+	// $model->vouchers[1]->voucher_id = "17120577701";
+	// $model->vouchers[1]->voucher_stock = "39";
+	// $model->vouchers[1]->voucher_brand = "Appa";
+	// $model->vouchers[1]->voucher_description = "Deskripsi voucher Appa";
+	// $model->vouchers[1]->date_added = "05-12-2017";
+	// $model->vouchers[2] = new class{};
+	// $model->vouchers[2]->id = 3;
+	// $model->vouchers[2]->voucher_id = "17120977701";
+	// $model->vouchers[2]->voucher_stock = "40";
+	// $model->vouchers[2]->voucher_brand = "Tos Ibak";
+	// $model->vouchers[2]->voucher_description = "Deskripsi voucher Tos Ibak";
+	// $model->vouchers[2]->date_added = "09-12-2017";
 	
 	
 	
@@ -55,7 +55,7 @@
 						<div class="col-xs-1 list-group-item">
 							<?=$voucher->voucher_stock?> </div>
 						<div class="col-xs-2 list-group-item">
-							<?=$voucher->voucher_brand?> </div>
+							<?=$voucher->brand->brand_name?> </div>
 						<div class="col-xs-7 list-group-item">
 							<?=$voucher->voucher_description?> </div>
 					</a>
@@ -115,7 +115,7 @@
 						<label>Jumlah Stok:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" id="voucher_stock" readonly>
+						<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
 					</div>
 				</div>
 				<div class="form-group">
@@ -123,7 +123,7 @@
 						<label>Nama Brand:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_brand?>" class="form-control" id="voucher_brand" readonly>
+						<input type="text" value="<?=$model->vouchers[0]->voucher_brand?>" class="form-control" name="voucher_brand" readonly>
 					</div>
 				</div>
 				<div class="form-group">
@@ -131,7 +131,7 @@
 						<label>Kode Voucher:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" id="voucher_code" readonly>
+						<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
 					</div>
 				</div>
 				<div class="form-group">
