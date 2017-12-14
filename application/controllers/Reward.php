@@ -45,7 +45,11 @@ class Reward extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Reward_model');
+		$rewards = $this->Reward_model->get_all();
+		$this->load->model('views/admin/reward_list_view_model');
+		$this->reward_list_view_model->get($rewards);
+		$data['model'] = $this->reward_list_view_model;
 		$this->load->view('admin/reward_list', $data);
 		
 		// Load Footer
@@ -54,6 +58,9 @@ class Reward extends CI_Controller {
 	
 	public function create_reward()
 	{
+		// kalau create reward baru
+		if ($this->input->method() == "post") $this->post_reward_do();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -65,5 +72,22 @@ class Reward extends CI_Controller {
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function post_reward_do()
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('date_expired', 'Tanggal Expired', 'required');
+		$this->form_validation->set_rules('points_needed', 'Poin', 'required|integer');
+		$this->form_validation->set_rules('reward_description', 'Deskripsi', 'required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Reward_model');
+			$this->Reward_model->insert_from_post();
+			
+			redirect('Reward/reward_list');
+		}
 	}
 }
