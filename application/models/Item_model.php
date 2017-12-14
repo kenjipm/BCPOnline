@@ -89,6 +89,11 @@ class Item_model extends CI_Model {
 		$this->tenant_id				= $db_item->tenant_id;
 		$this->brand_id					= $db_item->brand_id;
 		
+		$this->category					= $this->load->model('Category_model');
+		$this->category->category_name	= $db_item->category_name;
+		$this->brand					= $this->load->model('Brand_model');
+		$this->brand->brand_name		= $db_item->brand_name;
+		
 		return $this;
 	}
 	
@@ -132,8 +137,10 @@ class Item_model extends CI_Model {
 	// get item detail
 	public function get_from_id($id)
 	{
-		$where['id'] = $id;
+		$where['posted_item.id'] = $id;
 		
+		$this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
+		$this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_item, 1);
 		$item = $query->row();
@@ -143,6 +150,9 @@ class Item_model extends CI_Model {
 	
 	public function get_all()
 	{
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$this->db->where('id', $cur_tenant->id);
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		

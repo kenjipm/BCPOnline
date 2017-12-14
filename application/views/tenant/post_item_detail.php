@@ -59,17 +59,17 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="category" 
-						value="<?=$model->posted_item->category_id?>" readonly></div>
+						value="<?=$model->posted_item->category->category_name?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="brand">Brand:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="brand" 
-						value="<?=$model->posted_item->brand_id?>" readonly></div>
+						value="<?=$model->posted_item->brand->brand_name?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="tag" 
-						value="<?=$model->posted_item->category_id?>" readonly></div>
+						value="<?=$model->posted_item->category->category_name?>" readonly></div>
 				</div>
 				<h4>Daftar Diskon Customer</h4>
 				<div id="add_customer" style="display:none">
