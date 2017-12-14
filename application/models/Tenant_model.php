@@ -46,9 +46,9 @@ class Tenant_model extends CI_Model {
 		
 		$this->db->trans_start();
 		
-		$this->db->set('tenant_id', $natural_id);
-		$this->db->where('id', $this->id);
-		$this->db->update($this->table_tenant);
+		$this->db->set('tenant_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_tenant);
 		
 		$this->db->trans_complete();
 	}

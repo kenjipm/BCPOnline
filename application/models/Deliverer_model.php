@@ -42,9 +42,9 @@ class Deliverer_model extends CI_Model {
 		
 		$this->db->trans_start();
 		
-		$this->db->set('deliverer_id', $natural_id);
-		$this->db->where('id', $this->id);
-		$this->db->update($this->table_deliverer);
+		$this->db->set('deliverer_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_deliverer);
 		
 		$this->db->trans_complete();
 	}

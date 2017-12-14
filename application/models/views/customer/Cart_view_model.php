@@ -49,12 +49,17 @@ class Cart_view_model extends CI_Model {
 		}
 		
 		$this->add_fee			= 0;
-		$this->address			= $shipping_address->address_detail;
 		$this->price_total		= $this->price_subtotal + $this->add_fee;
 			
 		$this->add_fee			= $this->text_renderer->to_rupiah($this->add_fee);
 		$this->price_subtotal	= $this->text_renderer->to_rupiah($this->price_subtotal);
 		$this->price_total		= $this->text_renderer->to_rupiah($this->price_total);
+		
+		$this->address			= $shipping_address->address_detail ? $shipping_address->address_detail : "";
+		$this->address		   .= $shipping_address->kelurahan ? ($this->address ? ", " : "").$shipping_address->kelurahan : "";
+		$this->address		   .= $shipping_address->kecamatan ? ($this->address ? ", " : "").$shipping_address->kecamatan : "";
+		$this->address		   .= $shipping_address->city ? ($this->address ? ", " : "").$shipping_address->city : "";
+		$this->address		   .= $shipping_address->postal_code ? ($this->address ? ", " : "").$shipping_address->postal_code : "";
 	}
 }
 ?>

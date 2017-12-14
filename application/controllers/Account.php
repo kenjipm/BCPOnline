@@ -104,6 +104,7 @@ class Account extends CI_Controller {
 		$this->form_validation->set_rules('name', 'Nama', 'required');
 		$this->form_validation->set_rules('address', 'Alamat', 'required');
 		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
 		
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
 		$this->form_validation->set_rules('password', 'Password', 'required');

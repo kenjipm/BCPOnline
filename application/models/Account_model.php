@@ -43,6 +43,7 @@ class Account_model extends CI_Model {
 	
 	// stub attribute
 	public $type;
+	public $child_id;
 	
 	// constructor
 	public function __construct()
@@ -64,6 +65,7 @@ class Account_model extends CI_Model {
 		$this->profile_pic			= "";
 		
 		$this->type					= "";
+		$this->child_id				= "";
 	}
 	
 	// constructor from database object
@@ -84,6 +86,7 @@ class Account_model extends CI_Model {
 		$this->profile_pic			= $db_item->profile_pic;
 		
 		$this->type					= $this->get_type($this->id);
+		$this->child_id				= $this->get_child_id($this->id);
 		
 		return $this;
 	}
@@ -181,6 +184,22 @@ class Account_model extends CI_Model {
 				return $type;
 			}
 		}
+	}
+	
+	public function get_child_id($id)
+	{
+		$this->db->where('account_id', $id);
+		foreach(TYPE['model'] as $type => $model)
+		{
+			$this->load->model($model);
+			$item = $this->{$model}->get_by_account_id($id);
+			
+			if ($item !== null)
+			{
+				return $item->id;
+			}
+		}
+		return null;
 	}
 }
 

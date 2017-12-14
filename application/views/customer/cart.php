@@ -77,6 +77,12 @@
 						</div>
 					<?php
 				}
+				if (count($model->items) <= 0)
+				{
+					?>
+					<label>Keranjang Belanja Anda Kosong</label>
+					<?php
+				}
 				?>
 				<hr/>
 				<div class="row">
@@ -100,7 +106,7 @@
 											else
 											{
 												?>
-												<button class="btn btn-default">Tambah Alamat Kirim</button>
+												<button onclick="popup.open('popup_address')" class="btn btn-default">Tambah Alamat Kirim</button>
 												<?php
 											}
 										?>
@@ -133,10 +139,94 @@
 			<div class="panel-footer">
 				<div class="row">
 					<div class="col-md-3 col-md-offset-9">
-						<a href="<?=site_url('billing/cart')?>" class="btn btn-default">Pilih Metode Pembayaran</a>
+						<?php
+							if (count($model->items) > 0)
+							{
+								?>
+								<a href="<?=site_url('billing/cart')?>" class="btn btn-default">Pilih Metode Pembayaran</a>
+								<?php
+							}
+							else
+							{
+								?>
+								<a href="<?=site_url('')?>" class="btn btn-default">Lanjut Belanja</a>
+								<?php
+							}
+						?>
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+<!---------------- POP UP TAMBAH ALAMAT --------------------->
+<div id="popup_address" class="popup popup-lg">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Tambah Alamat
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal" method="post" action="<?=site_url('customer/address_add_do')?>">
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Alamat</label>
+					</div>
+					<div class="col-sm-9">
+						<input type="text" name="address_detail" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kota</label>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" name="city" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kecamatan</label>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" name="kecamatan" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kelurahan</label>
+					</div>
+					<div class="col-sm-6">
+						<input type="text" name="kelurahan" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kode Pos</label>
+					</div>
+					<div class="col-sm-3">
+						<input type="text" name="postal_code" class="form-control"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Peta</label>
+					</div>
+					<div class="col-sm-9">
+						<div class="panel panel-default">
+							<div class="panel-body" style="height: 400px; width: auto">
+								<?php $this->load->view('googlemaps'); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-9 col-sm-offset-3">
+						<button type="submit" class="btn btn-default">Tambah</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_address')">Batal</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

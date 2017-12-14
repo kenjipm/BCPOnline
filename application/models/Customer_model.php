@@ -44,9 +44,9 @@ class Customer_model extends CI_Model {
 		
 		$this->db->trans_start();
 		
-		$this->db->set('customer_id', $natural_id);
-		$this->db->where('id', $this->id);
-		$this->db->update($this->table_customer);
+		$this->db->set('customer_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_customer);
 		
 		$this->db->trans_complete();
 	}

@@ -3,6 +3,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
+	public function __construct()
+	{
+		parent::__construct();
+		
+		$this->default_redirect($this->session->type);
+	}
+
 	public function index()
 	{
 		// Load Header
@@ -31,12 +38,14 @@ class Login extends CI_Controller {
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_from_login($email, $password);
 		$id = "";
+		$child_id = "";
 		$account_id = "";
 		$type = $email; //""; dummy buat bypass kalo mau login type lain
 		
 		if ($user !== null)
 		{
 			$id = $user->id;
+			$child_id = $user->child_id;
 			$account_id = $user->account_id;
 			$type = $user->type;
 		}
@@ -45,6 +54,7 @@ class Login extends CI_Controller {
 		{
 			$userdata = array(
 				'id' => $id,
+				'child_id' => $child_id,
 				'account_id' => $account_id,
 				'type' => $type,
 				'cart' => array()
@@ -52,22 +62,7 @@ class Login extends CI_Controller {
 			
 			$this->session->set_userdata($userdata);
 			
-			if ($type == TYPE['name']['CUSTOMER'])
-			{
-				redirect('dashboard');
-			}
-			else if ($type == TYPE['name']['TENANT'])
-			{
-				redirect('tenant');
-			}
-			else if ($type == TYPE['name']['ADMIN'])
-			{
-				redirect('admin');
-			}
-			else if ($type == TYPE['name']['DELIVERER'])
-			{
-				redirect('delivery');
-			}
+			$this->default_redirect($type);
 		}
 		
 		$this->session->sess_destroy();
@@ -89,6 +84,26 @@ class Login extends CI_Controller {
 		else
 		{
 			return "Unknown Error";
+		}
+	}
+	
+	public function default_redirect($type)
+	{
+		if ($type == TYPE['name']['CUSTOMER'])
+		{
+			redirect('dashboard');
+		}
+		else if ($type == TYPE['name']['TENANT'])
+		{
+			redirect('tenant');
+		}
+		else if ($type == TYPE['name']['ADMIN'])
+		{
+			redirect('admin');
+		}
+		else if ($type == TYPE['name']['DELIVERER'])
+		{
+			redirect('delivery');
 		}
 	}
 }

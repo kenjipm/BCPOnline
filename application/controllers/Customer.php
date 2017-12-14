@@ -55,7 +55,7 @@ class Customer extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('shipping_address_model');
-		$shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->id);
+		$shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->child_id);
 		
 		$this->load->model('views/customer/cart_view_model');
 		$this->cart_view_model->get($this->session->cart, $shipping_address);
@@ -111,7 +111,7 @@ class Customer extends CI_Controller {
 		$cart[$item_id] += $quantity;
 		$this->session->cart = $cart;
 		
-		redirect('customer/cart');
+		$this->default_redirect();
 	}
 	
 	public function cart_sub_do()
@@ -127,6 +127,36 @@ class Customer extends CI_Controller {
 		
 		$this->session->cart = $cart;
 		
-		redirect('customer/cart');
+		$this->default_redirect();
+	}
+	
+	public function address_add_do()
+	{
+		$address = new class{};
+		$address->city				= $this->input->post('city');
+		$address->kecamatan			= $this->input->post('kecamatan');
+		$address->kelurahan			= $this->input->post('kelurahan');
+		$address->postal_code		= $this->input->post('postal_code');
+		$address->address_detail	= $this->input->post('address_detail');
+		$address->latitude			= $this->input->post('lat') . ", " . $this->input->post('lng');
+		
+		$this->load->model('shipping_address_model');
+		$this->shipping_address_model->insert($address);
+		
+		$this->default_redirect();
+	}
+	
+	public function default_redirect()
+	{
+		if ($this->input->post('return_url') != null)
+		{
+			redirect($this->input->post('return_url'));
+		}
+		redirect($_SERVER['HTTP_REFERER']);
+	}
+	
+	public function load_googlemaps()
+	{
+		$this->load->view('googlemaps');
 	}
 }

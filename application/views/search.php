@@ -41,6 +41,14 @@
 							</div>
 						<?php
 					}
+					if (count($model->search_items) <= 0)
+					{
+						?>
+						<div class="col-md-4">
+							<label>Hasil pencarian tidak ditemukan</label>
+						</div>
+						<?php
+					}
 					?>
 				</div>
 			</div>

@@ -23,7 +23,7 @@
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_of_birth'); ?></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3">No HP</label>
+					<label class="control-label col-xs-3">No HP<span class="text-danger">*</span></label>
 					<div class="col-xs-9"><input type="text" name="phone_number" class="form-control" value="<?= set_value('phone_number'); ?>"/></div>
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('phone_number'); ?></div>
 				</div>

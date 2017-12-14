@@ -39,6 +39,11 @@ body {
 .popup-md { width: 500px; }
 .popup-lg { width: 700px; }
 
+.popup .panel-body {
+	max-height: 500px;
+	overflow-y: auto;
+}
+
 .template {
 	display: none;
 }

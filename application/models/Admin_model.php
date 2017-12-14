@@ -40,9 +40,9 @@ class Admin_model extends CI_Model {
 		
 		$this->db->trans_start();
 		
-		$this->db->set('admin_id', $natural_id);
-		$this->db->where('id', $this->id);
-		$this->db->update($this->table_admin);
+		$this->db->set('admin_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_admin);
 		
 		$this->db->trans_complete();
 	}
