@@ -106,6 +106,31 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function category($category_id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('item_model');
+		$items = $this->item_model->get_all_from_category_id($category_id);
+		
+		$this->load->model('category_model');
+		$category = $this->category_model->get_from_id($category_id);
+		
+		$this->load->model('views/search_view_model');
+		$this->search_view_model->get($items);
+		
+		$data['title'] = 'Kategori '.$category->category_name;
+		$data['model'] = $this->search_view_model;
+		$this->load->view('search', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function post_item_do()
 	{
 		$this->load->library('form_validation');

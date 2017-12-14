@@ -2,45 +2,45 @@
 	// Model untuk dashboard_main
 	
 	// dummy categories
-	$model->categories = array();
+	// $model->categories = array();
 	
-	$model->categories[0] = new class{};
-	$model->categories[0]->category_name = "Handphone & Tablet";
-	$model->categories[1] = new class{};
-	$model->categories[1]->category_name = "Laptop & Aksesoris";
-	$model->categories[2] = new class{};
-	$model->categories[2]->category_name = "Komputer & Aksesoris";
-	$model->categories[3] = new class{};
-	$model->categories[3]->category_name = "Elektronik";
-	$model->categories[4] = new class{};
-	$model->categories[4]->category_name = "Kamera";
-	$model->categories[5] = new class{};
-	$model->categories[5]->category_name = "Gaming";
-	$model->categories[6] = new class{};
-	$model->categories[6]->category_name = "Reparasi";
+	// $model->categories[0] = new class{};
+	// $model->categories[0]->category_name = "Handphone & Tablet";
+	// $model->categories[1] = new class{};
+	// $model->categories[1]->category_name = "Laptop & Aksesoris";
+	// $model->categories[2] = new class{};
+	// $model->categories[2]->category_name = "Komputer & Aksesoris";
+	// $model->categories[3] = new class{};
+	// $model->categories[3]->category_name = "Elektronik";
+	// $model->categories[4] = new class{};
+	// $model->categories[4]->category_name = "Kamera";
+	// $model->categories[5] = new class{};
+	// $model->categories[5]->category_name = "Gaming";
+	// $model->categories[6] = new class{};
+	// $model->categories[6]->category_name = "Reparasi";
 	
-	// dummy posted items
-	$model->hot_items = array();
+	// // dummy posted items
+	// $model->hot_items = array();
 	
-	$model->hot_items[0] = new class{};
-	$model->hot_items[0]->id = 1;
-	$model->hot_items[0]->name = "Charger Samsung";
-	$model->hot_items[0]->price = "Rp 250.000";
-	$model->hot_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
+	// $model->hot_items[0] = new class{};
+	// $model->hot_items[0]->id = 1;
+	// $model->hot_items[0]->posted_item_name = "Charger Samsung";
+	// $model->hot_items[0]->price = "Rp 250.000";
+	// $model->hot_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
 	
-	$model->hot_items[1] = new class{};
-	$model->hot_items[1]->id = 2;
-	$model->hot_items[1]->name = "Charger Wireless";
-	$model->hot_items[1]->price = "Rp 350.000";
-	$model->hot_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
+	// $model->hot_items[1] = new class{};
+	// $model->hot_items[1]->id = 2;
+	// $model->hot_items[1]->posted_item_name = "Charger Wireless";
+	// $model->hot_items[1]->price = "Rp 350.000";
+	// $model->hot_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
 	
-	$model->hot_items[2] = new class{};
-	$model->hot_items[2]->id = 3;
-	$model->hot_items[2]->name = "Dompet Doraemon";
-	$model->hot_items[2]->price = "Rp 40.000";
-	$model->hot_items[2]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
+	// $model->hot_items[2] = new class{};
+	// $model->hot_items[2]->id = 3;
+	// $model->hot_items[2]->posted_item_name = "Dompet Doraemon";
+	// $model->hot_items[2]->price = "Rp 40.000";
+	// $model->hot_items[2]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
 	
-	$model->tenant_items = $model->hot_items;
+	// $model->tenant_items = $model->hot_items;
 ?>
 
 <div class="row">
@@ -55,7 +55,7 @@
 			foreach($model->categories as $category)
 			{
 				?>
-				<a href="#">
+				<a href="<?=site_url('item/category/'.$category->id)?>">
 					<div class="panel-footer">
 						<?=$category->category_name?>
 					</div>
@@ -83,10 +83,10 @@
 								<div class="panel panel-default">
 									<a href="<?=site_url('item/'.$tenant_item->id)?>">
 										<div class="panel-body">
-											<img class="col-md-12" src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->name?>"/>
+											<img class="col-md-12" src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
 										</div>
 										<div class="panel-footer">
-											<label class="control-label"><?=$tenant_item->name?></label><br/>
+											<label class="control-label"><?=$tenant_item->posted_item_name?></label><br/>
 											<label class="control-label"><?=$tenant_item->price?></label>
 										</div>
 									</a>
@@ -134,10 +134,10 @@
 								<div class="panel panel-default">
 									<a href="<?=site_url('item/'.$hot_item->id)?>">
 										<div class="panel-body">
-											<img class="col-md-12" src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->name?>"/>
+											<img class="col-md-12" src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
 										</div>
 										<div class="panel-footer">
-											<label class="control-label"><?=$hot_item->name?></label><br/>
+											<label class="control-label"><?=$hot_item->posted_item_name?></label><br/>
 											<label class="control-label"><?=$hot_item->price?></label>
 										</div>
 									</a>

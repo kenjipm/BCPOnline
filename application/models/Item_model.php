@@ -3,6 +3,7 @@
 class Item_model extends CI_Model {
 	
 	private $table_item = 'posted_item';
+	private $table_category = 'category';
 	
 	// table attribute
 	public $id;
@@ -48,6 +49,8 @@ class Item_model extends CI_Model {
 		$this->tenant_id				= "";
 		$this->brand_id					= "";
 		
+		$this->category					= $this->load->model('Category_model');
+		$this->brand					= $this->load->model('Brand_model');
 	}
 	
 	// constructor from database object
@@ -72,10 +75,8 @@ class Item_model extends CI_Model {
 		$this->tenant_id				= $db_item->tenant_id;
 		$this->brand_id					= $db_item->brand_id;
 		
-		$this->category					= $this->load->model('Category_model');
-		$this->category->category_name	= $db_item->category_name;
-		$this->brand					= $this->load->model('Brand_model');
-		$this->brand->brand_name		= $db_item->brand_name;
+		$this->category->category_name	= $db_item->category_name ?? "";
+		$this->brand->brand_name		= $db_item->brand_name ?? "";
 		
 		return $this;
 	}
@@ -107,12 +108,42 @@ class Item_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Item_model();
+		
+		$stub->id						= $db_item->id;
+		$stub->posted_item_id			= $db_item->posted_item_id;
+		$stub->posted_item_name			= $db_item->posted_item_name;
+		$stub->price					= $db_item->price;
+		$stub->date_posted				= $db_item->date_posted;
+		$stub->date_updated				= $db_item->date_updated;
+		$stub->date_expired				= $db_item->date_expired;
+		$stub->item_type				= $db_item->item_type;
+		$stub->quantity_avalaible		= $db_item->quantity_avalaible;
+		$stub->unit_weight				= $db_item->unit_weight;
+		$stub->posted_item_description	= $db_item->posted_item_description;
+		$stub->image_one_name			= $db_item->image_one_name;
+		$stub->image_two_name			= $db_item->image_two_name;
+		$stub->image_three_name			= $db_item->image_three_name;
+		$stub->image_four_name			= $db_item->image_four_name;
+		$stub->category_id				= $db_item->category_id;
+		$stub->tenant_id				= $db_item->tenant_id;
+		$stub->brand_id					= $db_item->brand_id;
+		
+		$stub->category->category_name	= $db_item->category_name ?? "";
+		$stub->brand->brand_name		= $db_item->brand_name ?? "";
+		
+		return $stub;
+	}
+	
 	public function map_list($items)
 	{
 		$result = array();
 		foreach ($items as $item)
 		{
-			$result[] = $this->get_stub_from_db($item);
+			$result[] = $this->get_new_stub_from_db($item);
 		}
 		return $result;
 	}
@@ -122,6 +153,7 @@ class Item_model extends CI_Model {
 	{
 		$where['posted_item.id'] = $id;
 		
+		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
 		$this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
 		$this->db->where($where);
@@ -137,6 +169,33 @@ class Item_model extends CI_Model {
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		$this->db->where('id', $cur_tenant->id);
 		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_all_from_category_id($category_id)
+	{
+		$query = $this->db
+					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
+					  ->where('category_id', $category_id)
+					  ->get($this->table_item);
+					  
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_all_from_following_tenants($following_tenants)
+	{
+		$this->db->where('0', '1');
+		foreach ($following_tenants as $following_tenant)
+		{
+			$this->db->or_where('tenant_id', $following_tenant->tenant_id);
+		}
+		$query = $this->db
+					  ->order_by('id', 'DESC')
+					  ->get($this->table_item);
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : null;

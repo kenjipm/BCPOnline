@@ -47,6 +47,19 @@ class Brand_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Brand_model();
+		
+		$stub->id					= $db_item->id;
+		$stub->brand_id				= $db_item->brand_id;
+		$stub->brand_name			= $db_item->brand_name;
+		$stub->brand_description	= $db_item->brand_description;
+		
+		return $stub;
+	}
+	
 	// get item detail
 	public function get_from_id($id)
 	{

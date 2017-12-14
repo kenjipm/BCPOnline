@@ -42,6 +42,16 @@ class Category_model extends CI_Model {
 		return $db_item;
 	}
 	
+	public function map_list($items)
+	{
+		$result = array();
+		foreach ($items as $item)
+		{
+			$result[] = $this->get_stub_from_db($item);
+		}
+		return $result;
+	}
+	
 	// get category detail
 	public function get_from_id($id)
 	{
@@ -52,6 +62,14 @@ class Category_model extends CI_Model {
 		$category = $query->row();
 		
 		return ($category !== null) ? $this->get_stub_from_db($category) : null;
+	}
+	
+	public function get_all()
+	{
+		$query = $this->db->get($this->table_category);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	// insert new account from form post

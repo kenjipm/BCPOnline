@@ -6,12 +6,12 @@ class Login extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		
-		$this->default_redirect($this->session->type);
 	}
 
 	public function index()
 	{
+		$this->default_redirect($this->session->type);
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();

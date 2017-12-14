@@ -65,12 +65,32 @@ class Voucher_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Voucher_model();
+		
+		$stub->id					= $db_item->id;
+		$stub->voucher_id			= $db_item->voucher_id;
+		$stub->voucher_worth		= $db_item->voucher_worth;
+		$stub->voucher_description	= $db_item->voucher_description;
+		$stub->date_added			= $db_item->date_added;
+		$stub->voucher_stock		= $db_item->voucher_stock;
+		$stub->brand_id				= $db_item->brand_id;
+		$stub->voucher_code			= $db_item->voucher_code;
+		
+		$stub->brand				= $this->load->model('Brand_model');
+		$stub->brand->brand_name	= $db_item->brand_name;
+		
+		return $stub;
+	}
+	
 	public function map_list($vouchers)
 	{
 		$result = array();
 		foreach ($vouchers as $voucher)
 		{
-			$result[] = $this->get_stub_from_db($voucher);
+			$result[] = $this->get_new_stub_from_db($voucher);
 		}
 		return $result;
 	}

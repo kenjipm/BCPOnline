@@ -28,13 +28,14 @@
 				marker.setMap(map);
 			}
 			
-			map.panTo(latLng);
+			//map.panTo(latLng);
 			
 			document.getElementById('lat').value = latLng.lat();
 			document.getElementById('lng').value = latLng.lng();
 		}
 	</script>
-	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsz-510TWD-3YHaQkU7mNQbNTSdCmibYQ&callback=initMap"></script>
+	<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsz-510TWD-3YHaQkU7mNQbNTSdCmibYQ"></script>
+	<!--script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDsz-510TWD-3YHaQkU7mNQbNTSdCmibYQ&callback=initMap"></script-->
 	
 <input type="hidden" name="lat" id="lat"/>
 <input type="hidden" name="lng" id="lng"/>

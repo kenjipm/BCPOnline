@@ -106,7 +106,7 @@
 											else
 											{
 												?>
-												<button onclick="popup.open('popup_address')" class="btn btn-default">Tambah Alamat Kirim</button>
+												<button onclick="popup.open('popup_address'); initMap()" class="btn btn-default">Tambah Alamat Kirim</button>
 												<?php
 											}
 										?>

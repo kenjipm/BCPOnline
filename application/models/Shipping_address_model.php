@@ -72,6 +72,24 @@ class Shipping_address_model extends CI_Model {
 		return $db_item;
 	}
 	
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Shipping_address_model();
+		if ($db_item != null)
+		{
+			$stub->id				= $db_item->id;
+			$stub->address_id		= $db_item->address_id;
+			$stub->city				= $db_item->city;
+			$stub->kecamatan		= $db_item->kecamatan;
+			$stub->kelurahan		= $db_item->kelurahan;
+			$stub->postal_code		= $db_item->postal_code;
+			$stub->address_detail	= $db_item->address_detail;
+			$stub->latitude			= $db_item->latitude;
+			$stub->customer_id		= $db_item->customer_id;
+		}
+		return $stub;
+	}
+	
 	public function insert($address)
 	{
 		$this->city				= $address->city;

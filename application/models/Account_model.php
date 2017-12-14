@@ -113,6 +113,31 @@ class Account_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Account_model();
+		
+		$stub->id					= $db_item->id;
+		$stub->account_id			= $db_item->account_id;
+		$stub->name					= $db_item->name;
+		$stub->address				= $db_item->address;
+		$stub->date_of_birth		= $db_item->date_of_birth;
+		$stub->phone_number			= $db_item->phone_number;
+		$stub->email				= $db_item->email;
+		$stub->password				= $db_item->password;
+		$stub->identification_no	= $db_item->identification_no;
+		$stub->identification_pic	= $db_item->identification_pic;
+		$stub->status				= $db_item->status;
+		$stub->date_joined			= $db_item->date_joined;
+		$stub->profile_pic			= $db_item->profile_pic;
+		
+		$stub->type					= $this->get_type($this->id);
+		$stub->child_id				= $this->get_child_id($this->id);
+		
+		return $stub;
+	}
+	
 	// get stub from login
 	public function get_from_login($email, $password)
 	{

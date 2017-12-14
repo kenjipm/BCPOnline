@@ -11,20 +11,19 @@ class Dashboard extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		// $this->load->model('category_model');
-		// $categories = $this->category_model->get_all();
+		$this->load->model('category_model');
+		$categories = $this->category_model->get_all();
 		
-		// $this->load->model('item_model');
-		// $hot_items = $this->item_model->get_hot_items();
+		$this->load->model('hot_item_model');
+		$hot_items = $this->hot_item_model->get_all(6);
 		
-		// $this->load->model('following_tenant_model');
-		// $following_tenants = $this->following_tenant_model->get_all();
-		// $tenant_items = $this->item_model->get_tenant_items($following_tenants);
+		$this->load->model('following_tenant_model');
+		$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
+		$tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
 		
-		// $this->load->model('dashboard_view_model');
-		// $this->dashboard_view_model->get($categories, $hot_items, $tenant_items);
-		// $data['model'] = $this->dashboard_view_model;
-		$data['model'] = new class{};
+		$this->load->model('views/dashboard_view_model');
+		$this->dashboard_view_model->get($categories, $hot_items, $tenant_items);
+		$data['model'] = $this->dashboard_view_model;
 		$this->load->view('dashboard_main', $data);
 		
 		// Load Footer

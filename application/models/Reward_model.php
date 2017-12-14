@@ -54,12 +54,27 @@ class Reward_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Reward_model();
+		
+		$stub->id					= $db_item->id;
+		$stub->reward_id			= $db_item->reward_id;
+		$stub->date_added			= $db_item->date_added;
+		$stub->date_expired			= $db_item->date_expired;
+		$stub->points_needed		= $db_item->points_needed;
+		$stub->reward_description	= $db_item->reward_description;
+		
+		return $stub;
+	}
+	
 	public function map_list($rewards)
 	{
 		$result = array();
 		foreach ($rewards as $reward)
 		{
-			$result[] = $this->get_stub_from_db($reward);
+			$result[] = $this->get_new_stub_from_db($reward);
 		}
 		return $result;
 	}
