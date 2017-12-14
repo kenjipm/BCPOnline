@@ -10,65 +10,48 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Daftarkan Brand Baru</h3>
+			<h3>Daftarkan Voucher Baru</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('voucher/create_voucher')?>" class="form-horizontal" method="post">
 				<div class="form-group">
-					<div class="col-sm-2">
-						<label>ID Voucher:</label>
-					</div>
-					<div class="col-sm-2">
-						<input type="text" value="<?=$model->vouchers->voucher_id?>" class="form-control" id="id" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Deskripsi:</label>
-					</div>
+					<label class="control-label col-sm-2" for="brand">Nama Brand:</label>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" id="voucher_description">
+						<select class="form-control" name="brand_id">
+							<option value="1">Brand 1</option>
+							<option value="2">Brand 2</option>
+							<option value="3">Brand 3</option>
+							<option value="4">Brand 4</option>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Nilai Voucher:</label>
+					<label class="control-label col-sm-2">Deskripsi:</label>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="voucher_description">
 					</div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('voucher_description'); ?></span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-sm-2">Nilai Voucher:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="voucher_worth" >
+						<input type="text" class="form-control" name="voucher_worth" >
 					</div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('voucher_worth'); ?></span>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Tanggal Dibuat:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="date_added">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Jumlah Stok:</label>
-					</div>
+					<label class="control-label col-sm-2">Jumlah Stok:</label>
 					<div class="col-sm-3">
-						<input type="text" class="form-control" id="voucher_stock">
+						<input type="text" class="form-control" name="voucher_stock">
 					</div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('voucher_stock'); ?></span>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Nama Brand:</label>
-					</div>
-					<div class="col-sm-6">
-						<input type="text" class="form-control" id="voucher_brand">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Kode Voucher:</label>
-					</div>
+					<label class="control-label col-sm-2">Kode Voucher:</label>
 					<div class="col-sm-4">
-						<input type="text" class="form-control" id="voucher_code" readonly>
+						<input type="text" class="form-control" name="voucher_code">
 					</div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('voucher_code'); ?></span>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-7">
