@@ -11,7 +11,7 @@ class Tenant extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['echo'] = "Tenant Dashboard";
+		$data['model'] = new class{};
 		$this->load->view('tenant/dashboard_main', $data);
 		
 		// Load Footer
