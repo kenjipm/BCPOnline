@@ -10,7 +10,7 @@
 	$model->billings[0]->date_closed = "07-12-2017";
 	$model->billings[0]->customer = "Billy";
 	$model->billings[0]->address = "Jalan Moh. Toha no 194";
-	$model->billings[0]->add_fee = "Rp 25.000,-";
+	$model->billings[0]->shipping_charge = "Rp 25.000,-";
 	$model->billings[0]->total_payable = "Rp 275.000,-";
 	
 	// dummy data order list
@@ -121,9 +121,9 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="add_fee">Ongkos Kirim:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" id="add_fee" 
-						value="<?=$model->billings[0]->add_fee?>" readonly></div>
+					<label class="control-label col-xs-3" for="shipping_charge">Ongkos Kirim:</label>
+					<div class="col-xs-3"><input type="text" class="form-control" id="shipping_charge" 
+						value="<?=$model->billings[0]->shipping_charge?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="total_payable">Total Harga:</label>

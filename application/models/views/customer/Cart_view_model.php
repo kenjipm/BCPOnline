@@ -4,7 +4,7 @@ class Cart_view_model extends CI_Model {
 	
 	public $items;
 	public $price_subtotal;
-	public $add_fee;
+	public $shipping_charge;
 	public $address;
 	public $price_total;
 	
@@ -16,7 +16,7 @@ class Cart_view_model extends CI_Model {
 		$this->items = array();
 		
 		$this->price_subtotal = 0;
-		$this->add_fee = 0;
+		$this->shipping_charge = 0;
 		$this->address = "";
 		$this->price_total = 0;
 	}
@@ -26,7 +26,7 @@ class Cart_view_model extends CI_Model {
 		$this->load->library('text_renderer');
 		
 		$this->load->model('item_model');
-		foreach ($cart as $id => $quantity)
+		foreach ($cart as $id => $cart_item)
 		{
 			$item = $this->item_model->get_from_id($id);
 			
@@ -37,8 +37,8 @@ class Cart_view_model extends CI_Model {
 			$temp->price			= $item->price;
 			$temp->image_one_name	= $item->image_one_name;
 			
-			$temp->quantity			= $quantity;
-			$temp->price_total		= $quantity * $item->price;
+			$temp->quantity			= $cart_item->quantity;
+			$temp->price_total		= $cart_item->quantity * $item->price;
 			
 			$this->price_subtotal	+= $temp->price_total; // dijumlahkan dulu ke subtotal nya
 			
@@ -48,18 +48,14 @@ class Cart_view_model extends CI_Model {
 			$this->items[] = $temp; // baru di add ke array items
 		}
 		
-		$this->add_fee			= 0;
-		$this->price_total		= $this->price_subtotal + $this->add_fee;
+		$this->shipping_charge	= 0;
+		$this->price_total		= $this->price_subtotal + $this->shipping_charge;
 			
-		$this->add_fee			= $this->text_renderer->to_rupiah($this->add_fee);
+		$this->shipping_charge	= $this->text_renderer->to_rupiah($this->shipping_charge);
 		$this->price_subtotal	= $this->text_renderer->to_rupiah($this->price_subtotal);
 		$this->price_total		= $this->text_renderer->to_rupiah($this->price_total);
 		
-		$this->address			= $shipping_address->address_detail ? $shipping_address->address_detail : "";
-		$this->address		   .= $shipping_address->kelurahan ? ($this->address ? ", " : "").$shipping_address->kelurahan : "";
-		$this->address		   .= $shipping_address->kecamatan ? ($this->address ? ", " : "").$shipping_address->kecamatan : "";
-		$this->address		   .= $shipping_address->city ? ($this->address ? ", " : "").$shipping_address->city : "";
-		$this->address		   .= $shipping_address->postal_code ? ($this->address ? ", " : "").$shipping_address->postal_code : "";
+		$this->address			= $shipping_address->get_full_address();
 	}
 }
 ?>

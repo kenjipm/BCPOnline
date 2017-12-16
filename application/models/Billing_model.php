@@ -13,12 +13,12 @@ class Billing_model extends CI_Model {
 	public $total_payable;
 	public $customer_id;
 	public $shipping_address_id;
-	public $add_fee_id;
+	public $shipping_charge_id;
 	
 	// relation table
 	public $customer;
 	public $shipping_address;
-	public $add_fee;
+	public $shipping_charge;
 	
 	// constructor
 	public function __construct()
@@ -32,11 +32,11 @@ class Billing_model extends CI_Model {
 		$this->total_payable		= 0;
 		$this->customer_id			= 0;
 		$this->shipping_address_id	= 0;
-		$this->add_fee_id			= 0;
+		$this->shipping_charge_id	= 0;
 		
 		$this->customer				= $this->load->model('customer_model');
 		$this->shipping_address		= $this->load->model('shipping_address_model');
-		$this->add_fee				= $this->load->model('add_fee_model');
+		$this->shipping_charge		= $this->load->model('shipping_charge_model');
 	}
 	
 	// constructor from database object
@@ -49,7 +49,7 @@ class Billing_model extends CI_Model {
 		$this->total_payable		= $db_item->total_payable;
 		$this->customer_id			= $db_item->customer_id;
 		$this->shipping_address_id	= $db_item->shipping_address_id;
-		$this->add_fee_id			= $db_item->add_fee_id;
+		$this->shipping_charge_id	= $db_item->shipping_charge_id;
 		
 		return $this;
 	}
@@ -66,7 +66,7 @@ class Billing_model extends CI_Model {
 		$db_item->total_payable			= $this->total_payable;
 		$db_item->customer_id			= $this->customer_id;
 		$db_item->shipping_address_id	= $this->shipping_address_id;
-		$db_item->add_fee_id			= $this->add_fee_id;
+		$db_item->shipping_charge_id	= $this->shipping_charge_id;
 		
 		return $db_item;
 	}
@@ -83,9 +83,65 @@ class Billing_model extends CI_Model {
 		$stub->total_payable		= $db_item->total_payable;
 		$stub->customer_id			= $db_item->customer_id;
 		$stub->shipping_address_id	= $db_item->shipping_address_id;
-		$stub->add_fee_id			= $db_item->add_fee_id;
+		$stub->shipping_charge_id	= $db_item->shipping_charge_id;
 		
 		return $stub;
+	}
+	
+	// get item detail
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_billing, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_from_create_new($cart, $shipping_address, $shipping_charge)
+	{
+		$this->load->model('item_model');
+		foreach ($cart as $id => $cart_item)
+		{
+			$item = $this->item_model->get_from_id($id);
+			
+			$this->total_payable += $cart_item->quantity * $item->price;
+		}
+		
+		$this->total_payable		+= $shipping_charge->fee_amount;
+		$this->customer_id			= $this->session->child_id;
+		$this->shipping_address_id	= $shipping_address->id;
+		$this->shipping_charge_id	= $shipping_charge->id;
+		
+		return $this;
+	}
+	
+	public function insert()
+	{
+		$this->load->library('id_generator');
+		
+		$this->db->trans_start();
+		
+		if ($this->db->insert($this->table_billing, $this))
+		{
+			$this->id	= $this->db->insert_id();
+		}
+		
+		$natural_id = $this->id_generator->generate(TYPE['name']['BILLING'], $this->id);
+		$this->update_natural_id($natural_id);
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->bill_id = $natural_id;
+		
+		$this->db->set('bill_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_billing);
 	}
 	
 	public function init_customer()
@@ -100,22 +156,19 @@ class Billing_model extends CI_Model {
 		return $this->shipping_address;
 	}
 	
-	public function init_add_fee()
+	public function init_shipping_charge()
 	{
-		$this->add_fee = $this->add_fee->get_from_id($this->add_fee_id);
-		return $this->add_fee;
+		$this->shipping_charge = $this->shipping_charge->get_from_id($this->shipping_charge_id);
+		return $this->shipping_charge;
 	}
 	
-	// get item detail
-	public function get_from_id($id)
+	public function calculate_total_payable_from_cart($cart)
 	{
-		$where['id'] = $id;
-		
-		$this->db->where($where);
-		$query = $this->db->get($this->table_billing, 1);
-		$item = $query->row();
-		
-		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+		foreach ($cart as $id => $cart_item)
+		{
+			$this->total_payable += $cart_item->quantity * $cart_item->price;
+		}
+		return $this->total_payable;
 	}
 }
 

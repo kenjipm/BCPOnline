@@ -42,12 +42,24 @@ class Category_model extends CI_Model {
 		return $db_item;
 	}
 	
+	// new stub object from database object
+	public function get_new_stub_from_db($db_item)
+	{
+		$stub = new Category_model();
+		
+		$stub->id					= $db_item->id;
+		$stub->category_name		= $db_item->category_name;
+		$stub->category_description	= $db_item->category_description;
+		
+		return $stub;
+	}
+	
 	public function map_list($items)
 	{
 		$result = array();
 		foreach ($items as $item)
 		{
-			$result[] = $this->get_stub_from_db($item);
+			$result[] = $this->get_new_stub_from_db($item);
 		}
 		return $result;
 	}

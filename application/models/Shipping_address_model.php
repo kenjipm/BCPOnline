@@ -14,6 +14,9 @@ class Shipping_address_model extends CI_Model {
 	public $latitude;
 	public $customer_id;
 	
+	// stub attribute
+	public $full_address;
+	
 	public function __construct()
 	{
 		parent::__construct();
@@ -27,6 +30,8 @@ class Shipping_address_model extends CI_Model {
 		$this->address_detail	= "";
 		$this->latitude			= "";
 		$this->customer_id		= "";
+		
+		$this->full_address		= "";
 	}
 	
 	public function get_by_customer_id($customer_id)
@@ -122,6 +127,17 @@ class Shipping_address_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete();
+	}
+	
+	public function get_full_address()
+	{
+		$this->full_address	  = $this->address_detail ? $this->address_detail : "";
+		$this->full_address  .= $this->kelurahan ? ($this->full_address ? ", " : "").$this->kelurahan : "";
+		$this->full_address  .= $this->kecamatan ? ($this->full_address ? ", " : "").$this->kecamatan : "";
+		$this->full_address  .= $this->city ? ($this->full_address ? ", " : "").$this->city : "";
+		$this->full_address  .= $this->postal_code ? ($this->full_address ? ", " : "").$this->postal_code : "";
+		
+		return $this->full_address;
 	}
 }
 

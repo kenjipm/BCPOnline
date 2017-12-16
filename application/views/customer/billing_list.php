@@ -9,21 +9,21 @@
 	$model->bills[0]->date_created = "03-12-2017";
 	$model->bills[0]->date_closed = "07-12-2017";
 	$model->bills[0]->address = "Jalan Perjuangan Raya 17";
-	$model->bills[0]->add_fee = "Rp 25.000,-";
+	$model->bills[0]->shipping_charge = "Rp 25.000,-";
 	$model->bills[0]->total_payable = "Rp 275.000,-";
 	$model->bills[1] = new class{};
 	$model->bills[1]->id = 2;
 	$model->bills[1]->date_created = "05-12-2017";
 	$model->bills[1]->date_closed = "08-12-2017";
 	$model->bills[1]->address = "Jalan Perjuangan Raya 17";
-	$model->bills[1]->add_fee = "Rp 15.000,-";
+	$model->bills[1]->shipping_charge = "Rp 15.000,-";
 	$model->bills[1]->total_payable = "Rp 165.000,-";
 	$model->bills[2] = new class{};
 	$model->bills[2]->id = 3;
 	$model->bills[2]->date_created = "08-12-2017";
 	$model->bills[2]->date_closed = "09-12-2017";
 	$model->bills[2]->address = "Jalan Perjuangan Raya 17";
-	$model->bills[2]->add_fee = "Rp 20.000,-";
+	$model->bills[2]->shipping_charge = "Rp 20.000,-";
 	$model->bills[2]->total_payable = "Rp 180.000,-";
 	
 ?>
@@ -36,7 +36,7 @@
 			<div class="row list-group">
 				<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
 				<div class="col-xs-4"> <label for="address">Alamat</label> </div>
-				<div class="col-xs-2"> <label for="add_fee">Ongkos Kirim</label>	</div>
+				<div class="col-xs-2"> <label for="shipping_charge">Ongkos Kirim</label>	</div>
 				<div class="col-xs-3"> <label for="total_payable">Total Harga</label> </div>
 			</div>
 			<?php
@@ -49,7 +49,7 @@
 					<div class="col-xs-4 list-group-item">
 						<?=$bill->address?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$bill->add_fee?> </div>
+						<?=$bill->shipping_charge?> </div>
 					<div class="col-xs-3 list-group-item">
 						<?=$bill->total_payable?> </div>
 					<div class="col-xs-1">

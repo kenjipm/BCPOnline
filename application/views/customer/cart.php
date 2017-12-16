@@ -19,7 +19,7 @@
 	// $model->items[1]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
 	
 	// $model->price_subtotal = "Rp 540.000";
-	// $model->add_fee = "Rp 11.000";
+	// $model->shipping_charge = "Rp 11.000";
 	// $model->address = "Jalan Perjuangan Raya 17, Marga Mulya, Bekasi Utara, Kota Bks, Jawa Barat 17143";
 	// $model->price_total = "Rp 551.000";
 ?>
@@ -119,7 +119,7 @@
 						<label>Ongkos Kirim</label>
 					</div>
 					<div class="col-md-2">
-						<?=$model->add_fee?>
+						<?=$model->shipping_charge?>
 					</div>
 				</div>
 				<hr/>

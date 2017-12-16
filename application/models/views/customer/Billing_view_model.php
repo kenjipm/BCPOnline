@@ -22,7 +22,7 @@ class Billing_view_model extends CI_Model {
 			// public $date_created = ""; //date("d-m-Y");
 			// public $date_closed = ""; //date("d-m-Y", strtotime("+".INVOICE_DUE." days"));
 			// public $address = "";
-			// public $add_fee = 0;
+			// public $shipping_charge = 0;
 			// public $total_payable = 0;
 			// public $action = "";
 			// public $action_name = "";
@@ -55,57 +55,66 @@ class Billing_view_model extends CI_Model {
 		$this->payment_methods = array();
 	}
 	
-	public function get_from_cart($cart, $new_billing, $shipping_address)
+	public function get_from_cart($cart, $shipping_address, $shipping_charge, $new_billing)
 	{
 		$this->load->library('text_renderer');
 		
 		$this->load->model('item_model');
-		foreach ($cart as $id => $quantity)
+		foreach ($cart as $id => $cart_item)
 		{
 			$item = $this->item_model->get_from_id($id);
 			
-			$temp_order = new class{}:
-			$temp_order->quantity			= $quantity;
-			$temp_order->posted_item		= new class{}:
+			$temp_order = new class{};
+			$temp_order->quantity			= $cart_item->quantity;
+			$temp_order->posted_item		= new class{};
+			$temp_order->posted_item->id	= $item->id;
 			$temp_order->posted_item->name	= $item->posted_item_name;
 			$temp_order->posted_item->price	= $this->text_renderer->to_rupiah($item->price);
-			
-			$this->billing->id				= $new_billing->id;
-			$this->date_created				= $new_billing->date_created;
-			$this->date_closed				= $new_billing->date_created;
-			$this->total_payable			= $new_billing->;
-			$this->action					= $new_billing->;
-			$this->action_name				= $new_billing->;
-			$this->is_paid					= $new_billing->;
-			
-			$this->add_fee					= $new_billing->add_fee;
-			$this->address					= $new_billing->shipping_address;
-			
-			$temp->price			= $item->price;
-			$temp->image_one_name	= $item->image_one_name;
-			
-			$temp->quantity			= $quantity;
-			$temp->price_total		= $quantity * $item->price;
-			
-			$this->price_subtotal	+= $temp->price_total; // dijumlahkan dulu ke subtotal nya
-			
-			$temp->price_total		= $this->text_renderer->to_rupiah($temp->price_total);
+			$temp_order->price_total		= $this->text_renderer->to_rupiah($cart_item->quantity * $item->price);
 			
 			$this->orders[] = $temp_order; // baru di add ke array items
 		}
-		
-		$this->add_fee			= 0;
-		$this->price_total		= $this->price_subtotal + $this->add_fee;
 			
-		$this->add_fee			= $this->text_renderer->to_rupiah($this->add_fee);
-		$this->price_subtotal	= $this->text_renderer->to_rupiah($this->price_subtotal);
-		$this->price_total		= $this->text_renderer->to_rupiah($this->price_total);
+		$this->billing->id				= $new_billing->id;
+		$this->billing->date_created	= $new_billing->date_created;
+		$this->billing->date_closed		= $new_billing->date_closed;
+		$this->billing->total_payable	= $this->text_renderer->to_rupiah($new_billing->total_payable);
+		$this->billing->customer_id		= $new_billing->customer_id;
+		$this->billing->action			= "create_from_cart";
+		$this->billing->action_name		= "Bayar";
+		$this->billing->is_paid			= false;
 		
-		$this->address			= $shipping_address->address_detail ? $shipping_address->address_detail : "";
-		$this->address		   .= $shipping_address->kelurahan ? ($this->address ? ", " : "").$shipping_address->kelurahan : "";
-		$this->address		   .= $shipping_address->kecamatan ? ($this->address ? ", " : "").$shipping_address->kecamatan : "";
-		$this->address		   .= $shipping_address->city ? ($this->address ? ", " : "").$shipping_address->city : "";
-		$this->address		   .= $shipping_address->postal_code ? ($this->address ? ", " : "").$shipping_address->postal_code : "";
+		$this->billing->shipping_charge = new class{};
+		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;
+		$this->billing->shipping_address = new class{};
+		$this->billing->shipping_address->id			= $shipping_address->id;
+		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address();
+		
+		// DUMMY (taro mana??)
+		$this->payment_methods[0] = new class{};
+		$this->payment_methods[0]->id = 1;
+		$this->payment_methods[0]->name = "Cash on Delivery";
+		$this->payment_methods[0]->selected = true;
+		$this->payment_methods[1] = new class{};
+		$this->payment_methods[1]->id = 2;
+		$this->payment_methods[1]->name = "KlikBCA";
+		$this->payment_methods[1]->selected = false;
+		$this->payment_methods[2] = new class{};
+		$this->payment_methods[2]->id = 3;
+		$this->payment_methods[2]->name = "BCA KlikPay";
+		$this->payment_methods[2]->selected = false;
+		$this->payment_methods[3] = new class{};
+		$this->payment_methods[3]->id = 4;
+		$this->payment_methods[3]->name = "BNI e-Banking";
+		$this->payment_methods[3]->selected = false;
+		$this->payment_methods[4] = new class{};
+		$this->payment_methods[4]->id = 5;
+		$this->payment_methods[4]->name = "Doku Wallet";
+		$this->payment_methods[4]->selected = false;
+		foreach ($this->payment_methods as $payment_method)
+		{
+			
+		}
 	}
 }
 ?>

@@ -103,14 +103,26 @@ class Customer extends CI_Controller {
 	public function cart_add_do()
 	{
 		$item_id = $this->input->post('item_id');
-		$quantity = $this->input->post('quantity');
-		$cart = $this->session->cart;
-		
-		if (!isset($cart[$item_id])) $cart[$item_id] = 0;
-		
-		$cart[$item_id] += $quantity;
-		$this->session->cart = $cart;
-		
+		$this->load->model('posted_item_variance_model');
+		$posted_item_variance = $this->posted_item_variance_model->get_from_id($item_id);
+		if ($posted_item_variance != null) // siapatau pas di add, item tiba2 udah ke delete
+		{
+			$posted_item_variance->init_posted_item();
+			
+			$quantity = $this->input->post('quantity');
+			$cart = $this->session->cart;
+			
+			if (!isset($cart[$item_id]))
+			{
+				$cart[$item_id] = new class{};
+				$cart[$item_id]->name		= $posted_item_variance->posted_item->posted_item_name;
+				$cart[$item_id]->price		= $posted_item_variance->posted_item->price;
+				$cart[$item_id]->quantity	= 0;
+			}
+			
+			$cart[$item_id]->quantity += $quantity;
+			$this->session->cart = $cart;
+		}
 		$this->default_redirect();
 	}
 	
@@ -122,7 +134,7 @@ class Customer extends CI_Controller {
 		
 		if (!isset($cart[$item_id])) redirect('customer/cart');
 		
-		$cart[$item_id] -= $quantity;
+		$cart[$item_id]->quantity -= $quantity;
 		if ($cart[$item_id] <= 0) unset($cart[$item_id]);
 		
 		$this->session->cart = $cart;

@@ -7,7 +7,7 @@
 	$model->billing->date_created = "03-12-2017";
 	$model->billing->date_closed = "07-12-2017";
 	$model->billing->address = "Jalan Moh. Toha no 194";
-	$model->billing->add_fee = "Rp 25.000,-";
+	$model->billing->shipping_charge = "Rp 25.000,-";
 	$model->billing->total_payable = "Rp 275.000,-";
 	$model->billing->total_not_paid = "Rp 250.000,-";
 	
@@ -17,27 +17,27 @@
 	$model->orders[0] = new class{};
 	$model->orders[0]->id = 1;
 	$model->orders[0]->quantity = 1;
-	$model->orders[0]->posted_item = array();
-	$model->orders[0]->posted_item = new class{};
-	$model->orders[0]->posted_item->name = "Djisamsung Galaksih";
-	$model->orders[0]->posted_item->price = "Rp 175.000,-";
-	$model->orders[0]->posted_item->order_status = "Queued";
+	$model->orders[0]->posted_item_variance = new class{};
+	$model->orders[0]->posted_item_variance->posted_item = new class{};
+	$model->orders[0]->posted_item_variance->posted_item->name = "Djisamsung Galaksih";
+	$model->orders[0]->posted_item_variance->posted_item->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item_variance->posted_item->order_status = "Queued";
 	$model->orders[1] = new class{};
 	$model->orders[1]->id = 2;
 	$model->orders[1]->quantity = 1;
-	$model->orders[1]->posted_item = array();
-	$model->orders[1]->posted_item = new class{};
-	$model->orders[1]->posted_item->name = "Repair HP Xiaomi";
-	$model->orders[1]->posted_item->price = "Rp 25.000,-";
-	$model->orders[1]->posted_item->order_status = "Queued";
+	$model->orders[1]->posted_item_variance = new class{};
+	$model->orders[1]->posted_item_variance->posted_item = new class{};
+	$model->orders[1]->posted_item_variance->posted_item->name = "Repair HP Xiaomi";
+	$model->orders[1]->posted_item_variance->posted_item->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item_variance->posted_item->order_status = "Queued";
 	$model->orders[2] = new class{};
 	$model->orders[2]->id = 3;
 	$model->orders[2]->quantity = 2;
-	$model->orders[2]->posted_item = array();
-	$model->orders[2]->posted_item = new class{};
-	$model->orders[2]->posted_item->name = "Kesing Djisamsung";
-	$model->orders[2]->posted_item->price = "Rp 50.000,-";
-	$model->orders[2]->posted_item->order_status = "Queued";
+	$model->orders[2]->posted_item_variance = new class{};
+	$model->orders[2]->posted_item_variance->posted_item = new class{};
+	$model->orders[2]->posted_item_variance->posted_item->name = "Kesing Djisamsung";
+	$model->orders[2]->posted_item_variance->posted_item->price = "Rp 50.000,-";
+	$model->orders[2]->posted_item_variance->posted_item->order_status = "Queued";
 	
 	$model->billing->is_paid = false;
 	
@@ -102,13 +102,13 @@
 								<div class="col-xs-9 col-xs-offset-3">
 									<div class="row list-group">
 										<div class="col-xs-4 list-group-item">
-											<?=$order->posted_item->name?> </div>
+											<?=$order->posted_item_variance->posted_item->name?> </div>
 										<div class="col-xs-1 list-group-item">
-											<?=$order->quantity?> </div>
+											<?=$order->posted_item_variance->quantity?> </div>
 										<div class="col-xs-3 list-group-item">
-											<?=$order->posted_item->price?> </div>
+											<?=$order->posted_item_variance->posted_item->price?> </div>
 										<div class="col-xs-2 list-group-item">
-											<?=$order->posted_item->order_status?> </div>
+											<?=$order->posted_item_variance->posted_item->order_status?> </div>
 										<div class="col-xs-1">
 											<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 												Lihat
@@ -121,9 +121,9 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="control-label col-xs-3" for="add_fee">Ongkos Kirim:</label>
-						<div class="col-xs-3"><input type="text" class="form-control" id="add_fee" 
-							value="<?=$model->billing->add_fee?>" readonly></div>
+						<label class="control-label col-xs-3" for="shipping_charge">Ongkos Kirim:</label>
+						<div class="col-xs-3"><input type="text" class="form-control" id="shipping_charge" 
+							value="<?=$model->billing->shipping_charge?>" readonly></div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3" for="total_payable">Total Harga:</label>

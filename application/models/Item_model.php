@@ -14,7 +14,6 @@ class Item_model extends CI_Model {
 	public $date_updated;
 	public $date_expired;
 	public $item_type;
-	public $quantity_avalaible;
 	public $unit_weight;
 	public $posted_item_description;
 	public $image_one_name;
@@ -24,6 +23,9 @@ class Item_model extends CI_Model {
 	public $category_id;
 	public $tenant_id;
 	public $brand_id;
+	
+	// stub attribute
+	public $quantity_avalaible;
 	
 	// constructor
 	public function __construct()
@@ -38,16 +40,14 @@ class Item_model extends CI_Model {
 		$this->date_updated				= "";
 		$this->date_expired				= "";
 		$this->item_type				= "";
-		$this->quantity_avalaible		= "";
 		$this->unit_weight				= "";
 		$this->posted_item_description	= "";
 		$this->image_one_name			= "";
-		$this->image_two_name			= "";
-		$this->image_three_name			= "";
-		$this->image_four_name			= "";
 		$this->category_id				= "";
 		$this->tenant_id				= "";
 		$this->brand_id					= "";
+		
+		$this->quantity_avalaible		= "";
 		
 		$this->category					= $this->load->model('Category_model');
 		$this->brand					= $this->load->model('Brand_model');
@@ -64,13 +64,9 @@ class Item_model extends CI_Model {
 		$this->date_updated				= $db_item->date_updated;
 		$this->date_expired				= $db_item->date_expired;
 		$this->item_type				= $db_item->item_type;
-		$this->quantity_avalaible		= $db_item->quantity_avalaible;
 		$this->unit_weight				= $db_item->unit_weight;
 		$this->posted_item_description	= $db_item->posted_item_description;
 		$this->image_one_name			= $db_item->image_one_name;
-		$this->image_two_name			= $db_item->image_two_name;
-		$this->image_three_name			= $db_item->image_three_name;
-		$this->image_four_name			= $db_item->image_four_name;
 		$this->category_id				= $db_item->category_id;
 		$this->tenant_id				= $db_item->tenant_id;
 		$this->brand_id					= $db_item->brand_id;
@@ -94,13 +90,9 @@ class Item_model extends CI_Model {
 		$db_item->date_updated				= $this->date_updated;
 		$db_item->date_expired				= $this->date_expired;
 		$db_item->item_type					= $this->item_type;
-		$db_item->quantity_avalaible		= $this->quantity_avalaible;
 		$db_item->unit_weight				= $this->unit_weight;
 		$db_item->posted_item_description	= $this->posted_item_description;
 		$db_item->image_one_name			= $this->image_one_name;
-		$db_item->image_two_name			= $this->image_two_name;
-		$db_item->image_three_name			= $this->image_three_name;
-		$db_item->image_four_name			= $this->image_four_name;
 		$db_item->category_id				= $this->category_id;
 		$db_item->tenant_id					= $this->tenant_id;
 		$db_item->brand_id					= $this->brand_id;
@@ -121,13 +113,9 @@ class Item_model extends CI_Model {
 		$stub->date_updated				= $db_item->date_updated;
 		$stub->date_expired				= $db_item->date_expired;
 		$stub->item_type				= $db_item->item_type;
-		$stub->quantity_avalaible		= $db_item->quantity_avalaible;
 		$stub->unit_weight				= $db_item->unit_weight;
 		$stub->posted_item_description	= $db_item->posted_item_description;
 		$stub->image_one_name			= $db_item->image_one_name;
-		$stub->image_two_name			= $db_item->image_two_name;
-		$stub->image_three_name			= $db_item->image_three_name;
-		$stub->image_four_name			= $db_item->image_four_name;
 		$stub->category_id				= $db_item->category_id;
 		$stub->tenant_id				= $db_item->tenant_id;
 		$stub->brand_id					= $db_item->brand_id;
@@ -255,6 +243,19 @@ class Item_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function get_all_variance_quantity_available()
+	{
+		$this->load->model('posted_item_variance_model');
+		$posted_item_variances = $this->posted_item_variance_model->get_by_posted_item_id($this->id);
+		
+		foreach ($posted_item_variances as $posted_item_variance)
+		{
+			$this->quantity_avalaible += $posted_item_variance->quantity_avalaible;
+		}
+		
+		return $this->quantity_avalaible;
 	}
 	/*
 	public function get_type()

@@ -28,7 +28,7 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_ADDRESS'	=> 'SHIPPING_ADDRESS',
 			'TENANT_BILL'		=> 'TENANT_BILL',
 			'TENANT_PAY_RECEIPT'=> 'TENANT_PAY_RECEIPT',
-			'ADDITIONAL_FEE'	=> 'ADDITIONAL_FEE',
+			'SHIPPING_CHARGE'	=> 'SHIPPING_CHARGE',
 			'REDEEM_VOUCHER'	=> 'REDEEM_VOUCHER',
 			'REDEEM_REWARD'		=> 'REDEEM_REWARD'			
 		),
@@ -53,7 +53,7 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_ADDRESS'	=> 'ADD',
 			'TENANT_BILL'		=> 'TBL',
 			'TENANT_PAY_RECEIPT'=> 'TPR',
-			'ADDITIONAL_FEE'	=> 'FEE',
+			'SHIPPING_CHARGE'	=> 'FEE',
 			'REDEEM_VOUCHER'	=> 'RDV',
 			'REDEEM_REWARD'		=> 'RDR'	
 		),
@@ -78,7 +78,7 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_ADDRESS'	=> 8,
 			'TENANT_BILL'		=> 8,
 			'TENANT_PAY_RECEIPT'=> 8,
-			'ADDITIONAL_FEE'	=> 10,
+			'SHIPPING_CHARGE'	=> 10,
 			'REDEEM_VOUCHER'	=> 8,
 			'REDEEM_REWARD'		=> 8
 		),
