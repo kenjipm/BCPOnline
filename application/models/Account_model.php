@@ -119,9 +119,6 @@ class Account_model extends CI_Model {
 		$stub->type					= $this->get_type($stub->id);
 		$stub->child_id				= $this->get_child_id($stub->id);
 		
-		print_r($stub->type);
-		print_r($stub->child_id);
-		
 		return $stub;
 	}
 	
@@ -169,7 +166,6 @@ class Account_model extends CI_Model {
 		
 		$query = $this->db->get($this->table_account);
 		$items = $query->result();
-		print_r($items);
 		
 		return ($items !== null) ? $this->map_list($items) : null;
 	}

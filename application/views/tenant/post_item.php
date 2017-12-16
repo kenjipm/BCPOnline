@@ -34,11 +34,6 @@
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="quantity_avalaible">Jumlah Stok:</label>
-					<div class="col-xs-2"><input type="text" class="form-control" name="quantity_avalaible" value="<?= set_value('quantity_avalaible'); ?>"/></div>
-					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('quantity_avalaible'); ?></span>
-				</div>
-				<div class="form-group">
 					<label class="control-label col-xs-3" for="unit_weight">Berat(g):</label>
 					<div class="col-xs-2"><input type="text" class="form-control" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('unit_weight'); ?></span>
@@ -52,17 +47,6 @@
 					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
 					<div class="col-xs-9"><input type="file" class="form-control" name="image_one_name" value="<?= set_value('image_one_name'); ?>"/></div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="image2">Unggah Gambar:</label>
-					<div class="col-xs-9"><input type="file" class="form-control" name="image_two_name" value="<?= set_value('image_two_name'); ?>"/></div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="image3">Unggah Gambar:</label>
-					<div class="col-xs-9"><input type="file" class="form-control" name="image_three_name" value="<?= set_value('image_three_name'); ?>"/></div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="image4">Unggah Gambar:</label>
-					<div class="col-xs-9"><input type="file" class="form-control" name="image_four_name" value="<?= set_value('image_four_name'); ?>"/></div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
 					<div class="col-xs-6">
@@ -90,7 +74,69 @@
 					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput" name="tag" value="<?= set_value('tag'); ?>"/></div>
 				</div>
 				<div class="form-group">
-					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
+					<label class="control-label col-xs-3" for="variance">Varian:</label>
+					<div class="col-xs-7"><input type="text" class="form-control" name="variance" readonly/></div>
+					<div class="col-xs-2">
+						<a onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</a>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+
+<div id="popup_add_variance" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Tambah Varian
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Tipe Varian:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="var_type">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Deskripsi Varian:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="var_description">
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Jumlah Stok:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" class="form-control" name="quantity_avalaible">
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2" for="image2">Unggah Gambar:</label>
+					<div class="col-sm-10"><input type="file" class="form-control" name="image_two_name" value="<?= set_value('image_two_name'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2" for="image3">Unggah Gambar:</label>
+					<div class="col-sm-10"><input type="file" class="form-control" name="image_three_name" value="<?= set_value('image_three_name'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-2" for="image4">Unggah Gambar:</label>
+					<div class="col-sm-10"><input type="file" class="form-control" name="image_four_name" value="<?= set_value('image_four_name'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_add_variance')">Simpan</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_add_variance')">Tutup</button>
+					</div>
 				</div>
 			</form>
 		</div>
