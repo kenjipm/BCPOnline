@@ -165,9 +165,9 @@ class Item_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$this->load->model('Tenant_model');
-		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
-		$this->db->where('id', $cur_tenant->id);
+		// $this->load->model('Tenant_model');
+		// $cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$this->db->where('tenant_id', $this->session->child_id);
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		
