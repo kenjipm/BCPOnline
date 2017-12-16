@@ -9,22 +9,6 @@ class Account_model extends CI_Model {
 		'ACTIVE' => 'ACTIVE',
 		'BLOCKED' => 'BLOCKED'
 	);
-
-	// // type account
-	// const TYPE = array(
-		// 'CUSTOMER' => 'CUSTOMER',
-		// 'TENANT' => 'TENANT',
-		// 'DELIVERER' => 'DELIVERER',
-		// 'ADMIN' => 'ADMIN'
-	// );
-
-	// // nama model dari masing2 type account
-	// const TYPE_MODEL = array(
-		// 'CUSTOMER' => 'Customer_model',
-		// 'TENANT' => 'Tenant_model',
-		// 'DELIVERER' => 'Deliverer_model',
-		// 'ADMIN' => 'Admin_model'
-	// );
 	
 	// table attribute
 	public $id;
@@ -132,8 +116,11 @@ class Account_model extends CI_Model {
 		$stub->date_joined			= $db_item->date_joined;
 		$stub->profile_pic			= $db_item->profile_pic;
 		
-		$stub->type					= $this->get_type($this->id);
-		$stub->child_id				= $this->get_child_id($this->id);
+		$stub->type					= $this->get_type($stub->id);
+		$stub->child_id				= $this->get_child_id($stub->id);
+		
+		print_r($stub->type);
+		print_r($stub->child_id);
 		
 		return $stub;
 	}
@@ -149,6 +136,42 @@ class Account_model extends CI_Model {
 		$item = $query->row();
 		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function map_list($accounts)
+	{
+		$result = array();
+		foreach ($accounts as $account)
+		{
+			$result[] = $this->get_new_stub_from_db($account);
+		}
+		return $result;
+	}
+	
+	// get account detail
+	// public function get_from_id($id)
+	// {
+		// $where['posted_item.id'] = $id;
+		
+		// $this->db->select('*, ' . $this->table_item.'.id AS id');
+		// $this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
+		// $this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
+		// $this->db->where($where);
+		// $query = $this->db->get($this->table_item, 1);
+		// $item = $query->row();
+		
+		// return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	// }
+	
+	public function get_all()
+	{
+		$this->load->model('Account_model');
+		
+		$query = $this->db->get($this->table_account);
+		$items = $query->result();
+		print_r($items);
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	// insert new account from form post
@@ -198,7 +221,6 @@ class Account_model extends CI_Model {
 	
 	public function get_type($id)
 	{
-		$this->db->where('account_id', $id);
 		foreach(TYPE['model'] as $type => $model)
 		{
 			$this->load->model($model);
@@ -213,7 +235,6 @@ class Account_model extends CI_Model {
 	
 	public function get_child_id($id)
 	{
-		$this->db->where('account_id', $id);
 		foreach(TYPE['model'] as $type => $model)
 		{
 			$this->load->model($model);

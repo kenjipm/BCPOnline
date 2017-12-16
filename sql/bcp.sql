@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 04, 2017 at 10:31 AM
+-- Generation Time: Dec 16, 2017 at 09:21 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -31,6 +31,7 @@ SET time_zone = "+00:00";
 CREATE TABLE `account` (
   `id` int(10) NOT NULL,
   `account_id` varchar(12) NOT NULL DEFAULT '',
+  `name` varchar(200) NOT NULL DEFAULT '',
   `address` varchar(500) NOT NULL DEFAULT '',
   `date_of_birth` date NOT NULL DEFAULT '0000-00-00',
   `phone_number` varchar(20) NOT NULL DEFAULT '',
@@ -38,24 +39,20 @@ CREATE TABLE `account` (
   `password` varchar(100) NOT NULL DEFAULT '',
   `identification_no` varchar(50) NOT NULL DEFAULT '',
   `identification_pic` varchar(50) NOT NULL DEFAULT '',
+  `last_login` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `status` varchar(50) NOT NULL DEFAULT '',
   `date_joined` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `profile_pic` varchar(500) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- --------------------------------------------------------
-
 --
--- Table structure for table `additional_fee`
+-- Dumping data for table `account`
 --
 
-CREATE TABLE `additional_fee` (
-  `id` int(10) NOT NULL,
-  `fee_id` varchar(15) NOT NULL DEFAULT '',
-  `fee_amount` float NOT NULL DEFAULT '0',
-  `fee_description` varchar(1000) NOT NULL DEFAULT '',
-  `shipping_distance` float NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+INSERT INTO `account` (`id`, `account_id`, `name`, `address`, `date_of_birth`, `phone_number`, `email`, `password`, `identification_no`, `identification_pic`, `last_login`, `status`, `date_joined`, `profile_pic`) VALUES
+(1, 'TNT00001', 'Jordan', 'Jalan Pelajar Pejuang no 55', '1987-12-14', '0812312322', 'djisamsung@hotmail.com', 'a3dcb4d229de6fde0db5686dee47145d', '', '', '0000-00-00 00:00:00', 'VERIFIED', '2017-12-07 15:02:07', ''),
+(2, 'ADM00001', 'Dewa', 'Jalan Pejuang Pelajar no 56', '1987-12-05', '08214214233', 'admin1@hotmail.com', '21232f297a57a5a743894a0e4a801fc3', '', '', '0000-00-00 00:00:00', 'VERIFIED', '2017-12-14 06:35:41', ''),
+(3, 'CUS00001', 'Billy', 'Jalan Pelajar Pejuang no 57', '1997-12-20', '081298798222', 'billy@hotmail.com', '89c246298be2b6113fb10ba80f3c6956', 'CUS00001', 'CUS00004', '0000-00-00 00:00:00', 'UNVERIFIED', '2017-12-14 06:41:45', '');
 
 -- --------------------------------------------------------
 
@@ -69,6 +66,13 @@ CREATE TABLE `admin` (
   `account_id` int(15) NOT NULL,
   `hour_avalaible` varchar(50) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `admin`
+--
+
+INSERT INTO `admin` (`id`, `admin_id`, `account_id`, `hour_avalaible`) VALUES
+(1, 'ADM00001', 2, '10.00-22.00');
 
 -- --------------------------------------------------------
 
@@ -114,6 +118,14 @@ CREATE TABLE `brand` (
   `brand_description` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `brand`
+--
+
+INSERT INTO `brand` (`id`, `brand_id`, `brand_name`, `brand_description`) VALUES
+(1, 'BRD000001', 'Brand 1', 'Deskripsi Brand 1'),
+(2, 'BRD000002', 'Djisamsung', 'Merk Handphone Ternama');
+
 -- --------------------------------------------------------
 
 --
@@ -125,6 +137,14 @@ CREATE TABLE `category` (
   `category_name` varchar(500) NOT NULL DEFAULT '',
   `category_description` varchar(1000) NOT NULL DEFAULT ''
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `category_name`, `category_description`) VALUES
+(1, 'Kategori 1', 'Deskripsi Kategori 1'),
+(3, 'Handphone', 'Kategori untuk Handphone');
 
 -- --------------------------------------------------------
 
@@ -140,6 +160,13 @@ CREATE TABLE `customer` (
   `credit_amount` double NOT NULL DEFAULT '0',
   `reward_points` int(10) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `customer`
+--
+
+INSERT INTO `customer` (`id`, `customer_id`, `account_id`, `verified_mark`, `credit_amount`, `reward_points`) VALUES
+(1, 'CUS00001', 3, 'UNVERIFIED', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -259,6 +286,24 @@ CREATE TABLE `item_tag` (
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `item_variance`
+--
+
+CREATE TABLE `item_variance` (
+  `id` int(10) NOT NULL,
+  `detail_id` varchar(15) NOT NULL DEFAULT '',
+  `var_type` varchar(100) NOT NULL DEFAULT '',
+  `var_description` varchar(2000) NOT NULL DEFAULT '',
+  `quantity_avalaible` int(11) NOT NULL DEFAULT '0',
+  `image_two_name` varchar(500) NOT NULL,
+  `image_three_name` varchar(500) NOT NULL,
+  `image_four_name` varchar(500) NOT NULL,
+  `posted_item_id` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `message_inbox`
 --
 
@@ -357,17 +402,20 @@ CREATE TABLE `posted_item` (
   `date_updated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `date_expired` timestamp NULL DEFAULT NULL,
   `item_type` varchar(500) NOT NULL DEFAULT '',
-  `quantity_avalaible` int(10) NOT NULL DEFAULT '0',
   `unit_weight` int(10) NOT NULL DEFAULT '0',
   `posted_item_description` varchar(1000) NOT NULL DEFAULT '',
   `image_one_name` varchar(500) NOT NULL DEFAULT '',
-  `image_two_name` varchar(500) NOT NULL DEFAULT '',
-  `image_three_name` varchar(500) NOT NULL DEFAULT '',
-  `image_four_name` varchar(500) NOT NULL DEFAULT '',
   `category_id` int(15) NOT NULL,
   `tenant_id` int(15) NOT NULL,
   `brand_id` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `posted_item`
+--
+
+INSERT INTO `posted_item` (`id`, `posted_item_id`, `posted_item_name`, `price`, `date_posted`, `date_updated`, `date_expired`, `item_type`, `unit_weight`, `posted_item_description`, `image_one_name`, `category_id`, `tenant_id`, `brand_id`) VALUES
+(1, 'ITM000000001', 'Djisamsung Galaksih', 2500000, '0000-00-00 00:00:00', '0000-00-00 00:00:00', NULL, 'ORDER', 0, 'Handphone Djisamsung keluaran terbaru', '', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -414,6 +462,13 @@ CREATE TABLE `reward` (
   `reward_description` varchar(1000) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `reward`
+--
+
+INSERT INTO `reward` (`id`, `reward_id`, `date_added`, `date_expired`, `points_needed`, `reward_description`) VALUES
+(1, 'RWD00000001', '0000-00-00 00:00:00', '2017-12-28 17:00:00', 450, 'Reward berupa handphone dari tenant A');
+
 -- --------------------------------------------------------
 
 --
@@ -428,8 +483,23 @@ CREATE TABLE `shipping_address` (
   `kelurahan` varchar(500) NOT NULL DEFAULT '',
   `postal_code` varchar(20) NOT NULL DEFAULT '',
   `address_detail` varchar(1000) NOT NULL DEFAULT '',
-  `latitude` varchar(500) NOT NULL DEFAULT '',
+  `latitude` float NOT NULL DEFAULT '0',
+  `longitude` float NOT NULL DEFAULT '0',
   `customer_id` int(15) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `shipping_charge`
+--
+
+CREATE TABLE `shipping_charge` (
+  `id` int(10) NOT NULL,
+  `fee_id` varchar(15) NOT NULL DEFAULT '',
+  `fee_amount` float NOT NULL DEFAULT '0',
+  `fee_description` varchar(1000) NOT NULL DEFAULT '',
+  `shipping_distance` float NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -453,12 +523,20 @@ CREATE TABLE `tag` (
 CREATE TABLE `tenant` (
   `id` int(10) NOT NULL,
   `tenant_id` varchar(15) NOT NULL DEFAULT '',
+  `tenant_name` varchar(200) NOT NULL DEFAULT '',
   `account_id` int(15) NOT NULL,
   `unit_number` varchar(20) NOT NULL DEFAULT '',
   `floor` varchar(10) NOT NULL DEFAULT '',
   `selling_category` varchar(500) NOT NULL DEFAULT '',
   `is_open` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tenant`
+--
+
+INSERT INTO `tenant` (`id`, `tenant_id`, `tenant_name`, `account_id`, `unit_number`, `floor`, `selling_category`, `is_open`) VALUES
+(1, 'TNT00001', 'Djisamsung', 1, '75', '4', 'Handphone', 1);
 
 -- --------------------------------------------------------
 
@@ -507,8 +585,25 @@ CREATE TABLE `voucher` (
   `voucher_description` varchar(1000) NOT NULL DEFAULT '',
   `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `voucher_stock` int(10) NOT NULL DEFAULT '0',
-  `brand_id` int(15) NOT NULL,
   `voucher_code` varchar(500) NOT NULL DEFAULT ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `voucher`
+--
+
+INSERT INTO `voucher` (`id`, `voucher_id`, `voucher_worth`, `voucher_description`, `date_added`, `voucher_stock`, `voucher_code`) VALUES
+(2, 'VCR00000002', 50000, 'Potongan Harga 50 Ribu Rupiah', '0000-00-00 00:00:00', 5, 'VCR5523');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `voucher_brand`
+--
+
+CREATE TABLE `voucher_brand` (
+  `voucher_id` int(15) NOT NULL,
+  `brand_id` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -521,13 +616,6 @@ CREATE TABLE `voucher` (
 ALTER TABLE `account`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `accountID` (`account_id`);
-
---
--- Indexes for table `additional_fee`
---
-ALTER TABLE `additional_fee`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `fee_id` (`fee_id`);
 
 --
 -- Indexes for table `admin`
@@ -647,6 +735,14 @@ ALTER TABLE `item_tag`
   ADD KEY `tag` (`tag_id`);
 
 --
+-- Indexes for table `item_variance`
+--
+ALTER TABLE `item_variance`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `detail_id` (`detail_id`),
+  ADD KEY `posted_item_id` (`posted_item_id`);
+
+--
 -- Indexes for table `message_inbox`
 --
 ALTER TABLE `message_inbox`
@@ -736,6 +832,13 @@ ALTER TABLE `shipping_address`
   ADD KEY `customer` (`customer_id`);
 
 --
+-- Indexes for table `shipping_charge`
+--
+ALTER TABLE `shipping_charge`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `fee_id` (`fee_id`);
+
+--
 -- Indexes for table `tag`
 --
 ALTER TABLE `tag`
@@ -774,8 +877,14 @@ ALTER TABLE `tenant_pay_receipt`
 --
 ALTER TABLE `voucher`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `voucher_id` (`voucher_id`),
-  ADD KEY `voucher_brand` (`brand_id`);
+  ADD UNIQUE KEY `voucher_id` (`voucher_id`);
+
+--
+-- Indexes for table `voucher_brand`
+--
+ALTER TABLE `voucher_brand`
+  ADD KEY `brand_id` (`brand_id`),
+  ADD KEY `voucher_id` (`voucher_id`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -785,19 +894,13 @@ ALTER TABLE `voucher`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT for table `additional_fee`
---
-ALTER TABLE `additional_fee`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `admin`
 --
 ALTER TABLE `admin`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `bidding`
@@ -815,19 +918,19 @@ ALTER TABLE `billing`
 -- AUTO_INCREMENT for table `brand`
 --
 ALTER TABLE `brand`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `deliverer`
@@ -878,6 +981,12 @@ ALTER TABLE `item_tag`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT for table `item_variance`
+--
+ALTER TABLE `item_variance`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `message_inbox`
 --
 ALTER TABLE `message_inbox`
@@ -911,7 +1020,7 @@ ALTER TABLE `payment`
 -- AUTO_INCREMENT for table `posted_item`
 --
 ALTER TABLE `posted_item`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `redeem_reward`
@@ -929,12 +1038,18 @@ ALTER TABLE `redeem_voucher`
 -- AUTO_INCREMENT for table `reward`
 --
 ALTER TABLE `reward`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `shipping_address`
 --
 ALTER TABLE `shipping_address`
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `shipping_charge`
+--
+ALTER TABLE `shipping_charge`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
 
 --
@@ -947,7 +1062,7 @@ ALTER TABLE `tag`
 -- AUTO_INCREMENT for table `tenant`
 --
 ALTER TABLE `tenant`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `tenant_bill`
@@ -965,7 +1080,7 @@ ALTER TABLE `tenant_pay_receipt`
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables
@@ -989,7 +1104,7 @@ ALTER TABLE `bidding`
 --
 ALTER TABLE `billing`
   ADD CONSTRAINT `billing_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `customer` (`id`),
-  ADD CONSTRAINT `billing_ibfk_2` FOREIGN KEY (`add_fee_id`) REFERENCES `additional_fee` (`id`),
+  ADD CONSTRAINT `billing_ibfk_2` FOREIGN KEY (`add_fee_id`) REFERENCES `shipping_charge` (`id`),
   ADD CONSTRAINT `billing_ibfk_3` FOREIGN KEY (`shipping_address_id`) REFERENCES `shipping_address` (`id`);
 
 --
@@ -1053,6 +1168,12 @@ ALTER TABLE `hot_item`
 ALTER TABLE `item_tag`
   ADD CONSTRAINT `item_tag_ibfk_1` FOREIGN KEY (`posted_item_id`) REFERENCES `posted_item` (`id`),
   ADD CONSTRAINT `item_tag_ibfk_2` FOREIGN KEY (`tag_id`) REFERENCES `tag` (`id`);
+
+--
+-- Constraints for table `item_variance`
+--
+ALTER TABLE `item_variance`
+  ADD CONSTRAINT `item_variance_ibfk_1` FOREIGN KEY (`posted_item_id`) REFERENCES `posted_item` (`id`);
 
 --
 -- Constraints for table `message_inbox`
@@ -1141,10 +1262,11 @@ ALTER TABLE `tenant_pay_receipt`
   ADD CONSTRAINT `tenant_pay_receipt_ibfk_1` FOREIGN KEY (`admin_id`) REFERENCES `admin` (`id`);
 
 --
--- Constraints for table `voucher`
+-- Constraints for table `voucher_brand`
 --
-ALTER TABLE `voucher`
-  ADD CONSTRAINT `voucher_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`);
+ALTER TABLE `voucher_brand`
+  ADD CONSTRAINT `voucher_brand_ibfk_1` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`),
+  ADD CONSTRAINT `voucher_brand_ibfk_2` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`id`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

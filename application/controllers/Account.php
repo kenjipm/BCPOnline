@@ -60,7 +60,12 @@ class Account extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Account_model');
+		$items = $this->Account_model->get_all();
+		$this->load->model('views/admin/account_list_view_model');
+		$this->account_list_view_model->get($items);
+		$data['model'] = $this->account_list_view_model;
+		
 		$this->load->view('admin/account_list', $data);
 		
 		// Load Footer
