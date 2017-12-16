@@ -15,10 +15,10 @@ class Cart_view_model extends CI_Model {
 		
 		$this->items = array();
 		
-		$price_subtotal = 0;
-		$add_fee = 0;
-		$address = "";
-		$price_total = 0;
+		$this->price_subtotal = 0;
+		$this->add_fee = 0;
+		$this->address = "";
+		$this->price_total = 0;
 	}
 	
 	public function get($cart, $shipping_address)

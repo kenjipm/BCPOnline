@@ -63,6 +63,14 @@ class Billing extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$this->load->model('shipping_address_model');
+		$shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->child_id);
+		
+		$new_billing = $this->load->model('billing_model');
+		
+		$this->load->model('views/customer/billing_view_model');
+		$this->billing_view_model->get_from_cart($this->session->cart, $new_billing, $shipping_address);
+		
 		$data['title'] = "Keranjang Belanja";
 		$data['model'] = new class{}; // bedanya sama detail, modelnya pake session
 		$this->load->view('customer/billing', $data);

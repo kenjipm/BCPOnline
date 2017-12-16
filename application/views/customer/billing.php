@@ -10,34 +10,31 @@
 	$model->billing->add_fee = "Rp 25.000,-";
 	$model->billing->total_payable = "Rp 275.000,-";
 	
+	$model->billing->action = "create"; //create (kalau dari cart) or edit (kalau dari billing list)
+	$model->billing->action_name = "Bayar"; //Bayar (kalau dari cart) or Ubah (kalau dari billing list)
+	$model->billing->is_paid = false;
+	
 	// dummy data order list
 	$model->orders = array();
 	
 	$model->orders[0] = new class{};
 	$model->orders[0]->id = 1;
 	$model->orders[0]->quantity = 1;
-	$model->orders[0]->posted_item = array();
-	$model->orders[0]->posted_item[0] = new class{};
-	$model->orders[0]->posted_item[0]->name = "Djisamsung Galaksih";
-	$model->orders[0]->posted_item[0]->price = "Rp 175.000,-";
+	$model->orders[0]->posted_item = new class{};
+	$model->orders[0]->posted_item->name = "Djisamsung Galaksih";
+	$model->orders[0]->posted_item->price = "Rp 175.000,-";
 	$model->orders[1] = new class{};
 	$model->orders[1]->id = 2;
 	$model->orders[1]->quantity = 1;
-	$model->orders[1]->posted_item = array();
-	$model->orders[1]->posted_item[0] = new class{};
-	$model->orders[1]->posted_item[0]->name = "Kesing Appa Kamera";
-	$model->orders[1]->posted_item[0]->price = "Rp 25.000,-";
+	$model->orders[1]->posted_item = new class{};
+	$model->orders[1]->posted_item->name = "Kesing Appa Kamera";
+	$model->orders[1]->posted_item->price = "Rp 25.000,-";
 	$model->orders[2] = new class{};
 	$model->orders[2]->id = 3;
 	$model->orders[2]->quantity = 2;
-	$model->orders[2]->posted_item = array();
-	$model->orders[2]->posted_item[0] = new class{};
-	$model->orders[2]->posted_item[0]->name = "Kesing Djisamsung";
-	$model->orders[2]->posted_item[0]->price = "Rp 50.000,-";
-	
-	$model->billing->action = "create"; //create (kalau dari cart) or edit (kalau dari billing list)
-	$model->billing->action_name = "Bayar"; //Bayar (kalau dari cart) or Ubah (kalau dari billing list)
-	$model->billing->is_paid = false;
+	$model->orders[2]->posted_item = new class{};
+	$model->orders[2]->posted_item->name = "Kesing Djisamsung";
+	$model->orders[2]->posted_item->price = "Rp 50.000,-";
 	
 	$model->payment_methods = array();
 	$model->payment_methods[0] = new class{};
@@ -93,11 +90,11 @@
 						<div class="col-xs-9 col-xs-offset-3">
 							<div class="row list-group">
 								<div class="col-xs-5 list-group-item">
-									<?=$order->posted_item[0]->name?> </div>
+									<?=$order->posted_item->name?> </div>
 								<div class="col-xs-1 list-group-item">
 									<?=$order->quantity?> </div>
 								<div class="col-xs-4 list-group-item">
-									<?=$order->posted_item[0]->price?> </div>
+									<?=$order->posted_item->price?> </div>
 							</div>
 						</div>
 						<?php

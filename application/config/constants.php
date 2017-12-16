@@ -133,6 +133,7 @@ defined('TYPE') OR define('TYPE', array(
 |--------------------------------------------------------------------------
 */
 defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Bekasi Cyber Park Online');
+defined('INVOICE_DUE') OR define('INVOICE_DUE', '5'); // hari lamanya invoice jatuh tempo
 
 /*
 |--------------------------------------------------------------------------
