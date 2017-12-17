@@ -162,7 +162,9 @@ class Account_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$this->load->model('Account_model');
+		$tenant_model 		= $this->load->model('Tenant_model');
+		$customer_model 	= $this->load->model('Customer_model');
+		$deliverer_model 	= $this->load->model('Deliverer_model');
 		
 		$query = $this->db->get($this->table_account);
 		$items = $query->result();

@@ -36,6 +36,12 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= $db_item->credit_amount;
 		$this->reward_points	= $db_item->reward_points;
 		
+		$this->account				= $this->load->model('Account_model');
+		$this->account->name		= $db_item->name;
+		$this->account->email		= $db_item->email;
+		$this->account->status		= $db_item->status;
+		$this->account->date_joined = $db_item->date_joined;
+		
 		return $this;
 	}
 	
@@ -66,6 +72,11 @@ class Customer_model extends CI_Model {
 		$stub->credit_amount	= $db_item->credit_amount;
 		$stub->reward_points	= $db_item->reward_points;
 		
+		$stub->account				= $this->load->model('Account_model');
+		$stub->account->name		= $db_item->name;
+		$stub->account->email		= $db_item->email;
+		$stub->account->status		= $db_item->status;
+		$stub->account->date_joined = $db_item->date_joined;
 		return $stub;
 	}
 	
@@ -97,6 +108,10 @@ class Customer_model extends CI_Model {
 	public function get_all()
 	{
 		$this->load->model('Customer_model');
+		$where['customer.id'] = $id;
+		
+		$this->db->join('account', 'account.id=' . $this->table_customer . '.account_id', 'left');
+		$this->db->where($where);
 		
 		$query = $this->db->get($this->table_customer);
 		$items = $query->result();

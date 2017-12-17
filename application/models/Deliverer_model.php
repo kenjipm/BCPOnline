@@ -33,6 +33,12 @@ class Deliverer_model extends CI_Model {
 		$this->license_plate	= $db_item->license_plate;
 		$this->vehicle_desc		= $db_item->vehicle_desc;
 		
+		$this->account				= $this->load->model('Account_model');
+		$this->account->name		= $db_item->name;
+		$this->account->email		= $db_item->email;
+		$this->account->status		= $db_item->status;
+		$this->account->date_joined = $db_item->date_joined;
+		
 		return $this;
 	}
 	
@@ -61,6 +67,11 @@ class Deliverer_model extends CI_Model {
 		$stub->license_plate	= $db_item->license_plate;
 		$stub->vehicle_desc		= $db_item->vehicle_desc;
 		
+		$stub->account				= $this->load->model('Account_model');
+		$stub->account->name		= $db_item->name;
+		$stub->account->email		= $db_item->email;
+		$stub->account->status		= $db_item->status;
+		$stub->account->date_joined = $db_item->date_joined;
 		return $stub;
 	}
 	
@@ -92,6 +103,11 @@ class Deliverer_model extends CI_Model {
 	public function get_all()
 	{
 		$this->load->model('Deliverer_model');
+		$where['deliverer.id'] = $id;
+		
+		$this->db->join('account', 'account.id=' . $this->table_deliverer . '.account_id', 'left');
+		$this->db->where($where);
+		
 		
 		$query = $this->db->get($this->table_deliverer);
 		$items = $query->result();
