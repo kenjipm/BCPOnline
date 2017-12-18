@@ -12,6 +12,8 @@ class Customer_model extends CI_Model {
 	public $credit_amount;
 	public $reward_points;
 	
+	public $account;
+	
 	// constructor
 	public function __construct()
 	{
@@ -24,7 +26,7 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= "";
 		$this->reward_points	= "";
 		
-		$this->account			= $this->load->model('Account_model');
+		$this->account			= new Account_model();
 		
 	}
 	
@@ -38,7 +40,6 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= $db_item->credit_amount;
 		$this->reward_points	= $db_item->reward_points;
 		
-		$this->account				= $this->load->model('Account_model');
 		$this->account->name		= $db_item->name;
 		$this->account->email		= $db_item->email;
 		$this->account->status		= $db_item->status;
@@ -74,7 +75,6 @@ class Customer_model extends CI_Model {
 		$stub->credit_amount	= $db_item->credit_amount;
 		$stub->reward_points	= $db_item->reward_points;
 		
-		$stub->account				= $this->load->model('Account_model');
 		$stub->account->name		= $db_item->name;
 		$stub->account->email		= $db_item->email;
 		$stub->account->status		= $db_item->status;

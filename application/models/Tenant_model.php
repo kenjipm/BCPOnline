@@ -44,7 +44,6 @@ class Tenant_model extends CI_Model {
 		$this->selling_category		= $db_item->selling_category;
 		$this->is_open				= $db_item->is_open;
 		
-		$this->account				= $this->load->model('Account_model');
 		$this->account->name		= $db_item->name?? "";
 		$this->account->email		= $db_item->email?? "";
 		$this->account->status		= $db_item->status?? "";

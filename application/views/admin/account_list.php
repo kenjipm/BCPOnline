@@ -1,79 +1,79 @@
 <?php
 	// Model untuk customer
 	
-	// dummy account list
-	$model->tenants = array();
-	$model->customers = array();
-	$model->deliverers = array();
+	// // dummy account list
+	// $model->tenants = array();
+	// $model->customers = array();
+	// $model->deliverers = array();
 	
-	// Model dummy tenant
-	$model->tenants[0] = new class{};
-	$model->tenants[0]->id = 1;
-	$model->tenants[0]->tenant_id = "17120377701";
-	$model->tenants[0]->account_name = "Yessy";
-	$model->tenants[0]->tenant_name = "Henpon Senter";
-	$model->tenants[0]->email = "yessy@gmail.com";
-	$model->tenants[0]->date_joined = "03-12-2017";
-	$model->tenants[0]->status = "Verified";
-	$model->tenants[1] = new class{};
-	$model->tenants[1]->id = 2;
-	$model->tenants[1]->tenant_id = "17120577704";
-	$model->tenants[1]->account_name = "Yesi";
-	$model->tenants[1]->tenant_name = "Leptop Canggih";
-	$model->tenants[1]->email = "tesi@gmail.com";
-	$model->tenants[1]->date_joined = "05-12-2017";
-	$model->tenants[1]->status = "Unverified";
-	$model->tenants[2] = new class{};
-	$model->tenants[2]->id = 3;
-	$model->tenants[2]->tenant_id = "17120877794";
-	$model->tenants[2]->account_name = "Nosy";
-	$model->tenants[2]->tenant_name = "Kamera Terkenal";
-	$model->tenants[2]->email = "nosy@gmail.com";
-	$model->tenants[2]->date_joined = "08-12-2017";
-	$model->tenants[2]->status = "Verified";
+	// // Model dummy tenant
+	// $model->tenants[0] = new class{};
+	// $model->tenants[0]->id = 1;
+	// $model->tenants[0]->tenant_id = "17120377701";
+	// $model->tenants[0]->account_name = "Yessy";
+	// $model->tenants[0]->tenant_name = "Henpon Senter";
+	// $model->tenants[0]->email = "yessy@gmail.com";
+	// $model->tenants[0]->date_joined = "03-12-2017";
+	// $model->tenants[0]->status = "Verified";
+	// $model->tenants[1] = new class{};
+	// $model->tenants[1]->id = 2;
+	// $model->tenants[1]->tenant_id = "17120577704";
+	// $model->tenants[1]->account_name = "Yesi";
+	// $model->tenants[1]->tenant_name = "Leptop Canggih";
+	// $model->tenants[1]->email = "tesi@gmail.com";
+	// $model->tenants[1]->date_joined = "05-12-2017";
+	// $model->tenants[1]->status = "Unverified";
+	// $model->tenants[2] = new class{};
+	// $model->tenants[2]->id = 3;
+	// $model->tenants[2]->tenant_id = "17120877794";
+	// $model->tenants[2]->account_name = "Nosy";
+	// $model->tenants[2]->tenant_name = "Kamera Terkenal";
+	// $model->tenants[2]->email = "nosy@gmail.com";
+	// $model->tenants[2]->date_joined = "08-12-2017";
+	// $model->tenants[2]->status = "Verified";
 	
-	// Model dummy customer
-	$model->customers[0] = new class{};
-	$model->customers[0]->id = 1;
-	$model->customers[0]->customer_id = "17120377701";
-	$model->customers[0]->customer_name = "Willy";
-	$model->customers[0]->email = "willy@gmail.com";
-	$model->customers[0]->date_joined = "03-12-2017";
-	$model->customers[1] = new class{};
-	$model->customers[1]->id = 2;
-	$model->customers[1]->customer_id = "17120577704";
-	$model->customers[1]->customer_name = "Christo";
-	$model->customers[1]->email = "bill@gmail.com";
-	$model->customers[1]->date_joined = "05-12-2017";
-	$model->customers[2] = new class{};
-	$model->customers[2]->id = 3;
-	$model->customers[2]->customer_id = "17120877794";
-	$model->customers[2]->customer_name = "Billy";
-	$model->customers[2]->email = "billy@gmail.com";
-	$model->customers[2]->date_joined = "08-12-2017";
+	// // Model dummy customer
+	// $model->customers[0] = new class{};
+	// $model->customers[0]->id = 1;
+	// $model->customers[0]->customer_id = "17120377701";
+	// $model->customers[0]->customer_name = "Willy";
+	// $model->customers[0]->email = "willy@gmail.com";
+	// $model->customers[0]->date_joined = "03-12-2017";
+	// $model->customers[1] = new class{};
+	// $model->customers[1]->id = 2;
+	// $model->customers[1]->customer_id = "17120577704";
+	// $model->customers[1]->customer_name = "Christo";
+	// $model->customers[1]->email = "bill@gmail.com";
+	// $model->customers[1]->date_joined = "05-12-2017";
+	// $model->customers[2] = new class{};
+	// $model->customers[2]->id = 3;
+	// $model->customers[2]->customer_id = "17120877794";
+	// $model->customers[2]->customer_name = "Billy";
+	// $model->customers[2]->email = "billy@gmail.com";
+	// $model->customers[2]->date_joined = "08-12-2017";
 	
 	// Model dummy deliverer
 	$model->deliverers[0] = new class{};
 	$model->deliverers[0]->id = 1;
 	$model->deliverers[0]->deliverer_id = "17120388801";
-	$model->deliverers[0]->deliverer_name = "Dori";
+	$model->deliverers[0]->account_name = "Dori";
 	$model->deliverers[0]->email = "dori@gmail.com";
 	$model->deliverers[0]->date_joined = "03-12-2017";
 	$model->deliverers[0]->status = "Kosong";
-	$model->deliverers[1] = new class{};
-	$model->deliverers[1]->id = 2;
-	$model->deliverers[1]->deliverer_id = "17120588804";
-	$model->deliverers[1]->deliverer_name = "Rido";
-	$model->deliverers[1]->email = "rido@gmail.com";
-	$model->deliverers[1]->date_joined = "05-12-2017";
-	$model->deliverers[1]->status = "Sibuk";
-	$model->deliverers[2] = new class{};
-	$model->deliverers[2]->id = 3;
-	$model->deliverers[2]->deliverer_id = "17120888898";
-	$model->deliverers[2]->deliverer_name = "Rodi";
-	$model->deliverers[2]->email = "rodi@gmail.com";
-	$model->deliverers[2]->date_joined = "08-12-2017";
-	$model->deliverers[2]->status = "Kosong";
+	// $model->deliverers[1] = new class{};
+	// $model->deliverers[1]->id = 2;
+	// $model->deliverers[1]->deliverer_id = "17120588804";
+	// $model->deliverers[1]->deliverer_name = "Rido";
+	// $model->deliverers[1]->email = "rido@gmail.com";
+	// $model->deliverers[1]->date_joined = "05-12-2017";
+	// $model->deliverers[1]->status = "Sibuk";
+	// $model->deliverers[2] = new class{};
+	// $model->deliverers[2]->id = 3;
+	// $model->deliverers[2]->deliverer_id = "17120888898";
+	// $model->deliverers[2]->deliverer_name = "Rodi";
+	// $model->deliverers[2]->email = "rodi@gmail.com";
+	// $model->deliverers[2]->date_joined = "08-12-2017";
+	// $model->deliverers[2]->status = "Kosong";
 	
 ?>
 <div class="col-sm-10 col-sm-offset-1">
@@ -86,7 +86,7 @@
 				<div class="col-xs-2"> <label for="tenant_id">ID</label>	</div>
 				<div class="col-xs-2"> <label for="tenant_name">Tenant</label> </div>
 				<div class="col-xs-3"> <label for="account_name">PIC</label> </div>
-				<div class="col-xs-2"> <label for="email">E-mail</label> </div>
+				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
 				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
 			</div>
 			<?php
@@ -101,24 +101,11 @@
 							<?=$tenant->tenant_name?> </div>
 						<div class="col-xs-3 list-group-item">
 							<?=$tenant->account_name?> </div>
-						<div class="col-xs-2 list-group-item">
+						<div class="col-xs-3 list-group-item">
 							<?=$tenant->email?> </div>
 						<div class="col-xs-2 list-group-item">
 							<?=$tenant->date_joined?> </div>
 					</a>
-					<?php
-						if ($tenant->status == "Verified"){
-							$show_div_verify = false;
-						} else {
-							$show_div_verify = true;
-						}
-					?>
-					<div class="col-xs-1" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
-					</div>
-					<div class="col-xs-1" id="block">
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-					</div>
 				</div>
 				<?php
 			}
@@ -146,18 +133,32 @@
 			foreach($model->customers as $customer)
 			{
 				?>
-				<a href="<?=site_url('admin/account_detail/'.$customer->id)?>">
 				<div class="row list-group">
+				<a href="<?=site_url('admin/account_detail/'.$customer->id)?>">
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->customer_id?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$customer->customer_name?> </div>
+						<?=$customer->account_name?> </div>
 					<div class="col-xs-3 list-group-item">
 						<?=$customer->email?> </div>
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->date_joined?> </div>
-				</div>
-				</a>
+					</a>		
+					<?php
+						if ($customer->status == "VERIFIED"){
+							$show_div_verify = false;
+						} else {
+							$show_div_verify = true;
+						}
+					?>
+					<div class="col-xs-1" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+					</div>
+					<div class="col-xs-1" id="block">
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+					</div>
+				
+				</div>	
 				<?php
 			}
 			?>
@@ -186,23 +187,13 @@
 					<div class="col-xs-2 list-group-item">
 						<?=$deliverer->deliverer_id?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->deliverer_name?> </div>
+						<?=$deliverer->account_name?> </div>
 					<div class="col-xs-3 list-group-item">
 						<?=$deliverer->email?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->date_joined?> </div>								
-				</a>
-				<?php
-					if ($deliverer->status == "Sibuk"){
-						$show_div_assign = false;
-					} else {
-						$show_div_assign = true;
-					}
-				?>
-					<div class="col-xs-1" id="assign" <?php if ($show_div_assign == false){?> style="display:none"<?php } ?>>
-						<a class="btn btn-default" href="<?=site_url('admin/account_detail/'.$deliverer->id)?>">Beri Tugas</a>
-					</div>
+						<?=$deliverer->date_joined?> </div>	
 				</div>
+				</a>
 				<?php
 			}
 			?>

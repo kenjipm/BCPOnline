@@ -61,9 +61,14 @@ class Account extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('Account_model');
-		$items = $this->Account_model->get_all();
+		$this->load->model('Tenant_model');
+		$this->load->model('Customer_model');
+		$this->load->model('Deliverer_model');
+		$tenants = $this->Tenant_model->get_all();
+		$customers = $this->Customer_model->get_all();
+		$deliverers = $this->Deliverer_model->get_all();
 		$this->load->model('views/admin/account_list_view_model');
-		$this->account_list_view_model->get($items);
+		$this->account_list_view_model->get($tenants, $customers, $deliverers);
 		$data['model'] = $this->account_list_view_model;
 		
 		$this->load->view('admin/account_list', $data);
