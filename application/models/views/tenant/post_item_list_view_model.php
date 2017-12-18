@@ -1,6 +1,6 @@
 <?php
 
-class Post_Item_List_View_Model {
+class Post_Item_List_View_Model extends CI_Model{
 	
 	public $posted_items;
 	// constructor

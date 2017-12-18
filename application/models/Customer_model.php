@@ -24,6 +24,8 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= "";
 		$this->reward_points	= "";
 		
+		$this->account			= $this->load->model('Account_model');
+		
 	}
 	
 	// constructor from database object
@@ -108,10 +110,8 @@ class Customer_model extends CI_Model {
 	public function get_all()
 	{
 		$this->load->model('Customer_model');
-		$where['customer.id'] = $id;
 		
 		$this->db->join('account', 'account.id=' . $this->table_customer . '.account_id', 'left');
-		$this->db->where($where);
 		
 		$query = $this->db->get($this->table_customer);
 		$items = $query->result();

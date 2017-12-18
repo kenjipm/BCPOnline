@@ -22,6 +22,7 @@ class Deliverer_model extends CI_Model {
 		$this->license_plate	= "";
 		$this->vehicle_desc		= "";
 		
+		$this->account			= $this->load->model('Account_model');
 	}
 	
 	// constructor from database object
@@ -59,7 +60,7 @@ class Deliverer_model extends CI_Model {
 	// new stub object from database object
 	public function get_new_stub_from_db($db_item)
 	{
-		$stub = new Customer_model();
+		$stub = new Deliverer_model();
 		
 		$stub->id				= $db_item->id;
 		$stub->deliverer_id		= $db_item->deliverer_id;
@@ -103,11 +104,8 @@ class Deliverer_model extends CI_Model {
 	public function get_all()
 	{
 		$this->load->model('Deliverer_model');
-		$where['deliverer.id'] = $id;
 		
-		$this->db->join('account', 'account.id=' . $this->table_deliverer . '.account_id', 'left');
-		$this->db->where($where);
-		
+		$this->db->join('account', 'account.id=' . $this->table_deliverer . '.account_id', 'left');	
 		
 		$query = $this->db->get($this->table_deliverer);
 		$items = $query->result();

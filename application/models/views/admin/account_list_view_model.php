@@ -1,11 +1,12 @@
 <?php
 
-class Account_List_View_Model {
+class Account_List_View_Model extends CI_Model{
 	
 	public $accounts;
 	// constructor
 	public function __construct()
 	{	
+		parent::__construct();
 	}
 	
 	public function get($accounts)

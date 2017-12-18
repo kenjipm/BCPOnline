@@ -13,6 +13,8 @@ class Tenant_model extends CI_Model {
 	public $selling_category;
 	public $is_open;
 	
+	public $account;
+	
 	// constructor
 	public function __construct()
 	{
@@ -27,6 +29,7 @@ class Tenant_model extends CI_Model {
 		$this->selling_category	= "";
 		$this->is_open			= "";
 		
+		$this->account			= new Account_model();
 	}
 	
 	// constructor from database object
@@ -40,12 +43,12 @@ class Tenant_model extends CI_Model {
 		$this->floor				= $db_item->floor;
 		$this->selling_category		= $db_item->selling_category;
 		$this->is_open				= $db_item->is_open;
-			
+		
 		$this->account				= $this->load->model('Account_model');
-		$this->account->name		= $db_item->name;
-		$this->account->email		= $db_item->email;
-		$this->account->status		= $db_item->status;
-		$this->account->date_joined = $db_item->date_joined;
+		$this->account->name		= $db_item->name?? "";
+		$this->account->email		= $db_item->email?? "";
+		$this->account->status		= $db_item->status?? "";
+		$this->account->date_joined = $db_item->date_joined?? "";
 		
 		return $this;
 	}
@@ -81,11 +84,10 @@ class Tenant_model extends CI_Model {
 		$stub->selling_category	= $db_item->selling_category;
 		$stub->is_open			= $db_item->is_open;
 		
-		$stub->account				= $this->load->model('Account_model');
-		$stub->account->name		= $db_item->name;
-		$stub->account->email		= $db_item->email;
-		$stub->account->status		= $db_item->status;
-		$stub->account->date_joined = $db_item->date_joined;
+		$stub->account->name		= $db_item->name ?? "";
+		$stub->account->email		= $db_item->email ?? "";
+		$stub->account->status		= $db_item->status ?? "";
+		$stub->account->date_joined = $db_item->date_joined ?? "";
 		
 		return $stub;
 	}
@@ -118,10 +120,8 @@ class Tenant_model extends CI_Model {
 	public function get_all()
 	{
 		$this->load->model('Tenant_model');
-		$where['tenant.id'] = $id;
 		
 		$this->db->join('account', 'account.id=' . $this->table_tenant . '.account_id', 'left');
-		$this->db->where($where);
 		
 		$query = $this->db->get($this->table_tenant);
 		$items = $query->result();

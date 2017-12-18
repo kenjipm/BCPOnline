@@ -135,14 +135,26 @@ class Account_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
-	public function map_list($accounts)
+	public function map_list($tenants, $customers, $deliverers)
 	{
 		$result = array();
-		foreach ($accounts as $account)
+		$this->load->model('Tenant_model');
+		$this->load->model('Customer_model');
+		$this->load->model('Deliverer_model');
+		
+		foreach ($tenants as $tenant)
 		{
-			$result[] = $this->get_new_stub_from_db($account);
+			$result_tenant[] = $this->Tenant_model->get_new_stub_from_db($tenant);
 		}
-		return $result;
+		foreach ($customers as $customer)
+		{
+			$result_customer[] = $this->Customer_model->get_new_stub_from_db($customer);
+		}
+		foreach ($deliverers as $deliverer)
+		{
+			$result_deliverer[] = $this->Deliverer_model->get_new_stub_from_db($deliverer);
+		}
+		
 	}
 	
 	// get account detail
@@ -162,14 +174,15 @@ class Account_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$tenant_model 		= $this->load->model('Tenant_model');
-		$customer_model 	= $this->load->model('Customer_model');
-		$deliverer_model 	= $this->load->model('Deliverer_model');
+		$this->load->model('Tenant_model');
+		$this->load->model('Customer_model');
+		$this->load->model('Deliverer_model');
 		
-		$query = $this->db->get($this->table_account);
-		$items = $query->result();
+		$tenants 	= $this->Tenant_model->get_all();
+		$customers 	= $this->Customer_model->get_all();
+		$deliverers = $this->Deliverer_model->get_all();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return (($tenants !== null) && ($customers !== null) && ($deliverers !== null)) ? $this->map_list($tenants, $customers, $deliverers) : null;
 	}
 	
 	// insert new account from form post
@@ -243,8 +256,5 @@ class Account_model extends CI_Model {
 				return $item->id;
 			}
 		}
-		return null;
-	}
+		return null;	}
 }
-
-?>
