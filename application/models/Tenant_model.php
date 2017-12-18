@@ -29,7 +29,7 @@ class Tenant_model extends CI_Model {
 		$this->selling_category	= "";
 		$this->is_open			= "";
 		
-		$this->account			= new Account_model();
+		$this->account			= $this->load->model('Account_model');
 	}
 	
 	// constructor from database object

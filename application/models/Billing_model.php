@@ -51,6 +51,11 @@ class Billing_model extends CI_Model {
 		$this->shipping_address_id	= $db_item->shipping_address_id;
 		$this->shipping_charge_id	= $db_item->shipping_charge_id;
 		
+		$this->customer->account				= new Account_model();
+		$this->customer->account->name			= $db_item->name ?? "";
+		$this->shipping_address->address_detail	= $db_item->address_detail ?? "";
+		$this->shipping_charge->fee_amount		= $db_item->fee_amount ?? "";
+		
 		return $this;
 	}
 	
@@ -85,13 +90,50 @@ class Billing_model extends CI_Model {
 		$stub->shipping_address_id	= $db_item->shipping_address_id;
 		$stub->shipping_charge_id	= $db_item->shipping_charge_id;
 		
+		$stub->customer->account				= new Account_model();
+		$stub->customer->account->name			= $db_item->name ?? "";
+		$stub->shipping_address->address_detail	= $db_item->address_detail ?? "";
+		$stub->shipping_charge->fee_amount		= $db_item->fee_amount ?? "";
+		
 		return $stub;
+	}
+	
+	public function map_list($items)
+	{
+		$result = array();
+		foreach ($items as $item)
+		{
+			$result[] = $this->get_new_stub_from_db($item);
+		}
+		return $result;
+	}
+	
+	//get all billing
+	public function get_all()
+	{
+		$this->load->model('Billing_model');
+		
+		$this->db->join('customer', 'customer.id=' . $this->table_billing . '.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');
+		$this->db->join('shipping_charge', 'shipping_charge.id=' . $this->table_billing . '.shipping_charge_id', 'left');
+		
+		$query = $this->db->get($this->table_billing);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	// get item detail
 	public function get_from_id($id)
 	{
-		$where['id'] = $id;
+		$this->load->model('Billing_model');
+		$where['billing.id'] = $id;
+		
+		$this->db->join('customer', 'customer.id=' . $this->table_billing . '.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');
+		$this->db->join('shipping_charge', 'shipping_charge.id=' . $this->table_billing . '.shipping_charge_id', 'left');
 		
 		$this->db->where($where);
 		$query = $this->db->get($this->table_billing, 1);

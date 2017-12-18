@@ -26,7 +26,7 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= "";
 		$this->reward_points	= "";
 		
-		$this->account			= new Account_model();
+		$this->account			= $this->load->model('Account_model');
 		
 	}
 	
