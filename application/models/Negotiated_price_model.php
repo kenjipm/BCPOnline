@@ -143,7 +143,7 @@ class Negotiated_price_model extends CI_Model {
 		$items = $query->row();		
 		
 		$this->negotiation_id	= "";
-		$this->agreement_date	= date("d-m-Y");
+		$this->agreement_date	= date("Y-m-d H:i:s");
 		$this->discounted_price	= $this->input->post('discounted_price_'. $i);
 		$this->status			= "NOT_TAKEN";
 		$this->posted_item_id	= $posted_item_id;

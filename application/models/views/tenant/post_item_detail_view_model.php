@@ -8,7 +8,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 	{	
 	}
 	
-	public function get($item)
+	public function get($item, $posted_item_variances)
 	{
 		$this->posted_item = new class{};
 		$this->load->library('Text_renderer');
@@ -17,7 +17,6 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		$this->posted_item->posted_item_name 		= $item->posted_item_name;
 		$this->posted_item->price					= $this->text_renderer->to_rupiah($item->price);
 		$this->posted_item->item_type 				= $item->item_type;
-		$this->posted_item->quantity_avalaible		= $item->quantity_avalaible;
 		$this->posted_item->unit_weight				= $item->unit_weight;
 		$this->posted_item->posted_item_description	= $item->posted_item_description;
 		
@@ -26,6 +25,18 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		$this->posted_item->brand					= new class{};
 		$this->posted_item->brand->brand_name		= $item->brand->brand_name;
 		
+		$i = 0;
+		foreach($posted_item_variances as $posted_item_variance)
+		{
+			$this->posted_item->var_type[$i] 			= $posted_item_variance->var_type;
+			$this->posted_item->var_desc[$i] 			= $posted_item_variance->var_description;
+			$this->posted_item->quantity_available[$i] 	= $posted_item_variance->quantity_available;
+			$this->posted_item->image_two_name[$i] 		= $posted_item_variance->image_two_name;
+			$this->posted_item->image_three_name[$i] 	= $posted_item_variance->image_three_name;
+			$this->posted_item->image_four_name[$i] 	= $posted_item_variance->image_four_name;
+			
+			$i++;
+		}
 	}
 	
 	public function get_category_name($id)

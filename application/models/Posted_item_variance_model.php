@@ -109,11 +109,11 @@ class Posted_item_variance_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 
-	public function get_all()
+	public function get_all($posted_item_id)
 	{
+		$this->db->where('posted_item_id', $posted_item_id);
 		$query = $this->db->get($this->table_posted_item_variance);
 		$items = $query->result();
-
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 
