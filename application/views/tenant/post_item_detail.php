@@ -25,7 +25,7 @@
 			<h3>Lihat Item</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_name" 
@@ -74,8 +74,8 @@
 				<h4>Daftar Diskon Customer</h4>
 				<div id="add_customer" style="display:none">
 					<div class="form-group">
-						<label class="control-label col-xs-3">ID Customer:</label>
-						<div class="col-xs-9"><input type="text" class="form-control" name="customer_id_0"></div>
+						<label class="control-label col-xs-3">Email Customer:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" name="customer_email_0"></div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Harga Diskon:</label>
@@ -84,7 +84,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()">Tambah Customer</a></div>
-					<div class="col-xs-3"><a class="btn btn-default">Submit</a></div>
+					<div class="col-xs-3"><button type="submit" class="btn btn-default">Kirim</button></div>
 				</div>
 			</form>
 		</div>

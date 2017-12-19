@@ -65,6 +65,9 @@ class Item extends CI_Controller {
 	
 	public function post_item_detail($id)
 	{
+		// Submit Negotiated Price
+		if ($this->input->method() == "post") $this->set_nego_price_do($id);
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array("tenant/post_item_detail");
@@ -150,6 +153,22 @@ class Item extends CI_Controller {
 			$this->Item_model->insert_from_post();
 			
 			redirect('Item/post_item_list');
+		}
+	}
+	
+	public function set_nego_price_do($id)
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('customer_email_0', 'Email', 'required');
+		$this->form_validation->set_rules('discounted_price_0', 'Harga Diskon', 'required|integer');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Negotiated_price_model');
+			$this->Negotiated_price_model->insert_from_post($id);
+			
+			redirect('Item/post_item_detail/' . $id);
 		}
 	}
 	
