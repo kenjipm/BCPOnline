@@ -202,7 +202,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
-	// insert new account from form post
+	// insert new item from form post
 	public function insert_from_post()
 	{
 		$this->load->model('Tenant_model');
@@ -215,13 +215,9 @@ class Item_model extends CI_Model {
 		$this->date_updated				= date("d-m-Y");
 		$this->date_expired				= NULL;
 		$this->item_type				= $this->input->post('item_type');
-		$this->quantity_avalaible		= $this->input->post('quantity_avalaible');
 		$this->unit_weight				= $this->input->post('unit_weight');
 		$this->posted_item_description	= $this->input->post('posted_item_description');
 		$this->image_one_name			= $this->input->post('image_one_name');
-		$this->image_two_name			= $this->input->post('image_two_name');
-		$this->image_three_name			= $this->input->post('image_three_name');
-		$this->image_four_name			= $this->input->post('image_four_name');
 		$this->category_id				= $this->input->post('category_id');
 		$this->tenant_id				= $cur_tenant->id;
 		$this->brand_id					= $this->input->post('brand_id');
@@ -235,9 +231,10 @@ class Item_model extends CI_Model {
 		{
 			$this->load->library('Id_Generator');
 			
-			$db_item->id				= $this->db->insert_id();
-			$db_item->posted_item_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM'], $db_item->id);
+			$this->id				= $this->db->insert_id();
+			$this->posted_item_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM'], $this->id);
 			
+			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_item, $db_item);
 		}

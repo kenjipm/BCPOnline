@@ -78,16 +78,16 @@
 				<div class="form-group" id="var_desc">
 					<div class="control-label col-xs-3"><label>Deskripsi:</label></div>
 					<div class="col-sm-7">
-						<input type="text" class="form-control" name="var_desc_0" readonly/>
+						<input type="text" class="form-control" name="var_desc[]" readonly/>
 					</div>
 					<div class="col-sm-2">
 						<a onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</a>
 					</div>
 
-					<div><input name="quantity_available_0" type="text" class="form-control" style="display:none"/></div>
-					<div><input name="image_two_name_0" type="text" class="form-control" style="display:none"/></div>
-					<div><input name="image_three_name_0" type="text" class="form-control" style="display:none"/></div>
-					<div><input name="image_four_name_0" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="quantity_available[]" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_two_name[]" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_three_name[]" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_four_name[]" type="text" class="form-control" style="display:none"/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>

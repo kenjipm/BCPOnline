@@ -42,11 +42,6 @@
 						value="<?=$model->posted_item->item_type?>" readonly></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="quantity_avalaible">Jumlah Stok:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" name="quantity_avalaible" 
-						value="<?=$model->posted_item->quantity_avalaible?>" readonly></div>
-				</div>
-				<div class="form-group">
 					<label class="control-label col-xs-3" for="unit_weight">Berat(kg):</label>
 					<div class="col-xs-3"><input type="text" class="form-control" name="unit_weight" 
 						value="<?=$model->posted_item->unit_weight?>" readonly></div>
@@ -66,6 +61,32 @@
 					<div class="col-xs-9"><input type="text" class="form-control" name="brand" 
 						value="<?=$model->posted_item->brand->brand_name?>" readonly></div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="brand">Varian:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="var_type" 
+						value="<?=$model->posted_item->var_type[0]?>" readonly></div>
+				</div>
+				<?php
+				$i = 0;
+				foreach ($model->posted_item->var_desc as $var_desc)
+				{
+					?>
+					<div class="form-group">
+						<label class="control-label col-xs-2 col-xs-offset-3" for="var_desc">Deskripsi:</label>
+						<div class="col-xs-7"><input type="text" class="form-control" name="var_desc" 
+							value="<?=$model->posted_item->var_desc[$i]?>" readonly></div>
+						<label class="control-label col-xs-2 col-xs-offset-3" for="quantity_available">Stok:</label>
+						<div class="col-xs-7"><input type="text" class="form-control" name="quantity_available" value="<?=$model->posted_item->quantity_available[$i]?>" readonly></div>
+						<label class="control-label col-xs-2 col-xs-offset-3" for="image_two_name">Gambar:</label>
+						<div class="col-xs-7"><input type="text" class="form-control" name="image_two_name" value="<?=$model->posted_item->image_two_name[$i]?>" readonly></div>
+						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_three_name" value="<?=$model->posted_item->image_three_name[$i]?>" readonly></div>
+						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_four_name" value="<?=$model->posted_item->image_four_name[$i]?>" readonly></div>
+					</div>
+				<?php
+					$i++;
+				}
+				?>
+				
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="tag" 
