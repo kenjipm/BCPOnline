@@ -32,7 +32,7 @@
 					<div class="col-xs-9"><input type="text" name="identification_no" class="form-control" value="<?= set_value('identification_no'); ?>"/></div>
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('identification_no'); ?></div>
 				</div>
-				<div class="form-group">
+				<!--<div class="form-group">
 					<label class="control-label col-xs-3">Foto Kartu ID</label>
 					<div class="col-xs-9"><input type="file" name="identification_pic" class="form-control" value="<?= set_value('identification_pic'); ?>"></div>
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('identification_pic'); ?></div>
@@ -41,7 +41,7 @@
 					<label class="control-label col-xs-3">Foto Profil</label>
 					<div class="col-xs-9"><input type="file" name="profile_pic" class="form-control" value="<?= set_value('profile_pic'); ?>"></div>
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('profile_pic'); ?></div>
-				</div>
+				</div>-->
 			
 			<h4>Account</h4>
 				<div class="form-group">
@@ -61,6 +61,7 @@
 				</div>
 				
 				<div class="form-group">
+					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= $error ?? "" ?></div>
 					<div class="col-xs-offset-3">
 						<button type="submit" class="btn btn-default">Sign Up</button>
 					</div>

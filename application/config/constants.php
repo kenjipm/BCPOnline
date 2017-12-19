@@ -6,6 +6,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | Application Constants
 |--------------------------------------------------------------------------
 */
+
+defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.jpg');
+defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/profpic.jpg');
+
 defined('TYPE') OR define('TYPE', array(
 		'name' => array(
 			'CUSTOMER'			=> 'CUSTOMER',

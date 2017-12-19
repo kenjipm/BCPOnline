@@ -110,7 +110,6 @@ class Account extends CI_Controller {
 	public function signup_do()
 	{
 		$this->load->library('form_validation');
-
 		$this->form_validation->set_rules('name', 'Nama', 'required');
 		$this->form_validation->set_rules('address', 'Alamat', 'required');
 		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');

@@ -122,6 +122,17 @@ class Account_model extends CI_Model {
 		return $stub;
 	}
 	
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	// get stub from login
 	public function get_from_login($email, $password)
 	{
@@ -179,14 +190,15 @@ class Account_model extends CI_Model {
 		$this->date_of_birth		= $this->input->post('date_of_birth');
 		$this->phone_number			= $this->input->post('phone_number');
 		$this->identification_no	= $this->input->post('identification_no');
-		$this->identification_pic	= $this->input->post('identification_pic');
-		$this->profile_pic			= $this->input->post('profile_pic');
 		$this->email				= $this->input->post('email');
 		$this->password				= md5($this->input->post('password'));
 		
+		$this->identification_pic	= "";
+		$this->profile_pic			= "";
+		
 		$this->account_id			= "";
 		$this->status				= $this::STATUS['ACTIVE'];
-		$this->date_joined			= time();
+		$this->date_joined			= date("Y-m-d H:i:s", time());
 		
 		// insert data, then generate [account_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
@@ -212,6 +224,32 @@ class Account_model extends CI_Model {
 				$this->db->update($this->table_account, $db_item); // update account_id natural key yang udah di generate "ADM0001"
 			}
 		}
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	// insert new account from form post
+	public function update_from_post($type, $file_path)
+	{
+		$this->get_from_id($this->input->post('id')); // init diri sendiri dulu (biar kolom laen ga pada keubah)
+		
+		$this->name					= $this->input->post('name');
+		$this->address				= $this->input->post('address');
+		$this->date_of_birth		= $this->input->post('date_of_birth');
+		$this->phone_number			= $this->input->post('phone_number');
+		$this->identification_no	= $this->input->post('identification_no');
+		$this->identification_pic	= $file_path['identification_pic'] ?? "";
+		$this->profile_pic			= $file_path['profile_pic'] ?? "";
+		$this->email				= $this->input->post('email');
+		$this->password				= md5($this->input->post('password'));
+		
+		// update data
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		
+		$this->db->where('id', $db_item->id);
+		$this->db->update($this->table_account, $db_item);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
