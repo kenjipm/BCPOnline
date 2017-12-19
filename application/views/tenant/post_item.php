@@ -70,16 +70,34 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<div class="control-label col-xs-3"><label>Varian:</label></div>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="var_type" value="<?= set_value('var_type'); ?>">
+					</div>
+				</div>
+				<div class="form-group" id="var_desc">
+					<div class="control-label col-xs-3"><label>Deskripsi:</label></div>
+					<div class="col-sm-7">
+						<input type="text" class="form-control" name="var_desc_0" readonly/>
+					</div>
+					<div class="col-sm-2">
+						<a onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</a>
+					</div>
+
+					<div><input name="quantity_available_0" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_two_name_0" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_three_name_0" type="text" class="form-control" style="display:none"/></div>
+					<div><input name="image_four_name_0" type="text" class="form-control" style="display:none"/></div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput" name="tag" value="<?= set_value('tag'); ?>"/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="variance">Varian:</label>
 					<div class="col-xs-7"><input type="text" class="form-control" name="variance" readonly/></div>
-					<div class="col-xs-2">
-						<a onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</a>
-					</div>
 				</div>
+				
 				<div class="form-group">
 					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
 				</div>
@@ -98,18 +116,10 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-2">
-						<label>Tipe Varian:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" name="var_type">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
 						<label>Deskripsi Varian:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="var_description">
+						<input type="text" class="form-control" name="var_desc" value="<?= set_value('var_desc'); ?>">
 					</div>
 				</div>
 				<div class="form-group">
@@ -117,7 +127,7 @@
 						<label>Jumlah Stok:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" class="form-control" name="quantity_avalaible">
+						<input type="text" class="form-control" name="quantity_available" value="<?= set_value('quantity_available'); ?>">
 					</div>
 				</div>
 				<div class="form-group">
@@ -134,7 +144,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_add_variance')">Simpan</button>
+						<button type="button" class="btn btn-default" onclick="add_variance(); popup.close('popup_add_variance')">Simpan</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_add_variance')">Tutup</button>
 					</div>
 				</div>
