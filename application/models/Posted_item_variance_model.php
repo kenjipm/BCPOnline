@@ -117,6 +117,41 @@ class Posted_item_variance_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 
+	
+	// insert new variance from form post
+	public function insert_from_post($posted_item_id)
+	{
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		
+		$this->detail_id			= "";
+		$this->var_type				= $this->input->post('var_type');
+		$this->posted_item_id		= $posted_item_id;
+	
+		$this->var_description		= $this->input->post('var_description');
+		$this->quantity_available	= $this->input->post('quantity_available');
+		$this->image_two_name		= $this->input->post('image_two_name');
+		$this->image_three_name		= $this->input->post('image_three_name');
+		$this->image_four_name		= $this->input->post('image_four_name');
+		
+		// insert data, then generate [account_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_posted_item_variance, $db_item))
+		{
+			$this->load->library('Id_Generator');
+			
+			$db_item->id		= $this->db->insert_id();
+			$db_item->detail_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);
+			
+			$this->db->where('id', $db_item->id);
+			$this->db->update($this->table_posted_item_variance, $db_item);
+		}
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 	public function get_all_from_posted_item_id($posted_item_id)
 	{
 		$where['posted_item_id'] = $posted_item_id;
