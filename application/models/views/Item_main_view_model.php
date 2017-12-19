@@ -3,6 +3,7 @@
 class Item_main_view_model extends CI_Model {
 	
 	public $item;
+	public $item_variances;
 	
 	// constructor
 	public function __construct()
@@ -10,9 +11,10 @@ class Item_main_view_model extends CI_Model {
 		parent::__construct();
 		
 		$this->item = new class{};
+		$this->item_variances = array();
 	}
 	
-	public function get($item)
+	public function get($item, $item_variances)
 	{
 		$this->load->library('text_renderer');
 		
@@ -21,6 +23,21 @@ class Item_main_view_model extends CI_Model {
 		$this->item->price = $this->text_renderer->to_rupiah($item->price);
 		$this->item->posted_item_description = $item->posted_item_description;
 		$this->item->image_one_name = $item->image_one_name;
+		
+		foreach ($item_variances as $item_variance)
+		{
+			$item_variance_temp = new class{};
+			
+			$item_variance_temp->id						= $item_variance->id;
+			$item_variance_temp->var_type				= $item_variance->var_type;
+			$item_variance_temp->var_description		= $item_variance->var_description;
+			$item_variance_temp->quantity_available		= $item_variance->quantity_available;
+			$item_variance_temp->image_two_name			= $item_variance->image_two_name;
+			$item_variance_temp->image_three_name		= $item_variance->image_three_name;
+			$item_variance_temp->image_four_name		= $item_variance->image_four_name;
+			
+			$this->item_variances[] = $item_variance_temp;
+		}
 	}
 }
 ?>

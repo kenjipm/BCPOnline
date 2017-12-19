@@ -73,8 +73,8 @@ class Posted_item_variance_model extends CI_Model {
 	// new stub object from database object
 	public function get_new_stub_from_db($db_item)
 	{
-		$stub = new Payment_model();
-
+		$stub = new Posted_item_variance_model();
+		
 		$stub->id					= $db_item->id;
 		$stub->detail_id			= $db_item->detail_id;
 		$stub->var_type				= $db_item->var_type;

@@ -22,6 +22,23 @@
 					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>"/>
 				</div>
 				<div class="col-md-8">
+					<h4>Pilihan <?=$model->item_variances[0]->var_type?></h4>
+					<div class="row">
+						<?php
+							foreach ($model->item_variances as $item_variance)
+							{
+								?>
+								<div class="col-md-1">
+									<!--<div class="panel panel-default">
+										<div class="panel-body">-->
+											<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>"/>
+										<!--</div>
+									</div>-->
+								</div>
+								<?php
+							}
+						?>
+					</div>
 					<h4>Deskripsi Produk</h4>
 					<?=$model->item->posted_item_description?>
 				</div>
@@ -51,11 +68,25 @@
 			<form class="form-horizontal" method="post" action="<?=site_url('customer/cart_add_do')?>">
 				<div class="form-group">
 					<div class="col-sm-3">
+						<label><?=$model->item_variances[0]->var_type?></label>
+					</div>
+					<div class="col-sm-9">
+						<select name="posted_item_variance_id" id="posted_item_variance_id" class="form-control">
+							<?php
+								foreach ($model->item_variances as $item_variance)
+								{
+									?>
+									<option value="<?=$item_variance->id?>"><?=$item_variance->var_description?></option>
+									<?php
+								}
+							?>
+						</select>
+					</div>
+					<div class="col-sm-3">
 						<label>Jumlah</label>
 					</div>
 					<div class="col-sm-9">
 						<input type="text" name="quantity" value="1" class="form-control"/>
-						<input type="hidden" name="item_id" value="<?=$model->item->id?>"/>
 					</div>
 				</div>
 				<div class="form-group">
