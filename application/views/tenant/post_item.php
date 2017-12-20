@@ -51,10 +51,15 @@
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
 					<div class="col-xs-6">
 						<select class="form-control" name="category_id">
-							<option value="1">Kategori 1</option>
-							<option value="2">Kategori 2</option>
-							<option value="3">Kategori 3</option>
-							<option value="4">Kategori 4</option>
+						<?php
+						foreach ($model->item_category as $category)
+						{
+							?>
+							<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+							<?php
+							$i++;
+						}
+						?>
 						</select>
 					</div>
 				</div>
@@ -62,10 +67,15 @@
 					<label class="control-label col-xs-3" for="brand">Brand:</label>
 					<div class="col-xs-6">
 						<select class="form-control" name="brand_id">
-							<option value="1">Brand 1</option>
-							<option value="2">Brand 2</option>
-							<option value="3">Brand 3</option>
-							<option value="4">Brand 4</option>
+						<?php
+						foreach ($model->item_brand as $brand)
+						{
+							?>
+							<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+							<?php
+							$i++;
+						}
+						?>
 						</select>
 					</div>
 				</div>
@@ -92,10 +102,6 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="tag">Tag:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput" name="tag" value="<?= set_value('tag'); ?>"/></div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="variance">Varian:</label>
-					<div class="col-xs-7"><input type="text" class="form-control" name="variance" readonly/></div>
 				</div>
 				
 				<div class="form-group">

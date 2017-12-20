@@ -133,39 +133,48 @@ class Negotiated_price_model extends CI_Model {
 	{
 		$i = 0;
 		$this->load->model('Tenant_model');
-		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
-		$this->db->select('customer.id');
-		$this->db->where('account.email', $this->input->post('customer_email_'. $i));
-		
-		$this->db->join('account', 'account.id=customer.account_id', 'left');
-		
-		$query = $this->db->get('customer', 1);
-		$items = $query->row();		
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));	
 		
 		$this->negotiation_id	= "";
 		$this->agreement_date	= date("Y-m-d H:i:s");
-		$this->discounted_price	= $this->input->post('discounted_price_'. $i);
 		$this->status			= "NOT_TAKEN";
 		$this->posted_item_id	= $posted_item_id;
 		$this->tenant_id		= $cur_tenant->id;
-		$this->customer_id		= $items->id;
 		
-		// insert data, then generate [account_id] based on [id]
-		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-		
-		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-		if ($this->db->insert($this->table_nego, $db_item))
+		$temp_emails	= $this->input->post('customer_email');
+		$i = 0;
+		foreach($temp_emails as $temp_email)
 		{
-			$this->load->library('Id_Generator');
+			// Get Customer ID
+			$this->db->select('customer.id');
+			$this->db->where('account.email', $temp_email);	
+			$this->db->join('account', 'account.id=customer.account_id', 'left');
+			$query = $this->db->get('customer', 1);
+			$items = $query->row();	
+			$this->customer_id = $items->id;
 			
-			$db_item->id				= $this->db->insert_id();
-			$db_item->negotiation_id	= $this->id_generator->generate(TYPE['name']['NEGOTIATED_PRICE'], $db_item->id);
+			// Get Negotiated Price
+			$this->discounted_price	= $this->input->post('discounted_price')[$i];
 			
-			$this->db->where('id', $db_item->id);
-			$this->db->update($this->table_nego, $db_item);
-		}
+			// insert data, then generate [account_id] based on [id]
+			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+			
+			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+			if ($this->db->insert($this->table_nego, $db_item))
+			{
+				$this->load->library('Id_Generator');
+				
+				$db_item->id				= $this->db->insert_id();
+				$db_item->negotiation_id	= $this->id_generator->generate(TYPE['name']['NEGOTIATED_PRICE'], $db_item->id);
+				
+				$this->db->where('id', $db_item->id);
+				$this->db->update($this->table_nego, $db_item);
+			}
+			
+			$this->db->trans_complete(); // selesai nge lock db transaction
 		
-		$this->db->trans_complete(); // selesai nge lock db transaction
+			$i++;
+		}
 	}
 
 }
