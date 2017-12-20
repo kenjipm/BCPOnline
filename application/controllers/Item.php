@@ -163,8 +163,10 @@ class Item extends CI_Controller {
 		{
 			$this->load->model('Item_model');
 			$this->load->model('Posted_item_variance_model');
+			$this->load->model('Tag_model');
 			$this->Item_model->insert_from_post();
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
+			$this->Tag_model->insert_from_post($this->Item_model->id);
 			
 			redirect('Item/post_item_list');
 		}

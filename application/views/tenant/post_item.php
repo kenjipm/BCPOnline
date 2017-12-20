@@ -98,12 +98,8 @@
 					<div><input name="image_two_name[]" type="text" class="form-control" style="display:none"/></div>
 					<div><input name="image_three_name[]" type="text" class="form-control" style="display:none"/></div>
 					<div><input name="image_four_name[]" type="text" class="form-control" style="display:none"/></div>
+					
 				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="tag">Tag:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" data-role="tagsinput" name="tag" value="<?= set_value('tag'); ?>"/></div>
-				</div>
-				
 				<div class="form-group">
 					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
 				</div>
