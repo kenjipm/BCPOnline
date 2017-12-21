@@ -40,7 +40,6 @@
 				<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
 				<div class="col-xs-2"> <label for="customer">Customer</label> </div>
 				<div class="col-xs-3"> <label for="address">Alamat</label> </div>
-				<div class="col-xs-2"> <label for="shipping_charge">Ongkos Kirim</label>	</div>
 				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
 			</div>
 			<?php
@@ -55,9 +54,7 @@
 					<div class="col-xs-3 list-group-item">
 						<?=$bill->address?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$bill->shipping_charge?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$bill->total_payable?> </div>
+						<?=$bill->sold_price?> </div>
 					<div class="col-xs-1">
 						<a href="<?=site_url('billing/detail/'.$bill->id)?>">
 							<button class="btn btn-default">Lihat</button>
