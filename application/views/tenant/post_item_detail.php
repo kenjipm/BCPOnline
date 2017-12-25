@@ -87,11 +87,6 @@
 				}
 				?>
 				
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="tag">Tag:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" name="tag" 
-						value="<?=$model->posted_item->category->category_name?>" readonly></div>
-				</div>
 				<h4>Daftar Diskon Customer</h4>
 				<div id="add_customer" style="display:none">
 					<div class="form-group">

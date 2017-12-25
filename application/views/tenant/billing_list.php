@@ -37,26 +37,26 @@
 		</div>
 		<div class="panel-body">
 			<div class="row list-group">
-				<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
-				<div class="col-xs-2"> <label for="customer">Customer</label> </div>
-				<div class="col-xs-3"> <label for="address">Alamat</label> </div>
+				<div class="col-xs-2"> <label for="tanggal1">Dibuat</label>	</div>
+				<div class="col-xs-2"> <label for="tanggal2">Lunas</label> </div>
+				<div class="col-xs-3"> <label for="status">Status</label> </div>
 				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
 			</div>
 			<?php
-			foreach($model->billings as $bill)
+			foreach($model->orders as $order)
 			{
 				?>
 				<div class="row list-group">
 					<div class="col-xs-2 list-group-item">
-						<?=$bill->date_created?> </div>
+						<?=$order->date_created?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$bill->customer?> </div>
+						<?=$order->date_closed?> </div>
 					<div class="col-xs-3 list-group-item">
-						<?=$bill->address?> </div>
+						<?=$order->order_status?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$bill->sold_price?> </div>
+						<?=$order->sold_price?> </div>
 					<div class="col-xs-1">
-						<a href="<?=site_url('billing/detail/'.$bill->id)?>">
+						<a href="<?=site_url('billing/detail/'.$order->id)?>">
 							<button class="btn btn-default">Lihat</button>
 						</a></div>	
 						
