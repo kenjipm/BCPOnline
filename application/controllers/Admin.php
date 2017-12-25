@@ -12,7 +12,7 @@ class Admin extends CI_Controller {
 		
 		// Load Body
 		$data['model'] = new class{};
-		$this->load->view('', $data);
+		$this->load->view('admin/dashboard_main', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
