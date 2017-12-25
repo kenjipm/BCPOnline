@@ -1,3 +1,3 @@
-function select_payment_method(id) {
-	$("#payment_method-"+id).prop("checked", true);
+function select_payment_method(name) {
+	$("#payment_method-"+name).prop("checked", true);
 }

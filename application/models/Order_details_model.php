@@ -4,10 +4,6 @@ class Order_details_model extends CI_Model {
 	
 	private $table_order_details = 'order_details';
 	
-	const ORDER_STATUS = array(
-		"QUEUED" => "QUEUED"
-		);
-	
 	// table attribute
 	public $id;
 	public $order_id;
@@ -50,12 +46,15 @@ class Order_details_model extends CI_Model {
 		$this->date_repr_decided		= "";
 		$this->billing_id				= 0;
 		$this->posted_item_variance_id	= 0;
-		$this->deliverer_id				= 0;
-		$this->tnt_paid_receipt_id		= 0;
+		$this->deliverer_id				= NULL;
+		$this->tnt_paid_receipt_id		= NULL;
 		$this->voucher_cut_price		= 0;
 		
-		$this->billing					= $this->load->model('billing_model');
-		$this->posted_item_variance		= $this->load->model('posted_item_variance_model');
+		$this->load->model('billing_model');
+		$this->load->model('posted_item_variance_model');
+		
+		$this->billing					= new Billing_model();
+		$this->posted_item_variance		= new Posted_item_variance_model();
 		// $this->deliverer				= $this->load->model('deliverer_model');
 		// $this->tnt_paid_receipt			= $this->load->model('tnt_paid_receipt_model');
 	}
@@ -111,7 +110,7 @@ class Order_details_model extends CI_Model {
 	// new stub object from database object
 	public function get_new_stub_from_db($db_item)
 	{
-		$stub = new Payment_model();
+		$stub = new Order_details_model();
 		
 		$stub->id						= $db_item->id;
 		$stub->order_id					= $db_item->order_id;
@@ -177,30 +176,51 @@ class Order_details_model extends CI_Model {
 	{
 		$this->load->library('id_generator');
 		$this->load->model('item_model');
+		$this->load->model('posted_item_variance_model');
+			
 		$this->db->trans_start();
 		
 		foreach ($cart as $id => $cart_item)
 		{
-			$cur_item = $this->item_model->get_from_id($id);
+			$order_details = new Order_details_model();
 			
-			$this->id						= 0;
-			$this->quantity					= $cart_item->quantity;
-			$this->offered_price			= $cur_item->price;
-			$this->sold_price				= $cart_item->price;
-			$this->order_status				= $this->ORDER_STATUS['QUEUED'];
-			$this->billing_id				= $billing_id;
-			$this->posted_item_variance_id	= $id;
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+			$posted_item_variance->init_posted_item();
 			
-			if ($this->db->insert($this->table_order_details, $this))
+			$order_details->id						= 0;
+			$order_details->quantity				= $cart_item['quantity'];
+			$order_details->offered_price			= $posted_item_variance->posted_item->price;
+			$order_details->sold_price				= $cart_item['price'];
+			$order_details->order_status			= ORDER_STATUS['name']['WAITING_FOR_PAYMENT'];
+			$order_details->billing_id				= $billing_id;
+			$order_details->posted_item_variance_id	= $id;
+			
+			if ($this->db->insert($this->table_order_details, $order_details->get_db_from_stub()))
 			{
-				$this->id	= $this->db->insert_id();
+				$order_details->id	= $this->db->insert_id();
 			}
 			
-			$natural_id = $this->id_generator->generate(TYPE['name']['ORDER_DETAILS'], $this->id);
-			$this->update_natural_id($natural_id);
+			$natural_id = $this->id_generator->generate(TYPE['name']['ORDER_DETAILS'], $order_details->id);
+			$order_details->update_natural_id($natural_id);
 		}
 		
 		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->order_id = $natural_id;
+		
+		$this->db->set('order_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_order_details);
+	}
+	
+	public function set_all_paid_from_billing_id($billing_id)
+	{
+		$this->db->set('order_status', ORDER_STATUS['name']['QUEUED'])
+				 ->where('billing_id', $billing_id)
+				 ->update($this->table_order_details);
 	}
 	
 	public function init_billing()

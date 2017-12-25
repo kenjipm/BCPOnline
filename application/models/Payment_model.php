@@ -13,6 +13,9 @@ class Payment_model extends CI_Model {
 	public $paid_amount;
 	public $billing_id;
 	
+	// relation table
+	public $billing;
+	
 	// constructor
 	public function __construct()
 	{
@@ -25,6 +28,9 @@ class Payment_model extends CI_Model {
 		$this->credit_card			= "";
 		$this->paid_amount			= 0;
 		$this->billing_id			= 0;
+		
+		$this->load->model('billing_model');
+		$this->billing				= new Billing_model();
 	}
 	
 	// constructor from database object
@@ -91,7 +97,7 @@ class Payment_model extends CI_Model {
 		$query = $this->db->get($this->table_payment, 1);
 		$item = $query->row();
 		
-		return ($reward !== null) ? $this->get_stub_from_db($item) : null;
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
 	public function get_all()
@@ -111,6 +117,50 @@ class Payment_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function insert()
+	{
+		$this->load->library('id_generator');
+		
+		$this->db->trans_start();
+		
+		if ($this->db->insert($this->table_payment, $this))
+		{
+			$this->id	= $this->db->insert_id();
+		}
+		
+		$natural_id = $this->id_generator->generate(TYPE['name']['PAYMENT'], $this->id);
+		$this->update_natural_id($natural_id);
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_natural_id($natural_id)
+	{
+		$this->payment_id = $natural_id;
+		
+		$this->db->set('payment_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_payment);
+	}
+	
+	public function set_paid($id)
+	{
+		$data['paid_amount'] = $this->paid_amount;
+		$data['payment_date'] = date("Y-m-d H:i:s");
+		
+		$this->db->set($data)
+				 ->where('id', $id)
+				 ->update($this->table_payment);
+		
+		return 0; // total_payable dari table billing, dikurangi paid_amount
+	}
+	
+	public function init_billing()
+	{
+		$this->billing = $this->billing->get_from_id($this->billing_id);
+		return $this->billing;
 	}
 }
 

@@ -7,7 +7,7 @@ class Customer extends CI_Controller {
 	{
 		parent::__construct();
 		
-		if ($this->session->userdata('type') != TYPE['name']['CUSTOMER']) // check account type, kalau bukan customer, redirect ke login page
+		if ($this->session->type != TYPE['name']['CUSTOMER']) // check account type, kalau bukan customer, redirect ke login page
 		{
 			redirect('login');
 		}
@@ -175,9 +175,10 @@ class Customer extends CI_Controller {
 	
 	public function cart_add_do()
 	{
-		$item_id = $this->input->post('item_id');
+		$posted_item_variance_id = $this->input->post('posted_item_variance_id');
 		$this->load->model('posted_item_variance_model');
-		$posted_item_variance = $this->posted_item_variance_model->get_from_id($item_id);
+		$posted_item_variance = $this->posted_item_variance_model->get_from_id($posted_item_variance_id);
+		
 		if ($posted_item_variance != null) // siapatau pas di add, item tiba2 udah ke delete
 		{
 			$posted_item_variance->init_posted_item();
@@ -185,15 +186,17 @@ class Customer extends CI_Controller {
 			$quantity = $this->input->post('quantity');
 			$cart = $this->session->cart;
 			
-			if (!isset($cart[$item_id]))
+			if (!isset($cart[$posted_item_variance_id]))
 			{
-				$cart[$item_id] = new class{};
-				$cart[$item_id]->name		= $posted_item_variance->posted_item->posted_item_name;
-				$cart[$item_id]->price		= $posted_item_variance->posted_item->price;
-				$cart[$item_id]->quantity	= 0;
+				$cart[$posted_item_variance_id] = array();
+				$cart[$posted_item_variance_id]['name']				= $posted_item_variance->posted_item->posted_item_name;
+				$cart[$posted_item_variance_id]['price']			= $posted_item_variance->posted_item->price;
+				$cart[$posted_item_variance_id]['var_type']			= $posted_item_variance->var_type;
+				$cart[$posted_item_variance_id]['var_description']	= $posted_item_variance->var_description;
+				$cart[$posted_item_variance_id]['quantity']			= 0;
 			}
 			
-			$cart[$item_id]->quantity += $quantity;
+			$cart[$posted_item_variance_id]['quantity'] += $quantity;
 			$this->session->cart = $cart;
 		}
 		$this->default_redirect();
@@ -201,14 +204,14 @@ class Customer extends CI_Controller {
 	
 	public function cart_sub_do()
 	{
-		$item_id = $this->input->post('item_id');
+		$posted_item_variance_id = $this->input->post('posted_item_variance_id');
 		$quantity = $this->input->post('quantity');
 		$cart = $this->session->cart;
 		
-		if (!isset($cart[$item_id])) redirect('customer/cart');
+		if (!isset($cart[$posted_item_variance_id])) redirect('customer/cart');
 		
-		$cart[$item_id]->quantity -= $quantity;
-		if ($cart[$item_id] <= 0) unset($cart[$item_id]);
+		$cart[$posted_item_variance_id]['quantity'] -= $quantity;
+		if ($cart[$posted_item_variance_id]['quantity'] <= 0) unset($cart[$posted_item_variance_id]);
 		
 		$this->session->cart = $cart;
 		

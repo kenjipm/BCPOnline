@@ -69,6 +69,17 @@ class Shipping_charge_model extends CI_Model {
 		return $this;
 	}
 	
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_shipping_charge, 1);
+		$shipping_charge = $query->row();
+		
+		return ($shipping_charge !== null) ? $this->get_stub_from_db($shipping_charge) : null;
+	}
+	
 	public function insert()
 	{
 		$this->load->library('id_generator');

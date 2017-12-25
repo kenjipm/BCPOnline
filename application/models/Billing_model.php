@@ -27,16 +27,20 @@ class Billing_model extends CI_Model {
 		
 		$this->id					= 0;
 		$this->bill_id				= "";
-		$this->date_created			= date("d-m-Y");
-		$this->date_closed			= date("d-m-Y", strtotime("+".INVOICE_DUE." days"));
+		$this->date_created			= date("Y-m-d H:i:s");
+		$this->date_closed			= date("Y-m-d H:i:s", strtotime("+".INVOICE_DUE." days"));
 		$this->total_payable		= 0;
 		$this->customer_id			= 0;
 		$this->shipping_address_id	= 0;
 		$this->shipping_charge_id	= 0;
 		
-		$this->customer				= $this->load->model('customer_model');
-		$this->shipping_address		= $this->load->model('shipping_address_model');
-		$this->shipping_charge		= $this->load->model('shipping_charge_model');
+		$this->load->model('customer_model');
+		$this->load->model('shipping_address_model');
+		$this->load->model('shipping_charge_model');
+		
+		$this->customer				= new Customer_model();
+		$this->shipping_address		= new Shipping_address_model();
+		$this->shipping_charge		= new Shipping_charge_model();
 	}
 	
 	// constructor from database object
@@ -55,6 +59,10 @@ class Billing_model extends CI_Model {
 		$this->customer->account->name			= $db_item->name ?? "";
 		$this->shipping_address->address_detail	= $db_item->address_detail ?? "";
 		$this->shipping_charge->fee_amount		= $db_item->fee_amount ?? "";
+		
+		$this->customer				= new Customer_model();
+		$this->shipping_address		= new Shipping_address_model();
+		$this->shipping_charge		= new Shipping_charge_model();
 		
 		return $this;
 	}
@@ -113,6 +121,7 @@ class Billing_model extends CI_Model {
 	{
 		$this->load->model('Billing_model');
 		
+		$this->db->select('*, ' . $this->table_billing.'.id AS id');
 		$this->db->join('customer', 'customer.id=' . $this->table_billing . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');
@@ -130,6 +139,7 @@ class Billing_model extends CI_Model {
 		$this->load->model('Billing_model');
 		$where['billing.id'] = $id;
 		
+		$this->db->select('*, ' . $this->table_billing.'.id AS id');
 		$this->db->join('customer', 'customer.id=' . $this->table_billing . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');
@@ -144,12 +154,13 @@ class Billing_model extends CI_Model {
 	
 	public function get_from_create_new($cart, $shipping_address, $shipping_charge)
 	{
-		$this->load->model('item_model');
+		$this->load->model('posted_item_variance_model');
 		foreach ($cart as $id => $cart_item)
 		{
-			$item = $this->item_model->get_from_id($id);
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+			$posted_item_variance->init_posted_item();
 			
-			$this->total_payable += $cart_item->quantity * $item->price;
+			$this->total_payable += $cart_item['quantity'] * $posted_item_variance->posted_item->price;
 		}
 		
 		$this->total_payable		+= $shipping_charge->fee_amount;
@@ -208,7 +219,7 @@ class Billing_model extends CI_Model {
 	{
 		foreach ($cart as $id => $cart_item)
 		{
-			$this->total_payable += $cart_item->quantity * $cart_item->price;
+			$this->total_payable += $cart_item['quantity'] * $cart_item['price'];
 		}
 		return $this->total_payable;
 	}

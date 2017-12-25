@@ -61,6 +61,37 @@
 				<?php
 			}
 			?>
+			<div class="form-group">
+				<div class="col-xs-3 col-xs-offset-3">
+					<button type="button" onclick="popup.open('popup_OTP')" class="form-control">Input Kode OTP</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="popup_OTP" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Input Kode OTP
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-3">
+						<label>Kode OTP</label>
+					</div>
+					<div class="col-sm-9">
+						<input class="form-control" placeholder="Masukkan Kode OTP..." />
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-9 col-sm-offset-3">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_OTP')">Batal</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

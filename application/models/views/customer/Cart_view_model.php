@@ -5,6 +5,8 @@ class Cart_view_model extends CI_Model {
 	public $items;
 	public $price_subtotal;
 	public $shipping_charge;
+	public $var_type;
+	public $var_description;
 	public $address;
 	public $price_total;
 	
@@ -25,20 +27,24 @@ class Cart_view_model extends CI_Model {
 	{
 		$this->load->library('text_renderer');
 		
-		$this->load->model('item_model');
+		$this->load->model('posted_item_variance_model');
 		foreach ($cart as $id => $cart_item)
 		{
-			$item = $this->item_model->get_from_id($id);
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+			$posted_item_variance->init_posted_item();
 			
 			$temp = new class{};
 			
-			$temp->id				= $item->id;
-			$temp->posted_item_name	= $item->posted_item_name;
-			$temp->price			= $item->price;
-			$temp->image_one_name	= $item->image_one_name;
+			$temp->id				= $posted_item_variance->id;
+			$temp->posted_item_id	= $posted_item_variance->posted_item->id;
+			$temp->posted_item_name	= $posted_item_variance->posted_item->posted_item_name;
+			$temp->price			= $posted_item_variance->posted_item->price;
+			$temp->image_one_name	= $posted_item_variance->image_two_name;
+			$temp->var_type			= $posted_item_variance->var_type;
+			$temp->var_description	= $posted_item_variance->var_description;
 			
-			$temp->quantity			= $cart_item->quantity;
-			$temp->price_total		= $cart_item->quantity * $item->price;
+			$temp->quantity			= $cart_item['quantity'];
+			$temp->price_total		= $cart_item['quantity'] * $posted_item_variance->posted_item->price;
 			
 			$this->price_subtotal	+= $temp->price_total; // dijumlahkan dulu ke subtotal nya
 			

@@ -59,18 +59,22 @@ class Billing_view_model extends CI_Model {
 	{
 		$this->load->library('text_renderer');
 		
-		$this->load->model('item_model');
+		$this->load->model('posted_item_variance_model');
 		foreach ($cart as $id => $cart_item)
 		{
-			$item = $this->item_model->get_from_id($id);
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+			$posted_item_variance->init_posted_item();
 			
 			$temp_order = new class{};
-			$temp_order->quantity			= $cart_item->quantity;
-			$temp_order->posted_item		= new class{};
-			$temp_order->posted_item->id	= $item->id;
-			$temp_order->posted_item->name	= $item->posted_item_name;
-			$temp_order->posted_item->price	= $this->text_renderer->to_rupiah($item->price);
-			$temp_order->price_total		= $this->text_renderer->to_rupiah($cart_item->quantity * $item->price);
+			$temp_order->quantity									= $cart_item['quantity'];
+			$temp_order->posted_item_variance						= new class{};
+			$temp_order->posted_item_variance->id					= $posted_item_variance->id;
+			// $temp_order->posted_item_variance->var_type				= $posted_item_variance->var_type;
+			$temp_order->posted_item_variance->var_description		= $posted_item_variance->var_description;
+			$temp_order->posted_item_variance->posted_item			= new class{};
+			$temp_order->posted_item_variance->posted_item->name	= $posted_item_variance->posted_item->posted_item_name;
+			$temp_order->posted_item_variance->posted_item->price	= $this->text_renderer->to_rupiah($posted_item_variance->posted_item->price);
+			$temp_order->price_total								= $this->text_renderer->to_rupiah($cart_item['quantity'] * $posted_item_variance->posted_item->price);
 			
 			$this->orders[] = $temp_order; // baru di add ke array items
 		}
@@ -90,30 +94,18 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_address->id			= $shipping_address->id;
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address();
 		
-		// DUMMY (taro mana??)
-		$this->payment_methods[0] = new class{};
-		$this->payment_methods[0]->id = 1;
-		$this->payment_methods[0]->name = "Cash on Delivery";
-		$this->payment_methods[0]->selected = true;
-		$this->payment_methods[1] = new class{};
-		$this->payment_methods[1]->id = 2;
-		$this->payment_methods[1]->name = "KlikBCA";
-		$this->payment_methods[1]->selected = false;
-		$this->payment_methods[2] = new class{};
-		$this->payment_methods[2]->id = 3;
-		$this->payment_methods[2]->name = "BCA KlikPay";
-		$this->payment_methods[2]->selected = false;
-		$this->payment_methods[3] = new class{};
-		$this->payment_methods[3]->id = 4;
-		$this->payment_methods[3]->name = "BNI e-Banking";
-		$this->payment_methods[3]->selected = false;
-		$this->payment_methods[4] = new class{};
-		$this->payment_methods[4]->id = 5;
-		$this->payment_methods[4]->name = "Doku Wallet";
-		$this->payment_methods[4]->selected = false;
-		foreach ($this->payment_methods as $payment_method)
+		$this->load->config('payment_method');
+		$payment_method_list = $this->config->item('payment_methods');
+		foreach ($payment_method_list as $payment_method_name)
 		{
+			$cur_payment_method = $this->config->item($payment_method_name);
 			
+			$temp_payment_method = new class{};
+			$temp_payment_method->name = $cur_payment_method['name'];
+			$temp_payment_method->description = $cur_payment_method['description'];
+			$temp_payment_method->selected = count($this->payment_methods) == 0;
+			
+			$this->payment_methods[] = $temp_payment_method;
 		}
 	}
 }

@@ -78,7 +78,8 @@
 					<label class="control-label col-xs-3" for="orders">Order List:</label>
 					<div class="col-xs-9 pull-right">
 						<div class="row list-group">
-							<div class="col-xs-5">Nama </div>
+							<div class="col-xs-3">Nama </div>
+							<div class="col-xs-2">Varian </div>
 							<div class="col-xs-1">Jml </div>
 							<div class="col-xs-2">Harga </div>
 							<div class="col-xs-2">Total </div>
@@ -91,12 +92,14 @@
 						?>
 						<div class="col-xs-9 col-xs-offset-3">
 							<div class="row list-group">
-								<div class="col-xs-5 list-group-item">
-									<?=$order->posted_item->name?> </div>
+								<div class="col-xs-3 list-group-item">
+									<?=$order->posted_item_variance->posted_item->name?> </div>
+								<div class="col-xs-2 list-group-item">
+									<?=$order->posted_item_variance->var_description?> </div>
 								<div class="col-xs-1 list-group-item">
 									<?=$order->quantity?> </div>
 								<div class="col-xs-2 list-group-item">
-									<?=$order->posted_item->price?> </div>
+									<?=$order->posted_item_variance->posted_item->price?> </div>
 								<div class="col-xs-2 list-group-item">
 									<?=$order->price_total?> </div>
 							</div>
@@ -128,9 +131,9 @@
 						?>
 						<div class="col-md-4">
 							<div class="panel panel-default">
-								<div class="panel-body hoverdiv hoverdiv-white" onclick="select_payment_method(<?=$payment_method->id?>)">
-									<input type="radio" name="payment_method" id="payment_method-<?=$payment_method->id?>" value="<?=$payment_method->name /* hrsnya id, tp data nya ga disimpen?? */?>" <?=$payment_method->selected?"checked=\"checked\"":""?>/>
-									<label><?=$payment_method->name?></label>
+								<div class="panel-body hoverdiv hoverdiv-white" onclick="select_payment_method('<?=$payment_method->name?>')">
+									<input type="radio" name="payment_method" id="payment_method-<?=$payment_method->name?>" value="<?=$payment_method->name /* hrsnya id, tp data nya ga disimpen?? */?>" <?=$payment_method->selected?"checked=\"checked\"":""?>/>
+									<label><?=$payment_method->description?></label>
 								</div>
 							</div>
 						</div>

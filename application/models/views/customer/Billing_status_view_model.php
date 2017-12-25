@@ -29,17 +29,21 @@ class Billing_status_view_model extends CI_Model {
 		$this->billing->shipping_charge	= $billing->shipping_charge->fee_amount;
 		$this->billing->total_not_paid	= $billing->total_payable; // awalnnya ikutin amount yg harus dibayar dulu
 		
+		$this->load->config('payment_method');
 		foreach($payments as $payment)
 		{
+			$cur_payment_config = $this->config->item($payment->payment_method);
+			
 			$temp_payment = new class{};
 			
 			$temp_payment->id							= $payment->id;
-			$temp_payment->paid							= true;
+			// $temp_payment->paid							= true;
 			$temp_payment->payment_method				= $payment->payment_method;
-			$temp_payment->payment_method_description	= "";
+			$temp_payment->payment_method_description	= $cur_payment_config['long_description'];
 			$temp_payment->payment_date					= $payment->payment_date;
-			$temp_payment->paid_amount					= $payment->paid_amount;
-			$temp_payment->description					= $temp_payment->paid ? "Lunas" : "Menunggu Pembayaran";
+			$temp_payment->paid_amount					= $this->text_renderer->to_rupiah($payment->paid_amount);
+			$temp_payment->is_paid						= $payment->paid_amount > 0;
+			// $temp_payment->description					= $temp_payment->paid ? "Lunas" : "Menunggu Pembayaran";
 			
 			$this->billing->total_not_paid				-= $payment->paid_amount; // kurangi dari tiap payment
 			
@@ -55,11 +59,11 @@ class Billing_status_view_model extends CI_Model {
 			if ($order->init_posted_item_variance() != null)
 			{
 				$temp_order->posted_item_variance = $order->posted_item_variance;
-				if ($order->init_posted_item() != null)
+				if ($order->posted_item_variance->init_posted_item() != null)
 				{
-					$temp_order->posted_item_variance->posted_item->name = $order->posted_item->name;
-					$temp_order->posted_item_variance->posted_item->price = $order->posted_item->price;
-					$temp_order->posted_item_variance->posted_item->order_status = $order->order_status;
+					$temp_order->posted_item_variance->posted_item->posted_item_name = $order->posted_item_variance->posted_item->posted_item_name;
+					$temp_order->posted_item_variance->posted_item->price = $this->text_renderer->to_rupiah($order->posted_item_variance->posted_item->price);
+					$temp_order->order_status = ORDER_STATUS['description'][$order->order_status];
 				}
 			}
 			
@@ -67,6 +71,9 @@ class Billing_status_view_model extends CI_Model {
 		}
 		
 		$this->billing->is_paid = ($this->billing->total_not_paid <= 0);
+		
+		$this->billing->total_payable = $this->text_renderer->to_rupiah($this->billing->total_payable);
+		$this->billing->total_not_paid = $this->text_renderer->to_rupiah($this->billing->total_not_paid);
 	}
 }
 ?>

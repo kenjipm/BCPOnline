@@ -34,15 +34,6 @@ class Shipping_address_model extends CI_Model {
 		$this->full_address		= "";
 	}
 	
-	public function get_by_customer_id($customer_id)
-	{
-		$this->db->where('customer_id', $customer_id);
-		$this->db->order_by('id', 'DESC');
-		$query = $this->db->get($this->table_shipping_address, 1);
-		
-		return $this->get_stub_from_db($query->row());
-	}
-	
 	public function get_stub_from_db($db_item)
 	{
 		if ($db_item != null)
@@ -93,6 +84,26 @@ class Shipping_address_model extends CI_Model {
 			$stub->customer_id		= $db_item->customer_id;
 		}
 		return $stub;
+	}
+	
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_shipping_address, 1);
+		$shipping_address = $query->row();
+		
+		return ($shipping_address !== null) ? $this->get_stub_from_db($shipping_address) : null;
+	}
+	
+	public function get_by_customer_id($customer_id)
+	{
+		$this->db->where('customer_id', $customer_id);
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_shipping_address, 1);
+		
+		return $this->get_stub_from_db($query->row());
 	}
 	
 	public function insert($address)

@@ -33,7 +33,8 @@ class Posted_item_variance_model extends CI_Model {
 		$this->image_four_name		= "";
 		$this->posted_item_id		= 0;
 
-		$this->posted_item			= $this->load->model('item_model');
+		$this->load->model('item_model');
+		$this->posted_item			= new Item_model();
 	}
 
 	// constructor from database object

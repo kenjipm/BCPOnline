@@ -38,14 +38,15 @@
 					?>
 						<div class="row">
 							<div class="col-md-2">
-								<a href="<?=site_url('item/'.$item->id)?>">
+								<a href="<?=site_url('item/'.$item->posted_item_id)?>">
 									<img class="col-md-12" src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
 								</a>
 							</div>
 							<div class="col-md-6">
 								<div class="row">
-									<a href="<?=site_url('item/'.$item->id)?>">
-										<label><?=$item->posted_item_name?></label>
+									<a href="<?=site_url('item/'.$item->posted_item_id)?>">
+										<label><?=$item->posted_item_name?></label><br/>
+										<?=$item->var_type?>: <?=$item->var_description?>
 									</a>
 								</div>
 								<div class="row">
@@ -56,7 +57,7 @@
 								<div class="input-group">
 									<span class="input-group-btn">
 										<form method="post" action="<?=site_url('customer/cart_sub_do')?>">
-											<input type="hidden" name="item_id" value="<?=$item->id?>"/>
+											<input type="hidden" name="posted_item_variance_id" value="<?=$item->id?>"/>
 											<input type="hidden" name="quantity" value="1"/>
 											<button class="btn btn-secondary" type="submit" onclick="">-</button>
 										</form>
@@ -64,7 +65,7 @@
 									<input type="text" value="<?=$item->quantity?>" class="form-control text-center" readonly="readonly"/>
 									<span class="input-group-btn">
 										<form method="post" action="<?=site_url('customer/cart_add_do')?>">
-											<input type="hidden" name="item_id" value="<?=$item->id?>"/>
+											<input type="hidden" name="posted_item_variance_id" value="<?=$item->id?>"/>
 											<input type="hidden" name="quantity" value="1"/>
 											<button class="btn btn-secondary" type="submit" onclick="">+</button>
 										</form>
@@ -215,7 +216,7 @@
 					<div class="col-sm-9">
 						<div class="panel panel-default">
 							<div class="panel-body" style="height: 400px; width: auto">
-								<?php $this->load->view('googlemaps'); ?>
+								<?php //$this->load->view('googlemaps'); ?>
 							</div>
 						</div>
 					</div>

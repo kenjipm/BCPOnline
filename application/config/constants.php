@@ -10,6 +10,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.jpg');
 defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/profpic.jpg');
 
+defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
+		'name' => array(
+			"WAITING_FOR_PAYMENT"		=> "WAITING_FOR_PAYMENT",
+			"QUEUED"					=> "QUEUED",
+			"PICKING_FROM_TENANT"		=> "PICKING_FROM_TENANT",
+			"DELIVERING_TO_CUSTOMER"	=> "DELIVERING_TO_CUSTOMER",
+			"RECEIVED"					=> "RECEIVED",
+			"DELIVERING_TO_TENANT"		=> "DELIVERING_TO_TENANT",
+			"TENANT_RECEIVED"			=> "TENANT_RECEIVED",
+			"COST_CALCULATED"			=> "COST_CALCULATED",
+			"REPAIRING"					=> "REPAIRING",
+			"REPAIR_FINISHED"			=> "REPAIR_FINISHED",
+			"REFUNDED"					=> "REFUNDED",
+			"REPAIR_CANCELLED"			=> "REPAIR_CANCELLED",
+		),
+		'description' => array(
+			"WAITING_FOR_PAYMENT"		=> "Menunggu Pembayaran",
+			"QUEUED"					=> "Pesanan sedang diproses",
+			"PICKING_FROM_TENANT"		=> "Pengambilan dari tenant",
+			"DELIVERING_TO_CUSTOMER"	=> "Pengantaran ke customer",
+			"RECEIVED"					=> "Telah diterima",
+			"DELIVERING_TO_TENANT"		=> "Pengantaran ke tenant",
+			"TENANT_RECEIVED"			=> "Telah diterima oleh tenant",
+			"COST_CALCULATED"			=> "Penghitungan biaya",
+			"REPAIRING"					=> "Perbaikan diproses",
+			"REPAIR_FINISHED"			=> "Perbaikan selesai",
+			"REFUNDED"					=> "Uang dikembalikan",
+			"REPAIR_CANCELLED"			=> "Perbaikan dibatalkan",
+		),
+	)
+);
+
 defined('TYPE') OR define('TYPE', array(
 		'name' => array(
 			'CUSTOMER'				=> 'CUSTOMER',
@@ -20,6 +52,7 @@ defined('TYPE') OR define('TYPE', array(
 			'POSTED_ITEM_VARIANCE'	=> 'POSTED_ITEM_VARIANCE',
 			'ORDER_DETAILS'			=> 'ORDER_DETAILS',
 			'BILLING' 				=> 'BILLING',
+			'PAYMENT' 				=> 'PAYMENT',
 			'BIDDING'				=> 'BIDDING',
 			'BRAND'					=> 'BRAND',
 			'REWARD'				=> 'REWARD',
@@ -46,6 +79,7 @@ defined('TYPE') OR define('TYPE', array(
 			'POSTED_ITEM_VARIANCE'	=> 'VAR',
 			'ORDER_DETAILS'			=> 'ORD',
 			'BILLING' 				=> 'BIL',
+			'PAYMENT' 				=> 'PAY',
 			'BIDDING'				=> 'BID',
 			'BRAND'					=> 'BRD',
 			'REWARD'				=> 'RWD',
@@ -72,6 +106,7 @@ defined('TYPE') OR define('TYPE', array(
 			'POSTED_ITEM_VARIANCE' 	=> 10,
 			'ORDER_DETAILS'			=> 9,
 			'BILLING' 				=> 9,
+			'PAYMENT' 				=> 9,
 			'BIDDING'				=> 9,
 			'BRAND'					=> 6,
 			'REWARD'				=> 8,
@@ -98,6 +133,7 @@ defined('TYPE') OR define('TYPE', array(
 			'POSTED_ITEM_VARIANCE'	=> 'Posted_item_variance_model',
 			'ORDER_DETAILS'			=> 'Order_model',
 			'BILLING' 				=> 'Billing_model',
+			'PAYMENT' 				=> 'Payment_model',
 			'BIDDING'				=> 'Bidding_model',
 			'BRAND'					=> 'Brand_model',
 			'REWARD'				=> 'Reward_model',
