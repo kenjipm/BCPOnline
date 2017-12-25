@@ -254,6 +254,30 @@ class Account_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function update_identification_pic($id, $file_path)
+	{
+		// update data
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('identification_pic', $file_path);
+		$this->db->update($this->table_account);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function update_profile_pic($id, $file_path)
+	{
+		// update data
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('profile_pic', $file_path);
+		$this->db->update($this->table_account);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 	public function get_type($id)
 	{
 		foreach(TYPE['model'] as $type => $model)

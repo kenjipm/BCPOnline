@@ -99,7 +99,8 @@ class Login extends CI_Controller {
 		}
 		else if ($type == TYPE['name']['ADMIN'])
 		{
-			redirect('admin');
+			// redirect('admin'); // uncomment for real redirect
+			redirect('account/account_list');
 		}
 		else if ($type == TYPE['name']['DELIVERER'])
 		{

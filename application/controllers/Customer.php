@@ -259,7 +259,7 @@ class Customer extends CI_Controller {
 		if (count($data['error']) == 0)
 		{
 			$this->load->model('Account_model');
-			$this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+			$this->Account_model->update_profile_pic($this->session->id, $file_path['profile_pic']);
 			
 			$data['image_url'] = site_url($file_path['profile_pic']);
 			
@@ -296,7 +296,7 @@ class Customer extends CI_Controller {
 		if (count($data['error']) == 0)
 		{
 			$this->load->model('Account_model');
-			$this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+			$this->Account_model->update_identification_pic($this->session->id, $file_path['identification_pic']);
 			
 			$data['image_url'] = site_url($file_path['identification_pic']);
 			

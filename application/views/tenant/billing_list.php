@@ -36,38 +36,43 @@
 			<h3>Daftar Billing</h3>
 		</div>
 		<div class="panel-body">
-			<table>
-				<thead>
-					<th> <label for="tanggal1">Dibuat</label>	</th>
-					<th> <label for="tanggal2">Lunas</label> </th>
-					<th> <label for="status">Status</label> </th>
-					<th> <label for="total_payable">Total Harga</label> </th>
-				</thead>
-				<tbody>
-					<?php
-					foreach($model->orders as $order)
-					{
-						?>
-						<tr class="row list-group">
-							<td>
-								<?=$order->date_created?> </td>
-							<td>
-								<?=$order->date_closed?> </td>
-							<td>
-								<?=$order->order_status?> </td>
-							<td>
-								<?=$order->sold_price?> </td>
-							<td>
-								<a href="<?=site_url('billing/detail/'.$order->id)?>">
-									<button class="btn btn-default">Lihat</button>
-								</a>
-							</td>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="tanggal1">Dibuat</label>	</th>
+							<th> <label for="tanggal2">Lunas</label> </th>
+							<th> <label for="status">Status</label> </th>
+							<th> <label for="total_payable">Total Harga</label> </th>
+							<th> </th>
 						</tr>
+					</thead>
+					<tbody>
 						<?php
-					}
-					?>
-				</tbody>
-			</table>
+						foreach($model->orders as $order)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$order->date_created?> </td>
+								<td>
+									<?=$order->date_closed?> </td>
+								<td>
+									<?=$order->order_status?> </td>
+								<td>
+									<?=$order->sold_price?> </td>
+								<td>
+									<a href="<?=site_url('billing/detail/'.$order->id)?>">
+										<button class="btn btn-default">Lihat</button>
+									</a>
+								</td>
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
 		</div>
 	</div>
 </div>
