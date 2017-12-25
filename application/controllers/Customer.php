@@ -35,7 +35,7 @@ class Customer extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('simpleUpload', 'customer/profile_main');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -124,50 +124,50 @@ class Customer extends CI_Controller {
 
 		if ($this->form_validation->run() == TRUE)
 		{
-			$data['error'] = array();
-			$file_path = array();
-			$this->load->config('upload');
+			// $data['error'] = array();
+			// $file_path = array();
+			// $this->load->config('upload');
 			
-			// upload identification_pic
-			$config_upload_identification_pic = $this->config->item('upload_identification_pic');
-			$config_upload_identification_pic['upload_path'] .= $this->session->account_id."/";
-			$this->load->library('upload', $config_upload_identification_pic);
-			if ($_FILES['identification_pic']['name'])
-			{
-				if (!is_dir($config_upload_identification_pic['upload_path'])) {
-					mkdir($config_upload_identification_pic['upload_path']);
-				}
+			// // upload identification_pic
+			// $config_upload_identification_pic = $this->config->item('upload_identification_pic');
+			// $config_upload_identification_pic['upload_path'] .= $this->session->account_id."/";
+			// $this->load->library('upload', $config_upload_identification_pic);
+			// if ($_FILES['identification_pic']['name'])
+			// {
+				// if (!is_dir($config_upload_identification_pic['upload_path'])) {
+					// mkdir($config_upload_identification_pic['upload_path']);
+				// }
 				
-				if (!$this->upload->do_upload('identification_pic'))
-				{
-					$data['error'] = $this->upload->display_errors();
-				}
-				else $file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
-			}
+				// if (!$this->upload->do_upload('identification_pic'))
+				// {
+					// $data['error'] = $this->upload->display_errors();
+				// }
+				// else $file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
+			// }
 			
-			// upload profile pic
-			$config_upload_profpic = $this->config->item('upload_profpic');
-			$config_upload_profpic['upload_path'] .= $this->session->account_id."/";
-			$this->upload->initialize($config_upload_profpic);
-			if ($_FILES['profile_pic']['name'])
-			{
-				if (!is_dir($config_upload_profpic['upload_path'])) {
-					mkdir($config_upload_profpic['upload_path']);
-				}
-				if (!$this->upload->do_upload('profile_pic'))
-				{
-					$data['error'] = $this->upload->display_errors();
-				}
-				else $file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
-			}
+			// // upload profile pic
+			// $config_upload_profpic = $this->config->item('upload_profpic');
+			// $config_upload_profpic['upload_path'] .= $this->session->account_id."/";
+			// $this->upload->initialize($config_upload_profpic);
+			// if ($_FILES['profile_pic']['name'])
+			// {
+				// if (!is_dir($config_upload_profpic['upload_path'])) {
+					// mkdir($config_upload_profpic['upload_path']);
+				// }
+				// if (!$this->upload->do_upload('profile_pic'))
+				// {
+					// $data['error'] = $this->upload->display_errors();
+				// }
+				// else $file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
+			// }
 			
-			if (count($data['error']) == 0)
-			{
-				$this->load->model('Account_model');
-				$this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+			// if (count($data['error']) == 0)
+			// {
+				// $this->load->model('Account_model');
+				// $this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
 				
 				redirect('customer/profile');
-			}
+			// }
 			
 		}
 		return $data;
@@ -234,6 +234,85 @@ class Customer extends CI_Controller {
 		$this->default_redirect();
 	}
 	
+	public function upload_profpic()
+	{
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
+		
+		$config_upload_profpic = $this->config->item('upload_profpic');
+		$config_upload_profpic['upload_path'] .= $this->session->account_id."/";
+		$this->load->library('upload', $config_upload_profpic);
+		
+		if ($_FILES['profile_pic']['name'])
+		{
+			if (!is_dir($config_upload_profpic['upload_path'])) {
+				mkdir($config_upload_profpic['upload_path']);
+			}
+			if (!$this->upload->do_upload('profile_pic'))
+			{
+				$data['error'] = $this->upload->display_errors();
+			}
+			else $file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+			
+			$data['image_url'] = site_url($file_path['profile_pic']);
+			
+			header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+			header("Cache-Control: post-check=0, pre-check=0", false);
+			header("Pragma: no-cache");
+			header("Content-Type: application/json; charset=utf-8");
+			echo json_encode($data);
+		}
+	}
+	
+	public function upload_idpic()
+	{
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
+		
+		$config_upload_identification_pic = $this->config->item('upload_identification_pic');
+		$config_upload_identification_pic['upload_path'] .= $this->session->account_id."/";
+		$this->load->library('upload', $config_upload_identification_pic);
+		
+		if ($_FILES['identification_pic']['name'])
+		{
+			if (!is_dir($config_upload_identification_pic['upload_path'])) {
+				mkdir($config_upload_identification_pic['upload_path']);
+			}
+			if (!$this->upload->do_upload('identification_pic'))
+			{
+				$data['error'] = $this->upload->display_errors();
+			}
+			else $file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+			
+			$data['image_url'] = site_url($file_path['identification_pic']);
+			
+			header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+			header("Cache-Control: post-check=0, pre-check=0", false);
+			header("Pragma: no-cache");
+			header("Content-Type: application/json; charset=utf-8");
+			echo json_encode($data);
+		}
+	}
+	
+	public function load_googlemaps()
+	{
+		$this->load->view('googlemaps');
+	}
+	
 	public function default_redirect()
 	{
 		if ($this->input->post('return_url') != null)
@@ -241,10 +320,5 @@ class Customer extends CI_Controller {
 			redirect($this->input->post('return_url'));
 		}
 		redirect($_SERVER['HTTP_REFERER']);
-	}
-	
-	public function load_googlemaps()
-	{
-		$this->load->view('googlemaps');
 	}
 }

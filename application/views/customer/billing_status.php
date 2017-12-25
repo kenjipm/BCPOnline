@@ -86,38 +86,40 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3" for="orders">Order List:</label>
-						<div class="col-xs-9 pull-right">
-							<div class="row list-group">
-								<div class="col-xs-4">Nama </div>
-								<div class="col-xs-1">Jml </div>
-								<div class="col-xs-3">Harga </div>
-								<div class="col-xs-2">Status </div>
-							</div>
-						</div>
-						<div class="row">
-							<?php
-							foreach($model->orders as $order)
-							{
-								?>
-								<div class="col-xs-9 col-xs-offset-3">
-									<div class="row list-group">
-										<div class="col-xs-4 list-group-item">
-											<?=$order->posted_item_variance->posted_item->posted_item_name?> </div>
-										<div class="col-xs-1 list-group-item">
-											<?=$order->quantity?> </div>
-										<div class="col-xs-3 list-group-item">
-											<?=$order->posted_item_variance->posted_item->price?> </div>
-										<div class="col-xs-2 list-group-item">
-											<?=$order->order_status?> </div>
-										<div class="col-xs-1">
-											<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
-												Lihat
-											</a></div>	
-									</div>
-								</div>
-								<?php
-							}
-							?>
+						<div class="table-responsive col-xs-9">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Nama </th>
+										<th>Jml </th>
+										<th>Harga </th>
+										<th>Status </th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									foreach($model->orders as $order)
+									{
+										?>
+											<tr>
+												<td>
+													<?=$order->posted_item_variance->posted_item->posted_item_name?> </td>
+												<td>
+													<?=$order->quantity?> </td>
+												<td>
+													<?=$order->posted_item_variance->posted_item->price?> </td>
+												<td>
+													<?=$order->order_status?> </td>
+												<!--td class="col-xs-1">
+													<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
+														Lihat
+													</a></td-->	
+											</tr>
+										<?php
+									}
+									?>
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div class="form-group">
@@ -132,52 +134,54 @@
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3" >Pembayaran:</label>
-						<div class="col-xs-9 pull-right">
-							<div class="row list-group">
-								<div class="col-xs-2">Tanggal</div>
-								<div class="col-xs-2">Pembayaran</div>
-								<div class="col-xs-3">Jumlah</div>
-								<div class="col-xs-3">Keterangan</div>
-							</div>
-						</div>
-						<div class="row">
-							<?php
-							foreach($model->payments as $payment)
-							{
-								?>
-								<div class="col-xs-9 col-xs-offset-3">
-									<div class="row list-group">
-										<div class="col-xs-2 list-group-item"><?=$payment->payment_date?></div>
-										<div class="col-xs-2 list-group-item"><?=$payment->payment_method?></div>
-										<div class="col-xs-3 list-group-item"><?=$payment->paid_amount?></div>
-										<!--<div class="col-xs-3 list-group-item"><?=$payment->description?></div>-->
-										<div class="col-xs-2">
-											<button data-toggle="collapse" data-target="#payment_description-<?=$payment->id?>" class="btn btn-default" type="button">?</button>
-										</div>
-										<!-- DUMMY PEMBAYARAN -->
-										<?php if (!$payment->is_paid) { ?>
-										<div class="col-xs-1">
-											<a class="btn btn-default" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
-												BAYAR (dummy)
-											</a></div>	
-										<?php } ?>
-										<!-- ---------------- -->
-									</div>
-									<div class="row">
-										<div class="col-xs-10">
-											<div id="payment_description-<?=$payment->id?>" class="collapse">
+						<div class="table-responsive col-xs-9">
+							<table class="table table-bordered table-striped">
+								<thead>
+									<tr>
+										<th>Tanggal</th>
+										<th>Pembayaran</th>
+										<th>Jumlah</th>
+										<!--th>Keterangan</th-->
+										<th></th>
+									</tr>
+								</thead>
+								<tbody>
+									<?php
+									foreach($model->payments as $payment)
+									{
+										?>
+										<tr>
+											<td><?=$payment->payment_date?></td>
+											<td><?=$payment->payment_method?></td>
+											<td><?=$payment->paid_amount?></td>
+											<!--<td><?=$payment->description?></td>-->
+											<td>
+												<button data-toggle="collapse" data-target="#payment_description-<?=$payment->id?>" class="btn btn-default" type="button">?</button>
+											</td>
+											<!-- DUMMY PEMBAYARAN -->
+											<?php if (!$payment->is_paid) { ?>
+											<td>
+												<a class="btn btn-default" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
+													BAYAR (dummy)
+												</a>
+											</td>	
+											<?php } ?>
+											<!-- ---------------- -->
+										</tr>
+										<tr id="payment_description-<?=$payment->id?>" class="collapse">
+											<td colspan=4>
 												<div class="panel panel-default">
 													<div class="panel-body">
 														<?=$payment->payment_method_description?>
 													</div>
 												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-								<?php
-							}
-							?>
+											</td>
+										</tr>
+										<?php
+									}
+								?>
+								</tbody>
+							</table>
 						</div>
 					</div>
 					<div class="form-group">

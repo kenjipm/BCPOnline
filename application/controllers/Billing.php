@@ -2,6 +2,28 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 class Billing extends CI_Controller {
 	
+	const ALLOWED_ROLE = array(
+		TYPE['name']['CUSTOMER'],
+		TYPE['name']['TENANT'],
+		TYPE['name']['ADMIN'],
+	);
+	
+	// constructor
+	public function __construct()
+	{
+		parent::__construct();
+		
+		if ($this->session->id == null)
+		{
+			redirect('');
+		}
+		
+		if (!in_array($this->session->type, $this::ALLOWED_ROLE))
+		{
+			redirect('');
+		}
+	}
+	
 	public function index()
 	{
 		// Load Header
@@ -13,17 +35,26 @@ class Billing extends CI_Controller {
 		$data['model'] = new class{};
 		$data['title'] = "Daftar Billing";
 		
-		if ($this->session->userdata('type') == "TENANT") // dummy
+		if ($this->session->type == TYPE['name']['TENANT']) // dummy? apa bisa ya
 		{
 			$this->load->model('Order_details_model');
 			$items = $this->Order_details_model->get_all_from_tenant_id();
+			
 			$this->load->model('views/tenant/billing_list_view_model');
 			$this->billing_list_view_model->get($items);
+			
 			$data['model'] = $this->billing_list_view_model;
 			$this->load->view('tenant/billing_list', $data);
 		}
-		else
+		else // if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
+			$this->load->model('billing_model');
+			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id);
+			
+			$this->load->model('views/customer/billing_list_view_model');
+			$this->billing_list_view_model->get($billings);
+			
+			$data['model'] = $this->billing_list_view_model;
 			$this->load->view('customer/billing_list', $data);
 		}
 		
@@ -144,6 +175,8 @@ class Billing extends CI_Controller {
 		if (($this->session->type == TYPE['name']['CUSTOMER']) &&
 			($this->input->post('customer_id') == $this->session->child_id))
 		{
+			// >>>>> disini harus check item di cart dulu, stok nya cukup ga. kalau ga cukup, lgsg redirect & kasih pesan error	
+			
 			// create new bill here
 			$this->load->model('shipping_charge_model');
 			$shipping_charge = $this->shipping_charge_model;
@@ -179,7 +212,7 @@ class Billing extends CI_Controller {
 			{
 				$this->load->model('order_details_model');
 				$order_details = new Order_details_model();
-				$order_details = $order_details->set_all_paid_from_billing_id($id);
+				$order_details = $order_details->set_all_paid_from_billing_id($billing->id);
 			}
 			else // kalau nunggu pembayaran
 			{
@@ -187,6 +220,11 @@ class Billing extends CI_Controller {
 				// insert billing using api
 			}
 			
+			// kurangi stock dari barang yang dibeli
+			$this->load->model('posted_item_variance_model');
+			$this->posted_item_variance_model->quantity_sub_from_cart($this->session->cart);
+			
+			// baru kosongkan cart nya
 			$this->session->cart = array();
 			
 			// redirect to confirmation page

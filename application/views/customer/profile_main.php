@@ -10,11 +10,19 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="profile_pic">Foto Profil:</label>
 					<div class="col-xs-3">
-						<div class="thumbnail">
+					
+						<label for="profile_pic">
+							<div id="thumbnail-profile_pic" class="thumbnail">
+								<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+							</div>
+						</label>
+						<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" style="display:none"/>
+						
+						<!--div class="thumbnail">
 							<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
 						</div>
 						<input type="file" id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" class="form-control" style="display:none">
-						<label for="profile_pic" class="btn btn-default">Ubah Foto Profil</label>
+						<label for="profile_pic" class="btn btn-default">Ubah Foto Profil</label-->
 					</div>
 				</div>
 				<div class="form-group">
@@ -48,11 +56,19 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="identification_pic">Foto Kartu ID:</label>
 					<div class="col-xs-3">
-						<div class="thumbnail">
+					
+						<label for="identification_pic">
+							<div id="thumbnail-identification_pic" class="thumbnail">
+								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+							</div>
+						</label>
+						<input id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" data-url="<?=site_url('customer/upload_idpic')?>" type="file" style="display:none"/>
+						
+						<!--div class="thumbnail">
 							<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
 						</div>
 						<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" class="form-control" style="display:none">
-						<label for="identification_pic" class="btn btn-default">Ubah Foto Kartu ID</label>
+						<label for="identification_pic" class="btn btn-default">Ubah Foto Kartu ID</label-->
 					</div>
 				</div>
 				<div class="form-group">

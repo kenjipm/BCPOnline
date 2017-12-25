@@ -14,7 +14,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <script type='text/javascript' src='<?=site_url('js/jquery-3.2.1.min.js')?>'></script>
     <script type='text/javascript' src='<?=site_url('js/bootstrap.min.js')?>'></script>
     <script type='text/javascript' src='<?=site_url('js/default.js')?>'></script>
-
+	
     <?php
         //SET CUSTOM CSS
         if (isset($css_list)) { foreach ($css_list as $css) {

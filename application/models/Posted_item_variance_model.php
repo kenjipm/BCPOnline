@@ -171,6 +171,18 @@ class Posted_item_variance_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
+	public function quantity_sub_from_cart($cart)
+	{
+		foreach ($cart as $id => $cart_item)
+		{
+			$this->db->where('id', $id);
+			$this->db->set('quantity_available', 'quantity_available - ' . $cart_item['quantity'], false);
+			$this->db->update($this->table_posted_item_variance);
+		}
+		
+		return $this;
+	}
+	
 	public function init_posted_item()
 	{
 		$this->posted_item = $this->posted_item->get_from_id($this->posted_item_id);

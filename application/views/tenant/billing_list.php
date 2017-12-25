@@ -36,34 +36,38 @@
 			<h3>Daftar Billing</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="tanggal">Tanggal</label>	</div>
-				<div class="col-xs-2"> <label for="customer">Customer</label> </div>
-				<div class="col-xs-3"> <label for="address">Alamat</label> </div>
-				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
-			</div>
-			<?php
-			foreach($model->billings as $bill)
-			{
-				?>
-				<div class="row list-group">
-					<div class="col-xs-2 list-group-item">
-						<?=$bill->date_created?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$bill->customer?> </div>
-					<div class="col-xs-3 list-group-item">
-						<?=$bill->address?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$bill->sold_price?> </div>
-					<div class="col-xs-1">
-						<a href="<?=site_url('billing/detail/'.$bill->id)?>">
-							<button class="btn btn-default">Lihat</button>
-						</a></div>	
-						
-				</div>
-				<?php
-			}
-			?>
+			<table>
+				<thead>
+					<th> <label for="tanggal">Tanggal</label>	</th>
+					<th> <label for="customer">Customer</label> </th>
+					<th> <label for="address">Alamat</label> </th>
+					<th> <label for="total_payable">Total Harga</label> </th>
+				</thead>
+				<tbody>
+					<?php
+					foreach($model->billings as $bill)
+					{
+						?>
+						<tr class="row list-group">
+							<td>
+								<?=$bill->date_created?> </td>
+							<td>
+								<?=$bill->customer?> </td>
+							<td>
+								<?=$bill->address?> </td>
+							<td>
+								<?=$bill->sold_price?> </td>
+							<td>
+								<a href="<?=site_url('billing/detail/'.$bill->id)?>">
+									<button class="btn btn-default">Lihat</button>
+								</a>
+							</td>
+						</tr>
+						<?php
+					}
+					?>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

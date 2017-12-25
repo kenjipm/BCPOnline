@@ -19,6 +19,7 @@ class Billing_model extends CI_Model {
 	public $customer;
 	public $shipping_address;
 	public $shipping_charge;
+	public $payments;
 	
 	// constructor
 	public function __construct()
@@ -41,6 +42,8 @@ class Billing_model extends CI_Model {
 		$this->customer				= new Customer_model();
 		$this->shipping_address		= new Shipping_address_model();
 		$this->shipping_charge		= new Shipping_charge_model();
+		
+		$this->payments				= array();
 	}
 	
 	// constructor from database object
@@ -127,6 +130,18 @@ class Billing_model extends CI_Model {
 		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');
 		$this->db->join('shipping_charge', 'shipping_charge.id=' . $this->table_billing . '.shipping_charge_id', 'left');
 		
+		$query = $this->db->get($this->table_billing);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	//get all billing
+	public function get_all_from_customer_id($customer_id)
+	{
+		$this->load->model('Billing_model');
+		
+		$this->db->where('customer_id', $customer_id);
 		$query = $this->db->get($this->table_billing);
 		$items = $query->result();
 		
@@ -222,6 +237,20 @@ class Billing_model extends CI_Model {
 			$this->total_payable += $cart_item['quantity'] * $cart_item['price'];
 		}
 		return $this->total_payable;
+	}
+	
+	public function calculate_total_payable()
+	{
+		$this->load->model('payment_model');
+		$payments = $this->payment_model->get_all_from_billing_id($this->id);
+		
+		$total_payable = $this->total_payable;
+		foreach ($payments as $payment)
+		{
+			$total_payable -= $payment->paid_amount;
+		}
+		
+		return $total_payable;
 	}
 }
 

@@ -40,6 +40,14 @@ $config['top_menu_tenant'] = array(
 	'left' => array(
 		),
 	'right' => array(
+		'INBOX' => array(
+			'text'	=> "Inbox",
+			'url'	=> "message",
+			),
+		'PROFILE' => array(
+			'text'	=> "Profile",
+			'url'	=> "",
+			),
 		),
 	);
 
@@ -47,6 +55,10 @@ $config['top_menu_deliverer'] = array(
 	'left' => array(
 		),
 	'right' => array(
+		'PROFILE' => array(
+			'text'	=> "Profile",
+			'url'	=> "",
+			),
 		),
 	);
 
@@ -54,6 +66,10 @@ $config['top_menu_admin'] = array(
 	'left' => array(
 		),
 	'right' => array(
+		'PROFILE' => array(
+			'text'	=> "Profile",
+			'url'	=> "",
+			),
 		),
 	);
 
