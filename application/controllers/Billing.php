@@ -15,8 +15,8 @@ class Billing extends CI_Controller {
 		
 		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
-			$this->load->model('Billing_model');
-			$items = $this->Billing_model->get_all();
+			$this->load->model('Order_details_model');
+			$items = $this->Order_details_model->get_all_from_tenant_id();
 			$this->load->model('views/tenant/billing_list_view_model');
 			$this->billing_list_view_model->get($items);
 			$data['model'] = $this->billing_list_view_model;

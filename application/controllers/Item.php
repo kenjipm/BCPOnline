@@ -39,7 +39,14 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Category_model');
+		$this->load->model('Brand_model');
+		$categories = $this->Category_model->get_all();
+		$brands = $this->Brand_model->get_all();
+		$this->load->model('views/tenant/post_item_view_model');
+		$this->post_item_view_model->get($categories, $brands);
+		$data['model'] = $this->post_item_view_model;
+		
 		$this->load->view('tenant/post_item', $data);
 		
 		// Load Footer
@@ -156,8 +163,10 @@ class Item extends CI_Controller {
 		{
 			$this->load->model('Item_model');
 			$this->load->model('Posted_item_variance_model');
+			$this->load->model('Tag_model');
 			$this->Item_model->insert_from_post();
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
+			$this->Tag_model->insert_from_post($this->Item_model->id);
 			
 			redirect('Item/post_item_list');
 		}

@@ -60,6 +60,16 @@ class Brand_model extends CI_Model {
 		return $stub;
 	}
 	
+	public function map_list($items)
+	{
+		$result = array();
+		foreach ($items as $item)
+		{
+			$result[] = $this->get_new_stub_from_db($item);
+		}
+		return $result;
+	}
+	
 	// get item detail
 	public function get_from_id($id)
 	{
@@ -70,6 +80,14 @@ class Brand_model extends CI_Model {
 		$item = $query->row();
 		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_all()
+	{
+		$query = $this->db->get($this->table_brand);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	// insert new account from form post

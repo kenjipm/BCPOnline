@@ -82,7 +82,7 @@
 						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_three_name" value="<?=$model->posted_item->image_three_name[$i]?>" readonly></div>
 						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_four_name" value="<?=$model->posted_item->image_four_name[$i]?>" readonly></div>
 					</div>
-				<?php
+					<?php
 					$i++;
 				}
 				?>
@@ -96,11 +96,11 @@
 				<div id="add_customer" style="display:none">
 					<div class="form-group">
 						<label class="control-label col-xs-3">Email Customer:</label>
-						<div class="col-xs-9"><input type="text" class="form-control" name="customer_email_0"></div>
+						<div class="col-xs-9"><input type="text" class="form-control" name="customer_email[]"></div>
 					</div>
 					<div class="form-group">
 						<label class="control-label col-xs-3">Harga Diskon:</label>
-						<div class="col-xs-9"><input type="text" class="form-control" name="discounted_price_0"></div>
+						<div class="col-xs-9"><input type="text" class="form-control" name="discounted_price[]"></div>
 					</div>
 				</div>
 				<div class="form-group">
