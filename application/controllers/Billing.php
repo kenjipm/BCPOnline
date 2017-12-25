@@ -46,7 +46,18 @@ class Billing extends CI_Controller {
 			$data['model'] = $this->billing_list_view_model;
 			$this->load->view('tenant/billing_list', $data);
 		}
-		else // if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		else if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
+		{
+			$this->load->model('Order_details_model');
+			$items = $this->Order_details_model->get_all();
+			
+			$this->load->model('views/admin/billing_list_view_model');
+			$this->billing_list_view_model->get($items);
+			
+			$data['model'] = $this->billing_list_view_model;
+			$this->load->view('admin/billing_list', $data);
+		}
+		else // if ($this->session->userdata('type') == TYPE['name']['CUSTOMER']) // CUSTOMER
 		{
 			$this->load->model('billing_model');
 			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id);
@@ -75,7 +86,19 @@ class Billing extends CI_Controller {
 		
 		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
-			$this->load->view('tenant/billing', $data);
+			$this->load->view('tenant/billing_detail', $data);
+		}
+		if ($this->session->userdata('type') == "ADMIN") // dummy
+		{
+			$this->load->model('Order_details_model');
+			$this->load->model('Billing_model');
+			$orders = $this->Order_details_model->get_all_from_billing_id($id);
+			$billings = $this->Billing_model->get_from_id($id);
+			$this->load->model('views/admin/billing_detail_view_model');
+			$this->billing_detail_view_model->get_order($orders);
+			$this->billing_detail_view_model->get_billing($billings);
+			$data['model'] = $this->billing_detail_view_model;
+			$this->load->view('admin/billing_detail', $data);
 		}
 		else
 		{

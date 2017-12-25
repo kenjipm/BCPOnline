@@ -33,41 +33,45 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Daftar Billing</h3>
+			<h3>Daftar Order</h3>
 		</div>
 		<div class="panel-body">
-			<table>
-				<thead>
-					<th> <label for="tanggal1">Dibuat</label>	</th>
-					<th> <label for="tanggal2">Lunas</label> </th>
-					<th> <label for="status">Status</label> </th>
-					<th> <label for="total_payable">Total Harga</label> </th>
-				</thead>
-				<tbody>
-					<?php
-					foreach($model->orders as $order)
-					{
-						?>
-						<tr class="row list-group">
-							<td>
-								<?=$order->date_created?> </td>
-							<td>
-								<?=$order->date_closed?> </td>
-							<td>
-								<?=$order->order_status?> </td>
-							<td>
-								<?=$order->sold_price?> </td>
-							<td>
-								<a href="<?=site_url('billing/detail/'.$order->id)?>">
-									<button class="btn btn-default">Lihat</button>
-								</a>
-							</td>
-						</tr>
-						<?php
-					}
+			<div class="row list-group">
+				<div class="col-xs-4"> <label for="posted_item">Barang</label>	</div>
+				<div class="col-xs-5"> <label for="address">Alamat</label> </div>
+				<div class="col-xs-3"> <label for="total_payable">Pengirim</label> </div>
+			</div>
+			<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
+				<?php
+				foreach($model->order_list as $order)
+				{
 					?>
-				</tbody>
-			</table>
+					<div class="col-xs-4">
+						<?=$order->posted_item?> </div>
+					<div class="col-xs-5">
+						<?=$order->address?> </div>
+					<div class="form-group">
+						<div class="col-xs-3">
+							<select class="form-control" name="deliverer_id">
+							<?php
+							foreach ($model->idle_deliverer as $idle_deliverer)
+							{
+								?>
+								<option value="<?=$idle_deliverer->id?>"><?=$idle_deliverer->name?></option>			
+								<?php
+								$i++;
+							}
+							?>
+							</select>
+						</div>
+					</div>
+					<?php
+				}
+				?>
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

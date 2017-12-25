@@ -52,6 +52,10 @@ class Order_details_model extends CI_Model {
 		
 		$this->load->model('billing_model');
 		$this->load->model('posted_item_variance_model');
+		$this->load->model('item_model');
+		$this->load->model('deliverer_model');
+		$this->load->model('account_model');
+		$this->load->model('shipping_address_model');
 		
 		$this->billing					= new Billing_model();
 		$this->posted_item_variance		= new Posted_item_variance_model();
@@ -129,6 +133,19 @@ class Order_details_model extends CI_Model {
 		$stub->tnt_paid_receipt_id		= $db_item->tnt_paid_receipt_id;
 		$stub->voucher_cut_price		= $db_item->voucher_cut_price;
 		
+		$stub->posted_item_variance->posted_item					= new Item_model();
+		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
+		
+		$stub->shipping_address					= new Shipping_address_model();
+		$stub->shipping_address->address_detail	= $db_item->address_detail ?? "";
+		
+		$stub->billing						= new Billing_model();
+		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
+		
+		$stub->deliverer				= new Deliverer_model();
+		$stub->deliverer->account		= new Account_model();
+		$stub->deliverer->account->name	= $db_item->name ?? "";
+		
 		return $stub;
 	}
 	
@@ -155,6 +172,14 @@ class Order_details_model extends CI_Model {
 	
 	public function get_all()
 	{
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
+		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
@@ -165,6 +190,9 @@ class Order_details_model extends CI_Model {
 	{
 		$where['billing_id'] = $billing_id;
 		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
@@ -222,6 +250,19 @@ class Order_details_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete();
+	}
+	
+	public function get_idle_deliverer()
+	{		
+		$this->db->select('*, deliverer.id AS id');
+		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		$this->db->where_not_in('deliverer.id', $this->table_order_details. '.deliverer_id');
+		
+		$query = $this->db->get('deliverer');
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	public function update_natural_id($natural_id)

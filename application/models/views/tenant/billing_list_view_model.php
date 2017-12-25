@@ -2,7 +2,7 @@
 
 class Billing_List_View_Model extends CI_Model{
 	
-	public $billings;
+	public $orders;
 	// constructor
 	public function __construct()
 	{	
@@ -13,11 +13,12 @@ class Billing_List_View_Model extends CI_Model{
 		$i = 0;
 		foreach($billings as $billing)
 		{
-			$this->billings[$i] = new class{};
-			$this->billings[$i]->id 				= $billing->id;
-			$this->billings[$i]->date_created		= $billing->image_one_name;
-			$this->billings[$i]->date_closed		= $billing->image_two_name;
-			$this->billings[$i]->sold_price			= $billing->sold_price;
+			$this->orders[$i] = new class{};
+			$this->orders[$i]->id 			= $billing->id;
+			$this->orders[$i]->order_status	= $billing->order_status;
+			$this->orders[$i]->date_created	= $billing->billing->date_created;
+			$this->orders[$i]->date_closed	= $billing->billing->date_closed;
+			$this->orders[$i]->sold_price	= $billing->sold_price;
 			
 			$i++;
 		}

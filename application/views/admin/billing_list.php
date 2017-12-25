@@ -36,38 +36,34 @@
 			<h3>Daftar Billing</h3>
 		</div>
 		<div class="panel-body">
-			<table>
-				<thead>
-					<th> <label for="tanggal1">Dibuat</label>	</th>
-					<th> <label for="tanggal2">Lunas</label> </th>
-					<th> <label for="status">Status</label> </th>
-					<th> <label for="total_payable">Total Harga</label> </th>
-				</thead>
-				<tbody>
-					<?php
-					foreach($model->orders as $order)
-					{
-						?>
-						<tr class="row list-group">
-							<td>
-								<?=$order->date_created?> </td>
-							<td>
-								<?=$order->date_closed?> </td>
-							<td>
-								<?=$order->order_status?> </td>
-							<td>
-								<?=$order->sold_price?> </td>
-							<td>
-								<a href="<?=site_url('billing/detail/'.$order->id)?>">
-									<button class="btn btn-default">Lihat</button>
-								</a>
-							</td>
-						</tr>
-						<?php
-					}
-					?>
-				</tbody>
-			</table>
+			<div class="row list-group">
+				<div class="col-xs-2"> <label for="tanggal1">Dibuat</label>	</div>
+				<div class="col-xs-2"> <label for="tanggal2">Lunas</label> </div>
+				<div class="col-xs-3"> <label for="customer">Customer</label> </div>
+				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
+			</div>
+			<?php
+			foreach($model->billing_list as $billing)
+			{
+				?>
+				<div class="row list-group">
+					<div class="col-xs-2 list-group-item">
+						<?=$billing->date_created?> </div>
+					<div class="col-xs-2 list-group-item">
+						<?=$billing->date_closed?> </div>
+					<div class="col-xs-3 list-group-item">
+						<?=$billing->customer?> </div>
+					<div class="col-xs-2 list-group-item">
+						<?=$billing->total_payable?> </div>
+					<div class="col-xs-1">
+						<a href="<?=site_url('billing/detail/'.$billing->id)?>">
+							<button class="btn btn-default">Lihat</button>
+						</a></div>	
+						
+				</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
 </div>

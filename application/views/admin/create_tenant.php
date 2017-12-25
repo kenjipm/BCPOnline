@@ -15,12 +15,6 @@
 		<div class="panel-body">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="id">ID Tenant:</label>
-					<div class="col-xs-3">
-						<input type="text" value="<?=$model->tenants->tenant_id?>" class="form-control" id="id" readonly>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama Tenant:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="name"></div>
 				</div>

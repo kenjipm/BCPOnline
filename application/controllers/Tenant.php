@@ -7,11 +7,18 @@ class Tenant extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array("tenant/dashboard");
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Item_model');
+		$this->load->model('Tenant_model');
+		$tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$items = $this->Item_model->get_all();
+		$this->load->model('views/tenant/dashboard_view_model');
+		$this->dashboard_view_model->get_posted_item($items);
+		$this->dashboard_view_model->get_tenant($tenant);
+		$data['model'] = $this->dashboard_view_model;
 		$this->load->view('tenant/dashboard_main', $data);
 		
 		// Load Footer

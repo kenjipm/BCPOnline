@@ -1,14 +1,26 @@
 <?php
 
-class Post_Item_List_View_Model extends CI_Model{
+class Dashboard_View_Model extends CI_Model{
 	
+	public $tenant;
 	public $posted_items;
 	// constructor
 	public function __construct()
 	{	
 	}
 	
-	public function get($items)
+	public function get_tenant($item)
+	{
+		$this->tenant = new class{};
+		
+		$this->tenant->id 			= $item->id;
+		$this->tenant->tenant_name	= $item->tenant_name;
+		$this->tenant->unit_number 	= $item->unit_number;
+		$this->tenant->floor 		= $item->floor;
+		
+	}
+	
+	public function get_posted_item($items)
 	{
 		$this->load->library('Text_renderer');
 		$i = 0;
@@ -29,8 +41,6 @@ class Post_Item_List_View_Model extends CI_Model{
 		}
 		
 	}
-	
-	
 }
 
 ?>

@@ -53,13 +53,13 @@
 	// $model->customers[2]->date_joined = "08-12-2017";
 	
 	// Model dummy deliverer
-	$model->deliverers[0] = new class{};
-	$model->deliverers[0]->id = 1;
-	$model->deliverers[0]->deliverer_id = "17120388801";
-	$model->deliverers[0]->account_name = "Dori";
-	$model->deliverers[0]->email = "dori@gmail.com";
-	$model->deliverers[0]->date_joined = "03-12-2017";
-	$model->deliverers[0]->status = "Kosong";
+	// $model->deliverers[0] = new class{};
+	// $model->deliverers[0]->id = 1;
+	// $model->deliverers[0]->deliverer_id = "17120388801";
+	// $model->deliverers[0]->account_name = "Dori";
+	// $model->deliverers[0]->email = "dori@gmail.com";
+	// $model->deliverers[0]->date_joined = "03-12-2017";
+	// $model->deliverers[0]->status = "Kosong";
 	// $model->deliverers[1] = new class{};
 	// $model->deliverers[1]->id = 2;
 	// $model->deliverers[1]->deliverer_id = "17120588804";
@@ -94,7 +94,7 @@
 			{
 				?>
 				<div class="row list-group">
-					<a href="<?=site_url('admin/account_detail/'.$tenant->id)?>">
+					<a href="<?=site_url('account/account_detail/'.$tenant->id)?>">
 						<div class="col-xs-2 list-group-item">
 							<?=$tenant->tenant_id?> </div>
 						<div class="col-xs-2 list-group-item">
@@ -110,7 +110,7 @@
 				<?php
 			}
 			?>
-			<a class="btn btn-default" href="<?=site_url('admin/create_tenant')?>">
+			<a class="btn btn-default" href="<?=site_url('account/create_tenant')?>">
 				Buat Akun
 			</a>	
 		</div>
@@ -125,8 +125,8 @@
 		<div class="panel-body">
 			<div class="row list-group">
 				<div class="col-xs-2"> <label for="customer_id">ID</label>	</div>
-				<div class="col-xs-3"> <label for="customer_name">Nama</label> </div>
-				<div class="col-xs-2"> <label for="email">E-mail</label> </div>
+				<div class="col-xs-2"> <label for="customer_name">Nama</label> </div>
+				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
 				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
 			</div>
 			<?php
@@ -134,7 +134,7 @@
 			{
 				?>
 				<div class="row list-group">
-				<a href="<?=site_url('admin/account_detail/'.$customer->id)?>">
+				<a href="<?=site_url('account/account_detail/'.$customer->id)?>">
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->customer_id?> </div>
 					<div class="col-xs-2 list-group-item">
@@ -143,7 +143,7 @@
 						<?=$customer->email?> </div>
 					<div class="col-xs-2 list-group-item">
 						<?=$customer->date_joined?> </div>
-					</a>		
+					</a>
 					<?php
 						if ($customer->status == "VERIFIED"){
 							$show_div_verify = false;
@@ -151,13 +151,14 @@
 							$show_div_verify = true;
 						}
 					?>
-					<div class="col-xs-1" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+					<div class="col-xs-3">
+						<div class="col-xs-6" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
+							<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+						</div>
+						<div class="col-xs-6" id="block">
+							<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+						</div>
 					</div>
-					<div class="col-xs-1" id="block">
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-					</div>
-				
 				</div>	
 				<?php
 			}
@@ -174,15 +175,15 @@
 		<div class="panel-body">
 			<div class="row list-group">
 				<div class="col-xs-2"> <label for="deliverer_id">ID</label>	</div>
-				<div class="col-xs-3"> <label for="deliverer_name">Nama</label> </div>
-				<div class="col-xs-2"> <label for="email">E-mail</label> </div>
+				<div class="col-xs-2"> <label for="deliverer_name">Nama</label> </div>
+				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
 				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
 			</div>
 			<?php
 			foreach($model->deliverers as $deliverer)
 			{
 				?>
-				<a href="<?=site_url('admin/account_detail/'.$deliverer->id)?>">
+				<a href="<?=site_url('account/account_detail/'.$deliverer->id)?>">
 				<div class="row list-group">
 					<div class="col-xs-2 list-group-item">
 						<?=$deliverer->deliverer_id?> </div>
@@ -191,13 +192,13 @@
 					<div class="col-xs-3 list-group-item">
 						<?=$deliverer->email?> </div>
 					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->date_joined?> </div>	
+						<?=$deliverer->date_joined?> </div>
 				</div>
 				</a>
 				<?php
 			}
 			?>
-			<a class="btn btn-default" href="<?=site_url('admin/create_deliverer')?>">
+			<a class="btn btn-default" href="<?=site_url('account/create_deliverer')?>">
 				Buat Akun
 			</a>	
 		</div>
