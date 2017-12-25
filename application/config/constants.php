@@ -144,6 +144,12 @@ defined('TYPE') OR define('TYPE', array(
 			'TENANT_BILL'			=> 'Tenant_Bill_model',
 			'TENANT_PAY_RECEIPT'	=> 'Tenant_Pay_Receipt_model',
 		),
+		'TOP_MENU' => array(
+			'CUSTOMER'				=> 'top_menu_customer',
+			'TENANT'				=> 'top_menu_tenant',
+			'DELIVERER'				=> 'top_menu_deliverer',
+			'ADMIN'					=> 'top_menu_admin',
+		),
 		// 'CUSTOMER' => array(
 			// 'name'		=> 'CUSTOMER',
 			// 'initial'	=> 'CUS',

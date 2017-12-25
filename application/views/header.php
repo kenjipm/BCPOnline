@@ -27,6 +27,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     
 	<?php //pre-calculation
 		$is_logged_in = $this->session->userdata('id') !== null;
+		if ($is_logged_in)
+		{
+			$user_type = $this->session->type;
+			$this->load->config('nav_menu');
+			
+			$top_menu_items = $this->config->item(TYPE['TOP_MENU'][$user_type]);
+		}
 	?>
 	
 </head>
@@ -41,9 +48,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				<a class="navbar-brand" href="<?=site_url('')?>"><?=COMPANY_NAME?></a>
 			</div>
 			<ul class="nav navbar-nav">
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/followed_tenant')?>">Tenant</a></li> <?php } ?>
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/favorite_item')?>">Favorit</a></li> <?php } ?>
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('reward')?>">Reward</a></li> <?php } ?>
+				<?php if ($is_logged_in) { foreach ($top_menu_items['left'] as $menu_item) { ?> <li><a href="<?=site_url($menu_item['url'])?>"><?=$menu_item['text']?></a></li> <?php } } ?>
 			</ul>
 			<form action="<?=site_url('item/search')?>" method="get" class="navbar-form navbar-left">
 				<div class="input-group">
@@ -60,10 +65,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 									 else { ?><a href="<?=site_url('login/logout')?>" class="btn btn-default">Logout</a> <?php } ?>
 			</form>
 			<ul class="nav navbar-nav navbar-right">
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/cart')?>">Cart</a></li> <?php } ?>
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('billing')?>">Billing</a></li> <?php } ?>
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('message')?>">Inbox</a></li> <?php } ?>
-				<?php if ($is_logged_in) { ?><li><a href="<?=site_url('customer/profile')?>">Profile</a></li> <?php } ?>
+				<?php if ($is_logged_in) { foreach ($top_menu_items['right'] as $menu_item) { ?> <li><a href="<?=site_url($menu_item['url'])?>"><?=$menu_item['text']?></a></li> <?php } } ?>
 			</ul>
 		</div>
 	</nav>
