@@ -26,10 +26,6 @@
 							<input type="radio" name="item_type" name="type_repair" value="REPAIR" <?= set_value('item_type')=="REPAIR"? "selected='selected'":"" ?>/>
 							Servis
 						</label>
-						<label class="control-label">
-							<input type="radio" name="item_type" name="type_bid" value="BID" <?= set_value('item_type')=="BID"? "selected='selected'":"" ?>>
-							Lelang
-						</label>
 					</div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
 				</div>

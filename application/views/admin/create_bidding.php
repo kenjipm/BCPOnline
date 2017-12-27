@@ -42,12 +42,6 @@
 		<div class="panel-body">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="id">ID bidding:</label>
-					<div class="col-xs-2">
-						<input type="text" value="<?=$model->biddings->bidding_id?>" class="form-control" id="id" readonly>
-					</div>
-				</div>
-				<div class="form-group">
 					<label class="control-label col-xs-2" for="brand">Brand:</label>
 					<div class="col-xs-4">
 						<select class="form-control" name="brand">

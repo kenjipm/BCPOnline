@@ -79,7 +79,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">
-						<button type="button" class="btn btn-default">Ya</button>
+						<button type="button" class="btn btn-default" onclick="verify_account(<?=$model->account->id?>)">Ya</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_verify')">Batal</button>
 					</div>
 				</div>
