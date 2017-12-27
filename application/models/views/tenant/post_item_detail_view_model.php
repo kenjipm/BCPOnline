@@ -3,12 +3,13 @@
 class Post_Item_Detail_View_Model extends CI_Model{
 	
 	public $posted_item;
+	public $nego_price;
 	// constructor
 	public function __construct()
 	{	
 	}
 	
-	public function get($item, $posted_item_variances)
+	public function get($item, $posted_item_variances, $negotiated_prices)
 	{
 		$this->posted_item = new class{};
 		$this->load->library('Text_renderer');
@@ -34,6 +35,15 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$this->posted_item->image_two_name[$i] 		= $posted_item_variance->image_two_name;
 			$this->posted_item->image_three_name[$i] 	= $posted_item_variance->image_three_name;
 			$this->posted_item->image_four_name[$i] 	= $posted_item_variance->image_four_name;
+			
+			$i++;
+		}
+		
+		$i = 0;
+		foreach($negotiated_prices as $negotiated_price)
+		{
+			$this->nego_price->customer[$i] 			= $negotiated_price->account->email;
+			$this->nego_price->discounted_price[$i]		= $negotiated_price->discounted_price;
 			
 			$i++;
 		}

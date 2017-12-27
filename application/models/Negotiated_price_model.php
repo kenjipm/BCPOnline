@@ -86,6 +86,7 @@ class Negotiated_price_model extends CI_Model {
 		$stub->customer_id		= $db_item->customer_id;
 		
 		$stub->account->email	= $db_item->email?? "";
+		$stub->account->name	= $db_item->name?? "";
 		
 		return $stub;
 	}
@@ -118,6 +119,19 @@ class Negotiated_price_model extends CI_Model {
 	public function get_all()
 	{
 		$this->db->where('tenant_id', $this->session->child_id);
+		
+		$this->db->join('customer', 'customer.id=' . $this->table_nego . '.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		
+		$query = $this->db->get($this->table_nego);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_by_item_id($item_id)
+	{
+		$this->db->where('posted_item_id', $item_id);
 		
 		$this->db->join('customer', 'customer.id=' . $this->table_nego . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');

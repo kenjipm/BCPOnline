@@ -86,10 +86,12 @@ class Item extends CI_Controller {
 		// Load Body
 		$this->load->model('Item_model');
 		$this->load->model('Posted_item_variance_model');
+		$this->load->model('Negotiated_price_model');
 		$item = $this->Item_model->get_from_id($id);
 		$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+		$negotiated_price = $this->Negotiated_price_model->get_by_item_id($id);
 		$this->load->model('views/tenant/post_item_detail_view_model');
-		$this->post_item_detail_view_model->get($item, $posted_item_variance);
+		$this->post_item_detail_view_model->get($item, $posted_item_variance, $negotiated_price);
 		$data['model'] = $this->post_item_detail_view_model;
 		
 		$this->load->view('tenant/post_item_detail', $data);
