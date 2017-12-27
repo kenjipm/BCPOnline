@@ -76,40 +76,127 @@
 	// $model->deliverers[2]->status = "Kosong";
 	
 ?>
+
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Customer</h3>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="customer_id">ID</label></th>
+							<th> <label for="customer_name">Nama</label></th>
+							<th> <label for="email">E-mail</label></th>
+							<th> <label for="date_joined">Tanggal Daftar</label></th>
+							<th> </th>
+							<th> </th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->customers as $customer)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$customer->customer_id?> </td>
+								<td>
+									<?=$customer->account_name?> </td>
+								<td>
+									<?=$customer->email?> </td>
+								<td>
+									<?=$customer->date_joined?> </td>
+								<td>
+									<a href="<?=site_url('account/account_detail/'.$customer->account_id)?>">
+										<button class="btn btn-default">Lihat</button>
+									</a>
+								</td>
+								<?php
+									if ($customer->status == "VERIFIED"){
+										$show_div_verify = false;
+									} else {
+										$show_div_verify = true;
+									}
+								?>
+								<td>
+									<div id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
+										<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+									</div>
+								</td>
+								<td>
+									<div id="block">
+										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+									</div>
+								</td>
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Daftar Tenant</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="tenant_id">ID</label>	</div>
-				<div class="col-xs-2"> <label for="tenant_name">Tenant</label> </div>
-				<div class="col-xs-3"> <label for="account_name">PIC</label> </div>
-				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
-				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th><label for="tenant_id">ID</label></th>
+							<th><label for="tenant_name">Tenant</label></th>
+							<th><label for="account_name">PIC</label></th>
+							<th><label for="email">E-mail</label></th>
+							<th><label for="date_joined">Tanggal Daftar</label></th>
+							<th> </th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->tenants as $tenant)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$tenant->tenant_id?> </td>
+								<td>
+									<?=$tenant->tenant_name?> </td>
+								<td>
+									<?=$tenant->account_name?> </td>
+								<td>
+									<?=$tenant->email?> </td>
+								<td>
+									<?=$tenant->date_joined?> </td>
+								<td>
+									<a href="<?=site_url('account/account_detail/'.$tenant->account_id)?>">
+										<button class="btn btn-default">Lihat</button>
+									</a>
+								</td>
+								<td>
+									<div id="block">
+										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+									</div>
+								</td>
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
-			<?php
-			foreach($model->tenants as $tenant)
-			{
-				?>
-				<div class="row list-group">
-					<a href="<?=site_url('account/account_detail/'.$tenant->id)?>">
-						<div class="col-xs-2 list-group-item">
-							<?=$tenant->tenant_id?> </div>
-						<div class="col-xs-2 list-group-item">
-							<?=$tenant->tenant_name?> </div>
-						<div class="col-xs-3 list-group-item">
-							<?=$tenant->account_name?> </div>
-						<div class="col-xs-3 list-group-item">
-							<?=$tenant->email?> </div>
-						<div class="col-xs-2 list-group-item">
-							<?=$tenant->date_joined?> </div>
-					</a>
-				</div>
-				<?php
-			}
-			?>
+			
 			<a class="btn btn-default" href="<?=site_url('account/create_tenant')?>">
 				Buat Akun
 			</a>	
@@ -120,84 +207,52 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Daftar Customer</h3>
-		</div>
-		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="customer_id">ID</label>	</div>
-				<div class="col-xs-2"> <label for="customer_name">Nama</label> </div>
-				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
-				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
-			</div>
-			<?php
-			foreach($model->customers as $customer)
-			{
-				?>
-				<div class="row list-group">
-				<a href="<?=site_url('account/account_detail/'.$customer->id)?>">
-					<div class="col-xs-2 list-group-item">
-						<?=$customer->customer_id?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$customer->account_name?> </div>
-					<div class="col-xs-3 list-group-item">
-						<?=$customer->email?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$customer->date_joined?> </div>
-					</a>
-					<?php
-						if ($customer->status == "VERIFIED"){
-							$show_div_verify = false;
-						} else {
-							$show_div_verify = true;
-						}
-					?>
-					<div class="col-xs-3">
-						<div class="col-xs-6" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
-							<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
-						</div>
-						<div class="col-xs-6" id="block">
-							<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-						</div>
-					</div>
-				</div>	
-				<?php
-			}
-			?>
-		</div>
-	</div>
-</div>
-
-<div class="col-sm-10 col-sm-offset-1">
-	<div class="panel panel-default">
-		<div class="panel-heading">
 			<h3>Daftar Deliverer</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="deliverer_id">ID</label>	</div>
-				<div class="col-xs-2"> <label for="deliverer_name">Nama</label> </div>
-				<div class="col-xs-3"> <label for="email">E-mail</label> </div>
-				<div class="col-xs-2"> <label for="date_joined">Tanggal Daftar</label>	</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="deliverer_id">ID</label></th>
+							<th> <label for="deliverer_name">Nama</label></th>
+							<th> <label for="email">E-mail</label></th>
+							<th> <label for="date_joined">Tanggal Daftar</label></th>
+							<th> </th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->deliverers as $deliverer)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$deliverer->deliverer_id?> </td>
+								<td>
+									<?=$deliverer->account_name?> </td>
+								<td>
+									<?=$deliverer->email?> </td>
+								<td>
+									<?=$deliverer->date_joined?> </td>
+								<td>
+									<a href="<?=site_url('account/account_detail/'.$deliverer->account_id)?>">
+										<button class="btn btn-default">Lihat</button>
+									</a>
+								</td>
+								<td>
+									<div id="block">
+										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
+									</div>
+								</td>
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
-			<?php
-			foreach($model->deliverers as $deliverer)
-			{
-				?>
-				<a href="<?=site_url('account/account_detail/'.$deliverer->id)?>">
-				<div class="row list-group">
-					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->deliverer_id?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->account_name?> </div>
-					<div class="col-xs-3 list-group-item">
-						<?=$deliverer->email?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$deliverer->date_joined?> </div>
-				</div>
-				</a>
-				<?php
-			}
-			?>
 			<a class="btn btn-default" href="<?=site_url('account/create_deliverer')?>">
 				Buat Akun
 			</a>	
@@ -243,7 +298,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">
-						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default">Ya</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_block')">Batal</button>
 					</div>
 				</div>
