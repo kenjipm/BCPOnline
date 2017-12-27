@@ -257,7 +257,7 @@ class Order_details_model extends CI_Model {
 		$this->db->select('*, deliverer.id AS id');
 		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
 		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
-		$this->db->where_not_in('deliverer.id', $this->table_order_details. '.deliverer_id');
+		$this->db->where('deliverer.id !=', $this->table_order_details. '.deliverer_id');
 		
 		$query = $this->db->get('deliverer');
 		$items = $query->result();

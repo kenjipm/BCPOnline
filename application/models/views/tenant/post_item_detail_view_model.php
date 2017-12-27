@@ -43,7 +43,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		foreach($negotiated_prices as $negotiated_price)
 		{
 			$this->nego_price->customer[$i] 			= $negotiated_price->account->email;
-			$this->nego_price->discounted_price[$i]		= $negotiated_price->discounted_price;
+			$this->nego_price->discounted_price[$i]		= $this->text_renderer->to_rupiah($negotiated_price->discounted_price);
 			
 			$i++;
 		}

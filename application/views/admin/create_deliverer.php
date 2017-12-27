@@ -1,12 +1,3 @@
-<?php
-	// Model untuk Deliverer
-	
-	// dummy Deliverer id
-	$model->deliverers = new class{};
-	
-	$model->deliverers->deliverer_id = "17120455501"
-?>
-
 
 <div class="col-sm-8 col-sm-offset-2">
 	<div class="panel panel-default">
