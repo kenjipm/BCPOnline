@@ -22,7 +22,8 @@ class Deliverer_model extends CI_Model {
 		$this->license_plate	= "";
 		$this->vehicle_desc		= "";
 		
-		$this->account			= $this->load->model('Account_model');
+		$this->load->model('Account_model');
+		$this->account = new Account_model();
 	}
 	
 	// constructor from database object
@@ -69,6 +70,7 @@ class Deliverer_model extends CI_Model {
 		$stub->vehicle_desc		= $db_item->vehicle_desc;
 		
 		$stub->account				= $this->load->model('Account_model');
+		$stub->account->id			= $db_item->id;
 		$stub->account->name		= $db_item->name;
 		$stub->account->email		= $db_item->email;
 		$stub->account->status		= $db_item->status;

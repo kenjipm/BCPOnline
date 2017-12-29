@@ -29,7 +29,8 @@ class Tenant_model extends CI_Model {
 		$this->selling_category	= "";
 		$this->is_open			= "";
 		
-		$this->account			= $this->load->model('Account_model');
+		$this->load->model('Account_model');
+		$this->account = new Account_model();
 	}
 	
 	// constructor from database object
@@ -83,6 +84,7 @@ class Tenant_model extends CI_Model {
 		$stub->selling_category	= $db_item->selling_category;
 		$stub->is_open			= $db_item->is_open;
 		
+		$stub->account->id			= $db_item->id;
 		$stub->account->name		= $db_item->name ?? "";
 		$stub->account->email		= $db_item->email ?? "";
 		$stub->account->status		= $db_item->status ?? "";

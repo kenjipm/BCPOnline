@@ -88,6 +88,25 @@
 				?>
 				
 				<h4>Daftar Diskon Customer</h4>
+				
+				<?php
+				$i = 0;
+				foreach ($model->nego_price->customer as $nego_price)
+				{
+				?>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Email Customer:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->nego_price->customer[$i]?>" readonly/></div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-xs-3">Harga Diskon:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->nego_price->discounted_price[$i]?>" readonly/></div>
+					</div>
+					<?php
+					$i++;
+				}
+				?>
+				
 				<div id="add_customer" style="display:none">
 					<div class="form-group">
 						<label class="control-label col-xs-3">Email Customer:</label>

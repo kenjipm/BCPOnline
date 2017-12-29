@@ -77,6 +77,26 @@ class Account extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function account_detail($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Account_model');
+		$account = $this->Account_model->get_from_id($id);
+		$this->load->model('views/admin/account_detail_view_model');
+		$this->account_detail_view_model->get($account);
+		$data['model'] = $this->account_detail_view_model;
+		
+		$this->load->view('admin/account_detail', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function create_tenant()
 	{
 		// Load Header
