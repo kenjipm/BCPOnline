@@ -163,8 +163,8 @@ class Customer extends CI_Controller {
 			
 			// if (count($data['error']) == 0)
 			// {
-				// $this->load->model('Account_model');
-				// $this->Account_model->update_from_post(TYPE['name']['CUSTOMER'], $file_path);
+				$this->load->model('Account_model');
+				$this->Account_model->update_from_post();
 				
 				redirect('customer/profile');
 			// }

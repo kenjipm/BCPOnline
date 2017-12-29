@@ -7,8 +7,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |--------------------------------------------------------------------------
 */
 
-defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.jpg');
-defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/profpic.jpg');
+defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.png');
+defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/idpic.png');
 
 defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 		'name' => array(
@@ -182,8 +182,8 @@ defined('TYPE') OR define('TYPE', array(
 | Application Production
 |--------------------------------------------------------------------------
 */
-defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Bekasi Cyber Park Online');
-defined('INVOICE_DUE') OR define('INVOICE_DUE', '5'); // hari lamanya invoice jatuh tempo
+defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberia');
+defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
 
 /*
 |--------------------------------------------------------------------------

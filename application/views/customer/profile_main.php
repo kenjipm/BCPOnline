@@ -12,7 +12,7 @@
 					<div class="col-xs-3">
 					
 						<label for="profile_pic">
-							<div id="thumbnail-profile_pic" class="thumbnail">
+							<div id="thumbnail-profile_pic" class="thumbnail thumbnail-hover">
 								<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
 							</div>
 						</label>
@@ -58,7 +58,7 @@
 					<div class="col-xs-3">
 					
 						<label for="identification_pic">
-							<div id="thumbnail-identification_pic" class="thumbnail">
+							<div id="thumbnail-identification_pic" class="thumbnail thumbnail-hover">
 								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
 							</div>
 						</label>

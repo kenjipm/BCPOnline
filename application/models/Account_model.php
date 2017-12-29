@@ -229,7 +229,7 @@ class Account_model extends CI_Model {
 	}
 	
 	// insert new account from form post
-	public function update_from_post($type, $file_path)
+	public function update_from_post()
 	{
 		$this->get_from_id($this->input->post('id')); // init diri sendiri dulu (biar kolom laen ga pada keubah)
 		
@@ -238,10 +238,10 @@ class Account_model extends CI_Model {
 		$this->date_of_birth		= $this->input->post('date_of_birth');
 		$this->phone_number			= $this->input->post('phone_number');
 		$this->identification_no	= $this->input->post('identification_no');
-		$this->identification_pic	= $file_path['identification_pic'] ?? "";
-		$this->profile_pic			= $file_path['profile_pic'] ?? "";
+		// $this->identification_pic	= $file_path['identification_pic'] ?? "";
+		// $this->profile_pic			= $file_path['profile_pic'] ?? "";
 		$this->email				= $this->input->post('email');
-		$this->password				= md5($this->input->post('password'));
+		//$this->password				= md5($this->input->post('password'));
 		
 		// update data
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
