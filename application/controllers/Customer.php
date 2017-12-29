@@ -35,7 +35,7 @@ class Customer extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('simpleUpload', 'customer/profile_main');
+        $data_header['js_list'] = array('simpleUpload');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -251,7 +251,7 @@ class Customer extends CI_Controller {
 			}
 			if (!$this->upload->do_upload('profile_pic'))
 			{
-				$data['error'] = $this->upload->display_errors();
+				$data['error'] = $this->upload->display_errors('', '');
 			}
 			else $file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
 		}
@@ -262,13 +262,13 @@ class Customer extends CI_Controller {
 			$this->Account_model->update_profile_pic($this->session->id, $file_path['profile_pic']);
 			
 			$data['image_url'] = site_url($file_path['profile_pic']);
-			
-			header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-			header("Cache-Control: post-check=0, pre-check=0", false);
-			header("Pragma: no-cache");
-			header("Content-Type: application/json; charset=utf-8");
-			echo json_encode($data);
 		}
+			
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($data);
 	}
 	
 	public function upload_idpic()
@@ -288,7 +288,7 @@ class Customer extends CI_Controller {
 			}
 			if (!$this->upload->do_upload('identification_pic'))
 			{
-				$data['error'] = $this->upload->display_errors();
+				$data['error'] = $this->upload->display_errors('', '');
 			}
 			else $file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
 		}
@@ -299,13 +299,13 @@ class Customer extends CI_Controller {
 			$this->Account_model->update_identification_pic($this->session->id, $file_path['identification_pic']);
 			
 			$data['image_url'] = site_url($file_path['identification_pic']);
-			
-			header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
-			header("Cache-Control: post-check=0, pre-check=0", false);
-			header("Pragma: no-cache");
-			header("Content-Type: application/json; charset=utf-8");
-			echo json_encode($data);
 		}
+			
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($data);
 	}
 	
 	public function load_googlemaps()

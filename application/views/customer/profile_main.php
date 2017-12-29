@@ -16,13 +16,8 @@
 								<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
 							</div>
 						</label>
-						<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" style="display:none"/>
+						<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
 						
-						<!--div class="thumbnail">
-							<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
-						</div>
-						<input type="file" id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" class="form-control" style="display:none">
-						<label for="profile_pic" class="btn btn-default">Ubah Foto Profil</label-->
 					</div>
 				</div>
 				<div class="form-group">
@@ -62,7 +57,7 @@
 								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
 							</div>
 						</label>
-						<input id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" data-url="<?=site_url('customer/upload_idpic')?>" type="file" style="display:none"/>
+						<input id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" data-url="<?=site_url('customer/upload_idpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
 						
 						<!--div class="thumbnail">
 							<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
