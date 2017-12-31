@@ -115,24 +115,43 @@
 				<h3>Daftar Transaksi</h3>
 			</div>
 			<div class="panel-body">
-				<?php
-				foreach($model->posted_items as $posted_item)
-				{
-					?>
-					<div class="col-xs-4">
-						<div class="thumbnail">
-							<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
-								<img src="<?=site_url('img/favicon.gif')?>" alt="Image" style="width:50%">
-								<div class="caption text-center">
-									<p><?=$posted_item->posted_item_name?></p>
-									<p><?=$posted_item->price?></p>
-								</div>
-							</a>
-						</div>
-					</div>
-					<?php
-				}
-				?>
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<tr>
+								<th> <label for="tanggal1">Dibuat</label>	</th>
+								<th> <label for="tanggal2">Lunas</label> </th>
+								<th> <label for="status">Status</label> </th>
+								<th> <label for="total_payable">Total Harga</label> </th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody>
+							<?php
+							foreach($model->orders as $order)
+							{
+								?>
+								<tr>
+									<td>
+										<?=$order->date_created?> </td>
+									<td>
+										<?=$order->date_closed?> </td>
+									<td>
+										<?=$order->order_status?> </td>
+									<td>
+										<?=$order->sold_price?> </td>
+									<td>
+										<a href="<?=site_url('billing/detail/'.$order->id)?>">
+											<button class="btn btn-default">Lihat</button>
+										</a>
+									</td>
+								</tr>
+								<?php
+							}
+							?>
+						</tbody>
+					</table>
+				</div>
 			</div>
 		</div>
 		
