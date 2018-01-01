@@ -8,6 +8,7 @@ class Billing_model extends CI_Model {
 	// table attribute
 	public $id;
 	public $bill_id;
+	public $delivery_method;
 	public $date_created;
 	public $date_closed;
 	public $total_payable;
@@ -28,6 +29,7 @@ class Billing_model extends CI_Model {
 		
 		$this->id					= 0;
 		$this->bill_id				= "";
+		$this->delivery_method		= "";
 		$this->date_created			= date("Y-m-d H:i:s");
 		$this->date_closed			= date("Y-m-d H:i:s", strtotime("+".INVOICE_DUE." days"));
 		$this->total_payable		= 0;
@@ -51,6 +53,7 @@ class Billing_model extends CI_Model {
 	{
 		$this->id					= $db_item->id;
 		$this->bill_id				= $db_item->bill_id;
+		$this->delivery_method		= $db_item->delivery_method;
 		$this->date_created			= $db_item->date_created;
 		$this->date_closed			= $db_item->date_closed;
 		$this->total_payable		= $db_item->total_payable;
@@ -77,6 +80,7 @@ class Billing_model extends CI_Model {
 		
 		$db_item->id					= $this->id;
 		$db_item->bill_id				= $this->bill_id;
+		$db_item->delivery_method		= $this->delivery_method;
 		$db_item->date_created			= $this->date_created;
 		$db_item->date_closed			= $this->date_closed;
 		$db_item->total_payable			= $this->total_payable;
@@ -94,6 +98,7 @@ class Billing_model extends CI_Model {
 		
 		$stub->id					= $db_item->id;
 		$stub->bill_id				= $db_item->bill_id;
+		$stub->delivery_method		= $db_item->delivery_method;
 		$stub->date_created			= $db_item->date_created;
 		$stub->date_closed			= $db_item->date_closed;
 		$stub->total_payable		= $db_item->total_payable;

@@ -123,6 +123,11 @@
 						</div>
 					</div>
 					<div class="form-group">
+						<label class="control-label col-xs-3" for="delivery_method">Kurir:</label>
+						<div class="col-xs-3"><input type="text" class="form-control" id="delivery_method" 
+							value="<?=$model->billing->delivery_method?>" readonly></div>
+					</div>
+					<div class="form-group">
 						<label class="control-label col-xs-3" for="shipping_charge">Ongkos Kirim:</label>
 						<div class="col-xs-3"><input type="text" class="form-control" id="shipping_charge" 
 							value="<?=$model->billing->shipping_charge?>" readonly></div>

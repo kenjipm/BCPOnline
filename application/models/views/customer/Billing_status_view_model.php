@@ -19,8 +19,11 @@ class Billing_status_view_model extends CI_Model {
 	public function get($billing, $payments, $orders)
 	{
 		$this->load->library('text_renderer');
+		$this->load->config('delivery_method');
+		$cur_delivery_config = $this->config->item($billing->delivery_method);
 		
 		$this->billing->id				= $billing->id;
+		$this->billing->delivery_method	= $cur_delivery_config['description'];
 		$this->billing->date_created	= $billing->date_created;
 		$this->billing->date_closed		= $billing->date_closed;
 		$this->billing->total_payable	= $billing->total_payable;
@@ -38,7 +41,7 @@ class Billing_status_view_model extends CI_Model {
 			
 			$temp_payment->id							= $payment->id;
 			// $temp_payment->paid							= true;
-			$temp_payment->payment_method				= $payment->payment_method;
+			$temp_payment->payment_method				= $cur_payment_config['description'];
 			$temp_payment->payment_method_description	= $cur_payment_config['long_description'];
 			$temp_payment->payment_date					= $payment->payment_date;
 			$temp_payment->paid_amount					= $this->text_renderer->to_rupiah($payment->paid_amount);

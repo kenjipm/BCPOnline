@@ -208,6 +208,7 @@ class Billing extends CI_Controller {
 			
 			$this->load->model('billing_model');
 			$billing = $this->billing_model;
+			$billing->delivery_method		= $this->input->post('delivery_method');
 			$billing->date_created			= $this->input->post('date_created');
 			$billing->date_closed			= $this->input->post('date_closed');
 			$billing->customer_id			= $this->input->post('customer_id');

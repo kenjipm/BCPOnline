@@ -5,6 +5,7 @@ class Billing_view_model extends CI_Model {
 	public $billing;
 	public $orders;
 	public $payment_methods;
+	public $delivery_methods;
 	
 	// private $billing_class;
 	// private $order_class;
@@ -103,9 +104,23 @@ class Billing_view_model extends CI_Model {
 			$temp_payment_method = new class{};
 			$temp_payment_method->name = $cur_payment_method['name'];
 			$temp_payment_method->description = $cur_payment_method['description'];
-			$temp_payment_method->selected = count($this->payment_methods) == 0;
+			$temp_payment_method->selected = count($this->payment_methods) == 0; // select elemen pertama dulu aja
 			
 			$this->payment_methods[] = $temp_payment_method;
+		}
+		
+		$this->load->config('delivery_method');
+		$delivery_method_list = $this->config->item('delivery_methods');
+		foreach ($delivery_method_list as $delivery_method_name)
+		{
+			$cur_delivery_method = $this->config->item($delivery_method_name);
+			
+			$temp_delivery_method = new class{};
+			$temp_delivery_method->name = $cur_delivery_method['name'];
+			$temp_delivery_method->description = $cur_delivery_method['description'];
+			$temp_delivery_method->selected = count($this->delivery_methods) == 0; // select elemen pertama dulu aja
+			
+			$this->delivery_methods[] = $temp_delivery_method;
 		}
 	}
 }

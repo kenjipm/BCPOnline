@@ -144,6 +144,28 @@
 					if ($div_row_opened) { ?> </div> <?php }
 				?>
 				<hr/>
+				<h3>Pengiriman</h3>
+				<?php
+					$i = 0; $div_row_opened = false;
+					foreach ($model->delivery_methods as $delivery_method)
+					{
+						if ($i % 3 == 0) { ?> <div class="row"> <?php $div_row_opened = true; } 
+						?>
+						<div class="col-md-4">
+							<div class="panel panel-default">
+								<div class="panel-body hoverdiv hoverdiv-white" onclick="select_delivery_method('<?=$delivery_method->name?>')">
+									<input type="radio" name="delivery_method" id="delivery_method-<?=$delivery_method->name?>" value="<?=$delivery_method->name ?>" <?=$delivery_method->selected?"checked=\"checked\"":""?>/>
+									<label><?=$delivery_method->description?></label>
+								</div>
+							</div>
+						</div>
+						<?php
+						if ($i % 3 == 2) { ?> </div> <?php $div_row_opened = false; }
+						$i++;
+					}
+					if ($div_row_opened) { ?> </div> <?php }
+				?>
+				<hr/>
 				<input type="hidden" name="date_created" value="<?=$model->billing->date_created?>"/>
 				<input type="hidden" name="date_closed" value="<?=$model->billing->date_closed?>"/>
 				<input type="hidden" name="customer_id" value="<?=$model->billing->customer_id?>"/>
