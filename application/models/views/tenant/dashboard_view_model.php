@@ -4,6 +4,7 @@ class Dashboard_View_Model extends CI_Model{
 	
 	public $tenant;
 	public $posted_items;
+	public $orders;
 	// constructor
 	public function __construct()
 	{	
@@ -36,6 +37,25 @@ class Dashboard_View_Model extends CI_Model{
 			$this->posted_items[$i]->posted_item_name 	= $item->posted_item_name;
 			$this->posted_items[$i]->item_type 			= $item->item_type;
 			$this->posted_items[$i]->price				= $this->text_renderer->to_rupiah($item->price);
+			
+			$i++;
+		}
+		
+	}
+	
+	public function get_transaction($items)
+	{
+		$this->load->library('Text_renderer');
+		$i = 0;
+		foreach($items as $item)
+		{
+			$this->orders[$i] = new class{};
+			
+			$this->orders[$i]->id 			= $item->id;
+			$this->orders[$i]->order_status	= ORDER_STATUS['description'][$item->order_status];
+			$this->orders[$i]->date_created	= date("d-M-Y H:i:s", strtotime($item->billing->date_created));
+			$this->orders[$i]->date_closed	= date("d-M-Y H:i:s", strtotime($item->billing->date_closed));
+			$this->orders[$i]->sold_price	= $this->text_renderer->to_rupiah($item->sold_price);
 			
 			$i++;
 		}
