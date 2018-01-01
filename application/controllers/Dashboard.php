@@ -17,7 +17,19 @@ class Dashboard extends CI_Controller {
 		}
 		else if ($this->session->type == TYPE['name']['ADMIN'])
 		{
-			redirect('account/account_list');
+			$this->load->model('category_model');
+			$categories = $this->category_model->get_all();
+			
+			$this->load->model('brand_model');
+			$brands = $this->brand_model->get_all();
+			
+			$this->load->model('hot_item_model');
+			$hot_items = $this->hot_item_model->get_all(6);
+			
+			$this->load->model('views/admin/dashboard_view_model');
+			$this->dashboard_view_model->get($categories, $brands, $hot_items);
+			$data['model'] = $this->dashboard_view_model;
+			$this->load->view('admin/dashboard_main', $data);
 		}
 		else
 		{
