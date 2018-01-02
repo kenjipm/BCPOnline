@@ -16,11 +16,13 @@ class Tenant extends CI_Controller {
 		$this->load->model('Order_details_model');
 		$tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		$items = $this->Item_model->get_all();
+		$sold_items = $this->Order_details_model->get_all_sold_item();
 		$orders = $this->Order_details_model->get_all_from_tenant_id();
 		$this->load->model('views/tenant/dashboard_view_model');
 		$this->dashboard_view_model->get_posted_item($items);
 		$this->dashboard_view_model->get_tenant($tenant);
 		$this->dashboard_view_model->get_transaction($orders);
+		$this->dashboard_view_model->get_sold_item($sold_items);
 		$data['model'] = $this->dashboard_view_model;
 		$this->load->view('tenant/dashboard_main', $data);
 		

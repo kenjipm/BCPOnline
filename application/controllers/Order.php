@@ -32,6 +32,12 @@ class Order extends CI_Controller {
 		
 		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
 		{
+			$this->load->model('Order_details_model');
+			$order = $this->Order_details_model->get_from_id($id);
+			$this->load->model('views/tenant/transaction_detail_view_model');
+			$this->transaction_detail_view_model->get($order);
+			$data['model'] = $this->transaction_detail_view_model;
+			
 			$this->load->view('tenant/transaction_detail', $data);
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])

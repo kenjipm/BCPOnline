@@ -70,7 +70,7 @@
 									<td>
 										<?=$item->sold_price?> </td>
 									<td>
-										<?=$item->posted_item_variance?> </td>
+										<?=$item->posted_item_variance->type: $item->posted_item_variance->description?> </td>
 									<td>
 										<a href="<?=site_url('billing/detail/'.$item->id)?>">
 											<button class="btn btn-default">Lihat</button>
