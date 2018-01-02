@@ -111,7 +111,7 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-12">
-						<label>Kode OTP untuk Pengambilan Barang:</label>
+						<label>Masukkan Kode OTP:</label>
 					</div>
 				</div>
 				<div class="form-group">

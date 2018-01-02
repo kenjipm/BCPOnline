@@ -33,7 +33,65 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3>Daftar Billing</h3>
+			<h3>Barang untuk Dikirim</h3>
+		</div>
+		<div class="panel-body">
+			<div class="col-sm-2">
+				<label>Masukkan OTP:</label>
+			</div>
+			<div class="col-sm-4">
+				<input type="text" class="form-control" id="otp"/>
+			</div>
+			<div class="col-sm-2">
+				<button class="btn btn-default" onclick="view_item(document.getElementById('otp').value)">Kirim</button>
+			</div>
+		</div>
+		<div class="panel-body" id="item_list" style="display:none">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="posted_item">Barang</label></th>
+							<th> <label for="sold_price">Harga</label></th>
+							<th> <label for="posted_item_variance">Keterangan</label> </th>
+							<th> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if($model->items)
+						{
+							foreach($model->items as $item)
+							{
+								?>
+								<tr>
+									<td>
+										<?=$item->posted_item_name?> </td>
+									<td>
+										<?=$item->sold_price?> </td>
+									<td>
+										<?=$item->posted_item_variance?> </td>
+									<td>
+										<a href="<?=site_url('billing/detail/'.$item->id)?>">
+											<button class="btn btn-default">Lihat</button>
+										</a>
+									</td>
+								</tr>
+								<?php
+							}
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Histori Transaksi</h3>
 		</div>
 		<div class="panel-body">
 			<div class="table-responsive">
@@ -49,25 +107,28 @@
 					</thead>
 					<tbody>
 						<?php
-						foreach($model->orders as $order)
+						if($model->orders)
 						{
-							?>
-							<tr>
-								<td>
-									<?=$order->date_created?> </td>
-								<td>
-									<?=$order->date_closed?> </td>
-								<td>
-									<?=$order->order_status?> </td>
-								<td>
-									<?=$order->sold_price?> </td>
-								<td>
-									<a href="<?=site_url('billing/detail/'.$order->id)?>">
-										<button class="btn btn-default">Lihat</button>
-									</a>
-								</td>
-							</tr>
-							<?php
+							foreach($model->orders as $order)
+							{
+								?>
+								<tr>
+									<td>
+										<?=$order->date_created?> </td>
+									<td>
+										<?=$order->date_closed?> </td>
+									<td>
+										<?=$order->order_status?> </td>
+									<td>
+										<?=$order->sold_price?> </td>
+									<td>
+										<a href="<?=site_url('billing/detail/'.$order->id)?>">
+											<button class="btn btn-default">Lihat</button>
+										</a>
+									</td>
+								</tr>
+								<?php
+							}
 						}
 						?>
 					</tbody>

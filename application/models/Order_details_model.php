@@ -220,7 +220,7 @@ class Order_details_model extends CI_Model {
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		
 		$where['posted_item.tenant_id'] = $cur_tenant->id;
-		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
+		$where['order_status'] = ORDER_STATUS['name']['RECEIVED'];
 		
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');

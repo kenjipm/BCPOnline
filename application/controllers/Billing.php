@@ -28,20 +28,20 @@ class Billing extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('tenant/billing_list');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
 		$data['model'] = new class{};
 		$data['title'] = "Daftar Billing";
 		
-		if ($this->session->type == TYPE['name']['TENANT']) // dummy? apa bisa ya
+		if ($this->session->type == TYPE['name']['TENANT'])
 		{
 			$this->load->model('Order_details_model');
-			$items = $this->Order_details_model->get_all_from_tenant_id();
+			$orders = $this->Order_details_model->get_all_from_tenant_id();
 			
 			$this->load->model('views/tenant/billing_list_view_model');
-			$this->billing_list_view_model->get($items);
+			$this->billing_list_view_model->get($orders);
 			
 			$data['model'] = $this->billing_list_view_model;
 			$this->load->view('tenant/billing_list', $data);

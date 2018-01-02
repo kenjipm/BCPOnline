@@ -58,7 +58,7 @@ class Order extends CI_Controller {
 		$data['title'] = "Daftar Order";
 		$data['model'] = new class{};
 		
-		if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
 			$this->load->model('Order_details_model');
 			$orders = $this->Order_details_model->get_all();
