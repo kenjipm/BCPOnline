@@ -54,6 +54,7 @@ class Order_details_model extends CI_Model {
 		$this->load->model('posted_item_variance_model');
 		$this->load->model('item_model');
 		$this->load->model('deliverer_model');
+		$this->load->model('tenant_model');
 		$this->load->model('account_model');
 		$this->load->model('shipping_address_model');
 		
@@ -146,6 +147,9 @@ class Order_details_model extends CI_Model {
 		$stub->deliverer->account		= new Account_model();
 		$stub->deliverer->account->name	= $db_item->name ?? "";
 		
+		$stub->tenant		= new Tenant_model();
+		$stub->tenant->name = $db_item->tenant_name ?? "";
+		
 		return $stub;
 	}
 	
@@ -228,17 +232,38 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
-	public function get_all_from_deliverer_id()
+	public function get_collection_task_from_deliverer_id()
 	{
-		$this->load->model('Tenant_model');
-		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
 		
-		$where['posted_item.tenant_id'] = $cur_tenant->id;
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
 		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
+		$this->db->group_by('collection_code');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
-		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_deliver_task_from_deliverer_id()
+	{
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
+		$where['order_status'] = ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'];
+		
+		$this->db->group_by('billing.shipping_address_id');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
+		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();

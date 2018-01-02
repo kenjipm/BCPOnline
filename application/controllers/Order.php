@@ -69,8 +69,16 @@ class Order extends CI_Controller {
 			
 			$this->load->view('admin/order_list', $data);
 		}
-		else
+		else // DELIVERER
 		{
+			$this->load->model('Order_details_model');
+			$orders = $this->Order_details_model->get_collection_task_from_deliverer_id();
+			$delivers = $this->Order_details_model->get_deliver_task_from_deliverer_id();
+			$this->load->model('views/deliverer/order_list_view_model');
+			$this->order_list_view_model->get_collection_task($orders);
+			$this->order_list_view_model->get_deliver_task($delivers);
+			$data['model'] = $this->order_list_view_model;
+			
 			$this->load->view('deliverer/order_list', $data);
 		}
 		
