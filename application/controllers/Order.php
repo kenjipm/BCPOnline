@@ -32,6 +32,12 @@ class Order extends CI_Controller {
 		
 		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
 		{
+			$this->load->model('Order_details_model');
+			$order = $this->Order_details_model->get_from_id($id);
+			$this->load->model('views/tenant/transaction_detail_view_model');
+			$this->transaction_detail_view_model->get($order);
+			$data['model'] = $this->transaction_detail_view_model;
+			
 			$this->load->view('tenant/transaction_detail', $data);
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
@@ -58,7 +64,7 @@ class Order extends CI_Controller {
 		$data['title'] = "Daftar Order";
 		$data['model'] = new class{};
 		
-		if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
 			$this->load->model('Order_details_model');
 			$orders = $this->Order_details_model->get_all();
@@ -69,8 +75,16 @@ class Order extends CI_Controller {
 			
 			$this->load->view('admin/order_list', $data);
 		}
-		else
+		else // DELIVERER
 		{
+			$this->load->model('Order_details_model');
+			$orders = $this->Order_details_model->get_collection_task_from_deliverer_id();
+			$delivers = $this->Order_details_model->get_deliver_task_from_deliverer_id();
+			$this->load->model('views/deliverer/order_list_view_model');
+			$this->order_list_view_model->get_collection_task($orders);
+			$this->order_list_view_model->get_deliver_task($delivers);
+			$data['model'] = $this->order_list_view_model;
+			
 			$this->load->view('deliverer/order_list', $data);
 		}
 		

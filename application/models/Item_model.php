@@ -3,6 +3,7 @@
 class Item_model extends CI_Model {
 	
 	private $table_item = 'posted_item';
+	private $table_item_variance = 'posted_item_variance';
 	private $table_category = 'category';
 	
 	// table attribute
@@ -28,6 +29,8 @@ class Item_model extends CI_Model {
 	public $category;
 	public $brand;
 	public $tenant;
+	public $order;
+	public $variance;
 	
 	// stub attribute
 	public $quantity_avalaible;
@@ -57,10 +60,14 @@ class Item_model extends CI_Model {
 		$this->load->model('Category_model');
 		$this->load->model('Brand_model');
 		$this->load->model('Tenant_model');
+		$this->load->model('Order_details_model');
+		$this->load->model('Posted_item_variance_model');
 		
 		$this->category					= new Category_model();
 		$this->brand					= new Brand_model();
 		$this->tenant					= new Tenant_model();
+		$this->order					= new Order_details_model();
+		$this->variance					= new Posted_item_variance_model();
 	}
 	
 	// constructor from database object
@@ -132,6 +139,9 @@ class Item_model extends CI_Model {
 		
 		$stub->category->category_name	= $db_item->category_name ?? "";
 		$stub->brand->brand_name		= $db_item->brand_name ?? "";
+		$stub->order->sold_price		= $db_item->sold_price ?? "";
+		$stub->variance->type			= $db_item->var_type ?? "";
+		$stub->variance->description	= $db_item->var_description ?? "";
 		
 		return $stub;
 	}
@@ -163,8 +173,6 @@ class Item_model extends CI_Model {
 	
 	public function get_all()
 	{
-		// $this->load->model('Tenant_model');
-		// $cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		$this->db->where('tenant_id', $this->session->child_id);
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();

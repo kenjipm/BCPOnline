@@ -25,6 +25,7 @@ class Order_details_model extends CI_Model {
 	// relation table
 	public $billing;
 	public $posted_item_variance;
+	public $feedback;
 	public $deliverer;
 	public $tnt_paid_receipt;
 	
@@ -54,11 +55,17 @@ class Order_details_model extends CI_Model {
 		$this->load->model('posted_item_variance_model');
 		$this->load->model('item_model');
 		$this->load->model('deliverer_model');
+		$this->load->model('tenant_model');
 		$this->load->model('account_model');
 		$this->load->model('shipping_address_model');
+		$this->load->model('feedback_model');
 		
-		$this->billing					= new Billing_model();
-		$this->posted_item_variance		= new Posted_item_variance_model();
+		$this->billing								= new Billing_model();
+		$this->deliverer							= new Deliverer_model();
+		$this->deliverer->account					= new Account_model();
+		$this->posted_item_variance					= new Posted_item_variance_model();
+		$this->posted_item_variance->posted_item	= new Item_model();
+		$this->feedback								= new Feedback_model();
 		// $this->deliverer				= $this->load->model('deliverer_model');
 		// $this->tnt_paid_receipt			= $this->load->model('tnt_paid_receipt_model');
 	}
@@ -133,6 +140,10 @@ class Order_details_model extends CI_Model {
 		$stub->tnt_paid_receipt_id		= $db_item->tnt_paid_receipt_id;
 		$stub->voucher_cut_price		= $db_item->voucher_cut_price;
 		
+		$stub->posted_item_variance						= new Posted_item_variance_model();
+		$stub->posted_item_variance->var_type			= $db_item->var_type ?? "";
+		$stub->posted_item_variance->var_description	= $db_item->var_description ?? "";
+		
 		$stub->posted_item_variance->posted_item					= new Item_model();
 		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		
@@ -141,10 +152,18 @@ class Order_details_model extends CI_Model {
 		
 		$stub->billing						= new Billing_model();
 		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
+		$stub->billing->date_created		= $db_item->date_created ?? "";
 		
 		$stub->deliverer				= new Deliverer_model();
 		$stub->deliverer->account		= new Account_model();
 		$stub->deliverer->account->name	= $db_item->name ?? "";
+		
+		$stub->tenant		= new Tenant_model();
+		$stub->tenant->name = $db_item->tenant_name ?? "";
+		
+		$stub->feedback					= new Feedback_model();
+		$stub->feedback->feedback_text 	= $db_item->feedback_text ?? "";
+		$stub->feedback->rating		 	= $db_item->rating ?? "";
 		
 		return $stub;
 	}
@@ -161,13 +180,19 @@ class Order_details_model extends CI_Model {
 	
 	public function get_from_id($id)
 	{
-		$where['id'] = $id;
+		$where['order_details.id'] = $id;
 		
 		$this->db->where($where);
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		$this->db->join('feedback', 'feedback.order_det_id='. $this->table_order_details . '.id', 'left');
+		$this->db->join('billing', 'billing.id='. $this->table_order_details . '.billing_id', 'left');
 		$query = $this->db->get($this->table_order_details, 1);
 		$item = $query->row();
 		
-		return ($reward !== null) ? $this->get_stub_from_db($item) : null;
+		return ($item !== null) ? $this->get_new_stub_from_db($item) : null;
 	}
 	
 	public function get_all()
@@ -216,7 +241,6 @@ class Order_details_model extends CI_Model {
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		
 		$where['posted_item.tenant_id'] = $cur_tenant->id;
-		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
@@ -228,17 +252,38 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
-	public function get_all_from_deliverer_id()
+	public function get_collection_task_from_deliverer_id()
 	{
-		$this->load->model('Tenant_model');
-		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
 		
-		$where['posted_item.tenant_id'] = $cur_tenant->id;
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
 		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
+		$this->db->group_by('collection_code');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
-		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_deliver_task_from_deliverer_id()
+	{
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
+		$where['order_status'] = ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'];
+		
+		$this->db->group_by('billing.shipping_address_id');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
+		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
@@ -289,6 +334,19 @@ class Order_details_model extends CI_Model {
 		$this->db->where('deliverer.id !=', $this->table_order_details. '.deliverer_id');
 		
 		$query = $this->db->get('deliverer');
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_all_sold_item()
+	{
+		$this->db->where('tenant_id', $this->session->child_id);
+		
+		$this->db->join('posted_item_variance', $this->table_order_details. '.posted_item_variance_id=posted_item_variance.id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : null;
