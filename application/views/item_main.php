@@ -57,6 +57,20 @@
 		</div>
 	</div>
 	
+	<div class="col-md-3">
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h4>Tenant</h4>
+			</div>
+			<div class="panel-body text-center">
+				<a href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
+					<?=$model->item->tenant->tenant_name?>
+				</a>
+				<button type="button" class="btn btn-default col-md-12 <?= $model->item->tenant->btn_class ?>" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
+			</div>
+		</div>
+	</div>
+	
 </div>
 
 <div id="popup_buy" class="popup popup-md">

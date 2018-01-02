@@ -24,6 +24,11 @@ class Item_model extends CI_Model {
 	public $tenant_id;
 	public $brand_id;
 	
+	// relation table
+	public $category;
+	public $brand;
+	public $tenant;
+	
 	// stub attribute
 	public $quantity_avalaible;
 	
@@ -49,8 +54,13 @@ class Item_model extends CI_Model {
 		
 		$this->quantity_avalaible		= "";
 		
-		$this->category					= $this->load->model('Category_model');
-		$this->brand					= $this->load->model('Brand_model');
+		$this->load->model('Category_model');
+		$this->load->model('Brand_model');
+		$this->load->model('Tenant_model');
+		
+		$this->category					= new Category_model();
+		$this->brand					= new Brand_model();
+		$this->tenant					= new Tenant_model();
 	}
 	
 	// constructor from database object
@@ -189,6 +199,17 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
+	public function get_all_from_tenant_id($tenant_id, $limit=99)
+	{
+		$this->db->where('tenant_id', $tenant_id);
+		$query = $this->db
+					  ->order_by('id', 'DESC')
+					  ->get($this->table_item, $limit);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
 	public function get_from_search($keywords)
 	{
 		$this->db->like('posted_item_name', $keywords);
@@ -254,6 +275,13 @@ class Item_model extends CI_Model {
 		
 		return $this->quantity_avalaible;
 	}
+	
+	public function init_tenant()
+	{
+		$this->tenant = $this->tenant->get_from_id($this->tenant_id);
+		return $this->tenant;
+	}
+	
 	/*
 	public function get_type()
 	{

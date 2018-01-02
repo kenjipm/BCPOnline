@@ -72,3 +72,5 @@ body {
 }
 
 .thumbnail.thumbnail-hover:hover { opacity: 0.8; }
+
+.btn-favorited { background-color: #FF4444 }

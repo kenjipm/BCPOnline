@@ -102,8 +102,16 @@ class Customer extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$id = $this->session->child_id;
+		
+		$this->load->model('following_tenant_model');
+		$followed_tenants = $this->following_tenant_model->get_all_from_customer_id($id);
+		
+		$this->load->model('views/customer/followed_tenant_view_model');
+		$this->followed_tenant_view_model->get($followed_tenants);
+		
 		$data['title'] = "Tenant Diikuti";
-		$data['model'] = new class{};
+		$data['model'] = $this->followed_tenant_view_model;
 		$this->load->view('customer/followed_tenant', $data);
 		
 		// Load Footer
@@ -306,6 +314,17 @@ class Customer extends CI_Controller {
 		header("Pragma: no-cache");
 		header("Content-Type: application/json; charset=utf-8");
 		echo json_encode($data);
+	}
+	
+	public function toggle_tenant_favorite()
+	{
+		$tenant_id = $this->input->post('tenant_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('following_tenant_model');
+		$result = $this->following_tenant_model->toggle_tenant_favorite($customer_id, $tenant_id);
+		
+		echo $result ? "1" : "0";
 	}
 	
 	public function load_googlemaps()

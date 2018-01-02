@@ -22,14 +22,17 @@ class Following_tenant_model extends CI_Model {
 		parent::__construct();
 		
 		$this->id					= 0;
-		$this->following_id			= 0;
+		$this->following_id			= "";
 		$this->tenant_id			= 0;
 		$this->customer_id			= 0;
 		$this->date_followed		= "";
 		$this->date_unfollowed		= "";
 		
-		$this->tenant				= $this->load->model('tenant_model');
-		$this->customer				= $this->load->model('customer_model');
+		$this->load->model('Tenant_model');
+		$this->load->model('Customer_model');
+		
+		$this->tenant				= new Tenant_model();
+		$this->customer				= new Customer_model();
 	}
 	
 	// constructor from database object
@@ -119,6 +122,79 @@ class Following_tenant_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
+	public function insert($customer_id, $tenant_id)
+	{
+		$this->customer_id		= $customer_id;
+		$this->tenant_id		= $tenant_id;
+		$this->date_followed	= date("Y-m-d");
+		
+		$item = $this->get_db_from_stub();
+		if ($this->db->insert($this->table_following_tenant, $item))
+		{
+			$this->id	= $this->db->insert_id();
+		
+			$this->update_natural_id();
+		}
+		
+		$this->update_natural_id();
+	}
+	
+	public function update_natural_id()
+	{
+		$this->load->library('id_generator');
+		$this->following_id = $this->id_generator->generate(TYPE['name']['FOLLOWING_TENANT'], $this->id);
+		
+		$this->db->trans_start();
+		
+		$this->db->set('following_id', $this->following_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_following_tenant);
+		
+		$this->db->trans_complete();
+	}
+	
+	public function is_following($customer_id, $tenant_id)
+	{
+		$where['customer_id'] = $customer_id;
+		$where['tenant_id'] = $tenant_id;
+		
+		$query = $this->db
+					  ->where($where)
+					  ->get($this->table_following_tenant, 1);
+					  
+		$item = $query->row();
+		return ($item != null) ? $item->id : false;
+	}
+	
+	public function toggle_tenant_favorite($customer_id, $tenant_id)
+	{
+		$id = $this->is_following($customer_id, $tenant_id);
+		
+		if ($id == null) // kalau ga ada, insert new
+		{
+			$this->insert($customer_id, $tenant_id);
+			return $this->id;
+		}
+		else // kalau ada, hapus
+		{
+			$this->db->where('id', $id);
+			$this->db->delete($this->table_following_tenant);
+			
+			return false;
+		}
+	}
+	
+	public function init_tenant()
+	{
+		$this->tenant = $this->tenant->get_from_id($this->tenant_id);
+		return $this->tenant;
+	}
+	
+	public function init_customer()
+	{
+		$this->customer = $this->customer->get_from_id($this->customer_id);
+		return $this->customer;
+	}
 }
 
 ?>

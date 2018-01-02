@@ -15,6 +15,9 @@ class Tenant_model extends CI_Model {
 	
 	public $account;
 	
+	// relation table
+	public $items;
+	
 	// constructor
 	public function __construct()
 	{
@@ -30,7 +33,9 @@ class Tenant_model extends CI_Model {
 		$this->is_open			= "";
 		
 		$this->load->model('Account_model');
+		// $this->load->model('Item_model');
 		$this->account = new Account_model();
+		// $this->items = new Item_model();
 	}
 	
 	// constructor from database object
@@ -104,19 +109,15 @@ class Tenant_model extends CI_Model {
 	}
 	
 	// get tenant detail
-	// public function get_from_id($id)
-	// {
-		// $where['posted_item.id'] = $id;
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant, 1);
+		$item = $query->row();
 		
-		// $this->db->select('*, ' . $this->table_item.'.id AS id');
-		// $this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
-		// $this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
-		// $this->db->where($where);
-		// $query = $this->db->get($this->table_item, 1);
-		// $item = $query->row();
-		
-		// return ($item !== null) ? $this->get_stub_from_db($item) : null;
-	// }
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
 	
 	public function get_all()
 	{
@@ -168,6 +169,21 @@ class Tenant_model extends CI_Model {
 				 ->update($this->table_tenant);
 		
 		$this->db->trans_complete();
+	}
+	
+	public function is_followed($customer_id)
+	{
+		if (!$customer_id) return null;
+		
+		$this->load->model('following_tenant_model');
+		$following_id = $this->following_tenant_model->is_following($customer_id, $this->id);
+		return $following_id;
+	}
+	
+	public function init_account()
+	{
+		$this->account = $this->account->get_from_id($this->account_id);
+		return $this->account;
 	}
 }
 
