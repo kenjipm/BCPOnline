@@ -55,7 +55,7 @@
 								<tr>
 									<td><?=$order->posted_item?></td>
 									<td><?=$order->address?></td>
-									<td><?=$order->address?></td>
+									<td><?=$order->collection_method?></td>
 									<td>
 										<select class="form-control" name="deliverer_id">
 										<?php

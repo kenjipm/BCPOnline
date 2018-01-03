@@ -30,28 +30,44 @@
 			<h3>Daftar Brand</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="brand_id">ID</label>	</div>
-				<div class="col-xs-2"> <label for="brand_name">Nama Brand</label> </div>
-				<div class="col-xs-8"> <label for="account_name">Deskripsi</label> </div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="brand_name">Nama</label></th>
+							<th> <label for="brand_description">Deskripsi</label></th>
+							<!--<th> </th>
+							<th> </th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->brands as $brand)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$brand->brand_name?> </td>
+								<td>
+									<?=$brand->brand_description?> </td>
+								<!-- <td>
+									<a href="<?=site_url('brand/update_brand/'.$brand->id)?>">
+										<button class="btn btn-default">Ubah</button>
+									</a>
+								</td>
+								<td>
+									<a href="<?=site_url('brand/delete_brand/'.$brand->id)?>">
+										<button class="btn btn-default">Hapus</button>
+									</a>
+								</td>
+								-->
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
-			<?php
-			foreach($model->brands as $brand)
-			{
-				?>
-				<div class="row list-group">
-					<a href="<?=site_url('Brand/brand_detail/'.$brand->id)?>">
-						<div class="col-xs-2 list-group-item">
-							<?=$brand->brand_id?> </div>
-						<div class="col-xs-2 list-group-item">
-							<?=$brand->brand_name?> </div>
-						<div class="col-xs-8 list-group-item">
-							<?=$brand->brand_description?> </div>
-					</a>
-				</div>
-				<?php
-			}
-			?>
 			<a class="btn btn-default" href="<?=site_url('Brand/create_brand')?>">
 				Buat Brand
 			</a>	

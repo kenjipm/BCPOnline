@@ -4,6 +4,7 @@ class Deliverer_model extends CI_Model {
 	
 	private $table_default = 'deliverer';
 	private $table_deliverer = 'deliverer';
+	private $table_order_details = 'order_details';
 	
 	public $id;
 	public $deliverer_id;
@@ -69,7 +70,7 @@ class Deliverer_model extends CI_Model {
 		$stub->license_plate	= $db_item->license_plate;
 		$stub->vehicle_desc		= $db_item->vehicle_desc;
 		
-		$stub->account				= $this->load->model('Account_model');
+		$stub->account				= new Account_model();
 		$stub->account->id			= $db_item->id;
 		$stub->account->name		= $db_item->name;
 		$stub->account->email		= $db_item->email;
@@ -121,6 +122,39 @@ class Deliverer_model extends CI_Model {
 		$query = $this->db->get($this->table_deliverer, 1);
 		
 		return $query->row();
+	}
+	
+	public function get_idle_deliverer()
+	{	
+		
+		$this->db->select('deliverer.id AS id');
+		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
+		$this->db->where($this->table_order_details. '.deliverer_id is NOT NULL');
+		$this->db->where($this->table_order_details. '.order_status', ORDER_STATUS['name']['PICKING_FROM_TENANT']); // Dummy
+		
+		$query = $this->db->get('deliverer');
+		$items = $query->result();
+		//print_r($items);
+		$deliverers = array();
+		
+		if ($items)
+		{
+			foreach($items as $item)
+			{
+				$deliverers[] = $item->id;
+			}
+		}
+		//print_r($deliverers);
+		
+		$this->db->select('*, deliverer.id AS id');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		if (count($deliverers) > 0)
+			$this->db->where_not_in('deliverer.id', $deliverers);
+		$query = $this->db->get('deliverer');
+		$items = $query->result();		
+		//print_r($items);
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	public function insert_from_account($account_id)

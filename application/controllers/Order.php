@@ -67,8 +67,11 @@ class Order extends CI_Controller {
 		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
 			$this->load->model('Order_details_model');
+			$this->load->model('Deliverer_model');
+			
 			$orders = $this->Order_details_model->get_all();
-			$deliverers = $this->Order_details_model->get_idle_deliverer();
+			$deliverers = $this->Deliverer_model->get_idle_deliverer();
+			
 			$this->load->model('views/admin/order_list_view_model');
 			$this->order_list_view_model->get($orders, $deliverers);
 			$data['model'] = $this->order_list_view_model;

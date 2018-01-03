@@ -197,23 +197,15 @@ class Order_details_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$this->db->select('id');
-		$query = $this->db->get('deliverer');
-		$deliverers = $query->result();
-		foreach($deliverers as $deliverer)
-		{
-			$deliverer_list[] = $deliverer->id;
-		}
+		$where[$this->table_order_details.'.order_status'] = ORDER_STATUS['name']['QUEUED'];
+		$where[$this->table_order_details.'.deliverer_id'] = null;
 		
 		$this->db->select('*, ' . $this->table_order_details.'.id AS id,' . $this->table_order_details.'.deliverer_id AS deliverer_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
 		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
-		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
-		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
-		// $this->db->where_not_in($this->table_order_details.'.deliverer_id', $deliverer_list. 'AND'. 'order_status', ORDER_STATUS['is_busy']);
-		$this->db->where_not_in($this->table_order_details.'.deliverer_id', $deliverer_list);
+		$this->db->where($where);
 		
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
@@ -242,6 +234,27 @@ class Order_details_model extends CI_Model {
 		
 		$where['posted_item.tenant_id'] = $cur_tenant->id;
 		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_all_from_collection_code($otp)
+	{
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['posted_item.tenant_id'] = $cur_tenant->id;
+		$where[$this->table_order_details. '.collection_code'] = $otp;
+		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
+		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
@@ -324,19 +337,6 @@ class Order_details_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete();
-	}
-	
-	public function get_idle_deliverer()
-	{		
-		$this->db->select('*, deliverer.id AS id');
-		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
-		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
-		$this->db->where('deliverer.id !=', $this->table_order_details. '.deliverer_id');
-		
-		$query = $this->db->get('deliverer');
-		$items = $query->result();
-		
-		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	public function get_all_sold_item()

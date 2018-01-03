@@ -141,7 +141,7 @@
 									<td>
 										<?=$order->sold_price?> </td>
 									<td>
-										<a href="<?=site_url('billing/detail/'.$order->id)?>">
+										<a href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 											<button class="btn btn-default">Lihat</button>
 										</a>
 									</td>
@@ -211,11 +211,6 @@
 										<?=$sold_item->sold_price?> </td>
 									<td>
 										<?=$sold_item->var_type .": ". $sold_item->var_description?> </td>
-									<td>
-										<a href="<?=site_url('order/transaction_detail/'.$sold_item->id)?>">
-											<button class="btn btn-default">Lihat</button>
-										</a>
-									</td>
 								</tr>
 								<?php
 							}

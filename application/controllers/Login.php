@@ -99,7 +99,7 @@ class Login extends CI_Controller {
 		}
 		else if ($type == TYPE['name']['ADMIN'])
 		{
-			redirect('admin');
+			redirect('dashboard');
 		}
 		else if ($type == TYPE['name']['DELIVERER'])
 		{

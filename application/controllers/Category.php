@@ -27,7 +27,12 @@ class Category extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Category_model');
+		$items = $this->Category_model->get_all();
+		$this->load->model('views/admin/category_list_view_model');
+		$this->category_list_view_model->get($items);
+		$data['model'] = $this->category_list_view_model;
+		
 		$this->load->view('admin/category_list', $data);
 		
 		// Load Footer
