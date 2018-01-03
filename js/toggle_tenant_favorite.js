@@ -1,7 +1,7 @@
 function toggle_tenant_favorite(tenant_id) {
 	$.ajax({
 		type: "POST",
-		url: "../customer/toggle_tenant_favorite/",
+		url: base_url + "/customer/toggle_tenant_favorite/",
 		data:
 		{
 			tenant_id: tenant_id

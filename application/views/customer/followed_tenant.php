@@ -41,6 +41,14 @@
 							</div>
 						<?php
 					}
+					if (count($model->followed_tenants) <= 0)
+					{
+						?>
+						<div class="col-md-4">
+							<label>Belum ada Tenant yang diikuti</label>
+						</div>
+						<?php
+					}
 					?>
 				</div>
 			</div>

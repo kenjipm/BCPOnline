@@ -10,6 +10,7 @@
 						<div id="thumbnail-profile_pic" class="thumbnail">
 							<img src="<?=$model->tenant->account->profile_pic?>" alt="<?=$model->tenant->tenant_name?>" style="width:100%">
 						</div>
+						<button type="button" class="btn btn-default col-md-12 <?= $model->tenant->btn_class ?>" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->tenant->id?>)"><?= $model->tenant->btn_text ?></button>
 					</div>
 					<div class="col-md-9">
 						<div class="row"><?=$model->tenant->tenant_name?></div>

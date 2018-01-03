@@ -86,9 +86,17 @@ class Customer extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$id = $this->session->child_id;
+		
+		$this->load->model('favorite_item_model');
+		$favorite_items = $this->favorite_item_model->get_all_from_customer_id($id, 6);
+		
+		$this->load->model('views/customer/favorite_item_view_model');
+		$this->favorite_item_view_model->get($favorite_items);
+		
 		$data['title'] = "Daftar Barang Favorit";
-		$data['model'] = new class{};
-		$this->load->view('customer/favorite', $data);
+		$data['model'] = $this->favorite_item_view_model;
+		$this->load->view('customer/favorite_item', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
@@ -323,6 +331,17 @@ class Customer extends CI_Controller {
 		
 		$this->load->model('following_tenant_model');
 		$result = $this->following_tenant_model->toggle_tenant_favorite($customer_id, $tenant_id);
+		
+		echo $result ? "1" : "0";
+	}
+	
+	public function toggle_item_favorite()
+	{
+		$posted_item_id = $this->input->post('posted_item_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('favorite_item_model');
+		$result = $this->favorite_item_model->toggle_item_favorite($customer_id, $posted_item_id);
 		
 		echo $result ? "1" : "0";
 	}

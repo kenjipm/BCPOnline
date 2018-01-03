@@ -275,6 +275,15 @@ class Item_model extends CI_Model {
 		return $this->quantity_avalaible;
 	}
 	
+	public function is_favorite($customer_id)
+	{
+		if (!$customer_id) return null;
+		
+		$this->load->model('favorite_item_model');
+		$favorite_id = $this->favorite_item_model->is_favorite($customer_id, $this->id);
+		return $favorite_id;
+	}
+	
 	public function init_tenant()
 	{
 		$this->tenant = $this->tenant->get_from_id($this->tenant_id);

@@ -105,22 +105,6 @@ class Item_tag_model extends CI_Model {
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
-	/*
-	public function get_type()
-	{
-		$this->db->where('account_id', $this->id);
-		foreach($this::TYPE_MODEL as $type => $model)
-		{
-			$this->load->model($model);
-			$item = $this->{$model}->get_by_account_id($this->id);
-			
-			if ($item !== null)
-			{
-				return $type;
-			}
-		}
-	}
-	*/
 }
 
 ?>

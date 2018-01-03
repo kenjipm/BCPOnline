@@ -24,13 +24,15 @@ class Item_main_view_model extends CI_Model {
 		$this->item->price = $this->text_renderer->to_rupiah($item->price);
 		$this->item->posted_item_description = $item->posted_item_description;
 		$this->item->image_one_name = $item->image_one_name;
+		$this->item->is_favorite	= ($item->is_favorite($this->session->child_id) != null);
+		$this->item->btn_class	= ($this->item->is_favorite ? "btn-favorited" : "");
+		$this->item->btn_text	= ($this->item->is_favorite ? "Sudah Difavoritkan" : "Tambah ke Favorit");
 		
 		$item->init_tenant();
 		$this->item->tenant = new class{};
 		$this->item->tenant->id				= $item->tenant->id;
 		$this->item->tenant->tenant_name	= $item->tenant->tenant_name;
 		$this->item->tenant->is_followed	= ($item->tenant->is_followed($this->session->child_id) != null);
-		
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "btn-favorited" : "");
 		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "Sudah Diikuti" : "Ikuti");
 		

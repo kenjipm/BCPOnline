@@ -135,8 +135,6 @@ class Following_tenant_model extends CI_Model {
 		
 			$this->update_natural_id();
 		}
-		
-		$this->update_natural_id();
 	}
 	
 	public function update_natural_id()

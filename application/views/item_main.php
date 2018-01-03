@@ -52,7 +52,7 @@
 			<div class="panel-body text-center">
 				<h3><?=$model->item->price?></h3>
 				<button type="button" class="btn btn-default col-md-12" onclick="popup.open('popup_buy')">Beli</button>
-				<a href="#" class="btn btn-default col-md-12">Tambah Ke Favorit</a>
+				<button type="button" class="btn btn-default col-md-12 <?= $model->item->btn_class ?>" id="btn-toggle_item_favorite" onclick="toggle_item_favorite(<?=$model->item->id?>)"><?= $model->item->btn_text ?></button>
 			</div>
 		</div>
 	</div>
