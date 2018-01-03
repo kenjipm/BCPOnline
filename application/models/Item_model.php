@@ -60,14 +60,10 @@ class Item_model extends CI_Model {
 		$this->load->model('Category_model');
 		$this->load->model('Brand_model');
 		$this->load->model('Tenant_model');
-		$this->load->model('Order_details_model');
-		$this->load->model('Posted_item_variance_model');
 		
 		$this->category					= new Category_model();
 		$this->brand					= new Brand_model();
 		$this->tenant					= new Tenant_model();
-		$this->order					= new Order_details_model();
-		$this->variance					= new Posted_item_variance_model();
 	}
 	
 	// constructor from database object
@@ -139,9 +135,6 @@ class Item_model extends CI_Model {
 		
 		$stub->category->category_name	= $db_item->category_name ?? "";
 		$stub->brand->brand_name		= $db_item->brand_name ?? "";
-		$stub->order->sold_price		= $db_item->sold_price ?? "";
-		$stub->variance->type			= $db_item->var_type ?? "";
-		$stub->variance->description	= $db_item->var_description ?? "";
 		
 		return $stub;
 	}

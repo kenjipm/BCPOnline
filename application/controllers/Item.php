@@ -178,8 +178,8 @@ class Item extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('customer_email_0', 'Email', 'required');
-		$this->form_validation->set_rules('discounted_price_0', 'Harga Diskon', 'required|integer');
+		$this->form_validation->set_rules('customer_email[]', 'Email', 'required');
+		$this->form_validation->set_rules('discounted_price[]', 'Harga Diskon', 'required|integer');
 		
 		if ($this->form_validation->run() == TRUE)
 		{
@@ -188,6 +188,44 @@ class Item extends CI_Controller {
 			
 			redirect('Item/post_item_detail/' . $id);
 		}
+	}
+	
+	public function upload_image($item_id, $index)
+	{
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
+		
+		$config_upload_image = $this->config->item('upload_profpic');
+		$config_upload_image['upload_path'] .= $this->session->account_id."/";
+		$config_upload_image['file_name'] = $item_id."-".$index.".jpg";
+		$this->load->library('upload', $config_upload_image);
+		
+		if ($_FILES['profile_pic']['name'])
+		{
+			if (!is_dir($config_upload_image['upload_path'])) {
+				mkdir($config_upload_image['upload_path']);
+			}
+			if (!$this->upload->do_upload('profile_pic'))
+			{
+				$data['error'] = $this->upload->display_errors('', '');
+			}
+			else $file_path['profile_pic'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->update_profile_pic($this->session->id, $file_path['profile_pic']);
+			
+			$data['image_url'] = site_url($file_path['profile_pic']);
+		}
+			
+		header("Cache-Control: no-store, no-cache, no-referrer-when-downgrade, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($data);
 	}
 	
 }
