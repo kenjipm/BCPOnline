@@ -52,6 +52,18 @@
 						value="<?=$model->posted_item->posted_item_description?>" readonly></div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="image_one_name">Gambar:</label>
+					<div class="col-xs-3">
+					
+						<label for="image_one_name">
+							<div id="thumbnail-image_one_name" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->posted_item->image_one_name?>" alt="<?=$model->posted_item->image_one_name?>" style="width:100%">
+							</div>
+						</label>
+						<input id="image_one_name" name="image_one_name" value="<?=$model->posted_item->image_one_name?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
+					</div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="category" 
 						value="<?=$model->posted_item->category->category_name?>" readonly></div>

@@ -147,12 +147,12 @@ class Order_details_model extends CI_Model {
 		$stub->posted_item_variance->posted_item					= new Item_model();
 		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		
-		$stub->shipping_address					= new Shipping_address_model();
-		$stub->shipping_address->address_detail	= $db_item->address_detail ?? "";
-		
 		$stub->billing						= new Billing_model();
 		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
 		$stub->billing->date_created		= $db_item->date_created ?? "";
+		
+		$stub->billing->shipping_address					= new Shipping_address_model();
+		$stub->billing->shipping_address->address_detail	= $db_item->address_detail ?? "";
 		
 		$stub->deliverer				= new Deliverer_model();
 		$stub->deliverer->account		= new Account_model();

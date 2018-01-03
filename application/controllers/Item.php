@@ -201,27 +201,27 @@ class Item extends CI_Controller {
 		$config_upload_image['file_name'] = $item_id."-".$index.".jpg";
 		$this->load->library('upload', $config_upload_image);
 		
-		if ($_FILES['profile_pic']['name'])
+		if ($_FILES['image_one_name']['name'])
 		{
 			if (!is_dir($config_upload_image['upload_path'])) {
 				mkdir($config_upload_image['upload_path']);
 			}
-			if (!$this->upload->do_upload('profile_pic'))
+			if (!$this->upload->do_upload('image_one_name'))
 			{
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['profile_pic'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+			else $file_path['image_one_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
 		}
 		
 		if (count($data['error']) == 0)
 		{
-			$this->load->model('Account_model');
-			$this->Account_model->update_profile_pic($this->session->id, $file_path['profile_pic']);
+			$this->load->model('Item_model');
+			$this->Item_model->update_image($this->session->id, $file_path['image_one_name']);
 			
-			$data['image_url'] = site_url($file_path['profile_pic']);
+			$data['image_url'] = site_url($file_path['image_one_name']);
 		}
 			
-		header("Cache-Control: no-store, no-cache, no-referrer-when-downgrade, must-revalidate, max-age=0");
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 		header("Cache-Control: post-check=0, pre-check=0", false);
 		header("Pragma: no-cache");
 		header("Content-Type: application/json; charset=utf-8");
