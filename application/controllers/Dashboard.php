@@ -39,9 +39,9 @@ class Dashboard extends CI_Controller {
 			$this->load->model('hot_item_model');
 			$hot_items = $this->hot_item_model->get_all(6);
 			
-			$this->load->model('following_tenant_model');
-			$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
-			$tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
+			// $this->load->model('following_tenant_model');
+			// $following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
+			// $tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
 			
 			$this->load->model('views/dashboard_view_model');
 			$this->dashboard_view_model->get($categories, $hot_items, $tenant_items);

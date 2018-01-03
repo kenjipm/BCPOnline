@@ -67,7 +67,6 @@ class Tenant extends CI_Controller {
 		$this->load->model('views/tenant_public_profile_main_view_model');
 		$this->tenant_public_profile_main_view_model->get($cur_tenant, $items);
 		
-		
 		$data['title'] = "Tenant";
 		$data['model'] = $this->tenant_public_profile_main_view_model;
 		$this->load->view('tenant_public_profile_main', $data);

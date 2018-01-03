@@ -29,8 +29,6 @@ class Item_model extends CI_Model {
 	public $category;
 	public $brand;
 	public $tenant;
-	public $order;
-	public $variance;
 	
 	// stub attribute
 	public $quantity_avalaible;
