@@ -25,7 +25,8 @@ class Hot_item_model extends CI_Model {
 		$this->promo_description		= "";
 		$this->posted_item_id			= 0;
 		
-		$this->posted_item				= $this->load->model('item_model');
+		// $this->load->model('item_model');
+		// $this->posted_item				= new item_model();
 	}
 	
 	// constructor from database object
