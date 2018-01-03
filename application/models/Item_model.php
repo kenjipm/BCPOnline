@@ -290,6 +290,18 @@ class Item_model extends CI_Model {
 		return $this->tenant;
 	}
 	
+	public function update_profile_pic($id, $file_path)
+	{
+		// update data
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('image_one_name', $file_path);
+		$this->db->update($this->table_item);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 	/*
 	public function get_type()
 	{

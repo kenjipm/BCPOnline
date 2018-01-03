@@ -41,7 +41,9 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
-					<div class="col-xs-9"><input type="file" class="form-control" name="image_one_name" value="<?= set_value('image_one_name'); ?>"/></div>
+					<div class="col-xs-9">
+						<input id="image_one_name" name="image_one_name" value="<?= set_value('image_one_name'); ?>" data-url="<?=site_url('item/upload_image')?>" type="file" class="photo_upload_simple"/>
+					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="category">Kategori:</label>
