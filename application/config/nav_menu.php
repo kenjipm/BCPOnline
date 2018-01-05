@@ -64,11 +64,31 @@ $config['top_menu_deliverer'] = array(
 
 $config['top_menu_admin'] = array(
 	'left' => array(
+		'VOUCHER' => array(
+			'text'	=> "Voucher",
+			'url'	=> "voucher/voucher_list",
+			),
+		'REWARD' => array(
+			'text'	=> "Reward",
+			'url'	=> "reward/reward_list",
+			),
+		'BIDDING' => array(
+			'text'	=> "Bidding",
+			'url'	=> "bidding/bidding_list",
+			),
 		),
 	'right' => array(
-		'PROFILE' => array(
-			'text'	=> "Profile",
-			'url'	=> "",
+		'ACCOUNT' => array(
+			'text'	=> "Account",
+			'url'	=> "account/account_list",
+			),
+		'BILLING' => array(
+			'text'	=> "Billing",
+			'url'	=> "billing",
+			),
+		'DISPUTE' => array(
+			'text'	=> "Dispute",
+			'url'	=> "dispute",
 			),
 		),
 	);

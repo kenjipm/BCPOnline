@@ -48,8 +48,8 @@ class Billing extends CI_Controller {
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
 		{
-			$this->load->model('Order_details_model');
-			$items = $this->Order_details_model->get_all();
+			$this->load->model('Billing_model');
+			$items = $this->Billing_model->get_all();
 			
 			$this->load->model('views/admin/billing_list_view_model');
 			$this->billing_list_view_model->get($items);

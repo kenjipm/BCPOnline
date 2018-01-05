@@ -28,6 +28,9 @@ class Voucher_model extends CI_Model {
 		$this->brand_id				= "";
 		$this->voucher_code			= "";
 		
+		$this->load->model('Voucher_brand_model');
+		$this->load->model('Brand_model');
+		
 	}
 	
 	// constructor from database object
@@ -42,7 +45,8 @@ class Voucher_model extends CI_Model {
 		$this->brand_id				= $db_item->brand_id;
 		$this->voucher_code			= $db_item->voucher_code;
 		
-		$this->brand				= $this->load->model('Brand_model');
+		$this->voucher_brand		= new Voucher_brand_model();
+		$this->brand				= new Brand_model();
 		$this->brand->brand_name	= $db_item->brand_name;
 		
 		return $this;
@@ -79,8 +83,9 @@ class Voucher_model extends CI_Model {
 		$stub->brand_id				= $db_item->brand_id;
 		$stub->voucher_code			= $db_item->voucher_code;
 		
-		$stub->brand				= $this->load->model('Brand_model');
-		$stub->brand->brand_name	= $db_item->brand_name;
+		$stub->voucher_brand		= new Voucher_brand_model();
+		$stub->brand				= new Brand_model();
+		$stub->brand->brand_name	= $db_item->brand_name ?? "";
 		
 		return $stub;
 	}
@@ -98,8 +103,10 @@ class Voucher_model extends CI_Model {
 	// get voucher detail
 	public function get_from_id($id)
 	{
-		$where['id'] = $id;
+		$where[$this->table_voucher. '.id'] = $id;
 		
+		$this->db->join('voucher_brand', 'voucher_brand.voucher_id=' . $this->table_voucher . '.id', 'left');
+		$this->db->join('brand', 'brand.id=voucher_brand.brand_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_voucher, 1);
 		$voucher = $query->row();
@@ -109,8 +116,9 @@ class Voucher_model extends CI_Model {
 	
 	public function get_all()
 	{	
-		$this->db->join('brand', 'brand.id=' . $this->table_voucher . '.brand_id', 'left');
-		$query = $this->db->get($this->table_voucher, 1);
+		$this->db->join('voucher_brand', 'voucher_brand.voucher_id=' . $this->table_voucher . '.id', 'left');
+		$this->db->join('brand', 'brand.id=voucher_brand.brand_id', 'left');
+		$query = $this->db->get($this->table_voucher);
 		$vouchers = $query->result();
 		
 		return ($vouchers !== null) ? $this->map_list($vouchers) : null;

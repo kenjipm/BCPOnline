@@ -38,34 +38,53 @@
 			<h3>Daftar Voucher</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="voucher_id">ID</label>	</div>
-				<div class="col-xs-1"> <label for="voucher_stock">Stok</label>	</div>
-				<div class="col-xs-2"> <label for="voucher_brand">Nama Brand</label> </div>
-				<div class="col-xs-7"> <label for="voucher_description">Deskripsi</label> </div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="voucher_stock">Stok</label></th>
+							<th> <label for="voucher_brand">Nama Brand</label></th>
+							<th> <label for="voucher_description">Deskripsi</label></th>
+							<th> </th>
+							<!--<th> </th>
+							<th> </th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->vouchers as $voucher)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$voucher->voucher_stock?></td>
+								<td>
+									<?=$voucher->brand_name?> </td>
+								<td>
+									<?=$voucher->voucher_description?> </td>
+								<td>
+									<button class="btn btn-default" onclick="popup.open('popup_voucher_detail')">Lihat</button>
+									</td>
+								<!-- <td>
+									<a href="<?=site_url('voucher/update_voucher/'.$voucher->id)?>">
+										<button class="btn btn-default">Ubah</button>
+									</a>
+								</td>
+								<td>
+									<a href="<?=site_url('voucher/delete_voucher/'.$voucher->id)?>">
+										<button class="btn btn-default">Hapus</button>
+									</a>
+								</td> -->
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
 			</div>
-			<?php
-			foreach($model->vouchers as $voucher)
-			{
-				?>
-				<div class="row list-group">
-					<a onclick="popup.open('popup_voucher_detail')">
-						<div class="col-xs-2 list-group-item">
-							<?=$voucher->voucher_id?> </div>
-						<div class="col-xs-1 list-group-item">
-							<?=$voucher->voucher_stock?> </div>
-						<div class="col-xs-2 list-group-item">
-							<?=$voucher->brand->brand_name?> </div>
-						<div class="col-xs-7 list-group-item">
-							<?=$voucher->voucher_description?> </div>
-					</a>
-				</div>
-				<?php
-			}
-			?>
 			<a class="btn btn-default" href="<?=site_url('voucher/create_voucher')?>">
 				Buat voucher
-			</a>	
+			</a>		
 		</div>
 	</div>
 </div>

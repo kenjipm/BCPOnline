@@ -123,6 +123,9 @@
 				<a href="<?=site_url('item/post_item_list')?>">
 					<button class="btn btn-default">Lihat Semua Item</button>
 				</a>
+				<a href="<?=site_url('bidding/create_bidding')?>">
+					<button class="btn btn-default">Tambah Item Lelang</button>
+				</a>
 			</div>
 		</div>
 	</div>
