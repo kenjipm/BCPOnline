@@ -15,7 +15,7 @@ class Order_List_View_Model extends CI_Model{
 		foreach($orders as $order)
 		{
 			$this->order_list[$i] = new class{};
-			$this->order_list[$i]->collection_code 	= $order->collection_code;
+			$this->order_list[$i]->otp_deliverer_to_tenant 	= $order->otp_deliverer_to_tenant;
 			$this->order_list[$i]->tenant			= $order->tenant->name;
 			
 			$i++;

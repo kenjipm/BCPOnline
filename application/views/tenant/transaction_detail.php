@@ -10,9 +10,9 @@
 	// $model->transaction_detail->offered_price = "Rp 190.000,-";
 	// $model->transaction_detail->sold_price = "Rp 175.000,-";
 	// $model->transaction_detail->order_status = "Pembayaran";
-	// $model->transaction_detail->collection_code = "171203001";
+	// $model->transaction_detail->otp_deliverer_to_tenant = "171203001";
 	// $model->transaction_detail->collection_method = "COD";
-	// $model->transaction_detail->cust_rec_code = "171203223";
+	// $model->transaction_detail->otp_customer_to_deliverer = "171203223";
 	// $model->transaction_detail->item_name = "Djisamsung Galaksih";
 	// $model->transaction_detail->deliverer_name = "Dori";
 	// $model->transaction_detail->voucher_cut_price = "Rp 15.000,-";

@@ -8,9 +8,9 @@
 	$model->order_details->quantity = 1;
 	$model->order_details->date_repr_decided = "3 Desember 2017";
 	$model->order_details->sold_price = "Rp 175.000,-";
-	$model->order_details->collection_code = "171203001";
+	$model->order_details->otp_deliverer_to_tenant = "171203001";
 	$model->order_details->collection_method = "COD";
-	$model->order_details->cust_rec_code = "171203223";
+	$model->order_details->otp_customer_to_deliverer = "171203223";
 	$model->order_details->item_name = "Djisamsung Galaksih";
 	
 ?>
@@ -38,9 +38,9 @@
 						value="<?=$model->order_details->date_repr_decided?>" readonly></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="collection_code">Kode Pengiriman:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" id="collection_code" 
-						value="<?=$model->order_details->collection_code?>" readonly></div>
+					<label class="control-label col-xs-3" for="otp_deliverer_to_tenant">Kode Pengiriman:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="otp_deliverer_to_tenant" 
+						value="<?=$model->order_details->otp_deliverer_to_tenant?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="collection_method">Cara Pengiriman:</label>

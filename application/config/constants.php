@@ -41,6 +41,21 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"REFUNDED"					=> "Uang dikembalikan",
 			"REPAIR_CANCELLED"			=> "Perbaikan dibatalkan",
 		),
+		'sequence_index' => array(
+			"WAITING_FOR_PAYMENT"		=> "01",
+			"QUEUED"					=> "02",
+			"PICKING_FROM_TENANT"		=> "09",
+			"DELIVERING_TO_CUSTOMER"	=> "10",
+			"RECEIVED"					=> "11",
+			"PICKING_FROM_CUSTOMER"		=> "03",
+			"DELIVERING_TO_TENANT"		=> "04",
+			"TENANT_RECEIVED"			=> "05",
+			"COST_CALCULATED"			=> "06",
+			"REPAIRING"					=> "07",
+			"REPAIR_FINISHED"			=> "08",
+			"REFUNDED"					=> "12",
+			"REPAIR_CANCELLED"			=> "13"
+		),
 		'is_busy' => array(
 			"WAITING_FOR_PAYMENT"		=> FALSE,
 			"QUEUED"					=> FALSE,

@@ -11,10 +11,10 @@ class Order_details_model extends CI_Model {
 	public $offered_price;
 	public $sold_price;
 	public $order_status;
-	public $collection_code;
+	public $otp_deliverer_to_tenant;
 	public $collection_method;
-	public $cust_rec_code;
-	public $tent_repr_rec_code;
+	public $otp_customer_to_deliverer;
+	public $otp_tenant_to_deliverer;
 	public $date_repr_decided;
 	public $billing_id;
 	public $posted_item_variance_id;
@@ -40,10 +40,10 @@ class Order_details_model extends CI_Model {
 		$this->offered_price			= 0;
 		$this->sold_price				= 0;
 		$this->order_status				= "";
-		$this->collection_code			= "";
+		$this->otp_deliverer_to_tenant			= "";
 		$this->collection_method		= "";
-		$this->cust_rec_code			= "";
-		$this->tent_repr_rec_code		= "";
+		$this->otp_customer_to_deliverer			= "";
+		$this->otp_tenant_to_deliverer		= "";
 		$this->date_repr_decided		= "";
 		$this->billing_id				= 0;
 		$this->posted_item_variance_id	= 0;
@@ -79,10 +79,10 @@ class Order_details_model extends CI_Model {
 		$this->offered_price			= $db_item->offered_price;
 		$this->sold_price				= $db_item->sold_price;
 		$this->order_status				= $db_item->order_status;
-		$this->collection_code			= $db_item->collection_code;
+		$this->otp_deliverer_to_tenant			= $db_item->otp_deliverer_to_tenant;
 		$this->collection_method		= $db_item->collection_method;
-		$this->cust_rec_code			= $db_item->cust_rec_code;
-		$this->tent_repr_rec_code		= $db_item->tent_repr_rec_code;
+		$this->otp_customer_to_deliverer			= $db_item->otp_customer_to_deliverer;
+		$this->otp_tenant_to_deliverer		= $db_item->otp_tenant_to_deliverer;
 		$this->date_repr_decided		= $db_item->date_repr_decided;
 		$this->billing_id				= $db_item->billing_id;
 		$this->posted_item_variance_id	= $db_item->posted_item_variance_id;
@@ -104,10 +104,10 @@ class Order_details_model extends CI_Model {
 		$db_item->offered_price				= $this->offered_price;
 		$db_item->sold_price				= $this->sold_price;
 		$db_item->order_status				= $this->order_status;
-		$db_item->collection_code			= $this->collection_code;
+		$db_item->otp_deliverer_to_tenant			= $this->otp_deliverer_to_tenant;
 		$db_item->collection_method			= $this->collection_method;
-		$db_item->cust_rec_code				= $this->cust_rec_code;
-		$db_item->tent_repr_rec_code		= $this->tent_repr_rec_code;
+		$db_item->otp_customer_to_deliverer				= $this->otp_customer_to_deliverer;
+		$db_item->otp_tenant_to_deliverer		= $this->otp_tenant_to_deliverer;
 		$db_item->date_repr_decided			= $this->date_repr_decided;
 		$db_item->billing_id				= $this->billing_id;
 		$db_item->posted_item_variance_id	= $this->posted_item_variance_id;
@@ -129,10 +129,10 @@ class Order_details_model extends CI_Model {
 		$stub->offered_price			= $db_item->offered_price;
 		$stub->sold_price				= $db_item->sold_price;
 		$stub->order_status				= $db_item->order_status;
-		$stub->collection_code			= $db_item->collection_code;
+		$stub->otp_deliverer_to_tenant			= $db_item->otp_deliverer_to_tenant;
 		$stub->collection_method		= $db_item->collection_method;
-		$stub->cust_rec_code			= $db_item->cust_rec_code;
-		$stub->tent_repr_rec_code		= $db_item->tent_repr_rec_code;
+		$stub->otp_customer_to_deliverer			= $db_item->otp_customer_to_deliverer;
+		$stub->otp_tenant_to_deliverer		= $db_item->otp_tenant_to_deliverer;
 		$stub->date_repr_decided		= $db_item->date_repr_decided;
 		$stub->billing_id				= $db_item->billing_id;
 		$stub->posted_item_variance_id	= $db_item->posted_item_variance_id;
@@ -258,13 +258,13 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_collection_code($otp)
+	public function get_all_from_otp_deliverer_to_tenant($otp)
 	{
 		$this->load->model('Tenant_model');
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		
 		$where['posted_item.tenant_id'] = $cur_tenant->id;
-		$where[$this->table_order_details. '.collection_code'] = $otp;
+		$where[$this->table_order_details. '.otp_deliverer_to_tenant'] = $otp;
 		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
 		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
@@ -286,7 +286,7 @@ class Order_details_model extends CI_Model {
 		$where['order_details.deliverer_id'] = $cur_deliverer->id;
 		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
-		$this->db->group_by('collection_code');
+		$this->db->group_by('otp_deliverer_to_tenant');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');

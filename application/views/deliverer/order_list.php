@@ -37,7 +37,7 @@
 					<thead>
 						<tr>
 							<th> <label for="tenant_name">Tenant</label> </th>
-							<th> <label for="collection_code">Kode OTP</label> </th>
+							<th> <label for="otp_deliverer_to_tenant">Kode OTP</label> </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -49,7 +49,7 @@
 								?>
 								<tr>
 									<td><?=$order->tenant?></td>
-									<td><?=$order->collection_code?></td>
+									<td><?=$order->otp_deliverer_to_tenant?></td>
 								<?php
 							}
 						}
