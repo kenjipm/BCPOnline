@@ -9,7 +9,8 @@ class Customer extends CI_Controller {
 		
 		if ($this->session->type != TYPE['name']['CUSTOMER']) // check account type, kalau bukan customer, redirect ke login page
 		{
-			redirect('login');
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
 		}
 	}
 

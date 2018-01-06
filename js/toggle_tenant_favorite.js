@@ -11,9 +11,12 @@ function toggle_tenant_favorite(tenant_id) {
 				$("#btn-toggle_tenant_favorite").addClass('btn-favorited');
 				$("#btn-toggle_tenant_favorite").html('Sudah Diikuti');
 			}
-			else { // if (data == "0")
+			else if (data == "0") {
 				$("#btn-toggle_tenant_favorite").removeClass('btn-favorited');
 				$("#btn-toggle_tenant_favorite").html('Ikuti');
+			}
+			else { // not logged in
+				window.location = base_url + '/login' + '?return_url=' + window.location.href;
 			}
 		}
 	});

@@ -13,7 +13,7 @@
 						foreach ($order_otps_list->order_otps as $order_otp)
 						{
 							?>
-							<b>OTP: <?= $order_otp->otp ?></b>
+							<span>OTP: <?= $order_otp->otp ?></span>
 							<div class="table-responsive">
 								<table class="table table-striped table-bordered">
 									<thead>

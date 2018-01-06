@@ -23,6 +23,7 @@ class Login extends CI_Controller {
 		{
 			$data['message'] = $this->get_error_message($this->input->get('err'));
 		}
+		$data['return_url'] = $this->input->get('return_url') ?? "";
 		$data['model'] = new class{};
 		$this->load->view('login_main', $data);
 		
@@ -34,6 +35,7 @@ class Login extends CI_Controller {
 	{
 		$email = $this->input->post('email');
 		$password = $this->input->post('password');
+		$return_url = $this->input->post('return_url');
 		
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_from_login($email, $password);
@@ -61,6 +63,8 @@ class Login extends CI_Controller {
 			);
 			
 			$this->session->set_userdata($userdata);
+			
+			if ($return_url != "") redirect($return_url);
 			
 			$this->default_redirect($type);
 		}

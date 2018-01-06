@@ -143,6 +143,10 @@ class Account_model extends CI_Model {
 		$query = $this->db->get($this->table_account, 1);
 		$item = $query->row();
 		
+		$this->db->where('id', $item->id);
+		$this->db->set('last_login', date("Y-m-d H:i:s"));
+		$this->db->update($this->table_account);
+		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	

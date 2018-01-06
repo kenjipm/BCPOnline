@@ -105,7 +105,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
-						<input type="hidden" name="return_url" value="customer/cart"/>
+						<input type="hidden" name="return_url" value="item/<?=$model->item->id?>"/>
 						<button type="submit" class="btn btn-default">Beli</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_buy')">Batal</button>
 					</div>

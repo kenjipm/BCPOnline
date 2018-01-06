@@ -20,6 +20,7 @@
 					</div>
 				</div>
 				<span><?=$message?></span>
+				<input type="hidden" id="return_url" name="return_url" value="<?=$return_url?>"/>
 			</form>
 		</div>
 	</div>
