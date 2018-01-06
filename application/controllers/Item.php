@@ -84,10 +84,6 @@ class Item extends CI_Controller {
 			$this->load->view('tenant/post_item_list', $data);
 		}
 		
-		
-		
-		$this->load->view('tenant/post_item_list', $data);
-		
 		// Load Footer
 		$this->load->view('footer');
 	}
