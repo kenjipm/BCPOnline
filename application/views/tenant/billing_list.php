@@ -36,15 +36,19 @@
 			<h3>Barang untuk Dikirim</h3>
 		</div>
 		<div class="panel-body">
-			<div class="col-sm-2">
-				<label>Masukkan OTP:</label>
-			</div>
-			<div class="col-sm-4">
-				<input type="text" class="form-control" id="otp"/>
-			</div>
-			<div class="col-sm-2">
-				<button class="btn btn-default" onclick="view_item(document.getElementById('otp').value)">Kirim</button>
-			</div>
+			<form action="<?=site_url('billing')?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Masukkan OTP:</label>
+					</div>
+					<div class="col-sm-4">
+						<input type="text" class="form-control" name="otp"/>
+					</div>
+					<div class="col-sm-2">
+						<button class="btn btn-default" type="submit" class="btn btn-default">Kirim</button>
+					</div>
+				</div>
+			</form>	
 		</div>
 		<div class="panel-body" id="item_list" style="display:none">
 			<div class="table-responsive">
@@ -70,7 +74,7 @@
 									<td>
 										<?=$item->sold_price?> </td>
 									<td>
-										<?=$item->posted_item_variance->type: $item->posted_item_variance->description?> </td>
+										<?=$item->posted_item_variance->type.": ". $item->posted_item_variance->description?> </td>
 									<td>
 										<a href="<?=site_url('billing/detail/'.$item->id)?>">
 											<button class="btn btn-default">Lihat</button>

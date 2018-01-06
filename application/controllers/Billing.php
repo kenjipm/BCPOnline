@@ -37,6 +37,9 @@ class Billing extends CI_Controller {
 		
 		if ($this->session->type == TYPE['name']['TENANT'])
 		{
+			// OTP INPUT
+			if ($this->input->method() == "post") $this->get_item_do();
+			
 			$this->load->model('Order_details_model');
 			$orders = $this->Order_details_model->get_all_from_tenant_id();
 			
@@ -274,6 +277,15 @@ class Billing extends CI_Controller {
 		}
 		
 		redirect('billing/status/'.$payment->billing->id);
+	}
+	
+	public function get_item_do()
+	{
+		$this->load->model('Order_details_model');
+		$this->Order_details_model->get_all_from_otp_deliverer_to_tenant($this->input->post('otp'), $this->session->child_id);
+			
+		redirect('Billing');
+	
 	}
 	
 	public function edit()

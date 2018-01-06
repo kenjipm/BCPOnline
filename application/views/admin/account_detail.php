@@ -17,45 +17,37 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->name ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->name ?>" readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="address">Alamat</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->address ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->address ?>" readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_of_birth">Tanggal Lahir</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->date_of_birth ?>"readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->date_of_birth ?>"readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="phone_number">No. HP</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->phone_number ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->phone_number ?>" readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="identification_no">No. ID</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->identification_no ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->identification_no ?>" readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="email">Email</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->email ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->email ?>" readonly/></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="status">Status</label>
-					<div class="col-xs-9"><input type="text" class="form-control" value="<?=$model->account->status ?>" readonly/></div>
+					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->status ?>" readonly/></div>
 				</div>
-				
-				<?php
-					if ($model->account->status == "VERIFIED"){
-						$show_div_verify = false;
-					} else {
-						$show_div_verify = true;
-					}
-				?>
 				<div class="row">
-					<div class="col-xs-1 col-xs-offset-10" id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
+					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "active"){?> style="display:none"<?php } ?>>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Aktivasi</button>
 					</div>
-					<div class="col-xs-1 pull-right">
+					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "inactive"){?> style="display:none"<?php } ?>>
 						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
 					</div>
 				</div>

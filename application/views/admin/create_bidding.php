@@ -73,7 +73,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2" for="item">Item:</label>
-					<div class="col-xs-4">
+					<div class="col-xs-10">
 						<select class="form-control" name="item">
 						<?php
 						foreach($model->bidding_item as $item)
