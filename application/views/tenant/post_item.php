@@ -5,25 +5,21 @@
 		</div>
 		
 		<!-- CHOOSE TYPE FIRST -->
-		<div class="panel-body" id="choose_type">
+		<div class="panel-body" id="choose_type_button" style="display:block">
 			<div class="form-group">
-				<label class="control-label col-xs-3" for="item_type">Tipe:</label>
-				<div class="col-xs-9">
-					<label class="control-label">
-						<input type="radio" name="item_type" name="type_order" value="ORDER" <?= set_value('item_type')=="ORDER"? "selected='selected'":"" ?>/>
-						Barang
-					</label>
-					<label class="control-label">
-						<input type="radio" name="item_type" name="type_repair" value="REPAIR" <?= set_value('item_type')=="REPAIR"? "selected='selected'":"" ?>/>
-						Servis
-					</label>
-				</div>
-				<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
+				<div class="col-xs-6"><button class="btn btn-default" onclick="input_order()">Barang</button></div>
+				<div class="col-xs-6"><button class="btn btn-default" onclick="input_repair()">Servis</button></div>
+			</div>
+		</div>
+		
+		<div style="display:none">
+			<div class="form-group">
+				<input type="text" name="item_type" id="item_type" value="<?= set_value('item_type'); ?>"/>
 			</div>
 		</div>
 		
 		<!-- ORDER -->
-		<div class="panel-body" id="choose_order">
+		<div class="panel-body" id="choose_order" style="display:none">
 			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama:</label>
@@ -43,7 +39,6 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"/></div>
-					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('posted_item_description'); ?></span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
@@ -95,7 +90,7 @@
 						<input type="text" class="form-control" name="var_desc[]" readonly/>
 					</div>
 					<div class="col-sm-2">
-						<a onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</a>
+						<button onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</button>
 					</div>
 
 					<div><input name="quantity_available[]" type="text" class="form-control" style="display:none"/></div>
@@ -111,7 +106,7 @@
 		</div>
 		
 		<!-- REPAIR -->
-		<div class="panel-body" id="choose_repair">
+		<div class="panel-body" id="choose_repair" style="display:none">
 			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>

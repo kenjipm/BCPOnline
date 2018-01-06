@@ -133,6 +133,7 @@ class Item_model extends CI_Model {
 		
 		$stub->category->category_name	= $db_item->category_name ?? "";
 		$stub->brand->brand_name		= $db_item->brand_name ?? "";
+		$stub->tenant->tenant_name		= $db_item->tenant_name ?? "";
 		
 		return $stub;
 	}
@@ -169,6 +170,15 @@ class Item_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_for_admin()
+	{
+		$this->db->join('tenant', 'tenant.id=' . $this->table_item . '.tenant_id', 'left');
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	public function get_all_from_category_id($category_id)

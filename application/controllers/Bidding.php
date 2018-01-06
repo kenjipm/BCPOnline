@@ -57,7 +57,16 @@ class Bidding extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Category_model');
+		$this->load->model('Brand_model');
+		$this->load->model('Item_model');
+		$categories = $this->Category_model->get_all();
+		$brands = $this->Brand_model->get_all();
+		$items = $this->Item_model->get_all_for_admin();
+		$this->load->model('views/admin/create_bidding_view_model');
+		$this->create_bidding_view_model->get($categories, $brands, $items);
+		$data['model'] = $this->create_bidding_view_model;
+		
 		$this->load->view('admin/create_bidding', $data);
 		
 		// Load Footer
