@@ -126,17 +126,18 @@ class Deliverer_model extends CI_Model {
 	
 	public function get_idle_deliverer()
 	{	
-		
+		// Get Busy Deliverer dulu
 		$this->db->select('deliverer.id AS id');
 		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
 		$this->db->where($this->table_order_details. '.deliverer_id is NOT NULL');
-		$this->db->where($this->table_order_details. '.order_status', ORDER_STATUS['name']['PICKING_FROM_TENANT']); // Dummy
+		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['RECEIVED']); // Dummy
 		
 		$query = $this->db->get('deliverer');
 		$items = $query->result();
 		//print_r($items);
 		$deliverers = array();
 		
+		// Masukin Array ID Deliverer yg busy
 		if ($items)
 		{
 			foreach($items as $item)
@@ -146,6 +147,7 @@ class Deliverer_model extends CI_Model {
 		}
 		//print_r($deliverers);
 		
+		// Baru di-not_in buat nyari idle nya
 		$this->db->select('*, deliverer.id AS id');
 		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
 		if (count($deliverers) > 0)

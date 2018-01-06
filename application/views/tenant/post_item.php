@@ -3,7 +3,27 @@
 		<div class="panel-heading">
 			<h3>Tambah Item Baru</h3>
 		</div>
-		<div class="panel-body">
+		
+		<!-- CHOOSE TYPE FIRST -->
+		<div class="panel-body" id="choose_type">
+			<div class="form-group">
+				<label class="control-label col-xs-3" for="item_type">Tipe:</label>
+				<div class="col-xs-9">
+					<label class="control-label">
+						<input type="radio" name="item_type" name="type_order" value="ORDER" <?= set_value('item_type')=="ORDER"? "selected='selected'":"" ?>/>
+						Barang
+					</label>
+					<label class="control-label">
+						<input type="radio" name="item_type" name="type_repair" value="REPAIR" <?= set_value('item_type')=="REPAIR"? "selected='selected'":"" ?>/>
+						Servis
+					</label>
+				</div>
+				<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
+			</div>
+		</div>
+		
+		<!-- ORDER -->
+		<div class="panel-body" id="choose_order">
 			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama:</label>
@@ -14,20 +34,6 @@
 					<label class="control-label col-xs-3" for="price">Harga:</label>
 					<div class="col-xs-3"><input type="text" class="form-control" name="price" value="<?= set_value('price'); ?>"/></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('price'); ?></span>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="item_type">Tipe:</label>
-					<div class="col-xs-9">
-						<label class="control-label">
-							<input type="radio" name="item_type" name="type_order" value="ORDER" <?= set_value('item_type')=="ORDER"? "selected='selected'":"" ?>/>
-							Barang
-						</label>
-						<label class="control-label">
-							<input type="radio" name="item_type" name="type_repair" value="REPAIR" <?= set_value('item_type')=="REPAIR"? "selected='selected'":"" ?>/>
-							Servis
-						</label>
-					</div>
-					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('item_type'); ?></span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="unit_weight">Berat(g):</label>
@@ -97,6 +103,36 @@
 					<div><input name="image_three_name[]" type="text" class="form-control" style="display:none"/></div>
 					<div><input name="image_four_name[]" type="text" class="form-control" style="display:none"/></div>
 					
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
+				</div>
+			</form>
+		</div>
+		
+		<!-- REPAIR -->
+		<div class="panel-body" id="choose_repair">
+			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('posted_item_description'); ?></span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="category">Kategori:</label>
+					<div class="col-xs-6">
+						<select class="form-control" name="category_id">
+						<?php
+						foreach ($model->item_category as $category)
+						{
+							?>
+							<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+							<?php
+							$i++;
+						}
+						?>
+						</select>
+					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
