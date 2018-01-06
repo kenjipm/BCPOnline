@@ -33,7 +33,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"RECEIVED"					=> "Telah diterima",
 			"DELIVERING_TO_TENANT"		=> "Pengantaran ke tenant",
 			"TENANT_RECEIVED"			=> "Telah diterima oleh tenant",
-			"COST_CALCULATED"			=> "Penghitungan biaya",
+			"COST_CALCULATED"			=> "Biaya sudah dihitung",
 			"REPAIRING"					=> "Perbaikan diproses",
 			"REPAIR_FINISHED"			=> "Perbaikan selesai",
 			"REFUNDED"					=> "Uang dikembalikan",
