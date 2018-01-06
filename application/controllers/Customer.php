@@ -126,6 +126,30 @@ class Customer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function order_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('order_details_model');
+		$order_details = $this->order_details_model->get_all_from_customer_id($customer_id);
+		
+		$this->load->model('views/customer/order_list_view_model');
+		$this->order_list_view_model->get($order_details);
+		
+		$data['title'] = "Order List";
+		$data['model'] = $this->order_list_view_model;
+		$this->load->view('customer/order_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function profile_edit_do()
 	{
 		$this->load->library('form_validation');

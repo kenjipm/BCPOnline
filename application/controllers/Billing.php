@@ -20,7 +20,7 @@ class Billing extends CI_Controller {
 		
 		if (!in_array($this->session->type, $this::ALLOWED_ROLE))
 		{
-			redirect('');
+			redirect('login');
 		}
 	}
 	

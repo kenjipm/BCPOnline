@@ -94,7 +94,7 @@ class Hot_item_model extends CI_Model {
 		
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 }
 

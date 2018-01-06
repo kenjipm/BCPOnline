@@ -21,9 +21,13 @@ $config['top_menu_customer'] = array(
 			'text'	=> "Cart",
 			'url'	=> "customer/cart",
 			),
-		'FAVORITE_ITEM' => array(
+		'BILLING' => array(
 			'text'	=> "Billing",
 			'url'	=> "billing",
+			),
+		'ORDER_LIST' => array(
+			'text'	=> "Orders",
+			'url'	=> "customer/order_list",
 			),
 		'INBOX' => array(
 			'text'	=> "Inbox",

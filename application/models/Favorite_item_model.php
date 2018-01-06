@@ -90,7 +90,7 @@ class Favorite_item_model extends CI_Model {
 		$query = $this->db->get($this->table_favorite_item);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	// get item detail
@@ -104,7 +104,7 @@ class Favorite_item_model extends CI_Model {
 					  ->get($this->table_favorite_item, $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function is_favorite($customer_id, $posted_item_id)

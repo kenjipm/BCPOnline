@@ -113,7 +113,7 @@ class Deliverer_model extends CI_Model {
 		$query = $this->db->get($this->table_deliverer);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_by_account_id($account_id)
@@ -156,7 +156,7 @@ class Deliverer_model extends CI_Model {
 		$items = $query->result();		
 		//print_r($items);
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function insert_from_account($account_id)

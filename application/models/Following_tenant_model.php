@@ -111,7 +111,7 @@ class Following_tenant_model extends CI_Model {
 					  ->get($this->table_following_tenant, $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all()
@@ -119,7 +119,7 @@ class Following_tenant_model extends CI_Model {
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function insert($customer_id, $tenant_id)

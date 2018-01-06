@@ -9,7 +9,7 @@ class Billing_list_view_model extends CI_Model {
 	{
 		parent::__construct();
 		
-		$billings = array();
+		$this->billings = array();
 	}
 	
 	public function get($billings)

@@ -118,7 +118,7 @@ class Customer_model extends CI_Model {
 		$query = $this->db->get($this->table_customer);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_by_account_id($account_id)

@@ -210,7 +210,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_billing_id($billing_id)
@@ -224,7 +224,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_tenant_id()
@@ -242,7 +242,20 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_from_customer_id($customer_id)
+	{
+		$where['billing.customer_id'] = $customer_id;
+		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_collection_code($otp)
@@ -262,7 +275,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_collection_task_from_deliverer_id()
@@ -281,7 +294,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_deliver_task_from_deliverer_id()
@@ -301,7 +314,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function insert_from_cart($cart, $billing_id)
@@ -349,7 +362,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function update_natural_id($natural_id)
@@ -366,6 +379,63 @@ class Order_details_model extends CI_Model {
 		$this->db->set('order_status', ORDER_STATUS['name']['QUEUED'])
 				 ->where('billing_id', $billing_id)
 				 ->update($this->table_order_details);
+	}
+	
+	// otp_receiver_type: CUSTOMER, TENANT, DELIVERER
+	// otp_receiver_id: id dari Customer, Tenant, atau Deliverer yang akan memasukkan OTP
+	public function get_available_otp($otp_receiver_type, $otp_receiver_id)
+	{
+		$this->load->library('otp_generator');
+		$is_available = false;
+		$otp = '';
+		
+		$i = 0; //biar ga infinite loop
+		while ((!$is_available) && ($i < 100))
+		{
+			$otp = $this->otp_generator->generate();
+			$is_available = $this->is_otp_available($otp, $otp_receiver_type, $otp_receiver_id);
+			$i++;
+		}
+		
+		return $otp;
+	}
+	
+	// otp_receiver_type: CUSTOMER, TENANT, DELIVERER
+	// otp_receiver_id: id dari Customer, Tenant, atau Deliverer yang akan memasukkan OTP
+	public function is_otp_available($otp, $otp_receiver_type, $otp_receiver_id)
+	{
+		$result = false;
+		
+		if ($otp_receiver_type == TYPE['name']['CUSTOMER'])
+		{
+			$this->db->where('order_status', ORDER_STATUS['name']['PICKING_FROM_CUSTOMER']);
+			$this->db->where('customer_id', $otp_receiver_id);
+			$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+			$query = $this->db->get($this->table_order_details);
+			$result = ($query->result() == null);
+		}
+		else if ($otp_receiver_type == TYPE['name']['TENANT'])
+		{
+			$this->db->where('order_status', ORDER_STATUS['name']['PICKING_FROM_TENANT']);
+			$this->db->where('tenant_id', $otp_receiver_id);
+			$this->db->join('posted_item_variance', $this->table_order_details. '.posted_item_variance_id = posted_item_variance.id', 'left');
+			$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
+			$query = $this->db->get($this->table_order_details);
+			$result = ($query->result() == null);
+		}
+		else if ($otp_receiver_type == TYPE['name']['DELIVERER'])
+		{
+			$this->db
+				->group_start()
+					->where('order_status', ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'])
+					->or_where('order_status', ORDER_STATUS['name']['DELIVERING_TO_TENANT'])
+				->group_end()
+				->where('deliverer_id', $otp_receiver_id);
+			$query = $this->db->get($this->table_order_details);
+			$result = ($query->result() == null);
+		}
+		
+		return $result;
 	}
 	
 	public function init_billing()

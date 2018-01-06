@@ -105,7 +105,7 @@ class Payment_model extends CI_Model {
 		$query = $this->db->get($this->table_payment);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_billing_id($billing_id)
@@ -116,7 +116,7 @@ class Payment_model extends CI_Model {
 		$query = $this->db->get($this->table_payment);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function insert()

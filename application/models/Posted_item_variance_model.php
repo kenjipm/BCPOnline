@@ -115,7 +115,7 @@ class Posted_item_variance_model extends CI_Model {
 		$this->db->where('posted_item_id', $posted_item_id);
 		$query = $this->db->get($this->table_posted_item_variance);
 		$items = $query->result();
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 
 	
@@ -168,7 +168,7 @@ class Posted_item_variance_model extends CI_Model {
 		$query = $this->db->get($this->table_posted_item_variance);
 		$items = $query->result();
 
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function quantity_sub_from_cart($cart)

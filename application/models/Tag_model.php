@@ -81,7 +81,7 @@ class Tag_model extends CI_Model {
 		$query = $this->db->get($this->table_tag);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	// insert new account from form post

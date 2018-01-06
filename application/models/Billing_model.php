@@ -138,7 +138,7 @@ class Billing_model extends CI_Model {
 		$query = $this->db->get($this->table_billing);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	//get all billing
@@ -150,7 +150,7 @@ class Billing_model extends CI_Model {
 		$query = $this->db->get($this->table_billing);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	// get item detail

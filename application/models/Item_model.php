@@ -168,7 +168,7 @@ class Item_model extends CI_Model {
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_category_id($category_id)
@@ -180,7 +180,7 @@ class Item_model extends CI_Model {
 					  
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_following_tenants($following_tenants)
@@ -195,7 +195,7 @@ class Item_model extends CI_Model {
 					  ->get($this->table_item);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_from_tenant_id($tenant_id, $limit=99)
@@ -206,7 +206,7 @@ class Item_model extends CI_Model {
 					  ->get($this->table_item, $limit);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_from_search($keywords)
@@ -219,7 +219,7 @@ class Item_model extends CI_Model {
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	// insert new item from form post

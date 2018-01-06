@@ -126,7 +126,7 @@ class Negotiated_price_model extends CI_Model {
 		$query = $this->db->get($this->table_nego);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_by_item_id($item_id)
@@ -139,7 +139,7 @@ class Negotiated_price_model extends CI_Model {
 		$query = $this->db->get($this->table_nego);
 		$items = $query->result();
 		
-		return ($items !== null) ? $this->map_list($items) : null;
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	// insert new account from form post
