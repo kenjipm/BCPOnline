@@ -258,12 +258,11 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_otp_deliverer_to_tenant($otp)
+	public function get_all_from_otp_deliverer_to_tenant($otp, $tenant_id)
 	{
 		$this->load->model('Tenant_model');
-		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		
-		$where['posted_item.tenant_id'] = $cur_tenant->id;
+		$where['posted_item.tenant_id'] = $tenant_id;
 		$where[$this->table_order_details. '.otp_deliverer_to_tenant'] = $otp;
 		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
 		
@@ -274,6 +273,11 @@ class Order_details_model extends CI_Model {
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
+		
+		foreach($items as $item)
+		{
+			$this->update_order_status($item->id, ORDER_STATUS['name']['PICKING_FROM_TENANT'], ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER']);
+		}
 		
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
@@ -363,6 +367,15 @@ class Order_details_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function update_order_status($order_id, $cur_status, $status)
+	{
+		$cur_tenant_id = 
+		$this->db->set('order_status', $status)
+				 ->where('id', $order_id)
+				 ->where('order_status', $cur_status)
+				 ->update($this->table_order_details);
 	}
 	
 	public function update_natural_id($natural_id)
