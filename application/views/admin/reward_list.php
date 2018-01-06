@@ -49,34 +49,44 @@
 			<h3>Daftar Reward</h3>
 		</div>
 		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-2"> <label for="reward_id">ID</label>	</div>
-				<div class="col-xs-5"> <label for="reward_description">Deskripsi</label>	</div>
-				<div class="col-xs-3"> <label for="reward_date">Tanggal Berlaku</label> </div>
-				<div class="col-xs-2"> <label for="points_needed">Poin Dibutuhkan</label> </div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="reward_description">Reward</label></th>
+							<th> <label for="points_needed">Poin Dibutuhkan</label></th>
+							<th> <label for="reward_date">Tanggal Berlaku</label></th>	
+							<th> </th>	
+							<!--<th> </th>
+							<th> </th> -->
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->rewards as $reward)
+						{
+							?>
+							<tr>
+								<td>
+									<?=$reward->reward_description?> </td>
+								<td>
+									<?=$reward->points_needed?> </td>
+								<td>
+									<?=$reward->date_added?> s/d <?=$reward->date_expired?></td>
+								<td>
+									<button class="btn btn-default" onclick="popup.open('popup_reward_detail')">Lihat</button>
+									</td>
+								</a>
+							</tr>
+							<?php
+						}
+						?>	
+					</tbody>
+				</table>
+				<a class="btn btn-default" href="<?=site_url('reward/create_reward')?>">
+					Buat Reward
+				</a>
 			</div>
-			<?php
-			foreach($model->rewards as $reward)
-			{
-				?>
-				<div class="row list-group">
-					<a onclick="popup.open('popup_reward_detail')">
-						<div class="col-xs-2 list-group-item">
-							<?=$reward->reward_id?> </div>
-						<div class="col-xs-5 list-group-item">
-							<?=$reward->reward_description?> </div>
-						<div class="col-xs-3 list-group-item">
-							<?=$reward->date_added?> s/d <?=$reward->date_expired?></div>
-						<div class="col-xs-2 list-group-item">
-							<?=$reward->points_needed?> </div>
-					</a>
-				</div>
-				<?php
-			}
-			?>
-			<a class="btn btn-default" href="<?=site_url('reward/create_reward')?>">
-				Buat Reward
-			</a>	
 		</div>
 	</div>
 </div>
@@ -90,15 +100,7 @@
 			<form class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-2">
-						<label>ID Reward:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->rewards[0]->reward_id?>" class="form-control" id="id" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Deskripsi:</label>
+						<label>Reward:</label>
 					</div>
 					<div class="col-sm-10">
 						<input type="text" value="<?=$model->rewards[0]->reward_description?>" class="form-control" id="reward_description" readonly>

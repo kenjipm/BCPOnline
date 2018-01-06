@@ -43,7 +43,7 @@
 				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
 			</div>
 			<?php
-			foreach($model->billing_list as $billing)
+			foreach($model->billings as $billing)
 			{
 				?>
 				<div class="row list-group">
