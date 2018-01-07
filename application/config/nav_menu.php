@@ -42,6 +42,10 @@ $config['top_menu_customer'] = array(
 
 $config['top_menu_tenant'] = array(
 	'left' => array(
+		'ORDER' => array(
+			'text'	=> "Input OTP",
+			'url'	=> "order/order_list",
+			),
 		),
 	'right' => array(
 		'INBOX' => array(
@@ -82,6 +86,10 @@ $config['top_menu_admin'] = array(
 			),
 		),
 	'right' => array(
+		'ORDER' => array(
+			'text'	=> "Kirim Barang",
+			'url'	=> "order/order_list",
+			),
 		'ACCOUNT' => array(
 			'text'	=> "Account",
 			'url'	=> "account/account_list",

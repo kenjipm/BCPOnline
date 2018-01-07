@@ -79,9 +79,9 @@ class Order_details_model extends CI_Model {
 		$this->offered_price			= $db_item->offered_price;
 		$this->sold_price				= $db_item->sold_price;
 		$this->order_status				= $db_item->order_status;
-		$this->otp_deliverer_to_tenant			= $db_item->otp_deliverer_to_tenant;
+		$this->otp_deliverer_to_tenant		= $db_item->otp_deliverer_to_tenant;
 		$this->collection_method		= $db_item->collection_method;
-		$this->otp_customer_to_deliverer			= $db_item->otp_customer_to_deliverer;
+		$this->otp_customer_to_deliverer	= $db_item->otp_customer_to_deliverer;
 		$this->otp_tenant_to_deliverer		= $db_item->otp_tenant_to_deliverer;
 		$this->date_repr_decided		= $db_item->date_repr_decided;
 		$this->billing_id				= $db_item->billing_id;
@@ -104,9 +104,9 @@ class Order_details_model extends CI_Model {
 		$db_item->offered_price				= $this->offered_price;
 		$db_item->sold_price				= $this->sold_price;
 		$db_item->order_status				= $this->order_status;
-		$db_item->otp_deliverer_to_tenant			= $this->otp_deliverer_to_tenant;
+		$db_item->otp_deliverer_to_tenant		= $this->otp_deliverer_to_tenant;
 		$db_item->collection_method			= $this->collection_method;
-		$db_item->otp_customer_to_deliverer				= $this->otp_customer_to_deliverer;
+		$db_item->otp_customer_to_deliverer		= $this->otp_customer_to_deliverer;
 		$db_item->otp_tenant_to_deliverer		= $this->otp_tenant_to_deliverer;
 		$db_item->date_repr_decided			= $this->date_repr_decided;
 		$db_item->billing_id				= $this->billing_id;
@@ -129,10 +129,10 @@ class Order_details_model extends CI_Model {
 		$stub->offered_price			= $db_item->offered_price;
 		$stub->sold_price				= $db_item->sold_price;
 		$stub->order_status				= $db_item->order_status;
-		$stub->otp_deliverer_to_tenant			= $db_item->otp_deliverer_to_tenant;
+		$stub->otp_deliverer_to_tenant	= $db_item->otp_deliverer_to_tenant;
 		$stub->collection_method		= $db_item->collection_method;
-		$stub->otp_customer_to_deliverer			= $db_item->otp_customer_to_deliverer;
-		$stub->otp_tenant_to_deliverer		= $db_item->otp_tenant_to_deliverer;
+		$stub->otp_customer_to_deliverer = $db_item->otp_customer_to_deliverer;
+		$stub->otp_tenant_to_deliverer	= $db_item->otp_tenant_to_deliverer;
 		$stub->date_repr_decided		= $db_item->date_repr_decided;
 		$stub->billing_id				= $db_item->billing_id;
 		$stub->posted_item_variance_id	= $db_item->posted_item_variance_id;
@@ -146,10 +146,12 @@ class Order_details_model extends CI_Model {
 		
 		$stub->posted_item_variance->posted_item					= new Item_model();
 		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
+		$stub->posted_item_variance->posted_item->tenant_id			= $db_item->tenant_id ?? "";
 		
 		$stub->billing						= new Billing_model();
 		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
 		$stub->billing->date_created		= $db_item->date_created ?? "";
+		$stub->billing->customer_id			= $db_item->customer_id ?? "";
 		
 		$stub->billing->shipping_address					= new Shipping_address_model();
 		$stub->billing->shipping_address->address_detail	= $db_item->address_detail ?? "";
@@ -270,6 +272,8 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('deliverer', 'deliverer.id=' . $this->table_order_details . '.deliverer_id', 'left');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
@@ -367,6 +371,43 @@ class Order_details_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function assign_deliverer()
+	{
+		$temp_order_ids		= $this->input->post('order_id');
+		$temp_deliverer_ids	= $this->input->post('deliverer_id');
+		$otp_list			= array();
+		
+		$i = 0;
+		foreach($temp_order_ids as $temp_order_id)
+		{
+			$order_id 		= $this->input->post('order_id')[$i];
+			$deliverer_id	= $this->input->post('deliverer_id')[$i];
+			$tenant_id		= $this->input->post('tenant_id')[$i];
+			$customer_id	= $this->input->post('customer_id')[$i];
+			if (!isset($otp_list[$deliverer_id][$tenant_id]))
+			{
+				$otp_list[$deliverer_id][$tenant_id] = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
+			}
+			if (!isset($otp_list[$customer_id][$deliverer_id]))
+			{
+				$otp_list[$customer_id][$deliverer_id] = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
+			}
+			// update deliverer id for each order id
+			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+			
+			$this->db->set('deliverer_id', $deliverer_id);
+			$this->db->set('otp_deliverer_to_tenant', $otp_list[$deliverer_id][$tenant_id]);
+			$this->db->set('otp_customer_to_deliverer', $otp_list[$customer_id][$deliverer_id]);
+			$this->db->where('id', $order_id);
+			$this->db->update($this->table_order_details);
+			
+			$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
+			$this->db->trans_complete(); // selesai nge lock db transaction
+			
+			$i++;
+		}
 	}
 	
 	public function update_order_status($order_id, $cur_status, $status)

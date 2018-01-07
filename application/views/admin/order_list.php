@@ -52,17 +52,26 @@
 							foreach($model->order_list as $order)
 							{
 								?>
+								<div class="form-group" style="display:none">
+									<input type="text" class="form-control" name="order_id[]" value="<?=$order->id?>" readonly/>
+								</div>
+								<div class="form-group" style="display:none">
+									<input type="text" class="form-control" name="tenant_id[]" value="<?=$order->tenant_id?>" readonly/>
+								</div>
+								<div class="form-group" style="display:none">
+									<input type="text" class="form-control" name="tenant_id[]" value="<?=$order->customer_id?>" readonly/>
+								</div>
 								<tr>
 									<td><?=$order->posted_item?></td>
 									<td><?=$order->address?></td>
 									<td><?=$order->collection_method?></td>
 									<td>
-										<select class="form-control" name="deliverer_id">
+										<select class="form-control" name="deliverer_id[]">
 										<?php
-										foreach ($model->idle_deliverer as $idle_deliverer)
+										foreach ($model->idle_deliverer as $deliverer)
 										{
 											?>
-											<option value="<?=$idle_deliverer->id?>"><?=$idle_deliverer->name?></option>			
+											<option value="<?=$deliverer->id?>"><?=$deliverer->name?></option>			
 											<?php
 											$i++;
 										}
