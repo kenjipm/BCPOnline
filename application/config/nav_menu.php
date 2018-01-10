@@ -25,10 +25,10 @@ $config['top_menu_customer'] = array(
 			'text'	=> "Billing",
 			'url'	=> "billing",
 			),
-		'ORDER_LIST' => array(
-			'text'	=> "Orders",
-			'url'	=> "customer/order_list",
-			),
+		// 'ORDER_LIST' => array(
+			// 'text'	=> "Orders",
+			// 'url'	=> "customer/order_list",
+			// ),
 		'INBOX' => array(
 			'text'	=> "Inbox",
 			'url'	=> "message",

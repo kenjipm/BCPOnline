@@ -11,6 +11,10 @@
 							<img src="<?=$model->tenant->account->profile_pic?>" alt="<?=$model->tenant->tenant_name?>" style="width:100%">
 						</div>
 						<button type="button" class="btn btn-default col-md-12 <?= $model->tenant->btn_class ?>" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->tenant->id?>)"><?= $model->tenant->btn_text ?></button>
+						<form method="post" action="<?=site_url('message/open_detail_do')?>">
+							<input type="hidden" name="receiver_account_id" value="<?=$model->tenant->account_id?>"/>
+							<button type="submit" class="btn btn-default col-md-12" id="btn-send_message">Kirim Pesan</button>
+						</form>
 					</div>
 					<div class="col-md-9">
 						<div class="row"><?=$model->tenant->tenant_name?></div>

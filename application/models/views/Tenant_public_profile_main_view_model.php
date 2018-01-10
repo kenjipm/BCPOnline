@@ -20,6 +20,7 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 		$tenant->init_account();
 		
 		$this->tenant->id			= $tenant->id;
+		$this->tenant->account_id	= $tenant->account_id;
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		
 		$this->tenant->account->profile_pic	= $tenant->account->profile_pic;
