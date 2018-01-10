@@ -529,6 +529,20 @@ class Order_details_model extends CI_Model {
 		return $result;
 	}
 	
+	public function get_tenants_to_pay()
+	{
+		$where[$this->table_order_details.'.tnt_paid_receipt_id'] = null;
+		
+		$this->db->join('posted_item_variance', $this->table_order_details. '.posted_item_variance_id=posted_item_variance.id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function init_billing()
 	{
 		$this->billing = $this->billing->get_from_id($this->billing_id);
