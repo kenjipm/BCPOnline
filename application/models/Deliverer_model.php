@@ -163,8 +163,8 @@ class Deliverer_model extends CI_Model {
 	{
 		$this->account_id			= $account_id;
 		$this->deliverer_id			= "";
-		$this->license_plate		= "";
-		$this->vehicle_desc			= "";
+		$this->license_plate		= $this->input->post('license_plate');
+		$this->vehicle_desc			= $this->input->post('vehicle_desc');
 		
 		$this->db->trans_start();
 		
