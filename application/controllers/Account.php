@@ -99,6 +99,9 @@ class Account extends CI_Controller {
 	
 	public function create_tenant()
 	{
+		// kalau signup account baru
+		if ($this->input->method() == "post") $this->create_tenant_do();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -114,6 +117,9 @@ class Account extends CI_Controller {
 	
 	public function create_deliverer()
 	{
+		// kalau signup account baru
+		if ($this->input->method() == "post") $this->create_deliverer_do();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -143,6 +149,58 @@ class Account extends CI_Controller {
 		{
 			$this->load->model('Account_model');
 			$this->Account_model->insert_from_post(TYPE['name']['CUSTOMER']);
+			
+			redirect('account/signup_success');
+		}
+	}
+	
+	public function create_tenant_do()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('tenant_name', 'Nama Tenant', 'required');
+		$this->form_validation->set_rules('unit_number', 'Nomor Unit', 'required');
+		$this->form_validation->set_rules('floor', 'Nomor Lantai', 'required');
+		$this->form_validation->set_rules('selling_category', 'Kategori', 'required');
+		
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('address', 'Alamat', 'required');
+		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
+		$this->form_validation->set_rules('identification_no', 'No KTP', 'required');
+		
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->insert_from_post(TYPE['name']['TENANT']);
+			
+			redirect('account/signup_success');
+		}
+	}
+	
+	public function create_deliverer_do()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('license_plate', 'Nomor Plat', 'required');
+		$this->form_validation->set_rules('vehicle_desc', 'Deskripsi Kendaraan', 'required');
+		
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('address', 'Alamat', 'required');
+		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
+		$this->form_validation->set_rules('identification_no', 'No KTP', 'required');
+		
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
+
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->insert_from_post(TYPE['name']['DELIVERER']);
 			
 			redirect('account/signup_success');
 		}

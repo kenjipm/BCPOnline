@@ -72,7 +72,7 @@
 					<thead>
 						<tr>
 							<th> <label for="address">Alamat</label> </th>
-							<th></th>
+							<th> <label for="customer">Nama Customer</label> </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -83,12 +83,8 @@
 							{
 								?>
 								<tr>
-									<td><?=$deliver->address?></td>
-									<td>
-										<div id="otp">
-											<button type="button" class="btn btn-default" onclick="popup.open('popup_otp')">Masukkan Kode OTP</button>
-										</div>
-									</td>
+									<td><?=$deliver->address . ", " . $deliver->city . ", Kecamatan " . $deliver->kecamatan . ", Kelurahan " . $deliver->kelurahan . ", " . $deliver->postal_code?></td>
+									<td><?=$deliver->customer?></td>
 								</tr>
 								<?php
 							}
@@ -96,35 +92,20 @@
 						?>
 					</tbody>
 				</table>
+				<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
+					<div class="form-group">
+						<div class="col-sm-2">
+							<label>Masukkan OTP:</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" name="otp"/>
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-default" type="submit" class="btn btn-default">Kirim</button>
+						</div>
+					</div>
+				</form>	
 			</div>
-			
-		</div>
-	</div>
-</div>
-
-<div id="popup_otp" class="popup popup-md">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Kode OTP
-		</div>
-		<div class="panel-body">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-12">
-						<label>Masukkan Kode OTP:</label>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-4 col-sm-offset-4">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-7 col-sm-offset-5">
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_otp')">Kirim</button>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>

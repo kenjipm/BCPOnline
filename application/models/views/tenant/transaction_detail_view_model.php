@@ -19,7 +19,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->var_type	 			= $item->posted_item_variance->var_type;
 		$this->transaction_detail->var_description 		= $item->posted_item_variance->var_description;
 		$this->transaction_detail->quantity				= $item->quantity;
-		$this->transaction_detail->order_status			= $item->order_status;
+		$this->transaction_detail->order_status			= ORDER_STATUS['description'][$item->order_status];
 		$this->transaction_detail->date_created			= $item->billing->date_created;
 		$this->transaction_detail->deliverer			= $item->deliverer->account->name;
 		$this->transaction_detail->collection_method	= $item->collection_method;

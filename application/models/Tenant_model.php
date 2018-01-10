@@ -15,9 +15,6 @@ class Tenant_model extends CI_Model {
 	
 	public $account;
 	
-	// relation table
-	public $items;
-	
 	// constructor
 	public function __construct()
 	{
@@ -143,9 +140,10 @@ class Tenant_model extends CI_Model {
 	{
 		$this->account_id			= $account_id;
 		$this->tenant_id			= "";
-		$this->unit_number			= "";
-		$this->floor				= "";
-		$this->selling_category		= "";
+		$this->tenant_name			= $this->input->post('tenant_name');
+		$this->unit_number			= $this->input->post('unit_number');
+		$this->floor				= $this->input->post('floor');
+		$this->selling_category		= $this->input->post('selling_category');
 		$this->is_open				= false;
 		
 		$this->db->trans_start();

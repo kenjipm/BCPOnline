@@ -1,6 +1,6 @@
-var i = 0;
-
 function add_variance(){
+	var i = 0;
+
 	var desc = document.getElementsByName("var_desc")[0].value;
 	var quantity_available = document.getElementsByName("quantity_available")[0].value;
 	var image_two = document.getElementsByName("image_two_name")[0].value;

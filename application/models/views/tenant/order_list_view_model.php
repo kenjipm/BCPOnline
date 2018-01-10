@@ -1,6 +1,6 @@
 <?php
 
-class Billing_List_View_Model extends CI_Model{
+class Order_List_View_Model extends CI_Model{
 	
 	public $orders;
 	public $items;

@@ -36,7 +36,7 @@
 			<h3>Barang untuk Dikirim</h3>
 		</div>
 		<div class="panel-body">
-			<form action="<?=site_url('billing')?>" class="form-horizontal" method="post">
+			<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-2">
 						<label>Masukkan OTP:</label>
@@ -49,45 +49,6 @@
 					</div>
 				</div>
 			</form>	
-		</div>
-		<div class="panel-body" id="item_list" style="display:none">
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered">
-					<thead>
-						<tr>
-							<th> <label for="posted_item">Barang</label></th>
-							<th> <label for="sold_price">Harga</label></th>
-							<th> <label for="posted_item_variance">Keterangan</label> </th>
-							<th> </th>
-						</tr>
-					</thead>
-					<tbody>
-						<?php
-						if($model->items)
-						{
-							foreach($model->items as $item)
-							{
-								?>
-								<tr>
-									<td>
-										<?=$item->posted_item_name?> </td>
-									<td>
-										<?=$item->sold_price?> </td>
-									<td>
-										<?=$item->posted_item_variance->type.": ". $item->posted_item_variance->description?> </td>
-									<td>
-										<a href="<?=site_url('billing/detail/'.$item->id)?>">
-											<button class="btn btn-default">Lihat</button>
-										</a>
-									</td>
-								</tr>
-								<?php
-							}
-						}
-						?>
-					</tbody>
-				</table>
-			</div>
 		</div>
 	</div>
 </div>
@@ -126,7 +87,7 @@
 									<td>
 										<?=$order->sold_price?> </td>
 									<td>
-										<a href="<?=site_url('billing/detail/'.$order->id)?>">
+										<a href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 											<button class="btn btn-default">Lihat</button>
 										</a>
 									</td>

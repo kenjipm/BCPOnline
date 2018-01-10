@@ -77,9 +77,6 @@
 						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')">Lihat Ulasan</button>
 					</div>
 				</div>
-				<a href="">
-					<button class="btn btn-default">Masukkan Harga Servis</button>
-				</a>
 				<a href="<?=site_url('dispute/'.$model->transaction_detail->id)?>">
 					<button class="btn btn-default">Komplain</button>
 				</a>
@@ -97,7 +94,7 @@
 <div id="popup_review" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Ulas Barang
+			Ulasan Barang
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal">

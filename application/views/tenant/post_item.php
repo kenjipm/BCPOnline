@@ -7,8 +7,8 @@
 		<!-- CHOOSE TYPE FIRST -->
 		<div class="panel-body" id="choose_type_button" style="display:block">
 			<div class="form-group">
-				<div class="col-xs-6"><button class="btn btn-default" onclick="input_order()">Barang</button></div>
-				<div class="col-xs-6"><button class="btn btn-default" onclick="input_repair()">Servis</button></div>
+				<div class="col-xs-6"><button class="btn btn-default" onclick="input_order()" type="button" >Barang</button></div>
+				<div class="col-xs-6"><button class="btn btn-default" onclick="input_repair()" type="button" >Servis</button></div>
 			</div>
 		</div>
 		
@@ -90,7 +90,7 @@
 						<input type="text" class="form-control" name="var_desc[]" readonly/>
 					</div>
 					<div class="col-sm-2">
-						<button onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</button>
+						<button type="button" onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</button>
 					</div>
 
 					<div><input name="quantity_available[]" type="text" class="form-control" style="display:none"/></div>
