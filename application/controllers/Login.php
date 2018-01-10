@@ -107,7 +107,7 @@ class Login extends CI_Controller {
 		}
 		else if ($type == TYPE['name']['DELIVERER'])
 		{
-			redirect('dashboard');
+			redirect('order/order_list');
 		}
 	}
 }

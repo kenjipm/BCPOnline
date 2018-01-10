@@ -108,7 +108,7 @@ class Order extends CI_Controller {
 		else if ($this->session->userdata('type') == TYPE['name']['TENANT'])
 		{
 			// OTP INPUT
-			if ($this->input->method() == "post") $this->get_item_do();
+			if ($this->input->method() == "post") $this->get_item_tenant_do();
 			
 			$this->load->model('Order_details_model');
 			$orders = $this->Order_details_model->get_all_from_tenant_id();
@@ -121,6 +121,9 @@ class Order extends CI_Controller {
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['DELIVERER'])
 		{
+			// OTP INPUT
+			if ($this->input->method() == "post") $this->get_item_deliverer_do();
+			
 			$this->load->model('Order_details_model');
 			$orders = $this->Order_details_model->get_collection_task_from_deliverer_id();
 			$delivers = $this->Order_details_model->get_deliver_task_from_deliverer_id();
@@ -136,7 +139,7 @@ class Order extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function get_item_do()
+	public function get_item_tenant_do()
 	{
 		$this->load->model('Order_details_model');
 		$orders = $this->Order_details_model->get_all_from_otp_deliverer_to_tenant($this->input->post('otp'), $this->session->child_id);
@@ -146,6 +149,19 @@ class Order extends CI_Controller {
 		$data['model'] = $this->order_detail_view_model;
 		
 		$this->load->view('tenant/order_detail', $data);
+	
+	}
+	
+	public function get_item_deliverer_do()
+	{
+		$this->load->model('Order_details_model');
+		$orders = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('otp'), $this->session->child_id);
+		
+		$this->load->model('views/deliverer/order_detail_view_model');
+		$this->order_detail_view_model->get($orders);
+		$data['model'] = $this->order_detail_view_model;
+		
+		$this->load->view('deliverer/order_detail', $data);
 	
 	}
 	
