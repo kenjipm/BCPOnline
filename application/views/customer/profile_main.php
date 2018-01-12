@@ -8,7 +8,7 @@
 				<input type="hidden" name="id" value="<?=$this->session->id?>"/>
 			
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="profile_pic">Foto Profil:</label>
+					<label class="control-label col-xs-3">Foto Profil:</label>
 					<div class="col-xs-3">
 					
 						<label for="profile_pic">
@@ -49,7 +49,7 @@
 					<div class="col-xs-4"><input type="text" class="form-control" id="date_joined" name="date_joined" value="<?=$model->account->date_joined?>" readonly/></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="identification_pic">Foto Kartu ID:</label>
+					<label class="control-label col-xs-3">Foto Kartu ID:</label>
 					<div class="col-xs-3">
 					
 						<label for="identification_pic">

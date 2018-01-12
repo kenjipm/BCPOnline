@@ -25,6 +25,8 @@ class Profile_main_view_model extends CI_Model {
 		
 		$this->account->identification_pic = site_url(($account->identification_pic !== "") ? $account->identification_pic : DEFAULT_IDENTIFICATION_PIC);
 		$this->account->profile_pic = site_url(($account->profile_pic !== "") ? $account->profile_pic : DEFAULT_PROFILE_PIC);
+		
+		$this->account->profile_pic .= "?t=".time();
 	}
 }
 ?>

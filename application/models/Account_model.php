@@ -45,7 +45,7 @@ class Account_model extends CI_Model {
 		$this->identification_no	= "";
 		$this->identification_pic	= "";
 		$this->status				= "";
-		$this->date_joined			= "";
+		$this->date_joined			= date("Y-m-d H:i:s");
 		$this->profile_pic			= "";
 		
 		$this->type					= "";
