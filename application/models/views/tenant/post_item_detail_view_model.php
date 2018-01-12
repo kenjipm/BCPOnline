@@ -20,7 +20,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		$this->posted_item->item_type 				= $item->item_type;
 		$this->posted_item->unit_weight				= $item->unit_weight;
 		$this->posted_item->posted_item_description	= $item->posted_item_description;
-		$this->posted_item->image_one_name			= $item->image_one_name;
+		$this->posted_item->image_one_name			= site_url($item->image_one_name);
 		
 		$this->posted_item->category				= new class{};
 		$this->posted_item->category->category_name	= $item->category->category_name;
