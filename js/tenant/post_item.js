@@ -1,9 +1,7 @@
-var i = 0;
 
 function input_order(){
 	document.getElementById("choose_type_button").style.display = 'none';
 	document.getElementById("choose_order").style.display = 'block';
-	document.getElementById("item_type").value = 'ORDER';
 	
 	document.getElementsByName("posted_item_description")[1].value = '';
 }
@@ -11,7 +9,6 @@ function input_order(){
 function input_repair(){
 	document.getElementById("choose_type_button").style.display = 'none';
 	document.getElementById("choose_repair").style.display = 'block';
-	document.getElementById("item_type").value = 'REPAIR';
 	
 	document.getElementsByName("posted_item_name")[0].value = '';
 	document.getElementsByName("price")[0].value = 25000;
