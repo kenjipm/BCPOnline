@@ -52,7 +52,7 @@
 						value="<?=$model->posted_item->posted_item_description?>" readonly></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="image_one_name">Gambar:</label>
+					<label class="control-label col-xs-3">Gambar:</label>
 					<div class="col-xs-3">
 					
 						<label for="image_one_name">

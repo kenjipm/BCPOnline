@@ -48,7 +48,7 @@ class Item_model extends CI_Model {
 		$this->item_type				= "";
 		$this->unit_weight				= "";
 		$this->posted_item_description	= "";
-		$this->image_one_name			= "";
+		$this->image_one_name			= DEFAULT_ITEM_IMAGE;
 		$this->category_id				= "";
 		$this->tenant_id				= "";
 		$this->brand_id					= "";

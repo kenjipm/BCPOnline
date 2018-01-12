@@ -6,7 +6,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 	public $nego_price;
 	// constructor
 	public function __construct()
-	{	
+	{
 	}
 	
 	public function get($item, $posted_item_variances, $negotiated_prices)
