@@ -28,9 +28,9 @@ class Posted_item_variance_model extends CI_Model {
 		$this->var_type				= "";
 		$this->var_description		= "";
 		$this->quantity_available	= 0;
-		$this->image_two_name		= "";
-		$this->image_three_name		= "";
-		$this->image_four_name		= "";
+		$this->image_two_name		= DEFAULT_ITEM_IMAGE;
+		$this->image_three_name		= DEFAULT_ITEM_IMAGE;
+		$this->image_four_name		= DEFAULT_ITEM_IMAGE;
 		$this->posted_item_id		= 0;
 
 		$this->load->model('item_model');

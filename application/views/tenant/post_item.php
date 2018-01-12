@@ -15,7 +15,7 @@
 		
 		<!-- ORDER -->
 		<div class="panel-body" id="choose_order" style="display:none">
-			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post">
+			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="item_type" value="ORDER"/>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="name">Nama:</label>
@@ -39,7 +39,13 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
 					<div class="col-xs-9">
-						<input id="image_one_name" name="image_one_name" value="<?= set_value('image_one_name'); ?>" data-url="<?=site_url('item/upload_image')?>" type="file" class="photo_upload_simple"/>
+						<label for="image_one_name">
+							<!--<div id="thumbnail-image_one_name" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+							</div>-->
+						</label>
+						<input id="image_one_name" name="image_one_name" type="file" class="photo_upload_simple"/>
+						
 					</div>
 				</div>
 				<div class="form-group">

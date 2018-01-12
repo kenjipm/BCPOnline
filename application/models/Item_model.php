@@ -48,7 +48,7 @@ class Item_model extends CI_Model {
 		$this->item_type				= "";
 		$this->unit_weight				= "";
 		$this->posted_item_description	= "";
-		$this->image_one_name			= "";
+		$this->image_one_name			= DEFAULT_ITEM_IMAGE;
 		$this->category_id				= "";
 		$this->tenant_id				= "";
 		$this->brand_id					= "";
@@ -247,7 +247,6 @@ class Item_model extends CI_Model {
 		$this->item_type				= $this->input->post('item_type');
 		$this->unit_weight				= $this->input->post('unit_weight');
 		$this->posted_item_description	= $this->input->post('posted_item_description');
-		$this->image_one_name			= $this->input->post('image_one_name');
 		$this->category_id				= $this->input->post('category_id');
 		$this->tenant_id				= $cur_tenant->id;
 		$this->brand_id					= $this->input->post('brand_id');
@@ -268,6 +267,8 @@ class Item_model extends CI_Model {
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_item, $db_item);
 		}
+		
+		$this->upload_image($this->id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
@@ -300,16 +301,35 @@ class Item_model extends CI_Model {
 		return $this->tenant;
 	}
 	
-	public function update_profile_pic($id, $file_path)
+	public function upload_image($id)
 	{
-		// update data
-		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
 		
-		$this->db->where('id', $id);
-		$this->db->set('image_one_name', $file_path);
-		$this->db->update($this->table_item);
+		$config_upload_image = $this->config->item('upload_image');
+		$config_upload_image['upload_path'] .= $this->session->account_id."/".$this->posted_item_id."/";
+
+		$this->load->library('upload', $config_upload_image);
 		
-		$this->db->trans_complete(); // selesai nge lock db transaction
+		if ($_FILES['image_one_name']['name'])
+		{
+			if (!is_dir($config_upload_image['upload_path'])) {
+				mkdir($config_upload_image['upload_path'], 0777, true);
+			}
+			if (!$this->upload->do_upload('image_one_name'))
+			{
+				$data['error'] = $this->upload->display_errors('', '');
+			}
+			else $file_path['image_one_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->db->set('image_one_name', $file_path['image_one_name']);
+			$this->db->where('id', $id);
+			$this->db->update($this->table_item);
+		}
 	}
 	
 	/*
