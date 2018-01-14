@@ -59,7 +59,7 @@
 									<input type="text" class="form-control" name="tenant_id[]" value="<?=$order->tenant_id?>" readonly/>
 								</div>
 								<div class="form-group" style="display:none">
-									<input type="text" class="form-control" name="tenant_id[]" value="<?=$order->customer_id?>" readonly/>
+									<input type="text" class="form-control" name="customer_id[]" value="<?=$order->customer_id?>" readonly/>
 								</div>
 								<tr>
 									<td><?=$order->posted_item?></td>

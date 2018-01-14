@@ -416,13 +416,12 @@ class Order_details_model extends CI_Model {
 		$temp_deliverer_ids	= $this->input->post('deliverer_id');
 		$otp_list			= array();
 		
-		$i = 0;
-		foreach($temp_order_ids as $temp_order_id)
+		foreach($temp_order_ids as $key => $temp_order_id)
 		{
-			$order_id 		= $this->input->post('order_id')[$i];
-			$deliverer_id	= $this->input->post('deliverer_id')[$i];
-			$tenant_id		= $this->input->post('tenant_id')[$i];
-			$customer_id	= $this->input->post('customer_id')[$i];
+			$order_id 		= $this->input->post('order_id')[$key];
+			$deliverer_id	= $this->input->post('deliverer_id')[$key];
+			$tenant_id		= $this->input->post('tenant_id')[$key];
+			$customer_id	= $this->input->post('customer_id')[$key];
 			if (!isset($otp_list[$deliverer_id][$tenant_id]))
 			{
 				$otp_list[$deliverer_id][$tenant_id] = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
@@ -443,7 +442,6 @@ class Order_details_model extends CI_Model {
 			$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
 			$this->db->trans_complete(); // selesai nge lock db transaction
 			
-			$i++;
 		}
 	}
 	
