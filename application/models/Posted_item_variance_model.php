@@ -236,9 +236,9 @@ class Posted_item_variance_model extends CI_Model {
 		
 		if (count($data['error']) == 0)
 		{
-			$this->db->set('image_two_name', $file_path['image_two_name']);
-			$this->db->set('image_three_name', $file_path['image_three_name']);
-			$this->db->set('image_four_name', $file_path['image_four_name']);
+			if (isset($file_path['image_two_name'])) $this->db->set('image_two_name', $file_path['image_two_name']);
+			if (isset($file_path['image_three_name'])) $this->db->set('image_three_name', $file_path['image_three_name']);
+			if (isset($file_path['image_four_name'])) $this->db->set('image_four_name', $file_path['image_four_name']);
 			$this->db->where('id', $id);
 			$this->db->update($this->table_posted_item_variance);
 		}

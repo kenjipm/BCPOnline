@@ -28,10 +28,10 @@
 							foreach ($model->item_variances as $item_variance)
 							{
 								?>
-								<div class="col-md-1">
+								<div class="col-md-2">
 									<!--<div class="panel panel-default">
 										<div class="panel-body">-->
-											<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>"/>
+											<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" style="width:100%"/>
 										<!--</div>
 									</div>-->
 								</div>

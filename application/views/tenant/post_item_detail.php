@@ -92,13 +92,13 @@
 						<label class="control-label col-xs-2 col-xs-offset-3" for="image_two_name">Gambar:</label>
 						<div class="col-xs-7">
 							<div id="thumbnail-image_two_name" class="thumbnail thumbnail-hover">
-								<img src="<?=$model->posted_item->image_two_name[$i]?>" alt="<?=$model->posted_item->image_two_name[$i]?>" style="width:100%">
+								<img src="<?=$model->posted_item->image_two_name[$i]?>" alt="<?=$model->posted_item->image_two_name[$i]?>" />
 							</div>
 							<div id="thumbnail-image_three_name" class="thumbnail thumbnail-hover">
-								<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="<?=$model->posted_item->image_three_name[$i]?>" style="width:100%">
+								<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="<?=$model->posted_item->image_three_name[$i]?>" />
 							</div>
 							<div id="thumbnail-image_four_name" class="thumbnail thumbnail-hover">
-								<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="<?=$model->posted_item->image_four_name[$i]?>" style="width:100%">
+								<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="<?=$model->posted_item->image_four_name[$i]?>" />
 							</div>
 						</div>
 					</div>

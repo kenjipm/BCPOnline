@@ -19,7 +19,7 @@ class Search_view_model extends CI_Model {
 			$temp->id = $item->id;
 			$temp->posted_item_name = $item->posted_item_name;
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
-			$temp->image_one_name = $item->image_one_name;
+			$temp->image_one_name = site_url($item->image_one_name);
 			
 			$this->search_items[] = $temp;
 		}
