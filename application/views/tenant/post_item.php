@@ -99,13 +99,15 @@
 				</div>
 			</form>
 			<div class="template" id="div_variance">
-				<div class='col-xs-7 col-xs-offset-3'>
+				<div class='col-xs-9 col-xs-offset-3'>
 					<input name='var_desc[]' type='text' class='form-control' readonly/>
+					<input name='quantity_available[]' type='text' class="form-control" readonly/>
 				</div>
-				<input name='quantity_available[]' type='hidden'/>
-				<input name='image_two_name[]' type='hidden'/>			
-				<input name='image_three_name[]' type='hidden'/>	
-				<input name='image_four_name[]' type='hidden'/>
+				<div class='col-xs-9 col-xs-offset-3'>
+					<input name='image_two_name[]' type='file' class="photo_upload_simple"/>			
+					<input name='image_three_name[]' type='file' class="photo_upload_simple"/>	
+					<input name='image_four_name[]' type='file' class="photo_upload_simple"/>
+				</div>
 			</div>
 		</div>
 		
@@ -165,18 +167,6 @@
 					<div class="col-sm-10">
 						<input type="text" class="form-control" id="quantity_available">
 					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2" for="image2">Unggah Gambar:</label>
-					<div class="col-sm-10"><input type="file" class="form-control" id="image_two_name"/></div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2" for="image3">Unggah Gambar:</label>
-					<div class="col-sm-10"><input type="file" class="form-control" id="image_three_name"/></div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2" for="image4">Unggah Gambar:</label>
-					<div class="col-sm-10"><input type="file" class="form-control" id="image_four_name"/></div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">

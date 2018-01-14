@@ -33,9 +33,9 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$this->posted_item->var_type[$i] 			= $posted_item_variance->var_type;
 			$this->posted_item->var_desc[$i] 			= $posted_item_variance->var_description;
 			$this->posted_item->quantity_available[$i] 	= $posted_item_variance->quantity_available;
-			$this->posted_item->image_two_name[$i] 		= $posted_item_variance->image_two_name;
-			$this->posted_item->image_three_name[$i] 	= $posted_item_variance->image_three_name;
-			$this->posted_item->image_four_name[$i] 	= $posted_item_variance->image_four_name;
+			$this->posted_item->image_two_name[$i] 		= site_url($posted_item_variance->image_two_name);
+			$this->posted_item->image_three_name[$i] 	= site_url($posted_item_variance->image_three_name);
+			$this->posted_item->image_four_name[$i] 	= site_url($posted_item_variance->image_four_name);
 			
 			$i++;
 		}

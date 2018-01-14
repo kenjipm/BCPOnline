@@ -90,9 +90,17 @@
 						<label class="control-label col-xs-2 col-xs-offset-3" for="quantity_available">Stok:</label>
 						<div class="col-xs-7"><input type="text" class="form-control" name="quantity_available" value="<?=$model->posted_item->quantity_available[$i]?>" readonly></div>
 						<label class="control-label col-xs-2 col-xs-offset-3" for="image_two_name">Gambar:</label>
-						<div class="col-xs-7"><input type="text" class="form-control" name="image_two_name" value="<?=$model->posted_item->image_two_name[$i]?>" readonly></div>
-						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_three_name" value="<?=$model->posted_item->image_three_name[$i]?>" readonly></div>
-						<div class="col-xs-7 col-xs-offset-5"><input type="text" class="form-control" name="image_four_name" value="<?=$model->posted_item->image_four_name[$i]?>" readonly></div>
+						<div class="col-xs-7">
+							<div id="thumbnail-image_two_name" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->posted_item->image_two_name[$i]?>" alt="<?=$model->posted_item->image_two_name[$i]?>" style="width:100%">
+							</div>
+							<div id="thumbnail-image_three_name" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="<?=$model->posted_item->image_three_name[$i]?>" style="width:100%">
+							</div>
+							<div id="thumbnail-image_four_name" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="<?=$model->posted_item->image_four_name[$i]?>" style="width:100%">
+							</div>
+						</div>
 					</div>
 					<?php
 					$i++;
