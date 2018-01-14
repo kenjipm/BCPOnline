@@ -22,7 +22,7 @@ class Message_text_model extends CI_Model {
 		parent::__construct();
 		
 		$this->id					= 0;
-		$this->date_sent			= "";
+		$this->date_sent			= date("Y-m-d H:i:s");
 		$this->text					= "";
 		$this->sender_id			= "";
 		$this->message_inbox_id		= "";
@@ -116,6 +116,20 @@ class Message_text_model extends CI_Model {
 		$result = $query->row();
 		
 		return ($result !== null) ? $this->get_stub_from_db($result) : null;
+	}
+	
+	public function insert_from_stub()
+	{
+		$db_item = $this->get_db_from_stub();
+		
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->insert($this->table_message_text, $db_item);
+		$this->id	= $this->db->insert_id();
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+		
+		return $this->id;
 	}
 	
 	public function insert_from_post()

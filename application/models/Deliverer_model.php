@@ -89,20 +89,17 @@ class Deliverer_model extends CI_Model {
 		return $result;
 	}
 	
-	// get deliverer detail
-	// public function get_from_id($id)
-	// {
-		// $where['posted_item.id'] = $id;
+	public function get_from_id($id)
+	{
+		$where['deliverer.id'] = $id;
 		
-		// $this->db->select('*, ' . $this->table_item.'.id AS id');
-		// $this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
-		// $this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
-		// $this->db->where($where);
-		// $query = $this->db->get($this->table_item, 1);
-		// $item = $query->row();
+		$this->db->select('*, ' . $this->table_deliverer.'.id AS id');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_deliverer, 1);
+		$item = $query->row();
 		
-		// return ($item !== null) ? $this->get_stub_from_db($item) : null;
-	// }
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
 	
 	public function get_all()
 	{
@@ -187,6 +184,12 @@ class Deliverer_model extends CI_Model {
 				 ->update($this->table_deliverer);
 		
 		$this->db->trans_complete();
+	}
+	
+	public function init_account()
+	{
+		$this->account = $this->account->get_from_id($this->account_id);
+		return $this->account;
 	}
 }
 

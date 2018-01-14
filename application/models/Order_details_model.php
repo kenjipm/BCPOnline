@@ -440,8 +440,16 @@ class Order_details_model extends CI_Model {
 			$this->db->update($this->table_order_details);
 			
 			$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
+			
 			$this->db->trans_complete(); // selesai nge lock db transaction
 			
+		}
+		foreach($otp_list as $customer_id => $otp_deliverer)
+		{
+			foreach($otp_deliverer as $deliverer_id => $otp)
+			{
+				$this->send_otp_to_customer($customer_id, $deliverer_id, $otp);
+			}
 		}
 	}
 	
@@ -525,6 +533,32 @@ class Order_details_model extends CI_Model {
 		}
 		
 		return $result;
+	}
+	
+	public function send_otp_to_customer($customer_id, $deliverer_id, $otp)
+	{
+		$cur_customer = $this->customer_model->get_from_id($customer_id);
+		
+		$cur_deliverer = $this->Deliverer_model->get_from_id($deliverer_id);
+		$cur_deliverer->init_account();
+		
+		$this->load->model('Message_inbox_model');
+		$party_one_id = $this->session->id;
+		$party_two_id = $cur_customer->account_id;
+		$cur_message_inbox = $this->Message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
+		
+		if ($cur_message_inbox == null)
+		{
+			$cur_message_inbox = new Message_inbox_model();
+			$cur_message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
+		}
+		
+		$this->load->model('Message_text_model');
+		$cur_message_text = new Message_text_model();
+		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
+		$cur_message_text->sender_id = $this->session->id;
+		$cur_message_text->text = "Nama Pengirim: " . $cur_deliverer->account->name . ", Kode OTP: ". $otp;
+		$cur_message_text->insert_from_stub();
 	}
 	
 	public function get_tenants_to_pay()

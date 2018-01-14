@@ -159,6 +159,12 @@ class Customer_model extends CI_Model {
 		
 		$this->db->trans_complete();
 	}
+	
+	public function init_account()
+	{
+		$this->account = $this->account->get_from_id($this->account_id);
+		return $this->account;
+	}
 }
 
 ?>
