@@ -539,22 +539,22 @@ class Order_details_model extends CI_Model {
 	{
 		$cur_customer = $this->customer_model->get_from_id($customer_id);
 		
-		$cur_deliverer = $this->Deliverer_model->get_from_id($deliverer_id);
+		$cur_deliverer = $this->deliverer_model->get_from_id($deliverer_id);
 		$cur_deliverer->init_account();
 		
-		$this->load->model('Message_inbox_model');
+		$this->load->model('message_inbox_model');
 		$party_one_id = $this->session->id;
 		$party_two_id = $cur_customer->account_id;
-		$cur_message_inbox = $this->Message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
+		$cur_message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
 		
 		if ($cur_message_inbox == null)
 		{
-			$cur_message_inbox = new Message_inbox_model();
+			$cur_message_inbox = new message_inbox_model();
 			$cur_message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
 		}
 		
-		$this->load->model('Message_text_model');
-		$cur_message_text = new Message_text_model();
+		$this->load->model('message_text_model');
+		$cur_message_text = new message_text_model();
 		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
 		$cur_message_text->sender_id = $this->session->id;
 		$cur_message_text->text = "Nama Pengirim: " . $cur_deliverer->account->name . ", Kode OTP: ". $otp;

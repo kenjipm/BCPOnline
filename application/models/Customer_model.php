@@ -41,10 +41,10 @@ class Customer_model extends CI_Model {
 		$this->credit_amount	= $db_item->credit_amount;
 		$this->reward_points	= $db_item->reward_points;
 		
-		$this->account->name		= $db_item->name;
-		$this->account->email		= $db_item->email;
-		$this->account->status		= $db_item->status;
-		$this->account->date_joined = $db_item->date_joined;
+		$this->account->name		= $db_item->name ?? "";
+		$this->account->email		= $db_item->email ?? "";
+		$this->account->status		= $db_item->status ?? "";
+		$this->account->date_joined = $db_item->date_joined ?? "";
 		
 		return $this;
 	}
@@ -95,19 +95,15 @@ class Customer_model extends CI_Model {
 	}
 	
 	// get customer detail
-	// public function get_from_id($id)
-	// {
-		// $where['posted_item.id'] = $id;
+	public function get_from_id($id)
+	{
+		$where['id'] = $id;
+		$this->db->where($where);
+		$query = $this->db->get($this->table_customer, 1);
+		$item = $query->row();
 		
-		// $this->db->select('*, ' . $this->table_item.'.id AS id');
-		// $this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
-		// $this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
-		// $this->db->where($where);
-		// $query = $this->db->get($this->table_item, 1);
-		// $item = $query->row();
-		
-		// return ($item !== null) ? $this->get_stub_from_db($item) : null;
-	// }
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
 	
 	public function get_all()
 	{

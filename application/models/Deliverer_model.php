@@ -36,7 +36,7 @@ class Deliverer_model extends CI_Model {
 		$this->license_plate	= $db_item->license_plate;
 		$this->vehicle_desc		= $db_item->vehicle_desc;
 		
-		$this->account				= $this->load->model('Account_model');
+		$this->account				= new Account_model();
 		$this->account->name		= $db_item->name;
 		$this->account->email		= $db_item->email;
 		$this->account->status		= $db_item->status;
@@ -93,7 +93,8 @@ class Deliverer_model extends CI_Model {
 	{
 		$where['deliverer.id'] = $id;
 		
-		$this->db->select('*, ' . $this->table_deliverer.'.id AS id');
+		$this->db->select('*, deliverer.id AS id, deliverer.account_id AS account_id');
+		$this->db->join('account', 'account.id=' . $this->table_deliverer . '.account_id', 'left');	
 		$this->db->where($where);
 		$query = $this->db->get($this->table_deliverer, 1);
 		$item = $query->row();
@@ -105,6 +106,7 @@ class Deliverer_model extends CI_Model {
 	{
 		$this->load->model('Deliverer_model');
 		
+		$this->db->select('*, deliverer.id AS id, deliverer.account_id AS account_id');
 		$this->db->join('account', 'account.id=' . $this->table_deliverer . '.account_id', 'left');	
 		
 		$query = $this->db->get($this->table_deliverer);
@@ -124,7 +126,7 @@ class Deliverer_model extends CI_Model {
 	public function get_idle_deliverer()
 	{	
 		// Get Busy Deliverer dulu
-		$this->db->select('deliverer.id AS id');
+		$this->db->select('*, deliverer.id AS id, deliverer.account_id AS account_id');
 		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
 		$this->db->where($this->table_order_details. '.deliverer_id is NOT NULL');
 		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['RECEIVED']); // Dummy
@@ -145,7 +147,7 @@ class Deliverer_model extends CI_Model {
 		//print_r($deliverers);
 		
 		// Baru di-not_in buat nyari idle nya
-		$this->db->select('*, deliverer.id AS id');
+		$this->db->select('*, deliverer.id AS id, deliverer.account_id AS account_id');
 		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
 		if (count($deliverers) > 0)
 			$this->db->where_not_in('deliverer.id', $deliverers);
