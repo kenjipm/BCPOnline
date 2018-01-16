@@ -324,6 +324,15 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_unpaid_by_tenants()
+	{
+		$result = array();
+		
+		
+		
+		return $result;
+	}
+	
 	public function get_collection_task_from_deliverer_id()
 	{
 		$this->load->model('Deliverer_model');
@@ -484,17 +493,24 @@ class Order_details_model extends CI_Model {
 		}
 	}
 	
-	public function update_order_status($order_id, $cur_status, $status)
+	public function update_order_status($order_id, $cur_status, $status, $customer_id=0)
 	{
-		$cur_tenant_id = 
-		$this->db->set('order_status', $status)
-				 ->where('id', $order_id)
-				 ->where('order_status', $cur_status)
-				 ->update($this->table_order_details);
+		if ($customer_id != 0)
+		{
+			// $this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
+			// $this->db->where('billing.customer_id', $customer_id);
+			// $this->db->where('order_details.billing_id = billing.id');
+		}
+		
+		$this->db->where('order_details.id', $order_id);
+		$this->db->where('order_details.order_status', $cur_status);
+		
+		$this->db->set('order_details.order_status', $status);
+		return $this->db->update('order_details');
 	}
 	
 	public function update_natural_id($natural_id)
-	{
+	{	
 		$this->order_id = $natural_id;
 		
 		$this->db->set('order_id', $natural_id)

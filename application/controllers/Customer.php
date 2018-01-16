@@ -371,6 +371,17 @@ class Customer extends CI_Controller {
 		echo $result ? "1" : "0";
 	}
 	
+	public function mark_order_finish()
+	{
+		$order_detail_id = $this->input->post('order_detail_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('order_details_model');
+		$result = $this->order_details_model->update_order_status($order_detail_id, ORDER_STATUS['name']['RECEIVED'], ORDER_STATUS['name']['DONE'], $customer_id);
+		
+		echo $result ? "1" : "0";
+	}
+	
 	public function load_googlemaps()
 	{
 		$this->load->view('googlemaps');

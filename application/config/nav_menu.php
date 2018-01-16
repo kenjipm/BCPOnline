@@ -90,6 +90,10 @@ $config['top_menu_admin'] = array(
 			'text'	=> "Kirim Barang",
 			'url'	=> "order/order_list",
 			),
+		'PAY_DEBT' => array(
+			'text'	=> "Tenant",
+			'url'	=> "admin/tenant_to_pay_list",
+			),
 		'ACCOUNT' => array(
 			'text'	=> "Account",
 			'url'	=> "account/account_list",

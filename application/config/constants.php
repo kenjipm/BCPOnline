@@ -18,6 +18,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"PICKING_FROM_TENANT"		=> "PICKING_FROM_TENANT",
 			"DELIVERING_TO_CUSTOMER"	=> "DELIVERING_TO_CUSTOMER",
 			"RECEIVED"					=> "RECEIVED",
+			"DONE"						=> "DONE",
 			"PICKING_FROM_CUSTOMER"		=> "PICKING_FROM_CUSTOMER",
 			"DELIVERING_TO_TENANT"		=> "DELIVERING_TO_TENANT",
 			"TENANT_RECEIVED"			=> "TENANT_RECEIVED",
@@ -33,6 +34,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"PICKING_FROM_TENANT"		=> "Pengambilan dari tenant",
 			"DELIVERING_TO_CUSTOMER"	=> "Pengantaran ke customer",
 			"RECEIVED"					=> "Telah diterima",
+			"DONE"						=> "Selesai",
 			"PICKING_FROM_CUSTOMER"		=> "Pengambilan dari customer",
 			"DELIVERING_TO_TENANT"		=> "Pengantaran ke tenant",
 			"TENANT_RECEIVED"			=> "Telah diterima oleh tenant",
@@ -48,14 +50,15 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"PICKING_FROM_TENANT"		=> "09",
 			"DELIVERING_TO_CUSTOMER"	=> "10",
 			"RECEIVED"					=> "11",
+			"DONE"						=> "12",
 			"PICKING_FROM_CUSTOMER"		=> "03",
 			"DELIVERING_TO_TENANT"		=> "04",
 			"TENANT_RECEIVED"			=> "05",
 			"COST_CALCULATED"			=> "06",
 			"REPAIRING"					=> "07",
 			"REPAIR_FINISHED"			=> "08",
-			"REFUNDED"					=> "12",
-			"REPAIR_CANCELLED"			=> "13"
+			"REFUNDED"					=> "13",
+			"REPAIR_CANCELLED"			=> "14"
 		),
 		'is_busy' => array(
 			"WAITING_FOR_PAYMENT"		=> FALSE,
@@ -63,6 +66,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"PICKING_FROM_TENANT"		=> TRUE,
 			"DELIVERING_TO_CUSTOMER"	=> TRUE,
 			"RECEIVED"					=> FALSE,
+			"DONE"						=> FALSE,
 			"PICKING_FROM_CUSTOMER"		=> TRUE,
 			"DELIVERING_TO_TENANT"		=> TRUE,
 			"TENANT_RECEIVED"			=> TRUE,
@@ -71,6 +75,18 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"REPAIR_FINISHED"			=> TRUE,
 			"REFUNDED"					=> TRUE,
 			"REPAIR_CANCELLED"			=> TRUE,
+		),
+	)
+);
+
+defined('DISPUTE_STATUS') OR define('DISPUTE_STATUS', array(
+		'name' => array(
+			"ON_PROGRESS"		=> "ON_PROGRESS",
+			"RESOLVED"			=> "RESOLVED",
+		),
+		'description' => array(
+			"ON_PROGRESS"		=> "Dalam proses",
+			"RESOLVED"			=> "Selesai",
 		),
 	)
 );
