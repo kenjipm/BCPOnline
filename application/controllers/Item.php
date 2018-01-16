@@ -167,14 +167,23 @@ class Item extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 
-		$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
-		$this->form_validation->set_rules('price', 'Harga', 'required|integer');
-		$this->form_validation->set_rules('item_type', 'Tipe', 'required');
-		$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
-		$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
-		$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
-		$this->form_validation->set_rules('category_id', 'Kategori', 'required');
-		$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		if ($this->input->post('item_type') == "ORDER")
+		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
+			$this->form_validation->set_rules('item_type', 'Tipe', 'required');
+			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
+			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		} 
+		else if ($this->input->post('item_type') == "REPAIR")
+		{
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		}
 		
 		if ($this->form_validation->run() == TRUE)
 		{

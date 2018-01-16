@@ -137,6 +137,22 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="brand">Brand:</label>
+					<div class="col-xs-6">
+						<select class="form-control" name="brand_id">
+						<?php
+						foreach ($model->item_brand as $brand)
+						{
+							?>
+							<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+							<?php
+							$i++;
+						}
+						?>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
 				</div>
 			</form>
