@@ -124,41 +124,67 @@ class Posted_item_variance_model extends CI_Model {
 	{
 		$this->load->model('Tenant_model');
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$item_type = $this->input->post('item_type');
 		
 		$this->detail_id			= "";
-		$this->var_type				= $this->input->post('var_type');
 		$this->posted_item_id		= $posted_item_id;
 		$this->init_posted_item();
-		$files = $_FILES;
 		
-		$temp_var_descriptions	= $this->input->post('var_desc');
-		$i = 0;
-		foreach($temp_var_descriptions as $temp_var_description)
+		if ($item_type == "ORDER")
 		{
-			$this->var_description 		= $temp_var_description;
-			$this->quantity_available	= $this->input->post('quantity_available')[$i];
+			$this->var_type				= $this->input->post('var_type');
+			$files = $_FILES;
 			
-			$_FILES['image_two_name']['name']		= $files['image_two_name']['name'][$i];
-			$_FILES['image_two_name']['type']		= $files['image_two_name']['type'][$i];
-			$_FILES['image_two_name']['tmp_name']	= $files['image_two_name']['tmp_name'][$i];
-			$_FILES['image_two_name']['error']		= $files['image_two_name']['error'][$i];
-			$_FILES['image_two_name']['size']		= $files['image_two_name']['size'][$i];
-			
-			$_FILES['image_three_name']['name']		= $files['image_three_name']['name'][$i];
-			$_FILES['image_three_name']['type']		= $files['image_three_name']['type'][$i];
-			$_FILES['image_three_name']['tmp_name']	= $files['image_three_name']['tmp_name'][$i];
-			$_FILES['image_three_name']['error']	= $files['image_three_name']['error'][$i];
-			$_FILES['image_three_name']['size']		= $files['image_three_name']['size'][$i];
-			
-			$_FILES['image_four_name']['name']		= $files['image_four_name']['name'][$i];
-			$_FILES['image_four_name']['type']		= $files['image_four_name']['type'][$i];
-			$_FILES['image_four_name']['tmp_name']	= $files['image_four_name']['tmp_name'][$i];
-			$_FILES['image_four_name']['error']		= $files['image_four_name']['error'][$i];
-			$_FILES['image_four_name']['size']		= $files['image_four_name']['size'][$i];
-			
-				// insert data, then generate [account_id] based on [id]
+			$temp_var_descriptions	= $this->input->post('var_desc');
+			$i = 0;
+			foreach($temp_var_descriptions as $temp_var_description)
+			{
+				$this->var_description 		= $temp_var_description;
+				$this->quantity_available	= $this->input->post('quantity_available')[$i];
+				
+				$_FILES['image_two_name']['name']		= $files['image_two_name']['name'][$i];
+				$_FILES['image_two_name']['type']		= $files['image_two_name']['type'][$i];
+				$_FILES['image_two_name']['tmp_name']	= $files['image_two_name']['tmp_name'][$i];
+				$_FILES['image_two_name']['error']		= $files['image_two_name']['error'][$i];
+				$_FILES['image_two_name']['size']		= $files['image_two_name']['size'][$i];
+				
+				$_FILES['image_three_name']['name']		= $files['image_three_name']['name'][$i];
+				$_FILES['image_three_name']['type']		= $files['image_three_name']['type'][$i];
+				$_FILES['image_three_name']['tmp_name']	= $files['image_three_name']['tmp_name'][$i];
+				$_FILES['image_three_name']['error']	= $files['image_three_name']['error'][$i];
+				$_FILES['image_three_name']['size']		= $files['image_three_name']['size'][$i];
+				
+				$_FILES['image_four_name']['name']		= $files['image_four_name']['name'][$i];
+				$_FILES['image_four_name']['type']		= $files['image_four_name']['type'][$i];
+				$_FILES['image_four_name']['tmp_name']	= $files['image_four_name']['tmp_name'][$i];
+				$_FILES['image_four_name']['error']		= $files['image_four_name']['error'][$i];
+				$_FILES['image_four_name']['size']		= $files['image_four_name']['size'][$i];
+				
+					// insert data, then generate [account_id] based on [id]
+				$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+				
+				$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+				if ($this->db->insert($this->table_posted_item_variance, $db_item))
+				{
+					$this->load->library('Id_Generator');
+					
+					$db_item->id			= $this->db->insert_id();
+					$db_item->detail_id		= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);
+					
+					$this->db->where('id', $db_item->id);
+					$this->db->update($this->table_posted_item_variance, $db_item);
+				}
+				
+				$this->upload_image($db_item->id, $i);
+				
+				$this->db->trans_complete(); // selesai nge lock db transaction
+				$i++;
+			}
+		}
+		else if ($item_type == "REPAIR")
+		{
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-			
+				
 			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 			if ($this->db->insert($this->table_posted_item_variance, $db_item))
 			{
@@ -171,12 +197,8 @@ class Posted_item_variance_model extends CI_Model {
 				$this->db->update($this->table_posted_item_variance, $db_item);
 			}
 			
-			$this->upload_image($db_item->id, $i);
-			
-			$this->db->trans_complete(); // selesai nge lock db transaction
-			$i++;
+			$this->db->trans_complete();
 		}
-		
 	}
 	
 	public function upload_image($id, $index)
