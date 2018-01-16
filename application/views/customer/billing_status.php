@@ -94,6 +94,7 @@
 										<th>Jml </th>
 										<th>Harga </th>
 										<th>Status </th>
+										<th></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -103,13 +104,28 @@
 										?>
 											<tr>
 												<td>
-													<?=$order->posted_item_variance->posted_item->posted_item_name?> </td>
+													<?=$order->posted_item_variance->posted_item->posted_item_name?>
+												</td>
 												<td>
-													<?=$order->quantity?> </td>
+													<?=$order->quantity?>
+												</td>
 												<td>
-													<?=$order->posted_item_variance->posted_item->price?> </td>
+													<?=$order->posted_item_variance->posted_item->price?>
+												</td>
+												<td id="order_status-<?=$order->id?>" >
+													<?=$order->order_status?>
+												</td>
 												<td>
-													<?=$order->order_status?> </td>
+												<?php
+													if (!$order->is_done)
+													{
+														?>
+														<button type="button" class="btn btn-default" id="btn-mark_order_finish-<?=$order->id?>" onclick="mark_order_finish(<?=$order->id?>)">Selesai</button>
+														<button type="button" class="btn btn-default" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">Komplain</button>
+														<?php
+													}
+												?>
+												</td>
 												<!--td class="col-xs-1">
 													<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 														Lihat
