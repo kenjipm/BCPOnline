@@ -149,6 +149,7 @@ class Order_details_model extends CI_Model {
 		
 		$stub->posted_item_variance->posted_item					= new Item_model();
 		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
+		$stub->posted_item_variance->posted_item->item_type			= $db_item->item_type ?? "";
 		$stub->posted_item_variance->posted_item->tenant_id			= $db_item->tenant_id ?? "";
 		
 		$stub->billing						= new Billing_model();
@@ -415,6 +416,7 @@ class Order_details_model extends CI_Model {
 		$temp_order_ids		= $this->input->post('order_id');
 		$temp_deliverer_ids	= $this->input->post('deliverer_id');
 		$otp_list			= array();
+		$otp_repair_list	= array();
 		
 		foreach($temp_order_ids as $key => $temp_order_id)
 		{
@@ -422,25 +424,54 @@ class Order_details_model extends CI_Model {
 			$deliverer_id	= $this->input->post('deliverer_id')[$key];
 			$tenant_id		= $this->input->post('tenant_id')[$key];
 			$customer_id	= $this->input->post('customer_id')[$key];
-			if (!isset($otp_list[$deliverer_id][$tenant_id]))
+			$item_type		= $this->input->post('item_type')[$key];
+			
+			if ($item_type == "ORDER") // Kalau order OTP masukin 2 saja
 			{
-				$otp_list[$deliverer_id][$tenant_id] = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
+				if (!isset($otp_list[$deliverer_id][$tenant_id]))
+				{
+					$otp_list[$deliverer_id][$tenant_id] = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
+				}
+				if (!isset($otp_list[$customer_id][$deliverer_id]))
+				{
+					$otp_list[$customer_id][$deliverer_id] = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
+				}
 			}
-			if (!isset($otp_list[$customer_id][$deliverer_id]))
+			else if ($item_type == "REPAIR") // Setelah repair finish baru kirim otp yg order
 			{
-				$otp_list[$customer_id][$deliverer_id] = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
+				if (!isset($otp_repair_list[$tenant_id][$deliverer_id]))
+				{
+					$otp_repair_list[$tenant_id][$deliverer_id] = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
+				}
+				if (!isset($otp_repair_list[$deliverer_id][$customer_id]))
+				{
+					$otp_repair_list[$deliverer_id][$customer_id] = $this->get_available_otp(TYPE['name']['CUSTOMER'], $customer_id);
+				}
 			}
 			// update deliverer id for each order id
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 			
 			$this->db->set('deliverer_id', $deliverer_id);
-			$this->db->set('otp_deliverer_to_tenant', $otp_list[$deliverer_id][$tenant_id]);
-			$this->db->set('otp_customer_to_deliverer', $otp_list[$customer_id][$deliverer_id]);
+			if ($item_type == "ORDER") // Kalau repair set otp tambahan
+			{
+				$this->db->set('otp_deliverer_to_tenant', $otp_list[$deliverer_id][$tenant_id]);
+				$this->db->set('otp_customer_to_deliverer', $otp_list[$customer_id][$deliverer_id]);
+			}
+			else if ($item_type == "REPAIR") // Kalau repair set otp tambahan
+			{
+				$this->db->set('otp_tenant_to_deliverer', $otp_repair_list[$tenant_id][$deliverer_id]);
+				$this->db->set('otp_deliverer_to_customer', $otp_repair_list[$deliverer_id][$customer_id]);
+			}
 			$this->db->where('id', $order_id);
 			$this->db->update($this->table_order_details);
-			
-			$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
-			
+			if ($item_type == "ORDER") // Kalau order deliverer pergi ke tenant
+			{
+				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
+			}
+			else if ($item_type == "REPAIR") // Kalau repair deliverer pergi ke customer
+			{
+				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_CUSTOMER']);
+			}
 			$this->db->trans_complete(); // selesai nge lock db transaction
 			
 		}

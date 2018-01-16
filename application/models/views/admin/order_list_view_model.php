@@ -19,6 +19,7 @@ class Order_List_View_Model extends CI_Model{
 			$this->order_list[$i] = new class{};
 			$this->order_list[$i]->id 					= $order->id;
 			$this->order_list[$i]->posted_item			= $order->posted_item_variance->posted_item->posted_item_name;
+			$this->order_list[$i]->item_type			= $order->posted_item_variance->posted_item->item_type;
 			$this->order_list[$i]->tenant_id			= $order->posted_item_variance->posted_item->tenant_id;
 			$this->order_list[$i]->customer_id			= $order->billing->customer_id;
 			$this->order_list[$i]->address				= $order->billing->shipping_address->address_detail;
