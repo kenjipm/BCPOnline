@@ -237,20 +237,32 @@ class Item_model extends CI_Model {
 	{
 		$this->load->model('Tenant_model');
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
-		
-		$this->posted_item_id			= "";
-		$this->posted_item_name			= $this->input->post('posted_item_name');
-		$this->price					= $this->input->post('price');
-		$this->date_posted				= date("d-m-Y");
-		$this->date_updated				= date("d-m-Y");
-		$this->date_expired				= NULL;
 		$this->item_type				= $this->input->post('item_type');
-		$this->unit_weight				= $this->input->post('unit_weight');
-		$this->posted_item_description	= $this->input->post('posted_item_description');
-		$this->category_id				= $this->input->post('category_id');
-		$this->tenant_id				= $cur_tenant->id;
-		$this->brand_id					= $this->input->post('brand_id');
-	
+		if ($this->item_type == "ORDER")
+		{
+			$this->posted_item_id			= "";
+			$this->price					= $this->input->post('price');
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= NULL;
+			$this->unit_weight				= $this->input->post('unit_weight');
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= $cur_tenant->id;
+			$this->brand_id					= $this->input->post('brand_id');
+		} 
+		else if ($this->item_type == "REPAIR")
+		{
+			$this->posted_item_id			= "";
+			$this->price					= "25000";
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= NULL;
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= $cur_tenant->id;
+			$this->brand_id					= $this->input->post('brand_id');
+		}
 		
 		// insert data, then generate [account_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)

@@ -31,6 +31,8 @@
 			<?php
 			foreach($model->posted_items as $posted_item)
 			{
+				if ($posted_item->item_type == "ORDER")
+				{
 				?>
 				<div class="col-xs-4">
 					<div class="thumbnail">
@@ -43,9 +45,33 @@
 					</div>
 				</div>
 				<?php
+				}
 			}
 			?>
 		</div>
 	</div>
-	
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Repair</h3>
+		</div>
+		<div class="panel-body">
+			<?php
+			foreach($model->posted_items as $posted_item)
+			{
+				if ($posted_item->item_type == "REPAIR")
+				{
+				?>
+				<div class="col-xs-12">
+					<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
+						<div class="caption text-center">
+							<p><?=$posted_item->posted_item_description?></p>
+						</div>
+					</a>
+				</div>
+				<?php
+				}
+			}
+			?>
+		</div>
+	</div>
 </div>

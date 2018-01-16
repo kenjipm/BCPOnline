@@ -49,21 +49,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$i++;
 		}
 	}
-	
-	public function get_category_name($id)
-	{
-		
-	}
-	
-	public function get_brand_name($id)
-	{
-		
-	}
-	
-	public function get_all_tag($id)
-	{
-		
-	}
+
 	
 }
 

@@ -1,25 +1,25 @@
 <?php
 	// Model untuk customer
 	
-	// dummy brand list
-	$model->brands = array();
+	// // dummy brand list
+	// $model->brands = array();
 	
-	// Model dummy brand
-	$model->brands[0] = new class{};
-	$model->brands[0]->id = 1;
-	$model->brands[0]->brand_id = "17120377701";
-	$model->brands[0]->brand_name = "Djisamsung";
-	$model->brands[0]->brand_description = "Deskripsi Brand Djisamsung";
-	$model->brands[1] = new class{};
-	$model->brands[1]->id = 1;
-	$model->brands[1]->brand_id = "17120377701";
-	$model->brands[1]->brand_name = "Appa";
-	$model->brands[1]->brand_description = "Deskripsi Brand Appa";
-	$model->brands[2] = new class{};
-	$model->brands[2]->id = 1;
-	$model->brands[2]->brand_id = "17120377701";
-	$model->brands[2]->brand_name = "Tos Ibak";
-	$model->brands[2]->brand_description = "Deskripsi Brand Tos Ibak";
+	// // Model dummy brand
+	// $model->brands[0] = new class{};
+	// $model->brands[0]->id = 1;
+	// $model->brands[0]->brand_id = "17120377701";
+	// $model->brands[0]->brand_name = "Djisamsung";
+	// $model->brands[0]->brand_description = "Deskripsi Brand Djisamsung";
+	// $model->brands[1] = new class{};
+	// $model->brands[1]->id = 1;
+	// $model->brands[1]->brand_id = "17120377701";
+	// $model->brands[1]->brand_name = "Appa";
+	// $model->brands[1]->brand_description = "Deskripsi Brand Appa";
+	// $model->brands[2] = new class{};
+	// $model->brands[2]->id = 1;
+	// $model->brands[2]->brand_id = "17120377701";
+	// $model->brands[2]->brand_name = "Tos Ibak";
+	// $model->brands[2]->brand_description = "Deskripsi Brand Tos Ibak";
 	
 	
 	

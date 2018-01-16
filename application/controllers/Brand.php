@@ -27,7 +27,11 @@ class Brand extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Brand_model');
+		$items = $this->Brand_model->get_all();
+		$this->load->model('views/admin/brand_list_view_model');
+		$this->brand_list_view_model->get($items);
+		$data['model'] = $this->brand_list_view_model;
 		$this->load->view('admin/brand_list', $data);
 		
 		// Load Footer
