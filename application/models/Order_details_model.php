@@ -324,6 +324,60 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	// FOR REPAIR
+	public function get_all_from_otp_deliverer_to_customer($otp, $customer_id)
+	{
+		$this->load->model('Customer_model');
+		
+		// $where['posted_item.tenant_id'] = $tenant_id;
+		// $where[$this->table_order_details. '.otp_deliverer_to_tenant'] = $otp;
+		// $where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
+		
+		// $this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		// $this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		// $this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		// $this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		// $this->db->join('deliverer', 'deliverer.id=' . $this->table_order_details . '.deliverer_id', 'left');
+		// $this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		// $this->db->where($where);
+		// $query = $this->db->get($this->table_order_details);
+		// $items = $query->result();
+		
+		foreach($items as $item)
+		{
+			$this->update_order_status($item->id, ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'], ORDER_STATUS['name']['DELIVERING_TO_TENANT']);
+		}
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_from_otp_tenant_to_deliverer($otp, $deliverer_id)
+	{
+		$this->load->model('Deliverer_model');
+		
+		// $where[$this->table_order_details. '.deliverer_id'] = $deliverer_id;
+		// $where[$this->table_order_details. '.otp_customer_to_deliverer'] = $otp;
+		// $where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'];
+		
+		// $this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		// $this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		// $this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		// $this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		// $this->db->join('customer', 'customer.id=billing.customer_id', 'left');
+		// $this->db->join('account', 'account.id=customer.account_id', 'left');
+		// $this->db->where($where);
+		// $query = $this->db->get($this->table_order_details);
+		// $items = $query->result();
+		
+		foreach($items as $item)
+		{
+			$this->update_order_status($item->id, ORDER_STATUS['name']['DELIVERING_TO_TENANT'], ORDER_STATUS['name']['TENANT_RECEIVED']);
+		}
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	
 	public function get_all_unpaid_by_tenants()
 	{
 		$result = array();
