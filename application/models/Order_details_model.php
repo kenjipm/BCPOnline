@@ -329,19 +329,19 @@ class Order_details_model extends CI_Model {
 	{
 		$this->load->model('Customer_model');
 		
-		// $where['posted_item.tenant_id'] = $tenant_id;
-		// $where[$this->table_order_details. '.otp_deliverer_to_tenant'] = $otp;
-		// $where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_TENANT'];
+		$where['billing.customer_id'] = $customer_id;
+		$where[$this->table_order_details. '.otp_deliverer_to_customer'] = $otp;
+		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'];
 		
-		// $this->db->select('*, ' . $this->table_order_details.'.id AS id');
-		// $this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
-		// $this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
-		// $this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
-		// $this->db->join('deliverer', 'deliverer.id=' . $this->table_order_details . '.deliverer_id', 'left');
-		// $this->db->join('account', 'account.id=deliverer.account_id', 'left');
-		// $this->db->where($where);
-		// $query = $this->db->get($this->table_order_details);
-		// $items = $query->result();
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('deliverer', 'deliverer.id=' . $this->table_order_details . '.deliverer_id', 'left');
+		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
 		
 		foreach($items as $item)
 		{
@@ -355,19 +355,17 @@ class Order_details_model extends CI_Model {
 	{
 		$this->load->model('Deliverer_model');
 		
-		// $where[$this->table_order_details. '.deliverer_id'] = $deliverer_id;
-		// $where[$this->table_order_details. '.otp_customer_to_deliverer'] = $otp;
-		// $where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'];
+		$where[$this->table_order_details. '.deliverer_id'] = $deliverer_id;
+		$where[$this->table_order_details. '.otp_tenant_to_deliverer'] = $otp;
+		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['DELIVERING_TO_TENANT'];
 		
-		// $this->db->select('*, ' . $this->table_order_details.'.id AS id');
-		// $this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
-		// $this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
-		// $this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
-		// $this->db->join('customer', 'customer.id=billing.customer_id', 'left');
-		// $this->db->join('account', 'account.id=customer.account_id', 'left');
-		// $this->db->where($where);
-		// $query = $this->db->get($this->table_order_details);
-		// $items = $query->result();
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
 		
 		foreach($items as $item)
 		{
