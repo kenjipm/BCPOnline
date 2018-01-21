@@ -7,6 +7,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{	
+		$this->transaction_detail = array();
 	}
 	
 	public function get($item)
@@ -15,7 +16,10 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->load->library('Text_renderer');
 			
 		$this->transaction_detail->id 					= $item->id;
+		$this->transaction_detail->posted_item_id	 	= $item->posted_item_variance->posted_item->posted_item_id;
 		$this->transaction_detail->posted_item_name 	= $item->posted_item_variance->posted_item->posted_item_name;
+		$this->transaction_detail->posted_item_description 	= $item->posted_item_variance->posted_item->posted_item_description;
+		$this->transaction_detail->item_type		 	= $item->posted_item_variance->posted_item->item_type;
 		$this->transaction_detail->var_type	 			= $item->posted_item_variance->var_type;
 		$this->transaction_detail->var_description 		= $item->posted_item_variance->var_description;
 		$this->transaction_detail->quantity				= $item->quantity;

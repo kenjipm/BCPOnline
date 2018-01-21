@@ -47,7 +47,7 @@ class Order extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('transaction_detail');
+		$data_header['js_list'] = array('tenant/transaction_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -56,6 +56,9 @@ class Order extends CI_Controller {
 		
 		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
 		{
+			// Submit Negotiated Price
+			if ($this->input->method() == "post") $this->set_nego_price_do($id);
+			
 			$this->load->model('Order_details_model');
 			$order = $this->Order_details_model->get_from_id($id);
 			$this->load->model('views/tenant/transaction_detail_view_model');
@@ -154,6 +157,21 @@ class Order extends CI_Controller {
 		
 		$this->load->view('tenant/order_detail', $data);
 	
+	}
+	
+	public function set_nego_price_do($id)
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('discounted_price', 'Harga Diskon', 'required|integer');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Negotiated_price_model');
+			$this->Negotiated_price_model->insert_from_post($id);
+			
+			redirect('Order/order_list');
+		}
 	}
 	
 	public function get_item_deliverer_do()
