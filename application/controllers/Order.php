@@ -125,11 +125,15 @@ class Order extends CI_Controller {
 			if ($this->input->method() == "post") $this->get_item_deliverer_do();
 			
 			$this->load->model('Order_details_model');
-			$orders = $this->Order_details_model->get_collection_task_from_deliverer_id();
-			$delivers = $this->Order_details_model->get_deliver_task_from_deliverer_id();
+			$orders = $this->Order_details_model->get_order_collection_task_from_deliverer_id();
+			$deliver_orders = $this->Order_details_model->get_order_deliver_task_from_deliverer_id();
+			$repairs = $this->Order_details_model->get_repair_collection_task_from_deliverer_id();
+			$deliver_repairs = $this->Order_details_model->get_repair_deliver_task_from_deliverer_id();
 			$this->load->model('views/deliverer/order_list_view_model');
-			$this->order_list_view_model->get_collection_task($orders);
-			$this->order_list_view_model->get_deliver_task($delivers);
+			$this->order_list_view_model->get_order_collection_task($orders);
+			$this->order_list_view_model->get_order_deliver_task($deliver_orders);
+			$this->order_list_view_model->get_repair_collection_task($repairs);
+			$this->order_list_view_model->get_repair_deliver_task($deliver_repairs);
 			$data['model'] = $this->order_list_view_model;
 			
 			$this->load->view('deliverer/order_list', $data);
@@ -156,12 +160,15 @@ class Order extends CI_Controller {
 	{
 		$this->load->model('Order_details_model');
 		$orders = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('otp'), $this->session->child_id);
+		$repairs = $this->Order_details_model->get_all_from_otp_tenant_to_deliverer($this->input->post('otp'), $this->session->child_id);
 		
 		$this->load->model('views/deliverer/order_detail_view_model');
-		$this->order_detail_view_model->get($orders);
+		$this->order_detail_view_model->get_order($orders);
+		$this->order_detail_view_model->get_repair($repairs);
 		$data['model'] = $this->order_detail_view_model;
 		
 		$this->load->view('deliverer/order_detail', $data);
+		$this->load->view('deliverer/repair_detail', $data);
 	
 	}
 	

@@ -3,13 +3,15 @@
 class Order_Detail_View_Model extends CI_Model{
 	
 	public $order_list;
+	public $repair_list;
 	// constructor
 	public function __construct()
 	{
 		$this->order_list = array();
+		$this->repair_list = array();
 	}
 	
-	public function get($orders)
+	public function get_order($orders)
 	{
 		$i = 0;
 		foreach($orders as $order)
@@ -29,6 +31,22 @@ class Order_Detail_View_Model extends CI_Model{
 		
 	}
 	
+	public function get_repair($repairs)
+	{
+		$i = 0;
+		foreach($repairs as $repair)
+		{
+			$this->repair_list[$i] = new class{};
+
+			$this->repair_list[$i]->id 			= $repair->id;
+			$this->repair_list[$i]->description	= $repair->posted_item_variance->posted_item->posted_item_description;
+			$this->repair_list[$i]->otp	 		= $repair->otp_tenant_to_deliverer;
+			$this->repair_list[$i]->tenant_name	= $repair->tenant->tenant_name;
+			
+			$i++;
+		}
+		
+	}
 }
 
 ?>
