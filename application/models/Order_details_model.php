@@ -136,6 +136,8 @@ class Order_details_model extends CI_Model {
 		$stub->collection_method		= $db_item->collection_method;
 		$stub->otp_customer_to_deliverer = $db_item->otp_customer_to_deliverer;
 		$stub->otp_tenant_to_deliverer	= $db_item->otp_tenant_to_deliverer;
+		$stub->otp_deliverer_to_customer = $db_item->otp_deliverer_to_customer;
+		$stub->otp_deliverer_to_tenant	= $db_item->otp_deliverer_to_tenant;
 		$stub->date_repr_decided		= $db_item->date_repr_decided;
 		$stub->billing_id				= $db_item->billing_id;
 		$stub->posted_item_variance_id	= $db_item->posted_item_variance_id;
@@ -149,6 +151,7 @@ class Order_details_model extends CI_Model {
 		
 		$stub->posted_item_variance->posted_item					= new Item_model();
 		$stub->posted_item_variance->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
+		$stub->posted_item_variance->posted_item->posted_item_description	= $db_item->posted_item_description ?? "";
 		$stub->posted_item_variance->posted_item->item_type			= $db_item->item_type ?? "";
 		$stub->posted_item_variance->posted_item->tenant_id			= $db_item->tenant_id ?? "";
 		
@@ -172,8 +175,10 @@ class Order_details_model extends CI_Model {
 		$stub->deliverer->account		= new Account_model();
 		$stub->deliverer->account->name	= $db_item->name ?? "";
 		
-		$stub->tenant		= new Tenant_model();
-		$stub->tenant->name = $db_item->tenant_name ?? "";
+		$stub->tenant				= new Tenant_model();
+		$stub->tenant->tenant_name 	= $db_item->tenant_name ?? "";
+		$stub->tenant->unit_number	= $db_item->unit_number ?? "";
+		$stub->tenant->floor		= $db_item->floor ?? "";
 		
 		$stub->feedback					= new Feedback_model();
 		$stub->feedback->feedback_text 	= $db_item->feedback_text ?? "";
@@ -197,6 +202,7 @@ class Order_details_model extends CI_Model {
 		$where['order_details.id'] = $id;
 		
 		$this->db->where($where);
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id,' . $this->table_order_details.'.deliverer_id AS deliverer_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
@@ -462,7 +468,7 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $items : array();
 	}
 	
-	public function get_collection_task_from_deliverer_id()
+	public function get_order_collection_task_from_deliverer_id()
 	{
 		$this->load->model('Deliverer_model');
 		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
@@ -481,7 +487,7 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_deliver_task_from_deliverer_id()
+	public function get_order_deliver_task_from_deliverer_id()
 	{
 		$this->load->model('Deliverer_model');
 		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
@@ -489,11 +495,50 @@ class Order_details_model extends CI_Model {
 		$where['order_details.deliverer_id'] = $cur_deliverer->id;
 		$where['order_status'] = ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'];
 		
-		$this->db->group_by('billing.shipping_address_id');
+		$this->db->group_by('otp_customer_to_deliverer');
 		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
 		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
 		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_repair_collection_task_from_deliverer_id()
+	{
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
+		$where['order_status'] = ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'];
+		
+		$this->db->group_by('otp_deliverer_to_customer');
+		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('shipping_address', 'shipping_address.id=billing.shipping_address_id', 'left');
+		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_repair_deliver_task_from_deliverer_id()
+	{
+		$this->load->model('Deliverer_model');
+		$cur_deliverer = $this->Deliverer_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['order_details.deliverer_id'] = $cur_deliverer->id;
+		$where['order_status'] = ORDER_STATUS['name']['DELIVERING_TO_TENANT'];
+		
+		$this->db->group_by('otp_tenant_to_deliverer');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
@@ -558,10 +603,14 @@ class Order_details_model extends CI_Model {
 		
 		foreach($temp_order_ids as $key => $temp_order_id)
 		{
+			$id_deliverer	= $this->input->post('deliverer_id')[$key];
+			$id_tenant		= $this->input->post('tenant_id')[$key];
+			$id_customer	= $this->input->post('customer_id')[$key];
+			
 			$order_id 		= $this->input->post('order_id')[$key];
-			$deliverer_id	= $this->input->post('deliverer_id')[$key];
-			$tenant_id		= $this->input->post('tenant_id')[$key];
-			$customer_id	= $this->input->post('customer_id')[$key];
+			$deliverer_id	= $this->deliverer_model->get_from_id($id_deliverer)->account_id;
+			$tenant_id		= $this->tenant_model->get_from_id($id_tenant)->account_id;
+			$customer_id	= $this->customer_model->get_from_id($id_customer)->account_id;
 			$item_type		= $this->input->post('item_type')[$key];
 			
 			if ($item_type == "ORDER") // Kalau order OTP masukin 2 saja
@@ -589,7 +638,7 @@ class Order_details_model extends CI_Model {
 			// update deliverer id for each order id
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 			
-			$this->db->set('deliverer_id', $deliverer_id);
+			$this->db->set('deliverer_id', $id_deliverer);
 			if ($item_type == "ORDER") // Kalau repair set otp tambahan
 			{
 				$this->db->set('otp_deliverer_to_tenant', $otp_list[$deliverer_id][$tenant_id]);
@@ -620,6 +669,60 @@ class Order_details_model extends CI_Model {
 				$this->send_otp_to_customer($customer_id, $deliverer_id, $otp);
 			}
 		}
+		
+		foreach($otp_repair_list as $tenant_id => $otp_deliverer)
+		{
+			foreach($otp_deliverer as $deliverer_id => $otp)
+			{
+				$this->send_otp_to_tenant($tenant_id, $deliverer_id, $otp);
+			}
+		}
+	}
+	
+	public function notify_repair_finished($order_id)
+	{	
+		// Dapetin ID Account Tenant
+		$this->db->select('tenant.account_id');
+		$this->db->where($this->table_order_details. '.id', $order_id);
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('tenant', 'tenant.id=posted_item.tenant_id', 'left');
+		$query = $this->db->get('order_details', 1);
+		$item = $query->row();
+		$tenant_id = $item->account_id;
+		print_r($tenant_id);
+		
+		// Dapetin ID Account Customer
+		$this->db->select('customer.account_id');
+		$this->db->where('order_details.id', $id);
+		$this->db->join('billing', 'billing.id=order_details.billing_id', 'left');
+		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
+		$query = $this->db->get('order_details', 1);
+		$item = $query->row();
+		$customer_id = $item->account_id;
+		
+		// Dapetin ID Account Deliverer
+		$this->db->select('deliverer.account_id');
+		$this->db->where('order_details.id', $order_id);
+		$this->db->join('deliverer', 'deliverer.id=order_details.deliverer_id', 'left');
+		$query = $this->db->get('order_details', 1);
+		$item = $query->row();
+		$deliverer_id = $item->account_id;
+		
+		$this->db->trans_start();
+		
+		$this->Order_details_model->update_order_status($order_id, ORDER_STATUS['name']['REPAIRING'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
+		$otp_deliverer_to_tenant = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
+		$otp_customer_to_deliverer = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
+		redirect('Order/order_list');
+		$this->db->set('otp_deliverer_to_tenant', $otp_deliverer_to_tenant);
+		$this->db->set('otp_customer_to_deliverer', $otp_customer_to_deliverer);
+		$this->db->where('id', $order_id);
+		$this->db->update('order_details');
+		
+		$this->Order_details_model->send_otp_to_customer($customer_id, $deliverer_id, $otp_customer_to_deliverer);
+		
+		$this->db->trans_complete();
 	}
 	
 	public function update_order_status($order_id, $cur_status, $status, $customer_id=0)
@@ -725,14 +828,11 @@ class Order_details_model extends CI_Model {
 	
 	public function send_otp_to_customer($customer_id, $deliverer_id, $otp)
 	{
-		$cur_customer = $this->customer_model->get_from_id($customer_id);
-		
-		$cur_deliverer = $this->deliverer_model->get_from_id($deliverer_id);
-		$cur_deliverer->init_account();
+		$cur_deliverer = $this->account_model->get_from_id($deliverer_id);
 		
 		$this->load->model('message_inbox_model');
 		$party_one_id = $this->session->id;
-		$party_two_id = $cur_customer->account_id;
+		$party_two_id = $customer_id;
 		$cur_message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
 		
 		if ($cur_message_inbox == null)
@@ -745,7 +845,30 @@ class Order_details_model extends CI_Model {
 		$cur_message_text = new message_text_model();
 		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
 		$cur_message_text->sender_id = $this->session->id;
-		$cur_message_text->text = "Nama Pengirim: " . $cur_deliverer->account->name . ", Kode OTP: ". $otp;
+		$cur_message_text->text = "Nama Pengirim: " . $cur_deliverer->name . ", Kode OTP: ". $otp;
+		$cur_message_text->insert_from_stub();
+	}
+	
+	public function send_otp_to_tenant($tenant_id, $deliverer_id, $otp)
+	{
+		$cur_deliverer = $this->account_model->get_from_id($deliverer_id);
+		
+		$this->load->model('message_inbox_model');
+		$party_one_id = $this->session->id;
+		$party_two_id = $tenant_id;
+		$cur_message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
+		
+		if ($cur_message_inbox == null)
+		{
+			$cur_message_inbox = new message_inbox_model();
+			$cur_message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
+		}
+		
+		$this->load->model('message_text_model');
+		$cur_message_text = new message_text_model();
+		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
+		$cur_message_text->sender_id = $this->session->id;
+		$cur_message_text->text = "Nama Pengirim: " . $cur_deliverer->name . ", Kode OTP: ". $otp;
 		$cur_message_text->insert_from_stub();
 	}
 	

@@ -47,7 +47,7 @@ class Order extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('transaction_detail');
+		$data_header['js_list'] = array('tenant/transaction_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -56,6 +56,9 @@ class Order extends CI_Controller {
 		
 		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
 		{
+			// Submit Negotiated Price
+			if ($this->input->method() == "post") $this->set_nego_price_do($id);
+			
 			$this->load->model('Order_details_model');
 			$order = $this->Order_details_model->get_from_id($id);
 			$this->load->model('views/tenant/transaction_detail_view_model');
@@ -125,11 +128,15 @@ class Order extends CI_Controller {
 			if ($this->input->method() == "post") $this->get_item_deliverer_do();
 			
 			$this->load->model('Order_details_model');
-			$orders = $this->Order_details_model->get_collection_task_from_deliverer_id();
-			$delivers = $this->Order_details_model->get_deliver_task_from_deliverer_id();
+			$orders = $this->Order_details_model->get_order_collection_task_from_deliverer_id();
+			$deliver_orders = $this->Order_details_model->get_order_deliver_task_from_deliverer_id();
+			$repairs = $this->Order_details_model->get_repair_collection_task_from_deliverer_id();
+			$deliver_repairs = $this->Order_details_model->get_repair_deliver_task_from_deliverer_id();
 			$this->load->model('views/deliverer/order_list_view_model');
-			$this->order_list_view_model->get_collection_task($orders);
-			$this->order_list_view_model->get_deliver_task($delivers);
+			$this->order_list_view_model->get_order_collection_task($orders);
+			$this->order_list_view_model->get_order_deliver_task($deliver_orders);
+			$this->order_list_view_model->get_repair_collection_task($repairs);
+			$this->order_list_view_model->get_repair_deliver_task($deliver_repairs);
 			$data['model'] = $this->order_list_view_model;
 			
 			$this->load->view('deliverer/order_list', $data);
@@ -152,16 +159,46 @@ class Order extends CI_Controller {
 	
 	}
 	
+	public function notify_repair_finished($id)
+	{
+		redirect('Order/transaction_detail/' . $id);
+		// if ($this->input->method() == "post") 
+		// {
+			// $this->load->model('Order_details_model');
+			
+			// $this->Order_details_model->notify_repair_finished($id);
+			// redirect(site_url('Order/transaction_detail/' . $id));
+		// }
+	}
+	
+	public function set_nego_price_do($id)
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('discounted_price', 'Harga Diskon', 'required|integer');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Negotiated_price_model');
+			$this->Negotiated_price_model->insert_from_post($id);
+			
+			redirect('Order/order_list');
+		}
+	}
+	
 	public function get_item_deliverer_do()
 	{
 		$this->load->model('Order_details_model');
 		$orders = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('otp'), $this->session->child_id);
+		$repairs = $this->Order_details_model->get_all_from_otp_tenant_to_deliverer($this->input->post('otp'), $this->session->child_id);
 		
 		$this->load->model('views/deliverer/order_detail_view_model');
-		$this->order_detail_view_model->get($orders);
+		$this->order_detail_view_model->get_order($orders);
+		$this->order_detail_view_model->get_repair($repairs);
 		$data['model'] = $this->order_detail_view_model;
 		
 		$this->load->view('deliverer/order_detail', $data);
+		$this->load->view('deliverer/repair_detail', $data);
 	
 	}
 	

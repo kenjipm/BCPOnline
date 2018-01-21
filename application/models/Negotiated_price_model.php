@@ -9,7 +9,7 @@ class Negotiated_price_model extends CI_Model {
 	public $agreement_date;
 	public $discounted_price;
 	public $status;
-	public $posted_item_id;
+	public $order_id;
 	public $tenant_id;
 	public $customer_id;
 	
@@ -26,7 +26,7 @@ class Negotiated_price_model extends CI_Model {
 		$this->agreement_date	= "";
 		$this->discounted_price	= "";
 		$this->status			= "";
-		$this->posted_item_id	= "";
+		$this->order_id	= "";
 		$this->tenant_id		= "";
 		$this->customer_id		= "";
 		
@@ -42,7 +42,7 @@ class Negotiated_price_model extends CI_Model {
 		$this->agreement_date	= $db_item->agreement_date;
 		$this->discounted_price	= $db_item->discounted_price;
 		$this->status			= $db_item->status;
-		$this->posted_item_id	= $db_item->posted_item_id;
+		$this->order_id			= $db_item->order_id;
 		$this->tenant_id		= $db_item->tenant_id;
 		$this->customer_id		= $db_item->customer_id;
 		
@@ -64,7 +64,7 @@ class Negotiated_price_model extends CI_Model {
 		$db_item->agreement_date	= $this->agreement_date;
 		$db_item->discounted_price	= $this->discounted_price;
 		$db_item->status			= $this->status;
-		$db_item->posted_item_id	= $this->posted_item_id;
+		$db_item->order_id			= $this->order_id;
 		$db_item->tenant_id			= $this->tenant_id;
 		$db_item->customer_id		= $this->customer_id;
 		
@@ -81,7 +81,7 @@ class Negotiated_price_model extends CI_Model {
 		$stub->agreement_date	= $db_item->agreement_date;
 		$stub->discounted_price	= $db_item->discounted_price;
 		$stub->status			= $db_item->status;
-		$stub->posted_item_id	= $db_item->posted_item_id;
+		$stub->order_id			= $db_item->order_id;
 		$stub->tenant_id		= $db_item->tenant_id;
 		$stub->customer_id		= $db_item->customer_id;
 		
@@ -129,9 +129,9 @@ class Negotiated_price_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_by_item_id($item_id)
+	public function get_by_order_id($order_id)
 	{
-		$this->db->where('posted_item_id', $item_id);
+		$this->db->where('order_id', $order_id);
 		
 		$this->db->join('customer', 'customer.id=' . $this->table_nego . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
@@ -143,52 +143,57 @@ class Negotiated_price_model extends CI_Model {
 	}
 	
 	// insert new account from form post
-	public function insert_from_post($posted_item_id)
+	public function insert_from_post($order_id)
 	{
-		$i = 0;
 		$this->load->model('Tenant_model');
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));	
 		
 		$this->negotiation_id	= "";
 		$this->agreement_date	= date("Y-m-d H:i:s");
 		$this->status			= "NOT_TAKEN";
-		$this->posted_item_id	= $posted_item_id;
+		$this->order_id			= $order_id;
 		$this->tenant_id		= $cur_tenant->id;
 		
-		$temp_emails	= $this->input->post('customer_email');
-		$i = 0;
-		foreach($temp_emails as $temp_email)
-		{
-			// Get Customer ID
-			$this->db->select('customer.id');
-			$this->db->where('account.email', $temp_email);	
-			$this->db->join('account', 'account.id=customer.account_id', 'left');
-			$query = $this->db->get('customer', 1);
-			$items = $query->row();	
-			$this->customer_id = $items->id;
-			
-			// Get Negotiated Price
-			$this->discounted_price	= $this->input->post('discounted_price')[$i];
-			
-			// insert data, then generate [account_id] based on [id]
-			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-			
-			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-			if ($this->db->insert($this->table_nego, $db_item))
-			{
-				$this->load->library('Id_Generator');
-				
-				$db_item->id				= $this->db->insert_id();
-				$db_item->negotiation_id	= $this->id_generator->generate(TYPE['name']['NEGOTIATED_PRICE'], $db_item->id);
-				
-				$this->db->where('id', $db_item->id);
-				$this->db->update($this->table_nego, $db_item);
-			}
-			
-			$this->db->trans_complete(); // selesai nge lock db transaction
+		// Get Customer ID
+		$this->db->select('billing.customer_id');
+		$this->db->where('order_details.id', $order_id);	
+		$this->db->join('billing', 'order_details.billing_id=billing.id', 'left');
+		$query = $this->db->get('order_details', 1);
+		$items = $query->row();	
+		$this->customer_id = $items->customer_id;
 		
-			$i++;
+		// Get Negotiated Price
+		$this->discounted_price	= $this->input->post('discounted_price');
+		
+		// insert data, then generate [account_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_nego, $db_item))
+		{
+			$this->load->library('Id_Generator');
+			
+			$db_item->id				= $this->db->insert_id();
+			$db_item->negotiation_id	= $this->id_generator->generate(TYPE['name']['NEGOTIATED_PRICE'], $db_item->id);
+			
+			$this->db->where('id', $db_item->id);
+			$this->db->update($this->table_nego, $db_item);
 		}
+		
+		// Get Offered Price
+		$this->db->select('order_details.offered_price');
+		$this->db->where('order_details.id', $order_id);	
+		$query = $this->db->get('order_details', 1);
+		$items = $query->row();	
+		$this->offered_price = $items->offered_price;
+		
+		$this->db->where('id', $this->order_id);
+		$this->db->set('sold_price', $this->discounted_price + $this->offered_price);
+		$this->db->set('order_status', ORDER_STATUS['name']['COST_CALCULATED']);
+		$this->db->update('order_details');
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+
 	}
 
 }

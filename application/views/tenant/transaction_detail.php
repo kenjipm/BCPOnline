@@ -1,22 +1,6 @@
 <?php
-	// Model untuk Transaction Order Detail
-	
-	// dummy data order detail
-	// $model->transaction_detail = new class{};
-
-	// $model->transaction_detail->id = 1;
-	// $model->transaction_detail->quantity = 1;
-	// $model->transaction_detail->date_repr_decided = "3 Desember 2017";
-	// $model->transaction_detail->offered_price = "Rp 190.000,-";
-	// $model->transaction_detail->sold_price = "Rp 175.000,-";
-	// $model->transaction_detail->order_status = "Pembayaran";
-	// $model->transaction_detail->otp_deliverer_to_tenant = "171203001";
-	// $model->transaction_detail->collection_method = "COD";
-	// $model->transaction_detail->otp_customer_to_deliverer = "171203223";
-	// $model->transaction_detail->item_name = "Djisamsung Galaksih";
-	// $model->transaction_detail->deliverer_name = "Dori";
-	// $model->transaction_detail->voucher_cut_price = "Rp 15.000,-";
-	// $model->transaction_detail->feedback = "Bagus lah mantep pokonya recommended banget :)";
+if ($model->transaction_detail->item_type == "ORDER")
+{
 	
 ?>
 
@@ -36,6 +20,11 @@
 					<label class="control-label col-xs-3" for="quantity">Jumlah:</label>
 					<div class="col-xs-3"><input type="text" class="form-control" id="quantity" 
 						value="<?=$model->transaction_detail->quantity?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="desc">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="desc" 
+						value="<?=$model->transaction_detail->posted_item_description?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="order_status">Status:</label>
@@ -90,7 +79,92 @@
 		</div>
 	</div>
 </div>
+<?php
+}
+else if ($model->transaction_detail->item_type == "REPAIR")
+{
+	
+?>
 
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Detail Transaksi</h3>
+		</div>
+		<div class="panel-body">
+			<form action="<?=site_url('order/transaction_detail/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="desc">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="desc" 
+						value="<?=$model->transaction_detail->posted_item_description?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="order_status">Status:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="order_status" 
+						value="<?=$model->transaction_detail->order_status_desc?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="date_repr_decided">Tanggal Order:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="date_repr_decided" 
+						value="<?=$model->transaction_detail->date_created?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="deliverer_name">Nama Pengirim:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="deliverer_name" 
+						value="<?=$model->transaction_detail->deliverer?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="collection_method">Cara Pengiriman:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="collection_method" 
+						value="<?=$model->transaction_detail->collection_method?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="offered_price">Harga Awal:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="offered_price" 
+						value="<?=$model->transaction_detail->offered_price?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="sold_price">Total Harga:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" id="sold_price" 
+						value="<?=$model->transaction_detail->sold_price?>" readonly></div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-9 col-xs-offset-3">
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')">Lihat Ulasan</button>
+					</div>
+				</div>
+				<div id="add_customer" style="display:none">
+					<div class="form-group">
+						<label class="control-label col-xs-3">Harga Diskon:</label>
+						<div class="col-xs-9"><input type="text" class="form-control" name="discounted_price"></div>
+					</div>
+					<div class="form-group">
+						<div class="col-xs-3"><button type="submit" class="btn btn-default">Kirim</button></div>
+					</div>
+				</div>
+				<div class="form-group" id="add_price">
+					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a></div>
+				</div>
+			</form>
+			<button class="btn btn-default" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Notify Repair Finish</button>
+			
+			<!--<button class="btn btn-default" onclick="popup.open('popup_notify_failed')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Notify Repair Failed</button>
+			-->
+			
+			<a href="<?=site_url('message/'.$model->transaction_detail->id)?>">
+				<button class="btn btn-default">Kirim Pesan</button>
+			</a>
+			<a href="<?=site_url('customer/profile/'.$model->transaction_detail->id)?>">
+				<button class="btn btn-default">Lihat Customer</button>
+			</a>
+		</div>
+	</div>
+</div>
+
+<?php
+}
+	
+?>
 <div id="popup_review" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -139,3 +213,51 @@
 		</div>
 	</div>
 </div>
+
+<div id="popup_notify_finished" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Perbaikan Selesai
+		</div>
+		<div class="panel-body">
+			<form action="<?=site_url('order/notify_repair_finished/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<label>Beri tahu barang sudah selesai diservis?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_notify_finished')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_notify_finished')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<!--
+<div id="popup_notify_failed" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Perbaikan Gagal
+		</div>
+		<div class="panel-body">
+			<form action="<?=site_url('order/notify_repair_failed/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<label>Beri tahu barang tidak dapat diservis?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+-->

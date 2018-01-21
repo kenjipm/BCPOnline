@@ -37,6 +37,8 @@
 					<thead>
 						<tr>
 							<th> <label for="tenant_name">Tenant</label> </th>
+							<th> <label for="tenant_unit">Unit</label> </th>
+							<th> <label for="tenant_floor">Lantai</label> </th>
 							<th> <label for="otp_deliverer_to_tenant">Kode OTP</label> </th>
 						</tr>
 					</thead>
@@ -49,6 +51,8 @@
 								?>
 								<tr>
 									<td><?=$order->tenant?></td>
+									<td><?=$order->unit_number?></td>
+									<td><?=$order->floor?></td>
 									<td><?=$order->otp_deliverer_to_tenant?></td>
 								<?php
 							}
@@ -77,9 +81,9 @@
 					</thead>
 					<tbody>
 						<?php
-						if ($model->deliver_list)
+						if ($model->deliver_order_list)
 						{
-							foreach($model->deliver_list as $deliver)
+							foreach($model->deliver_order_list as $deliver)
 							{
 								?>
 								<tr>
@@ -109,3 +113,92 @@
 		</div>
 	</div>
 </div>
+
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Pengambilan Repair</h3>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="address">Alamat</label> </th>
+							<th> <label for="customer">Nama Customer</label> </th>
+							<th> <label for="otp_deliverer_to_tenant">Kode OTP</label> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($model->repair_list)
+						{
+							foreach($model->repair_list as $repair)
+							{
+								?>
+								<tr>
+									<td><?=$repair->address . ", " . $repair->city . ", Kecamatan " . $repair->kecamatan . ", Kelurahan " . $repair->kelurahan . ", " . $repair->postal_code?></td>
+									<td><?=$repair->customer?></td>
+									<td><?=$repair->otp_deliverer_to_customer?></td>
+								</tr>
+								<?php
+							}
+						}
+						?>
+					</tbody>
+				</table>	
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3>Daftar Pengiriman Repair</h3>
+		</div>
+		<div class="panel-body">
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<tr>
+							<th> <label for="tenant_name">Tenant</label> </th>
+							<th> <label for="tenant_unit">Unit</label> </th>
+							<th> <label for="tenant_floor">Lantai</label> </th>
+						</tr>
+					</thead>
+					<tbody>
+						<?php
+						if ($model->deliver_repair_list)
+						{
+							foreach($model->deliver_repair_list as $deliver)
+							{
+								?>
+								<tr>
+									<td><?=$deliver->tenant?></td>
+									<td><?=$deliver->unit_number?></td>
+									<td><?=$deliver->floor?></td>
+								<?php
+							}
+						}
+						?>
+					</tbody>
+				</table>
+				<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
+					<div class="form-group">
+						<div class="col-sm-2">
+							<label>Masukkan OTP:</label>
+						</div>
+						<div class="col-sm-4">
+							<input type="text" class="form-control" name="otp"/>
+						</div>
+						<div class="col-sm-2">
+							<button class="btn btn-default" type="submit" class="btn btn-default">Kirim</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+
