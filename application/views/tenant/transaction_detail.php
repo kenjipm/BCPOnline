@@ -145,15 +145,18 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 				<div class="form-group" id="add_price">
 					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a></div>
 				</div>
-				
-				<button class="btn btn-default" onclick="popup.open('popup_notify')">Notify Repair Finish</button>
-				<a href="<?=site_url('message/'.$model->transaction_detail->id)?>">
-					<button class="btn btn-default">Kirim Pesan</button>
-				</a>
-				<a href="<?=site_url('customer/profile/'.$model->transaction_detail->id)?>">
-					<button class="btn btn-default">Lihat Customer</button>
-				</a>
 			</form>
+			<button class="btn btn-default" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Notify Repair Finish</button>
+			
+			<!--<button class="btn btn-default" onclick="popup.open('popup_notify_failed')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Notify Repair Failed</button>
+			-->
+			
+			<a href="<?=site_url('message/'.$model->transaction_detail->id)?>">
+				<button class="btn btn-default">Kirim Pesan</button>
+			</a>
+			<a href="<?=site_url('customer/profile/'.$model->transaction_detail->id)?>">
+				<button class="btn btn-default">Lihat Customer</button>
+			</a>
 		</div>
 	</div>
 </div>
@@ -211,20 +214,50 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 	</div>
 </div>
 
-<div id="popup_notify" class="popup popup-md">
+<div id="popup_notify_finished" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Konfirmasi Perbaikan Selesai
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('order/notify_repair_finished/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
-						<button type="button" class="btn btn-default">Kirim</button>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Batal</button>
+						<label>Beri tahu barang sudah selesai diservis?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_notify_finished')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_notify_finished')">Batal</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
+
+<!--
+<div id="popup_notify_failed" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Perbaikan Gagal
+		</div>
+		<div class="panel-body">
+			<form action="<?=site_url('order/notify_repair_failed/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<label>Beri tahu barang tidak dapat diservis?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+-->
