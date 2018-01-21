@@ -146,9 +146,7 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a></div>
 				</div>
 				
-				<a href="<?=site_url('dispute/'.$model->transaction_detail->id)?>">
-					<button class="btn btn-default">Komplain</button>
-				</a>
+				<button class="btn btn-default" onclick="popup.open('popup_notify')">Notify Repair Finish</button>
 				<a href="<?=site_url('message/'.$model->transaction_detail->id)?>">
 					<button class="btn btn-default">Kirim Pesan</button>
 				</a>
@@ -202,6 +200,24 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 						<textarea class="form-control" placeholder="Tulis balasan..."></textarea>
 					</div>
 				</div>
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<button type="button" class="btn btn-default">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_notify" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Perbaikan Selesai
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<button type="button" class="btn btn-default">Kirim</button>
