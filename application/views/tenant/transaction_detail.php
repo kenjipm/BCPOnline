@@ -101,7 +101,7 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="order_status">Status:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="order_status" 
-						value="<?=$model->transaction_detail->order_status?>" readonly></div>
+						value="<?=$model->transaction_detail->order_status_desc?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_repr_decided">Tanggal Order:</label>
@@ -143,7 +143,7 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 					</div>
 				</div>
 				<div class="form-group" id="add_price">
-					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()">Masukkan Harga Servis</a></div>
+					<div class="col-xs-3"><a class="btn btn-default" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a></div>
 				</div>
 				
 				<a href="<?=site_url('dispute/'.$model->transaction_detail->id)?>">
