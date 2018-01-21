@@ -105,29 +105,33 @@ class Tenant_pay_receipt_model extends CI_Model {
 	}
 	
 	// insert new account from form post
-	public function insert_from_post($brand_id, $voucher_id)
+	public function insert_from_stub()
 	{
-		$this->load->model('tenant_pay_receipt_model');
-		
-		$this->tenant_receipt_id	= "";
-		$this->payment_period_start	= "";
-		$this->payment_period_end	= "";
-		$this->payment_purpose		= "";
-		$this->admin_id				= "";
-		$this->paid_amount			= "";
-	
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
-		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
 		if ($this->db->insert($this->table_tenant_pay_receipt, $db_item))
 		{	
 			$db_item->id = $this->db->insert_id();
+			$this->id = $db_item->id;
 			
-			$this->db->where('id', $db_item->id);
-			$this->db->update($this->table_tenant_pay_receipt, $db_item);
+			$this->update_natural_id();
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+		
+		return $this->id;
+	}
+	
+	public function update_natural_id()
+	{
+		$this->load->library('id_generator');
+		$natural_id = $this->id_generator->generate(TYPE['name']['TENANT_PAY_RECEIPT'], $this->id);
+		
+		$this->tenant_receipt_id = $natural_id;
+		$this->db->set('tenant_receipt_id', $natural_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_tenant_pay_receipt);
 	}
 }
 

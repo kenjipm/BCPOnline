@@ -375,14 +375,91 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	
 	public function get_all_unpaid_by_tenants()
 	{
 		$result = array();
 		
+		$this->db->select('
+			order_details.sold_price,
+			order_details.quantity,
+			order_details.voucher_cut_price,
+			posted_item.posted_item_name,
+			posted_item.tenant_id,
+			tenant.tenant_name
+		');
 		
+		$where['order_details.tnt_paid_receipt_id'] = NULL;
+		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
+		$where['tenant.is_open'] = 1;
 		
-		return $result;
+		$this->db->join('billing', 'billing.id = order_details.billing_id', 'left');
+		
+		$this->db->join('posted_item_variance', 'posted_item_variance.id = order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
+		$this->db->join('tenant', 'tenant.id = posted_item.tenant_id', 'left');
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $items : array();
+	}
+	
+	public function get_unpaid_from_tenant_id($tenant_id)
+	{
+		$result = array();
+		
+		$this->db->select('
+			order_details.id AS id,
+			order_details.sold_price,
+			order_details.quantity,
+			order_details.voucher_cut_price,
+			posted_item.posted_item_name,
+			posted_item.tenant_id
+		');
+		
+		$where['posted_item.tenant_id'] = $tenant_id;
+		$where['order_details.tnt_paid_receipt_id'] = NULL;
+		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
+		
+		$this->db->join('billing', 'billing.id = order_details.billing_id', 'left');
+		
+		$this->db->join('posted_item_variance', 'posted_item_variance.id = order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $items : array();
+	}
+	
+	public function get_from_tnt_paid_receipt_id($tnt_paid_receipt_id)
+	{
+		$result = array();
+		
+		$this->db->select('
+			order_details.id AS id,
+			order_details.sold_price,
+			order_details.quantity,
+			order_details.voucher_cut_price,
+			posted_item.posted_item_name,
+			posted_item.tenant_id
+		');
+		
+		$where['order_details.tnt_paid_receipt_id'] = $tnt_paid_receipt_id;
+		// $where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
+		
+		$this->db->join('billing', 'billing.id = order_details.billing_id', 'left');
+		
+		$this->db->join('posted_item_variance', 'posted_item_variance.id = order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $items : array();
 	}
 	
 	public function get_collection_task_from_deliverer_id()
@@ -558,6 +635,18 @@ class Order_details_model extends CI_Model {
 		$this->db->where('order_details.order_status', $cur_status);
 		
 		$this->db->set('order_details.order_status', $status);
+		return $this->db->update('order_details');
+	}
+	
+	public function update_tenant_pay_receipt_id($list_order_detail_id, $tenant_pay_receipt_id)
+	{
+		$this->db->where('id', '0');
+		foreach ($list_order_detail_id as $order_detail_id)
+		{
+			$this->db->or_where('id', $order_detail_id);
+		}
+		
+		$this->db->set('tnt_paid_receipt_id', $tenant_pay_receipt_id);
 		return $this->db->update('order_details');
 	}
 	

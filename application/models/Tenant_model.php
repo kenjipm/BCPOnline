@@ -27,7 +27,7 @@ class Tenant_model extends CI_Model {
 		$this->unit_number		= "";
 		$this->floor			= "";
 		$this->selling_category	= "";
-		$this->is_open			= "";
+		$this->is_open			= 1;
 		
 		$this->load->model('Account_model');
 		// $this->load->model('Item_model');
@@ -144,7 +144,7 @@ class Tenant_model extends CI_Model {
 		$this->unit_number			= $this->input->post('unit_number');
 		$this->floor				= $this->input->post('floor');
 		$this->selling_category		= $this->input->post('selling_category');
-		$this->is_open				= false;
+		$this->is_open				= true;
 		
 		$this->db->trans_start();
 		
