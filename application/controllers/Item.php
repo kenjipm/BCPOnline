@@ -64,12 +64,11 @@ class Item extends CI_Controller {
 		
 		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
-			// $this->load->model('Item_model');
-			// $items = $this->Item_model->get_all();
-			// $this->load->model('views/tenant/post_item_list_view_model');
-			// $this->post_item_list_view_model->get($items);
-			// $data['model'] = $this->post_item_list_view_model;
-			$data['model'] = new class{};
+			$this->load->model('Item_model');
+			$items = $this->Item_model->get_all_for_admin();
+			$this->load->model('views/admin/post_item_list_view_model');
+			$this->post_item_list_view_model->get($items);
+			$data['model'] = $this->post_item_list_view_model;
 			
 			$this->load->view('admin/post_item_list', $data);
 		}

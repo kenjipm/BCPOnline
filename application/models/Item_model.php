@@ -172,10 +172,11 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_for_admin()
+	public function get_all_for_admin($limit=9, $offset=0)
 	{
 		$this->db->join('tenant', 'tenant.id=' . $this->table_item . '.tenant_id', 'left');
-		$query = $this->db->get($this->table_item);
+		$query = $this->db->order_by($this->table_item. '.tenant_id', 'DESC')
+						  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : null;

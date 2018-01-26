@@ -65,7 +65,7 @@
 										</div>
 										<div class="panel-footer">
 											<label class="control-label"><?=$hot_item->posted_item_name?></label><br/>
-											<label class="control-label"><?=$hot_item->price?></label>
+											<label class="control-label"><?=$hot_item->initial_price . " >>> " . $hot_item->promo_price?></label>
 										</div>
 									</a>
 								</div>
