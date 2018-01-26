@@ -115,8 +115,11 @@ class Billing extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
+		$address_id = $this->input->post('address_id');
+		
 		$this->load->model('shipping_address_model');
-		$shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->child_id);
+		// $shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->child_id);
+		$shipping_address = $this->shipping_address_model->get_from_id($address_id);
 		
 		$this->load->model('shipping_charge_model');
 		$shipping_charge = $this->shipping_charge_model->get_from_shipping_address($shipping_address);

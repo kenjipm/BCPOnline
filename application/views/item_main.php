@@ -100,14 +100,39 @@
 						<label>Jumlah</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="text" name="quantity" value="1" class="form-control"/>
+						<input type="text" name="quantity" id="quantity" value="1" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
 						<input type="hidden" name="return_url" value="item/<?=$model->item->id?>"/>
-						<button type="submit" class="btn btn-default">Beli</button>
+						<button type="button" class="btn btn-default" onclick="cart_add_do()">Beli</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_buy')">Batal</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_buy_success" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Tambah ke Keranjang
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<h4>Barang berhasil ditambahkan ke Keranjang!</h4>
+						<br/>
+						<br/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<a class="btn btn-default" href="<?=site_url('customer/cart')?>">Lanjut ke Keranjang</a>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_buy_success')">Lanjut Belanja</button>
 					</div>
 				</div>
 			</form>

@@ -97,7 +97,7 @@ class Reward_model extends CI_Model {
 		$query = $this->db->get($this->table_reward);
 		$rewards = $query->result();
 		
-		return ($rewards !== null) ? $this->map_list($rewards) : null;
+		return ($rewards !== null) ? $this->map_list($rewards) : array();
 	}
 	
 	// insert new reward from form post
