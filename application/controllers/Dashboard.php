@@ -31,7 +31,7 @@ class Dashboard extends CI_Controller {
 			$data['model'] = $this->dashboard_view_model;
 			$this->load->view('admin/dashboard_main', $data);
 		}
-		else
+		else // CUSTOMER
 		{
 			$this->load->model('category_model');
 			$categories = $this->category_model->get_all();

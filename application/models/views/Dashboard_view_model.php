@@ -31,9 +31,9 @@ class Dashboard_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $hot_item->id;
-			$temp->posted_item_name	= $hot_item->posted_item_name;
-			$temp->price			= $hot_item->price;
-			$temp->image_one_name	= $hot_item->image_one_name;
+			$temp->posted_item_name	= $hot_item->posted_item->posted_item_name;
+			$temp->price			= $hot_item->promo_price;
+			$temp->image_one_name	= $hot_item->posted_item->image_one_name;
 			
 			$this->hot_items[] = $temp;
 		}

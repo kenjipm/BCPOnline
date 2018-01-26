@@ -25,8 +25,8 @@ class Hot_item_model extends CI_Model {
 		$this->promo_description		= "";
 		$this->posted_item_id			= 0;
 		
-		// $this->load->model('item_model');
-		// $this->posted_item				= new item_model();
+		$this->load->model('item_model');
+		$this->posted_item				= new item_model();
 	}
 	
 	// constructor from database object
@@ -40,6 +40,7 @@ class Hot_item_model extends CI_Model {
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$this->posted_item->price				= $db_item->price ?? "";
+		$this->posted_item->image_one_name		= $db_item->image_one_name ?? "";
 		
 		return $this;
 	}
@@ -71,6 +72,7 @@ class Hot_item_model extends CI_Model {
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$stub->posted_item->price				= $db_item->price ?? "";
+		$stub->posted_item->image_one_name		= $db_item->image_one_name ?? "";
 		
 		return $stub;
 	}

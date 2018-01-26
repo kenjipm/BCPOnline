@@ -104,6 +104,7 @@ class Following_tenant_model extends CI_Model {
 	public function get_all_from_customer_id($customer_id, $limit=10, $offset=0)
 	{
 		$where['customer_id'] = $customer_id;
+		$where['date_unfollowed'] = 0;			// Ngga (Belum) diunfollow
 		
 		$query = $this->db
 					  ->where($where)
@@ -126,7 +127,7 @@ class Following_tenant_model extends CI_Model {
 	{
 		$this->customer_id		= $customer_id;
 		$this->tenant_id		= $tenant_id;
-		$this->date_followed	= date("Y-m-d");
+		$this->date_followed	= date("Y-m-d H:i:s", time());
 		
 		$item = $this->get_db_from_stub();
 		if ($this->db->insert($this->table_following_tenant, $item))
@@ -155,6 +156,7 @@ class Following_tenant_model extends CI_Model {
 	{
 		$where['customer_id'] = $customer_id;
 		$where['tenant_id'] = $tenant_id;
+		$where['date_unfollowed'] = 0;
 		
 		$query = $this->db
 					  ->where($where)
@@ -175,8 +177,14 @@ class Following_tenant_model extends CI_Model {
 		}
 		else // kalau ada, hapus
 		{
-			$this->db->where('id', $id);
-			$this->db->delete($this->table_following_tenant);
+			$date_unfollowed =  date("Y-m-d H:i:s", time());
+			$this->db->trans_start();
+			
+			$this->db->set('date_unfollowed', $date_unfollowed)
+					 ->where('id', $id)
+					 ->update($this->table_following_tenant);
+					 
+			$this->db->trans_complete();
 			
 			return false;
 		}

@@ -193,16 +193,17 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_following_tenants($following_tenants)
+	public function get_all_from_following_tenants($following_tenants, $limit=3, $offset=0)
 	{
 		$this->db->where('0', '1');
 		foreach ($following_tenants as $following_tenant)
 		{
 			$this->db->or_where('tenant_id', $following_tenant->tenant_id);
+			$this->db->where('item_type', "ORDER");
 		}
 		$query = $this->db
 					  ->order_by('id', 'DESC')
-					  ->get($this->table_item);
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
