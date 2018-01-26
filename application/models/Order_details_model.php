@@ -694,7 +694,7 @@ class Order_details_model extends CI_Model {
 		
 		// Dapetin ID Account Customer
 		$this->db->select('customer.account_id');
-		$this->db->where('order_details.id', $id);
+		$this->db->where('order_details.id', $order_id);
 		$this->db->join('billing', 'billing.id=order_details.billing_id', 'left');
 		$this->db->join('customer', 'customer.id=billing.customer_id', 'left');
 		$query = $this->db->get('order_details', 1);
@@ -714,7 +714,7 @@ class Order_details_model extends CI_Model {
 		$this->Order_details_model->update_order_status($order_id, ORDER_STATUS['name']['REPAIRING'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
 		$otp_deliverer_to_tenant = $this->get_available_otp(TYPE['name']['TENANT'], $tenant_id);
 		$otp_customer_to_deliverer = $this->get_available_otp(TYPE['name']['DELIVERER'], $deliverer_id);
-		redirect('Order/order_list');
+
 		$this->db->set('otp_deliverer_to_tenant', $otp_deliverer_to_tenant);
 		$this->db->set('otp_customer_to_deliverer', $otp_customer_to_deliverer);
 		$this->db->where('id', $order_id);

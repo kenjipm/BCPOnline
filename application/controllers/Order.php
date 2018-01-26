@@ -161,14 +161,13 @@ class Order extends CI_Controller {
 	
 	public function notify_repair_finished($id)
 	{
-		redirect('Order/transaction_detail/' . $id);
-		// if ($this->input->method() == "post") 
-		// {
-			// $this->load->model('Order_details_model');
+		if ($this->input->method() == "post") 
+		{
+			$this->load->model('Order_details_model');
 			
-			// $this->Order_details_model->notify_repair_finished($id);
-			// redirect(site_url('Order/transaction_detail/' . $id));
-		// }
+			$this->Order_details_model->notify_repair_finished($id);
+			redirect('Order/transaction_detail/' . $id);
+		}
 	}
 	
 	public function set_nego_price_do($id)

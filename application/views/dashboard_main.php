@@ -20,27 +20,27 @@
 	// $model->categories[6]->category_name = "Reparasi";
 	
 	// dummy posted items
-	$model->hot_items = array();
+	// $model->hot_items = array();
 	
-	$model->hot_items[0] = new class{};
-	$model->hot_items[0]->id = 1;
-	$model->hot_items[0]->posted_item_name = "Charger Samsung";
-	$model->hot_items[0]->price = "Rp 250.000";
-	$model->hot_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
+	// $model->hot_items[0] = new class{};
+	// $model->hot_items[0]->id = 1;
+	// $model->hot_items[0]->posted_item_name = "Charger Samsung";
+	// $model->hot_items[0]->price = "Rp 250.000";
+	// $model->hot_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
 	
-	$model->hot_items[1] = new class{};
-	$model->hot_items[1]->id = 2;
-	$model->hot_items[1]->posted_item_name = "Charger Wireless";
-	$model->hot_items[1]->price = "Rp 350.000";
-	$model->hot_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
+	// $model->hot_items[1] = new class{};
+	// $model->hot_items[1]->id = 2;
+	// $model->hot_items[1]->posted_item_name = "Charger Wireless";
+	// $model->hot_items[1]->price = "Rp 350.000";
+	// $model->hot_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
 	
-	$model->hot_items[2] = new class{};
-	$model->hot_items[2]->id = 3;
-	$model->hot_items[2]->posted_item_name = "Dompet Doraemon";
-	$model->hot_items[2]->price = "Rp 40.000";
-	$model->hot_items[2]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
+	// $model->hot_items[2] = new class{};
+	// $model->hot_items[2]->id = 3;
+	// $model->hot_items[2]->posted_item_name = "Dompet Doraemon";
+	// $model->hot_items[2]->price = "Rp 40.000";
+	// $model->hot_items[2]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
 	
-	$model->tenant_items = $model->hot_items;
+	//$model->tenant_items = $model->hot_items;
 ?>
 
 <div class="row">
