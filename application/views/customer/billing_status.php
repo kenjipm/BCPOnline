@@ -117,10 +117,17 @@
 												</td>
 												<td>
 												<?php
-													if (!$order->is_done)
+													if ($order->is_received)
 													{
 														?>
 														<button type="button" class="btn btn-default" id="btn-mark_order_finish-<?=$order->id?>" onclick="mark_order_finish(<?=$order->id?>)">Selesai</button>
+														<?php
+													}
+												?>
+												<?php
+													if (!$order->is_done)
+													{
+														?>
 														<button type="button" class="btn btn-default" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">Komplain</button>
 														<?php
 													}

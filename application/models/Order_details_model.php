@@ -237,7 +237,7 @@ class Order_details_model extends CI_Model {
 	{
 		$where['billing_id'] = $billing_id;
 		
-		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->select('*, ' . $this->table_order_details.'.id AS order_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->where($where);

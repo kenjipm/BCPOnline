@@ -61,15 +61,15 @@ class Customer extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('customer/cart');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
 		$this->load->model('shipping_address_model');
-		$shipping_address = $this->shipping_address_model->get_by_customer_id($this->session->child_id);
+		$shipping_addresses = $this->shipping_address_model->get_all_by_customer_id($this->session->child_id);
 		
 		$this->load->model('views/customer/cart_view_model');
-		$this->cart_view_model->get($this->session->cart, $shipping_address);
+		$this->cart_view_model->get($this->session->cart, $shipping_addresses);
 		
 		$data['title'] = "Keranjang Belanja";
 		$data['model'] = $this->cart_view_model;
@@ -214,7 +214,7 @@ class Customer extends CI_Controller {
 		return $data;
 	}
 	
-	public function cart_add_do()
+	public function cart_add_do($is_ajax=false)
 	{
 		$posted_item_variance_id = $this->input->post('posted_item_variance_id');
 		$this->load->model('posted_item_variance_model');
@@ -240,10 +240,13 @@ class Customer extends CI_Controller {
 			$cart[$posted_item_variance_id]['quantity'] += $quantity;
 			$this->session->cart = $cart;
 		}
-		$this->default_redirect();
+		
+		if (!$is_ajax) $this->default_redirect();
+		
+		echo "1";
 	}
 	
-	public function cart_sub_do()
+	public function cart_sub_do($is_ajax=false)
 	{
 		$posted_item_variance_id = $this->input->post('posted_item_variance_id');
 		$quantity = $this->input->post('quantity');
@@ -256,7 +259,9 @@ class Customer extends CI_Controller {
 		
 		$this->session->cart = $cart;
 		
-		$this->default_redirect();
+		if (!$is_ajax) $this->default_redirect();
+		
+		echo "1";
 	}
 	
 	public function address_add_do()

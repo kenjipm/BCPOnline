@@ -86,6 +86,16 @@ class Shipping_address_model extends CI_Model {
 		return $stub;
 	}
 	
+	public function map_list($items)
+	{
+		$result = array();
+		foreach ($items as $item)
+		{
+			$result[] = $this->get_new_stub_from_db($item);
+		}
+		return $result;
+	}
+	
 	public function get_from_id($id)
 	{
 		$where['id'] = $id;
@@ -104,6 +114,18 @@ class Shipping_address_model extends CI_Model {
 		$query = $this->db->get($this->table_shipping_address, 1);
 		
 		return $this->get_stub_from_db($query->row());
+	}
+	
+	public function get_all_by_customer_id($customer_id)
+	{
+		$this->db->select('*, shipping_address.id AS id');
+		$this->db->join('billing', 'shipping_address.address_id = billing.shipping_address_id', 'left');
+		$this->db->where('shipping_address.customer_id', $customer_id);
+		$this->db->order_by('billing.date_created', 'DESC');
+		$query = $this->db->get($this->table_shipping_address);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function insert($address)

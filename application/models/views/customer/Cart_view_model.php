@@ -7,7 +7,7 @@ class Cart_view_model extends CI_Model {
 	public $shipping_charge;
 	public $var_type;
 	public $var_description;
-	public $address;
+	public $shipping_addresses;
 	public $price_total;
 	
 	// constructor
@@ -19,11 +19,11 @@ class Cart_view_model extends CI_Model {
 		
 		$this->price_subtotal = 0;
 		$this->shipping_charge = 0;
-		$this->address = "";
+		$this->shipping_addresses = array();
 		$this->price_total = 0;
 	}
 	
-	public function get($cart, $shipping_address)
+	public function get($cart, $shipping_addresses)
 	{
 		$this->load->library('text_renderer');
 		
@@ -61,7 +61,16 @@ class Cart_view_model extends CI_Model {
 		$this->price_subtotal	= $this->text_renderer->to_rupiah($this->price_subtotal);
 		$this->price_total		= $this->text_renderer->to_rupiah($this->price_total);
 		
-		$this->address			= $shipping_address->get_full_address();
+		foreach ($shipping_addresses as $shipping_address)
+		{
+			$temp_shipping_address = new class{};
+			$temp_shipping_address->id				= $shipping_address->id;
+			$temp_shipping_address->full_address	= $shipping_address->get_full_address();
+			
+			$this->shipping_addresses[] = $temp_shipping_address;
+		}
+		
+		$this->btn_address_text	= (count($this->shipping_addresses) <= 0) ? "Tambah Alamat Kirim" : "Tambah Alamat Kirim";
 	}
 }
 ?>

@@ -7,7 +7,7 @@ class Item extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('toggle_tenant_favorite', 'toggle_item_favorite');
+        $data_header['js_list'] = array('toggle_tenant_favorite', 'toggle_item_favorite', 'item_main');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
