@@ -243,6 +243,7 @@ class Item_model extends CI_Model {
 		if ($this->item_type == "ORDER")
 		{
 			$this->posted_item_id			= "";
+			$this->posted_item_name			= $this->input->post('posted_item_name');
 			$this->price					= $this->input->post('price');
 			$this->date_posted				= date("Y-m-d H:i:s", time());
 			$this->date_updated				= date("Y-m-d H:i:s", time());

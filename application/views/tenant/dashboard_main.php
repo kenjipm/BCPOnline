@@ -86,21 +86,47 @@
 			</div>
 			<div class="panel-body">
 				<?php
+				$i = 0;
 				foreach($model->posted_items as $posted_item)
 				{
+					if ($i%3 == 0)
+					{
+					?>
+					<div class="row">
+					<?php
+					}
 					?>
 					<div class="col-xs-4">
 						<div class="thumbnail">
 							<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
 								<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>" style="width:50%">
 								<div class="caption text-center">
+									<?php 
+									if ($posted_item->item_type == "ORDER")
+									{
+									?>
 									<p><?=$posted_item->posted_item_name?></p>
-									<p><?=$posted_item->price?></p>
+									<?php
+									}
+									else
+									{
+									?>
+									<p><?=$posted_item->posted_item_description?></p>
+									<?php
+									}
+									?>
 								</div>
 							</a>
 						</div>
 					</div>
 					<?php
+					if ($i%3 == 2)
+					{
+					?>
+					</div>
+					<?php
+					}
+					$i++;
 				}
 				?>
 				<div class="col-sm-3 col-sm-offset-9">

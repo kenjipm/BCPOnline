@@ -9,7 +9,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 	{
 	}
 	
-	public function get($item, $posted_item_variances, $negotiated_prices)
+	public function get($item, $posted_item_variances)
 	{
 		$this->posted_item = new class{};
 		$this->load->library('Text_renderer');
@@ -40,14 +40,6 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$i++;
 		}
 		
-		$i = 0;
-		foreach($negotiated_prices as $negotiated_price)
-		{
-			$this->nego_price->customer[$i] 			= $negotiated_price->account->email;
-			$this->nego_price->discounted_price[$i]		= $this->text_renderer->to_rupiah($negotiated_price->discounted_price);
-			
-			$i++;
-		}
 	}
 
 	
