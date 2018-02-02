@@ -11,6 +11,10 @@ $config['top_menu_customer'] = array(
 			'text'	=> "Favorit",
 			'url'	=> "customer/favorite_item",
 			),
+		'REPAIR' => array(
+			'text'	=> "Input OTP",
+			'url'	=> "order/order_list",
+			),
 		'REWARD' => array(
 			'text'	=> "Reward",
 			'url'	=> "reward",

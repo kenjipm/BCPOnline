@@ -141,6 +141,14 @@ class Order extends CI_Controller {
 			
 			$this->load->view('deliverer/order_list', $data);
 		}
+		else // CUSTOMER
+		{
+			// OTP INPUT
+			if ($this->input->method() == "post") $this->get_item_customer_do();
+			
+			$data['model'] = new class{};
+			$this->load->view('customer/repair_list', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');
@@ -198,6 +206,19 @@ class Order extends CI_Controller {
 		
 		$this->load->view('deliverer/order_detail', $data);
 		$this->load->view('deliverer/repair_detail', $data);
+	
+	}
+	
+	public function get_item_customer_do()
+	{
+		$this->load->model('Order_details_model');
+		$repairs = $this->Order_details_model->get_all_from_otp_deliverer_to_customer($this->input->post('otp'), $this->session->child_id);
+		
+		$this->load->model('views/customer/repair_detail_view_model');
+		$this->repair_detail_view_model->get($repairs);
+		$data['model'] = $this->repair_detail_view_model;
+		
+		$this->load->view('customer/repair_detail', $data);
 	
 	}
 	
