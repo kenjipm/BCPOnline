@@ -7,6 +7,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{
+		
 	}
 	
 	public function get($item, $posted_item_variances)
@@ -39,10 +40,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			
 			$i++;
 		}
-
 	}
-
-	
 }
 
 ?>

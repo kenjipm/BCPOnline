@@ -36,6 +36,7 @@ class Dashboard_View_Model extends CI_Model{
 			$this->posted_items[$i]->image_three_name	= $item->image_three_name;
 			$this->posted_items[$i]->image_four_name	= $item->image_four_name;
 			$this->posted_items[$i]->posted_item_name 	= $item->posted_item_name;
+			$this->posted_items[$i]->posted_item_description = $item->posted_item_description;
 			$this->posted_items[$i]->item_type 			= $item->item_type;
 			$this->posted_items[$i]->price				= $this->text_renderer->to_rupiah($item->price);
 			

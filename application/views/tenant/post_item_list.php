@@ -29,22 +29,36 @@
 		</div>
 		<div class="panel-body">
 			<?php
+			$i = 0;
 			foreach($model->posted_items as $posted_item)
 			{
 				if ($posted_item->item_type == "ORDER")
 				{
-				?>
-				<div class="col-xs-4">
-					<div class="thumbnail">
-						<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
-							<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>" style="width:50%">
-							<div class="caption text-center">
-								<p><?=$posted_item->posted_item_name?></p>
-							</div>
-						</a>
+					if ($i%3 == 0)
+					{
+					?>
+					<div class="row">
+					<?php
+					}
+					?>
+					<div class="col-xs-4">
+						<div class="thumbnail">
+							<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
+								<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>" style="width:50%">
+								<div class="caption text-center">
+									<p><?=$posted_item->posted_item_name?></p>
+								</div>
+							</a>
+						</div>
 					</div>
-				</div>
-				<?php
+					<?php
+					if ($i%3 == 2)
+					{
+					?>
+					</div>
+					<?php
+					}
+					$i++;
 				}
 			}
 			?>
