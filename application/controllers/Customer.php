@@ -404,6 +404,35 @@ class Customer extends CI_Controller {
 		redirect('dispute/detail/' . $dispute->id);
 	}
 	
+	public function create_feedback()
+	{
+		$this->load->model('feedback_model');
+		$order_detail_id = $this->input->post('order_detail_id');
+		
+		$feedback = $this->feedback_model->get_from_order_detail_id($order_detail_id);
+		$feedback->rating = $this->input->post('rating');
+		$feedback->feedback_text = $this->input->post('feedback_text');
+		$feedback->feedback_reply = "";
+		$feedback->submitted_by = $this->session->child_id;
+		$feedback->feedback_for = $this->input->post('feedback_for');
+		$feedback->order_detail_id = $this->input->post('order_detail_id');
+		
+		if ($feedback->id == null) // kalau blm pernah ngasih feedback dari order detail ybs, bikin feedback baru
+		{
+			$result = $feedback->insert_from_stub();
+		}
+		else
+		{
+			$result = $feedback->update_from_stub();
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($result);
+	}
+	
 	public function load_googlemaps()
 	{
 		$this->load->view('googlemaps');

@@ -135,6 +135,12 @@
 														</form>
 														<?php
 													}
+													else
+													{
+														?>
+														<button type="button" class="btn btn-default" id="btn-create_feedback-<?=$order->id?>" onclick="open_popup_feedback(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">Review</button>
+														<?php
+													}
 												?>
 												</td>
 												<!--td class="col-xs-1">
@@ -223,6 +229,67 @@
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="popup_feedback" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Review
+		</div>
+		<div class="panel-body">
+			<input type="hidden" id="feedback-order_detail_id" value="" />
+			<input type="hidden" id="feedback-tenant_id" value="" />
+			<div class="form-horizontal">
+				<div class="form-group">
+					<label class="control-label col-xs-3">Rating:</label>
+					<div class="col-xs-9">
+						<select class="form-control" id="feedback-rating">
+							<?php
+								for($i=1; $i<=5; $i++) { ?> <option value="<?=$i?>"><?=$i?></option> <?php }
+							?>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3">Pesan:</label>
+					<div class="col-xs-9">
+						<textarea class="form-control" id="feedback-feedback_text"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3"></label>
+					<div class="col-xs-9">
+						<button type="button" class="btn btn-default" onclick="create_feedback()" id="btn-create_feedback">Kirim</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_feedback')">Batal</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="popup_feedback_success" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Review
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<h4>Terima kasih atas review nya!</h4>
+						<br/>
+						<br/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_feedback_success')">Sama Sama</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

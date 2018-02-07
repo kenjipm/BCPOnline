@@ -11,7 +11,8 @@ class Feedback_model extends CI_Model {
 	public $feedback_text;
 	public $feedback_reply;
 	public $submitted_by;
-	public $order_det_id;
+	public $feedback_for;
+	public $order_detail_id;
 	
 	// constructor
 	public function __construct()
@@ -24,7 +25,8 @@ class Feedback_model extends CI_Model {
 		$this->feedback_text	= "";
 		$this->feedback_reply	= "";
 		$this->submitted_by		= "";
-		$this->order_det_id		= "";
+		$this->feedback_for		= "";
+		$this->order_detail_id		= "";
 		
 	}
 	
@@ -37,7 +39,8 @@ class Feedback_model extends CI_Model {
 		$this->feedback_text	= $db_item->feedback_text;
 		$this->feedback_reply	= $db_item->feedback_reply;
 		$this->submitted_by		= $db_item->submitted_by;
-		$this->order_det_id		= $db_item->order_det_id;
+		$this->feedback_for		= $db_item->feedback_for;
+		$this->order_detail_id	= $db_item->order_detail_id;
 		
 		return $this;
 	}
@@ -53,7 +56,8 @@ class Feedback_model extends CI_Model {
 		$db_item->feedback_text		= $this->feedback_text;
 		$db_item->feedback_reply	= $this->feedback_reply;
 		$db_item->submitted_by		= $this->submitted_by;
-		$db_item->order_det_id		= $this->order_det_id;
+		$db_item->feedback_for		= $this->feedback_for;
+		$db_item->order_detail_id	= $this->order_detail_id;
 		
 		return $db_item;
 	}
@@ -69,7 +73,8 @@ class Feedback_model extends CI_Model {
 		$stub->feedback_text	= $db_item->feedback_text;
 		$stub->feedback_reply	= $db_item->feedback_reply;
 		$stub->submitted_by		= $db_item->submitted_by;
-		$stub->order_det_id		= $db_item->order_det_id;
+		$stub->feedback_for		= $db_item->feedback_for;
+		$stub->order_detail_id	= $db_item->order_detail_id;
 		
 		
 		return $stub;
@@ -96,6 +101,54 @@ class Feedback_model extends CI_Model {
 		
 		// return ($voucher !== null) ? $this->get_stub_from_db($voucher) : null;
 	// }
+	
+	public function get_from_order_detail_id($order_detail_id)
+	{
+		$where['order_detail_id'] = $order_detail_id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_feedback, 1);
+		$feedback = $query->row();
+		
+		return ($feedback !== null) ? $this->get_stub_from_db($feedback) : new feedback_model();
+	}
+	
+	public function insert_from_stub()
+	{
+		$db_item = $this->get_db_from_stub();
+		
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->insert($this->table_feedback, $db_item);
+		
+		$this->id	= $this->db->insert_id();
+		$this->update_natural_id();
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function update_from_stub()
+	{
+		$db_item = $this->get_db_from_stub();
+		
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $db_item->id);
+		$this->db->update($this->table_feedback, $db_item);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function update_natural_id()
+	{
+		$this->load->library('id_generator');
+		$this->feedback_id = $this->id_generator->generate(TYPE['name']['FEEDBACK'], $this->id);
+		
+		$this->db->set('feedback_id', $this->feedback_id)
+				 ->where('id', $this->id)
+				 ->update($this->table_feedback);
+	}
+	
 	
 	// public function get_all()
 	// {	
