@@ -66,6 +66,7 @@ class Billing_status_view_model extends CI_Model {
 				{
 					$temp_order->posted_item_variance->posted_item->posted_item_name = $order->posted_item_variance->posted_item->posted_item_name . " (" . $order->posted_item_variance->var_description .  ")";
 					$temp_order->posted_item_variance->posted_item->price = $this->text_renderer->to_rupiah($order->posted_item_variance->posted_item->price);
+					$temp_order->posted_item_variance->posted_item->tenant_id = $order->posted_item_variance->posted_item->tenant_id;
 					$temp_order->order_status = ORDER_STATUS['description'][$order->order_status];
 					$temp_order->is_received = ($order->order_status == ORDER_STATUS['name']['RECEIVED']);
 					$temp_order->is_done = ($order->order_status == ORDER_STATUS['name']['DONE']);

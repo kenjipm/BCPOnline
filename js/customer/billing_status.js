@@ -31,6 +31,7 @@ function mark_order_finish(order_detail_id)
 function create_dispute(order_detail_id)
 {
 	if (confirm("Ajukan Komplain?")) {
-		window.location = base_url + '/customer/create_dispute' + '?order_detail_id=' + order_detail_id;
+		// window.location = base_url + '/customer/create_dispute' + '?order_detail_id=' + order_detail_id;
+		$("#form-create_dispute-" + order_detail_id).submit();
 	}
 }

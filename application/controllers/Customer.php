@@ -387,6 +387,23 @@ class Customer extends CI_Controller {
 		echo $result ? "1" : "0";
 	}
 	
+	public function create_dispute()
+	{
+		$party_one_id = $this->session->id;
+		$party_two_id = $this->input->post('tenant_id');
+		$order_detail_id = $this->input->post('order_detail_id');
+		
+		$this->load->model('dispute_model');
+		$dispute = $this->dispute_model->get_from_parties_id($party_one_id, $party_two_id, $order_detail_id);
+		
+		if ($dispute == null) // kalau blm pernah dispute sm account ybs, bikin chat room baru
+		{
+			$dispute = new dispute_model();
+			$dispute->insert_from_parties_id($party_one_id, $party_two_id, $order_detail_id);
+		}
+		redirect('dispute/detail/' . $dispute->id);
+	}
+	
 	public function load_googlemaps()
 	{
 		$this->load->view('googlemaps');

@@ -73,7 +73,7 @@
 				<h3><?=$title?></h3>
 			</div>
 			<div class="panel-body">
-				<form class="form-horizontal">
+				<div class="form-horizontal">
 					<div class="form-group">
 						<label class="control-label col-xs-3" for="date_created">Tanggal:</label>
 						<div class="col-xs-9"><input type="text" class="form-control" id="date_created" 
@@ -129,6 +129,10 @@
 													{
 														?>
 														<button type="button" class="btn btn-default" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">Komplain</button>
+														<form id="form-create_dispute-<?=$order->id?>" method="post" action="<?=site_url('customer/create_dispute')?>">
+															<input type="hidden" name="order_detail_id" value="<?=$order->id?>"/>
+															<input type="hidden" name="tenant_id" value="<?=$order->posted_item_variance->posted_item->tenant_id?>"/>
+														</form>
 														<?php
 													}
 												?>
@@ -217,7 +221,7 @@
 						<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 							value="<?=$model->billing->total_not_paid?>" readonly></div>
 					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>

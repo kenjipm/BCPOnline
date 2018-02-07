@@ -33,6 +33,10 @@ $config['top_menu_customer'] = array(
 			'text'	=> "Inbox",
 			'url'	=> "message",
 			),
+		'DSIPUTE' => array(
+			'text'	=> "Dispute",
+			'url'	=> "dispute",
+			),
 		'PROFILE' => array(
 			'text'	=> "Profile",
 			'url'	=> "customer/profile",

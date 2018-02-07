@@ -19,7 +19,7 @@
 			</div>
 			<div class="panel-body">
 				<div class="col-md-4">
-					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>"/>
+					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="thumbnail"/>
 				</div>
 				<div class="col-md-8">
 					<h4>Pilihan <?=$model->item_variances[0]->var_type?></h4>
