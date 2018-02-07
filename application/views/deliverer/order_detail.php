@@ -22,8 +22,9 @@ if ($model->order_list){
 					<table class="table table-striped table-bordered">
 						<thead>
 							<tr>
-								<th> <label for="address">Nama</label> </th>
-								<th> <label for="customer">Jumlah</label> </th>
+								<th> <label for="name">Nama</label> </th>
+								<th> <label for="desc">Deskripsi</label> </th>
+								<th> <label for="quantity">Jumlah</label> </th>
 							</tr>
 						</thead>
 						<tbody>
@@ -33,6 +34,7 @@ if ($model->order_list){
 								?>
 								<tr>
 									<td><?=$order->posted_item_name . " (" . $order->var_type . ": " . $order->var_description . ")"?></td>
+									<td><?=$order->posted_item_description?></td>
 									<td><?=$order->quantity?></td>
 								</tr>
 								<?php
