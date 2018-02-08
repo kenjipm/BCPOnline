@@ -44,10 +44,10 @@
 					<div class="col-xs-8"><input type="text" class="form-control" value="<?=$model->account->status ?>" readonly/></div>
 				</div>
 				<div class="row">
-					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "active"){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Aktivasi</button>
+					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "ACTIVE"){?> style="display:none"<?php } ?>>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_unblock')">Aktivasi</button>
 					</div>
-					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "inactive"){?> style="display:none"<?php } ?>>
+					<div class="col-xs-1 col-xs-offset-10" <?php if ($model->account->status == "INACTIVE"){?> style="display:none"<?php } ?>>
 						<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
 					</div>
 				</div>
@@ -57,22 +57,22 @@
 </div>
 
 
-<div id="popup_verify" class="popup popup-md">
+<div id="popup_unblock" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Verifikasi Akun
+			Aktivasi Akun
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('account/unblock_account/' . $model->account->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-12">
-						<label>Verifikasi akun ini?</label>
+						<label>Aktivasi akun ini?</label>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">
-						<button type="button" class="btn btn-default" onclick="verify_account(<?=$model->account->id?>)">Ya</button>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_verify')">Batal</button>
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_unblock')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_unblock')">Batal</button>
 					</div>
 				</div>
 			</form>
@@ -86,7 +86,7 @@
 			Blokir Akun
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('account/block_account/' . $model->account->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-12">
 						<label>Apakah Anda yakin untuk memblokir akun ini?</label>
@@ -94,7 +94,7 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-8 col-sm-offset-4">
-						<button type="button" class="btn btn-default">Ya</button>
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_block')">Ya</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_block')">Batal</button>
 					</div>
 				</div>

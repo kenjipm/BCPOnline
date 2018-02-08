@@ -205,4 +205,25 @@ class Account extends CI_Controller {
 			redirect('account/signup_success');
 		}
 	}
+	
+	public function unblock_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->unblock_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
+	public function block_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->block_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
 }

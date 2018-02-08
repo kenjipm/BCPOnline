@@ -282,6 +282,28 @@ class Account_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function unblock_account($id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('status', 'ACTIVE');
+		$this->db->update($this->table_account);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function block_account($id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('status', 'INACTIVE');
+		$this->db->update($this->table_account);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 	public function get_type($id)
 	{
 		foreach(TYPE['model'] as $type => $model)
