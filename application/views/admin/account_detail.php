@@ -63,7 +63,7 @@
 			Aktivasi Akun
 		</div>
 		<div class="panel-body">
-			<form action="<?=site_url('account/unblock_account/' . $model->account->id)?>" class="form-horizontal" method="post">
+			<form action="<?=site_url('admin/unblock_account/' . $model->account->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-12">
 						<label>Aktivasi akun ini?</label>
@@ -86,7 +86,7 @@
 			Blokir Akun
 		</div>
 		<div class="panel-body">
-			<form action="<?=site_url('account/block_account/' . $model->account->id)?>" class="form-horizontal" method="post">
+			<form action="<?=site_url('admin/block_account/' . $model->account->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<div class="col-sm-12">
 						<label>Apakah Anda yakin untuk memblokir akun ini?</label>

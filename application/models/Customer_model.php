@@ -76,11 +76,10 @@ class Customer_model extends CI_Model {
 		$stub->credit_amount	= $db_item->credit_amount;
 		$stub->reward_points	= $db_item->reward_points;
 		
-		$stub->account->id			= $db_item->id;
-		$stub->account->name		= $db_item->name;
-		$stub->account->email		= $db_item->email;
-		$stub->account->status		= $db_item->status;
-		$stub->account->date_joined = $db_item->date_joined;
+		$stub->account->name		= $db_item->name ?? "";
+		$stub->account->email		= $db_item->email ?? "";
+		$stub->account->status		= $db_item->status ?? "";
+		$stub->account->date_joined = $db_item->date_joined ?? "";
 		return $stub;
 	}
 	
@@ -109,6 +108,7 @@ class Customer_model extends CI_Model {
 	{
 		$this->load->model('Customer_model');
 		
+		$this->db->select('*, customer.id as id, customer.account_id as account_id');
 		$this->db->join('account', 'account.id=' . $this->table_customer . '.account_id', 'left');
 		
 		$query = $this->db->get($this->table_customer);
@@ -141,6 +141,28 @@ class Customer_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete();
+	}
+	
+	public function unverify_account($id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('account_id', $id);
+		$this->db->set('verified_mark', 'UNVERIFIED');
+		$this->db->update($this->table_customer);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function verify_account($id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('account_id', $id);
+		$this->db->set('verified_mark', 'VERIFIED');
+		$this->db->update($this->table_customer);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
 	public function update_natural_id($natural_id)

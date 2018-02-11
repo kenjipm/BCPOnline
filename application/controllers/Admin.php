@@ -118,6 +118,46 @@ class Admin extends CI_Controller {
 		echo $tenant_pay_receipt_id;
 	}
 	
+	public function unblock_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->unblock_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
+	public function block_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->block_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
+	public function unverify_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Customer_model');
+			$this->Customer_model->unverify_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
+	public function verify_account($id)
+	{
+		if ($this->input->method() == "post")
+		{
+			$this->load->model('Customer_model');
+			$this->Customer_model->verify_account($id);
+		}
+		redirect('account/account_detail/' . $id);
+	}
+	
 	public function get_header_print()
 	{
         $data_header['css_list'] = array();

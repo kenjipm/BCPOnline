@@ -33,25 +33,13 @@
 									<?=$customer->date_joined?> </td>
 								<td>
 									<a href="<?=site_url('account/account_detail/'.$customer->account_id)?>">
-										<button class="btn btn-default">Lihat</button>
+										<button class="btn btn-default">Lihat Akun</button>
 									</a>
 								</td>
-								<?php
-									if ($customer->status == "VERIFIED"){
-										$show_div_verify = false;
-									} else {
-										$show_div_verify = true;
-									}
-								?>
 								<td>
-									<div id="verify" <?php if ($show_div_verify == false){?> style="display:none"<?php } ?>>
-										<button type="button" class="btn btn-default" onclick="popup.open('popup_verify')">Verifikasi</button>
-									</div>
-								</td>
-								<td>
-									<div id="block">
-										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-									</div>
+									<a href="<?=site_url('customer/profile/'.$customer->id)?>">
+										<button class="btn btn-default">Lihat Profil</button>
+									</a>
 								</td>
 							</tr>
 							<?php
