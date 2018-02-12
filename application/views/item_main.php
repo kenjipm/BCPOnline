@@ -90,13 +90,7 @@
 								foreach ($model->item_variances as $item_variance)
 								{
 									?>
-									<option value="<?=$item_variance->id?>"><?=$item_variance->var_description?></option>
-									<?php
-								}
-								if (count($model->item_variances) <= 0)
-								{
-									?>
-									<option value="0">-</option>
+									<option value="<?=$item_variance->id?>"><?=$item_variance->var_description ? $item_variance->var_description : "-"?></option>
 									<?php
 								}
 							?>
