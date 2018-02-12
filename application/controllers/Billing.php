@@ -202,6 +202,9 @@ class Billing extends CI_Controller {
 			$shipping_charge->fee_amount	= $this->input->post('fee_amount');
 			$shipping_charge->insert();
 			
+			$this->load->model('setting_reward_model');
+			$setting_reward_id = $this->setting_reward_model->get_latest_setting_reward_id();
+			
 			$this->load->model('billing_model');
 			$billing = $this->billing_model;
 			$billing->delivery_method		= $this->input->post('delivery_method');
@@ -210,6 +213,7 @@ class Billing extends CI_Controller {
 			$billing->customer_id			= $this->input->post('customer_id');
 			$billing->shipping_address_id	= $this->input->post('shipping_address_id');
 			$billing->shipping_charge_id	= $shipping_charge->id;
+			$billing->setting_reward_id		= $setting_reward_id;
 			$billing->calculate_total_payable_from_cart($this->session->cart);
 			$billing->insert();
 			

@@ -69,7 +69,6 @@
 							<th><label for="email">E-mail</label></th>
 							<th><label for="date_joined">Tanggal Daftar</label></th>
 							<th> </th>
-							<th> </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -92,11 +91,6 @@
 									<a href="<?=site_url('account/account_detail/'.$tenant->account_id)?>">
 										<button class="btn btn-default">Lihat</button>
 									</a>
-								</td>
-								<td>
-									<div id="block">
-										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-									</div>
 								</td>
 							</tr>
 							<?php
@@ -128,7 +122,6 @@
 							<th> <label for="email">E-mail</label></th>
 							<th> <label for="date_joined">Tanggal Daftar</label></th>
 							<th> </th>
-							<th> </th>
 						</tr>
 					</thead>
 					<tbody>
@@ -149,11 +142,6 @@
 									<a href="<?=site_url('account/account_detail/'.$deliverer->account_id)?>">
 										<button class="btn btn-default">Lihat</button>
 									</a>
-								</td>
-								<td>
-									<div id="block">
-										<button type="button" class="btn btn-default" onclick="popup.open('popup_block')">Blokir</button>
-									</div>
 								</td>
 							</tr>
 							<?php

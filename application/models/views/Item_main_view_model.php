@@ -20,7 +20,7 @@ class Item_main_view_model extends CI_Model {
 		
 		
 		$this->item->id = $item->id;
-		$this->item->posted_item_name = $item->posted_item_name;
+		$this->item->posted_item_name = $item->posted_item_name ? $item->posted_item_name ?  $item->posted_item_description;
 		$this->item->price = $this->text_renderer->to_rupiah($item->price);
 		$this->item->posted_item_description = $item->posted_item_description;
 		$this->item->image_one_name = site_url($item->image_one_name);

@@ -36,6 +36,7 @@ class Billing_model extends CI_Model {
 		$this->customer_id			= 0;
 		$this->shipping_address_id	= 0;
 		$this->shipping_charge_id	= 0;
+		$this->setting_reward_id	= 0; // Dummy
 		
 		$this->load->model('customer_model');
 		$this->load->model('shipping_address_model');

@@ -93,6 +93,12 @@
 									<option value="<?=$item_variance->id?>"><?=$item_variance->var_description?></option>
 									<?php
 								}
+								if (count($model->item_variances) <= 0)
+								{
+									?>
+									<option value="0">-</option>
+									<?php
+								}
 							?>
 						</select>
 					</div>
