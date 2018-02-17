@@ -63,7 +63,7 @@ if ($model->transaction_detail->item_type == "ORDER")
 				</div>
 				<div class="form-group">
 					<div class="col-xs-9 col-xs-offset-3">
-						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')">Lihat Ulasan</button>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_review')" >Lihat Ulasan</button>
 					</div>
 				</div>
 				<a href="<?=site_url('dispute/'.$model->transaction_detail->id)?>">
@@ -191,6 +191,7 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 					<div class="col-sm-2">
 						<label>Ulasan</label>
 					</div>
+					<input type="hidden" id="feedback-order_detail_id" value="<?=$model->transaction_detail->id?>" />
 					<div class="col-sm-10">
 						<textarea class="form-control" placeholder="<?=$model->transaction_detail->feedback?>" readonly></textarea>
 					</div>
@@ -200,13 +201,21 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 						<label>Balas Ulasan</label>
 					</div>
 					<div class="col-sm-10">
-						<textarea class="form-control" placeholder="Tulis balasan..."></textarea>
+						<?php if ($model->transaction_detail->feedback_reply){?>
+							<textarea class="form-control" placeholder="<?=$model->transaction_detail->feedback_reply?>" readonly></textarea>
+						<?php } else { ?>
+							<textarea class="form-control" id="feedback-reply_feedback_text"></textarea>
+						<?php }	?>
 					</div>
 				</div>
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
-						<button type="button" class="btn btn-default">Kirim</button>
+						<?php if (!$model->transaction_detail->feedback_reply){?>
+						<button type="button" class="btn btn-default" onclick="reply_feedback()" id="btn-reply_feedback">Kirim</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Batal</button>
+						<?php } else { ?>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Tutup</button>
+						<?php }	?>
 					</div>
 				</div>
 			</form>
@@ -237,27 +246,26 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 	</div>
 </div>
 
-<!--
-<div id="popup_notify_failed" class="popup popup-md">
+<div id="popup_review_success" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Konfirmasi Perbaikan Gagal
+			Balasan Review
 		</div>
 		<div class="panel-body">
-			<form action="<?=site_url('order/notify_repair_failed/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+			<form>
 				<div class="form-group">
-					<div class="col-sm-10 col-sm-offset-2">
-						<label>Beri tahu barang tidak dapat diservis?</label>
+					<div class="col-sm-12">
+						<h4>Balasan berhasil dikirim</h4>
+						<br/>
+						<br/>
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="col-sm-8 col-sm-offset-4">
-						<button type="submit" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Ya</button>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_notify_failed')">Batal</button>
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_review_success')">OK</button>
 					</div>
 				</div>
 			</form>
 		</div>
 	</div>
 </div>
--->

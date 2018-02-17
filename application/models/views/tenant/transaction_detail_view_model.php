@@ -32,6 +32,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->voucher_cut_price 	= $this->text_renderer->to_rupiah($item->voucher_cut_price);
 		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price);
 		$this->transaction_detail->feedback 			= $item->feedback->feedback_text;
+		$this->transaction_detail->feedback_reply		= $item->feedback->feedback_reply;
 		$this->transaction_detail->rating	 			= $item->feedback->rating;
 		
 	}

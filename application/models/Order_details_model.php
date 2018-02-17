@@ -182,6 +182,7 @@ class Order_details_model extends CI_Model {
 		
 		$stub->feedback					= new Feedback_model();
 		$stub->feedback->feedback_text 	= $db_item->feedback_text ?? "";
+		$stub->feedback->feedback_reply	= $db_item->feedback_reply ?? "";
 		$stub->feedback->rating		 	= $db_item->rating ?? "";
 		
 		return $stub;
@@ -207,7 +208,7 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
 		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
-		$this->db->join('feedback', 'feedback.order_det_id='. $this->table_order_details . '.id', 'left');
+		$this->db->join('feedback', 'feedback.order_detail_id='. $this->table_order_details . '.id', 'left');
 		$this->db->join('billing', 'billing.id='. $this->table_order_details . '.billing_id', 'left');
 		$query = $this->db->get($this->table_order_details, 1);
 		$item = $query->row();
