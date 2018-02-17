@@ -733,12 +733,18 @@ class Order_details_model extends CI_Model {
 			// $this->db->where('billing.customer_id', $customer_id);
 			// $this->db->where('order_details.billing_id = billing.id');
 		}
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
 		$this->db->where('order_details.id', $order_id);
 		$this->db->where('order_details.order_status', $cur_status);
 		
 		$this->db->set('order_details.order_status', $status);
-		return $this->db->update('order_details');
+		$this->db->update('order_details');
+		
+		$this->load->model('Order_status_history_model');
+		$this->Order_status_history_model->insert($order_id, $status);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
 	public function update_tenant_pay_receipt_id($list_order_detail_id, $tenant_pay_receipt_id)

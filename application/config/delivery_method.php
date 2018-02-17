@@ -5,6 +5,9 @@ $config['delivery_methods'] = array('CYBERIA', 'JNE', 'TIKI', 'GOJEK');
 
 $config['no_tracking_delivery_methods'] = array('CYBERIA');
 
+$config['order_delivery_methods'] = array('JNE', 'TIKI', 'GOJEK');
+$config['repair_delivery_methods'] = array('CYBERIA', 'JNE', 'TIKI', 'GOJEK');
+
 $config['CYBERIA'] = array(
 	'name'				=> 'CYBERIA',
 	'description'		=> 'Cyberia Delivery',

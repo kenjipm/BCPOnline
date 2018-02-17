@@ -96,7 +96,11 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address();
 		
 		$this->load->config('payment_method');
-		$payment_method_list = $this->config->item('payment_methods');
+		// if ($order_type == "REPAIR") 
+			// $payment_method_list = $this->config->item('repair_payment_methods');
+		// else //if ($order_type == "ORDER") 
+			$payment_method_list = $this->config->item('order_payment_methods');
+		
 		foreach ($payment_method_list as $payment_method_name)
 		{
 			$cur_payment_method = $this->config->item($payment_method_name);
@@ -110,7 +114,11 @@ class Billing_view_model extends CI_Model {
 		}
 		
 		$this->load->config('delivery_method');
-		$delivery_method_list = $this->config->item('delivery_methods');
+		// if ($order_type == "REPAIR") 
+			// $payment_method_list = $this->config->item('repair_delivery_methods');
+		// else //if ($order_type == "ORDER") 
+			$delivery_method_list = $this->config->item('order_delivery_methods');
+		
 		foreach ($delivery_method_list as $delivery_method_name)
 		{
 			$cur_delivery_method = $this->config->item($delivery_method_name);

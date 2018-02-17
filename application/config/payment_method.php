@@ -5,6 +5,9 @@ $config['payment_methods'] = array('COD', 'KLIKBCA', 'BNI', 'DOKU');
 
 $config['no_wait_payment_methods'] = array('COD');
 
+$config['order_payment_methods'] = array('DOKU');
+$config['repair_payment_methods'] = array('DOKU');
+
 $config['COD'] = array(
 	'name'				=> 'COD',
 	'description'		=> 'Cash on Delivery',
