@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 17, 2018 at 01:00 PM
+-- Generation Time: Feb 17, 2018 at 01:33 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -462,6 +462,20 @@ INSERT INTO `order_details` (`id`, `order_id`, `quantity`, `offered_price`, `sol
 (5, 'ORD000000005', 1, 7500000, 7500000, 'RECEIVED', 'OY7MJX', '', '', 'RWPIUC', '', '0000-00-00 00:00:00', 3, 9, 1, NULL, 0),
 (6, 'ORD00003', 1, 25000, 325000, 'DONE', 'D2R0YY', 'XR71GZ', 'DELIVER', 'DP94GQ', 'VEVQUP', '0000-00-00 00:00:00', 3, 41, 3, NULL, 0),
 (7, 'ORD000000007', 1, 25000, 75000, 'RECEIVED', 'EBN3HJ', '6L9LSR', '', '8TJVYC', '2D4OFT', '0000-00-00 00:00:00', 7, 43, 4, NULL, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_status_history`
+--
+
+CREATE TABLE `order_status_history` (
+  `id` int(11) NOT NULL,
+  `order_status_history_id` varchar(128) NOT NULL DEFAULT '',
+  `order_details_id` int(11) NOT NULL,
+  `status` varchar(128) NOT NULL DEFAULT '',
+  `date_added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -1019,6 +1033,13 @@ ALTER TABLE `order_details`
   ADD KEY `posted_item_variance_id` (`posted_item_variance_id`);
 
 --
+-- Indexes for table `order_status_history`
+--
+ALTER TABLE `order_status_history`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `order_details_id` (`order_details_id`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -1267,6 +1288,12 @@ ALTER TABLE `order_details`
   MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT for table `order_status_history`
+--
+ALTER TABLE `order_status_history`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
@@ -1474,6 +1501,12 @@ ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`deliverer_id`) REFERENCES `deliverer` (`id`),
   ADD CONSTRAINT `order_details_ibfk_4` FOREIGN KEY (`tnt_paid_receipt_id`) REFERENCES `tenant_pay_receipt` (`id`),
   ADD CONSTRAINT `order_details_ibfk_5` FOREIGN KEY (`posted_item_variance_id`) REFERENCES `posted_item_variance` (`id`);
+
+--
+-- Constraints for table `order_status_history`
+--
+ALTER TABLE `order_status_history`
+  ADD CONSTRAINT `order_status_history_ibfk_1` FOREIGN KEY (`order_details_id`) REFERENCES `order_details` (`id`) ON UPDATE CASCADE;
 
 --
 -- Constraints for table `payment`
