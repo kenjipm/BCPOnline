@@ -114,6 +114,8 @@
 												</td>
 												<td id="order_status-<?=$order->id?>" >
 													<?=$order->order_status?>
+													<!--button type="button" class="btn btn-default" onclick="toggle_order_status_history(<?=$order->id?>)">V</button-->
+													<button data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="btn btn-default" type="button">V</button>
 												</td>
 												<td>
 												<?php
@@ -147,6 +149,22 @@
 													<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 														Lihat
 													</a></td-->	
+											</tr>
+											<tr id="order_status_history-<?=$order->id?>" class="collapse">
+												<td colspan="5">
+													<?php
+														foreach($order->order_status_histories as $order_status_history)
+														{
+															?>
+															<div class="row">
+																<div class="col-md-12">
+																	<?=$order_status_history->status?> (<?=$order_status_history->date_added?>)
+																</div>
+															</div>
+															<?php
+														}
+													?>
+												</td>
 											</tr>
 										<?php
 									}

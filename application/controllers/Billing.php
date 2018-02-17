@@ -160,14 +160,6 @@ class Billing extends CI_Controller {
 		
 		$this->load->model('order_details_model');
 		$orders = $this->order_details_model->get_all_from_billing_id($billing->id);
-		// foreach ($orders as $order)
-		// {
-			// $order->init_posted_item_variance();
-			// if ($order->posted_item_variance != null)
-			// {
-				// $order->posted_item_variance->init_posted_item();
-			// }
-		// }
 		
 		$this->load->model('views/customer/billing_status_view_model');
 		$this->billing_status_view_model->get($billing, $payments, $orders);

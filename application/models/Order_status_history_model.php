@@ -19,7 +19,7 @@ class Order_status_history_model extends CI_Model {
 		$this->order_status_history_id		= "";
 		$this->order_details_id				= "";
 		$this->status						= "";
-		$this->date_added					= "";
+		$this->date_added					= date("Y-m-d H:i:s");
 		
 		$this->load->model('Order_details_model');
 		$this->order_details = new Order_details_model();
@@ -111,8 +111,8 @@ class Order_status_history_model extends CI_Model {
 		{
 			$this->load->library('Id_Generator');
 			
-			$db_item->id		= $this->db->insert_id();
-			$db_item->brand_id	= $this->id_generator->generate(TYPE['name']['ORDER_STATUS_HISTORY'], $db_item->id);
+			$db_item->id						= $this->db->insert_id();
+			$db_item->order_status_history_id	= $this->id_generator->generate(TYPE['name']['ORDER_STATUS_HISTORY'], $db_item->id);
 			
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_order_status_history, $db_item);

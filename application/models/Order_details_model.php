@@ -552,6 +552,7 @@ class Order_details_model extends CI_Model {
 		$this->load->library('id_generator');
 		$this->load->model('item_model');
 		$this->load->model('posted_item_variance_model');
+		$this->load->model('Order_status_history_model');
 			
 		$this->db->trans_start();
 		
@@ -577,6 +578,8 @@ class Order_details_model extends CI_Model {
 			
 			$natural_id = $this->id_generator->generate(TYPE['name']['ORDER_DETAILS'], $order_details->id);
 			$order_details->update_natural_id($natural_id);
+			
+			$this->Order_status_history_model->insert($order_details->id, $order_details->order_status);
 		}
 		
 		$this->db->trans_complete();
@@ -774,6 +777,13 @@ class Order_details_model extends CI_Model {
 		$this->db->set('order_status', ORDER_STATUS['name']['QUEUED'])
 				 ->where('billing_id', $billing_id)
 				 ->update($this->table_order_details);
+				 
+		$this->load->model('Order_status_history_model');
+		$order_details = $this->get_all_from_billing_id($billing_id);
+		foreach ($order_details as $order_detail)
+		{
+			$this->Order_status_history_model->insert($order_detail->order_id, ORDER_STATUS['name']['QUEUED']);
+		}
 	}
 	
 	// otp_receiver_type: CUSTOMER, TENANT, DELIVERER

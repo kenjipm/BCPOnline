@@ -91,3 +91,8 @@ function create_feedback()
 		}
 	});
 }
+
+function toggle_order_status_history(order_status_history_id)
+{
+	$("#order_status_history-" + order_status_history_id).toggle();
+}
