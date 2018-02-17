@@ -11,7 +11,6 @@ class Feedback_model extends CI_Model {
 	public $feedback_text;
 	public $feedback_reply;
 	public $submitted_by;
-	public $feedback_for;
 	public $order_detail_id;
 	
 	// constructor
@@ -25,7 +24,6 @@ class Feedback_model extends CI_Model {
 		$this->feedback_text	= "";
 		$this->feedback_reply	= "";
 		$this->submitted_by		= "";
-		$this->feedback_for		= "";
 		$this->order_detail_id		= "";
 		
 	}
@@ -39,7 +37,6 @@ class Feedback_model extends CI_Model {
 		$this->feedback_text	= $db_item->feedback_text;
 		$this->feedback_reply	= $db_item->feedback_reply;
 		$this->submitted_by		= $db_item->submitted_by;
-		$this->feedback_for		= $db_item->feedback_for;
 		$this->order_detail_id	= $db_item->order_detail_id;
 		
 		return $this;
@@ -56,7 +53,6 @@ class Feedback_model extends CI_Model {
 		$db_item->feedback_text		= $this->feedback_text;
 		$db_item->feedback_reply	= $this->feedback_reply;
 		$db_item->submitted_by		= $this->submitted_by;
-		$db_item->feedback_for		= $this->feedback_for;
 		$db_item->order_detail_id	= $this->order_detail_id;
 		
 		return $db_item;
@@ -73,7 +69,6 @@ class Feedback_model extends CI_Model {
 		$stub->feedback_text	= $db_item->feedback_text;
 		$stub->feedback_reply	= $db_item->feedback_reply;
 		$stub->submitted_by		= $db_item->submitted_by;
-		$stub->feedback_for		= $db_item->feedback_for;
 		$stub->order_detail_id	= $db_item->order_detail_id;
 		
 		
@@ -149,46 +144,16 @@ class Feedback_model extends CI_Model {
 				 ->update($this->table_feedback);
 	}
 	
-	
-	// public function get_all()
-	// {	
-		// $this->db->join('brand', 'brand.id=' . $this->table_voucher . '.brand_id', 'left');
-		// $query = $this->db->get($this->table_voucher, 1);
-		// $vouchers = $query->result();
+	public function reply_feedback()
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
-		// return ($vouchers !== null) ? $this->map_list($vouchers) : null;
-	// }
-	
-	// insert new authorized voucher from form post
-	// public function insert_from_post()
-	// {	
-		// $this->voucher_id			= "";
-		// $this->voucher_worth		= $this->input->post('voucher_worth');
-		// $this->voucher_description	= $this->input->post('voucher_description');
-		// $this->date_added			= date("d-m-Y");
-		// $this->voucher_stock		= $this->input->post('voucher_stock');
-		// $this->brand_id				= $this->input->post('brand_id');
-		// $this->voucher_code			= $this->input->post('voucher_code');
-	
-		
-		// // insert data, then generate [voucher_id] based on [id]
-		// $this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-		
-		// $db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-		// if ($this->db->insert($this->table_voucher, $db_item))
-		// {
-			// $this->load->library('Id_Generator');
-			
-			// $db_item->id			= $this->db->insert_id();
-			// $db_item->voucher_id	= $this->id_generator->generate(TYPE['name']['VOUCHER'], $db_item->id);
-			
-			// $this->db->where('id', $db_item->id);
-			// $this->db->update($this->table_voucher, $db_item);
-		// }
-		
-		// $this->db->trans_complete(); // selesai nge lock db transaction
-	// }
-
+		$this->db->set('feedback_reply', $this->feedback_reply)
+				 ->where('order_detail_id', $this->order_detail_id)
+				 ->update($this->table_feedback);
+				 
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
 }
 
 ?>

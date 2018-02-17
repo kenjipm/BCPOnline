@@ -81,4 +81,23 @@ class Tenant extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	public function reply_feedback()
+	{
+		$this->load->model('feedback_model');
+		$order_detail_id = $this->input->post('order_detail_id');
+		
+		$feedback = $this->feedback_model->get_from_order_detail_id($order_detail_id);
+		$feedback->feedback_reply = $this->input->post('reply_feedback_text');
+		$feedback->order_detail_id = $this->input->post('order_detail_id');
+		
+		$result = $feedback->reply_feedback();
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($result);
+	}
+	
 }
