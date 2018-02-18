@@ -135,7 +135,7 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 				</div>
 				<div id="add_customer" style="display:none">
 					<div class="form-group">
-						<label class="control-label col-xs-3">Harga Diskon:</label>
+						<label class="control-label col-xs-3">Harga Servis:</label>
 						<div class="col-xs-9"><input type="text" class="form-control" name="discounted_price"></div>
 					</div>
 					<div class="form-group">
