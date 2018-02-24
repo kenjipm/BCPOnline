@@ -17,7 +17,7 @@ $config['top_menu_customer'] = array(
 			),
 		'REWARD' => array(
 			'text'	=> "Reward",
-			'url'	=> "reward",
+			'url'	=> "customer/reward",
 			),
 		),
 	'right' => array(

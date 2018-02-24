@@ -100,6 +100,18 @@ class Reward_model extends CI_Model {
 		return ($rewards !== null) ? $this->map_list($rewards) : array();
 	}
 	
+	public function get_all_not_expired()
+	{
+		$cur_date = date("Y-m-d H:i:s", time());
+		
+		$this->db->where("date_expired > ", $cur_date);
+		
+		$query = $this->db->get($this->table_reward);
+		$rewards = $query->result();
+		
+		return ($rewards !== null) ? $this->map_list($rewards) : array();
+	}
+	
 	// insert new reward from form post
 	public function insert_from_post()
 	{	
@@ -126,6 +138,11 @@ class Reward_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function is_expired()
+	{
+		return (time() > strtotime($this->date_expired));
 	}
 
 }

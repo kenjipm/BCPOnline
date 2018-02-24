@@ -165,6 +165,20 @@ class Customer_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function reward_point_increment($customer_id, $point_count)
+	{
+		$this->db->set('reward_points', 'reward_points + '.$point_count, FALSE)
+				 ->where('id', $customer_id)
+				 ->update($this->table_customer);
+	}
+	
+	public function reward_point_decrement($customer_id, $point_count)
+	{
+		$this->db->set('reward_points', 'reward_points - '.$point_count, FALSE)
+				 ->where('id', $customer_id)
+				 ->update($this->table_customer);
+	}
+	
 	public function update_natural_id($natural_id)
 	{
 		$this->customer_id = $natural_id;

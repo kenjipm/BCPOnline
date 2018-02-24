@@ -18,31 +18,33 @@
 				<h3><?=$model->item->posted_item_name?></h3>
 			</div>
 			<div class="panel-body">
-				<div class="col-md-4">
-					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="thumbnail"/>
-				</div>
-				<div class="col-md-8">
-					<h4>Pilihan <?=$model->item_variances[0]->var_type?></h4>
-					<div class="row">
-						<?php
-							foreach ($model->item_variances as $item_variance)
-							{
-								?>
-								<div class="col-md-2">
-									<!--<div class="panel panel-default">
-										<div class="panel-body">-->
-											<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" style="width:100%"/>
-										<!--</div>
-									</div>-->
-								</div>
-								<?php
-							}
-						?>
+				<div class="row">
+					<div class="col-md-4">
+						<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="thumbnail" style="width:100%"/>
 					</div>
-					<h4>Deskripsi Produk</h4>
-					<?=$model->item->posted_item_description?>
+					<div class="col-md-8">
+						<h4>Pilihan <?=$model->item_variances[0]->var_type?></h4>
+						<div class="row">
+							<?php
+								foreach ($model->item_variances as $item_variance)
+								{
+									?>
+									<div class="col-md-2">
+										<!--<div class="panel panel-default">
+											<div class="panel-body">-->
+												<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" style="width:100%"/>
+											<!--</div>
+										</div>-->
+									</div>
+									<?php
+								}
+							?>
+						</div>
+						<h4>Deskripsi Produk</h4>
+						<?=$model->item->posted_item_description?>
+					</div>
+					<h4></h4>
 				</div>
-				<h4></h4>
 			</div>
 		</div>
 	</div>

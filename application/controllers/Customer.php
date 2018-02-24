@@ -151,6 +151,87 @@ class Customer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function reward()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('customer/reward_main');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('reward_model');
+		$rewards = $this->reward_model->get_all_not_expired();
+		
+		$this->load->model('customer_model');
+		$customer = $this->customer_model->get_from_id($this->session->child_id);
+		$reward_points = $customer->reward_points;
+		
+		$this->load->model('views/customer/reward_main_view_model');
+		$this->reward_main_view_model->get($rewards, $reward_points);
+		
+		$data['model'] = $this->reward_main_view_model;
+		$data['title'] = "Reward";
+		$this->load->view('customer/reward_main', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function redeem_reward_do()
+	{
+		$reward_id = $this->input->post('reward_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('reward_model');
+		$reward = $this->reward_model->get_from_id($reward_id);
+		
+		$this->load->model('customer_model');
+		$customer = $this->customer_model->get_from_id($this->session->child_id);
+		$reward_points = $customer->reward_points;
+		
+		if ($reward_points > $reward->points_needed) // kalau reward mencukupi
+		{
+			if (!$reward->is_expired())
+			{
+				$this->load->model('redeem_reward_model');
+				$redeem_reward = new redeem_reward_model();
+				$redeem_reward->insert($reward_id, $customer_id);
+				
+				$this->customer_model->reward_point_decrement($this->session->child_id, $reward->points_needed);
+				
+				redirect('customer/redeem_reward');
+			}
+		}
+		
+		redirect('customer/reward');
+	}
+	
+	public function redeem_reward()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('redeem_reward_model');
+		$redeem_rewards = $this->redeem_reward_model->get_all();
+		
+		$this->load->model('customer_model');
+		$customer = $this->customer_model->get_from_id($this->session->child_id);
+		$reward_points = $customer->reward_points;
+		
+		$this->load->model('views/customer/reward_redeem_view_model');
+		$this->reward_redeem_view_model->get($redeem_rewards, $reward_points);
+		
+		$data['model'] = $this->reward_redeem_view_model;
+		$data['title'] = "Reward yang sudah diklaim";
+		$this->load->view('customer/reward_redeem', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function profile_edit_do()
 	{
 		$this->load->library('form_validation');

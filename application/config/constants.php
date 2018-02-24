@@ -34,7 +34,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"PICKING_FROM_TENANT"		=> "Pengambilan dari tenant",
 			"DELIVERING_TO_CUSTOMER"	=> "Pengantaran ke customer",
 			"RECEIVED"					=> "Telah diterima",
-			"DONE"						=> "Selesai",
+			"DONE"						=> "Selesai", // 2 x 24 jam auto selesai
 			"PICKING_FROM_CUSTOMER"		=> "Pengambilan dari customer",
 			"DELIVERING_TO_TENANT"		=> "Pengantaran ke tenant",
 			"TENANT_RECEIVED"			=> "Telah diterima oleh tenant",
