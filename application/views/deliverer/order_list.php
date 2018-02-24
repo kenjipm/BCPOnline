@@ -77,6 +77,7 @@
 						<tr>
 							<th> <label for="address">Alamat</label> </th>
 							<th> <label for="customer">Nama Customer</label> </th>
+							<th></th>
 						</tr>
 					</thead>
 					<tbody>
@@ -89,6 +90,11 @@
 								<tr>
 									<td><?=$deliver->address . ", " . $deliver->city . ", Kecamatan " . $deliver->kecamatan . ", Kelurahan " . $deliver->kelurahan . ", " . $deliver->postal_code?></td>
 									<td><?=$deliver->customer?></td>
+									<td>
+										<a href="<?=site_url('order/transaction_detail/'.$deliver->id)?>">
+											<button class="btn btn-default">Lihat</button>
+										</a></div>	
+									</td>
 								</tr>
 								<?php
 							}
@@ -193,7 +199,7 @@
 							<input type="text" class="form-control" name="otp"/>
 						</div>
 						<div class="col-sm-2">
-							<button class="btn btn-default" type="submit" class="btn btn-default">Kirim</button>
+							<button class="btn btn-default" type="submit">Kirim</button>
 						</div>
 					</div>
 				</form>

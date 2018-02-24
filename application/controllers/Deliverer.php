@@ -18,11 +18,4 @@ class Deliverer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function mark_as_received($order_id)
-	{
-		$this->load->model('order_details_model');
-		
-		$this->update_order_status($order_id, ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'], ORDER_STATUS['name']['RECEIVED']);
-		
-	}
 }

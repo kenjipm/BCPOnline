@@ -42,6 +42,7 @@
 				<button class="btn btn-default">Lihat Semua</button>
 			</a>
 		</div>
+		
 	</div>
 	
 	<div class="col-md-10">
