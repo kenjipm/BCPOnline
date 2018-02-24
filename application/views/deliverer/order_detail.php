@@ -7,7 +7,7 @@ if ($model->order_list){
 			<h3>Daftar Barang</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('deliverer/mark_as_received/' . $model->order_list[0]->id)?>" class="form-horizontal" method="post">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="otp">OTP:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" 
@@ -43,6 +43,7 @@ if ($model->order_list){
 						</tbody>
 					</table>
 				</div>
+				<button type="submit" class="btn btn-default">Mark as Received</button>
 			</form>
 		</div>
 	</div>
