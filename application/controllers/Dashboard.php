@@ -33,6 +33,8 @@ class Dashboard extends CI_Controller {
 		}
 		else // CUSTOMER
 		{
+			$this->check_referral();
+			
 			$this->load->model('category_model');
 			$categories = $this->category_model->get_all();
 			
@@ -53,6 +55,21 @@ class Dashboard extends CI_Controller {
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function check_referral()
+	{
+		$upline_id = $this->input->post_get('ref');
+		if ($upline_id) // kalo ada referral nya
+		{
+			if (!isset($this->session->id)) // kalo blm login
+			{
+				$userdata = array(
+					'upline_id' => $upline_id,
+				);
+				$this->session->set_userdata($userdata);
+			}
+		}
 	}
 	
 	public function show_404()

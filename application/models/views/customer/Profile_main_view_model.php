@@ -12,7 +12,7 @@ class Profile_main_view_model extends CI_Model {
 		$this->account = new class{};
 	}
 	
-	public function get($account)
+	public function get($account, $customer)
 	{
 		$this->account->customer_id = $account->account_id;
 		$this->account->name = $account->name;
@@ -27,6 +27,8 @@ class Profile_main_view_model extends CI_Model {
 		$this->account->profile_pic = site_url(($account->profile_pic !== "") ? $account->profile_pic : DEFAULT_PROFILE_PIC);
 		
 		$this->account->profile_pic .= "?t=".time();
+		
+		$this->account->referral_link = "http://" . $_SERVER['HTTP_HOST'] . site_url() . "?ref=" . $customer->id;
 	}
 }
 ?>

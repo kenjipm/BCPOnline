@@ -49,6 +49,10 @@
 					<div class="col-xs-4"><input type="text" class="form-control" id="date_joined" name="date_joined" value="<?=$model->account->date_joined?>" readonly/></div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="referral_link">Referral Link:</label>
+					<div class="col-xs-4"><input type="text" class="form-control" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly/></div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3">Foto Kartu ID:</label>
 					<div class="col-xs-3">
 					

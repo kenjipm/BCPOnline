@@ -45,8 +45,11 @@ class Customer extends CI_Controller {
 		$this->load->model('account_model');
 		$account = $this->account_model->get_from_id($this->session->id);
 		
+		$this->load->model('customer_model');
+		$customer = $this->customer_model->get_from_id($this->session->child_id);
+		
 		$this->load->model('views/customer/profile_main_view_model');
-		$this->profile_main_view_model->get($account);
+		$this->profile_main_view_model->get($account, $customer);
 		
 		$data['title'] = "Profil";
 		$data['model'] = $this->profile_main_view_model;

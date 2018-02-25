@@ -11,6 +11,7 @@ class Customer_model extends CI_Model {
 	public $verified_mark;
 	public $credit_amount;
 	public $reward_points;
+	public $upline_id;
 	
 	public $account;
 	
@@ -23,8 +24,9 @@ class Customer_model extends CI_Model {
 		$this->customer_id		= "";
 		$this->account_id		= "";
 		$this->verified_mark	= "";
-		$this->credit_amount	= "";
-		$this->reward_points	= "";
+		$this->credit_amount	= 0;
+		$this->reward_points	= 0;
+		$this->upline_id		= NULL;
 		
 		$this->load->model('Account_model');
 		$this->account = new Account_model();
@@ -40,6 +42,7 @@ class Customer_model extends CI_Model {
 		$this->verified_mark	= $db_item->verified_mark;
 		$this->credit_amount	= $db_item->credit_amount;
 		$this->reward_points	= $db_item->reward_points;
+		$this->upline_id		= $db_item->upline_id;
 		
 		$this->account->name		= $db_item->name ?? "";
 		$this->account->email		= $db_item->email ?? "";
@@ -60,6 +63,7 @@ class Customer_model extends CI_Model {
 		$db_item->verified_mark	= $this->verified_mark;
 		$db_item->credit_amount	= $this->credit_amount;
 		$db_item->reward_points	= $this->reward_points;
+		$db_item->upline_id		= $this->upline_id;
 		
 		return $db_item;
 	}
@@ -75,6 +79,7 @@ class Customer_model extends CI_Model {
 		$stub->verified_mark	= $db_item->verified_mark;
 		$stub->credit_amount	= $db_item->credit_amount;
 		$stub->reward_points	= $db_item->reward_points;
+		$stub->upline_id		= $db_item->upline_id;
 		
 		$stub->account->name		= $db_item->name ?? "";
 		$stub->account->email		= $db_item->email ?? "";
@@ -132,6 +137,7 @@ class Customer_model extends CI_Model {
 		$this->verified_mark		= "";
 		$this->credit_amount		= 0;
 		$this->reward_points		= 0;
+		$this->upline_id			= $this->session->upline_id ?? NULL;
 		
 		$this->db->trans_start();
 		
