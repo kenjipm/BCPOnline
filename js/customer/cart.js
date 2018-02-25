@@ -39,3 +39,15 @@ function cart_sub_do(posted_item_variance_id, quantity)
 		}
 	});
 }
+
+function submit_cart()
+{
+	if ($("#address_id").val() == undefined)
+	{
+		alert("Harap isi alamat kirim terlebih dahulu");
+	}
+	else
+	{
+		$("#form-cart").submit();
+	}
+}

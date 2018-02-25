@@ -28,7 +28,7 @@
 
 	<div class="col-md-12">
 		<div class="panel panel-default">
-			<form action="<?=site_url('billing/cart')?>" method="post">
+			<form id="form-cart" action="<?=site_url('billing/cart')?>" method="post">
 				<div class="panel-heading">
 					<h3>Shopping Cart</h3>
 				</div>
@@ -97,7 +97,7 @@
 												if (count($model->shipping_addresses) > 0)
 												{
 													?>
-													<select name="address_id" class="form-control">
+													<select name="address_id" id="address_id" class="form-control">
 														<?php
 															foreach ($model->shipping_addresses as $shipping_address)
 															{
@@ -149,7 +149,7 @@
 								if (count($model->items) > 0)
 								{
 									?>
-									<button type="submit" class="btn btn-default">Pilih Metode Pembayaran</button>
+									<a href="#" class="btn btn-default" onclick="submit_cart();">Pilih Metode Pembayaran</a>
 									<?php
 								}
 								else

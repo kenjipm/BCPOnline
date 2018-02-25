@@ -170,7 +170,7 @@ class Billing_model extends CI_Model {
 		$query = $this->db->get($this->table_billing, 1);
 		$item = $query->row();
 		
-		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+		return ($item !== null) ? $this->get_stub_from_db($item) : new Billing_model();
 	}
 	
 	public function get_from_create_new($cart, $shipping_address, $shipping_charge)
@@ -186,8 +186,8 @@ class Billing_model extends CI_Model {
 		
 		$this->total_payable		+= $shipping_charge->fee_amount;
 		$this->customer_id			= $this->session->child_id;
-		$this->shipping_address_id	= $shipping_address->id;
-		$this->shipping_charge_id	= $shipping_charge->id;
+		$this->shipping_address_id	= $shipping_address->id ?? 0;
+		$this->shipping_charge_id	= $shipping_charge->id ?? 0;
 		
 		return $this;
 	}

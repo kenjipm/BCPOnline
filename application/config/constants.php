@@ -119,7 +119,8 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_CHARGE'		=> 'SHIPPING_CHARGE',
 			'SETTING_REWARD'		=> 'SETTING_REWARD',
 			'REDEEM_VOUCHER'		=> 'REDEEM_VOUCHER',
-			'REDEEM_REWARD'			=> 'REDEEM_REWARD'			
+			'REDEEM_REWARD'			=> 'REDEEM_REWARD',
+			'POINT_HISTORY'			=> 'POINT_HISTORY'
 		),
 		'initial' => array(
 			'CUSTOMER'				=> 'CUS',
@@ -148,7 +149,8 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_CHARGE'		=> 'FEE',
 			'SETTING_REWARD'		=> 'SRW',
 			'REDEEM_VOUCHER'		=> 'RDV',
-			'REDEEM_REWARD'			=> 'RDR'	
+			'REDEEM_REWARD'			=> 'RDR',
+			'POINT_HISTORY'			=> 'PTH'
 		),
 		'id_length' => array(
 			'CUSTOMER'				=> 8,
@@ -177,7 +179,8 @@ defined('TYPE') OR define('TYPE', array(
 			'SHIPPING_CHARGE'		=> 10,
 			'SETTING_REWARD'		=> 6,
 			'REDEEM_VOUCHER'		=> 8,
-			'REDEEM_REWARD'			=> 8
+			'REDEEM_REWARD'			=> 8,
+			'POINT_HISTORY'			=> 10
 		),
 		'model' => array(
 			'CUSTOMER'				=> 'Customer_model',
@@ -199,6 +202,7 @@ defined('TYPE') OR define('TYPE', array(
 			'FEEDBACK'				=> 'Feedback_model',
 			'TENANT_BILL'			=> 'Tenant_Bill_model',
 			'TENANT_PAY_RECEIPT'	=> 'Tenant_Pay_Receipt_model',
+			'POINT_HISTORY'			=> 'Point_history_model'
 		),
 		'TOP_MENU' => array(
 			'CUSTOMER'				=> 'top_menu_customer',

@@ -263,6 +263,18 @@ class Billing extends CI_Controller {
 			$this->load->model('order_details_model');
 			$order_details = new Order_details_model();
 			$order_details->set_all_paid_from_billing_id($payment->billing->id);
+			
+			$this->load->model('setting_reward_model');
+			$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			
+			$total_paid = $payment->paid_amount;
+			$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
+			
+			$this->load->model('point_history_model');
+			$this->point_history_model->insert($point_get, "", $payment->billing->id, $this->session->child_id);
+			
+			$this->load->model('customer_model');
+			$this->customer_model->reward_point_increment($this->session->child_id, $point_get);
 		}
 		
 		redirect('billing/status/'.$payment->billing->id);

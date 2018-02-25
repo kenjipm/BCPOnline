@@ -104,7 +104,7 @@ class Shipping_address_model extends CI_Model {
 		$query = $this->db->get($this->table_shipping_address, 1);
 		$shipping_address = $query->row();
 		
-		return ($shipping_address !== null) ? $this->get_stub_from_db($shipping_address) : null;
+		return ($shipping_address !== null) ? $this->get_stub_from_db($shipping_address) : new Shipping_address_model();
 	}
 	
 	public function get_by_customer_id($customer_id)

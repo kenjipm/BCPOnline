@@ -92,8 +92,8 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_charge = new class{};
 		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;
 		$this->billing->shipping_address = new class{};
-		$this->billing->shipping_address->id			= $shipping_address->id;
-		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address();
+		$this->billing->shipping_address->id			= $shipping_address->id ?? 0;
+		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
 		
 		$this->load->config('payment_method');
 		// if ($order_type == "REPAIR") 

@@ -77,7 +77,7 @@ class Shipping_charge_model extends CI_Model {
 		$query = $this->db->get($this->table_shipping_charge, 1);
 		$shipping_charge = $query->row();
 		
-		return ($shipping_charge !== null) ? $this->get_stub_from_db($shipping_charge) : null;
+		return ($shipping_charge !== null) ? $this->get_stub_from_db($shipping_charge) : new Shipping_charge_model();
 	}
 	
 	public function insert()
