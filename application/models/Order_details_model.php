@@ -248,6 +248,21 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_from_billing_deliverer_id($billing_id, $deliverer_id)
+	{
+		$where['billing_id'] = $billing_id;
+		$where['deliverer_id'] = $deliverer_id;
+		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS order_id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_from_tenant_id()
 	{
 		$this->load->model('Tenant_model');

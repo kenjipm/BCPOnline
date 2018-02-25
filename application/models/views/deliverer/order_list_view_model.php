@@ -31,6 +31,7 @@ class Order_List_View_Model extends CI_Model{
 		foreach($delivers as $deliver)
 		{
 			$this->deliver_order_list[$i] = new class{};
+			$this->deliver_order_list[$i]->id 			= $deliver->id;
 			$this->deliver_order_list[$i]->address 		= $deliver->billing->shipping_address->address_detail;
 			$this->deliver_order_list[$i]->city 		= $deliver->billing->shipping_address->city;
 			$this->deliver_order_list[$i]->kecamatan 	= $deliver->billing->shipping_address->kecamatan;

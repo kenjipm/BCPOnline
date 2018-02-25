@@ -104,33 +104,36 @@ class Setting_reward_model extends CI_Model {
 		return ($setting_rewards !== null) ? $this->map_list($setting_rewards) : array();
 	}
 	
-	// insert new reward from form post
-	// public function insert_from_post()
-	// {	
-		// $this->reward_id			= "";
-		// $this->date_added			= date("d-m-Y");
-		// $this->date_expired			= $this->input->post('date_expired');
-		// $this->points_needed		= $this->input->post('points_needed');
-		// $this->reward_description	= $this->input->post('reward_description');
-	
+	//insert new reward from form post
+	public function insert_from_post()
+	{	
+		$this->setting_reward_id	= "";
+		$this->event_name			= $this->input->post('event_name');
+		$this->base_percent			= $this->input->post('base_percent');
+		$this->ratio_percent		= $this->input->post('ratio_percent');
+		$this->price_per_point		= $this->input->post('price_per_point');
+		$this->point_get			= $this->input->post('point_get');
+		$this->date_created			= $this->input->post('date_created');
+		if(!$this->input->post('expire'))
+			$this->date_expired			= $this->input->post('date_expired');
+
+		//insert data, then generate [reward_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
-		// // insert data, then generate [reward_id] based on [id]
-		// $this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-		
-		// $db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-		// if ($this->db->insert($this->table_reward, $db_item))
-		// {
-			// $this->load->library('Id_Generator');
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_setting_reward, $db_item))
+		{
+			$this->load->library('Id_Generator');
 			
-			// $db_item->id		= $this->db->insert_id();
-			// $db_item->reward_id	= $this->id_generator->generate(TYPE['name']['REWARD'], $db_item->id);
+			$db_item->id				= $this->db->insert_id();
+			$db_item->setting_reward_id	= $this->id_generator->generate(TYPE['name']['SETTING_REWARD'], $db_item->id);
 			
-			// $this->db->where('id', $db_item->id);
-			// $this->db->update($this->table_reward, $db_item);
-		// }
+			$this->db->where('id', $db_item->id);
+			$this->db->update($this->table_setting_reward, $db_item);
+		}
 		
-		// $this->db->trans_complete(); // selesai nge lock db transaction
-	// }
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
 	
 	public function get_latest_setting_reward_id()
 	{	
