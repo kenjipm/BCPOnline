@@ -153,7 +153,7 @@ class Setting_reward_model extends CI_Model {
 		$this->db->where("date_expired > ", $cur_date);
 		$this->db->or_where("date_expired is NULL");
 		
-		$query = $this->db->get($this->table_reward, 1);
+		$query = $this->db->get($this->table_setting_reward, 1);
 		$setting_reward = $query->row();
 		
 		return ($setting_reward !== null) ? $this->get_new_stub_from_db($setting_reward) : new Setting_reward_model();

@@ -195,7 +195,7 @@ class Billing extends CI_Controller {
 			$shipping_charge->insert();
 			
 			$this->load->model('setting_reward_model');
-			$setting_reward_id = $this->setting_reward_model->get_latest_setting_reward_id();
+			$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
 			
 			$this->load->model('billing_model');
 			$billing = $this->billing_model;
@@ -205,7 +205,7 @@ class Billing extends CI_Controller {
 			$billing->customer_id			= $this->input->post('customer_id');
 			$billing->shipping_address_id	= $this->input->post('shipping_address_id');
 			$billing->shipping_charge_id	= $shipping_charge->id;
-			$billing->setting_reward_id		= $setting_reward_id;
+			$billing->setting_reward_id		= $setting_reward->id;
 			$billing->calculate_total_payable_from_cart($this->session->cart);
 			$billing->insert();
 			
@@ -251,33 +251,69 @@ class Billing extends CI_Controller {
 	
 	public function payment_dummy_bayar($id)
 	{
-		$this->load->model('payment_model');
-		$payment = new Payment_model();
-		$payment = $payment->get_from_id($id);
-		$payment->init_billing();
-		$payment->paid_amount	= $payment->billing->total_payable; // dummy ceritanya bayar semua aja
-		$payable_left = $payment->set_paid($id);
+		$this->db->trans_start();
 		
-		if ($payable_left <= 0)
-		{
-			$this->load->model('order_details_model');
-			$order_details = new Order_details_model();
-			$order_details->set_all_paid_from_billing_id($payment->billing->id);
+			$this->load->model('payment_model');
+			$payment = new Payment_model();
+			$payment = $payment->get_from_id($id);
+			$payment->init_billing();
+			$payment->paid_amount	= $payment->billing->total_payable; // dummy ceritanya bayar semua aja
+			$payable_left = $payment->set_paid($id);
 			
-			$this->load->model('setting_reward_model');
-			$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			if ($payable_left <= 0)
+			{
+				$this->load->model('order_details_model');
+				$order_details = new Order_details_model();
+				$order_details->set_all_paid_from_billing_id($payment->billing->id);
+				
+				$this->load->model('setting_reward_model');
+				$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+				
+				$total_paid = $payment->paid_amount;
+				$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
+				
+				$this->recursive_point_increment($point_get, "", $payment->billing->id, $this->session->child_id);
+			}
 			
-			$total_paid = $payment->paid_amount;
-			$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
-			
-			$this->load->model('point_history_model');
-			$this->point_history_model->insert($point_get, "", $payment->billing->id, $this->session->child_id);
-			
-			$this->load->model('customer_model');
-			$this->customer_model->reward_point_increment($this->session->child_id, $point_get);
-		}
+		$this->db->trans_complete();
 		
 		redirect('billing/status/'.$payment->billing->id);
+	}
+	
+	public function recursive_point_increment($point_get, $point_description, $billing_id, $customer_id, $repeat_count=0)
+	{
+		$this->load->model('point_history_model');
+		$this->load->model('customer_model');
+		$this->load->model('setting_reward_model');
+		
+		$point_history = new point_history_model();
+		
+		$point_history->insert($point_get, $point_description, $billing_id, $customer_id);
+		$this->customer_model->reward_point_increment($customer_id, $point_get);
+		
+		$customer = $this->customer_model->get_from_id($customer_id);
+		if ($customer->upline_id != NULL)
+		{
+			$this->load->config('reward_point');
+			$ratio_percent_repeat = $this->config->item('RATIO_PERCENT_REPEAT');
+			$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			$multiplier = 1;
+			
+			if ($repeat_count == 0) // kalau baru dari level pertama (upline lgsg dipotong kan)
+			{
+				$multiplier = $latest_setting_reward->base_percent / 100;
+			}
+			
+			$repeat_count++;
+			if ($repeat_count > $ratio_percent_repeat) // kalo udah naek level upline melebihi jumlah repeat yg ditentukan
+			{
+				$multiplier = $latest_setting_reward->ratio_percent / 100;
+				$repeat_count = 1;
+			}
+			
+			$upline_point_get = ceil($multiplier * $point_get); // pembulatan ke atas
+			$this->recursive_point_increment($upline_point_get, $point_description, $billing_id, $customer->upline_id, $repeat_count);
+		}
 	}
 	
 	public function edit()
