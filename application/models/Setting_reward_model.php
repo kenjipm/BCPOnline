@@ -28,7 +28,6 @@ class Setting_reward_model extends CI_Model {
 		$this->point_get			= "";
 		$this->event_name			= "";
 		$this->date_created			= "";
-		$this->date_expired			= "";
 		
 	}
 	
@@ -149,7 +148,7 @@ class Setting_reward_model extends CI_Model {
 	{	
 		$cur_date = date("Y-m-d H:i:s", time());
 		
-		$this->db->order_by("id", "desc");
+		$this->db->order_by("id", "DESC");
 		$this->db->where("date_expired > ", $cur_date);
 		$this->db->or_where("date_expired is NULL");
 		

@@ -61,7 +61,59 @@
 				<a class="btn btn-default" href="<?=site_url('reward/setting_reward')?>">
 					Setting Reward
 				</a>
+				<a class="btn btn-default" onclick="popup.open('popup_setting_reward')">
+					Lihat Setting Reward
+				</a>
 			</div>
+		</div>
+	</div>
+</div>
+
+<div id="popup_setting_reward" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Setting Reward
+		</div>
+		<div class="panel-body">
+			<form class="form-horizontal">
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Event:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->setting_reward->event_name?>" class="form-control" id="event_name" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Base / Ratio Percent:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->setting_reward->base_percent?> / <?=$model->setting_reward->ratio_percent?>" class="form-control" id="percent" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Setting Poin:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->setting_reward->price_per_point?> rupiah per <?=$model->setting_reward->point_get?> poin" class="form-control" id="points_needed" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Berlaku:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->setting_reward->date_created?> s/d <?=$model->setting_reward->date_expired?>" class="form-control" id="points_needed" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-7 col-sm-offset-5">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_setting_reward')">Tutup</button>
+					</div>
+				</div>
+			</form>
 		</div>
 	</div>
 </div>

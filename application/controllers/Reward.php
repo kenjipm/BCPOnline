@@ -46,9 +46,12 @@ class Reward extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('Reward_model');
+		$this->load->model('Setting_reward_model');
 		$rewards = $this->Reward_model->get_all();
+		$setting_reward = $this->Setting_reward_model->get_latest_setting_reward();
 		$this->load->model('views/admin/reward_list_view_model');
 		$this->reward_list_view_model->get($rewards);
+		$this->reward_list_view_model->get_setting($setting_reward);
 		$data['model'] = $this->reward_list_view_model;
 		$this->load->view('admin/reward_list', $data);
 		
