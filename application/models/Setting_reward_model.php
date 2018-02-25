@@ -145,17 +145,18 @@ class Setting_reward_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
-	public function get_latest_setting_reward_id()
+	public function get_latest_setting_reward()
 	{	
-		$where['date_expired'] = NULL;
+		$cur_date = date("Y-m-d H:i:s", time());
 		
-		$this->db->order_by('id', 'desc');
-		$this->db->where($where);
+		$this->db->order_by("id", "desc");
+		$this->db->where("date_expired > ", $cur_date);
+		$this->db->or_where("date_expired is NULL");
 		
-		$query = $this->db->get($this->table_setting_reward, 1);
-		$item = $query->row();
+		$query = $this->db->get($this->table_reward, 1);
+		$setting_reward = $query->row();
 		
-		return ($item !== null) ? $item->id : null;
+		return ($setting_reward !== null) ? $this->get_new_stub_from_db($setting_reward) : new Setting_reward_model();
 	}
 
 }
