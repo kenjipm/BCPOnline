@@ -100,6 +100,14 @@ class Dispute_model extends CI_Model {
 		return $result;
 	}
 	
+	public function get_all()
+	{
+		$query = $this->db->get($this->table_dispute);
+		$results = $query->result();
+		
+		return ($results !== null) ? $this->map_list($results) : array();
+	}
+	
 	public function get_from_id($id)
 	{
 		$where['id'] = $id;
