@@ -9,6 +9,8 @@ class Setting_reward_model extends CI_Model {
 	public $setting_reward_id;
 	public $base_percent;
 	public $ratio_percent;
+	public $price_per_point;
+	public $point_get;
 	public $event_name;
 	public $date_created;
 	public $date_expired;
@@ -22,6 +24,8 @@ class Setting_reward_model extends CI_Model {
 		$this->setting_reward_id	= "";
 		$this->base_percent			= "";
 		$this->ratio_percent		= "";
+		$this->price_per_point		= "";
+		$this->point_get			= "";
 		$this->event_name			= "";
 		$this->date_created			= "";
 		$this->date_expired			= "";
@@ -35,6 +39,8 @@ class Setting_reward_model extends CI_Model {
 		$this->setting_reward_id	= $db_item->setting_reward_id;
 		$this->base_percent			= $db_item->base_percent;
 		$this->ratio_percent		= $db_item->ratio_percent;
+		$this->price_per_point		= $db_item->price_per_point;
+		$this->point_get			= $db_item->point_get;
 		$this->event_name			= $db_item->event_name;
 		$this->date_created			= $db_item->date_created;
 		$this->date_expired			= $db_item->date_expired;
@@ -51,6 +57,8 @@ class Setting_reward_model extends CI_Model {
 		$db_item->setting_reward_id		= $this->setting_reward_id;
 		$db_item->base_percent			= $this->base_percent;
 		$db_item->ratio_percent			= $this->ratio_percent;
+		$db_item->price_per_point		= $this->price_per_point;
+		$db_item->point_get				= $this->point_get;
 		$db_item->event_name			= $this->event_name;
 		$db_item->date_created			= $this->date_created;
 		$db_item->date_expired			= $this->date_expired;
@@ -67,6 +75,8 @@ class Setting_reward_model extends CI_Model {
 		$stub->setting_reward_id	= $db_item->setting_reward_id;
 		$stub->base_percent			= $db_item->base_percent;
 		$stub->ratio_percent		= $db_item->ratio_percent;
+		$stub->price_per_point		= $db_item->price_per_point;
+		$stub->point_get			= $db_item->point_get;
 		$stub->event_name			= $db_item->event_name;
 		$stub->date_created			= $db_item->date_created;
 		$stub->date_expired			= $db_item->date_expired;
