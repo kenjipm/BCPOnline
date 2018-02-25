@@ -119,7 +119,6 @@ class Reward extends CI_Controller {
 		$this->form_validation->set_rules('price_per_point', 'Harga', 'required|integer');
 		$this->form_validation->set_rules('point_get', 'Poin', 'required|integer');
 		$this->form_validation->set_rules('date_created', 'Tanggal mulai', 'required');
-		$this->form_validation->set_rules('date_expired', 'Tanggal Selesai', 'required');
 		
 		if ($this->form_validation->run() == TRUE)
 		{

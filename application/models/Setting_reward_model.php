@@ -114,10 +114,10 @@ class Setting_reward_model extends CI_Model {
 		$this->price_per_point		= $this->input->post('price_per_point');
 		$this->point_get			= $this->input->post('point_get');
 		$this->date_created			= $this->input->post('date_created');
-		$this->date_expired			= $this->input->post('date_expired');
-	
-		
-		// insert data, then generate [reward_id] based on [id]
+		if(!$this->input->post('expire'))
+			$this->date_expired			= $this->input->post('date_expired');
+
+		//insert data, then generate [reward_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini

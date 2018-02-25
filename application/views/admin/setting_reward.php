@@ -40,14 +40,15 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2" for="date_created">Berlaku Sejak:</label>
-					<div class="col-xs-4"><input type="date" class="form-control" name="date_created"></div>
+					<div class="col-xs-4"><input type="datetime-local" class="form-control" name="date_created"></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_created'); ?></span>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2" for="date_expired">Berlaku Hingga:</label>
-					<div class="col-xs-4"><input type="date" class="form-control" name="date_expired"></div>
-					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_expired'); ?></span>
+					<div class="col-xs-4"><input type="datetime-local" class="form-control" name="date_expired"></div>
+					<input type="checkbox" name="expire" value="forever">Selamanya
 				</div>
+				
 				<div class="form-group">
 					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
 				</div>
