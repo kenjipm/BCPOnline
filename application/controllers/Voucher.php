@@ -45,11 +45,16 @@ class Voucher extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array("admin/create_voucher");
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Brand_model');
+		$brands = $this->Brand_model->get_all();
+		$this->load->model('views/admin/create_voucher_view_model');
+		$this->create_voucher_view_model->get($brands);
+		$data['model'] = $this->create_voucher_view_model;
+		
 		$this->load->view('admin/create_voucher', $data);
 		
 		// Load Footer

@@ -1,10 +1,5 @@
 <?php
-	// Model untuk Deliverer
-	
-	// dummy Deliverer id
-	$model->vouchers = new class{};
-	
-	$model->vouchers->voucher_id = "VC17120501"
+
 ?>
 
 <div class="col-sm-10 col-sm-offset-1">
@@ -15,16 +10,38 @@
 		<div class="panel-body">
 			<form action="<?=site_url('voucher/create_voucher')?>" class="form-horizontal" method="post">
 				<div class="form-group">
-					<label class="control-label col-sm-2" for="brand">Nama Brand:</label>
+					<label class="control-label col-sm-2" for="brand">Berlaku untuk:</label>
 					<div class="col-sm-10">
-						<select class="form-control" name="brand_id">
-							<option value="1">Brand 1</option>
-							<option value="2">Brand 2</option>
-							<option value="3">Brand 3</option>
-							<option value="4">Brand 4</option>
-						</select>
+						<button type="button" class="btn btn-default" onclick="popup.open('popup_select_brand')">Lihat Brand</button>
 					</div>
 				</div>
+					
+				<div id="popup_select_brand" class="popup popup-md">
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							Pilih Brand
+						</div>
+						<div class="panel-body">
+							<div class="form-group">
+								<div class="col-sm-12" id="brand">
+								<?php
+								foreach($model->brand_list as $brand){
+								?>
+									<input type="checkbox" name="brand_list[]" value="<?=$brand->id?>"> <?=$brand->brand_name?><br>
+								<?php 
+								}
+								?>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-7">
+									<button type="button" class="btn btn-default" onclick="popup.close('popup_select_brand')">OK</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>				
+				
 				<div class="form-group">
 					<label class="control-label col-sm-2">Deskripsi:</label>
 					<div class="col-sm-10">

@@ -85,24 +85,27 @@ class Voucher_brand_model extends CI_Model {
 	}
 	
 	// insert new account from form post
-	public function insert_from_post($brand_id, $voucher_id)
-	{
-		$this->load->model('voucher_brand_model');
-		
-		$this->voucher_id	= $voucher_id;
-		$this->brand_id		= $brand_id;
+	public function insert_from_post($voucher_id)
+	{	
+		$this->voucher_id = $voucher_id;
+		$brand_list = $this->input->post('brand_list[]');
 	
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		foreach($brand_list as $brand)
+		{
+			$this->brand_id = $brand;
 		
-		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
-		if ($this->db->insert($this->table_voucher_brand, $db_item))
-		{	
-			$db_item->id = $this->db->insert_id();
-			
-			$this->db->where('id', $db_item->id);
-			$this->db->update($this->table_voucher_brand, $db_item);
+			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+			if ($this->db->insert($this->table_voucher_brand, $db_item))
+			{	
+				$this->load->library('Id_Generator');
+				
+				$db_item->id = $this->db->insert_id();
+				
+				$this->db->where('id', $db_item->id);
+				$this->db->update($this->table_voucher_brand, $db_item);
+			}
 		}
-		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 }

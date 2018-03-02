@@ -11,7 +11,6 @@ class Voucher_model extends CI_Model {
 	public $voucher_description;
 	public $date_added;
 	public $voucher_stock;
-	public $brand_id;
 	public $voucher_code;
 	
 	// constructor
@@ -25,7 +24,6 @@ class Voucher_model extends CI_Model {
 		$this->voucher_description	= "";
 		$this->date_added			= "";
 		$this->voucher_stock		= "";
-		$this->brand_id				= "";
 		$this->voucher_code			= "";
 		
 		$this->load->model('Voucher_brand_model');
@@ -42,7 +40,6 @@ class Voucher_model extends CI_Model {
 		$this->voucher_description	= $db_item->voucher_description;
 		$this->date_added			= $db_item->date_added;
 		$this->voucher_stock		= $db_item->voucher_stock;
-		$this->brand_id				= $db_item->brand_id;
 		$this->voucher_code			= $db_item->voucher_code;
 		
 		$this->voucher_brand		= new Voucher_brand_model();
@@ -63,7 +60,6 @@ class Voucher_model extends CI_Model {
 		$db_item->voucher_description	= $this->voucher_description;
 		$db_item->date_added			= $this->date_added;
 		$db_item->voucher_stock			= $this->voucher_stock;
-		$db_item->brand_id				= $this->brand_id;
 		$db_item->voucher_code			= $this->voucher_code;
 		
 		return $db_item;
@@ -80,7 +76,6 @@ class Voucher_model extends CI_Model {
 		$stub->voucher_description	= $db_item->voucher_description;
 		$stub->date_added			= $db_item->date_added;
 		$stub->voucher_stock		= $db_item->voucher_stock;
-		$stub->brand_id				= $db_item->brand_id;
 		$stub->voucher_code			= $db_item->voucher_code;
 		
 		$stub->voucher_brand		= new Voucher_brand_model();
@@ -132,7 +127,6 @@ class Voucher_model extends CI_Model {
 		$this->voucher_description	= $this->input->post('voucher_description');
 		$this->date_added			= date("d-m-Y");
 		$this->voucher_stock		= $this->input->post('voucher_stock');
-		$this->brand_id				= $this->input->post('brand_id');
 		$this->voucher_code			= $this->input->post('voucher_code');
 	
 		
@@ -150,6 +144,8 @@ class Voucher_model extends CI_Model {
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_voucher, $db_item);
 		}
+		$this->load->model('Voucher_brand_model');
+		$this->Voucher_brand_model->insert_from_post($db_item->id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
