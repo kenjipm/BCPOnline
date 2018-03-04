@@ -12,6 +12,8 @@ class Voucher_model extends CI_Model {
 	public $date_added;
 	public $voucher_stock;
 	public $voucher_code;
+	public $min_order_price;
+	public $use_per_day;
 	
 	// constructor
 	public function __construct()
@@ -25,6 +27,8 @@ class Voucher_model extends CI_Model {
 		$this->date_added			= "";
 		$this->voucher_stock		= "";
 		$this->voucher_code			= "";
+		$this->min_order_price		= "";
+		$this->use_per_day			= "";
 		
 		$this->load->model('Voucher_brand_model');
 		$this->load->model('Brand_model');
@@ -41,6 +45,8 @@ class Voucher_model extends CI_Model {
 		$this->date_added			= $db_item->date_added;
 		$this->voucher_stock		= $db_item->voucher_stock;
 		$this->voucher_code			= $db_item->voucher_code;
+		$this->min_order_price		= $db_item->min_order_price;
+		$this->use_per_day			= $db_item->use_per_day;
 		
 		$this->voucher_brand		= new Voucher_brand_model();
 		$this->brand				= new Brand_model();
@@ -61,6 +67,8 @@ class Voucher_model extends CI_Model {
 		$db_item->date_added			= $this->date_added;
 		$db_item->voucher_stock			= $this->voucher_stock;
 		$db_item->voucher_code			= $this->voucher_code;
+		$db_item->min_order_price		= $this->min_order_price;
+		$db_item->use_per_day			= $this->use_per_day;
 		
 		return $db_item;
 	}
@@ -77,6 +85,8 @@ class Voucher_model extends CI_Model {
 		$stub->date_added			= $db_item->date_added;
 		$stub->voucher_stock		= $db_item->voucher_stock;
 		$stub->voucher_code			= $db_item->voucher_code;
+		$stub->min_order_price		= $db_item->min_order_price;
+		$stub->use_per_day			= $db_item->use_per_day;
 		
 		$stub->voucher_brand		= new Voucher_brand_model();
 		$stub->brand				= new Brand_model();
@@ -140,6 +150,8 @@ class Voucher_model extends CI_Model {
 		$this->date_added			= date("d-m-Y");
 		$this->voucher_stock		= $this->input->post('voucher_stock');
 		$this->voucher_code			= $this->input->post('voucher_code');
+		$this->min_order_price		= $this->input->post('min_order_price');
+		$this->use_per_day			= $this->input->post('use_per_day');
 		
 		// insert data, then generate [voucher_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)

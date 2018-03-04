@@ -142,7 +142,7 @@
 						<label>Nama Brand:</label>
 					</div>
 					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->brand->brand_name?>" class="form-control" name="voucher_brand" readonly>
+						<input type="text" value="<?=$model->vouchers[0]->brand_name?>" class="form-control" name="voucher_brand" readonly>
 					</div>
 				</div>
 				<div class="form-group">
@@ -151,6 +151,22 @@
 					</div>
 					<div class="col-sm-10">
 						<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Minimal Order:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Pemakaian per Hari:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
 					</div>
 				</div>
 				<div class="form-group">
