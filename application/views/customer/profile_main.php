@@ -51,6 +51,7 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="referral_link">Referral Link:</label>
 					<div class="col-xs-4"><input type="text" class="form-control" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly/></div>
+					<div class="col-xs-1"><button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3">Foto Kartu ID:</label>
