@@ -240,7 +240,7 @@ class Billing_model extends CI_Model {
 	{
 		foreach ($cart as $id => $cart_item)
 		{
-			$this->total_payable += $cart_item['quantity'] * $cart_item['price'];
+			$this->total_payable += ($cart_item['quantity'] * $cart_item['price']) - $cart_item['voucher_cut_price'];
 		}
 		return $this->total_payable;
 	}

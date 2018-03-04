@@ -585,6 +585,7 @@ class Order_details_model extends CI_Model {
 			$order_details->order_status			= ORDER_STATUS['name']['WAITING_FOR_PAYMENT'];
 			$order_details->billing_id				= $billing_id;
 			$order_details->posted_item_variance_id	= $id;
+			$order_details->voucher_cut_price		= $cart_item['voucher_cut_price'];
 			
 			if ($this->db->insert($this->table_order_details, $order_details->get_db_from_stub()))
 			{

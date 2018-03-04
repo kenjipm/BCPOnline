@@ -63,7 +63,7 @@
 			<h3><?=$title?></h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('billing/'.$model->billing->action)?>" method="post" class="form-horizontal" id="form_billing">
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_created">Tanggal:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="date_created" 
@@ -121,13 +121,16 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="total_payable">Kode Voucher:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" id="voucher_code" 
+					<div class="col-xs-3"><input type="text" class="form-control" id="voucher_code" name="voucher_code" 
 						value=""></div>
-					<div class="col-xs-1"><button type="button" class="btn btn-default" onclick="cek_kode_voucher()">Cek</button></div>
+					<div class="col-xs-1">
+						<button type="button" class="btn btn-default" onclick="cek_kode_voucher()">Cek</button>
+					</div>
+					<div class="col-xs-2">
+						<span id="voucher_code_status"></span>
+					</div>
 				</div>
-			</form>
-			<hr/>
-			<form action="<?=site_url('billing/'.$model->billing->action)?>" method="post">
+				<hr/>
 				<h3>Pembayaran</h3>
 				<?php
 					$i = 0; $div_row_opened = false;
@@ -179,7 +182,7 @@
 				
 				<input type="hidden" name="fee_amount" value="<?=$model->billing->shipping_charge->fee_amount?>"/>
 			
-				<button type="submit" class="btn btn-default">
+				<button type="button" class="btn btn-default" onclick="cek_kode_voucher(true)">
 					<?=$model->billing->action_name?>
 				</button>
 			</form>

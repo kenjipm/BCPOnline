@@ -10,6 +10,7 @@ class Voucher_model extends CI_Model {
 	public $voucher_worth;
 	public $voucher_description;
 	public $date_added;
+	public $date_expired;
 	public $voucher_stock;
 	public $voucher_code;
 	public $min_order_price;
@@ -24,7 +25,8 @@ class Voucher_model extends CI_Model {
 		$this->voucher_id			= "";
 		$this->voucher_worth		= "";
 		$this->voucher_description	= "";
-		$this->date_added			= "";
+		$this->date_added			= date("Y-m-d H:i:s", time());
+		$this->date_expired			= "";
 		$this->voucher_stock		= "";
 		$this->voucher_code			= "";
 		$this->min_order_price		= "";
@@ -43,6 +45,7 @@ class Voucher_model extends CI_Model {
 		$this->voucher_worth		= $db_item->voucher_worth;
 		$this->voucher_description	= $db_item->voucher_description;
 		$this->date_added			= $db_item->date_added;
+		$this->date_expired			= $db_item->date_expired;
 		$this->voucher_stock		= $db_item->voucher_stock;
 		$this->voucher_code			= $db_item->voucher_code;
 		$this->min_order_price		= $db_item->min_order_price;
@@ -65,6 +68,7 @@ class Voucher_model extends CI_Model {
 		$db_item->voucher_worth			= $this->voucher_worth;
 		$db_item->voucher_description	= $this->voucher_description;
 		$db_item->date_added			= $this->date_added;
+		$db_item->date_expired			= $this->date_expired;
 		$db_item->voucher_stock			= $this->voucher_stock;
 		$db_item->voucher_code			= $this->voucher_code;
 		$db_item->min_order_price		= $this->min_order_price;
@@ -83,6 +87,7 @@ class Voucher_model extends CI_Model {
 		$stub->voucher_worth		= $db_item->voucher_worth;
 		$stub->voucher_description	= $db_item->voucher_description;
 		$stub->date_added			= $db_item->date_added;
+		$stub->date_expired			= $db_item->date_expired;
 		$stub->voucher_stock		= $db_item->voucher_stock;
 		$stub->voucher_code			= $db_item->voucher_code;
 		$stub->min_order_price		= $db_item->min_order_price;
@@ -124,6 +129,9 @@ class Voucher_model extends CI_Model {
 	{
 		$where[$this->table_voucher. '.voucher_code'] = $voucher_code;
 		
+		$this->db->select('*, '.$this->table_voucher.'.id AS id');
+		$this->db->join('voucher_brand', 'voucher_brand.voucher_id=' . $this->table_voucher . '.id', 'left');
+		$this->db->join('brand', 'brand.id=voucher_brand.brand_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_voucher, 1);
 		$voucher = $query->row();
@@ -148,6 +156,7 @@ class Voucher_model extends CI_Model {
 		$this->voucher_worth		= $this->input->post('voucher_worth');
 		$this->voucher_description	= $this->input->post('voucher_description');
 		$this->date_added			= date("d-m-Y");
+		$this->date_expired			= $this->input->post('date_expired');
 		$this->voucher_stock		= $this->input->post('voucher_stock');
 		$this->voucher_code			= $this->input->post('voucher_code');
 		$this->min_order_price		= $this->input->post('min_order_price');
@@ -171,6 +180,60 @@ class Voucher_model extends CI_Model {
 		$this->Voucher_brand_model->insert_from_post($db_item->id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function is_ready_stock()
+	{
+		return $this->voucher_stock != 0;
+	}
+	
+	public function is_expired()
+	{
+		return (time() > strtotime($this->date_expired));
+	}
+	
+	public function get_first_item_id_from_voucher_code($voucher_code)
+	{
+		if ($voucher_code)
+		{
+			$voucher = $this->get_from_voucher_code($voucher_code);
+			
+			if ($voucher)
+			{
+				if ($voucher->is_expired()) { return -1; }
+				if (!$voucher->is_ready_stock()) { return -2; }
+				
+				$this->load->model('voucher_brand_model');
+				$voucher_brands = $this->voucher_brand_model->get_all_from_voucher_id($voucher->id);
+				
+				$this->load->model('posted_item_variance_model');
+				$cart = $this->session->cart;
+				foreach ($cart as $id => $cart_item)
+				{
+					$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+					$posted_item_variance->init_posted_item();
+					
+					foreach ($voucher_brands as $voucher_brand)
+					{
+						if ($voucher_brand->brand_id == $posted_item_variance->posted_item->brand_id)
+						{
+							return $id;
+						}
+					}
+				}
+			}
+		}
+		
+		return 0;
+	}
+	
+	public function quantity_sub($value)
+	{
+		$this->db->where('id', $id);
+		$this->db->set('voucher_stock', 'voucher_stock - ' . $value, false);
+		$this->db->update($this->table_voucher);
+		
+		return $this;
 	}
 }
 

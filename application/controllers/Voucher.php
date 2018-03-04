@@ -88,22 +88,51 @@ class Voucher extends CI_Controller {
 		if ($voucher_code)
 		{
 			$this->load->model('voucher_model');
-			$voucher = $this->voucher_model->get_from_voucher_code($voucher_code);
+			$vouchered_item_variance_id = $this->voucher_model->get_first_item_id_from_voucher_code($voucher_code);
 			
-			if ($voucher)
+			if ($vouchered_item_variance_id > 0)
 			{
-				
-				
-				$this->load->model('voucher_brand_model');
-				$voucher_brands = $this->voucher_brand_model->get_all_from_voucher_id($voucher->id);
-				
-				foreach ($cart as $id => $cart_item)
-				{
-					
-				}
+				echo "1";
 			}
+			else if ($vouchered_item_variance_id == -1)
+			{
+				echo "-1";
+			}
+			else if ($vouchered_item_variance_id == -2)
+			{
+				echo "-2";
+			}
+			else //if ($vouchered_item_variance_id == 0)
+			{
+				echo "0";
+			}
+			// $voucher = $this->voucher_model->get_from_voucher_code($voucher_code);
+			
+			// if ($voucher)
+			// {
+				// if ($voucher->is_expired()) { echo "-1"; return false; }
+				// if (!$voucher->is_ready_stock()) { echo "-2"; return false; }
+				
+				// $this->load->model('voucher_brand_model');
+				// $voucher_brands = $this->voucher_brand_model->get_all_from_voucher_id($voucher->id);
+				
+				// $this->load->model('posted_item_variance_model');
+				// $cart = $this->session->cart;
+				// foreach ($cart as $id => $cart_item)
+				// {
+					// $posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+					// $posted_item_variance->init_posted_item();
+					
+					// foreach ($voucher_brands as $voucher_brand)
+					// {
+						// // echo "brand: ".$posted_item_variance->posted_item->brand_id."    ";
+						// if ($voucher_brand->brand_id == $posted_item_variance->posted_item->brand_id)
+						// {
+							// echo "1"; return true;
+						// }
+					// }
+				// }
+			// }
 		}
-		
-		return false;
 	}
 }

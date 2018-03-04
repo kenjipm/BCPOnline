@@ -153,7 +153,7 @@ class Item_model extends CI_Model {
 	{
 		$where['posted_item.id'] = $id;
 		
-		$this->db->select('*, ' . $this->table_item.'.id AS id');
+		$this->db->select('*, ' . $this->table_item.'.id AS id, ' . $this->table_item.'.brand_id AS brand_id');
 		$this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
 		$this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
 		$this->db->where($where);
