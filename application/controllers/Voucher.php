@@ -78,4 +78,30 @@ class Voucher extends CI_Controller {
 			redirect('Voucher/voucher_list');
 		}
 	}
+	
+	public function cek_kode_voucher()
+	{
+		$voucher_code = $this->input->post('voucher_code');
+		
+		if ($voucher_code)
+		{
+			$this->load->model('voucher_model');
+			$voucher = $this->voucher_model->get_from_voucher_code($voucher_code);
+			
+			if ($voucher)
+			{
+				
+				
+				$this->load->model('voucher_brand_model');
+				$voucher_brands = $this->voucher_brand_model->get_all_from_voucher_id($voucher->id);
+				
+				foreach ($cart as $id => $cart_item)
+				{
+					
+				}
+			}
+		}
+		
+		return false;
+	}
 }

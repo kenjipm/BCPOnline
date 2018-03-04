@@ -84,6 +84,17 @@ class Voucher_brand_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_from_voucher_id($voucher_id)
+	{
+		$where[$this->table_voucher_brand. '.voucher_id'] = $voucher_id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_voucher_brand);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	// insert new account from form post
 	public function insert_from_post($voucher_id)
 	{	

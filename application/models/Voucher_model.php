@@ -109,6 +109,18 @@ class Voucher_model extends CI_Model {
 		return ($voucher !== null) ? $this->get_stub_from_db($voucher) : null;
 	}
 	
+	// get voucher detail
+	public function get_from_voucher_code($voucher_code)
+	{
+		$where[$this->table_voucher. '.voucher_code'] = $voucher_code;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_voucher, 1);
+		$voucher = $query->row();
+		
+		return ($voucher !== null) ? $this->get_stub_from_db($voucher) : null;
+	}
+	
 	public function get_all()
 	{	
 		$this->db->join('voucher_brand', 'voucher_brand.voucher_id=' . $this->table_voucher . '.id', 'left');
@@ -128,7 +140,6 @@ class Voucher_model extends CI_Model {
 		$this->date_added			= date("d-m-Y");
 		$this->voucher_stock		= $this->input->post('voucher_stock');
 		$this->voucher_code			= $this->input->post('voucher_code');
-	
 		
 		// insert data, then generate [voucher_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
@@ -149,7 +160,6 @@ class Voucher_model extends CI_Model {
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
-
 }
 
 ?>

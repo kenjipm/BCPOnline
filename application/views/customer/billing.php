@@ -119,6 +119,12 @@
 					<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 						value="<?=$model->billing->total_payable?>" readonly></div>
 				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="total_payable">Kode Voucher:</label>
+					<div class="col-xs-3"><input type="text" class="form-control" id="voucher_code" 
+						value=""></div>
+					<div class="col-xs-1"><button type="button" class="btn btn-default" onclick="cek_kode_voucher()">Cek</button></div>
+				</div>
 			</form>
 			<hr/>
 			<form action="<?=site_url('billing/'.$model->billing->action)?>" method="post">
