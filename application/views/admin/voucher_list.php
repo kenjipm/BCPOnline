@@ -154,6 +154,22 @@
 					</div>
 				</div>
 				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Minimal Order:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-2">
+						<label>Pemakaian per Hari:</label>
+					</div>
+					<div class="col-sm-10">
+						<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
+					</div>
+				</div>
+				<div class="form-group">
 					<div class="col-sm-7 col-sm-offset-5">
 						<a href="<?=site_url('tenant_pay_receipt/set_price')?>">
 							<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Harga Bayar</button>

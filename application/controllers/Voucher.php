@@ -69,6 +69,8 @@ class Voucher extends CI_Controller {
 		$this->form_validation->set_rules('voucher_description', 'Deskripsi', 'required');
 		$this->form_validation->set_rules('voucher_worth', 'Harga', 'required|integer');
 		$this->form_validation->set_rules('voucher_code', 'Kode Voucher', 'required');
+		$this->form_validation->set_rules('min_order_price', 'Minimal pembelanjaan', 'required|integer');
+		$this->form_validation->set_rules('use_per_day', 'Pemakaian per Hari', 'required|integer');
 		
 		if ($this->form_validation->run() == TRUE)
 		{
