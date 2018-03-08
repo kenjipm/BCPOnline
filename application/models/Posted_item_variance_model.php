@@ -199,6 +199,26 @@ class Posted_item_variance_model extends CI_Model {
 			
 			$this->db->trans_complete();
 		}
+		else // BID
+		{
+			$this->var_type				= $this->input->post('posted_item_variance_name');
+			$this->var_description		= $this->input->post('posted_item_variance_description');
+			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+				
+			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+			if ($this->db->insert($this->table_posted_item_variance, $db_item))
+			{
+				$this->load->library('Id_Generator');
+				
+				$db_item->id			= $this->db->insert_id();
+				$db_item->detail_id		= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);
+				
+				$this->db->where('id', $db_item->id);
+				$this->db->update($this->table_posted_item_variance, $db_item);
+			}
+			
+			$this->db->trans_complete();
+		}
 	}
 	
 	public function upload_image($id, $index)

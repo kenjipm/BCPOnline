@@ -165,7 +165,6 @@ class Item extends CI_Controller {
 		{
 			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
-			$this->form_validation->set_rules('item_type', 'Tipe', 'required');
 			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
 			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
@@ -177,6 +176,20 @@ class Item extends CI_Controller {
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
 			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
 			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		}
+		else // BID
+		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
+			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
+			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+			$this->form_validation->set_rules('posted_item_variance_name', 'Varian', 'required');
+			$this->form_validation->set_rules('posted_item_variance_description', 'Deskripsi Varian', 'required');
+			$this->form_validation->set_rules('date_expired', 'Tanggal Selesai Bidding', 'required');
+			$this->form_validation->set_rules('bidding_max_range', 'Maksimum Kenaikan Harga', 'required');
 		}
 		
 		if ($this->form_validation->run() == TRUE)

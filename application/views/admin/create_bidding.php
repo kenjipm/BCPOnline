@@ -40,16 +40,45 @@
 			<h3>Daftarkan bidding Baru</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
+			<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+				<input type="hidden" name="item_type" value="BID"/>
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="brand">Brand:</label>
-					<div class="col-xs-4">
-						<select class="form-control" name="brand">
+					<label class="control-label col-xs-3" for="name">Nama:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_name" value="<?= set_value('posted_item_name'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('posted_item_name'); ?></span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="price">Harga:</label>
+					<div class="col-xs-3"><input type="text" class="form-control" name="price" value="<?= set_value('price'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('price'); ?></span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="unit_weight">Berat(g):</label>
+					<div class="col-xs-2"><input type="text" class="form-control" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('unit_weight'); ?></span>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
+					<div class="col-xs-9">
+						<label for="image_one_name">
+						</label>
+						<input id="image_one_name" name="image_one_name" type="file" class="photo_upload_simple"/>
+						
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="control-label col-xs-3" for="category">Kategori:</label>
+					<div class="col-xs-6">
+						<select class="form-control" name="category_id">
 						<?php
-						foreach($model->bidding_brand as $brand)
+						foreach ($model->bidding_category as $category)
 						{
 							?>
-								<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>
+							<option value="<?=$category->id?>"><?=$category->category_name?></option>			
 							<?php
 						}
 						?>
@@ -57,14 +86,14 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="category">Kategori:</label>
-					<div class="col-xs-4">
-						<select class="form-control" name="category">
+					<label class="control-label col-xs-3" for="brand">Brand:</label>
+					<div class="col-xs-6">
+						<select class="form-control" name="brand_id">
 						<?php
-						foreach($model->bidding_category as $category)
+						foreach ($model->bidding_brand as $brand)
 						{
 							?>
-								<option value="<?=$category->id?>"><?=$category->category_name?></option>
+							<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
 							<?php
 						}
 						?>
@@ -72,30 +101,23 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="item">Item:</label>
-					<div class="col-xs-10">
-						<select class="form-control" name="item">
-						<?php
-						foreach($model->bidding_item as $item)
-						{
-							?>
-								<option value="<?=$item->id?>"><?=$item->posted_item_name . " (" . $item->tenant_name .")"?></option>
-							<?php
-						}
-						?>
-						</select>
-					</div>
+					<label class="control-label col-xs-3" for="posted_item_variance_name">Varian:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_variance_name" value="<?= set_value('posted_item_variance_name'); ?>"/></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="bidding_price">Harga Awal:</label>
-					<div class="col-xs-4"><input type="text" class="form-control" name="bidding_price"></div>
+					<label class="control-label col-xs-3" for="posted_item_variance_description">Deskripsi:</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_variance_description" value="<?= set_value('posted_item_variance_description'); ?>"/></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-2" for="bidding_time">Batas Waktu:</label>
-					<div class="col-xs-3"><input type="datetime-local" class="form-control" name="bidding_time"></div>
+					<label class="control-label col-xs-3" for="bidding_max_range">Maksimal Kenaikan Harga:</label>
+					<div class="col-xs-4"><input type="text" class="form-control" name="bidding_max_range" value="<?= set_value('bidding_max_range'); ?>"/></div>
 				</div>
 				<div class="form-group">
-					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
+					<label class="control-label col-xs-3" for="date_expired">Berlaku Hingga:</label>
+					<div class="col-xs-4"><input type="datetime-local" class="form-control" name="date_expired" value="<?= set_value('date_expired'); ?>"/></div>
+				</div>
+				<div class="form-group">
+					<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
 				</div>
 			</form>
 		</div>

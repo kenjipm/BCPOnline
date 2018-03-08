@@ -14,6 +14,7 @@ class Item_model extends CI_Model {
 	public $date_posted;
 	public $date_updated;
 	public $date_expired;
+	public $bidding_max_range;
 	public $item_type;
 	public $unit_weight;
 	public $posted_item_description;
@@ -45,6 +46,7 @@ class Item_model extends CI_Model {
 		$this->date_posted				= "";
 		$this->date_updated				= "";
 		$this->date_expired				= "";
+		$this->bidding_max_range		= "";
 		$this->item_type				= "";
 		$this->unit_weight				= "";
 		$this->posted_item_description	= "";
@@ -74,6 +76,7 @@ class Item_model extends CI_Model {
 		$this->date_posted				= $db_item->date_posted;
 		$this->date_updated				= $db_item->date_updated;
 		$this->date_expired				= $db_item->date_expired;
+		$this->bidding_max_range		= $db_item->bidding_max_range;
 		$this->item_type				= $db_item->item_type;
 		$this->unit_weight				= $db_item->unit_weight;
 		$this->posted_item_description	= $db_item->posted_item_description;
@@ -100,6 +103,7 @@ class Item_model extends CI_Model {
 		$db_item->date_posted				= $this->date_posted;
 		$db_item->date_updated				= $this->date_updated;
 		$db_item->date_expired				= $this->date_expired;
+		$db_item->bidding_max_range			= $this->bidding_max_range;
 		$db_item->item_type					= $this->item_type;
 		$db_item->unit_weight				= $this->unit_weight;
 		$db_item->posted_item_description	= $this->posted_item_description;
@@ -123,6 +127,7 @@ class Item_model extends CI_Model {
 		$stub->date_posted				= $db_item->date_posted;
 		$stub->date_updated				= $db_item->date_updated;
 		$stub->date_expired				= $db_item->date_expired;
+		$stub->bidding_max_range		= $db_item->bidding_max_range;
 		$stub->item_type				= $db_item->item_type;
 		$stub->unit_weight				= $db_item->unit_weight;
 		$stub->posted_item_description	= $db_item->posted_item_description;
@@ -266,7 +271,21 @@ class Item_model extends CI_Model {
 			$this->tenant_id				= $cur_tenant->id;
 			$this->brand_id					= $this->input->post('brand_id');
 		}
-		
+		else // BID
+		{
+			$this->posted_item_id			= "";
+			$this->posted_item_name			= $this->input->post('posted_item_name');
+			$this->price					= $this->input->post('price');
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= $this->input->post('date_expired');
+			$this->bidding_max_range		= $this->input->post('bidding_max_range');
+			$this->unit_weight				= $this->input->post('unit_weight');
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= $cur_tenant->id;
+			$this->brand_id					= $this->input->post('brand_id');
+		}
 		// insert data, then generate [account_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
