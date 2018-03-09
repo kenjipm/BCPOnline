@@ -20,7 +20,7 @@ class Order_details_model extends CI_Model {
 	public $posted_item_variance_id;
 	public $deliverer_id;
 	public $tnt_paid_receipt_id;
-	public $voucher_cut_price;
+	public $voucher_id;
 	
 	// relation table
 	public $billing;
@@ -28,6 +28,7 @@ class Order_details_model extends CI_Model {
 	public $feedback;
 	public $deliverer;
 	public $tnt_paid_receipt;
+	public $voucher;
 	
 	// constructor
 	public function __construct()
@@ -49,7 +50,7 @@ class Order_details_model extends CI_Model {
 		$this->posted_item_variance_id	= 0;
 		$this->deliverer_id				= NULL;
 		$this->tnt_paid_receipt_id		= NULL;
-		$this->voucher_cut_price		= 0;
+		$this->voucher_id		= NULL;
 		
 		$this->load->model('billing_model');
 		$this->load->model('posted_item_variance_model');
@@ -60,6 +61,7 @@ class Order_details_model extends CI_Model {
 		$this->load->model('account_model');
 		$this->load->model('shipping_address_model');
 		$this->load->model('feedback_model');
+		$this->load->model('voucher_model');
 		
 		$this->billing								= new Billing_model();
 		$this->deliverer							= new Deliverer_model();
@@ -69,6 +71,7 @@ class Order_details_model extends CI_Model {
 		$this->posted_item_variance					= new Posted_item_variance_model();
 		$this->posted_item_variance->posted_item	= new Item_model();
 		$this->feedback								= new Feedback_model();
+		$this->voucher								= new Voucher_model();
 		// $this->deliverer				= $this->load->model('deliverer_model');
 		// $this->tnt_paid_receipt			= $this->load->model('tnt_paid_receipt_model');
 	}
@@ -91,7 +94,7 @@ class Order_details_model extends CI_Model {
 		$this->posted_item_variance_id	= $db_item->posted_item_variance_id;
 		$this->deliverer_id				= $db_item->deliverer_id;
 		$this->tnt_paid_receipt_id		= $db_item->tnt_paid_receipt_id;
-		$this->voucher_cut_price		= $db_item->voucher_cut_price;
+		$this->voucher_id				= $db_item->voucher_id;
 		
 		return $this;
 	}
@@ -116,7 +119,7 @@ class Order_details_model extends CI_Model {
 		$db_item->posted_item_variance_id	= $this->posted_item_variance_id;
 		$db_item->deliverer_id				= $this->deliverer_id;
 		$db_item->tnt_paid_receipt_id		= $this->tnt_paid_receipt_id;
-		$db_item->voucher_cut_price			= $this->voucher_cut_price;
+		$db_item->voucher_id				= $this->voucher_id;
 		
 		return $db_item;
 	}
@@ -143,7 +146,7 @@ class Order_details_model extends CI_Model {
 		$stub->posted_item_variance_id	= $db_item->posted_item_variance_id;
 		$stub->deliverer_id				= $db_item->deliverer_id;
 		$stub->tnt_paid_receipt_id		= $db_item->tnt_paid_receipt_id;
-		$stub->voucher_cut_price		= $db_item->voucher_cut_price;
+		$stub->voucher_id				= $db_item->voucher_id;
 		
 		$stub->posted_item_variance						= new Posted_item_variance_model();
 		$stub->posted_item_variance->var_type			= $db_item->var_type ?? "";
@@ -294,6 +297,18 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_from_customer_id_and_voucher_id($customer_id, $voucher_id)
+	{
+		$where['customer_id'] = $customer_id;
+		$where['voucher_id'] = $voucher_id;
+		$this->db->where($where);
+		
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_from_otp_deliverer_to_tenant($otp, $tenant_id)
 	{
 		$this->load->model('Tenant_model');
@@ -404,7 +419,7 @@ class Order_details_model extends CI_Model {
 		$this->db->select('
 			order_details.sold_price,
 			order_details.quantity,
-			order_details.voucher_cut_price,
+			order_details.voucher_id,
 			posted_item.posted_item_name,
 			posted_item.tenant_id,
 			tenant.tenant_name
@@ -435,7 +450,7 @@ class Order_details_model extends CI_Model {
 			order_details.id AS id,
 			order_details.sold_price,
 			order_details.quantity,
-			order_details.voucher_cut_price,
+			order_details.voucher_id,
 			posted_item.posted_item_name,
 			posted_item.tenant_id
 		');
@@ -464,7 +479,7 @@ class Order_details_model extends CI_Model {
 			order_details.id AS id,
 			order_details.sold_price,
 			order_details.quantity,
-			order_details.voucher_cut_price,
+			order_details.voucher_id,
 			posted_item.posted_item_name,
 			posted_item.tenant_id
 		');
@@ -562,7 +577,7 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function insert_from_cart($cart, $billing_id)
+	public function insert_from_cart($cart, $billing_id, $voucher_id=null)
 	{
 		$this->load->library('id_generator');
 		$this->load->model('item_model');
@@ -585,7 +600,7 @@ class Order_details_model extends CI_Model {
 			$order_details->order_status			= ORDER_STATUS['name']['WAITING_FOR_PAYMENT'];
 			$order_details->billing_id				= $billing_id;
 			$order_details->posted_item_variance_id	= $id;
-			$order_details->voucher_cut_price		= $cart_item['voucher_cut_price'];
+			$order_details->voucher_id				= $voucher_id;
 			
 			if ($this->db->insert($this->table_order_details, $order_details->get_db_from_stub()))
 			{
@@ -929,6 +944,12 @@ class Order_details_model extends CI_Model {
 	{
 		$this->posted_item_variance = $this->posted_item_variance->get_from_id($this->posted_item_variance_id);
 		return $this->posted_item_variance;
+	}
+	
+	public function init_voucher()
+	{
+		$this->voucher = $this->voucher->get_from_id($this->voucher_id);
+		return $this->voucher;
 	}
 }
 

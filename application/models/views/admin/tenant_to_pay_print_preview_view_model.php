@@ -29,9 +29,11 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 			$temp_order_detail->posted_item_name	= $order_detail->posted_item_name;
 			$temp_order_detail->quantity			= $order_detail->quantity;
 			$temp_order_detail->sold_price			= $this->text_renderer->to_rupiah($order_detail->sold_price);
-			$temp_order_detail->voucher_cut_price	= $this->text_renderer->to_rupiah($order_detail->voucher_cut_price);
 			
-			$temp_order_detail->total_unpaid		= ($order_detail->quantity * $order_detail->sold_price) + $order_detail->voucher_cut_price;
+			$order_detail->init_voucher();
+			$temp_order_detail->voucher_cut_price	= $this->text_renderer->to_rupiah($order_detail->voucher->voucher_worth);
+			
+			$temp_order_detail->total_unpaid		= ($order_detail->quantity * $order_detail->sold_price) + $order_detail->voucher->voucher_worth;
 			$this->tenant->total_unpaid				+= $temp_order_detail->total_unpaid;
 			
 			$temp_order_detail->total_unpaid		= $this->text_renderer->to_rupiah($temp_order_detail->total_unpaid);

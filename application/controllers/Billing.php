@@ -189,10 +189,11 @@ class Billing extends CI_Controller {
 			// >>>>> disini harus check item di cart dulu, stok nya cukup ga. kalau ga cukup, lgsg redirect & kasih pesan error	
 			
 			// cek voucher dulu
+			$this->load->model('voucher_model');
+			$voucher = new voucher_model();
 			$voucher_code = $this->input->post('voucher_code');
 			if ($voucher_code)
 			{
-				$this->load->model('voucher_model');
 				$vouchered_item_variance_id = $this->voucher_model->get_first_item_id_from_voucher_code($voucher_code);
 				if ($vouchered_item_variance_id)
 				{
@@ -238,7 +239,7 @@ class Billing extends CI_Controller {
 			$billing->insert();
 			
 			$this->load->model('order_details_model');
-			$this->order_details_model->insert_from_cart($this->session->cart, $billing->id);
+			$this->order_details_model->insert_from_cart($this->session->cart, $billing->id, $voucher->id);
 			
 			// insert billing to chosen payment method
 			

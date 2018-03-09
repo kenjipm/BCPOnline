@@ -33,6 +33,12 @@ function cek_kode_voucher(then_submit=false) {
 			else if (data == "-2") {
 				$("#voucher_code_status").html("Voucher sudah tidak ada stok");
 			}
+			else if (data == "-3") {
+				$("#voucher_code_status").html("Voucher tidak dapat digunakan lagi hari ini");
+			}
+			else if (data == "-4") {
+				$("#voucher_code_status").html("Total belanja tidak cukup untuk menggunakan voucher ini");
+			}
 		}
 	});
 }

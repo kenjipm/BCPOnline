@@ -102,6 +102,14 @@ class Voucher extends CI_Controller {
 			{
 				echo "-2";
 			}
+			else if ($vouchered_item_variance_id == -3)
+			{
+				echo "-3";
+			}
+			else if ($vouchered_item_variance_id == -4)
+			{
+				echo "-4";
+			}
 			else //if ($vouchered_item_variance_id == 0)
 			{
 				echo "0";

@@ -96,7 +96,9 @@ class Admin extends CI_Controller {
 			$payment_period_start	= NULL;
 			$payment_period_end		= NULL;
 			$payment_purpose		= "";
-			$paid_amount += ($order_detail->quantity * $order_detail->sold_price) + $order_detail->voucher_cut_price;
+			
+			$order_detail->init_voucher();
+			$paid_amount += ($order_detail->quantity * $order_detail->sold_price) + $order_detail->voucher->voucher_worth;
 			
 			$list_order_detail_id[] = $order_detail->id;
 		}
