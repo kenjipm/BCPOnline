@@ -297,14 +297,23 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_customer_id_and_voucher_id($customer_id, $voucher_id)
+	public function get_all_from_customer_id_and_voucher_id_and_date($customer_id, $voucher_id, $date)
 	{
-		$where['customer_id'] = $customer_id;
+		$where['billing.customer_id'] = $customer_id;
 		$where['voucher_id'] = $voucher_id;
+		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
 		$this->db->where($where);
+		
+		$this->db->where('DAY(billing.date_created) = '.date_format($date, "j")); // 1-31
+		$this->db->where('MONTH(billing.date_created) = '.date_format($date, "n")); // 1-12
+		$this->db->where('YEAR(billing.date_created) = '.date_format($date, "Y")); // 1970-9999
 		
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
+		
+		// print_r($this->db->last_query());
 		
 		return ($items !== null) ? $this->map_list($items) : array();
 	}

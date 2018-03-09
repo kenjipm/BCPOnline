@@ -199,7 +199,7 @@ class Voucher_model extends CI_Model {
 	
 	public function is_order_sufficient($total_order)
 	{
-		return $total_order > $this->min_order_price;
+		return $total_order >= $this->min_order_price;
 	}
 	
 	public function get_first_item_id_from_voucher_code($voucher_code)
@@ -214,20 +214,29 @@ class Voucher_model extends CI_Model {
 				if (!$voucher->is_ready_stock()) { return -2; }
 				
 				$this->load->model('order_details_model');
-				$cur_vouchered_order_list = $this->order_details_model->get_all_from_customer_id_and_voucher_id($this->session->child_id, $voucher->id);
+				$cur_vouchered_order_list = $this->order_details_model->get_all_from_customer_id_and_voucher_id_and_date($this->session->child_id, $voucher->id, date_create());
 				if (!$voucher->is_usable_this_day(count($cur_vouchered_order_list))) { return -3; }
-				
-				$cart = $this->session->cart;
-				$total_order = 0;
-				foreach ($cart as $id => $cart_item)
-				{
-					$total_order += $cart_item->quantity * $cart_item->price;
-				}
-				if (!$voucher->is_order_sufficient($total_order)) { return -4; }
 				
 				$this->load->model('posted_item_variance_model');
 				$this->load->model('voucher_brand_model');
 				$voucher_brands = $this->voucher_brand_model->get_all_from_voucher_id($voucher->id);
+				$cart = $this->session->cart;
+				$total_order = 0;
+				foreach ($cart as $id => $cart_item)
+				{
+					$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+					$posted_item_variance->init_posted_item();
+					
+					foreach ($voucher_brands as $voucher_brand)
+					{
+						if ($voucher_brand->brand_id == $posted_item_variance->posted_item->brand_id)
+						{
+							$total_order += $cart_item['quantity'] * $cart_item['price'];
+						}
+					}
+				}
+				if (!$voucher->is_order_sufficient($total_order)) { return -4; }
+				
 				foreach ($cart as $id => $cart_item)
 				{
 					$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
