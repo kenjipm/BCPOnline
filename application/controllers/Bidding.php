@@ -29,7 +29,7 @@ class Bidding extends CI_Controller {
 		// Load Body
 		$this->load->model('Item_model');
 		$this->load->model('Bidding_model');
-		$items = $this->Item_model->get_all();
+		$items = $this->Item_model->get_all_bidding_items();
 		$biddings = $this->Bidding_model->get_all();
 		$this->load->model('views/admin/bidding_list_view_model');
 		$this->bidding_list_view_model->get($items, $biddings);

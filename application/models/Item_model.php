@@ -187,6 +187,15 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
+	public function get_all_bidding_items()
+	{
+		$this->db->where('item_type', 'BID');
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_from_category_id($category_id)
 	{
 		$query = $this->db

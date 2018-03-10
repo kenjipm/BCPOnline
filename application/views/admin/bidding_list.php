@@ -61,6 +61,9 @@
 				$i++;
 			}
 			?>
+			<a class="btn btn-default" href="<?=site_url('bidding/create_bidding')?>">
+				Buat Bidding
+			</a>
 		</div>
 	</div>
 </div>
