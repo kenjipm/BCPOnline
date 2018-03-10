@@ -43,7 +43,7 @@
 				?>
 				<div class="col-xs-4">
 					<div class="thumbnail">
-						<a href="<?=site_url('Item/post_item_detail/'.$posted_item->id)?>">
+						<a href="<?=site_url('Bidding/bidding_detail/'.$posted_item->id)?>">
 							<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>" style="width:50%">
 							<div class="caption text-center">
 								<p><?=$posted_item->posted_item_name?></p>

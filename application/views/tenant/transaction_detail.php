@@ -47,16 +47,6 @@ if ($model->transaction_detail->item_type == "ORDER")
 						value="<?=$model->transaction_detail->collection_method?>" readonly></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="offered_price">Harga Awal:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" id="offered_price" 
-						value="<?=$model->transaction_detail->offered_price?>" readonly></div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="voucher_cut_price">Potongan Voucher:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" id="voucher_cut_price" 
-						value="<?=$model->transaction_detail->voucher_cut_price?>" readonly></div>
-				</div>
-				<div class="form-group">
 					<label class="control-label col-xs-3" for="sold_price">Total Harga:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="sold_price" 
 						value="<?=$model->transaction_detail->sold_price?>" readonly></div>
@@ -117,11 +107,6 @@ else if ($model->transaction_detail->item_type == "REPAIR")
 					<label class="control-label col-xs-3" for="collection_method">Cara Pengiriman:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="collection_method" 
 						value="<?=$model->transaction_detail->collection_method?>" readonly></div>
-				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="offered_price">Harga Awal:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" id="offered_price" 
-						value="<?=$model->transaction_detail->offered_price?>" readonly></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="sold_price">Total Harga:</label>
