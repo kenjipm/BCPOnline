@@ -71,6 +71,10 @@
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('voucher_code'); ?></span>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="date_expired">Berlaku Hingga:</label>
+					<div class="col-xs-4"><input type="datetime-local" class="form-control" name="date_expired"></div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-sm-3">Minimal Pembelanjaan:</label>
 					<div class="col-sm-4">
 						<input type="text" class="form-control" name="min_order_price">
