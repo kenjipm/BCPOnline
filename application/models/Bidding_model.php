@@ -69,6 +69,7 @@ class Bidding_model extends CI_Model {
 		$stub->customer_id		= $db_item->customer_id;
 		$stub->posted_item_id	= $db_item->posted_item_id;
 		
+		$stub->customer					= new Customer_model();
 		$stub->customer->account		= new Account_model();
 		$stub->customer->account->name 	= $db_item->name ?? "";
 		
@@ -116,6 +117,20 @@ class Bidding_model extends CI_Model {
 	
 	public function get_all()
 	{
+		$query = $this->db->get($this->table_bidding);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : null;
+	}
+	
+	public function get_all_from_posted_item_id($posted_item_id)
+	{
+		$where['posted_item_id'] = $posted_item_id;
+		
+		$this->db->select('*, ' . $this->table_bidding.'.id AS id, customer.id AS customer_id, account.id AS account_id');
+		$this->db->join('customer', 'customer.id=' . $this->table_bidding . '.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$this->db->where($where);
 		$query = $this->db->get($this->table_bidding);
 		$items = $query->result();
 		

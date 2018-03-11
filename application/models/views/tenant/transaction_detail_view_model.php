@@ -28,8 +28,6 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->date_created			= $item->billing->date_created;
 		$this->transaction_detail->deliverer			= $item->deliverer->account->name;
 		$this->transaction_detail->collection_method	= $item->collection_method;
-		$this->transaction_detail->offered_price	 	= $this->text_renderer->to_rupiah($item->offered_price);
-		$this->transaction_detail->voucher_cut_price 	= $this->text_renderer->to_rupiah($item->voucher_cut_price);
 		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price);
 		$this->transaction_detail->feedback 			= $item->feedback->feedback_text;
 		$this->transaction_detail->feedback_reply		= $item->feedback->feedback_reply;

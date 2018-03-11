@@ -54,7 +54,7 @@ class Bidding extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function bidding_detail($id)
+	public function bidding_detail($posted_item_id)
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -62,7 +62,11 @@ class Bidding extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('Bidding_model');
+		$biddings = $this->Bidding_model->get_all_from_posted_item_id($posted_item_id);
+		$this->load->model('views/admin/bidding_detail_view_model');
+		$this->bidding_detail_view_model->get($biddings);
+		$data['model'] = $this->bidding_detail_view_model;
 		$this->load->view('admin/bidding_detail', $data);
 		
 		// Load Footer
