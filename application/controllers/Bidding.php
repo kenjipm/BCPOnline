@@ -111,7 +111,7 @@ class Bidding extends CI_Controller {
 		redirect('Bidding/bidding_list');
 	}
 	
-	public function choose_winner($customer_id)
+	public function choose_winner()
 	{
 		$this->load->model('Billing_model');
 		
