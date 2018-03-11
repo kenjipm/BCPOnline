@@ -70,6 +70,9 @@ function submit_bid()
 					$("#btn-submit_bid").prop("disabled", true);
 					$("#bidding_status").html("Bidding berhasil dipasang");
 				}
+				else { // kalau blm daftar customer
+					window.location = base_url + '/login' + '?return_url=' + window.location.href;
+				}
 			}
 		});
 	}
