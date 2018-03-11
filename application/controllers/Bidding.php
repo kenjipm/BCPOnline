@@ -96,4 +96,17 @@ class Bidding extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	public function update_price()
+	{
+		$this->load->model('Item_model');
+		$this->Item_model->update_price();
+		
+		redirect('Bidding/bidding_list');
+	}
+	
+	public function choose_winner($customer_id)
+	{
+		$this->load->model('Billing_model');
+	}
 }

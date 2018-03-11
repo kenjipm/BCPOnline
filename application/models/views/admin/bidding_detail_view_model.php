@@ -22,6 +22,7 @@ class Bidding_detail_view_model extends CI_Model {
 			$this->biddings[$i] = new class{};
 			
 			$this->biddings[$i]->id				= $bidding->id;
+			$this->biddings[$i]->customer_id	= $bidding->customer_id;
 			$this->biddings[$i]->customer_name	= $bidding->customer->account->name;
 			$this->biddings[$i]->bid_time		= $bidding->bid_time;
 			$this->biddings[$i]->bid_price		= $bidding->bid_price;

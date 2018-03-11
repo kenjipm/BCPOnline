@@ -33,30 +33,41 @@
 			<h3>Lihat Bidding</h3>
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal">
-				<h4>Daftar Bidding Customer</h4>
-				<div class="row list-group">
-					<div class="col-sm-2 col-sm-offset-1"> <label for="customer_id">ID Customer</label> </div>
-					<div class="col-sm-3"> <label for="bidding_time">Waktu Bidding</label> </div>
-					<div class="col-sm-3"> <label for="bidding_price">Harga</label> </div>
+			<form class="form-horizontal" action="<?=site_url('Bidding/update_price')?>" method="post">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<label class="control-label col-xs-3" for="title">Daftar Bidding Customer</label>
+							<tr>
+								<th> ID Customer </th>
+								<th> Waktu Bidding </th>
+								<th> Harga </th>
+								<th> </th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						foreach($model->biddings as $bidding)
+						{
+							?>
+							<input type="hidden" value="<?=$bidding->posted_item_id?>" name="posted_item_id"></input>
+							<input type="hidden" value="<?=$bidding->bid_price?>" name="bid_price"></input>
+							<tr>
+								<td>
+									<?=$bidding->customer_name?></td>
+								<td>
+									<?=$bidding->bid_time?> </td>
+								<td>
+									<?=$bidding->bid_price?> </td>
+								<td>
+									<button class="btn btn-default" type="submit">Update Harga</button></td>
+							</tr>
+							<?php
+						}
+						?>
+						</tbody>
+					</table>
 				</div>
-				<?php
-				foreach($model->biddings as $bidding)
-				{
-					?>
-					<div class="row list-group">
-						<div class="col-sm-2  col-sm-offset-1 list-group-item">
-							<?=$bidding->customer_name?> </div>
-						<div class="col-sm-3 list-group-item">
-							<?=$bidding->bid_time?> </div>
-						<div class="col-sm-3 list-group-item">
-							<?=$bidding->bid_price?> </div>
-						<div class="col-sm-1">
-							<a class="btn btn-default">Pemenang</a></div>
-					</div>
-					<?php
-				}
-				?>
 			</form>
 		</div>
 	</div>

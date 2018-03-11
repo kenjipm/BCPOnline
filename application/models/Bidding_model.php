@@ -131,6 +131,7 @@ class Bidding_model extends CI_Model {
 		$this->db->join('customer', 'customer.id=' . $this->table_bidding . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->where($where);
+		$this->db->order_by("bid_price", "asc");
 		$query = $this->db->get($this->table_bidding);
 		$items = $query->result();
 		
