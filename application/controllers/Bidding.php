@@ -63,9 +63,15 @@ class Bidding extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('Bidding_model');
+		$this->load->model('Item_model');
 		$biddings = $this->Bidding_model->get_all_from_posted_item_id($posted_item_id);
+		$item = $this->Item_model->get_from_id($posted_item_id);
+		if (strtotime(date('Y-m-d H:m:s')) > strtotime($item->date_expired))
+			$is_expired = 1;
+		else	
+			$is_expired = 0;
 		$this->load->model('views/admin/bidding_detail_view_model');
-		$this->bidding_detail_view_model->get($biddings);
+		$this->bidding_detail_view_model->get($biddings, $is_expired);
 		$data['model'] = $this->bidding_detail_view_model;
 		$this->load->view('admin/bidding_detail', $data);
 		
@@ -108,5 +114,7 @@ class Bidding extends CI_Controller {
 	public function choose_winner($customer_id)
 	{
 		$this->load->model('Billing_model');
+		
+		redirect('Bidding/bidding_list');
 	}
 }

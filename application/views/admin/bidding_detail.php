@@ -33,7 +33,43 @@
 			<h3>Lihat Bidding</h3>
 		</div>
 		<div class="panel-body">
+			<?php if (!$model->is_expired){ ?>
 			<form class="form-horizontal" action="<?=site_url('Bidding/update_price')?>" method="post">
+				<div class="table-responsive">
+					<table class="table table-striped table-bordered">
+						<thead>
+							<label class="control-label col-xs-3" for="title">Daftar Bidding Customer</label>
+							<tr>
+								<th> ID Customer </th>
+								<th> Waktu Bidding </th>
+								<th> Harga </th>
+							</tr>
+						</thead>
+						<tbody>
+						<?php
+						foreach($model->biddings as $bidding)
+						{
+							?>
+							<input type="hidden" value="<?=$bidding->posted_item_id?>" name="posted_item_id"></input>
+							<input type="hidden" value="<?=$bidding->bid_price?>" name="bid_price"></input>
+							<tr>
+								<td>
+									<?=$bidding->customer_name?></td>
+								<td>
+									<?=$bidding->bid_time?> </td>
+								<td>
+									<?=$bidding->bid_price?> </td>
+							</tr>
+							<?php
+						}
+						?>
+						<button class="btn btn-default" type="submit">Update Harga</button>
+						</tbody>
+					</table>
+				</div>
+			</form>
+			<?php } else {?>
+			<form class="form-horizontal" action="<?=site_url('Bidding/choose_winner')?>" method="post">
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered">
 						<thead>
@@ -60,7 +96,7 @@
 								<td>
 									<?=$bidding->bid_price?> </td>
 								<td>
-									<button class="btn btn-default" type="submit">Update Harga</button></td>
+									<button class="btn btn-default" type="submit">Pemenang</button></td>
 							</tr>
 							<?php
 						}
@@ -69,6 +105,7 @@
 					</table>
 				</div>
 			</form>
+			<?php } ?>
 		</div>
 	</div>
 </div>

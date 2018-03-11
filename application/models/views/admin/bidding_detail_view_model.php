@@ -3,6 +3,7 @@
 class Bidding_detail_view_model extends CI_Model {
 	
 	public $biddings;
+	public $is_expired;
 	
 	// constructor
 	public function __construct()
@@ -12,7 +13,7 @@ class Bidding_detail_view_model extends CI_Model {
 		$biddings = array();
 	}
 	
-	public function get($biddings)
+	public function get($biddings, $is_expired)
 	{
 		$i = 0;
 		$this->load->library('text_renderer');
@@ -30,6 +31,8 @@ class Bidding_detail_view_model extends CI_Model {
 			
 			$i++;
 		}
+		
+		$this->is_expired = $is_expired;
 	}
 }
 ?>
