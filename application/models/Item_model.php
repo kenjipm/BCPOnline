@@ -248,6 +248,35 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_last_bidding_item()
+	{
+		$this->db->where('item_type', "BID");
+		$this->db->where('date_expired > ', date("Y-m-d H:i:s"));
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_item, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function is_expired()
+	{
+		return (time() > strtotime($this->date_expired));
+	}
+	
+	public function is_bid_price_valid($value)
+	{
+		$bid_step = $this->bidding_max_range / 10;
+		return ($value <= ($this->price + $this->bidding_max_range)) && // bid lebih kecil dari max price available nya
+			   ($value >= ($this->price + $bid_step)) && // bid lebih besar dari harga awalnya
+			   (($value - $this->price) % $bid_step == 0); // bid kelipatan step nya
+	}
+	
+	public function is_can_bid_this_session($last_bid_time)
+	{
+		return ($last_bid_time == null) || (strtotime($last_bid_time) < strtotime($this->date_updated));
+	}
+	
 	// insert new item from form post
 	public function insert_from_post()
 	{

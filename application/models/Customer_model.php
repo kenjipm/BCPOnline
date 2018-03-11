@@ -11,6 +11,7 @@ class Customer_model extends CI_Model {
 	public $verified_mark;
 	public $credit_amount;
 	public $reward_points;
+	public $deposit_status;
 	public $upline_id;
 	
 	public $account;
@@ -26,6 +27,7 @@ class Customer_model extends CI_Model {
 		$this->verified_mark	= "";
 		$this->credit_amount	= 0;
 		$this->reward_points	= 0;
+		$this->deposit_status	= false;
 		$this->upline_id		= NULL;
 		
 		$this->load->model('Account_model');
@@ -42,6 +44,7 @@ class Customer_model extends CI_Model {
 		$this->verified_mark	= $db_item->verified_mark;
 		$this->credit_amount	= $db_item->credit_amount;
 		$this->reward_points	= $db_item->reward_points;
+		$this->deposit_status	= $db_item->deposit_status;
 		$this->upline_id		= $db_item->upline_id;
 		
 		$this->account->name		= $db_item->name ?? "";
@@ -63,6 +66,7 @@ class Customer_model extends CI_Model {
 		$db_item->verified_mark	= $this->verified_mark;
 		$db_item->credit_amount	= $this->credit_amount;
 		$db_item->reward_points	= $this->reward_points;
+		$db_item->deposit_status	= $this->deposit_status;
 		$db_item->upline_id		= $this->upline_id;
 		
 		return $db_item;
@@ -79,6 +83,7 @@ class Customer_model extends CI_Model {
 		$stub->verified_mark	= $db_item->verified_mark;
 		$stub->credit_amount	= $db_item->credit_amount;
 		$stub->reward_points	= $db_item->reward_points;
+		$stub->deposit_status	= $db_item->deposit_status;
 		$stub->upline_id		= $db_item->upline_id;
 		
 		$stub->account->name		= $db_item->name ?? "";
@@ -137,6 +142,7 @@ class Customer_model extends CI_Model {
 		$this->verified_mark		= "";
 		$this->credit_amount		= 0;
 		$this->reward_points		= 0;
+		$this->deposit_status		= false;
 		$this->upline_id			= $this->session->upline_id ?? NULL;
 		
 		$this->db->trans_start();
@@ -166,6 +172,17 @@ class Customer_model extends CI_Model {
 		
 		$this->db->where('account_id', $id);
 		$this->db->set('verified_mark', 'VERIFIED');
+		$this->db->update($this->table_customer);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function deposit_status_set($id, $value)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('deposit_status', $value);
 		$this->db->update($this->table_customer);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction

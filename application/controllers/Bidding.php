@@ -7,12 +7,26 @@ class Bidding extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('bidding');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
-		$this->load->view('', $data);
+		$this->load->model('item_model');
+		$bidding_item = $this->item_model->get_last_bidding_item();
+		
+		$this->load->model('bidding_model');
+		$last_bidding = $this->bidding_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
+		if ($last_bidding == null)
+		{
+			$last_bidding = new class{};
+			$last_bidding->bid_time = null;
+		}
+		
+		$this->load->model('views/bidding_main_view_model');
+		$this->bidding_main_view_model->get($bidding_item, $last_bidding);
+		
+		$data['model'] = $this->bidding_main_view_model;
+		$this->load->view('bidding_main', $data);
 		
 		// Load Footer
 		$this->load->view('footer');

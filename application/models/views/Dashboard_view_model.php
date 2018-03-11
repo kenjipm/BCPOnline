@@ -5,6 +5,7 @@ class Dashboard_view_model extends CI_Model {
 	public $categories;
 	public $tenant_items;
 	public $hot_items;
+	public $bidding_item;
 	
 	// constructor
 	public function __construct()
@@ -12,9 +13,10 @@ class Dashboard_view_model extends CI_Model {
 		$this->categories = array();
 		$this->tenant_items = array();
 		$this->hot_items = array();
+		$this->bidding_item = null;
 	}
 	
-	public function get($categories, $hot_items, $tenant_items)
+	public function get($categories, $hot_items, $tenant_items, $bidding_item, $last_bidding)
 	{
 		$this->load->library('text_renderer');
 		
@@ -48,6 +50,21 @@ class Dashboard_view_model extends CI_Model {
 			$temp->image_one_name	= $tenant_item->image_one_name;
 			
 			$this->tenant_items[] = $temp;
+		}
+		
+		if ($bidding_item != null)
+		{
+			$this->bidding_item = new class{};
+			$this->bidding_item->id = $bidding_item->id;
+			$this->bidding_item->posted_item_name = $bidding_item->posted_item_name;
+			$this->bidding_item->price = $bidding_item->price;
+			$this->bidding_item->bidding_max_range = $bidding_item->bidding_max_range;
+			$this->bidding_item->price_str = $this->text_renderer->to_rupiah($bidding_item->price);
+			$this->bidding_item->image_one_name	= $bidding_item->image_one_name;
+			
+			$bid_step = $bidding_item->bidding_max_range / 10;
+			$this->bidding_item->can_bid			= $bidding_item->is_can_bid_this_session($last_bidding->bid_time);
+			$this->bidding_item->start_bid_price	= $this->bidding_item->can_bid ? ($bidding_item->price + $bid_step) : $last_bidding->bid_price;
 		}
 	}
 }
