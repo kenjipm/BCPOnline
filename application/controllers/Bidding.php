@@ -178,7 +178,7 @@ class Bidding extends CI_Controller {
 			
 			$this->load->model('message_text_model');
 			$message_text = new message_text_model();
-			$message_text->text = $this->bidding_model->generate_winner_message($posted_item->posted_item_name, $bidding->bid_price, $billing->id)
+			$message_text->text = $this->bidding_model->generate_winner_message($posted_item->posted_item_name, $bidding->bid_price, $billing->id);
 			$message_text->sender_id = $admin_id;
 			$message_text->message_inbox_id = $message_inbox->id;
 			
