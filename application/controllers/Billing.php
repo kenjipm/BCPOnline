@@ -138,6 +138,94 @@ class Billing extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	// view billing dari billing_unconfirmed
+	public function confirm()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('billing');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$billing_id = $this->input->post('billing_id');
+		$address_id = $this->input->post('address_id');
+		
+		$this->load->model('shipping_address_model');
+		$shipping_address = $this->shipping_address_model->get_from_id($address_id);
+		
+		$this->load->model('shipping_charge_model');
+		$shipping_charge = $this->shipping_charge_model->get_from_shipping_address($shipping_address);
+		
+		$this->load->model('order_details_model');
+		$order_details = $this->order_details_model->get_all_from_billing_id($billing_id);
+		
+		$this->load->model('billing_model');
+		$unconfirmed_billing = $this->billing_model->get_from_id($billing_id);
+		
+		$this->load->model('views/customer/billing_view_model');
+		$this->billing_view_model->get_from_order_details($order_details, $shipping_address, $shipping_charge, $unconfirmed_billing);
+		
+		$data['title'] = "Konfirmasi Billing";
+		$data['model'] = $this->billing_view_model;
+		$this->load->view('customer/billing', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function confirm_do()
+	{
+		if (($this->session->type == TYPE['name']['CUSTOMER']) &&
+			($this->input->post('customer_id') == $this->session->child_id))
+		{
+			// update bill here
+			$this->load->model('shipping_charge_model');
+			$shipping_charge = $this->shipping_charge_model;
+			$shipping_charge->fee_amount	= $this->input->post('fee_amount');
+			$shipping_charge->insert();
+			
+			$this->load->model('setting_reward_model');
+			$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			
+			$this->load->model('billing_model');
+			$billing = $this->billing_model->get_from_id($billing_id);
+			$billing->delivery_method		= $this->input->post('delivery_method');
+			$billing->shipping_address_id	= $this->input->post('shipping_address_id');
+			$billing->shipping_charge_id	= $shipping_charge->id;
+			$billing->setting_reward_id		= $setting_reward->id;
+			$billing->total_payable			+= $shipping_charge->fee_amount;
+			$billing->update();
+			
+			// insert billing to chosen payment method
+			
+			// ga jadi lgsg masukin payment, kalo udah milih cara payment, tapi bayarnya pake cara laen mah ga mungkin bisa, soalnya ga ada tagihan di bank lainnya.
+			// eh jadi ding??? kalo ga dimasukin, kalo ke close browser nya masa kudu ngulang
+			$this->load->model('payment_model');
+			$payment = $this->payment_model;
+			$payment->payment_method		= $this->input->post('payment_method');
+			$payment->paid_amount			= 0;
+			$payment->billing_id			= $billing->id;
+			$payment->insert();
+			
+			$this->load->config('payment_method');
+			if (in_array($this->input->post('payment_method'), $this->config->item('no_wait_payment_methods'))) // kalau customer milih payment method yg ga perlu nunggu pembayaran (lgsg kirim)
+			{
+				$this->load->model('order_details_model');
+				$order_details = new Order_details_model();
+				$order_details = $order_details->set_all_paid_from_billing_id($billing->id);
+			}
+			else // kalau nunggu pembayaran
+			{
+				$cur_payment_method = $this->config->item($this->input->post('payment_method'));
+				// insert billing using api
+			}
+			
+			// redirect to confirmation page
+			redirect('billing/status/'.$billing->id);
+		}
+		redirect('');
+	}
+	
 	//
 	public function status($id)
 	{

@@ -88,6 +88,84 @@ class Billing_view_model extends CI_Model {
 		$this->billing->action			= "create_from_cart";
 		$this->billing->action_name		= "Bayar";
 		$this->billing->is_paid			= false;
+		$this->billing->is_voucher_available = true;
+		
+		$this->billing->shipping_charge = new class{};
+		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;
+		$this->billing->shipping_address = new class{};
+		$this->billing->shipping_address->id			= $shipping_address->id ?? 0;
+		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
+		
+		$this->load->config('payment_method');
+		// if ($order_type == "REPAIR") 
+			// $payment_method_list = $this->config->item('repair_payment_methods');
+		// else //if ($order_type == "ORDER") 
+			$payment_method_list = $this->config->item('order_payment_methods');
+		
+		foreach ($payment_method_list as $payment_method_name)
+		{
+			$cur_payment_method = $this->config->item($payment_method_name);
+			
+			$temp_payment_method = new class{};
+			$temp_payment_method->name = $cur_payment_method['name'];
+			$temp_payment_method->description = $cur_payment_method['description'];
+			$temp_payment_method->selected = count($this->payment_methods) == 0; // select elemen pertama dulu aja
+			
+			$this->payment_methods[] = $temp_payment_method;
+		}
+		
+		$this->load->config('delivery_method');
+		// if ($order_type == "REPAIR") 
+			// $payment_method_list = $this->config->item('repair_delivery_methods');
+		// else //if ($order_type == "ORDER") 
+			$delivery_method_list = $this->config->item('order_delivery_methods');
+		
+		foreach ($delivery_method_list as $delivery_method_name)
+		{
+			$cur_delivery_method = $this->config->item($delivery_method_name);
+			
+			$temp_delivery_method = new class{};
+			$temp_delivery_method->name = $cur_delivery_method['name'];
+			$temp_delivery_method->description = $cur_delivery_method['description'];
+			$temp_delivery_method->selected = count($this->delivery_methods) == 0; // select elemen pertama dulu aja
+			
+			$this->delivery_methods[] = $temp_delivery_method;
+		}
+	}
+	
+	public function get_from_order_details($order_details, $shipping_address, $shipping_charge, $unconfirmed_billing)
+	{
+		$this->load->library('text_renderer');
+		
+		$this->load->model('posted_item_variance_model');
+		foreach ($order_details as $order_detail)
+		{
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($order_detail->posted_item_variance_id);
+			$posted_item_variance->init_posted_item();
+			
+			$temp_order = new class{};
+			$temp_order->quantity									= $order_detail->quantity;
+			$temp_order->posted_item_variance						= new class{};
+			$temp_order->posted_item_variance->id					= $posted_item_variance->id;
+			// $temp_order->posted_item_variance->var_type				= $posted_item_variance->var_type;
+			$temp_order->posted_item_variance->var_description		= $posted_item_variance->var_description;
+			$temp_order->posted_item_variance->posted_item			= new class{};
+			$temp_order->posted_item_variance->posted_item->name	= $posted_item_variance->posted_item->posted_item_name;
+			$temp_order->posted_item_variance->posted_item->price	= $this->text_renderer->to_rupiah($order_detail->sold_price);
+			$temp_order->price_total								= $this->text_renderer->to_rupiah($order_detail->quantity * $order_detail->sold_price);
+			
+			$this->orders[] = $temp_order; // baru di add ke array items
+		}
+			
+		$this->billing->id				= $unconfirmed_billing->id;
+		$this->billing->date_created	= $unconfirmed_billing->date_created;
+		$this->billing->date_closed		= $unconfirmed_billing->date_closed;
+		$this->billing->total_payable	= $this->text_renderer->to_rupiah($unconfirmed_billing->total_payable);
+		$this->billing->customer_id		= $unconfirmed_billing->customer_id;
+		$this->billing->action			= "confirm_do";
+		$this->billing->action_name		= "Konfirmasi";
+		$this->billing->is_paid			= false;
+		$this->billing->is_voucher_available = false;
 		
 		$this->billing->shipping_charge = new class{};
 		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;

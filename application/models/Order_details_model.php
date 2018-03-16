@@ -625,6 +625,42 @@ class Order_details_model extends CI_Model {
 		$this->db->trans_complete();
 	}
 	
+	public function insert_from_bid($price, $billing_id, $posted_item_variance_id)
+	{
+		$this->load->library('id_generator');
+		$this->load->model('item_model');
+		$this->load->model('posted_item_variance_model');
+		$this->load->model('Order_status_history_model');
+			
+		$this->db->trans_start();
+		
+		$order_details = new Order_details_model();
+		
+		$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+		$posted_item_variance->init_posted_item();
+		
+		$order_details->id						= 0;
+		$order_details->quantity				= 1;
+		$order_details->offered_price			= $price;
+		$order_details->sold_price				= $price;
+		$order_details->order_status			= ORDER_STATUS['name']['WAITING_FOR_PAYMENT'];
+		$order_details->billing_id				= $billing_id;
+		$order_details->posted_item_variance_id	= $posted_item_variance_id;
+		$order_details->voucher_id				= NULL;
+		
+		if ($this->db->insert($this->table_order_details, $order_details->get_db_from_stub()))
+		{
+			$order_details->id	= $this->db->insert_id();
+		}
+		
+		$natural_id = $this->id_generator->generate(TYPE['name']['ORDER_DETAILS'], $order_details->id);
+		$order_details->update_natural_id($natural_id);
+		
+		$this->Order_status_history_model->insert($order_details->id, $order_details->order_status);
+		
+		$this->db->trans_complete();
+	}
+	
 	public function get_all_sold_item()
 	{
 		$this->db->where('tenant_id', $this->session->child_id);

@@ -117,4 +117,72 @@ class Bidding extends CI_Controller {
 		
 		redirect('Bidding/bidding_list');
 	}
+	
+	public function ajax_create_billing()
+	{
+		if ($this->session->type == TYPE['name']['ADMIN'])
+		{
+			$bidding_id 	= $this->input->post('bidding_id');
+			
+			$this->load->model('bidding_model');
+			$bidding = $this->bidding_model->get_from_id($bidding_id);
+			
+			// validasi, kalau bidding ga ada (error)
+			if ($bidding == null) { echo "-1"; return -1; }
+			
+			$customer_id	= $bidding->customer_id;
+			$posted_item_id	= $bidding->posted_item_id;
+			
+			$this->load->model('item_model');
+			$posted_item = $this->item_model->get_from_id($posted_item_id);
+			
+			// validasi, kalau item ga ada (error)
+			if ($posted_item == null) { echo "-2"; return -2; }
+			
+			$this->load->model('posted_item_variance_model');
+			$posted_item_variances = $this->posted_item_variance_model->get_all($posted_item->id);
+			
+			// validasi, kalau item variance ga ada (error)
+			if (count($posted_item_variances) <= 0) { echo "-3"; return -3; }
+			
+			$posted_item_variance = $posted_item_variances[0];
+			
+			$this->load->model('setting_reward_model');
+			$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			
+			$this->load->model('billing_model');
+			$billing = new billing_model();
+			$billing->delivery_method		= "";
+			$billing->customer_id			= $customer_id;
+			$billing->shipping_address_id	= NULL;
+			$billing->shipping_charge_id	= NULL;
+			$billing->setting_reward_id		= $setting_reward->id;
+			$billing->total_payable			= $bidding->bid_price;
+			$billing->insert();
+			
+			$this->load->model('order_details_model');
+			$this->order_details_model->insert_from_bid($bidding->bid_price, $billing->id, $posted_item_variance->id);
+			
+			// kurangi stock dari barang yang dibeli
+			$this->posted_item_variance_model->quantity_sub(1);
+			
+			// kirim message kepada pemenang
+			$admin_id 		= $this->session->child_id;
+			
+			$this->load->model('message_inbox_model');
+			$message_inbox = $this->message_inbox_model->get_from_parties_id($admin_id, $customer_id);
+			
+			if ($message_inbox == null) {
+				$message_inbox = $this->message_inbox_model->insert_from_parties_id($admin_id, $customer_id);
+			}
+			
+			$this->load->model('message_text_model');
+			$message_text = new message_text_model();
+			$message_text->text = $this->bidding_model->generate_winner_message($posted_item->posted_item_name, $bidding->bid_price, $billing->id)
+			$message_text->sender_id = $admin_id;
+			$message_text->message_inbox_id = $message_inbox->id;
+			
+			echo "1"; return "1";
+		}
+	}
 }

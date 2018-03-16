@@ -64,6 +64,7 @@
 		</div>
 		<div class="panel-body">
 			<form action="<?=site_url('billing/'.$model->billing->action)?>" method="post" class="form-horizontal" id="form_billing">
+				<input type="hidden" name="billing_id" value="<?=$model->billing->id?>"/>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_created">Tanggal:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" id="date_created" 
@@ -119,17 +120,24 @@
 					<div class="col-xs-3"><input type="text" class="form-control" id="total_payable" 
 						value="<?=$model->billing->total_payable?>" readonly></div>
 				</div>
-				<div class="form-group">
-					<label class="control-label col-xs-3" for="total_payable">Kode Voucher:</label>
-					<div class="col-xs-3"><input type="text" class="form-control" id="voucher_code" name="voucher_code" 
-						value=""></div>
-					<div class="col-xs-1">
-						<button type="button" class="btn btn-default" onclick="cek_kode_voucher()">Cek</button>
-					</div>
-					<div class="col-xs-2">
-						<span id="voucher_code_status"></span>
-					</div>
-				</div>
+				<?php
+					if ($model->billing->is_voucher_available)
+					{
+						?>
+						<div class="form-group">
+							<label class="control-label col-xs-3" for="total_payable">Kode Voucher:</label>
+							<div class="col-xs-3"><input type="text" class="form-control" id="voucher_code" name="voucher_code" 
+								value=""></div>
+							<div class="col-xs-1">
+								<button type="button" class="btn btn-default" onclick="cek_kode_voucher()">Cek</button>
+							</div>
+							<div class="col-xs-2">
+								<span id="voucher_code_status"></span>
+							</div>
+						</div>
+						<?php
+					}
+				?>
 				<hr/>
 				<h3>Pembayaran</h3>
 				<?php
@@ -182,7 +190,7 @@
 				
 				<input type="hidden" name="fee_amount" value="<?=$model->billing->shipping_charge->fee_amount?>"/>
 			
-				<button type="button" class="btn btn-default" onclick="cek_kode_voucher(true)">
+				<button type="button" class="btn btn-default" onclick="<?=$model->billing->is_voucher_available?'cek_kode_voucher(true)':'submit_form()'?>">
 					<?=$model->billing->action_name?>
 				</button>
 			</form>

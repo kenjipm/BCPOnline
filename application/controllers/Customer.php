@@ -82,6 +82,38 @@ class Customer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function billing_unconfirmed($billing_id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('customer/billing_unconfirmed');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('shipping_address_model');
+		$shipping_addresses = $this->shipping_address_model->get_all_by_customer_id($this->session->child_id);
+		
+		$this->load->model('billing_model');
+		$billing = $this->billing_model->get_from_id($billing_id);
+		
+		if ($billing == null) { redirect(''); } // ga ada billing nya
+		
+		$this->load->model('order_details_model');
+		$order_details = $this->order_details_model->get_all_by_billing_id($billing->id);
+		
+		if (count($order_details) <= 0) { redirect(''); } // ga ada order_details nya
+		
+		$this->load->model('views/customer/billing_unconfirmed_view_model');
+		$this->billing_unconfirmed_view_model->get($billing_id, $order_details, $shipping_addresses);
+		
+		$data['title'] = "Konfirmasi Pembayaran";
+		$data['model'] = $this->billing_unconfirmed_view_model;
+		$this->load->view('customer/billing_unconfirmed', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function favorite_item()
 	{
 		// Load Header

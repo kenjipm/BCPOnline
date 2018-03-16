@@ -209,6 +209,17 @@ class Billing_model extends CI_Model {
 		$this->db->trans_complete();
 	}
 	
+	public function update()
+	{
+		$db_item = $this->get_db_from_stub();
+		$this->db->set('delivery_method', $db_item->delivery_method)
+				 ->set('total_payable', $db_item->total_payable)
+				 ->set('shipping_address_id', $db_item->shipping_address_id)
+				 ->set('shipping_charge_id', $db_item->shipping_charge_id)
+				 ->where('id', $db_item->id)
+				 ->update($this->table_billing);
+	}
+	
 	public function update_natural_id($natural_id)
 	{
 		$this->bill_id = $natural_id;

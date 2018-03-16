@@ -6,6 +6,10 @@ function select_delivery_method(name) {
 	$("#delivery_method-"+name).prop("checked", true);
 }
 
+function submit_form() {
+	$("#form_billing").submit();
+}
+
 function cek_kode_voucher(then_submit=false) {
 	var voucher_code = $("#voucher_code").val();
 	
@@ -21,7 +25,7 @@ function cek_kode_voucher(then_submit=false) {
 				$("#voucher_code_status").html("Voucher diterima");
 				if (then_submit)
 				{
-					$("#form_billing").submit();
+					submit_form();
 				}
 			}
 			else if (data == "0") {
