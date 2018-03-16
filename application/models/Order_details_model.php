@@ -693,7 +693,7 @@ class Order_details_model extends CI_Model {
 			$customer_id	= $this->customer_model->get_from_id($id_customer)->account_id;
 			$item_type		= $this->input->post('item_type')[$key];
 			
-			if ($item_type == "ORDER") // Kalau order OTP masukin 2 saja
+			if ($item_type == "ORDER" || $item_type == "BID") // Kalau order OTP masukin 2 saja
 			{
 				if (!isset($otp_list[$deliverer_id][$tenant_id]))
 				{
@@ -719,7 +719,7 @@ class Order_details_model extends CI_Model {
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 			
 			$this->db->set('deliverer_id', $id_deliverer);
-			if ($item_type == "ORDER") // Kalau repair set otp tambahan
+			if ($item_type == "ORDER" || $item_type == "BID") // Kalau repair set otp tambahan
 			{
 				$this->db->set('otp_deliverer_to_tenant', $otp_list[$deliverer_id][$tenant_id]);
 				$this->db->set('otp_customer_to_deliverer', $otp_list[$customer_id][$deliverer_id]);
@@ -731,7 +731,7 @@ class Order_details_model extends CI_Model {
 			}
 			$this->db->where('id', $order_id);
 			$this->db->update($this->table_order_details);
-			if ($item_type == "ORDER") // Kalau order deliverer pergi ke tenant
+			if ($item_type == "ORDER" || $item_type == "BID") // Kalau order deliverer pergi ke tenant
 			{
 				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
 			}
