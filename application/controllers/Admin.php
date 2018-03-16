@@ -29,6 +29,30 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function hot_item_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Hot_item_model');
+		$this->load->model('Tenant_bill_model');
+		$hot_items = $this->Hot_item_model->get_all_registered();
+		$tenant_bills = $this->Tenant_bill_model->get_all_unpaid_by_tenants();
+		
+		$this->load->model('views/admin/hot_item_view_model');
+		$this->hot_item_view_model->get($hot_items, $tenant_bills);
+		
+		$data['model'] = $this->hot_item_view_model;
+		$data['title'] = "Tenant yang Belum Bayar";
+		$this->load->view('admin/hot_item_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function tenant_to_pay_list()
 	{
 		// Load Header

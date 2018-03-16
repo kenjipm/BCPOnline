@@ -92,6 +92,10 @@ $config['top_menu_admin'] = array(
 			'text'	=> "Bidding",
 			'url'	=> "bidding/bidding_list",
 			),
+		'HOT_ITEM' => array(
+			'text'	=> "Hot Item",
+			'url'	=> "admin/hot_item_list",
+			),
 		),
 	'right' => array(
 		'ORDER' => array(

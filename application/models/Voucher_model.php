@@ -141,8 +141,7 @@ class Voucher_model extends CI_Model {
 	
 	public function get_all()
 	{	
-		$this->db->join('voucher_brand', 'voucher_brand.voucher_id=' . $this->table_voucher . '.id', 'left');
-		$this->db->join('brand', 'brand.id=voucher_brand.brand_id', 'left');
+		
 		$query = $this->db->get($this->table_voucher);
 		$vouchers = $query->result();
 		

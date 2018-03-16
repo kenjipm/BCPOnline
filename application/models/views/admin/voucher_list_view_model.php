@@ -25,7 +25,6 @@ class Voucher_List_View_Model {
 			$this->vouchers[$i]->voucher_worth			= $voucher->voucher_worth;
 			$this->vouchers[$i]->date_added				= $voucher->date_added;
 			
-			$this->vouchers[$i]->brand_name				= $voucher->brand->brand_name;
 			$i++;
 		}
 		
