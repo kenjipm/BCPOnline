@@ -14,8 +14,11 @@ function choose_winner(bidding_id)
 				alert("Barang Tidak Ditemukan");
 			} else if (data == "-3"){
 				alert("Varian Tidak Ditemukan");
-			} else {
+			} else if (data == "1"){
 				alert("Pemenang Berhasil Ditentukan");
+				$("#button_winner").remove();
+			} else {
+				alert("Unknown Error");
 			}
 		}
 	});
