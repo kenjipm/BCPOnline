@@ -167,13 +167,17 @@ class Bidding extends CI_Controller {
 			$this->posted_item_variance_model->quantity_sub(1);
 			
 			// kirim message kepada pemenang
-			$admin_id 		= $this->session->child_id;
+			$admin_id 		= $this->session->id;
+			
+			$this->load->model('customer_model');
+			$customer = $this->customer_model->get_from_id($customer_id);
 			
 			$this->load->model('message_inbox_model');
-			$message_inbox = $this->message_inbox_model->get_from_parties_id($admin_id, $customer_id);
+			$message_inbox = $this->message_inbox_model->get_from_parties_id($admin_id, $customer->account_id);
 			
 			if ($message_inbox == null) {
-				$message_inbox = $this->message_inbox_model->insert_from_parties_id($admin_id, $customer_id);
+				$message_inbox = new message_inbox_model();
+				$message_inbox->insert_from_parties_id($admin_id, $customer->account_id);
 			}
 			
 			$this->load->model('message_text_model');
@@ -181,6 +185,7 @@ class Bidding extends CI_Controller {
 			$message_text->text = $this->bidding_model->generate_winner_message($posted_item->posted_item_name, $bidding->bid_price, $billing->id);
 			$message_text->sender_id = $admin_id;
 			$message_text->message_inbox_id = $message_inbox->id;
+			$message_text->insert_from_stub();
 			
 			echo "1"; return "1";
 		}

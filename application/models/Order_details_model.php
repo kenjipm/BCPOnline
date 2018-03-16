@@ -636,7 +636,7 @@ class Order_details_model extends CI_Model {
 		
 		$order_details = new Order_details_model();
 		
-		$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
+		$posted_item_variance = $this->posted_item_variance_model->get_from_id($posted_item_variance_id);
 		$posted_item_variance->init_posted_item();
 		
 		$order_details->id						= 0;

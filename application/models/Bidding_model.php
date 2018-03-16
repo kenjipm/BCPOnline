@@ -160,7 +160,7 @@ class Bidding_model extends CI_Model {
 	public function generate_winner_message($posted_item_name, $price, $billing_id)
 	{
 		$this->load->library('text_renderer');
-		return "Selamat! Anda memenangkan lelang untuk barang " . $posted_item->posted_item_name .
+		return "Selamat! Anda memenangkan lelang untuk barang " . $posted_item_name .
 			   " dengan harga " . $this->text_renderer->to_rupiah($price) . "." .
 			   " Harap segera konfirmasi alamat dan pengiriman melalui link berikut: " .
 			   "<a href='" . site_url('customer/billing_unconfirmed/'.$billing_id) ."'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>";
