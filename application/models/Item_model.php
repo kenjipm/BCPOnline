@@ -406,7 +406,7 @@ class Item_model extends CI_Model {
 	
 	public function update_price()
 	{
-		$this->db->set('price', $this->input->post('bid_price'));
+		$this->db->set('price', $this->input->post('update_price'));
 		$this->db->where('id', $this->input->post('posted_item_id'));
 		$this->db->update($this->table_item);
 	}
