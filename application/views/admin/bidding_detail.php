@@ -96,7 +96,7 @@
 								<td>
 									<?=$bidding->bid_price?> </td>
 								<td>
-									<button class="btn btn-default" type="submit">Pemenang</button></td>
+									<button class="btn btn-default" onclick="choose_winner(<?=$bidding->id?>)">Pemenang</button></td>
 							</tr>
 							<?php
 						}
