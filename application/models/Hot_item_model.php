@@ -101,7 +101,12 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_all_registered()
 	{
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
+		$query = $this->db->get($this->table_hot_item);
+		$hot_items = $query->result();
 		
+		return ($hot_items !== null) ? $this->map_list($hot_items) : array();
 	}
 	
 	public function insert_from_post($posted_item_id)

@@ -13,14 +13,17 @@ class Hot_Item_View_Model extends CI_Model{
 	
 	public function get($hot_items, $tenant_bills)
 	{
-		// $i = 0;
-		// foreach($hot_items as $hot_item)
-		// {
-			// $this->hot_item_list[$i] = new class{};
-			// $this->hot_item_list[$i]->id	= $hot_item->id;
+		$i = 0;
+		foreach($hot_items as $hot_item)
+		{
+			$this->hot_item_list[$i] = new class{};
+			$this->hot_item_list[$i]->id				= $hot_item->id;
+			// $this->hot_item_list[$i]->tenant_name		= $hot_item->tenant->tenant_name;
+			// $this->hot_item_list[$i]->posted_item_name	= $hot_item->posted_item->posted_item_name;
+			$this->hot_item_list[$i]->promo_price		= $hot_item->promo_price;
 			
-			// $i++;
-		// }
+			$i++;
+		}
 		
 		// $i = 0;
 		// foreach($tenant_bills as $tenant_bill)
