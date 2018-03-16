@@ -16,6 +16,7 @@ function choose_winner(bidding_id)
 				alert("Varian Tidak Ditemukan");
 			} else if (data == "1"){
 				alert("Pemenang Berhasil Ditentukan");
+				$("#button_winner").remove();
 			} else {
 				alert("Unknown Error");
 			}
