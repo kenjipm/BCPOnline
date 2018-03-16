@@ -53,6 +53,31 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function hot_item($id)
+	{		
+		// kalau create item baru
+		if ($this->input->method() == "post") $this->hot_item_do($id);
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Item_model');
+		$this->load->model('Posted_item_variance_model');
+		$item = $this->Item_model->get_from_id($id);
+		$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+		$this->load->model('views/tenant/hot_item_view_model');
+		$this->hot_item_view_model->get($item, $posted_item_variance);
+		$data['model'] = $this->hot_item_view_model;
+		
+		$this->load->view('tenant/create_hot_item', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function post_item_list()
 	{
 		// Load Header
@@ -205,6 +230,22 @@ class Item extends CI_Controller {
 		}
 	}
 	
+	public function hot_item_do($id)
+	{
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('promo_description', 'Deskripsi', 'required');
+		$this->form_validation->set_rules('promo_price', 'Harga', 'required|integer');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Hot_item_model');
+			$this->Hot_item_model->insert_from_post($id);
+			
+			redirect('Item/post_item_list');
+		}
+	}
+	
 	public function upload_image($item_id, $index)
 	{
 		$data['error'] = array();
@@ -242,5 +283,6 @@ class Item extends CI_Controller {
 		header("Content-Type: application/json; charset=utf-8");
 		echo json_encode($data);
 	}
+	
 	
 }

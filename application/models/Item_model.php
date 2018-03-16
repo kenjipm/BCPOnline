@@ -321,7 +321,7 @@ class Item_model extends CI_Model {
 			$this->unit_weight				= $this->input->post('unit_weight');
 			$this->posted_item_description	= $this->input->post('posted_item_description');
 			$this->category_id				= $this->input->post('category_id');
-			$this->tenant_id				= $cur_tenant->id;
+			$this->tenant_id				= 0;
 			$this->brand_id					= $this->input->post('brand_id');
 		}
 		// insert data, then generate [account_id] based on [id]

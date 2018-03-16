@@ -35,7 +35,7 @@
 						value="<?=$model->posted_item->item_type?>" readonly></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="unit_weight">Berat(kg):</label>
+					<label class="control-label col-xs-3" for="unit_weight">Berat(g):</label>
 					<div class="col-xs-3"><input type="text" class="form-control" name="unit_weight" 
 						value="<?=$model->posted_item->unit_weight?>" readonly></div>
 				</div>
@@ -100,6 +100,7 @@
 				}
 				?>
 			</form>
+			<a class="btn btn-default" href="<?=site_url('Item/hot_item/'.$model->posted_item->id)?>">Set as Hot Item</a>
 		</div>
 	</div>
 	

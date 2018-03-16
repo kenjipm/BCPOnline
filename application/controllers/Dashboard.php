@@ -49,7 +49,11 @@ class Dashboard extends CI_Controller {
 			
 			$bidding_item = $this->item_model->get_last_bidding_item();
 			$this->load->model('bidding_model');
-			$last_bidding = $this->bidding_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
+			$last_bidding = null;
+			if ($bidding_item != null)
+			{
+				$last_bidding = $this->bidding_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
+			}
 			if ($last_bidding == null)
 			{
 				$last_bidding = new class{};

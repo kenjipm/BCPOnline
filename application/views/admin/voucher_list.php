@@ -42,8 +42,8 @@
 				<table class="table table-striped table-bordered">
 					<thead>
 						<tr>
+							<th> <label for="voucher_code">Kode Voucher</label></th>
 							<th> <label for="voucher_stock">Stok</label></th>
-							<th> <label for="voucher_brand">Nama Brand</label></th>
 							<th> <label for="voucher_description">Deskripsi</label></th>
 							<th> </th>
 							<!--<th> </th>
@@ -57,9 +57,9 @@
 							?>
 							<tr>
 								<td>
-									<?=$voucher->voucher_stock?></td>
+									<?=$voucher->voucher_code?></td>
 								<td>
-									<?=$voucher->brand_name?> </td>
+									<?=$voucher->voucher_stock?></td>
 								<td>
 									<?=$voucher->voucher_description?> </td>
 								<td>
@@ -135,14 +135,6 @@
 					</div>
 					<div class="col-sm-10">
 						<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Nama Brand:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->brand_name?>" class="form-control" name="voucher_brand" readonly>
 					</div>
 				</div>
 				<div class="form-group">
