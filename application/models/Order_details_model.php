@@ -731,13 +731,17 @@ class Order_details_model extends CI_Model {
 			}
 			$this->db->where('id', $order_id);
 			$this->db->update($this->table_order_details);
-			if ($item_type == "ORDER" || $item_type == "BID") // Kalau order deliverer pergi ke tenant
+			if ($item_type == "ORDER") // Kalau order deliverer pergi ke tenant
 			{
 				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_TENANT']);
 			}
 			else if ($item_type == "REPAIR") // Kalau repair deliverer pergi ke customer
 			{
 				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['PICKING_FROM_CUSTOMER']);
+			}
+			else if ($item_type == "BID")
+			{
+				$this->update_order_status($order_id, ORDER_STATUS['name']['QUEUED'], ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER']);
 			}
 			$this->db->trans_complete(); // selesai nge lock db transaction
 			
