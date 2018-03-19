@@ -110,7 +110,16 @@ class Tenant_bill_model extends CI_Model {
 	
 	public function get_all_unpaid_by_tenants()
 	{
+		$where[$this->table_tenant_bill.'.payment_date'] = null;
 		
+		$this->db->join('hot_item', 'hot_item.id = '. $this->table_tenant_bill . '.hot_item_id', 'left');
+		$this->db->join($this->table_item, $this->table_item. '.id = hot_item.posted_item_id', 'left');
+		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill);
+		$tenant_bills = $query->result();
+		
+		return ($tenant_bills !== null) ? $this->map_list($tenant_bills) : array();
 	}
 	// public function get_all($limit=10, $offset=0)
 	// {

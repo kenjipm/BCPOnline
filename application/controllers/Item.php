@@ -128,7 +128,14 @@ class Item extends CI_Controller {
 		$this->post_item_detail_view_model->get($item, $posted_item_variance);
 		$data['model'] = $this->post_item_detail_view_model;
 		
-		$this->load->view('tenant/post_item_detail', $data);
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
+		{
+			$this->load->view('admin/post_item_detail', $data);
+		}
+		else // TENANT
+		{
+			$this->load->view('tenant/post_item_detail', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');

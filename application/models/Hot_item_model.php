@@ -13,30 +13,32 @@ class Hot_item_model extends CI_Model {
 	public $posted_item_id;
 	
 	public $posted_item;
+	public $tenant;
 	
 	// constructor
 	public function __construct()
 	{
 		parent::__construct();
 		
-		$this->id						= 0;
-		$this->hot_item_id				= "";
-		$this->promo_price				= 0;
-		$this->promo_description		= "";
-		$this->posted_item_id			= 0;
+		$this->id					= 0;
+		$this->hot_item_id			= "";
+		$this->promo_price			= 0;
+		$this->promo_description	= "";
+		$this->posted_item_id		= 0;
 		
 		$this->load->model('item_model');
-		$this->posted_item				= new item_model();
+		$this->posted_item	= new item_model();
+		$this->tenant		= new tenant_model();
 	}
 	
 	// constructor from database object
 	public function get_stub_from_db($db_item)
 	{
-		$this->id						= $db_item->id;
-		$this->hot_item_id				= $db_item->hot_item_id;
-		$this->promo_price				= $db_item->promo_price;
-		$this->promo_description		= $db_item->promo_description;
-		$this->posted_item_id			= $db_item->posted_item_id;
+		$this->id					= $db_item->id;
+		$this->hot_item_id			= $db_item->hot_item_id;
+		$this->promo_price			= $db_item->promo_price;
+		$this->promo_description	= $db_item->promo_description;
+		$this->posted_item_id		= $db_item->posted_item_id;
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$this->posted_item->price				= $db_item->price ?? "";
@@ -50,11 +52,11 @@ class Hot_item_model extends CI_Model {
 	{
 		$db_item = new class{};
 		
-		$db_item->id					= $this->id;
-		$db_item->hot_item_id			= $this->hot_item_id;
-		$db_item->promo_price			= $this->promo_price;
-		$db_item->promo_description		= $this->promo_description;
-		$db_item->posted_item_id		= $this->posted_item_id;
+		$db_item->id				= $this->id;
+		$db_item->hot_item_id		= $this->hot_item_id;
+		$db_item->promo_price		= $this->promo_price;
+		$db_item->promo_description	= $this->promo_description;
+		$db_item->posted_item_id	= $this->posted_item_id;
 		
 		return $db_item;
 	}
@@ -64,15 +66,16 @@ class Hot_item_model extends CI_Model {
 	{
 		$stub = new Hot_item_model();
 		
-		$stub->id						= $db_item->id;
-		$stub->hot_item_id				= $db_item->hot_item_id;
-		$stub->promo_price				= $db_item->promo_price;
-		$stub->promo_description		= $db_item->promo_description;
-		$stub->posted_item_id			= $db_item->posted_item_id;
+		$stub->id					= $db_item->id;
+		$stub->hot_item_id			= $db_item->hot_item_id;
+		$stub->promo_price			= $db_item->promo_price;
+		$stub->promo_description	= $db_item->promo_description;
+		$stub->posted_item_id		= $db_item->posted_item_id;
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$stub->posted_item->price				= $db_item->price ?? "";
 		$stub->posted_item->image_one_name		= $db_item->image_one_name ?? "";
+		$stub->tenant->tenant_name				= $db_item->tenant_name ?? "";
 		
 		return $stub;
 	}
@@ -101,6 +104,7 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_all_registered()
 	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
 		$query = $this->db->get($this->table_hot_item);
