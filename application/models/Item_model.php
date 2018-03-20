@@ -87,6 +87,7 @@ class Item_model extends CI_Model {
 		
 		$this->category->category_name	= $db_item->category_name ?? "";
 		$this->brand->brand_name		= $db_item->brand_name ?? "";
+		$this->tenant->tenant_name		= $db_item->tenant_name ?? "";
 		
 		return $this;
 	}
@@ -158,9 +159,10 @@ class Item_model extends CI_Model {
 	{
 		$where['posted_item.id'] = $id;
 		
-		$this->db->select('*, ' . $this->table_item.'.id AS id, ' . $this->table_item.'.brand_id AS brand_id');
+		$this->db->select('*, ' . $this->table_item.'.id AS id, ' . $this->table_item.'.brand_id AS brand_id, '. $this->table_item. '.tenant_id AS tenant_id');
 		$this->db->join('category', 'category.id=' . $this->table_item . '.category_id', 'left');
 		$this->db->join('brand', 'brand.id=' . $this->table_item . '.brand_id', 'left');
+		$this->db->join('tenant', 'tenant.id=' . $this->table_item . '.tenant_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_item, 1);
 		$item = $query->row();

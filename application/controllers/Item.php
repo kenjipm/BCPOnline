@@ -120,25 +120,55 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->model('Item_model');
-		$this->load->model('Posted_item_variance_model');
-		$item = $this->Item_model->get_from_id($id);
-		$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
-		$this->load->model('views/tenant/post_item_detail_view_model');
-		$this->post_item_detail_view_model->get($item, $posted_item_variance);
-		$data['model'] = $this->post_item_detail_view_model;
 		
 		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
+			$this->load->model('Item_model');
+			$this->load->model('Posted_item_variance_model');
+			$item = $this->Item_model->get_from_id($id);
+			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+			$this->load->model('views/admin/post_item_detail_view_model');
+			$this->post_item_detail_view_model->get($item, $posted_item_variance);
+			$data['model'] = $this->post_item_detail_view_model;
+			
 			$this->load->view('admin/post_item_detail', $data);
 		}
 		else // TENANT
 		{
+			$this->load->model('Item_model');
+			$this->load->model('Posted_item_variance_model');
+			$item = $this->Item_model->get_from_id($id);
+			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+			$this->load->model('views/tenant/post_item_detail_view_model');
+			$this->post_item_detail_view_model->get($item, $posted_item_variance);
+			$data['model'] = $this->post_item_detail_view_model;
+			
 			$this->load->view('tenant/post_item_detail', $data);
 		}
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function hot_item_detail($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Hot_item_model');
+		$this->load->model('Item_model');
+		$this->load->model('Posted_item_variance_model');
+		$item_id = $this->Hot_item_model->get_posted_item_id($id);
+		$item = $this->Item_model->get_from_id($item_id);
+		$posted_item_variance = $this->Posted_item_variance_model->get_all($item_id);
+		$this->load->model('views/admin/post_item_detail_view_model');
+		$this->post_item_detail_view_model->get($item, $posted_item_variance, $id);
+		$data['model'] = $this->post_item_detail_view_model;
+		
+		$this->load->view('admin/post_item_detail', $data);
 	}
 	
 	public function search()

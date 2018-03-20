@@ -53,6 +53,44 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function create_tenant_bill($id)
+	{
+		if ($this->input->method() == "post") $this->create_tenant_bill_do();
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Hot_item_model');
+		$this->load->model('Item_model');
+		$this->load->model('Posted_item_variance_model');
+		$item_id = $this->Hot_item_model->get_posted_item_id($id);
+		$item = $this->Item_model->get_from_id($item_id);
+		$this->load->model('views/admin/create_tenant_bill_view_model');
+		$this->create_tenant_bill_view_model->get($item, $id);
+		$data['model'] = $this->create_tenant_bill_view_model;
+		
+		$this->load->view('admin/create_tenant_bill', $data);
+	}
+	
+	public function create_tenant_bill_do()
+	{	
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('payment_value', 'Harga', 'required');
+		$this->form_validation->set_rules('payment_expiration', 'Masa Berlaku', 'required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Tenant_bill_model');
+			$this->Tenant_bill_model->insert_from_post();
+			
+			redirect('Item/post_item_list');
+		}
+	}
+	
 	public function tenant_to_pay_list()
 	{
 		// Load Header

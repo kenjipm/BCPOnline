@@ -133,10 +133,16 @@ class Tenant_bill_model extends CI_Model {
 		// return ($items !== null) ? $this->map_list($items) : array();
 	// }
 	
-	public function insert_from_post($hot_item_id)
+	public function insert_from_post()
 	{	
 		$this->tenant_bill_id		= "";
-	
+		$this->payment_expiration	= $this->input->post('payment_expiration');
+		$this->payment_value		= $this->input->post('payment_value');
+		$this->tenant_id			= $this->input->post('tenant_id');
+		$this->posted_item_id		= $this->input->post('posted_item_id');
+		$this->hot_item_id			= $this->input->post('hot_item_id');
+		$this->admin_id				= $this->session->child_id;
+		$this->payment_date			= "";
 		
 		// insert data, then generate [reward_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)

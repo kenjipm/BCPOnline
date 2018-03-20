@@ -87,8 +87,7 @@
 				}
 				?>
 			</form>
-			<a class="btn btn-default" href="<?=site_url('Item/hot_item/'.$model->posted_item->id)?>">Confirmed as Hot Item</a>
-			<a class="btn btn-default" href="<?=site_url('Item/hot_item/'.$model->posted_item->id)?>">Confirmed as SEO Item</a>
+			<a class="btn btn-default" href="<?=site_url('Admin/create_tenant_bill/'.$model->posted_item->id)?>">Buat Billing Tenant</a>
 		</div>
 	</div>
 </div>

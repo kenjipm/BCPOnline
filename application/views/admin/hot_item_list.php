@@ -36,7 +36,7 @@
 								<td><?=$hot_items->tenant_name?></td>
 								<td><?=$hot_items->posted_item_name?></td>
 								<td><?=$hot_items->promo_price?></td>
-								<td><a href="<?=site_url('Item/post_item_detail/'.$hot_items->posted_item_id)?>" class="btn btn-default">Lihat Item</a> </td>
+								<td><a href="<?=site_url('Item/hot_item_detail/'.$hot_items->id)?>" class="btn btn-default">Lihat Item</a> </td>
 							<?php
 						}
 						?>
