@@ -8,7 +8,9 @@ class Account_List_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{	
-		parent::__construct();
+		$this->tenants = array();
+		$this->customers = array();
+		$this->deliverers = array();
 	}
 	
 	public function get($tenants, $customers, $deliverers)
