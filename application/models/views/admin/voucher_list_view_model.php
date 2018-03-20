@@ -5,7 +5,8 @@ class Voucher_List_View_Model {
 	public $vouchers;
 	// constructor
 	public function __construct()
-	{	
+	{
+		$this->vouchers = array();
 	}
 	
 	public function get($vouchers)
