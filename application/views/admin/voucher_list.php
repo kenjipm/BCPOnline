@@ -65,6 +65,79 @@
 								<td>
 									<button class="btn btn-default" onclick="popup.open('popup_voucher_detail')">Lihat</button>
 									</td>
+								
+								<div id="popup_voucher_detail" class="popup popup-md">
+									<div class="panel panel-default">
+										<div class="panel-heading">
+											Detil Voucher
+										</div>
+										<div class="panel-body">
+											<form class="form-horizontal">
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Deskripsi:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->voucher_description?>" class="form-control" id="voucher_description" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Nilai Voucher:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->voucher_worth?>" class="form-control" id="voucher_worth" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Tanggal Dibuat:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->date_added?>" class="form-control" id="date_added" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Jumlah Stok:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Kode Voucher:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Minimal Order:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-4">
+														<label>Pemakaian per Hari:</label>
+													</div>
+													<div class="col-sm-8">
+														<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
+													</div>
+												</div>
+												<div class="form-group">
+													<div class="col-sm-7 col-sm-offset-4">
+														<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Tutup</button>
+													</div>
+												</div>
+											</form>
+										</div>
+									</div>
+								</div>
 								<!-- <td>
 									<a href="<?=site_url('voucher/update_voucher/'.$voucher->id)?>">
 										<button class="btn btn-default">Ubah</button>
@@ -85,91 +158,6 @@
 			<a class="btn btn-default" href="<?=site_url('voucher/create_voucher')?>">
 				Buat voucher
 			</a>		
-		</div>
-	</div>
-</div>
-
-
-<div id="popup_voucher_detail" class="popup popup-md">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Detil Voucher
-		</div>
-		<div class="panel-body">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>ID Voucher:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_id?>" class="form-control" id="id" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Deskripsi:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_description?>" class="form-control" id="voucher_description" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Nilai Voucher:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_worth?>" class="form-control" id="voucher_worth" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Tanggal Dibuat:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->date_added?>" class="form-control" id="date_added" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Jumlah Stok:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Kode Voucher:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Minimal Order:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Pemakaian per Hari:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-7 col-sm-offset-5">
-						<a href="<?=site_url('tenant_pay_receipt/set_price')?>">
-							<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Harga Bayar</button>
-						</a>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Tutup</button>
-					</div>
-				</div>
-			</form>
 		</div>
 	</div>
 </div>
