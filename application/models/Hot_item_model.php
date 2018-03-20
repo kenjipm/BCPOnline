@@ -92,10 +92,12 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_all($limit=10, $offset=0)
 	{
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$query = $this->db
 					  ->order_by($this->table_hot_item.'.id', 'DESC')
-					  ->get($this->table_hot_item, $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
+					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		
 		$items = $query->result();
 		
