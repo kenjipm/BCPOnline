@@ -99,7 +99,7 @@ class Customer extends CI_Controller {
 		if ($billing == null) { redirect(''); } // ga ada billing nya
 		
 		$this->load->model('order_details_model');
-		$order_details = $this->order_details_model->get_all_by_billing_id($billing->id);
+		$order_details = $this->order_details_model->get_all_from_billing_id($billing->id);
 		
 		if (count($order_details) <= 0) { redirect(''); } // ga ada order_details nya
 		

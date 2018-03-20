@@ -160,7 +160,7 @@ class Billing_model extends CI_Model {
 		$this->load->model('Billing_model');
 		$where['billing.id'] = $id;
 		
-		$this->db->select('*, ' . $this->table_billing.'.id AS id');
+		$this->db->select('*, ' . $this->table_billing.'.id AS id, ' . $this->table_billing.'.customer_id AS customer_id');
 		$this->db->join('customer', 'customer.id=' . $this->table_billing . '.customer_id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->join('shipping_address', 'shipping_address.id=' . $this->table_billing . '.shipping_address_id', 'left');

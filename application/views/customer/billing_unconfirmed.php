@@ -7,7 +7,7 @@
 					<h3><?=$title?></h3>
 				</div>
 				<div class="panel-body">
-					<input type="hidden" name="billing_id" value="<?=$billing_id?>"/>
+					<input type="hidden" name="billing_id" value="<?=$model->billing_id?>"/>
 					<?php
 					foreach($model->items as $item)
 					{

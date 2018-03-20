@@ -178,6 +178,8 @@ class Billing extends CI_Controller {
 		if (($this->session->type == TYPE['name']['CUSTOMER']) &&
 			($this->input->post('customer_id') == $this->session->child_id))
 		{
+			$billing_id = $this->input->post('billing_id');
+			
 			// update bill here
 			$this->load->model('shipping_charge_model');
 			$shipping_charge = $this->shipping_charge_model;
