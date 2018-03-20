@@ -183,6 +183,7 @@ class Tenant_model extends CI_Model {
 		$this->account = $this->account->get_from_id($this->account_id);
 		return $this->account;
 	}
+
 }
 
 ?>

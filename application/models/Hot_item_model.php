@@ -127,6 +127,19 @@ class Hot_item_model extends CI_Model {
 		return ($hot_items !== null) ? $hot_items->posted_item_id : array();
 	}
 	
+	// get hot_item detail
+	public function get_from_posted_item_id($posted_item_id)
+	{
+		$where['posted_item_id'] = $posted_item_id;
+		
+		$this->db->where($where);
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_hot_item, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function insert_from_post($posted_item_id)
 	{	
 		$this->hot_item_id			= "";
@@ -152,6 +165,18 @@ class Hot_item_model extends CI_Model {
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
+
+	public function deposit_status_set($id, $value)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('id', $id);
+		$this->db->set('deposit_status', $value);
+		$this->db->update($this->table_customer);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 }
 
 ?>

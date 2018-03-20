@@ -133,6 +133,41 @@ class Tenant_bill_model extends CI_Model {
 		// return ($items !== null) ? $this->map_list($items) : array();
 	// }
 	
+	public function is_paid()
+	{
+		return ($this->payment_date != 0); // "0000-00-00 00:00:00"
+	}
+	
+	public function is_expired()
+	{
+		return (time() > strtotime($this->payment_expiration));
+	}
+	
+	public function set_paid($hot_item_id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('hot_item_id', $hot_item_id);
+		$this->db->set('payment_date', date("Y-m-d H:i:s"));
+		$this->db->update($this->table_tenant_bill);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	
+	// get hot_item detail
+	public function get_from_hot_item_id($hot_item_id)
+	{
+		$where['hot_item_id'] = $hot_item_id;
+		
+		$this->db->where($where);
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function insert_from_post()
 	{	
 		$this->tenant_bill_id		= "";
