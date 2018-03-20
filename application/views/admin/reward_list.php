@@ -50,6 +50,46 @@
 									</td>
 								</a>
 							</tr>
+														
+							<div id="popup_reward_detail" class="popup popup-md">
+								<div class="panel panel-default">
+									<div class="panel-heading">
+										Detil Reward
+									</div>
+									<div class="panel-body">
+										<form class="form-horizontal">
+											<div class="form-group">
+												<div class="col-sm-4">
+													<label>Reward:</label>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" value="<?=$reward->reward_description?>" class="form-control" id="reward_description" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-4">
+													<label>Tanggal Berlaku:</label>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" value="<?=$reward->date_added?> s/d <?=$reward->date_expired?>" class="form-control" id="date" readonly>
+												</div>
+											</div>
+											<div class="form-group">
+												<div class="col-sm-4">
+													<label>Poin Dibutuhkan:</label>
+												</div>
+												<div class="col-sm-8">
+													<input type="text" value="<?=$reward->points_needed?>" class="form-control" id="points_needed" readonly>
+												</div>
+											</div>
+										</form>
+										<div class="form-group">
+										<div class="col-sm-7 col-sm-offset-4">
+											<button type="button" class="btn btn-default" onclick="popup.close('popup_reward_detail')">Tutup</button>
+										</div>
+									</div>
+								</div>
+							</div>
 							<?php
 						}
 						?>	
@@ -114,85 +154,6 @@
 					</div>
 				</div>
 			</form>
-		</div>
-	</div>
-</div>
-
-<div id="popup_reward_detail" class="popup popup-md">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Detil Reward
-		</div>
-		<div class="panel-body">
-			<form class="form-horizontal">
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Reward:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->rewards[0]->reward_description?>" class="form-control" id="reward_description" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Tanggal Berlaku:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->rewards[0]->date_added?> s/d <?=$model->rewards[0]->date_expired?>" class="form-control" id="date" readonly>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Poin Dibutuhkan:</label>
-					</div>
-					<div class="col-sm-10">
-						<input type="text" value="<?=$model->rewards[0]->points_needed?>" class="form-control" id="points_needed" readonly>
-					</div>
-				</div>
-			</form>
-		</div>
-		
-		<div class="panel-heading">
-			Daftar Customer Redeem
-		</div>
-		<div class="panel-body">
-			<div class="row list-group">
-				<div class="col-xs-3"> <label for="redeem_id">ID</label> </div>
-				<div class="col-xs-6"> <label for="date_redeemed">Tanggal Redeem</label> </div>
-			</div>
-			<?php
-			foreach($model->redeems as $redeem)
-			{
-				?>
-				<div class="row list-group">
-					<div class="col-xs-3 list-group-item">
-						<?=$redeem->customer_id?> </div>
-					<div class="col-xs-6 list-group-item">
-						<?=$redeem->date_redeemed?> </div>
-					<?php
-						if ($redeem->status == "Taken"){
-							$show_div_redeem = false;
-							$show_div_redeemed = true;
-						} else {
-							$show_div_redeem = true;
-							$show_div_redeemed = false;
-						}
-					?>
-					<div class="col-xs-3" id="verify" <?php if ($show_div_redeem == false){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default">Beri Reward</button>
-					</div>	
-					<div class="col-xs-3" id="verify" <?php if ($show_div_redeemed == false){?> style="display:none"<?php } ?>>
-						<button type="button" class="btn btn-default" disabled="disabled">Sudah Diberi</button>
-					</div>	
-				</div>
-				<?php
-			}
-			?>
-			<div class="form-group">
-				<div class="col-sm-7 col-sm-offset-5">
-					<button type="button" class="btn btn-default" onclick="popup.close('popup_reward_detail')">Tutup</button>
-				</div>
-			</div>
 		</div>
 	</div>
 </div>
