@@ -110,7 +110,16 @@ class Tenant_bill_model extends CI_Model {
 	
 	public function get_all_unpaid_by_tenants()
 	{
+		$where[$this->table_tenant_bill.'.payment_date'] = null;
 		
+		$this->db->join('hot_item', 'hot_item.id = '. $this->table_tenant_bill . '.hot_item_id', 'left');
+		$this->db->join($this->table_item, $this->table_item. '.id = hot_item.posted_item_id', 'left');
+		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill);
+		$tenant_bills = $query->result();
+		
+		return ($tenant_bills !== null) ? $this->map_list($tenant_bills) : array();
 	}
 	// public function get_all($limit=10, $offset=0)
 	// {
@@ -124,10 +133,16 @@ class Tenant_bill_model extends CI_Model {
 		// return ($items !== null) ? $this->map_list($items) : array();
 	// }
 	
-	public function insert_from_post($hot_item_id)
+	public function insert_from_post()
 	{	
 		$this->tenant_bill_id		= "";
-	
+		$this->payment_expiration	= $this->input->post('payment_expiration');
+		$this->payment_value		= $this->input->post('payment_value');
+		$this->tenant_id			= $this->input->post('tenant_id');
+		$this->posted_item_id		= $this->input->post('posted_item_id');
+		$this->hot_item_id			= $this->input->post('hot_item_id');
+		$this->admin_id				= $this->session->child_id;
+		$this->payment_date			= "";
 		
 		// insert data, then generate [reward_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)

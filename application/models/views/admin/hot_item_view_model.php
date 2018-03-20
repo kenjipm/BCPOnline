@@ -7,6 +7,7 @@ class Hot_Item_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{
+		$this->load->library('Text_renderer');
 		$this->hot_item_list = array();
 		$this->tenant_bill_list = array();
 	}
@@ -18,21 +19,25 @@ class Hot_Item_View_Model extends CI_Model{
 		{
 			$this->hot_item_list[$i] = new class{};
 			$this->hot_item_list[$i]->id				= $hot_item->id;
-			// $this->hot_item_list[$i]->tenant_name		= $hot_item->tenant->tenant_name;
-			// $this->hot_item_list[$i]->posted_item_name	= $hot_item->posted_item->posted_item_name;
-			$this->hot_item_list[$i]->promo_price		= $hot_item->promo_price;
+			$this->hot_item_list[$i]->tenant_name		= $hot_item->tenant->tenant_name;
+			$this->hot_item_list[$i]->posted_item_id	= $hot_item->posted_item_id;
+			$this->hot_item_list[$i]->posted_item_name	= $hot_item->posted_item->posted_item_name;
+			$this->hot_item_list[$i]->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);
 			
 			$i++;
 		}
 		
-		// $i = 0;
-		// foreach($tenant_bills as $tenant_bill)
-		// {
-			// $this->tenant_bill_list[$i] = new class{};
-			// $this->tenant_bill_list[$i]->id = $tenant_bill->id;
+		$i = 0;
+		foreach($tenant_bills as $tenant_bill)
+		{
+			$this->tenant_bill_list[$i] = new class{};
+			$this->tenant_bill_list[$i]->id				 	= $tenant_bill->id;
+			$this->tenant_bill_list[$i]->tenant_name 		= $tenant_bill->tenant->tenant_name;
+			$this->tenant_bill_list[$i]->posted_item_name 	= $tenant_bill->posted_item->posted_item_name;
+			$this->tenant_bill_list[$i]->payment_value 		= $this->text_renderer->to_rupiah($tenant_bill->payment_value);
 			
-			// $i++;
-		// }
+			$i++;
+		}
 	}
 	
 	
