@@ -823,12 +823,14 @@ class Order_details_model extends CI_Model {
 		$this->db->where('order_details.order_status', $cur_status);
 		
 		$this->db->set('order_details.order_status', $status);
-		$this->db->update('order_details');
+		$result = $this->db->update('order_details');
 		
 		$this->load->model('Order_status_history_model');
 		$this->Order_status_history_model->insert($order_id, $status);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+		
+		return $result;
 	}
 	
 	public function update_tenant_pay_receipt_id($list_order_detail_id, $tenant_pay_receipt_id)
