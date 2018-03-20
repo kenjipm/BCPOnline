@@ -16,7 +16,7 @@ class Voucher_List_View_Model {
 		{
 			$this->vouchers[$i] = new class{};
 			
-			$this->vouchers[$i]->idate					= $voucher->id;
+			$this->vouchers[$i]->id						= $voucher->id;
 			$this->vouchers[$i]->voucher_id				= $voucher->voucher_id;
 			$this->vouchers[$i]->voucher_stock 			= $voucher->voucher_stock;
 			$this->vouchers[$i]->voucher_description	= $voucher->voucher_description;

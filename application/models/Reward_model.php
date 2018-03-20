@@ -116,7 +116,7 @@ class Reward_model extends CI_Model {
 	public function insert_from_post()
 	{	
 		$this->reward_id			= "";
-		$this->date_added			= date("d-m-Y");
+		$this->date_added			= date("Y-m-d H:i:s");
 		$this->date_expired			= $this->input->post('date_expired');
 		$this->points_needed		= $this->input->post('points_needed');
 		$this->reward_description	= $this->input->post('reward_description');
