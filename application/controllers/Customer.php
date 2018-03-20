@@ -455,6 +455,9 @@ class Customer extends CI_Controller {
 		$config_upload_profpic['upload_path'] .= $this->session->account_id."/";
 		$this->load->library('upload', $config_upload_profpic);
 		
+		$config_compress_image = $this->config->item('compress_image_profpic');
+		$this->load->library('image_lib');
+		
 		if ($_FILES['profile_pic']['name'])
 		{
 			if (!is_dir($config_upload_profpic['upload_path'])) {
@@ -464,7 +467,17 @@ class Customer extends CI_Controller {
 			{
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
+			else
+			{
+				$file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['profile_pic'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if (count($data['error']) == 0)
@@ -492,6 +505,9 @@ class Customer extends CI_Controller {
 		$config_upload_identification_pic['upload_path'] .= $this->session->account_id."/";
 		$this->load->library('upload', $config_upload_identification_pic);
 		
+		$config_compress_image = $this->config->item('compress_image_idpic');
+		$this->load->library('image_lib');
+		
 		if ($_FILES['identification_pic']['name'])
 		{
 			if (!is_dir($config_upload_identification_pic['upload_path'])) {
@@ -501,7 +517,17 @@ class Customer extends CI_Controller {
 			{
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
+			else 
+			{
+				$file_path['identification_pic'] = $config_upload_identification_pic['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['identification_pic'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if (count($data['error']) == 0)

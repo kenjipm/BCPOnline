@@ -386,6 +386,9 @@ class Item_model extends CI_Model {
 
 		$this->load->library('upload', $config_upload_image);
 		
+		$config_compress_image = $this->config->item('compress_image_item');
+		$this->load->library('image_lib');
+		
 		if ($_FILES['image_one_name']['name'])
 		{
 			if (!is_dir($config_upload_image['upload_path'])) {
@@ -395,7 +398,17 @@ class Item_model extends CI_Model {
 			{
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['image_one_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+			else
+			{
+				$file_path['image_one_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['image_one_name'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if (count($data['error']) == 0)

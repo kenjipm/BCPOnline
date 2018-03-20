@@ -25,4 +25,36 @@ $config['upload_image'] = array(
 	'overwrite'		=> true
 );
 
+$config['compress_image_item'] = array(
+	'image_library'		=> 'gd2',
+	// 'create_thumb'		=> TRUE,
+	'maintain_ratio'	=> TRUE,
+	'width'				=> 200,
+	'height'			=> 200,
+);
+
+$config['compress_image_variance'] = array(
+	'image_library'		=> 'gd2',
+	// 'create_thumb'		=> TRUE,
+	'maintain_ratio'	=> TRUE,
+	'width'				=> 200,
+	'height'			=> 200,
+);
+
+$config['compress_image_profpic'] = array(
+	'image_library'		=> 'gd2',
+	// 'create_thumb'		=> TRUE,
+	'maintain_ratio'	=> TRUE,
+	'width'				=> 200,
+	'height'			=> 200,
+);
+
+$config['compress_image_idpic'] = array(
+	'image_library'		=> 'gd2',
+	// 'create_thumb'		=> TRUE,
+	'maintain_ratio'	=> TRUE,
+	'width'				=> 200,
+	'height'			=> 200,
+);
+
 ?>
