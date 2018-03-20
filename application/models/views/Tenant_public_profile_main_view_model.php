@@ -23,7 +23,7 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 		$this->tenant->account_id	= $tenant->account_id;
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		
-		$this->tenant->account->profile_pic	= $tenant->account->profile_pic;
+		$this->tenant->account->profile_pic	= site_url($tenant->account->profile_pic);
 			
 		$this->tenant->is_followed	= ($tenant->is_followed($this->session->child_id) != null);
 		$this->tenant->btn_class	= ($this->tenant->is_followed ? "btn-favorited" : "");
@@ -36,7 +36,7 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 			$temp->id = $item->id;
 			$temp->posted_item_name = $item->posted_item_name;
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
-			$temp->image_one_name = $item->image_one_name;
+			$temp->image_one_name = site_url($item->image_one_name);
 			
 			$this->tenant->items[] = $temp;
 		}

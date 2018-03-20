@@ -231,6 +231,9 @@ class Posted_item_variance_model extends CI_Model {
 		$config_upload_image['upload_path'] .= $this->session->account_id."/".$this->posted_item->posted_item_id."/";
 		$this->load->library('upload', $config_upload_image);
 		
+		$config_compress_image = $this->config->item('compress_image_variance');
+		$this->load->library('image_lib');
+		
 		if ($_FILES['image_two_name']['name'])
 		{
 			$config_upload_image['file_name'] = $index."-1.jpg";
@@ -243,7 +246,17 @@ class Posted_item_variance_model extends CI_Model {
 				print_r($id . $index . "2");
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['image_two_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+			else 
+			{
+				$file_path['image_two_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['image_two_name'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if ($_FILES['image_three_name']['name'])
@@ -258,7 +271,17 @@ class Posted_item_variance_model extends CI_Model {
 				print_r($id . $index . "3");
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['image_three_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+			else
+			{
+				$file_path['image_three_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['image_three_name'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if ($_FILES['image_four_name']['name'])
@@ -273,7 +296,17 @@ class Posted_item_variance_model extends CI_Model {
 				print_r($id . $index . "4");
 				$data['error'] = $this->upload->display_errors('', '');
 			}
-			else $file_path['image_four_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+			else
+			{
+				$file_path['image_four_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['image_four_name'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
 		}
 		
 		if (count($data['error']) == 0)

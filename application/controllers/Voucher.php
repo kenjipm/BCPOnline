@@ -142,5 +142,9 @@ class Voucher extends CI_Controller {
 				// }
 			// }
 		}
+		else
+		{
+			echo "1";
+		}
 	}
 }
