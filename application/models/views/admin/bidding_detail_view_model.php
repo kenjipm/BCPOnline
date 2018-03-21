@@ -11,7 +11,7 @@ class Bidding_detail_view_model extends CI_Model {
 	{
 		parent::__construct();
 		
-		$biddings = array();
+		$this->biddings = array();
 	}
 	
 	public function get($biddings, $is_expired)
