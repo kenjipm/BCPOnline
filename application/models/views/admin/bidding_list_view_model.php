@@ -10,8 +10,8 @@ class Bidding_list_view_model extends CI_Model {
 	{
 		parent::__construct();
 		
-		$items = array();
-		$biddings = array();
+		$this->items = array();
+		$this->biddings = array();
 	}
 	
 	public function get($items, $biddings)

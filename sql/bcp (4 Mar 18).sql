@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 04, 2018 at 11:37 AM
+-- Generation Time: Mar 21, 2018 at 04:35 AM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -50,16 +50,17 @@ CREATE TABLE `account` (
 --
 
 INSERT INTO `account` (`id`, `account_id`, `name`, `address`, `date_of_birth`, `phone_number`, `email`, `password`, `identification_no`, `identification_pic`, `last_login`, `status`, `date_joined`, `profile_pic`) VALUES
-(1, 'TNT00001', 'Jordan', 'Jalan Pelajar Pejuang no 55', '1987-12-14', '0812312322', 'djisamsung@hotmail.com', 'a3dcb4d229de6fde0db5686dee47145d', '327213217385', '', '2018-02-17 18:27:55', 'ACTIVE', '2017-12-07 15:02:07', ''),
-(2, 'ADM00001', 'Dewa', 'Jalan Pejuang Pelajar no 56', '1987-12-05', '08214214233', 'admin1@hotmail.com', '21232f297a57a5a743894a0e4a801fc3', '327213217384', '', '2018-02-26 10:30:02', 'active', '2017-12-14 06:35:41', ''),
-(3, 'CUS00001', 'Billy', 'Jalan Pelajar Pejuang no 57', '1997-12-20', '081298798222', 'billy@hotmail.com', '89c246298be2b6113fb10ba80f3c6956', '327213217382', 'CUS00004', '2018-02-26 10:21:11', 'ACTIVE', '2017-12-14 06:41:45', ''),
+(1, 'TNT00001', 'Jordan', 'Jalan Pelajar Pejuang no 55', '1987-12-14', '0812312322', 'djisamsung@hotmail.com', 'a3dcb4d229de6fde0db5686dee47145d', '327213217385', '', '2018-03-16 16:21:23', 'ACTIVE', '2017-12-07 15:02:07', ''),
+(2, 'ADM00001', 'Dewa', 'Jalan Pejuang Pelajar no 56', '1987-12-05', '08214214233', 'admin1@hotmail.com', '21232f297a57a5a743894a0e4a801fc3', '327213217384', '', '2018-03-16 18:31:44', 'active', '2017-12-14 06:35:41', ''),
+(3, 'CUS00001', 'Billy', 'Jalan Pelajar Pejuang no 57', '1997-12-20', '081298798222', 'billy@hotmail.com', '89c246298be2b6113fb10ba80f3c6956', '327213217382', 'CUS00004', '2018-03-12 11:02:08', 'ACTIVE', '2017-12-14 06:41:45', ''),
 (4, 'DLV00001', 'Dori', 'Jalan Jendral Sudirman 543', '1991-12-12', '082131271322', 'dori@gmail.com', 'c5548e74ec3c08a867e8eac9cc6cf90e', '327213217381', '327212037812', '2018-02-24 14:45:58', 'inactive', '2017-12-25 11:35:00', ''),
 (5, 'DLV00002', 'Rido', 'Jalan Pejuang Pelajar no 2', '1991-01-19', '08123312312', 'rido@gmail.com', 'c5548e74ec3c08a867e8eac9cc6cf90e', '327212037813', '327212037812', '2018-02-19 10:28:17', 'active', '2018-01-01 16:38:24', ''),
-(8, 'TNT00003', 'Michael', 'Jalan Pelajar Pejuang No 57', '1987-11-24', '08132221333', 'xiyaoming@hotmail.com', 'a3dcb4d229de6fde0db5686dee47145d', '327213217382', '', '2018-02-12 10:27:43', 'ACTIVE', '2018-01-10 10:29:15', ''),
+(8, 'TNT00003', 'Michael', 'Jalan Pelajar Pejuang No 57', '1987-11-24', '08132221333', 'xiyaoming@hotmail.com', 'a3dcb4d229de6fde0db5686dee47145d', '327213217382', '', '2018-03-16 16:21:46', 'ACTIVE', '2018-01-10 10:29:15', ''),
 (9, 'DLV00003', 'Dodo', 'Jalan Jendral Sudirman No 534', '1992-12-12', '082131271333', 'dodo@gmail.com', 'c5548e74ec3c08a867e8eac9cc6cf90e', '327213247381', '', '2018-02-07 14:18:07', 'ACTIVE', '2018-01-10 10:41:02', ''),
 (10, 'DLV00004', 'Riri', 'Jalan Pejuang Pelajar No 27', '1990-12-23', '082122233344', 'riri@gmail.com', 'c5548e74ec3c08a867e8eac9cc6cf90e', '327329182312', '', '2018-02-12 10:28:24', 'ACTIVE', '2018-02-12 03:22:18', ''),
 (11, 'CUS00000002', 'Willy', 'Jalan Jendral Sudirman No 536', '1990-02-01', '08132221334', 'willy@gmail.com', 'e7236697824fb37763235980f1061218', '327213217381', '', '2018-02-26 10:24:46', 'ACTIVE', '2018-02-26 03:24:39', ''),
-(12, 'CUS00000003', 'Bill', 'Jalan Jendral Sudirman No 539', '1989-02-15', '082122233388', 'bill@gmail.com', 'e8375d7cd983efcbf956da5937050ffc', '327213247380', '', '2018-02-26 10:26:27', 'ACTIVE', '2018-02-26 03:26:21', '');
+(12, 'CUS00000003', 'Bill', 'Jalan Jendral Sudirman No 539', '1989-02-15', '082122233388', 'bill@gmail.com', 'e8375d7cd983efcbf956da5937050ffc', '327213247380', '', '2018-02-26 10:26:27', 'ACTIVE', '2018-02-26 03:26:21', ''),
+(13, 'TNT0000', 'Admin', 'Jalan Cyberia', '1988-03-15', '08992223334', 'admin@gmail.com', '21232f297a57a5a743894a0e4a801fc3', '', '', '2018-03-10 16:54:48', 'ACTIVE', '2018-03-10 09:52:29', '');
 
 -- --------------------------------------------------------
 
@@ -95,6 +96,15 @@ CREATE TABLE `bidding` (
   `posted_item_id` int(15) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+--
+-- Dumping data for table `bidding`
+--
+
+INSERT INTO `bidding` (`id`, `bid_time`, `bid_price`, `customer_id`, `posted_item_id`) VALUES
+(1, '2018-03-10 13:30:03', 300000, 2, 45),
+(2, '2018-03-10 13:31:00', 350000, 3, 45),
+(3, '2018-03-12 04:03:38', 2000000, 1, 47);
+
 -- --------------------------------------------------------
 
 --
@@ -124,7 +134,10 @@ INSERT INTO `billing` (`id`, `bill_id`, `date_created`, `date_closed`, `total_pa
 (3, 'BIL000000003', '2018-01-08 10:10:08', '2018-01-09 10:10:08', 7500000, 1, 1, 2, 'CYBERIA', 0, 1),
 (7, 'BIL000000007', '2018-02-12 10:14:33', '2018-02-13 10:14:33', 25000, 1, 1, 7, 'CYBERIA', 0, 1),
 (8, 'BIL000000008', '2018-02-26 10:22:06', '2018-02-27 10:22:06', 7500000, 1, 1, 8, 'JNE', 0, 4),
-(9, 'BIL000000009', '2018-02-26 10:28:05', '2018-02-27 10:28:05', 7500000, 3, 2, 9, 'JNE', 0, 4);
+(9, 'BIL000000009', '2018-02-26 10:28:05', '2018-02-27 10:28:05', 7500000, 3, 2, 9, 'JNE', 0, 4),
+(10, 'BIL000000010', '2018-03-05 10:14:21', '2018-03-06 10:14:21', 7490000, 1, 1, 10, 'JNE', 0, 4),
+(11, 'BIL000000011', '2018-03-12 10:42:08', '2018-03-13 10:42:08', 1900000, 1, 1, 11, 'JNE', 0, 4),
+(12, 'BIL000000012', '2018-03-12 10:44:02', '2018-03-13 10:44:02', 1900000, 1, 1, 12, 'JNE', 0, 4);
 
 -- --------------------------------------------------------
 
@@ -191,7 +204,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`id`, `customer_id`, `account_id`, `verified_mark`, `credit_amount`, `reward_points`, `deposit_status`, `upline_id`) VALUES
-(1, 'CUS00001', 3, 'UNVERIFIED', 0, 1125, 0, NULL),
+(1, 'CUS00001', 3, 'UNVERIFIED', 0, 1505, 1, NULL),
 (2, 'CUS00000002', 11, '', 0, 0, 0, NULL),
 (3, 'CUS00000003', 12, '', 0, 750, 0, 1);
 
@@ -326,7 +339,8 @@ CREATE TABLE `hot_item` (
 --
 
 INSERT INTO `hot_item` (`id`, `hot_item_id`, `promo_price`, `promo_description`, `posted_item_id`) VALUES
-(1, 'HOT00000001', 1600000, 'Beli 1 Dapet 1', 37);
+(1, 'HOT00000001', 1600000, 'Beli 1 Dapet 1', 37),
+(2, 'HOT00000002', 7500000, '5 Bulan Sebelum Kemerdekaan RI', 43);
 
 -- --------------------------------------------------------
 
@@ -350,7 +364,11 @@ INSERT INTO `item_tag` (`id`, `tag_id`, `posted_item_id`) VALUES
 (3, 14, 12),
 (4, 15, 12),
 (5, 16, 18),
-(6, 17, 18);
+(6, 17, 18),
+(7, 18, 45),
+(8, 19, 45),
+(9, 17, 47),
+(10, 20, 47);
 
 -- --------------------------------------------------------
 
@@ -455,21 +473,24 @@ CREATE TABLE `order_details` (
   `posted_item_variance_id` int(15) NOT NULL,
   `deliverer_id` int(15) DEFAULT NULL,
   `tnt_paid_receipt_id` int(15) DEFAULT NULL,
-  `voucher_cut_price` float NOT NULL DEFAULT '0'
+  `voucher_id` int(11) DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `order_details`
 --
 
-INSERT INTO `order_details` (`id`, `order_id`, `quantity`, `offered_price`, `sold_price`, `order_status`, `otp_deliverer_to_tenant`, `otp_deliverer_to_customer`, `collection_method`, `otp_customer_to_deliverer`, `otp_tenant_to_deliverer`, `date_repr_decided`, `billing_id`, `posted_item_variance_id`, `deliverer_id`, `tnt_paid_receipt_id`, `voucher_cut_price`) VALUES
-(3, 'ORD00001', 1, 1000000, 1000000, 'RECEIVED', '46EGX1', '', 'DELIVER', '5FZSSQ', '', '0000-00-00 00:00:00', 2, 3, 2, NULL, 0),
-(4, 'ORD00002', 1, 2000000, 1900000, 'RECEIVED', '46EGX1', '', 'DELIVER', '5FZSSQ', '', '0000-00-00 00:00:00', 2, 8, 2, NULL, 100000),
-(5, 'ORD000000005', 1, 7500000, 7500000, 'DELIVERING_TO_CUSTOMER', 'OY7MJX', '', '', 'RWPIUC', '', '0000-00-00 00:00:00', 3, 9, 1, NULL, 0),
-(6, 'ORD00003', 1, 25000, 325000, 'DONE', 'D2R0YY', 'XR71GZ', 'DELIVER', 'DP94GQ', 'VEVQUP', '0000-00-00 00:00:00', 3, 41, 3, NULL, 0),
-(7, 'ORD000000007', 1, 25000, 75000, 'RECEIVED', 'EBN3HJ', '6L9LSR', '', '8TJVYC', '2D4OFT', '0000-00-00 00:00:00', 7, 43, 4, NULL, 0),
-(8, 'ORD000000008', 1, 7500000, 7500000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 8, 13, NULL, NULL, 0),
-(9, 'ORD000000009', 1, 7500000, 7500000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 9, 13, NULL, NULL, 0);
+INSERT INTO `order_details` (`id`, `order_id`, `quantity`, `offered_price`, `sold_price`, `order_status`, `otp_deliverer_to_tenant`, `otp_deliverer_to_customer`, `collection_method`, `otp_customer_to_deliverer`, `otp_tenant_to_deliverer`, `date_repr_decided`, `billing_id`, `posted_item_variance_id`, `deliverer_id`, `tnt_paid_receipt_id`, `voucher_id`) VALUES
+(3, 'ORD00001', 1, 1000000, 1000000, 'RECEIVED', '46EGX1', '', 'DELIVER', '5FZSSQ', '', '0000-00-00 00:00:00', 2, 3, 2, NULL, NULL),
+(4, 'ORD00002', 1, 2000000, 1900000, 'RECEIVED', '46EGX1', '', 'DELIVER', '5FZSSQ', '', '0000-00-00 00:00:00', 2, 8, 2, NULL, NULL),
+(5, 'ORD000000005', 1, 7500000, 7500000, 'DELIVERING_TO_CUSTOMER', 'OY7MJX', '', '', 'RWPIUC', '', '0000-00-00 00:00:00', 3, 9, 1, NULL, NULL),
+(6, 'ORD00003', 1, 25000, 325000, 'DONE', 'D2R0YY', 'XR71GZ', 'DELIVER', 'DP94GQ', 'VEVQUP', '0000-00-00 00:00:00', 3, 41, 3, NULL, NULL),
+(7, 'ORD000000007', 1, 25000, 75000, 'RECEIVED', 'EBN3HJ', '6L9LSR', '', '8TJVYC', '2D4OFT', '0000-00-00 00:00:00', 7, 43, 4, NULL, NULL),
+(8, 'ORD000000008', 1, 7500000, 7500000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 8, 13, NULL, NULL, NULL),
+(9, 'ORD000000009', 1, 7500000, 7500000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 9, 13, NULL, NULL, NULL),
+(10, 'ORD000000010', 1, 7500000, 7500000, 'WAITING_FOR_PAYMENT', '', '', '', '', '', '0000-00-00 00:00:00', 10, 13, NULL, NULL, NULL),
+(11, 'ORD000000011', 1, 2000000, 2000000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 11, 35, NULL, NULL, NULL),
+(12, 'ORD000000012', 1, 2000000, 2000000, 'QUEUED', '', '', '', '', '', '0000-00-00 00:00:00', 12, 36, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -495,7 +516,12 @@ INSERT INTO `order_status_history` (`id`, `order_status_history_id`, `order_deta
 (6, 'OST0000000006', 8, 'WAITING_FOR_PAYMENT', '2018-02-26 03:22:15'),
 (7, 'OST0000000007', 8, 'QUEUED', '2018-02-26 03:22:20'),
 (8, 'OST0000000008', 9, 'WAITING_FOR_PAYMENT', '2018-02-26 03:28:10'),
-(9, 'OST0000000009', 9, 'QUEUED', '2018-02-26 03:28:13');
+(9, 'OST0000000009', 9, 'QUEUED', '2018-02-26 03:28:13'),
+(10, 'OST0000000010', 10, 'WAITING_FOR_PAYMENT', '2018-03-05 03:15:26'),
+(11, 'OST0000000011', 11, 'WAITING_FOR_PAYMENT', '2018-03-12 03:43:30'),
+(12, 'OST0000000012', 11, 'QUEUED', '2018-03-12 03:43:43'),
+(13, 'OST0000000013', 12, 'WAITING_FOR_PAYMENT', '2018-03-12 03:46:08'),
+(14, 'OST0000000014', 12, 'QUEUED', '2018-03-12 03:46:13');
 
 -- --------------------------------------------------------
 
@@ -521,7 +547,10 @@ INSERT INTO `payment` (`id`, `payment_id`, `payment_method`, `payment_date`, `cr
 (1, 'PAY000000001', 'KLIKBCA', '2018-01-08 03:10:37', '', 7500000, 3),
 (2, 'PAY000000002', 'KLIKBCA', '2018-02-12 03:17:36', '', 25000, 7),
 (3, 'PAY000000003', 'DOKU', '2018-02-26 03:22:20', '', 7500000, 8),
-(4, 'PAY000000004', 'DOKU', '2018-02-26 03:28:13', '', 7500000, 9);
+(4, 'PAY000000004', 'DOKU', '2018-02-26 03:28:13', '', 7500000, 9),
+(5, 'PAY000000005', 'DOKU', '0000-00-00 00:00:00', '', 0, 10),
+(6, 'PAY000000006', 'DOKU', '2018-03-12 03:43:43', '', 1900000, 11),
+(7, 'PAY000000007', 'DOKU', '2018-03-12 03:46:13', '', 1900000, 12);
 
 -- --------------------------------------------------------
 
@@ -546,7 +575,9 @@ CREATE TABLE `point_history` (
 INSERT INTO `point_history` (`id`, `history_id`, `point_received`, `point_description`, `date_received`, `billing_id`, `customer_id`) VALUES
 (1, 'PTH0000000001', 750, '', '2018-02-26 03:22:20', 8, 1),
 (2, 'PTH0000000002', 750, '', '2018-02-26 03:28:13', 9, 3),
-(3, 'PTH0000000003', 375, '', '2018-02-26 03:28:13', 9, 1);
+(3, 'PTH0000000003', 375, '', '2018-02-26 03:28:13', 9, 1),
+(4, 'PTH0000000004', 190, '', '2018-03-12 03:43:43', 11, 1),
+(5, 'PTH0000000005', 190, '', '2018-03-12 03:46:13', 12, 1);
 
 -- --------------------------------------------------------
 
@@ -594,7 +625,10 @@ INSERT INTO `posted_item` (`id`, `posted_item_id`, `posted_item_name`, `price`, 
 (41, 'ITM000000041', '', 25000, '2018-01-16 12:29:26', '2018-01-16 12:29:26', NULL, NULL, 'REPAIR', 0, 'Servis Handphone Djisamsung semua tipe', '', 3, 1, 2),
 (42, 'ITM000000042', '', 25000, '2018-01-16 14:45:50', '2018-01-16 14:45:50', NULL, NULL, 'REPAIR', 0, 'Servis Laptop Xiyaoming Bebas Apa Aja', '', 4, 3, 3),
 (43, 'ITM000000043', 'Xiyaoming Readme', 8000000, '2018-01-29 03:31:07', '2018-01-29 03:31:07', NULL, NULL, 'ORDER', 120, 'Xiaoming Baca Dulu', 'img/upload/TNT00003/ITM000000043/default.jpg', 3, 3, 3),
-(44, 'ITM000000044', '', 25000, '2018-02-12 03:13:34', '2018-02-12 03:13:34', NULL, NULL, 'REPAIR', 0, 'Servis Handphone Xiyaoming', '', 3, 3, 3);
+(44, 'ITM000000044', '', 25000, '2018-02-12 03:13:34', '2018-02-12 03:13:34', NULL, NULL, 'REPAIR', 0, 'Servis Handphone Xiyaoming', '', 3, 3, 3),
+(45, 'ITM000000045', 'Djisamsung Not Balok', 350000, '2018-03-08 13:39:31', '2018-03-08 13:39:31', '2018-03-10 18:22:00', 500000, 'BID', 100, 'Djisamsung #bidding #lelang not balok', 'img/upload/ADM00001/ITM000000045/default.jpg', 3, 0, 2),
+(46, 'ITM000000046', 'Xiyaoming M9', 3000000, '2018-03-12 03:40:39', '2018-03-12 03:40:39', NULL, 0, 'ORDER', 100, 'HP Xiyaoming 2018', '', 3, 1, 3),
+(47, 'ITM000000047', 'Djisamsung S9', 2000000, '2018-03-12 04:00:44', '2018-03-12 04:00:44', '2018-03-13 03:00:00', 1000000, 'BID', 150, 'Djisamsung terbaru 2018 #baru #terbaru', 'img/upload/ADM00001/ITM000000047/default.jpg', 3, 0, 2);
 
 -- --------------------------------------------------------
 
@@ -628,21 +662,23 @@ INSERT INTO `posted_item_variance` (`id`, `detail_id`, `var_type`, `var_descript
 (10, 'VAR0000000010', 'Warna', 'Kuning', 2, '', '', '', 14),
 (11, 'VAR0000000011', 'Warna', 'Merah', 3, '', '', '', 15),
 (12, 'VAR0000000012', 'Warna', 'Hijau', 3, '', '', '', 16),
-(13, 'VAR0000000013', 'Warna', 'Jingga', 0, '', '', '', 17),
+(13, 'VAR0000000013', 'Warna', 'Jingga', -1, '', '', '', 17),
 (14, 'VAR0000000014', 'Warna', 'Hologram', 2, '', '', '', 18),
 (15, 'VAR0000000015', 'Warna', 'Pelangi', 1, '', '', '', 18),
 (16, 'VAR0000000016', 'Warna', 'Coklat', 2, '', '', '', 19),
 (17, 'VAR0000000017', 'Warna', 'Abu', 4, '', '', '', 19),
 (27, 'VAR0000000027', 'Warna', 'Merah', 3, '', '', '', 30),
-(35, 'VAR0000000035', 'Warna', 'Putih', 3, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 37),
-(36, 'VAR0000000036', 'Warna', 'Hitam', 4, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 37),
+(35, 'VAR0000000035', 'Warna', 'Putih', 2, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 37),
+(36, 'VAR0000000036', 'Warna', 'Hitam', 3, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 37),
 (37, 'VAR0000000037', 'Warna', 'Kuning', 2, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 38),
 (38, 'VAR0000000038', 'Warna', 'Jingga', 4, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 38),
 (39, 'VAR0000000039', 'Warna', 'Abu', 2, 'img/upload/TNT00003/ITM000000039/0-1.jpg', 'img/upload/TNT00003/ITM000000039/0-2.jpg', '', 39),
 (40, 'VAR0000000040', 'Warna', 'Kuning', 1, 'img/upload/TNT00003/ITM000000039/1-1.jpg', '', '', 39),
 (41, 'VAR0000000041', '', '', 0, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 42),
 (42, 'VAR0000000042', 'Warna', 'Putih', 3, 'img/upload/TNT00003/ITM000000043/0-1.jpg', 'img/default_item.png', 'img/default_item.png', 43),
-(43, 'VAR0000000043', '', '', -1, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 44);
+(43, 'VAR0000000043', '', '', -1, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 44),
+(44, 'VAR0000000044', 'Warna', 'Hitam', 0, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 45),
+(46, 'VAR0000000046', 'Warna', 'Putih', 0, 'img/default_item.png', 'img/default_item.png', 'img/default_item.png', 47);
 
 -- --------------------------------------------------------
 
@@ -694,7 +730,8 @@ CREATE TABLE `reward` (
 --
 
 INSERT INTO `reward` (`id`, `reward_id`, `date_added`, `date_expired`, `points_needed`, `reward_description`) VALUES
-(1, 'RWD00000001', '0000-00-00 00:00:00', '2017-12-28 17:00:00', 450, 'Reward berupa handphone dari tenant A');
+(2, 'RWD00000002', '0000-00-00 00:00:00', '2018-03-30 17:00:00', 500, 'Handphone Baru dari Xiyaoming'),
+(3, 'RWD00000003', '2018-03-20 17:02:28', '2018-03-29 17:00:00', 1000, 'Laptop Baru dari Djisamsung');
 
 -- --------------------------------------------------------
 
@@ -776,7 +813,10 @@ INSERT INTO `shipping_charge` (`id`, `fee_id`, `fee_amount`, `fee_description`, 
 (6, 'FEE0000000006', 0, '', 0),
 (7, 'FEE0000000007', 0, '', 0),
 (8, 'FEE0000000008', 0, '', 0),
-(9, 'FEE0000000009', 0, '', 0);
+(9, 'FEE0000000009', 0, '', 0),
+(10, 'FEE0000000010', 0, '', 0),
+(11, 'FEE0000000011', 0, '', 0),
+(12, 'FEE0000000012', 0, '', 0);
 
 -- --------------------------------------------------------
 
@@ -800,7 +840,10 @@ INSERT INTO `tag` (`id`, `tag_name`, `date_of_initial_used`) VALUES
 (14, 'new', '2017-12-20'),
 (15, 'best', '2017-12-20'),
 (16, '2017', '2018-01-12'),
-(17, 'baru', '2018-01-12');
+(17, 'baru', '2018-01-12'),
+(18, 'bidding', '2018-03-08'),
+(19, 'lelang', '2018-03-08'),
+(20, 'terbaru', '2018-03-12');
 
 -- --------------------------------------------------------
 
@@ -824,6 +867,7 @@ CREATE TABLE `tenant` (
 --
 
 INSERT INTO `tenant` (`id`, `tenant_id`, `tenant_name`, `account_id`, `unit_number`, `floor`, `selling_category`, `is_open`) VALUES
+(0, 'TNT0000', 'Admin', 13, '0', '0', 'Bid and Flash Sale', 1),
 (1, 'TNT00001', 'Djisamsung', 1, '75', '4', 'Handphone', 1),
 (3, 'TNT00003', 'Xiyaoming', 8, '79', 'LG', 'Handphone dan Tablet', 0);
 
@@ -837,13 +881,20 @@ CREATE TABLE `tenant_bill` (
   `id` int(10) NOT NULL,
   `tenant_bill_id` varchar(15) NOT NULL DEFAULT '',
   `tenant_id` int(15) NOT NULL,
-  `posted_item_id` int(15) NOT NULL,
-  `hot_item_id` int(15) NOT NULL,
+  `posted_item_id` int(15) DEFAULT NULL,
+  `hot_item_id` int(15) DEFAULT NULL,
   `admin_id` int(15) NOT NULL,
   `payment_value` float NOT NULL DEFAULT '0',
   `payment_expiration` datetime NOT NULL DEFAULT '0000-00-00 00:00:00',
   `payment_date` datetime NOT NULL DEFAULT '0000-00-00 00:00:00'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tenant_bill`
+--
+
+INSERT INTO `tenant_bill` (`id`, `tenant_bill_id`, `tenant_id`, `posted_item_id`, `hot_item_id`, `admin_id`, `payment_value`, `payment_expiration`, `payment_date`) VALUES
+(5, '5', 3, 43, 2, 1, 50000, '2018-03-22 00:00:00', '0000-00-00 00:00:00');
 
 -- --------------------------------------------------------
 
@@ -885,9 +936,7 @@ CREATE TABLE `voucher` (
 --
 
 INSERT INTO `voucher` (`id`, `voucher_id`, `voucher_worth`, `voucher_description`, `date_added`, `date_expired`, `voucher_stock`, `voucher_code`, `min_order_price`, `use_per_day`) VALUES
-(2, 'VCR00000002', 50000, 'Potongan Harga 50 Ribu Rupiah', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 5, 'VCR5523', 0, 0),
-(5, 'VCR00000005', 10000, 'Potongan Harga 10 Ribu', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 10, 'TST23', 0, 0),
-(6, 'VCR00000006', 100000, 'Potongan Harga 100 Ribu', '0000-00-00 00:00:00', '0000-00-00 00:00:00', 10, 'VCR316', 500000, 1);
+(9, 'VCR00000009', 10000, 'Potongan Harga 10 Ribu', '0000-00-00 00:00:00', '2018-03-23 02:22:00', 50, 'TST23', 50000, 1);
 
 -- --------------------------------------------------------
 
@@ -906,11 +955,7 @@ CREATE TABLE `voucher_brand` (
 --
 
 INSERT INTO `voucher_brand` (`id`, `voucher_id`, `brand_id`) VALUES
-(1, 2, 2),
-(2, 5, 2),
-(3, 5, 3),
-(4, 6, 1),
-(5, 6, 3);
+(12, 9, 3);
 
 --
 -- Indexes for dumped tables
@@ -1077,7 +1122,8 @@ ALTER TABLE `order_details`
   ADD KEY `bill` (`billing_id`),
   ADD KEY `deliverer` (`deliverer_id`),
   ADD KEY `tnt_paid_receipt` (`tnt_paid_receipt_id`),
-  ADD KEY `posted_item_variance_id` (`posted_item_variance_id`);
+  ADD KEY `posted_item_variance_id` (`posted_item_variance_id`),
+  ADD KEY `voucher_id` (`voucher_id`);
 
 --
 -- Indexes for table `order_status_history`
@@ -1225,7 +1271,7 @@ ALTER TABLE `voucher_brand`
 -- AUTO_INCREMENT for table `account`
 --
 ALTER TABLE `account`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `admin`
@@ -1237,13 +1283,13 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `bidding`
 --
 ALTER TABLE `bidding`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `billing`
 --
 ALTER TABLE `billing`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `brand`
@@ -1303,13 +1349,13 @@ ALTER TABLE `following_tenant`
 -- AUTO_INCREMENT for table `hot_item`
 --
 ALTER TABLE `hot_item`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `item_tag`
 --
 ALTER TABLE `item_tag`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `message_inbox`
@@ -1333,37 +1379,37 @@ ALTER TABLE `negotiated_price`
 -- AUTO_INCREMENT for table `order_details`
 --
 ALTER TABLE `order_details`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `order_status_history`
 --
 ALTER TABLE `order_status_history`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `point_history`
 --
 ALTER TABLE `point_history`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `posted_item`
 --
 ALTER TABLE `posted_item`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
 
 --
 -- AUTO_INCREMENT for table `posted_item_variance`
 --
 ALTER TABLE `posted_item_variance`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=47;
 
 --
 -- AUTO_INCREMENT for table `redeem_reward`
@@ -1381,7 +1427,7 @@ ALTER TABLE `redeem_voucher`
 -- AUTO_INCREMENT for table `reward`
 --
 ALTER TABLE `reward`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `setting_reward`
@@ -1399,13 +1445,13 @@ ALTER TABLE `shipping_address`
 -- AUTO_INCREMENT for table `shipping_charge`
 --
 ALTER TABLE `shipping_charge`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `tag`
 --
 ALTER TABLE `tag`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `tenant`
@@ -1417,7 +1463,7 @@ ALTER TABLE `tenant`
 -- AUTO_INCREMENT for table `tenant_bill`
 --
 ALTER TABLE `tenant_bill`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `tenant_pay_receipt`
@@ -1429,13 +1475,13 @@ ALTER TABLE `tenant_pay_receipt`
 -- AUTO_INCREMENT for table `voucher`
 --
 ALTER TABLE `voucher`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `voucher_brand`
 --
 ALTER TABLE `voucher_brand`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
@@ -1554,7 +1600,8 @@ ALTER TABLE `order_details`
   ADD CONSTRAINT `order_details_ibfk_1` FOREIGN KEY (`billing_id`) REFERENCES `billing` (`id`),
   ADD CONSTRAINT `order_details_ibfk_3` FOREIGN KEY (`deliverer_id`) REFERENCES `deliverer` (`id`),
   ADD CONSTRAINT `order_details_ibfk_4` FOREIGN KEY (`tnt_paid_receipt_id`) REFERENCES `tenant_pay_receipt` (`id`),
-  ADD CONSTRAINT `order_details_ibfk_5` FOREIGN KEY (`posted_item_variance_id`) REFERENCES `posted_item_variance` (`id`);
+  ADD CONSTRAINT `order_details_ibfk_5` FOREIGN KEY (`posted_item_variance_id`) REFERENCES `posted_item_variance` (`id`),
+  ADD CONSTRAINT `order_details_ibfk_6` FOREIGN KEY (`voucher_id`) REFERENCES `voucher` (`id`);
 
 --
 -- Constraints for table `order_status_history`
