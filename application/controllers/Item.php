@@ -128,7 +128,7 @@ class Item extends CI_Controller {
 			$item = $this->Item_model->get_from_id($id);
 			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
 			$this->load->model('views/admin/post_item_detail_view_model');
-			$this->post_item_detail_view_model->get($item, $posted_item_variance);
+			$this->post_item_detail_view_model->get($item, $posted_item_variance, $id);
 			$data['model'] = $this->post_item_detail_view_model;
 			
 			$this->load->view('admin/post_item_detail', $data);

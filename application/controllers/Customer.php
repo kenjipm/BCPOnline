@@ -580,8 +580,12 @@ class Customer extends CI_Controller {
 	
 	public function create_dispute()
 	{
+		$tenant_id = $this->input->post('tenant_id');
+		$this->load->model('tenant_model');
+		$tenant = $this->tenant_model->get_from_id($tenant_id);
+		
 		$party_one_id = $this->session->id;
-		$party_two_id = $this->input->post('tenant_id');
+		$party_two_id = $tenant->account_id;
 		$order_detail_id = $this->input->post('order_detail_id');
 		
 		$this->load->model('dispute_model');

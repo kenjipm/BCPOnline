@@ -46,12 +46,12 @@
 							</tr>
 						</thead>
 						<tbody>
-						<input type="hidden" value="<?=$model->update_price?>" name="posted_item_id"></input>
+						<input type="hidden" value="<?=$model->update_price?>" name="update_price"/>
 						<?php
 						foreach($model->biddings as $bidding)
 						{
 							?>
-							<input type="hidden" value="<?=$bidding->posted_item_id?>" name="posted_item_id"></input>
+							<input type="hidden" value="<?=$bidding->posted_item_id?>" name="posted_item_id"/>
 							<tr>
 								<td>
 									<?=$bidding->customer_name?></td>

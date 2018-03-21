@@ -22,8 +22,11 @@ class Bidding extends CI_Controller {
 			$last_bidding->bid_time = null;
 		}
 		
+		$this->load->model('customer_model');
+		$customer = $this->customer_model->get_from_id($this->session->child_id);
+		
 		$this->load->model('views/bidding_main_view_model');
-		$this->bidding_main_view_model->get($bidding_item, $last_bidding);
+		$this->bidding_main_view_model->get($bidding_item, $last_bidding, $customer->deposit_status);
 		
 		$data['model'] = $this->bidding_main_view_model;
 		$this->load->view('bidding_main', $data);
@@ -66,12 +69,12 @@ class Bidding extends CI_Controller {
 		$this->load->model('Item_model');
 		$biddings = $this->Bidding_model->get_all_from_posted_item_id($posted_item_id);
 		$item = $this->Item_model->get_from_id($posted_item_id);
-		if (strtotime(date('Y-m-d H:m:s')) > strtotime($item->date_expired))
-			$is_expired = 1;
-		else	
-			$is_expired = 0;
+		// if (strtotime(date('Y-m-d H:m:s')) > strtotime($item->date_expired))
+			// $is_expired = 1;
+		// else	
+			// $is_expired = 0;
 		$this->load->model('views/admin/bidding_detail_view_model');
-		$this->bidding_detail_view_model->get($biddings, $is_expired);
+		$this->bidding_detail_view_model->get($biddings, $item->is_expired());
 		$data['model'] = $this->bidding_detail_view_model;
 		$this->load->view('admin/bidding_detail', $data);
 		

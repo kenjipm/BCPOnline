@@ -3,6 +3,7 @@
 class Bidding_main_view_model extends CI_Model {
 	
 	public $bidding_item;
+	public $is_deposit;
 	
 	// constructor
 	public function __construct()
@@ -10,10 +11,13 @@ class Bidding_main_view_model extends CI_Model {
 		parent::__construct();
 		
 		$this->bidding_item = null;
+		$this->is_deposit = false;
 	}
 	
-	public function get($bidding_item, $last_bidding)
+	public function get($bidding_item, $last_bidding, $deposit_status)
 	{
+		$this->is_deposit = $deposit_status;
+		
 		$this->load->library('text_renderer');
 		if ($bidding_item != null)
 		{

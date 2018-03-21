@@ -1,6 +1,29 @@
 <div class="row">
 	<div class="col-md-12">
 	
+	<?php
+		if (!$model->is_deposit)
+		{
+			?>
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<h3>Keterangan</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							Untuk dapat mengikuti lelang, harap melakukan deposit dulu melalui transfer ke rekening 123456789 BCA a/n PT SAMP sejumlah <b>Rp 100.000</b>
+						</div>
+						<div class="col-md-12">
+							<button type="button" onclick="dummy_deposit_done()" class="btn btn-default">Deposit (dummy)</button>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+	?>
+		
 		<!-------- BIDDING -------->
 		<div class="panel panel-default">
 			<div class="panel-heading">
@@ -67,22 +90,6 @@
 						<?php
 					}
 				?>
-			</div>
-		</div>
-		
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Keterangan</h3>
-			</div>
-			<div class="panel-body">
-				<div class="row">
-					<div class="col-md-12">
-						Untuk dapat mengikuti lelang, harap melakukan deposit dulu melalui transfer ke rekening 123456789 BCA a/n PT SAMP sejumlah <b>Rp 100.000</b>
-					</div>
-					<div class="col-md-12">
-						<button type="button" onclick="dummy_deposit_done()" class="btn btn-default">Deposit (dummy)</button>
-					</div>
-				</div>
 			</div>
 		</div>
 		
