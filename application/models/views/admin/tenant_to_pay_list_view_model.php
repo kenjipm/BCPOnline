@@ -24,8 +24,8 @@ class Tenant_to_pay_list_view_model extends CI_Model {
 		{
 			$temp_tenant = new class{};
 			
-			$temp_tenant->tenant_name		= $order_detail->tenant_name;
-			$temp_tenant->tenant_id			= $order_detail->tenant_id;
+			$temp_tenant->tenant_name		= $order_detail->tenant->tenant_name;
+			$temp_tenant->tenant_id			= $order_detail->posted_item_variance->posted_item->tenant_id;
 			
 			$order_detail->init_voucher();
 			$temp_tenant->total_unpaid		= ($order_detail->quantity * $order_detail->sold_price) + $order_detail->voucher->voucher_worth;

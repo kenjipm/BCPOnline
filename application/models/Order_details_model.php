@@ -188,6 +188,9 @@ class Order_details_model extends CI_Model {
 		$stub->feedback->feedback_reply	= $db_item->feedback_reply ?? "";
 		$stub->feedback->rating		 	= $db_item->rating ?? "";
 		
+		$stub->voucher					= new Voucher_model();
+		$stub->voucher->voucher_worth 	= $db_item->voucher_worth ?? "";
+		
 		return $stub;
 	}
 	
@@ -425,7 +428,7 @@ class Order_details_model extends CI_Model {
 	{
 		$result = array();
 		
-		$this->db->select('
+		$this->db->select('*,
 			order_details.sold_price,
 			order_details.quantity,
 			order_details.voucher_id,
@@ -443,12 +446,13 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item_variance', 'posted_item_variance.id = order_details.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
 		$this->db->join('tenant', 'tenant.id = posted_item.tenant_id', 'left');
+		$this->db->join('voucher', 'voucher.id = order_details.voucher_id', 'left');
 		
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $items : array();
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_unpaid_from_tenant_id($tenant_id)
@@ -999,7 +1003,7 @@ class Order_details_model extends CI_Model {
 	
 	public function init_voucher()
 	{
-		$this->voucher = $this->voucher->get_from_id($this->voucher_id);
+		$this->voucher->get_from_id($this->voucher_id);
 		return $this->voucher;
 	}
 }
