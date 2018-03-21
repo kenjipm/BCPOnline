@@ -181,6 +181,7 @@ class Item_model extends CI_Model {
 	
 	public function get_all_for_admin($limit=9, $offset=0)
 	{
+		$this->db->select('*, ' . $this->table_item.'.id AS id, ' . $this->table_item. '.tenant_id AS tenant_id');
 		$this->db->join('tenant', 'tenant.id=' . $this->table_item . '.tenant_id', 'left');
 		$query = $this->db->order_by($this->table_item. '.tenant_id', 'DESC')
 						  ->get($this->table_item, $limit??"", $limit?$offset:"");
