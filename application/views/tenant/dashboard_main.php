@@ -74,9 +74,9 @@
 		<div class="panel panel-body">
 			<div class="col-md-12">
 				<a class="btn btn-default" onclick="show_posted_item_div()">Posted Item</a>
-				<a class="btn btn-default" onclick="show_transaction_div()">Transaksi</a>
-				<a class="btn btn-default" onclick="show_dispute_div()">Dispute</a>
-				<a class="btn btn-default" onclick="show_sold_item_div()">Produk Terjual</a>
+				<a class="btn btn-default" href="<?=site_url('Order/Order_list')?>">Transaksi</a>
+				<a class="btn btn-default" href="<?=site_url('Dispute')?>">Dispute</a>
+				<a class="btn btn-default" href="<?=site_url('Item/post_item_list')?>">Produk Terjual</a>
 			</div>
 		</div>
 		
