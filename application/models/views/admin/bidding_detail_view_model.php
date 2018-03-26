@@ -4,6 +4,7 @@ class Bidding_detail_view_model extends CI_Model {
 	
 	public $biddings;
 	public $is_expired;
+	public $max_price;
 	public $update_price;
 	
 	// constructor
@@ -12,6 +13,7 @@ class Bidding_detail_view_model extends CI_Model {
 		parent::__construct();
 		
 		$this->biddings = array();
+		$this->max_price = 0;
 	}
 	
 	public function get($biddings, $is_expired)
@@ -29,6 +31,9 @@ class Bidding_detail_view_model extends CI_Model {
 			$this->biddings[$i]->bid_time		= $bidding->bid_time;
 			$this->biddings[$i]->bid_price		= $bidding->bid_price;
 			$this->biddings[$i]->posted_item_id	= $bidding->posted_item_id;
+			
+			if ($bidding->bid_price > $this->max_price)
+				$this->max_price = $bidding->bid_price;
 			
 			$i++;
 		}
