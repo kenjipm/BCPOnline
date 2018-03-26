@@ -148,6 +148,9 @@ class Order_details_model extends CI_Model {
 		$stub->tnt_paid_receipt_id		= $db_item->tnt_paid_receipt_id;
 		$stub->voucher_id				= $db_item->voucher_id;
 		
+		$stub->posted_item_name			= $db_item->posted_item_name ?? "";
+		$stub->voucher_worth 			= $db_item->voucher_worth ?? 0;
+		
 		$stub->posted_item_variance						= new Posted_item_variance_model();
 		$stub->posted_item_variance->var_type			= $db_item->var_type ?? "";
 		$stub->posted_item_variance->var_description	= $db_item->var_description ?? "";
@@ -189,7 +192,7 @@ class Order_details_model extends CI_Model {
 		$stub->feedback->rating		 	= $db_item->rating ?? "";
 		
 		$stub->voucher					= new Voucher_model();
-		$stub->voucher->voucher_worth 	= $db_item->voucher_worth ?? "";
+		$stub->voucher->voucher_worth 	= $db_item->voucher_worth ?? 0;
 		
 		return $stub;
 	}
@@ -459,7 +462,7 @@ class Order_details_model extends CI_Model {
 	{
 		$result = array();
 		
-		$this->db->select('
+		$this->db->select('*, 
 			order_details.id AS id,
 			order_details.sold_price,
 			order_details.quantity,
@@ -481,14 +484,14 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $items : array();
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_from_tnt_paid_receipt_id($tnt_paid_receipt_id)
 	{
 		$result = array();
 		
-		$this->db->select('
+		$this->db->select('*, 
 			order_details.id AS id,
 			order_details.sold_price,
 			order_details.quantity,
@@ -509,7 +512,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		return ($items !== null) ? $items : array();
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_order_collection_task_from_deliverer_id()

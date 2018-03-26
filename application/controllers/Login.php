@@ -50,10 +50,10 @@ class Login extends CI_Controller {
 			$child_id = $user->child_id;
 			$account_id = $user->account_id;
 			$type = $user->type;
-		}
+		// }
 		
 		// if ($user !== null)
-		{
+		// {
 			$userdata = array(
 				'id' => $id,
 				'child_id' => $child_id,
