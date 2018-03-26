@@ -26,6 +26,7 @@ class Tenant_model extends CI_Model {
 		$this->account_id		= "";
 		$this->unit_number		= "";
 		$this->floor			= "";
+		$this->bank_account		= "";
 		$this->selling_category	= "";
 		$this->is_open			= 1;
 		
@@ -44,6 +45,7 @@ class Tenant_model extends CI_Model {
 		$this->account_id			= $db_item->account_id;
 		$this->unit_number			= $db_item->unit_number;
 		$this->floor				= $db_item->floor;
+		$this->bank_account			= $db_item->bank_account;
 		$this->selling_category		= $db_item->selling_category;
 		$this->is_open				= $db_item->is_open;
 		
@@ -66,6 +68,7 @@ class Tenant_model extends CI_Model {
 		$db_item->account_id		= $this->account_id;
 		$db_item->unit_number		= $this->unit_number;
 		$db_item->floor				= $this->floor;
+		$db_item->bank_account		= $this->bank_account;
 		$db_item->selling_category	= $this->selling_category;
 		$db_item->is_open			= $this->is_open;
 		
@@ -83,6 +86,7 @@ class Tenant_model extends CI_Model {
 		$stub->account_id		= $db_item->account_id;
 		$stub->unit_number		= $db_item->unit_number;
 		$stub->floor			= $db_item->floor;
+		$stub->bank_account		= $db_item->bank_account;
 		$stub->selling_category	= $db_item->selling_category;
 		$stub->is_open			= $db_item->is_open;
 		
@@ -143,6 +147,7 @@ class Tenant_model extends CI_Model {
 		$this->tenant_name			= $this->input->post('tenant_name');
 		$this->unit_number			= $this->input->post('unit_number');
 		$this->floor				= $this->input->post('floor');
+		$this->bank_account			= $this->input->post('bank_account');
 		$this->selling_category		= $this->input->post('selling_category');
 		$this->is_open				= true;
 		

@@ -31,6 +31,11 @@
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('floor'); ?></span>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="bank_account">No. Rekening</label>
+					<div class="col-xs-9"><input type="text" class="form-control" name="bank_account" value="<?= set_value('bank_account'); ?>"/></div>
+					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('bank_account'); ?></span>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3" for="selling_category">Kategori</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="selling_category" value="<?= set_value('selling_category'); ?>"/></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('selling_category'); ?></span>

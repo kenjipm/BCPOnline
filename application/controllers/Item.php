@@ -269,7 +269,10 @@ class Item extends CI_Controller {
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
 			$this->Tag_model->insert_from_post($this->Item_model->id);
 			
-			redirect('Item/post_item_list');
+			if ($this->input->post('item_type') == "BID")
+				redirect('bidding/bidding_list');
+			else
+				redirect('Item/post_item_list');
 		}
 	}
 	

@@ -168,6 +168,7 @@ class Account extends CI_Controller {
 		$this->form_validation->set_rules('tenant_name', 'Nama Tenant', 'required');
 		$this->form_validation->set_rules('unit_number', 'Nomor Unit', 'required');
 		$this->form_validation->set_rules('floor', 'Nomor Lantai', 'required');
+		$this->form_validation->set_rules('bank_account', 'Nomor Rekening', 'required');
 		$this->form_validation->set_rules('selling_category', 'Kategori', 'required');
 		
 		$this->form_validation->set_rules('name', 'Nama', 'required');
