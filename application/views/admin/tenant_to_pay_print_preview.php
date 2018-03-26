@@ -16,6 +16,10 @@
 				<div class="col-xs-3"><label>Lantai</label></div>
 				<div class="col-xs-9">: <?=$model->tenant->floor?></div>
 			</div>
+			<div class="row">
+				<div class="col-xs-3"><label>Bank</label></div>
+				<div class="col-xs-9">: <?=$model->tenant->bank_account?></div>
+			</div>
 		
 			<div class="table-responsive">
 				<table class="table table-striped table-bordered">
@@ -58,8 +62,34 @@
 				</table>
 			</div>
 			
-			<div class="pull-right">
-				<h4>Total: <?=$model->tenant->total_unpaid?></h4>
+			<div class="row">
+				<div class="col-md-12">
+					<div class="pull-right">
+						<h4>Total: <?=$model->tenant->total_unpaid?></h4>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-md-12">
+					<hr size=1/>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="col-xs-1"></div>
+				<div class="col-xs-3 text-center">
+					<label>Cyberia</label>
+					<br/><br/><br/><br/>
+					<div style="border-bottom: 1px solid #000"></div>
+				</div>
+				<div class="col-xs-4"></div>
+				<div class="col-xs-3 text-center">
+					<label>Yang Menerima</label>
+					<br/><br/><br/><br/>
+					<div style="border-bottom: 1px solid #000"></div>
+				</div>
+				<div class="col-xs-1"></div>
 			</div>
 		<!--/div>
 	</div>

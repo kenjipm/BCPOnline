@@ -186,6 +186,52 @@ class Customer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function shipping_address()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('customer/shipping_address');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$id = $this->session->child_id;
+		
+		$this->load->model('shipping_address_model');
+		$shipping_addresses = $this->shipping_address_model->get_all_by_customer_id($this->session->child_id);
+		
+		$this->load->model('views/customer/shipping_address_view_model');
+		$this->shipping_address_view_model->get($shipping_addresses);
+		
+		$data['title'] = "Daftar Alamat Kirim";
+		$data['model'] = $this->shipping_address_view_model;
+		$this->load->view('customer/shipping_address', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function shipping_address_delete()
+	{
+		$shipping_address_id = $this->input->post('shipping_address_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('shipping_address_model');
+		$result = $this->shipping_address_model->delete_from_id($customer_id, $shipping_address_id);
+		
+		echo $result ? "1" : "0";
+	}
+	
+	public function shipping_address_set_primary()
+	{
+		$shipping_address_id = $this->input->post('shipping_address_id');
+		$customer_id = $this->session->child_id;
+		
+		$this->load->model('shipping_address_model');
+		$result = $this->shipping_address_model->set_primary($customer_id, $shipping_address_id);
+		
+		echo $result ? "1" : "0";
+	}
+	
 	public function reward()
 	{
 		// Load Header
@@ -435,6 +481,47 @@ class Customer extends CI_Controller {
 			$bidding->posted_item_id	= $bidding_item_id;
 			
 			$bidding_id = $bidding->insert_from_stub();
+			echo ($bidding_id > 0) ? "1" : "0"; // 1 = success, 0 = failed to add
+		}
+	}
+	
+	public function bid_live_post_do()
+	{
+		$bidding_item_id = $this->input->post('bidding_item_id');
+		$bidding_next_price = $this->input->post('bidding_next_price');
+		
+		$this->load->model('item_model');
+		$bidding_item = $this->item_model->get_from_id($bidding_item_id);
+		
+		$this->load->model('customer_model');
+		$cur_customer = $this->customer_model->get_from_id($this->session->child_id);
+		
+		$this->load->model('bidding_live_model');
+		$last_bidding = $this->bidding_live_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item_id);
+		if ($last_bidding == null)
+		{
+			$last_bidding = new class{};
+			$last_bidding->bid_time = null;
+		}
+		
+		if (!$cur_customer->deposit_status) echo "-9"; // customer belum dapat melakukan bidding
+		else if ($bidding_item == null) echo "-1"; // item tidak ditemukan
+		else if ($bidding_item->item_type != "BID") echo "-2"; // item bukan item bidding
+		else if ($bidding_item->is_expired()) echo "-3"; // bidding sudah tidak berlaku
+		else if (!$bidding_item->is_bid_live_price_valid($bidding_next_price)) echo "-4"; // harga bidding tidak valid
+		//else if (!$bidding_item->is_can_bid_this_session($last_bidding->bid_time)) echo "-5"; // customer sudah melakukan bidding
+		else 
+		{
+			$bidding = new bidding_live_model();
+			
+			$bidding->bid_time			= date("Y-m-d H:i:s");
+			$bidding->bid_price			= $bidding_next_price;
+			$bidding->customer_id		= $this->session->child_id;
+			$bidding->posted_item_id	= $bidding_item_id;
+				
+			$bidding_id = $bidding->insert_from_stub();
+			
+			$this->item_model->update_price_live($bidding_next_price, $bidding_item_id);
 			echo ($bidding_id > 0) ? "1" : "0"; // 1 = success, 0 = failed to add
 		}
 	}

@@ -7,7 +7,7 @@ class Dashboard extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('bidding');
+        $data_header['js_list'] = array('bidding_live');
 		$this->load->view('header', $data_header);
 
 		// Load Body
@@ -48,11 +48,11 @@ class Dashboard extends CI_Controller {
 			$tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
 			
 			$bidding_item = $this->item_model->get_last_bidding_item();
-			$this->load->model('bidding_model');
+			$this->load->model('bidding_live_model');
 			$last_bidding = null;
 			if ($bidding_item != null)
 			{
-				$last_bidding = $this->bidding_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
+				$last_bidding = $this->bidding_live_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
 			}
 			if ($last_bidding == null)
 			{

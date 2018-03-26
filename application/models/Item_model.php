@@ -286,6 +286,13 @@ class Item_model extends CI_Model {
 			   (($value - $this->price) % $bid_step == 0); // bid kelipatan step nya
 	}
 	
+	public function is_bid_live_price_valid($value)
+	{
+		$bid_step = $this->bidding_max_range;
+		return ($value >= ($this->price + $bid_step)) && // bid lebih besar dari harga awalnya
+			   (($value - $this->price) % $bid_step == 0); // bid kelipatan step nya
+	}
+	
 	public function is_can_bid_this_session($last_bid_time)
 	{
 		return ($last_bid_time == null) || (strtotime($last_bid_time) < strtotime($this->date_updated));
@@ -436,6 +443,14 @@ class Item_model extends CI_Model {
 		$this->db->set('price', $this->input->post('update_price'));
 		$this->db->set('date_updated', date('Y-m-d H:i:s'));
 		$this->db->where('id', $this->input->post('posted_item_id'));
+		$this->db->update($this->table_item);
+	}
+	
+	public function update_price_live($price, $posted_item_id)
+	{
+		$this->db->set('price', $price);
+		$this->db->set('date_updated', date('Y-m-d H:i:s'));
+		$this->db->where('id', $posted_item_id);
 		$this->db->update($this->table_item);
 	}
 	/*

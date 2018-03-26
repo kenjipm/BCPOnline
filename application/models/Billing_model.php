@@ -148,6 +148,7 @@ class Billing_model extends CI_Model {
 		$this->load->model('Billing_model');
 		
 		$this->db->where('customer_id', $customer_id);
+		$this->db->order_by('date_created', 'DESC');
 		$query = $this->db->get($this->table_billing);
 		$items = $query->result();
 		

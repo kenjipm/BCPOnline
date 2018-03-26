@@ -33,6 +33,10 @@
 					<div class="col-xs-9"><input type="text" class="form-control" id="address" name="address" value="<?=$model->account->address?>" /></div>
 				</div>
 				<div class="form-group">
+					<label class="control-label col-xs-3" for="address">Alamat Kirim:</label>
+					<div class="col-xs-9"><a href="<?=site_url('customer/shipping_address')?>" class="btn btn-default">Lihat</a></div>
+				</div>
+				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_of_birth">Tanggal Lahir:</label>
 					<div class="col-xs-6"><input type="text" class="form-control" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>" ></div>
 				</div>

@@ -19,6 +19,7 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		$this->tenant->unit_number	= $tenant->unit_number;
 		$this->tenant->floor		= $tenant->floor;
+		$this->tenant->bank_account	= $tenant->bank_account;
 		$this->tenant->total_unpaid = 0;
 		
 		$this->load->library('text_renderer');

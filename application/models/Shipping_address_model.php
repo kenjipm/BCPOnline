@@ -13,6 +13,7 @@ class Shipping_address_model extends CI_Model {
 	public $address_detail;
 	public $latitude;
 	public $customer_id;
+	public $is_primary;
 	
 	// stub attribute
 	public $full_address;
@@ -30,6 +31,7 @@ class Shipping_address_model extends CI_Model {
 		$this->address_detail	= "";
 		$this->latitude			= "";
 		$this->customer_id		= "";
+		$this->is_primary		= 0;
 		
 		$this->full_address		= "";
 	}
@@ -47,6 +49,7 @@ class Shipping_address_model extends CI_Model {
 			$this->address_detail	= $db_item->address_detail;
 			$this->latitude			= $db_item->latitude;
 			$this->customer_id		= $db_item->customer_id;
+			$this->is_primary		= $db_item->is_primary;
 		}
 		return $this;
 	}
@@ -64,6 +67,7 @@ class Shipping_address_model extends CI_Model {
 		$db_item->address_detail = $this->address_detail;
 		$db_item->latitude = $this->latitude;
 		$db_item->customer_id = $this->customer_id;
+		$db_item->is_primary = $this->is_primary;
 		
 		return $db_item;
 	}
@@ -82,6 +86,7 @@ class Shipping_address_model extends CI_Model {
 			$stub->address_detail	= $db_item->address_detail;
 			$stub->latitude			= $db_item->latitude;
 			$stub->customer_id		= $db_item->customer_id;
+			$stub->is_primary		= $db_item->is_primary;
 		}
 		return $stub;
 	}
@@ -110,7 +115,8 @@ class Shipping_address_model extends CI_Model {
 	public function get_by_customer_id($customer_id)
 	{
 		$this->db->where('customer_id', $customer_id);
-		$this->db->order_by('id', 'DESC');
+		$this->db->order_by('is_primary', 'DESC');
+		// $this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_shipping_address, 1);
 		
 		return $this->get_stub_from_db($query->row());
@@ -122,6 +128,7 @@ class Shipping_address_model extends CI_Model {
 		$this->db->join('billing', 'shipping_address.address_id = billing.shipping_address_id', 'left');
 		$this->db->where('shipping_address.customer_id', $customer_id);
 		$this->db->order_by('billing.date_created', 'DESC');
+		$this->db->order_by('is_primary', 'DESC');
 		$query = $this->db->get($this->table_shipping_address);
 		$items = $query->result();
 		
@@ -130,6 +137,9 @@ class Shipping_address_model extends CI_Model {
 	
 	public function insert($address)
 	{
+		$last_address = new shipping_address_model();
+		$last_address->get_by_customer_id($this->session->child_id);
+		
 		$this->city				= $address->city;
 		$this->kecamatan		= $address->kecamatan;
 		$this->kelurahan		= $address->kelurahan;
@@ -139,6 +149,7 @@ class Shipping_address_model extends CI_Model {
 		
 		$this->address_id		= "";
 		$this->customer_id		= $this->session->child_id;
+		$this->is_primary		= ($last_address->id == 0);
 		
 		$db_item = $this->get_db_from_stub();
 		
@@ -160,6 +171,29 @@ class Shipping_address_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete();
+	}
+	
+	public function delete_from_id($customer_id, $shipping_address_id)
+	{
+		$this->db->where('customer_id', $customer_id);
+		$this->db->where('id', $shipping_address_id);
+		$this->db->delete($this->table_shipping_address);
+	}
+	
+	public function set_primary($customer_id, $shipping_address_id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('customer_id', $customer_id);
+		$this->db->set('is_primary', 0);
+		$this->db->update($this->table_shipping_address);
+		
+		$this->db->where('customer_id', $customer_id);
+		$this->db->where('id', $shipping_address_id);
+		$this->db->set('is_primary', 1);
+		$this->db->update($this->table_shipping_address);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
 	public function get_full_address()

@@ -117,12 +117,12 @@
 													<!--button type="button" class="btn btn-default" onclick="toggle_order_status_history(<?=$order->id?>)">V</button-->
 													<button data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="btn btn-default" type="button">V</button>
 												</td>
-												<td>
+												<td id="order_action-<?=$order->id?>" >
 												<?php
 													if ($order->is_received)
 													{
 														?>
-														<button type="button" class="btn btn-default" id="btn-mark_order_finish-<?=$order->id?>" onclick="mark_order_finish(<?=$order->id?>)">Selesai</button>
+														<button type="button" class="btn btn-default" id="btn-mark_order_finish-<?=$order->id?>" onclick="mark_order_finish(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">Selesai</button>
 														<?php
 													}
 												?>
