@@ -176,6 +176,28 @@ class Account_model extends CI_Model {
 		// return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	// }
 	
+	public function get_from_email($email)
+	{
+		$where['email'] = $email;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_from_phone_number($phone_number)
+	{
+		$where['phone_number'] = $phone_number;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function get_all()
 	{
 		$this->load->model('Account_model');

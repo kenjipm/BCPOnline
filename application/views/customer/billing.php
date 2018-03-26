@@ -60,7 +60,10 @@
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			<h3><?=$title?></h3>
+			<h3>
+				<?=$title?>
+				<div class="pull-right"><a href="<?=site_url('customer/cart')?>" class="btn btn-default">Kembali</a></div>
+			</h3>
 		</div>
 		<div class="panel-body">
 			<form action="<?=site_url('billing/'.$model->billing->action)?>" method="post" class="form-horizontal" id="form_billing">

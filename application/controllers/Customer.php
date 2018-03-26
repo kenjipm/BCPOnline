@@ -355,6 +355,13 @@ class Customer extends CI_Controller {
 			}
 			
 			$cart[$posted_item_variance_id]['quantity'] += $quantity;
+			
+			// kalau stok ga mencukupi
+			if ($cart[$posted_item_variance_id]['quantity'] > $posted_item_variance->quantity_available)
+			{
+				$cart[$posted_item_variance_id]['quantity'] = $posted_item_variance->quantity_available;
+			}
+			
 			$this->session->cart = $cart;
 		}
 		
@@ -372,7 +379,18 @@ class Customer extends CI_Controller {
 		if (!isset($cart[$posted_item_variance_id])) redirect('customer/cart');
 		
 		$cart[$posted_item_variance_id]['quantity'] -= $quantity;
-		if ($cart[$posted_item_variance_id]['quantity'] <= 0) unset($cart[$posted_item_variance_id]);
+		if ($cart[$posted_item_variance_id]['quantity'] <= 0)
+		{
+			unset($cart[$posted_item_variance_id]);
+		}
+		// else
+		// {
+			// // kalau stok mencukupi
+			// if ($cart[$posted_item_variance_id]['quantity'] <= $posted_item_variance->quantity_available)
+			// {
+				// $this->session->cart = $cart;
+			// }
+		// }
 		
 		$this->session->cart = $cart;
 		

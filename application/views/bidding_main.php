@@ -37,14 +37,14 @@
 						<div class="row">
 							<div class="col-md-4">
 								<div class="panel panel-default">
-									<a href="<?=site_url('item/'.$model->bidding_item->id)?>">
+									<!--<a href="<?=site_url('item/'.$model->bidding_item->id)?>">-->
 										<div class="panel-body">
 											<img class="col-md-12" src="<?=$model->bidding_item->image_one_name?>" alt="<?=$model->bidding_item->posted_item_name?>"/>
 										</div>
 										<div class="panel-footer">
 											<label class="control-label"><?=$model->bidding_item->posted_item_name?></label>
 										</div>
-									</a>
+									<!--</a>-->
 								</div>
 							</div>
 							<div class="col-md-8">

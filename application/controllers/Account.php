@@ -139,15 +139,23 @@ class Account extends CI_Controller {
 		$this->form_validation->set_rules('name', 'Nama', 'required');
 		$this->form_validation->set_rules('address', 'Alamat', 'required');
 		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
-		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
+		$this->form_validation->set_rules('phone_number', 'No HP', 'required|is_unique[account.phone_number]');
 		
-		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'required');
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[account.email]');
+		$this->form_validation->set_rules('password', 'Password',
+			array(
+				'required',
+				'regex_match[/^.*((?=.*\d)(?=.*[a-zA-Z])|(?=.*[a-zA-Z])(?=.*[-!$%^&*()_+|~=`{}\[\]:";\'<>?,.\/])|(?=.*[-!$%^&*()_+|~=`{}\[\]:";\'<>?,.\/])(?=.*\d)).*$/]'
+			),
+			array(
+				'regex_match'      => '%s harus mengandung dua variasi (huruf, angka, simbol)',
+			));
 		$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
-
+		
 		if ($this->form_validation->run() == TRUE)
 		{
 			$this->load->model('Account_model');
+			
 			$this->Account_model->insert_from_post(TYPE['name']['CUSTOMER']);
 			
 			redirect('account/signup_success');

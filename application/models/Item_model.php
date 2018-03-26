@@ -32,7 +32,7 @@ class Item_model extends CI_Model {
 	public $tenant;
 	
 	// stub attribute
-	public $quantity_avalaible;
+	public $quantity_available;
 	
 	// constructor
 	public function __construct()
@@ -55,7 +55,7 @@ class Item_model extends CI_Model {
 		$this->tenant_id				= "";
 		$this->brand_id					= "";
 		
-		$this->quantity_avalaible		= "";
+		$this->quantity_available		= "";
 		
 		$this->load->model('Category_model');
 		$this->load->model('Brand_model');
@@ -202,8 +202,14 @@ class Item_model extends CI_Model {
 	public function get_all_from_category_id($category_id)
 	{
 		$query = $this->db
-					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
+					  ->where('item_type', 'ORDER')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
 					  ->get($this->table_item);
 					  
 		$items = $query->result();
@@ -240,7 +246,12 @@ class Item_model extends CI_Model {
 	
 	public function get_from_search($keywords)
 	{
+		$this->db->select('*, ' . $this->table_item.'.id AS id');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->like('posted_item_name', $keywords);
+		$this->db->group_by($this->table_item.'.id');
+		$this->db->distinct();
 		// foreach (explode(" ", $keywords) as $keyword) // untuk search per word
 		// {
 			// $this->db->or_like('name', $keyword);
@@ -355,10 +366,10 @@ class Item_model extends CI_Model {
 		
 		foreach ($posted_item_variances as $posted_item_variance)
 		{
-			$this->quantity_avalaible += $posted_item_variance->quantity_avalaible;
+			$this->quantity_available += $posted_item_variance->quantity_available;
 		}
 		
-		return $this->quantity_avalaible;
+		return $this->quantity_available;
 	}
 	
 	public function is_favorite($customer_id)
