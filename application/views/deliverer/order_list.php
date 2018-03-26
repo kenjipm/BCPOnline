@@ -95,7 +95,7 @@
 										<td><?=$deliver->address . ", " . $deliver->city . ", Kecamatan " . $deliver->kecamatan . ", Kelurahan " . $deliver->kelurahan . ", " . $deliver->postal_code?></td>
 										<td><?=$deliver->customer?></td>
 										<td>
-											<button class="btn btn-default" type="submit">By Pass OTP</button>
+											<button class="btn btn-default" type="submit">Pembelian di Tempat</button>
 										</td>
 									</tr>
 									<?php
