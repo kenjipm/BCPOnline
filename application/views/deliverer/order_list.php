@@ -81,25 +81,28 @@
 						</tr>
 					</thead>
 					<tbody>
-						<?php
-						if ($model->deliver_order_list)
-						{
-							foreach($model->deliver_order_list as $deliver)
+						<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
+							<?php
+							if ($model->deliver_order_list)
 							{
-								?>
-								<tr>
-									<td><?=$deliver->address . ", " . $deliver->city . ", Kecamatan " . $deliver->kecamatan . ", Kelurahan " . $deliver->kelurahan . ", " . $deliver->postal_code?></td>
-									<td><?=$deliver->customer?></td>
-									<td>
-										<a href="<?=site_url('order/transaction_detail/'.$deliver->id)?>">
-											<button class="btn btn-default">Lihat</button>
-										</a></div>	
-									</td>
-								</tr>
-								<?php
+								foreach($model->deliver_order_list as $deliver)
+								{
+									?>
+									<div class="form-group">
+										<input type="hidden" class="form-control" name="bypass_otp" value="<?=$deliver->bypass_otp?>"/>
+									</div>
+									<tr>
+										<td><?=$deliver->address . ", " . $deliver->city . ", Kecamatan " . $deliver->kecamatan . ", Kelurahan " . $deliver->kelurahan . ", " . $deliver->postal_code?></td>
+										<td><?=$deliver->customer?></td>
+										<td>
+											<button class="btn btn-default" type="submit">By Pass OTP</button>
+										</td>
+									</tr>
+									<?php
+								}
 							}
-						}
-						?>
+							?>
+						</form>
 					</tbody>
 				</table>
 				<form action="<?=site_url('order/order_list')?>" class="form-horizontal" method="post">
@@ -111,7 +114,7 @@
 							<input type="text" class="form-control" name="otp"/>
 						</div>
 						<div class="col-sm-2">
-							<button class="btn btn-default" type="submit" class="btn btn-default">Kirim</button>
+							<button class="btn btn-default" type="submit">Kirim</button>
 						</div>
 					</div>
 				</form>	

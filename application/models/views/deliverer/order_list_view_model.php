@@ -9,6 +9,10 @@ class Order_List_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{	
+		$this->order_list = array();
+		$this->deliver_order_list = array();	
+		$this->repair_list = array();
+		$this->deliver_repair_list = array();
 	}
 	
 	public function get_order_collection_task($orders)
@@ -32,6 +36,7 @@ class Order_List_View_Model extends CI_Model{
 		{
 			$this->deliver_order_list[$i] = new class{};
 			$this->deliver_order_list[$i]->id 			= $deliver->id;
+			$this->deliver_order_list[$i]->bypass_otp	= $deliver->otp_customer_to_deliverer;
 			$this->deliver_order_list[$i]->address 		= $deliver->billing->shipping_address->address_detail;
 			$this->deliver_order_list[$i]->city 		= $deliver->billing->shipping_address->city;
 			$this->deliver_order_list[$i]->kecamatan 	= $deliver->billing->shipping_address->kecamatan;

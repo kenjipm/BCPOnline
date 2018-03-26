@@ -20,7 +20,7 @@ class Order_List_View_Model extends CI_Model{
 			$this->orders[$i]->order_status	= ORDER_STATUS['description'][$billing->order_status];
 			$this->orders[$i]->date_created	= date("d-M-Y H:i:s", strtotime($billing->billing->date_created));
 			$this->orders[$i]->date_closed	= date("d-M-Y H:i:s", strtotime($billing->billing->date_closed));
-			$this->orders[$i]->sold_price	= $this->text_renderer->to_rupiah($billing->sold_price);
+			$this->orders[$i]->sold_price	= $this->text_renderer->to_rupiah($billing->sold_price * $billing->quantity);
 			
 			$i++;
 		}
