@@ -5,6 +5,7 @@ class Item_model extends CI_Model {
 	private $table_item = 'posted_item';
 	private $table_item_variance = 'posted_item_variance';
 	private $table_category = 'category';
+	private $table_tenant_bill = 'tenant_bill';
 	
 	// table attribute
 	public $id;
@@ -199,6 +200,28 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_promoted_from_category_id($category_id, $limit=6, $offset=0)
+	{
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left')
+					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->where($this->table_tenant_bill.'.payment_date > 0')
+					  ->where($this->table_tenant_bill.'.payment_expiration < CURDATE()')
+					  ->where('category_id', $category_id)
+					  ->where('item_type', 'ORDER')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->order_by('id', 'RANDOM')
+					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
+					  
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_from_category_id($category_id)
 	{
 		$query = $this->db
@@ -239,6 +262,28 @@ class Item_model extends CI_Model {
 		$query = $this->db
 					  ->order_by('id', 'DESC')
 					  ->get($this->table_item, $limit);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_promoted_from_search($keywords, $limit=6, $offset=0)
+	{
+		$this->db->select('*, ' . $this->table_item.'.id AS id');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->where($this->table_tenant_bill.'.payment_date > 0');
+		$this->db->where($this->table_tenant_bill.'.payment_expiration < CURDATE()');
+		$this->db->like('posted_item_name', $keywords);
+		$this->db->group_by($this->table_item.'.id');
+		$this->db->distinct();
+		$this->db->order_by('id', 'RANDOM');
+		// foreach (explode(" ", $keywords) as $keyword) // untuk search per word
+		// {
+			// $this->db->or_like('name', $keyword);
+		// }
+		$query = $this->db->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
