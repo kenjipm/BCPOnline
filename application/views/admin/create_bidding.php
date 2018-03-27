@@ -109,7 +109,7 @@
 					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_variance_description" value="<?= set_value('posted_item_variance_description'); ?>"/></div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="bidding_max_range">Maksimal Kenaikan Harga:</label>
+					<label class="control-label col-xs-3" for="bidding_max_range">Kenaikan Harga:</label>
 					<div class="col-xs-4"><input type="text" class="form-control" name="bidding_max_range" value="<?= set_value('bidding_max_range'); ?>"/></div>
 				</div>
 				<div class="form-group">

@@ -29,7 +29,7 @@ class Tenant_bill_model extends CI_Model {
 		$this->tenant_id			= 0;
 		$this->hot_item_id			= "";
 		$this->posted_item_id		= "";
-		$this->admin_id				= 0;
+		$this->admin_id				= "";
 		$this->payment_value		= "";
 		$this->payment_expiration	= "";
 		$this->payment_date			= "";
@@ -121,6 +121,21 @@ class Tenant_bill_model extends CI_Model {
 		
 		return ($tenant_bills !== null) ? $this->map_list($tenant_bills) : array();
 	}
+	
+	public function get_all_seo_unpaid_by_tenants()
+	{
+		$where[$this->table_tenant_bill.'.payment_date'] = null;
+		
+		$this->db->select('*, ' . $this->table_tenant_bill.'.posted_item_id AS posted_item_id, '. $this->table_tenant_bill.'.id AS id');
+		$this->db->join($this->table_item, $this->table_item. '.id = '. $this->table_tenant_bill.'.posted_item_id', 'left');
+		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill);
+		$tenant_bills = $query->result();
+		
+		return ($tenant_bills !== null) ? $this->map_list($tenant_bills) : array();
+	}
+	
 	// public function get_all($limit=10, $offset=0)
 	// {
 		// $this->db->join($this->table_item, $this->table_tenant_bill.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
@@ -154,6 +169,16 @@ class Tenant_bill_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function set_paid_seo($posted_item_id)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('posted_item_id', $posted_item_id);
+		$this->db->set('payment_date', date("Y-m-d H:i:s"));
+		$this->db->update($this->table_tenant_bill);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
 	
 	// get hot_item detail
 	public function get_from_hot_item_id($hot_item_id)
@@ -166,6 +191,66 @@ class Tenant_bill_model extends CI_Model {
 		$item = $query->row();
 		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	// get seo_item detail
+	public function get_from_seo_item_id($posted_item_id)
+	{
+		$where['posted_item_id'] = $posted_item_id;
+		
+		$this->db->where($where);
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function insert_seo_item($id)
+	{	
+		$this->tenant_bill_id		= "";
+		$this->payment_expiration	= "";
+		$this->payment_value		= "";
+		$this->tenant_id			= $this->session->child_id;
+		$this->posted_item_id		= $id;
+		$this->hot_item_id			= NULL;
+		$this->admin_id				= NULL;
+		$this->payment_date			= "";
+		
+		// insert data, then generate [reward_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_tenant_bill, $db_item))
+		{
+			$this->load->library('Id_Generator');
+			
+			$db_item->id		= $this->db->insert_id();
+			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['tenant_bill'], $db_item->id);
+			
+			$this->db->where('id', $db_item->id);
+			$this->db->update($this->table_tenant_bill, $db_item);
+		}
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function confirm_seo_item($id)
+	{	
+		$this->payment_expiration	= $this->input->post('payment_expiration');
+		$this->payment_value		= $this->input->post('payment_value');
+		$this->admin_id				= $this->session->child_id;
+		
+		// insert data, then generate [reward_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->set('admin_id', $this->admin_id);
+		$this->db->set('payment_value', $this->payment_value);
+		$this->db->set('payment_expiration', $this->payment_expiration);
+		$this->db->where('id', $id);
+		$this->db->update($this->table_tenant_bill);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
 	public function insert_from_post()

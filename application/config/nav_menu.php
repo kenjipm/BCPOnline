@@ -96,6 +96,10 @@ $config['top_menu_admin'] = array(
 			'text'	=> "Hot Item",
 			'url'	=> "admin/hot_item_list",
 			),
+		'SEO_ITEM' => array(
+			'text'	=> "SEO Item",
+			'url'	=> "admin/seo_item_list",
+			),
 		),
 	'right' => array(
 		'ORDER' => array(

@@ -127,6 +127,34 @@
 					<?php
 				}
 				?>
+				
+			<?php
+				if (!$model->posted_item->is_seo_item)
+				{
+					?>
+						<a class="btn btn-default" href="<?=site_url('Item/seo_item_do/'.$model->posted_item->id)?>">Set as SEO</a>
+					<?php
+				}
+				else if (!$model->posted_item->is_seo_item_confirmed)
+				{
+					?>
+						<button type="button" class="btn btn-default" disabled>Menunggu Konfirmasi Admin</button>
+					<?php
+				}
+				else if (!$model->posted_item->is_seo_item_paid)
+				{
+					?>
+						<button type="button" class="btn btn-default" disabled>Menunggu Pembayaran</button>
+						<button type="button" class="btn btn-default" onclick="bayar_seo_item_dummy(<?=$model->posted_item->posted_item_id?>)">Bayar (dummy)</button>
+					<?php
+				}
+				else // if ($is_seo_item_paid)
+				{
+					?>
+						<button type="button" class="btn btn-default" disabled>Sudah SEO Item</button>
+					<?php
+				}
+				?>
 		</div>
 	</div>
 	

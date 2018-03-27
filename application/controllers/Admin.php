@@ -53,6 +53,28 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function seo_item_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Tenant_bill_model');
+		$tenant_bills = $this->Tenant_bill_model->get_all_seo_unpaid_by_tenants();
+		
+		$this->load->model('views/admin/seo_item_view_model');
+		$this->seo_item_view_model->get($tenant_bills);
+		
+		$data['model'] = $this->seo_item_view_model;
+		$data['title'] = "Tenant yang Belum Bayar";
+		$this->load->view('admin/seo_item_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function create_tenant_bill($id)
 	{
 		if ($this->input->method() == "post") $this->create_tenant_bill_do();
@@ -73,6 +95,26 @@ class Admin extends CI_Controller {
 		$data['model'] = $this->create_tenant_bill_view_model;
 		
 		$this->load->view('admin/create_tenant_bill', $data);
+	}
+	
+	public function create_tenant_bill_seo($id)
+	{
+		if ($this->input->method() == "post") $this->create_tenant_bill_seo_do();
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Item_model');
+		$this->load->model('Posted_item_variance_model');
+		$item = $this->Item_model->get_from_id($id);
+		$this->load->model('views/admin/create_tenant_bill_seo_view_model');
+		$this->create_tenant_bill_seo_view_model->get($item);
+		$data['model'] = $this->create_tenant_bill_seo_view_model;
+		
+		$this->load->view('admin/create_tenant_bill_seo', $data);
 	}
 	
 	public function create_tenant_bill_do()
