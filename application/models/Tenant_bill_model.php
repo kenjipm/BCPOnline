@@ -213,11 +213,23 @@ class Tenant_bill_model extends CI_Model {
 		$where['posted_item_id'] = $posted_item_id;
 		
 		$this->db->where($where);
+		$this->db->where('admin_id is NOT NULL');
 		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_tenant_bill, 1);
 		$item = $query->row();
 		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_registered_seo($posted_item_id)
+	{
+		$where['posted_item_id'] = $posted_item_id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		$seo_item = $query->row();
+		
+		return ($seo_item !== null) ? $this->get_stub_from_db($seo_item) : null;
 	}
 	
 	public function insert_seo_item($id)
