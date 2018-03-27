@@ -70,7 +70,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		if ($seo_item != null)
 		{
 			$this->load->model('tenant_bill_model');
-			$tenant_bill = $this->tenant_bill_model->get_from_seo_item_id($seo_item->id);
+			$tenant_bill = $this->tenant_bill_model->get_from_seo_item_id($seo_item->posted_item_id);
 			$this->posted_item->is_seo_item = true;
 			$this->posted_item->seo_item_id = $seo_item->id;
 			if ($tenant_bill != null)

@@ -108,6 +108,20 @@ class Tenant_bill_model extends CI_Model {
 		return $result;
 	}
 	
+	public function get_from_id($id)
+	{
+		$where['tenant_bill.id'] = $id;
+		
+		$this->db->select('*, ' . $this->table_tenant_bill.'.id AS id, ' . $this->table_tenant_bill.'.posted_item_id AS posted_item_id, '. $this->table_item. '.tenant_id AS tenant_id');
+		$this->db->join('posted_item', 'posted_item.id=' . $this->table_tenant_bill . '.posted_item_id', 'left');
+		$this->db->join('tenant', 'tenant.id=' . $this->table_item . '.tenant_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function get_all_unpaid_by_tenants()
 	{
 		$where[$this->table_tenant_bill.'.payment_date'] = null;

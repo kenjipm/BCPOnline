@@ -99,7 +99,7 @@ class Admin extends CI_Controller {
 	
 	public function create_tenant_bill_seo($id)
 	{
-		if ($this->input->method() == "post") $this->create_tenant_bill_seo_do();
+		if ($this->input->method() == "post") $this->create_tenant_bill_seo_do($id);
 		
 		// Load Header
         $data_header['css_list'] = array();
@@ -107,11 +107,10 @@ class Admin extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->model('Item_model');
-		$this->load->model('Posted_item_variance_model');
-		$item = $this->Item_model->get_from_id($id);
+		$this->load->model('Tenant_bill_model');
+		$tenant_bill = $this->Tenant_bill_model->get_from_id($id);
 		$this->load->model('views/admin/create_tenant_bill_seo_view_model');
-		$this->create_tenant_bill_seo_view_model->get($item);
+		$this->create_tenant_bill_seo_view_model->get($tenant_bill);
 		$data['model'] = $this->create_tenant_bill_seo_view_model;
 		
 		$this->load->view('admin/create_tenant_bill_seo', $data);
@@ -128,6 +127,22 @@ class Admin extends CI_Controller {
 		{
 			$this->load->model('Tenant_bill_model');
 			$this->Tenant_bill_model->insert_from_post();
+			
+			redirect('Item/post_item_list');
+		}
+	}
+	
+	public function create_tenant_bill_seo_do($id)
+	{	
+		$this->load->library('form_validation');
+
+		$this->form_validation->set_rules('payment_value', 'Harga', 'required');
+		$this->form_validation->set_rules('payment_expiration', 'Masa Berlaku', 'required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Tenant_bill_model');
+			$this->Tenant_bill_model->confirm_seo_item($id);
 			
 			redirect('Item/post_item_list');
 		}

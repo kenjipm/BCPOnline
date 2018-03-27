@@ -145,7 +145,7 @@
 				{
 					?>
 						<button type="button" class="btn btn-default" disabled>Menunggu Pembayaran</button>
-						<button type="button" class="btn btn-default" onclick="bayar_seo_item_dummy(<?=$model->posted_item->posted_item_id?>)">Bayar (dummy)</button>
+						<button type="button" class="btn btn-default" onclick="bayar_seo_item_dummy(<?=$model->posted_item->id?>)">Bayar (dummy)</button>
 					<?php
 				}
 				else // if ($is_seo_item_paid)

@@ -110,4 +110,14 @@ class Tenant extends CI_Controller {
 		echo "1";
 	}
 	
+	public function bayar_seo_item_dummy()
+	{
+		$posted_item_id = $this->input->post('posted_item_id');
+		
+		$this->load->model('tenant_bill_model');
+		$this->tenant_bill_model->set_paid_seo($posted_item_id);
+		
+		echo "1";
+	}
+	
 }

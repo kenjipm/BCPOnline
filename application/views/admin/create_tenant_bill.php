@@ -13,7 +13,7 @@
 					<label class="control-label col-sm-3">Tenant:</label>
 					<div class="col-sm-9">
 						<input type="text" class="form-control" name="tenant_name" value="<?=$model->tenant_bill->tenant_name?>" readonly/>
-						<input type="text" name="tenant_id" value="<?=$model->tenant_bill->tenant_id?>" readonly/>
+						<input type="hidden" name="tenant_id" value="<?=$model->tenant_bill->tenant_id?>" readonly/>
 					</div>
 				</div>
 				<div class="form-group">

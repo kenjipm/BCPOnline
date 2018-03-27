@@ -36,7 +36,7 @@
 								<td><?=$tenant_bill->tenant_name?></td>
 								<td><?=$tenant_bill->posted_item_name?></td>
 								<td><?=$tenant_bill->payment_value?></td>
-								<td><a href="<?=site_url('Admin/create_tenant_bill_seo/'.$tenant_bill->posted_item_id)?>" class="btn btn-default">Buat Billing Tenant</a> </td>
+								<td><a href="<?=site_url('Admin/create_tenant_bill_seo/'.$tenant_bill->id)?>" class="btn btn-default">Buat Billing Tenant</a> </td>
 							<?php
 						}
 						?>
