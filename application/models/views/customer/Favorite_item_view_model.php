@@ -14,6 +14,7 @@ class Favorite_item_view_model extends CI_Model {
 	
 	public function get($favorite_items)
 	{
+		$this->load->library('text_renderer');
 		foreach($favorite_items as $favorite_item)
 		{
 			$favorite_item->init_posted_item();
@@ -25,7 +26,7 @@ class Favorite_item_view_model extends CI_Model {
 			$favorite_item_temp->posted_item->id				= $favorite_item->posted_item->id;
 			$favorite_item_temp->posted_item->image_one_name	= site_url($favorite_item->posted_item->image_one_name);
 			$favorite_item_temp->posted_item->posted_item_name	= $favorite_item->posted_item->posted_item_name;
-			$favorite_item_temp->posted_item->price				= $favorite_item->posted_item->price;
+			$favorite_item_temp->posted_item->price				= $this->text_renderer->to_rupiah($favorite_item->posted_item->price);
 			
 			$this->favorite_items[] = $favorite_item_temp;
 		}

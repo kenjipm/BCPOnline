@@ -210,7 +210,7 @@ class Item_model extends CI_Model {
 					  ->where($this->table_tenant_bill.'.payment_date > 0')
 					  ->where($this->table_tenant_bill.'.payment_expiration < CURDATE()')
 					  ->where('category_id', $category_id)
-					  ->where('item_type', 'ORDER')
+					  // ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->order_by('id', 'RANDOM')
@@ -229,7 +229,7 @@ class Item_model extends CI_Model {
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
 					  ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
-					  ->where('item_type', 'ORDER')
+					  // ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
