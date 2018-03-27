@@ -23,6 +23,24 @@
 			<div class="panel-body">
 				<div class="row">
 					<?php
+					foreach($model->promoted_items as $promoted_item)
+					{
+						?>
+							<div class="col-md-4">
+								<div class="panel panel-default">
+									<a href="<?=site_url('item/'.$promoted_item->id)?>">
+										<div class="panel-body">
+											<img class="col-md-12" src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
+										</div>
+										<div class="panel-footer">
+											<label class="control-label">*<?=$promoted_item->posted_item_name?></label><br/>
+											<label class="control-label"><?=$promoted_item->price?></label><br/>
+										</div>
+									</a>
+								</div>
+							</div>
+						<?php
+					}
 					foreach($model->search_items as $search_item)
 					{
 						?>

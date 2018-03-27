@@ -188,9 +188,11 @@ class Item extends CI_Controller {
 		$keywords = $this->input->get('keywords');
 		
 		$this->load->model('item_model');
+		$promoted_items = $this->item_model->get_all_promoted_from_search($keywords);
 		$items = $this->item_model->get_from_search($keywords);
+		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($items);
+		$this->search_view_model->get($promoted_items, $items);
 		
 		$data['title'] = 'Hasil Pencarian';
 		$data['model'] = $this->search_view_model;
@@ -209,13 +211,14 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('item_model');
+		$promoted_items = $this->item_model->get_all_promoted_from_category_id($category_id);
 		$items = $this->item_model->get_all_from_category_id($category_id);
 		
 		$this->load->model('category_model');
 		$category = $this->category_model->get_from_id($category_id);
 		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($items);
+		$this->search_view_model->get($promoted_items, $items);
 		
 		$data['title'] = 'Kategori '.$category->category_name;
 		$data['model'] = $this->search_view_model;
