@@ -164,6 +164,7 @@ class Order_details_model extends CI_Model {
 		$stub->billing						= new Billing_model();
 		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
 		$stub->billing->date_created		= $db_item->date_created ?? "";
+		$stub->billing->date_closed			= $db_item->date_closed ?? "";
 		$stub->billing->customer_id			= $db_item->customer_id ?? "";
 		
 		$stub->billing->customer					= new Customer_model();
@@ -284,6 +285,7 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
 		$this->db->where($where);
+		$this->db->order_by('date_created', 'DESC');
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		

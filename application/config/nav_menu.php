@@ -60,6 +60,10 @@ $config['top_menu_tenant'] = array(
 			'text'	=> "Inbox",
 			'url'	=> "message",
 			),
+		'DSIPUTE' => array(
+			'text'	=> "Dispute",
+			'url'	=> "dispute",
+			),
 		'PROFILE' => array(
 			'text'	=> "Profile",
 			'url'	=> "",

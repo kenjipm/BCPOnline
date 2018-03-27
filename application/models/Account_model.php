@@ -326,6 +326,11 @@ class Account_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function is_blocked()
+	{
+		return ($this->status == 'INACTIVE');
+	}
+	
 	public function get_type($id)
 	{
 		foreach(TYPE['model'] as $type => $model)

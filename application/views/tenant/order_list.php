@@ -32,7 +32,6 @@
 					<thead>
 						<tr>
 							<th> <label for="tanggal1">Dibuat</label>	</th>
-							<th> <label for="tanggal2">Lunas</label> </th>
 							<th> <label for="status">Status</label> </th>
 							<th> <label for="total_payable">Total Harga</label> </th>
 							<th> </th>
@@ -48,8 +47,6 @@
 								<tr>
 									<td>
 										<?=$order->date_created?> </td>
-									<td>
-										<?=$order->date_closed?> </td>
 									<td>
 										<?=$order->order_status?> </td>
 									<td>

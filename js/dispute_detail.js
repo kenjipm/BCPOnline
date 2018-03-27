@@ -1,5 +1,5 @@
 $(document).ready(function(){
-	$("dispute_input").keypress(function(e) {
+	$("#dispute_input").keypress(function(e) {
 		if(e.which == 13) {
 			send_dispute();
 		}

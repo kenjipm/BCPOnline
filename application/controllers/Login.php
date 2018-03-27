@@ -46,6 +46,12 @@ class Login extends CI_Controller {
 		
 		if ($user !== null)
 		{
+		
+			if ($user->is_blocked())
+			{
+				redirect('login?err=6');
+			}
+			
 			$id = $user->id;
 			$child_id = $user->child_id;
 			$account_id = $user->account_id;
@@ -84,6 +90,10 @@ class Login extends CI_Controller {
 		if ($error_code == 1)
 		{
 			return "Username / Password salah";
+		}
+		else if ($error_code == 6)
+		{
+			return "Akun Anda di blokir. Silakan hubungi admin untuk informasi lebih lanjut.";
 		}
 		else
 		{
