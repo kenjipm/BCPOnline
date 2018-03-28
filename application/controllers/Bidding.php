@@ -65,9 +65,9 @@ class Bidding extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->model('Bidding_live_model');
+		$this->load->model('Bidding_model');
 		$this->load->model('Item_model');
-		$biddings = $this->Bidding_live_model->get_all_from_posted_item_id($posted_item_id);
+		$biddings = $this->Bidding_model->get_all_from_posted_item_id($posted_item_id);
 		$item = $this->Item_model->get_from_id($posted_item_id);
 		// if (strtotime(date('Y-m-d H:m:s')) > strtotime($item->date_expired))
 			// $is_expired = 1;

@@ -94,7 +94,7 @@ $config['top_menu_admin'] = array(
 			),
 		'BIDDING' => array(
 			'text'	=> "Bidding",
-			'url'	=> "bidding/bidding_list",
+			'url'	=> "bidding_live/bidding_live_list",
 			),
 		'HOT_ITEM' => array(
 			'text'	=> "Hot Item",
