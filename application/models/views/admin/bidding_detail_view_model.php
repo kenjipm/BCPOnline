@@ -39,7 +39,6 @@ class Bidding_detail_view_model extends CI_Model {
 		}
 		
 		$this->is_expired = $is_expired;
-		$this->update_price = $this->biddings[0]->bid_price;
 	}
 }
 ?>
