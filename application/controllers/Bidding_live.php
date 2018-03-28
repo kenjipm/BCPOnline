@@ -12,10 +12,10 @@ class Bidding_live extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('item_model');
-		$bidding_live_item = $this->item_model->get_last_bidding_live_item();
+		$bidding_item = $this->item_model->get_last_bidding_item();
 		
 		$this->load->model('bidding_live_model');
-		$last_bidding_live = $this->bidding_live_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_live_item->id);
+		$last_bidding_live = $this->bidding_live_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
 		if ($last_bidding_live == null)
 		{
 			$last_bidding_live = new class{};
@@ -26,7 +26,7 @@ class Bidding_live extends CI_Controller {
 		$customer = $this->customer_model->get_from_id($this->session->child_id);
 		
 		$this->load->model('views/bidding_live_main_view_model');
-		$this->bidding_live_main_view_model->get($bidding_live_item, $last_bidding_live, $customer->deposit_status);
+		$this->bidding_live_main_view_model->get($bidding_item, $last_bidding_live, $customer->deposit_status);
 		
 		$data['model'] = $this->bidding_live_main_view_model;
 		$this->load->view('bidding_live_main', $data);
@@ -46,7 +46,7 @@ class Bidding_live extends CI_Controller {
 		// Load Body
 		$this->load->model('Item_model');
 		$this->load->model('Bidding_live_model');
-		$items = $this->Item_model->get_all_bidding_live_items();
+		$items = $this->Item_model->get_all_bidding_items();
 		$bidding_lives = $this->Bidding_live_model->get_all();
 		$this->load->model('views/admin/bidding_live_list_view_model');
 		$this->bidding_live_list_view_model->get($items, $bidding_lives);

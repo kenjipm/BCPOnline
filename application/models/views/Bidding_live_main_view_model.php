@@ -29,7 +29,7 @@ class Bidding_live_main_view_model extends CI_Model {
 			$this->bidding_item->price_str = $this->text_renderer->to_rupiah($bidding_item->price);
 			$this->bidding_item->image_one_name	= $bidding_item->image_one_name;
 			
-			$this->bidding_item->start_bid_price	= $bidding_item->price + $bidding_item->bidding_step;
+			$this->bidding_item->start_bid_price	= $bidding_item->price + $bidding_item->bidding_max_range;
 		}
 	}
 }
