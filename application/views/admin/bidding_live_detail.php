@@ -60,13 +60,7 @@
 								<td>
 									<?=$bidding->bid_price?> </td>
 								<td>
-									<?php if ($bidding->bid_price == $model->max_price) { 
-										$show_button_winner = true;
-										} else {
-										$show_button_winner = false;
-										}
-									?>
-									<button class="btn btn-default" onclick="choose_winner(<?=$bidding->id?>)" type="button" class="button_winner"  <?php if ($show_button_winner == false){ ?> style="display:none" <?php } ?>>Pemenang</button></td>
+									<button class="btn btn-default" onclick="choose_winner(<?=$bidding->id?>)" type="button" class="button_winner">Pemenang</button></td>
 							</tr>
 							<?php
 						}

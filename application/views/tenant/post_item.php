@@ -81,9 +81,18 @@
 					</div>
 				</div>
 				<div class="form-group">
-					<div class="control-label col-xs-3"><label>Varian:</label></div>
-					<div class="col-sm-7">
-						<input type="text" class="form-control" name="var_type" value="<?= set_value('var_type'); ?>">
+					<label class="control-label col-xs-3" for="var_type">Varian:</label>
+					<div class="col-xs-6">
+						<select class="form-control" name="var_type">
+						<?php
+						foreach ($model->item_variance as $variance)
+						{
+							?>
+							<option value="<?=$variance?>"><?=$variance?></option>			
+							<?php
+						}
+						?>
+						</select>
 					</div>
 				</div>
 				<div class="form-group">

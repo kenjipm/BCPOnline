@@ -91,6 +91,13 @@ defined('DISPUTE_STATUS') OR define('DISPUTE_STATUS', array(
 	)
 );
 
+defined('POSTED_ITEM_VARIANCE_TYPE') OR define('POSTED_ITEM_VARIANCE_TYPE', array(
+		'type' => array(
+			"WARNA"				=> "Warna",
+		),
+	)
+);
+
 defined('TYPE') OR define('TYPE', array(
 		'name' => array(
 			'CUSTOMER'				=> 'CUSTOMER',

@@ -5,6 +5,7 @@ class Create_Bidding_View_Model extends CI_Model{
 	public $bidding_category = array();
 	public $bidding_brand = array();
 	public $bidding_item = array();
+	public $bidding_variance = array();
 	// constructor
 	public function __construct()
 	{	
@@ -46,6 +47,13 @@ class Create_Bidding_View_Model extends CI_Model{
 			$i++;
 		}
 		
+		$i = 0;
+		foreach(POSTED_ITEM_VARIANCE_TYPE['type'] as $type)
+		{
+			$this->bidding_variance[$i] = $type;
+			
+			$i++;
+		}
 	}
 	
 	

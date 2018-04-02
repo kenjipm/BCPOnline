@@ -4,9 +4,13 @@ class Post_Item_View_Model extends CI_Model{
 	
 	public $item_category;
 	public $item_brand;
+	public $item_variance;
 	// constructor
 	public function __construct()
 	{	
+		$this->item_category = array();
+		$this->item_brand = array();
+		$this->item_variance = array();
 	}
 	
 	public function get($categories, $brands)
@@ -33,6 +37,13 @@ class Post_Item_View_Model extends CI_Model{
 			$i++;
 		}
 		
+		$i = 0;
+		foreach(POSTED_ITEM_VARIANCE_TYPE['type'] as $type)
+		{
+			$this->item_variance[$i] = $type;
+			
+			$i++;
+		}
 	}
 	
 	

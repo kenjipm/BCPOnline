@@ -102,10 +102,21 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="posted_item_variance_name">Varian:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_variance_name" value="<?= set_value('posted_item_variance_name'); ?>"/></div>
+					<div class="col-xs-6">
+						<select class="form-control" name="posted_item_variance_name">
+						<?php
+						foreach ($model->bidding_variance as $variance)
+						{
+							?>
+							<option value="<?=$variance?>"><?=$variance?></option>			
+							<?php
+						}
+						?>
+						</select>
+					</div>
 				</div>
 				<div class="form-group">
-					<label class="control-label col-xs-3" for="posted_item_variance_description">Deskripsi:</label>
+					<label class="control-label col-xs-3" for="posted_item_variance_description">Deskripsi Varian:</label>
 					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_variance_description" value="<?= set_value('posted_item_variance_description'); ?>"/></div>
 				</div>
 				<div class="form-group">
