@@ -9,7 +9,25 @@ $(document).ready(function(){
 	bidding_min_price = bidding_cur_price + bidding_step;
 	
 	update_price_live();
+	
+	bidding_next_price_format();
+	
+	$("#bidding_next_price_str").change(function(){
+		bidding_next_price_format();
+	});
 });
+
+function bidding_next_price_format(step=0)
+{
+	var price = $("#bidding_next_price_str").val();
+	price = price.replace(/\./g, '');
+	price = parseInt(price) + parseInt(step);
+	
+	$("#bidding_next_price").val(price);
+	
+	price = price.toLocaleString('id-ID');
+	$("#bidding_next_price_str").val(price);
+}
 
 function update_price_live()
 {
@@ -49,12 +67,16 @@ function bid_add_do()
 {
 	var bidding_next_price = parseInt($("#bidding_next_price").val()) + bidding_step; 
 	$("#bidding_next_price").val(bidding_next_price);
+	bidding_next_price_format(bidding_step);
 }
 
 function bid_sub_do()
 {
 	var bidding_next_price = parseInt($("#bidding_next_price").val()) - bidding_step;
-	if (bidding_next_price >= bidding_min_price) $("#bidding_next_price").val(bidding_next_price);
+	if (bidding_next_price >= bidding_min_price) {
+		$("#bidding_next_price").val(bidding_next_price);
+		bidding_next_price_format(-bidding_step);
+	}
 }
 
 function submit_bid()

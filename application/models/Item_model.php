@@ -491,6 +491,13 @@ class Item_model extends CI_Model {
 		$this->db->update($this->table_item);
 	}
 	
+	public function update_date_expired()
+	{
+		$this->db->set('date_expired', $this->date_expired);
+		$this->db->where('id', $this->input->post('posted_item_id'));
+		$this->db->update($this->table_item);
+	}
+	
 	public function update_price_live($price, $posted_item_id)
 	{
 		$this->db->set('price', $price);

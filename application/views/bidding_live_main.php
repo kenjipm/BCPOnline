@@ -60,7 +60,8 @@
 								</div>
 								<div class="row">
 									<div class="col-md-6">
-										<input type="text" class="form-control" id="bidding_next_price" value="<?=$model->bidding_item->start_bid_price?>" />
+										<input type="hidden" id="bidding_next_price" value="<?=$model->bidding_item->start_bid_price?>"/>
+										<input type="text" class="form-control" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
 									</div>
 									<div class="col-md-6">
 										<input type="hidden" id="bidding_item_id" value="<?=$model->bidding_item->id?>"/>

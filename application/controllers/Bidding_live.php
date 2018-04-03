@@ -159,6 +159,13 @@ class Bidding_live extends CI_Controller {
 			$this->load->model('item_model');
 			$posted_item = $this->item_model->get_from_id($posted_item_id);
 			
+			$date_now = time();
+			if (strtotime($posted_item->date_expired) > $date_now)
+			{
+				$posted_item->date_expired = date('Y-m-d H:i:s');
+				$posted_item->update_date_expired();
+			}
+			
 			// validasi, kalau item ga ada (error)
 			if ($posted_item == null) { echo "-2"; return -2; }
 			
