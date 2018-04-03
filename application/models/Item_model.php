@@ -26,6 +26,7 @@ class Item_model extends CI_Model {
 	public $category_id;
 	public $tenant_id;
 	public $brand_id;
+	public $is_confirmed;
 	
 	// relation table
 	public $category;
@@ -55,6 +56,7 @@ class Item_model extends CI_Model {
 		$this->category_id				= "";
 		$this->tenant_id				= "";
 		$this->brand_id					= "";
+		$this->is_confirmed				= 0;
 		
 		$this->quantity_available		= "";
 		
@@ -85,6 +87,7 @@ class Item_model extends CI_Model {
 		$this->category_id				= $db_item->category_id;
 		$this->tenant_id				= $db_item->tenant_id;
 		$this->brand_id					= $db_item->brand_id;
+		$this->is_confirmed					= $db_item->is_confirmed;
 		
 		$this->category->category_name	= $db_item->category_name ?? "";
 		$this->brand->brand_name		= $db_item->brand_name ?? "";
@@ -113,6 +116,7 @@ class Item_model extends CI_Model {
 		$db_item->category_id				= $this->category_id;
 		$db_item->tenant_id					= $this->tenant_id;
 		$db_item->brand_id					= $this->brand_id;
+		$db_item->is_confirmed					= $this->is_confirmed;
 		
 		return $db_item;
 	}
@@ -137,6 +141,39 @@ class Item_model extends CI_Model {
 		$stub->category_id				= $db_item->category_id;
 		$stub->tenant_id				= $db_item->tenant_id;
 		$stub->brand_id					= $db_item->brand_id;
+		$stub->is_confirmed					= $db_item->is_confirmed;
+		
+		$stub->category->category_name	= $db_item->category_name ?? "";
+		$stub->brand->brand_name		= $db_item->brand_name ?? "";
+		$stub->tenant->tenant_name		= $db_item->tenant_name ?? "";
+		
+		return $stub;
+	}
+	
+	// new stub object from database object
+	public function get_new_bidding_stub_from_db($db_item)
+	{
+		$stub = new Item_model();
+		
+		$stub->id						= $db_item->id;
+		$stub->posted_item_id			= $db_item->posted_item_id;
+		$stub->posted_item_name			= $db_item->posted_item_name;
+		$stub->price					= $db_item->price;
+		$stub->date_posted				= $db_item->date_posted;
+		$stub->date_updated				= $db_item->date_updated;
+		$stub->date_expired				= $db_item->date_expired;
+		$stub->bidding_max_range		= $db_item->bidding_max_range;
+		$stub->item_type				= $db_item->item_type;
+		$stub->unit_weight				= $db_item->unit_weight;
+		$stub->posted_item_description	= $db_item->posted_item_description;
+		$stub->image_one_name			= $db_item->image_one_name;
+		$stub->category_id				= $db_item->category_id;
+		$stub->tenant_id				= $db_item->tenant_id;
+		$stub->brand_id					= $db_item->brand_id;
+		$stub->is_confirmed				= $db_item->is_confirmed;
+		
+		$stub->var_type					= $db_item->var_type;
+		$stub->var_description			= $db_item->var_description;
 		
 		$stub->category->category_name	= $db_item->category_name ?? "";
 		$stub->brand->brand_name		= $db_item->brand_name ?? "";
@@ -311,11 +348,26 @@ class Item_model extends CI_Model {
 	{
 		$this->db->where('item_type', "BID");
 		$this->db->where('date_expired > ', date("Y-m-d H:i:s"));
+		$this->db->where('is_confirmed', 1);
 		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_item, 1);
 		$item = $query->row();
 		
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_unconfirmed_bidding_item()
+	{
+		$this->db->select('*, ' . $this->table_item.'.id AS id');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->where('item_type', "BID");
+		$this->db->where('date_expired > ', date("Y-m-d H:i:s"));
+		$this->db->where('is_confirmed', 0);
+		$this->db->order_by($this->table_item.'.id', 'DESC');
+		$query = $this->db->get($this->table_item, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_new_bidding_stub_from_db($item) : null;
 	}
 	
 	public function get_bid_time_left()
@@ -510,6 +562,23 @@ class Item_model extends CI_Model {
 		$this->db->where('id', $posted_item_id);
 		$this->db->update($this->table_item);
 	}
+	
+	public function set_is_confirmed($value=1)
+	{
+		$this->db->set('is_confirmed', 1);
+		$this->db->where('id', $this->id);
+		$this->db->update($this->table_item);
+	}
+	
+	public function delete_from_id($id)
+	{
+		$this->db->where('posted_item_id', $id);
+		$this->db->delete($this->table_item_variance);
+		
+		$this->db->where('id', $id);
+		$this->db->delete($this->table_item);
+	}
+	
 	/*
 	public function get_type()
 	{

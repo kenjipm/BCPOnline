@@ -88,7 +88,7 @@ class Bidding_live extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('admin/create_bidding');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -97,9 +97,12 @@ class Bidding_live extends CI_Controller {
 		$this->load->model('Item_model');
 		$categories = $this->Category_model->get_all();
 		$brands = $this->Brand_model->get_all();
-		$items = $this->Item_model->get_all_for_admin();
+		// $items = $this->Item_model->get_all_for_admin();
+		
+		$unconfirmed_item = $this->Item_model->get_unconfirmed_bidding_item();
+		
 		$this->load->model('views/admin/create_bidding_view_model');
-		$this->create_bidding_view_model->get($categories, $brands, $items);
+		$this->create_bidding_view_model->get($categories, $brands, $unconfirmed_item);
 		$data['model'] = $this->create_bidding_view_model;
 		
 		$this->load->view('admin/create_bidding', $data);
@@ -221,5 +224,52 @@ class Bidding_live extends CI_Controller {
 			
 			echo "1"; return "1";
 		}
+	}
+	public function bidding_approve_do()
+	{
+		$password = $this->input->post('password');
+		$json_result = new class{};
+		$json_result->code = "-1";
+		
+		$this->load->model('account_model');
+		if ($this->account_model->is_superadmin($password)) // if true
+		{
+			$posted_item_id = $this->input->post('posted_item_id');
+			
+			$this->load->model('item_model');
+			$item = $this->item_model->get_from_id($posted_item_id);
+			$item->set_is_confirmed();
+			$json_result->code = "1";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
+	
+	public function bidding_decline_do()
+	{
+		$password = $this->input->post('password');
+		$json_result = new class{};
+		$json_result->code = "-1";
+		
+		$this->load->model('account_model');
+		if ($this->account_model->is_superadmin($password)) // if true
+		{
+			$posted_item_id = $this->input->post('posted_item_id');
+			
+			$this->load->model('item_model');
+			$this->item_model->delete_from_id($posted_item_id);
+			
+			$json_result->code = "1";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
 	}
 }

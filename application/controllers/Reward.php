@@ -151,7 +151,7 @@ class Reward extends CI_Controller {
 			$setting_reward_id = $this->input->post('setting_reward_id');
 			
 			$this->load->model('setting_reward_model');
-			$setting_reward = $setting_reward_model->get_from_id($setting_reward_id);
+			$setting_reward = $this->setting_reward_model->get_from_id($setting_reward_id);
 			$setting_reward->set_is_confirmed();
 			$json_result->code = "1";
 		}

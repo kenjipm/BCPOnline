@@ -1,14 +1,14 @@
 $(document).ready(function(){
 	
 	$("#popup-btn_approve").click(function(){
-		if (confirm("Terima setting reward ini?"))
+		if (confirm("Terima bidding ini?"))
 		{
 			$.ajax ({
 				type: 'post',
-				url: base_url + "/reward/setting_reward_approve_do",
+				url: base_url + "/bidding_live/bidding_approve_do",
 				data:
 				{
-					setting_reward_id : $("#setting_reward_id").val(),
+					posted_item_id : $("#posted_item_id").val(),
 					password : $("#popup-password").val(),
 				},
 				success: function(data) {
@@ -25,14 +25,14 @@ $(document).ready(function(){
 	});
 	
 	$("#popup-btn_decline").click(function(){
-		if (confirm("Tolak setting reward ini?"))
+		if (confirm("Tolak bidding ini?"))
 		{
 			$.ajax ({
 				type: 'post',
-				url: base_url + "/reward/setting_reward_decline_do",
+				url: base_url + "/bidding_live/bidding_decline_do",
 				data:
 				{
-					setting_reward_id : $("#setting_reward_id").val(),
+					posted_item_id : $("#posted_item_id").val(),
 					password : $("#popup-password").val(),
 				},
 				success: function(data) {

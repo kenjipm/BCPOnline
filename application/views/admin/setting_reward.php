@@ -47,11 +47,11 @@
 				<div class="form-group">
 					<label class="control-label col-xs-2" for="date_expired">Berlaku Hingga:</label>
 					<div class="col-xs-4"><input type="text" class="form-control datetimepicker" name="date_expired" value="<?=$model->setting_reward->date_expired?>" autocomplete="off"/></div>
-					<input type="checkbox" name="expire" value="forever">Selamanya
+					<input type="checkbox" name="expire" value="forever" <?=$model->setting_reward->is_forever ? "checked" : ""?>>Selamanya
 				</div>
 				
 				<div class="form-group">
-					<div class="col-xs-offset-2 col-xs-1"><button type="submit" class="btn btn-default">Submit</button></div>
+					<div class="col-xs-offset-2 col-xs-1"><button type="submit" class="btn btn-default">Kirim</button></div>
 					<?php
 						if ($model->is_existed)
 						{

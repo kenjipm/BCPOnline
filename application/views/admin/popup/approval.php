@@ -10,7 +10,7 @@
 						<label>Password</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="password" name="password" id="password" value="" class="form-control"/>
+						<input type="password" name="password" id="popup-password" value="" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">

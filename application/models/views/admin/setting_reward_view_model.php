@@ -18,6 +18,7 @@ class Setting_Reward_View_Model {
 		$this->setting_reward->event_name	 		= "";
 		$this->setting_reward->date_created	 		= date('Y-m-d H:i:s');
 		$this->setting_reward->date_expired	 		= date('Y-m-d H:i:s');
+		$this->setting_reward->is_forever	 		= false;
 	}
 	
 	public function get($setting_reward=null)
@@ -32,6 +33,7 @@ class Setting_Reward_View_Model {
 			$this->setting_reward->event_name	 		= $setting_reward->event_name;
 			$this->setting_reward->date_created	 		= $setting_reward->date_created ?? date('Y-m-d H:i:s');
 			$this->setting_reward->date_expired	 		= $setting_reward->date_expired ?? "0000-00-00 00:00:00";
+			$this->setting_reward->is_forever	 		= $setting_reward->date_expired == null;
 			
 			$this->is_existed = true;
 		}
