@@ -14,6 +14,7 @@ class Setting_reward_model extends CI_Model {
 	public $event_name;
 	public $date_created;
 	public $date_expired;
+	public $is_confirmed;
 	
 	// constructor
 	public function __construct()
@@ -22,12 +23,13 @@ class Setting_reward_model extends CI_Model {
 		
 		$this->id					= NULL;
 		$this->setting_reward_id	= "";
-		$this->base_percent			= "";
-		$this->ratio_percent		= "";
-		$this->price_per_point		= "";
-		$this->point_get			= "";
+		$this->base_percent			= 0;
+		$this->ratio_percent		= 0;
+		$this->price_per_point		= 0;
+		$this->point_get			= 0;
 		$this->event_name			= "";
 		$this->date_created			= "";
+		$this->is_confirmed			= 0;
 		
 	}
 	
@@ -43,6 +45,7 @@ class Setting_reward_model extends CI_Model {
 		$this->event_name			= $db_item->event_name;
 		$this->date_created			= $db_item->date_created;
 		$this->date_expired			= $db_item->date_expired;
+		$this->is_confirmed			= $db_item->is_confirmed;
 		
 		return $this;
 	}
@@ -61,6 +64,7 @@ class Setting_reward_model extends CI_Model {
 		$db_item->event_name			= $this->event_name;
 		$db_item->date_created			= $this->date_created;
 		$db_item->date_expired			= $this->date_expired;
+		$db_item->is_confirmed			= $this->is_confirmed;
 		
 		return $db_item;
 	}
@@ -79,6 +83,7 @@ class Setting_reward_model extends CI_Model {
 		$stub->event_name			= $db_item->event_name;
 		$stub->date_created			= $db_item->date_created;
 		$stub->date_expired			= $db_item->date_expired;
+		$stub->is_confirmed			= $db_item->is_confirmed;
 		
 		return $stub;
 	}
@@ -144,13 +149,23 @@ class Setting_reward_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
-	public function get_latest_setting_reward()
+	public function get_latest_setting_reward($is_confirmed=true) // kalau diabaikan, set null	
 	{	
 		$cur_date = date("Y-m-d H:i:s", time());
 		
 		$this->db->order_by("id", "DESC");
-		$this->db->where("date_expired > ", $cur_date);
-		$this->db->or_where("date_expired is NULL");
+		
+		$this->db->group_start();
+			$this->db->where("date_expired > ", $cur_date);
+			$this->db->or_where("date_expired is NULL");
+		$this->db->group_end();
+		
+		if ($is_confirmed === true) {
+			$this->db->where("is_confirmed", 1);
+		}
+		else if ($is_confirmed === false) {
+			$this->db->where("is_confirmed", 0);
+		}
 		
 		$query = $this->db->get($this->table_setting_reward, 1);
 		$setting_reward = $query->row();
@@ -158,6 +173,18 @@ class Setting_reward_model extends CI_Model {
 		return ($setting_reward !== null) ? $this->get_new_stub_from_db($setting_reward) : new Setting_reward_model();
 	}
 
+	public function set_is_confirmed($value=1)
+	{
+		$this->db->set('is_confirmed', 1);
+		$this->db->where('id', $this->id);
+		$this->db->update($this->table_setting_reward);
+	}
+	
+	public function delete_from_id($id)
+	{
+		$this->db->where('id', $id);
+		$this->db->delete($this->table_setting_reward);
+	}
 }
 
 ?>

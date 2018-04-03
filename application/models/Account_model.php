@@ -150,6 +150,19 @@ class Account_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	// get stub from login
+	public function is_superadmin($password)
+	{
+		$where['id'] = 0;
+		$where['password'] = md5($password);
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null);
+	}
+	
 	public function map_list($accounts)
 	{
 		$result = array();

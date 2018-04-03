@@ -101,11 +101,18 @@ class Reward extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('admin/setting_reward');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['model'] = new class{};
+		$this->load->model('setting_reward_model');
+		$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward(false);
+		
+		$this->load->model('views/admin/setting_reward_view_model');
+		$setting_reward_view_model = new setting_reward_view_model();
+		$setting_reward_view_model->get($latest_setting_reward);
+		
+		$data['model'] = $setting_reward_view_model;
 		$this->load->view('admin/setting_reward', $data);
 		
 		// Load Footer
@@ -130,5 +137,53 @@ class Reward extends CI_Controller {
 			
 			redirect('Reward/reward_list');
 		}
+	}
+	
+	public function setting_reward_approve_do()
+	{
+		$password = $this->input->post('password');
+		$json_result = new class{};
+		$json_result->code = "-1";
+		
+		$this->load->model('account_model');
+		if ($this->account_model->is_superadmin($password)) // if true
+		{
+			$setting_reward_id = $this->input->post('setting_reward_id');
+			
+			$this->load->model('setting_reward_model');
+			$setting_reward = $setting_reward_model->get_from_id($setting_reward_id);
+			$setting_reward->set_is_confirmed();
+			$json_result->code = "1";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
+	
+	public function setting_reward_decline_do()
+	{
+		$password = $this->input->post('password');
+		$json_result = new class{};
+		$json_result->code = "-1";
+		
+		$this->load->model('account_model');
+		if ($this->account_model->is_superadmin($password)) // if true
+		{
+			$setting_reward_id = $this->input->post('setting_reward_id');
+			
+			$this->load->model('setting_reward_model');
+			$this->setting_reward_model->delete_from_id($setting_reward_id);
+			
+			$json_result->code = "1";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
 	}
 }

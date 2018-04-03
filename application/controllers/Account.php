@@ -24,8 +24,8 @@ class Account extends CI_Controller {
 		if ($this->input->method() == "post") $this->signup_do();
 		
 		// Load Header
-        $data_header['css_list'] = array('jquery-ui-1.12.1.custom/jquery-ui.min');
-        $data_header['js_list'] = array('signup_main', 'jquery-ui-1.12.1.custom/jquery-ui.min');
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('signup_main');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
