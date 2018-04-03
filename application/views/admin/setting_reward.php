@@ -51,12 +51,12 @@
 				</div>
 				
 				<div class="form-group">
-					<div class="col-xs-offset-11"><button type="submit" class="btn btn-default">Submit</button></div>
+					<div class="col-xs-offset-2 col-xs-1"><button type="submit" class="btn btn-default">Submit</button></div>
 					<?php
 						if ($model->is_existed)
 						{
 							?>
-							<div class="col-xs-offset-11"><button type="button" class="btn btn-default" onclick="popup.open('popup_approval')">Keputusan</button></div>
+							<div class="col-xs-1"><button type="button" class="btn btn-default" onclick="popup.open('popup_approval')">Keputusan</button></div>
 							<?php
 							$this->load->view('admin/popup/approval');
 						}
