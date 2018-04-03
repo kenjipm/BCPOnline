@@ -72,7 +72,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_expired">Berlaku Hingga:</label>
-					<div class="col-xs-4"><input type="datetime-local" class="form-control" name="date_expired"></div>
+					<div class="col-xs-4"><input type="text" class="form-control datetimepicker" name="date_expired"></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-sm-3">Minimal Pembelanjaan:</label>

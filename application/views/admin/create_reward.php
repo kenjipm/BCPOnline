@@ -20,7 +20,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-2" for="date_expired">Berlaku Hingga:</label>
-					<div class="col-xs-3"><input type="date" class="form-control" name="date_expired"></div>
+					<div class="col-xs-3"><input type="text" class="form-control datetimepicker" name="date_expired"></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_expired'); ?></span>
 				</div>
 				<div class="form-group">
