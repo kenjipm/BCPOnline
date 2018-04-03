@@ -96,3 +96,29 @@
 		
 	</div>
 </div>
+
+<!-- POPUP BID SUCCESS -->
+<div id="popup_bid_success" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Harga Tertinggi!
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<h4>Selamat! Harga yang Anda ajukan adalah harga tertinggi!</h4>
+						Lelang masih terbuka untuk <span id="bid_time_left"></span>
+						<br/>
+						<br/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_bid_success')">OK</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

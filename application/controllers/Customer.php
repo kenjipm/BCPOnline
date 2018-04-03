@@ -487,6 +487,10 @@ class Customer extends CI_Controller {
 	
 	public function bid_live_post_do()
 	{
+		$json_result = new class{};
+		$json_result->code = "0";
+		$json_result->bid_time_left = "";
+		
 		$bidding_item_id = $this->input->post('bidding_item_id');
 		$bidding_next_price = $this->input->post('bidding_next_price');
 		
@@ -504,12 +508,12 @@ class Customer extends CI_Controller {
 			$last_bidding->bid_time = null;
 		}
 		
-		if (!$cur_customer->deposit_status) echo "-9"; // customer belum dapat melakukan bidding
-		else if ($bidding_item == null) echo "-1"; // item tidak ditemukan
-		else if ($bidding_item->item_type != "BID") echo "-2"; // item bukan item bidding
-		else if ($bidding_item->is_expired()) echo "-3"; // bidding sudah tidak berlaku
-		else if (!$bidding_item->is_bid_live_price_valid($bidding_next_price)) echo "-4"; // harga bidding tidak valid
-		//else if (!$bidding_item->is_can_bid_this_session($last_bidding->bid_time)) echo "-5"; // customer sudah melakukan bidding
+		if (!$cur_customer->deposit_status) $json_result->code = "-9"; // customer belum dapat melakukan bidding
+		else if ($bidding_item == null) $json_result->code = "-1"; // item tidak ditemukan
+		else if ($bidding_item->item_type != "BID") $json_result->code = "-2"; // item bukan item bidding
+		else if ($bidding_item->is_expired()) $json_result->code = "-3"; // bidding sudah tidak berlaku
+		else if (!$bidding_item->is_bid_live_price_valid($bidding_next_price)) $json_result->code = "-4"; // harga bidding tidak valid
+		//else if (!$bidding_item->is_can_bid_this_session($last_bidding->bid_time)) $json_result->code = "-5"; // customer sudah melakukan bidding
 		else 
 		{
 			$bidding = new bidding_live_model();
@@ -522,8 +526,24 @@ class Customer extends CI_Controller {
 			$bidding_id = $bidding->insert_from_stub();
 			
 			$this->item_model->update_price_live($bidding_next_price, $bidding_item_id);
-			echo ($bidding_id > 0) ? "1" : "0"; // 1 = success, 0 = failed to add
+			$json_result->code = ($bidding_id > 0) ? "1" : "0"; // 1 = success, 0 = failed to add
+			
+			$cur_item = $this->item_model->get_from_id($bidding_item_id);
+			$bid_time_left = $cur_item->get_bid_time_left();
+			
+			$hour_left = floor($bid_time_left / 3600);
+			$minute_left = floor(($bid_time_left % 3600) / 60);
+			$second_left = $bid_time_left % 3600 % 60;
+			
+			// $json_result->bid_time_left = str_pad($hour_left, 2) . ":" . str_pad($minute_left, 2) . ":" . str_pad($second_left, 2);
+			$json_result->bid_time_left = $hour_left . " jam " . $minute_left . " menit " . $second_left . " detik";
 		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
 	}
 	
 	public function dummy_deposit_done()
