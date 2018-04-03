@@ -31,7 +31,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="date_of_birth">Tanggal Lahir</label>
-					<div class="col-xs-9"><input type="date" class="form-control" name="date_of_birth" value="<?= set_value('date_of_birth'); ?>"/></div>
+					<div class="col-xs-9"><input type="text" class="form-control datepicker" name="date_of_birth" value="<?= set_value('date_of_birth'); ?>"/></div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_of_birth'); ?></span>
 				</div>
 				<div class="form-group">

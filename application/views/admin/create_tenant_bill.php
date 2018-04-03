@@ -34,7 +34,7 @@
 				<div class="form-group">
 					<label class="control-label col-sm-3">Berlaku Hingga:</label>
 					<div class="col-sm-4">
-						<input type="date" class="form-control" name="payment_expiration">
+						<input type="text" class="form-control datepicker" name="payment_expiration">
 					</div>
 					<span class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('payment_expiration'); ?></span>
 				</div>
