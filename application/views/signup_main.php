@@ -19,7 +19,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3">Tanggal Lahir<span class="text-danger">*</span></label>
-					<div class="col-xs-9"><input type="text" name="date_of_birth" id="date_of_birth" class="form-control" value="<?= set_value('date_of_birth'); ?>"/></div>
+					<div class="col-xs-9"><input type="text" name="date_of_birth" id="date_of_birth" class="form-control date_of_birth" value="<?= set_value('date_of_birth'); ?>" autocomplete="off"/></div>
 					<div class="col-xs-9 col-xs-offset-3 text-danger"><?= form_error('date_of_birth'); ?></div>
 				</div>
 				<div class="form-group">
