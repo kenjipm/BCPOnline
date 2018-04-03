@@ -318,6 +318,11 @@ class Item_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	public function get_bid_time_left()
+	{
+		return strtotime($this->date_expired) - time();
+	}
+	
 	public function is_expired()
 	{
 		return (time() > strtotime($this->date_expired));
@@ -494,7 +499,7 @@ class Item_model extends CI_Model {
 	public function update_date_expired()
 	{
 		$this->db->set('date_expired', $this->date_expired);
-		$this->db->where('id', $this->input->post('posted_item_id'));
+		$this->db->where('id', $this->id);
 		$this->db->update($this->table_item);
 	}
 	

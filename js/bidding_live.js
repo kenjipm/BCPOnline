@@ -94,33 +94,35 @@ function submit_bid()
 				bidding_next_price: bidding_next_price
 			},
 			success: function(data) {
-				if (data == "0") {
+				if (data.code == "0") {
 					$("#bidding_status").html("Gagal memasang harga");
 				}
-				else if (data == "-1") {
+				else if (data.code == "-1") {
 					$("#bidding_status").html("Barang tidak ditemukan");
 				}
-				else if (data == "-2") {
+				else if (data.code == "-2") {
 					$("#bidding_status").html("Barang tidak dapat dilelang");
 				}
-				else if (data == "-3") {
+				else if (data.code == "-3") {
 					$("#bidding_status").html("Pelelangan barang ini sudah selesai");
 				}
-				else if (data == "-4") {
+				else if (data.code == "-4") {
 					$("#bidding_status").html("Harga salah");
 				}
-				else if (data == "-5") {
+				else if (data.code == "-5") {
 					$("#bidding_status").html("Kamu sudah memasang harga");
 				}
-				else if (data == "-9") {
+				else if (data.code == "-9") {
 					// $("#bidding_status").html("Harap lakukan deposit terlebih dahulu");
 					window.location = base_url + '/bidding_live';
 				}
-				else if (data == "1") {
+				else if (data.code == "1") {
 					// $("#btn-bid_sub").prop("disabled", true);
 					// $("#btn-bid_add").prop("disabled", true);
 					// $("#btn-submit_bid").prop("disabled", true);
-					$("#bidding_status").html("Bidding berhasil dipasang");
+					// $("#bidding_status").html("Bidding berhasil dipasang");
+					$("#bid_time_left").html(data.bid_time_left);
+					popup.open('popup_bid_success');
 				}
 				else { // kalau blm daftar customer
 					window.location = base_url + '/login' + '?return_url=' + window.location.href;
