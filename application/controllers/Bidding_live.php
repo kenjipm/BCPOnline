@@ -67,14 +67,16 @@ class Bidding_live extends CI_Controller {
 		// Load Body
 		$this->load->model('Bidding_live_model');
 		$this->load->model('Item_model');
+		$this->load->model('Order_details_model');
 		$bidding_lives = $this->Bidding_live_model->get_all_from_posted_item_id($posted_item_id);
 		$item = $this->Item_model->get_from_id($posted_item_id);
+		$order = $this->Order_details_model->is_choosen($posted_item_id);
 		// if (strtotime(date('Y-m-d H:m:s')) > strtotime($item->date_expired))
 			// $is_expired = 1;
 		// else	
 			// $is_expired = 0;
 		$this->load->model('views/admin/bidding_live_detail_view_model');
-		$this->bidding_live_detail_view_model->get($bidding_lives, $item->is_expired());
+		$this->bidding_live_detail_view_model->get($bidding_lives, $item->is_expired(), $order);
 		$data['model'] = $this->bidding_live_detail_view_model;
 		$this->load->view('admin/bidding_live_detail', $data);
 		

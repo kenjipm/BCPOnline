@@ -994,6 +994,21 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function is_choosen($posted_item_id)
+	{
+		$where['posted_item.id'] = $posted_item_id;
+		
+		$this->db->join('posted_item_variance', $this->table_order_details. '.posted_item_variance_id=posted_item_variance.id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
+		$this->db->where($where);
+		$this->db->where('billing.date_closed >',  date('Y-m-d H:i:s'));
+		$query = $this->db->get($this->table_order_details);
+		$items = $query->result();
+		
+		return (count($items) > 0);
+	}
+	
 	public function init_billing()
 	{
 		$this->billing = $this->billing->get_from_id($this->billing_id);

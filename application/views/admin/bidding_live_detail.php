@@ -32,7 +32,7 @@
 								<td>
 									<?=$bidding->bid_price?> </td>
 								<td>
-									<button class="btn btn-default" onclick="choose_winner(<?=$bidding->id?>)" type="button" class="button_winner">Pemenang</button></td>
+									<button class="btn btn-default" onclick="choose_winner(<?=$bidding->id?>)" type="button" class="button_winner" <?= $model->is_choosen ? "disabled" : ""?> >Pemenang</button></td>
 							</tr>
 							<?php
 						}

@@ -4,7 +4,7 @@ class Bidding_live_detail_view_model extends CI_Model {
 	
 	public $biddings;
 	public $is_expired;
-	public $max_price;
+	public $is_choosen;
 	public $update_price;
 	
 	// constructor
@@ -13,10 +13,9 @@ class Bidding_live_detail_view_model extends CI_Model {
 		parent::__construct();
 		
 		$this->biddings = array();
-		$this->max_price = 0;
 	}
 	
-	public function get($biddings, $is_expired)
+	public function get($biddings, $is_expired, $is_choosen)
 	{
 		$i = 0;
 		$this->load->library('text_renderer');
@@ -36,6 +35,7 @@ class Bidding_live_detail_view_model extends CI_Model {
 		}
 		
 		$this->is_expired = $is_expired;
+		$this->is_choosen = $is_choosen;
 	}
 }
 ?>
