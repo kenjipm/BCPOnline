@@ -32,9 +32,6 @@ class Bidding_detail_view_model extends CI_Model {
 			$this->biddings[$i]->bid_price		= $bidding->bid_price;
 			$this->biddings[$i]->posted_item_id	= $bidding->posted_item_id;
 			
-			if ($bidding->bid_price > $this->max_price)
-				$this->max_price = $bidding->bid_price;
-			
 			$i++;
 		}
 		
