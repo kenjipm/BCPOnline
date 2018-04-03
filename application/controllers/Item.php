@@ -47,7 +47,14 @@ class Item extends CI_Controller {
 		$this->post_item_view_model->get($categories, $brands);
 		$data['model'] = $this->post_item_view_model;
 		
-		$this->load->view('tenant/post_item', $data);
+		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
+		{
+			$this->load->view('tenant/post_item', $data);
+		}
+		else if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
+		{
+			$this->load->view('admin/create_bidding', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');
@@ -72,7 +79,10 @@ class Item extends CI_Controller {
 		$this->hot_item_view_model->get($item, $posted_item_variance);
 		$data['model'] = $this->hot_item_view_model;
 		
-		$this->load->view('tenant/create_hot_item', $data);
+		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
+		{
+			$this->load->view('tenant/create_hot_item', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');
