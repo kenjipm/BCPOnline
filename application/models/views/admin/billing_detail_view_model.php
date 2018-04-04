@@ -20,6 +20,7 @@ class Billing_Detail_View_Model extends CI_Model{
 			$this->order_list[$i]->posted_item		= $order->posted_item_variance->posted_item->posted_item_name;
 			$this->order_list[$i]->quantity			= $order->quantity;
 			$this->order_list[$i]->sold_price		= $order->text_renderer->to_rupiah($order->sold_price);
+			$this->order_list[$i]->total_price		= $order->text_renderer->to_rupiah($order->quantity * $order->sold_price);
 			
 			$i++;
 		}
