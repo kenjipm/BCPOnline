@@ -5,6 +5,7 @@ html {
 
 body {
 	margin-bottom: 80px; /* Margin bottom by footer height plus margin 20px*/
+	font: 'Lato Light';
 }
 
 .footer {
@@ -80,4 +81,8 @@ body {
 .navbar-default-custom { 
 	background-color: #434747; /* Dark White */
 	min-height: 105px;
+}
+
+.navbar-default-custom>li>a {
+	color: white;
 }

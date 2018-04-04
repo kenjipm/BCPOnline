@@ -49,7 +49,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<nav class="navbar navbar-default  navbar-default-custom">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="<?=site_url('')?>"><img src="<?=site_url('img/logo.jpg')?>" alt="Logo" class="logo-header" /></a>
+				<a class="navbar-brand" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
 			</div>
 			<ul class="nav navbar-nav">
 				<?php if ($is_logged_in) { foreach ($top_menu_items['left'] as $menu_item) { ?> <li><a href="<?=site_url($menu_item['url'])?>"><?=$menu_item['text']?></a></li> <?php } } ?>

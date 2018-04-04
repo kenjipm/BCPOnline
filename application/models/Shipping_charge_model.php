@@ -16,7 +16,7 @@ class Shipping_charge_model extends CI_Model {
 		
 		$this->id					= 0;
 		$this->fee_id				= "";
-		$this->fee_amount			= "";
+		$this->fee_amount			= 0;
 		$this->fee_description		= "";
 		$this->shipping_distance	= "";
 	}

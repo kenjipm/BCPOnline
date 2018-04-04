@@ -110,7 +110,7 @@ class Billing_model extends CI_Model {
 		$stub->customer->account				= new Account_model();
 		$stub->customer->account->name			= $db_item->name ?? "";
 		$stub->shipping_address->address_detail	= $db_item->address_detail ?? "";
-		$stub->shipping_charge->fee_amount		= $db_item->fee_amount ?? "";
+		$stub->shipping_charge->fee_amount		= $db_item->fee_amount ?? 0;
 		
 		return $stub;
 	}

@@ -5,10 +5,6 @@ class Dashboard extends CI_Controller {
 
 	public function index()
 	{
-		// Load Header
-        $data_header['css_list'] = array();
-        $data_header['js_list'] = array('bidding_live');
-		$this->load->view('header', $data_header);
 
 		// Load Body
 		if ($this->session->type == TYPE['name']['TENANT'])
@@ -17,6 +13,11 @@ class Dashboard extends CI_Controller {
 		}
 		else if ($this->session->type == TYPE['name']['ADMIN'])
 		{
+			// Load Header
+			$data_header['css_list'] = array();
+			$data_header['js_list'] = array();
+			$this->load->view('header', $data_header);
+			
 			$this->load->model('category_model');
 			$categories = $this->category_model->get_all();
 			
@@ -49,16 +50,24 @@ class Dashboard extends CI_Controller {
 			
 			$bidding_item = $this->item_model->get_last_bidding_item();
 			$this->load->model('bidding_live_model');
+			
+			// Load Header
+			$data_header['css_list'] = array();
+			$data_header['js_list'] = array();
+			
 			$last_bidding = null;
 			if ($bidding_item != null)
 			{
 				$last_bidding = $this->bidding_live_model->get_from_customer_id_and_item_id($this->session->child_id, $bidding_item->id);
+				$data_header['js_list'][] = 'bidding_live';
 			}
 			if ($last_bidding == null)
 			{
 				$last_bidding = new class{};
 				$last_bidding->bid_time = null;
 			}
+			
+			$this->load->view('header', $data_header);
 			
 			$this->load->model('views/dashboard_view_model');
 			$this->dashboard_view_model->get($categories, $hot_items, $tenant_items, $bidding_item, $last_bidding);
