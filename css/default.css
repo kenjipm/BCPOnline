@@ -77,4 +77,7 @@ body {
 
 .logo-header { height: 80px }
 
-.navbar-default-custom { background-color: #434747 }
+.navbar-default-custom { 
+	background-color: #434747; /* Dark White */
+	min-height: 120px;
+}
