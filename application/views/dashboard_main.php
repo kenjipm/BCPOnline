@@ -6,7 +6,7 @@
 		foreach($model->categories as $category)
 		{
 			?>
-			<a href="<?=site_url('item/category/'.$category->id)?>">
+			<a href="<?=site_url('item/category/'.$category->id)?>" class="category">
 				<div class="panel-category">
 					<?=$category->category_name?>
 				</div>

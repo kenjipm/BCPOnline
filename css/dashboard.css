@@ -5,8 +5,6 @@ html {
 
 body {
 	margin-bottom: 80px; /* Margin bottom by footer height plus margin 20px*/
-	font-color: #ffffff;
-	font-style: "lato-light";
 }
 
 .footer {
@@ -86,4 +84,8 @@ body {
     border-top: 1px solid #ddd;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+
+.category{
+	color: #ffffff;
 }
