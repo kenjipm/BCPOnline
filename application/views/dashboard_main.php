@@ -1,23 +1,19 @@
 <div class="row">
 	<!-- left bar buat category -->
 	<div class="col-md-2">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				<h3>Kategori</h3>
-			</div>
-			<?php
-			foreach($model->categories as $category)
-			{
-				?>
-				<a href="<?=site_url('item/category/'.$category->id)?>">
-					<div class="panel-footer">
-						<?=$category->category_name?>
-					</div>
-				</a>
-				<?php
-			}
+		<h3>Kategori</h3>
+		<?php
+		foreach($model->categories as $category)
+		{
 			?>
-		</div>
+			<a href="<?=site_url('item/category/'.$category->id)?>" class="category">
+				<div class="panel-category">
+					<?=$category->category_name?>
+				</div>
+			</a>
+			<?php
+		}
+		?>
 	</div>
 	
 	<div class="col-md-10">

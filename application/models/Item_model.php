@@ -414,6 +414,7 @@ class Item_model extends CI_Model {
 			$this->date_posted				= date("Y-m-d H:i:s", time());
 			$this->date_updated				= date("Y-m-d H:i:s", time());
 			$this->date_expired				= NULL;
+			$this->is_confirmed				= 0;
 			$this->unit_weight				= $this->input->post('unit_weight');
 			$this->posted_item_description	= $this->input->post('posted_item_description');
 			$this->category_id				= $this->input->post('category_id');

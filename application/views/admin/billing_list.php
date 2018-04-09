@@ -37,20 +37,17 @@
 		</div>
 		<div class="panel-body">
 			<div class="row list-group">
-				<div class="col-xs-2"> <label for="tanggal1">Dibuat</label>	</div>
-				<div class="col-xs-2"> <label for="tanggal2">Lunas</label> </div>
+				<div class="col-xs-3"> <label for="tanggal1">Dibuat</label>	</div>
 				<div class="col-xs-3"> <label for="customer">Customer</label> </div>
-				<div class="col-xs-2"> <label for="total_payable">Total Harga</label> </div>
+				<div class="col-xs-2"> <label for="total_payable">Harga yang Belum Dibayar</label> </div>
 			</div>
 			<?php
 			foreach($model->billings as $billing)
 			{
 				?>
 				<div class="row list-group">
-					<div class="col-xs-2 list-group-item">
+					<div class="col-xs-3 list-group-item">
 						<?=$billing->date_created?> </div>
-					<div class="col-xs-2 list-group-item">
-						<?=$billing->date_closed?> </div>
 					<div class="col-xs-3 list-group-item">
 						<?=$billing->customer?> </div>
 					<div class="col-xs-2 list-group-item">

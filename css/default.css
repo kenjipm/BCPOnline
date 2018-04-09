@@ -149,6 +149,7 @@ a, a:hover, a:active, a:visited, a:focus, a:focus-within {
 
 .navbar-cb-strip-text:hover {
 	color: #434747;
+	margin-bottom: 80px; /* Margin bottom by footer height plus margin 20px*/
 }
 
 .footer {
