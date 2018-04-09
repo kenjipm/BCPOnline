@@ -34,7 +34,7 @@
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="posted_item_description">Deskripsi:</label>
-					<div class="col-xs-9"><input type="text" class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"/></div>
+					<div class="col-xs-9"><textarea class="form-control" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>"></textarea></div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3" for="image1">Unggah Gambar:</label>
@@ -92,6 +92,7 @@
 							<?php
 						}
 						?>
+						<option value="lainnya">Lainnya</option>
 						</select>
 					</div>
 				</div>

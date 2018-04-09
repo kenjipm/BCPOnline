@@ -4,7 +4,7 @@
 		<div class="panel-heading">
 			<h3>
 				<?=$title?>
-				<div class="pull-right"><a href="<?=site_url('customer/cart')?>" class="btn btn-default">Kembali</a></div>
+				<div class="pull-right"><a href="<?=site_url('billing')?>" class="btn btn-default">Kembali</a></div>
 			</h3>
 		</div>
 		<div class="panel-body">
