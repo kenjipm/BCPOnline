@@ -42,6 +42,7 @@ class Login extends CI_Controller {
 		$id = "";
 		$child_id = "";
 		$account_id = "";
+		$profile_pic = "";
 		$type = $email; //""; dummy buat bypass kalo mau login type lain
 		
 		if ($user !== null)
@@ -55,6 +56,7 @@ class Login extends CI_Controller {
 			$id = $user->id;
 			$child_id = $user->child_id;
 			$account_id = $user->account_id;
+			$profile_pic = $user->profile_pic;
 			$type = $user->type;
 		// }
 		
@@ -64,6 +66,7 @@ class Login extends CI_Controller {
 				'id' => $id,
 				'child_id' => $child_id,
 				'account_id' => $account_id,
+				'profile_pic' => $profile_pic,
 				'type' => $type,
 				'cart' => array()
 			);

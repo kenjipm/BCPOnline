@@ -92,7 +92,7 @@ class Bidding_live extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->model('Category_model');
+		// $this->load->model('Category_model');
 		$this->load->model('Brand_model');
 		$this->load->model('Item_model');
 		$categories = $this->Category_model->get_all();

@@ -18,7 +18,7 @@ class Dashboard extends CI_Controller {
 			$data_header['js_list'] = array();
 			$this->load->view('header', $data_header);
 			
-			$this->load->model('category_model');
+			// $this->load->model('category_model');
 			$categories = $this->category_model->get_all();
 			
 			$this->load->model('brand_model');
@@ -36,7 +36,7 @@ class Dashboard extends CI_Controller {
 		{
 			$this->check_referral();
 			
-			$this->load->model('category_model');
+			// $this->load->model('category_model');
 			$categories = $this->category_model->get_all();
 			
 			$this->load->model('hot_item_model');

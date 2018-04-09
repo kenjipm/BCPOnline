@@ -39,7 +39,7 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$this->load->model('Category_model');
+		// $this->load->model('Category_model');
 		$this->load->model('Brand_model');
 		$categories = $this->Category_model->get_all();
 		$brands = $this->Brand_model->get_all();
@@ -227,7 +227,7 @@ class Item extends CI_Controller {
 		$promoted_items = $this->item_model->get_all_promoted_from_category_id($category_id);
 		$items = $this->item_model->get_all_from_category_id($category_id);
 		
-		$this->load->model('category_model');
+		// // $this->load->model('category_model');
 		$category = $this->category_model->get_from_id($category_id);
 		
 		$this->load->model('views/search_view_model');

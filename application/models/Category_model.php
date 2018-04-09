@@ -87,7 +87,7 @@ class Category_model extends CI_Model {
 	// insert new account from form post
 	public function insert_from_post()
 	{
-		$this->load->model('Category_model');
+		// $this->load->model('Category_model');
 		
 		$this->category_name		= $this->input->post('category_name');
 		$this->category_description	= $this->input->post('category_description');

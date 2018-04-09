@@ -212,6 +212,7 @@ defined('TYPE') OR define('TYPE', array(
 			'POINT_HISTORY'			=> 'Point_history_model'
 		),
 		'TOP_MENU' => array(
+			'GUEST'					=> 'top_menu_guest',
 			'CUSTOMER'				=> 'top_menu_customer',
 			'TENANT'				=> 'top_menu_tenant',
 			'DELIVERER'				=> 'top_menu_deliverer',

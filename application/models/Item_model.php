@@ -60,7 +60,7 @@ class Item_model extends CI_Model {
 		
 		$this->quantity_available		= "";
 		
-		$this->load->model('Category_model');
+		// $this->load->model('Category_model');
 		$this->load->model('Brand_model');
 		$this->load->model('Tenant_model');
 		
