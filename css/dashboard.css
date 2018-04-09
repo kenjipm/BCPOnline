@@ -79,11 +79,6 @@ body {
 
 .logo-header { height: 80px }
 
-a {
-    color: #ffffff;
-    text-decoration: none;
-}
-
 .panel-category { 
 	background-color: #e55026; /* Dark Orange */
 	padding: 10px 15px;
