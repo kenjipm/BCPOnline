@@ -1,20 +1,4 @@
 <div class="row">
-	<!-- left bar buat category -->
-	<div class="col-md-2">
-		<h3>Kategori</h3>
-		<?php
-		foreach($model->categories as $category)
-		{
-			?>
-			<a href="<?=site_url('item/category/'.$category->id)?>" class="category">
-				<div class="panel-category">
-					<?=$category->category_name?>
-				</div>
-			</a>
-			<?php
-		}
-		?>
-	</div>
 	
 	<div class="col-md-10">
 	

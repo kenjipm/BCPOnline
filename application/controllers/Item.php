@@ -218,7 +218,7 @@ class Item extends CI_Controller {
 	public function category($category_id)
 	{
 		// Load Header
-        $data_header['css_list'] = array();
+        $data_header['css_list'] = array('category');
         $data_header['js_list'] = array();
 		$this->load->view('header', $data_header);
 		
@@ -228,10 +228,11 @@ class Item extends CI_Controller {
 		$items = $this->item_model->get_all_from_category_id($category_id);
 		
 		// // $this->load->model('category_model');
+		$categories = $this->category_model->get_all();
 		$category = $this->category_model->get_from_id($category_id);
 		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($promoted_items, $items);
+		$this->search_view_model->get($categories, $promoted_items, $items);
 		
 		$data['title'] = 'Kategori '.$category->category_name;
 		$data['model'] = $this->search_view_model;

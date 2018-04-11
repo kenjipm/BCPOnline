@@ -14,10 +14,9 @@ class Item_main_view_model extends CI_Model {
 		$this->item_variances = array();
 	}
 	
-	public function get($item, $item_variances)
+	public function get($categories, $item, $item_variances)
 	{
 		$this->load->library('text_renderer');
-		
 		
 		$this->item->id = $item->id;
 		$this->item->posted_item_name = $item->posted_item_name ? $item->posted_item_name : $item->posted_item_description;

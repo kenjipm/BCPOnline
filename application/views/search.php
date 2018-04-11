@@ -15,7 +15,23 @@
 	// $model->search_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
 
 	?>
-<div class="col-sm-10 col-sm-offset-1">
+<!-- left bar buat category -->
+	<div class="col-md-2">
+		<h3>Kategori</h3>
+		<?php
+		foreach($model->categories as $category)
+		{
+			?>
+			<a href="<?=site_url('item/category/'.$category->id)?>" class="category">
+				<div class="panel-category">
+					<?=$category->category_name?>
+				</div>
+			</a>
+			<?php
+		}
+		?>
+	</div>
+<div class="col-sm-10">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3><?=$title?></h3>
