@@ -52,8 +52,8 @@ class Dashboard extends CI_Controller {
 			$this->load->model('bidding_live_model');
 			
 			// Load Header
-			$data_header['css_list'] = array();
-			$data_header['js_list'] = array();
+			$data_header['css_list'] = array('ad_boxes', 'slider');
+			$data_header['js_list'] = array('slider');
 			
 			$last_bidding = null;
 			if ($bidding_item != null)

@@ -41,7 +41,7 @@ class Item extends CI_Controller {
 		// Load Body
 		// $this->load->model('Category_model');
 		$this->load->model('Brand_model');
-		$categories = $this->Category_model->get_all();
+		$categories = $this->category_model->get_all();
 		$brands = $this->Brand_model->get_all();
 		$this->load->model('views/tenant/post_item_view_model');
 		$this->post_item_view_model->get($categories, $brands);
@@ -193,7 +193,7 @@ class Item extends CI_Controller {
 	public function search()
 	{
 		// Load Header
-        $data_header['css_list'] = array();
+        $data_header['css_list'] = array('category');
         $data_header['js_list'] = array();
 		$this->load->view('header', $data_header);
 		
@@ -204,8 +204,10 @@ class Item extends CI_Controller {
 		$promoted_items = $this->item_model->get_all_promoted_from_search($keywords);
 		$items = $this->item_model->get_from_search($keywords);
 		
+		$categories = $this->category_model->get_all();
+		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($promoted_items, $items);
+		$this->search_view_model->get($categories, $promoted_items, $items);
 		
 		$data['title'] = 'Hasil Pencarian';
 		$data['model'] = $this->search_view_model;

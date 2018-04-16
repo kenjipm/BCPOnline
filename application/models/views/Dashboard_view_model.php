@@ -2,6 +2,8 @@
 
 class Dashboard_view_model extends CI_Model {
 	
+	public $ad_boxes;
+	
 	public $categories;
 	public $tenant_items;
 	public $hot_items;
@@ -10,6 +12,7 @@ class Dashboard_view_model extends CI_Model {
 	// constructor
 	public function __construct()
 	{
+		$this->ad_boxes = array();
 		$this->categories = array();
 		$this->tenant_items = array();
 		$this->hot_items = array();
@@ -19,6 +22,10 @@ class Dashboard_view_model extends CI_Model {
 	public function get($categories, $hot_items, $tenant_items, $bidding_item, $last_bidding)
 	{
 		$this->load->library('text_renderer');
+		
+		$this->load->config('ad_setting');
+		$ad_boxes = $this->config->item('DASHBOARD_BOX');
+		$this->ad_boxes = $ad_boxes;
 		
 		foreach ($categories as $category)
 		{

@@ -1,0 +1,104 @@
+.ad_boxes {
+	/* display: -webkit-box; */
+	/* display: -ms-flexbox; */
+	/* display: flex; */
+	/* -ms-flex-wrap: wrap; */
+	/* flex-wrap: wrap; */
+	width: 100%;
+	/* margin-right: -5px; */
+	/* margin-left: -5px; */
+	height: 300px;
+}
+
+.ad_box {
+/* position: relative; */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	overflow: hidden;
+	
+	float: left;
+	width: 100%;
+	min-height: 1px;
+	border: 5px solid transparent;
+}
+
+.ad_box.c1 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 12.5%;
+	flex: 0 0 12.5%;
+	max-width: 12.5%;
+}
+
+.ad_box.c2 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 25%;
+	flex: 0 0 25%;
+	max-width: 25%;
+}
+
+.ad_box.c3 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 37.5%;
+	flex: 0 0 37.5%;
+	max-width: 37.5%;
+}
+
+.ad_box.c4 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 50%;
+	flex: 0 0 50%;
+	max-width: 50%;
+}
+
+.ad_box.c5 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 62.5%;
+	flex: 0 0 62.5%;
+	max-width: 62.5%;
+}
+
+.ad_box.c6 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 75%;
+	flex: 0 0 75%;
+	max-width: 75%;
+}
+
+.ad_box.c7 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 87.5%;
+	flex: 0 0 87.5%;
+	max-width: 87.5%;
+}
+
+.ad_box.c8 {
+	-webkit-box-flex: 0;
+	-ms-flex: 0 0 100%;
+	flex: 0 0 100%;
+	max-width: 100%;
+}
+
+.ad_box.r1 {
+	height: 50%;
+}
+
+.ad_box.r2 {
+	height: 100%;
+}
+
+.ad_box-image {
+	flex-shrink: 0;
+	min-width: 100%;
+	min-height: 100%;
+}
+
+.ad_box-slider {
+	height: 100%;
+	width: 100%;
+	margin-left: 30px;
+}
+
+.slider-compact {
+	height: 100%;
+}

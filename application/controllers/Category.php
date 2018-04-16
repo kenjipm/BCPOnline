@@ -28,7 +28,7 @@ class Category extends CI_Controller {
 		
 		// Load Body
 		// $this->load->model('Category_model');
-		$items = $this->Category_model->get_all();
+		$items = $this->category_model->get_all();
 		$this->load->model('views/admin/category_list_view_model');
 		$this->category_list_view_model->get($items);
 		$data['model'] = $this->category_list_view_model;
@@ -67,7 +67,7 @@ class Category extends CI_Controller {
 		if ($this->form_validation->run() == TRUE)
 		{
 			// $this->load->model('Category_model');
-			$this->Category_model->insert_from_post();
+			$this->category_model->insert_from_post();
 			
 			redirect('Category/category_list');
 		}

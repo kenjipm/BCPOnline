@@ -1,4 +1,80 @@
-<div class="row">
+<div class="ad_boxes">
+	<?php
+		foreach ($model->ad_boxes as $ad_box)
+		{
+			?>
+			<div class="ad_box <?=$ad_box['class']?>">
+				<?php
+					if ($ad_box['type'] == 'slider')
+					{
+						?>
+						<!-- Previous button -->
+						<a class="slider-prev" onclick="plusSlides(-1)">&#10094;</a>
+						<div class="slider-compact">
+							<?php
+								foreach($ad_box['images'] as $image)
+								{
+									?>
+									<div class="slider-slide ad_box-slider">
+										<a href="<?=site_url($image['url'])?>">
+											<img src="<?=site_url($image['path'])?>" alt=""/>
+										</a>
+									</div>
+									<?php
+								}
+							?>
+						</div>
+						<!-- Next button -->
+						<a class="slider-next" onclick="plusSlides(1)">&#10095;</a>
+						<div style="text-align:center">
+							<span class="dot" onclick="currentSlide(1)"></span> 
+							<span class="dot" onclick="currentSlide(2)"></span> 
+							<span class="dot" onclick="currentSlide(3)"></span> 
+						</div>
+						<?php
+					}
+					else //if ($ad_box['type'] == 'image')
+					{
+						$image = (count($ad_box['images']) > 0) ? $ad_box['images'][0] : '';
+						?>
+						<a href="<?=site_url($image['url'])?>">
+							<img class="ad_box-image" src="<?=site_url($image['path'])?>" alt=""/>
+						</a>
+						<?php
+					}
+				?>
+			</div>
+			<?php
+		}
+	?>
+</div>
+
+<div class="cb-row">
+	<div class="cb-col-half">
+		<h4 class="cb-txt-primary-1">HOT ITEMS</h4>
+		<!--<a class="pull-right">Lihat Selebihnya</a>-->
+		<div class="item-thumbnail cb-bg-primary-3"></div>
+	</div>
+	<div class="cb-col-half cb-bg-primary-2">
+		<h4 class="cb-txt-primary-1">LELANG</h4>
+		<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>
+		<div class="cb-bg-primary-3"></div>
+	</div>
+</div>
+
+<div class="cb-row">
+	<?php
+		foreach($model->tenant_items as $tenant_item)
+		{
+			?>
+			<div class="cb-col-fifth cb-bg-primary-3 p-1">
+			</div>
+			<?php
+		}
+	?>
+</div>
+
+<div class="">
 	
 	<div class="col-md-10">
 	

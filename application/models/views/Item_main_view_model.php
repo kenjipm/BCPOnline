@@ -14,7 +14,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item_variances = array();
 	}
 	
-	public function get($categories, $item, $item_variances)
+	public function get($item, $item_variances)
 	{
 		$this->load->library('text_renderer');
 		
