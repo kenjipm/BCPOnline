@@ -234,7 +234,7 @@ class Item extends CI_Controller {
 		$this->load->model('views/search_view_model');
 		$this->search_view_model->get($categories, $promoted_items, $items);
 		
-		$data['title'] = 'Kategori '.$category->category_name;
+		$data['title'] = strtoupper($category->category_name);
 		$data['model'] = $this->search_view_model;
 		$this->load->view('search', $data);
 		

@@ -34,60 +34,57 @@
 		</div>
 	</div>
 <div class="col-sm-10">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3><?=$title?></h3>
-		</div>
-		<div class="panel-body">
-			<div class="row">
-				<?php
-				foreach($model->promoted_items as $promoted_item)
-				{
-					?>
-						<div class="col-md-4">
-							<div class="panel panel-default">
-								<a href="<?=site_url('item/'.$promoted_item->id)?>">
-									<div class="panel-body">
-										<img class="col-md-12" src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
-									</div>
-									<div class="panel-footer">
-										<label class="control-label">*<?=$promoted_item->posted_item_name?></label><br/>
-										<label class="control-label"><?=$promoted_item->price?></label><br/>
-									</div>
-								</a>
-							</div>
-						</div>
-					<?php
-				}
-				foreach($model->search_items as $search_item)
-				{
-					?>
-						<div class="col-md-4">
-							<div class="panel panel-default">
-								<a href="<?=site_url('item/'.$search_item->id)?>">
-									<div class="panel-body">
-										<img class="col-md-12" src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
-									</div>
-									<div class="panel-footer">
-										<label class="control-label"><?=$search_item->posted_item_name?></label><br/>
-										<label class="control-label"><?=$search_item->price?></label>
-									</div>
-								</a>
-							</div>
-						</div>
-					<?php
-				}
-				if (count($model->search_items) <= 0)
-				{
-					?>
-					<div class="col-md-4">
-						<label>Hasil pencarian tidak ditemukan</label>
-					</div>
-					<?php
-				}
+	<div class="panel-item-heading">
+		<h3><?=$title?></h3>
+	</div>
+	<div class="panel-item-body">
+		<div class="row">
+			<?php
+			foreach($model->promoted_items as $promoted_item)
+			{
 				?>
-			</div>
+					<div class="col-md-3">
+						<div class="panel panel-default">
+							<a href="<?=site_url('item/'.$promoted_item->id)?>">
+								<div class="panel-body">
+									<img class="col-md-12" src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
+								</div>
+								<div class="panel-footer">
+									<label class="control-label">*<?=$promoted_item->posted_item_name?></label><br/>
+									<label class="control-label"><?=$promoted_item->price?></label><br/>
+								</div>
+							</a>
+						</div>
+					</div>
+				<?php
+			}
+			foreach($model->search_items as $search_item)
+			{
+				?>
+					<div class="col-md-3">
+						<div class="panel panel-default">
+							<a href="<?=site_url('item/'.$search_item->id)?>">
+								<div class="panel-body">
+									<img class="col-md-12" src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
+								</div>
+								<div class="panel-footer">
+									<label class="control-label"><?=$search_item->posted_item_name?></label><br/>
+									<label class="control-label"><?=$search_item->price?></label>
+								</div>
+							</a>
+						</div>
+					</div>
+				<?php
+			}
+			if (count($model->search_items) <= 0)
+			{
+				?>
+				<div class="col-md-4">
+					<label>Hasil pencarian tidak ditemukan</label>
+				</div>
+				<?php
+			}
+			?>
 		</div>
 	</div>
-	
 </div>
