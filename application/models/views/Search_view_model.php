@@ -22,7 +22,7 @@ class Search_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $category->id;
-			$temp->category_name	= $category->category_name;
+			$temp->category_name	= strtoupper($category->category_name);
 			
 			$this->categories[] = $temp;
 		}
