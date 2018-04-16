@@ -220,7 +220,7 @@ class Item extends CI_Controller {
 	public function category($category_id)
 	{
 		// Load Header
-        $data_header['css_list'] = array('category');
+        $data_header['css_list'] = array('category', 'item');
         $data_header['js_list'] = array();
 		$this->load->view('header', $data_header);
 		
