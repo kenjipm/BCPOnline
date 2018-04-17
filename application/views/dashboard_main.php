@@ -160,28 +160,26 @@
 						foreach($model->tenant_items as $tenant_item)
 						{
 							?>
-							<div class="cb-col-fifth">
-								<a href="<?=site_url('item/'.$tenant_item->id)?>">
-									<div class="item_thumbnail cb-border-round">
-										<div class="item_photo">
-											<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
-										</div>
-										<div class="item_tenant_name">
-										</div>
-										<div class="item_name">
-											<?=$tenant_item->posted_item_name?>
-										</div>
-										<div class="item_initial_price">
-											
-										</div>
-										<div class="item_current_price">
-											<?=$tenant_item->price?>
-										</div>
-										<div class="item_rating">
-										</div>
+							<a href="<?=site_url('item/'.$tenant_item->id)?>" class="cb-col-fifth">
+								<div class="item_thumbnail cb-border-round">
+									<div class="item_photo">
+										<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
 									</div>
-								</a>
-							</div>
+									<div class="item_tenant_name">
+									</div>
+									<div class="item_name">
+										<?=$tenant_item->posted_item_name?>
+									</div>
+									<div class="item_initial_price">
+										
+									</div>
+									<div class="item_current_price">
+										<?=$tenant_item->price?>
+									</div>
+									<div class="item_rating">
+									</div>
+								</div>
+							</a>
 							<?php
 						}
 					?>

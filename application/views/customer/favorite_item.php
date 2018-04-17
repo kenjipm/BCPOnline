@@ -15,7 +15,7 @@
 	// $model->favorite_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
 ?>
 
-<div class="col-sm-10 col-sm-offset-1">
+<div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3><?=$title?></h3>

@@ -7,7 +7,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r2 c3',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex1.jpg',
 					'url'	=> '',
 				),
 				array(
@@ -25,7 +25,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r2 c1',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex2.jpg',
 					'url'	=> '',
 				),
 			),
@@ -35,7 +35,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r2 c2',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex3.jpg',
 					'url'	=> '',
 				),
 			),
@@ -45,7 +45,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r1 c1',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex4.jpg',
 					'url'	=> '',
 				),
 			),
@@ -55,7 +55,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r1 c1',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex5.jpg',
 					'url'	=> '',
 				),
 			),
@@ -65,7 +65,7 @@ $config['DASHBOARD_BOX'] = array(
 		'class'		=> 'r1 c2',
 		'images'	=> array(
 				array(
-					'path'	=> 'img/ad_box/guy.jpg',
+					'path'	=> 'img/ad_box/ex6.jpg',
 					'url'	=> '',
 				),
 			),
