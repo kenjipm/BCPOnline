@@ -63,24 +63,26 @@
 							foreach($model->hot_items as $hot_item)
 							{
 								?>
-								<div class="item_thumbnail">
-									<div class="item_photo">
-										<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
+								<a href="<?=site_url('item/'.$hot_item->id)?>">
+									<div class="item_thumbnail">
+										<div class="item_photo">
+											<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
+										</div>
+										<div class="item_tenant_name">
+										</div>
+										<div class="item_name">
+											<?=$hot_item->posted_item_name?>
+										</div>
+										<div class="item_initial_price">
+											<?=$hot_item->initial_price?>
+										</div>
+										<div class="item_current_price">
+											<?=$hot_item->promo_price?>
+										</div>
+										<div class="item_rating">
+										</div>
 									</div>
-									<div class="item_tenant_name">
-									</div>
-									<div class="item_name">
-										<?=$hot_item->posted_item_name?>
-									</div>
-									<div class="item_initial_price">
-										<?=$hot_item->initial_price?>
-									</div>
-									<div class="item_current_price">
-										<?=$hot_item->promo_price?>
-									</div>
-									<div class="item_rating">
-									</div>
-								</div>
+								</a>
 								<?php
 							}
 						?>
@@ -147,15 +149,46 @@
 </div>
 
 <div class="cb-row">
-	<?php
-		foreach($model->tenant_items as $tenant_item)
-		{
-			?>
-			<div class="cb-col-fifth cb-bg-primary-3 p-1">
+	<div class="cb-col-full">
+		<div class="cb-panel">
+			<div class="cb-panel-heading cb-align-center">
+				<h4 class="cb-txt-primary-1">NEW ITEMS</h4>
 			</div>
-			<?php
-		}
-	?>
+			<div class="cb-panel-body cb-p-2">
+				<div class="item-showcase cb-row">
+					<?php
+						foreach($model->tenant_items as $tenant_item)
+						{
+							?>
+							<div class="cb-col-fifth">
+								<a href="<?=site_url('item/'.$tenant_item->id)?>">
+									<div class="item_thumbnail cb-border-round">
+										<div class="item_photo">
+											<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
+										</div>
+										<div class="item_tenant_name">
+										</div>
+										<div class="item_name">
+											<?=$tenant_item->posted_item_name?>
+										</div>
+										<div class="item_initial_price">
+											
+										</div>
+										<div class="item_current_price">
+											<?=$tenant_item->price?>
+										</div>
+										<div class="item_rating">
+										</div>
+									</div>
+								</a>
+							</div>
+							<?php
+						}
+					?>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 
 <div class="">
@@ -291,7 +324,7 @@
 	
 		<!-------- FOLLOWING TENANT NEW ITEMS -------->
 		<?php
-			if (count($model->tenant_items) > 0)
+			/*if (count($model->tenant_items) > 0)
 			{
 				?>
 				<div class="panel panel-default">
@@ -324,7 +357,7 @@
 					</div>
 				</div>
 				<?php
-			}
+			}*/
 		?>
 		
 		<!-------- SEARCH INPUT -------->
