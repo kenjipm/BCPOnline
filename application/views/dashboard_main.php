@@ -112,25 +112,27 @@
 								</div>
 							</div>
 							<div class="cb-col-half">
-								<div class="cb-row">
-									<div class="cb-col-full item_name">
+								<div class="cb-table">
+									<div class="cb-table-row item_name">
 										<?=$model->bidding_item->posted_item_name?>
 									</div>
-									<div class="cb-col-full sub_label">
-										Harga sekarang
+									<div class="cb-table-row" >
+										<div class="sub_label">Harga sekarang</div>
 									</div>
-									<div class="cb-col-full" id="bidding_cur_price_str">
-										<?=$model->bidding_item->price_str?>
+									<div class="cb-table-row" >
+										<div class="item_current_price" id="bidding_cur_price_str"><?=$model->bidding_item->price_str?></div>
 									</div>
-									<div class="cb-col-full">
-										<div class="cb-row">
-											<input type="text" class="cb-input-text cb-align-right" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
-											<button type="button" class="cb-button-operational" id="btn-bid_add" onclick="bid_add_do()">^</button>
-											<button type="button" class="cb-button-operational" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
-										</div>
+									<div class="cb-table-row">
 									</div>
-									<div class="cb-col-full">
-										<button type="button" class="cb-button-form" onclick="submit_bid()" id="btn-submit_bid">Pasang</button>
+									<div class="cb-table-row">
+										<input type="text" class="cb-input-text cb-align-right cb-table-cell" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
+										<button type="button" class="cb-button-operational cb-button-group-left cb-table-cell" id="btn-bid_add" onclick="bid_add_do()">^</button>
+										<button type="button" class="cb-button-operational cb-button-group-right cb-table-cell" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
+									</div>
+									<div class="cb-table-row">
+									</div>
+									<div class="cb-table-row">
+										<button type="button" class="cb-button-form cb-table-cell" onclick="submit_bid()" id="btn-submit_bid">Pasang</button>
 									</div>
 									<div class="" id="bidding_status"></div>
 								</div>
@@ -162,7 +164,7 @@
 	
 		<!-------- BIDDING LIVE -------->
 		<?php
-			if ($model->bidding_item != null)
+			/*if ($model->bidding_item != null)
 			{
 				?>
 				<div class="panel panel-default">
@@ -221,7 +223,7 @@
 					</div>
 				</div>
 				<?php
-			}
+			}*/
 		?>
 		
 		<!-------- BIDDING -------->
