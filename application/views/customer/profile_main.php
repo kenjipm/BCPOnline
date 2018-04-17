@@ -22,9 +22,38 @@
 		</div>
 	</div>
 	<div class="panel-item-body">
-		<div class="cb-row">
-			<div class="cb-txt-primary-1">CUSTOMER ID:</div>
-		</div>
+		<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<div class="cb-row">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> Customer ID </div>
+				</div>
+				<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+			</div>
+			<div class="cb-row">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> Nama</div>
+				</div>
+				<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+			</div>
+			<div class="cb-row">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> Tanggal Lahir </div>
+				</div>
+				<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+			</div>
+			<div class="cb-row">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> No. HP</div>
+				</div>
+				<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+			</div>
+			<div class="cb-row">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> Email </div>
+				</div>
+				<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+			</div>
+		</form>
 	</div>
 	
 </div>
