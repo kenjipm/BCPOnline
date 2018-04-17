@@ -50,16 +50,98 @@
 </div>
 
 <div class="cb-row">
-	<div class="cb-col-half">
-		<h4 class="cb-txt-primary-1">HOT ITEMS</h4>
-		<!--<a class="pull-right">Lihat Selebihnya</a>-->
-		<div class="item-thumbnail cb-bg-primary-3"></div>
+	<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
+		<div class="cb-panel">
+			<div class="cb-panel-heading">
+				<h4 class="cb-txt-primary-1">HOT ITEMS</h4>
+				<!--<a class="pull-right">Lihat Selebihnya</a>-->
+			</div>
+			<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
+				<div class="item-gallery-container">
+					<div class="item-gallery">
+						<?php
+							foreach($model->hot_items as $hot_item)
+							{
+								?>
+								<div class="item_thumbnail">
+									<div class="item_photo">
+										<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
+									</div>
+									<div class="item_tenant_name">
+									</div>
+									<div class="item_name">
+										<?=$hot_item->posted_item_name?>
+									</div>
+									<div class="item_initial_price">
+										<?=$hot_item->initial_price?>
+									</div>
+									<div class="item_current_price">
+										<?=$hot_item->promo_price?>
+									</div>
+									<div class="item_rating">
+									</div>
+								</div>
+								<?php
+							}
+						?>
+					</div>
+				</div>
+			</div>
+		</div>
 	</div>
-	<div class="cb-col-half cb-bg-primary-2">
-		<h4 class="cb-txt-primary-1">LELANG</h4>
-		<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>
-		<div class="cb-bg-primary-3"></div>
-	</div>
+	<?php
+		if ($model->bidding_item != null)
+		{
+			?>
+			<input type="hidden" id="bidding_next_price" value="<?=$model->bidding_item->start_bid_price?>"/>
+			<input type="hidden" id="bidding_item_id" value="<?=$model->bidding_item->id?>"/>
+			<input type="hidden" id="bidding_cur_price" value="<?=$model->bidding_item->price?>"/>
+			<input type="hidden" id="bidding_step" value="<?=$model->bidding_item->bidding_step?>"/>
+			
+			<div class="cb-col-half cb-p-2">
+				<div class="cb-panel cb-bg-primary-2 cb-border-round cb-p-2">
+					<div class="cb-panel-heading">
+						<h4 class="cb-txt-primary-1">LELANG</h4>
+						<!--<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>-->
+					</div>
+					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
+						<div class="cb-row">
+							<div class="cb-col-half">
+								<div class="item_photo">
+									<img src="<?=$model->bidding_item->image_one_name?>" alt="<?=$model->bidding_item->posted_item_name?>"/>
+								</div>
+							</div>
+							<div class="cb-col-half">
+								<div class="cb-row">
+									<div class="cb-col-full item_name">
+										<?=$model->bidding_item->posted_item_name?>
+									</div>
+									<div class="cb-col-full sub_label">
+										Harga sekarang
+									</div>
+									<div class="cb-col-full" id="bidding_cur_price_str">
+										<?=$model->bidding_item->price_str?>
+									</div>
+									<div class="cb-col-full">
+										<div class="cb-row">
+											<input type="text" class="cb-input-text cb-align-right" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
+											<button type="button" class="cb-button-operational" id="btn-bid_add" onclick="bid_add_do()">^</button>
+											<button type="button" class="cb-button-operational" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
+										</div>
+									</div>
+									<div class="cb-col-full">
+										<button type="button" class="cb-button-form" onclick="submit_bid()" id="btn-submit_bid">Pasang</button>
+									</div>
+									<div class="" id="bidding_status"></div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
+	?>
 </div>
 
 <div class="cb-row">
@@ -266,7 +348,7 @@
 		<!-------- HOT ITEM -------->
 		
 		<?php
-			if (count($model->hot_items) > 0)
+			/*if (count($model->hot_items) > 0)
 			{
 				?>
 				<div class="panel panel-default">
@@ -299,7 +381,7 @@
 					</div>
 				</div>
 				<?php
-			}
+			}*/
 		?>
 	</div>
 	

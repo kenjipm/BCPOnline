@@ -11,7 +11,7 @@
 	
 ?>
 
-<div class="col-sm-10 col-sm-offset-1">
+<div class="">
 	<!-- Order -->
 	<div class="panel panel-default" <?php if ($show_div_order===false){?>style="display:none"<?php } ?>>
 		<div class="panel-heading">

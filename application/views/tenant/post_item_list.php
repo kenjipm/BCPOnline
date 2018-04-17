@@ -22,7 +22,7 @@
 	*/
 ?>
 
-<div class="col-sm-10 col-sm-offset-1">
+<div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Daftar Item</h3>

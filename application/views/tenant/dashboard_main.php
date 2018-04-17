@@ -40,7 +40,7 @@
 
 	$show_posted_item_div = false;
 ?>
-<div class="col-sm-10 col-sm-offset-1">
+<div class="">
 	<div class="panel panel-default">
 		<div class="panel panel-body">
 			<div class="col-md-4">

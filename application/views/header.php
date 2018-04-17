@@ -188,4 +188,4 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	</nav>
 */ ?>
 	<!-- BODY CONTAINER -->
-    <div class="">
+    <div class="cb-container">
