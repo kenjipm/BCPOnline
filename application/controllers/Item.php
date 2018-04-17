@@ -227,14 +227,14 @@ class Item extends CI_Controller {
 		// Load Body
 		$this->load->model('item_model');
 		$promoted_items = $this->item_model->get_all_promoted_from_category_id($category_id);
-		$items = $this->item_model->get_all_from_category_id($category_id);
+		$items = $this->item_model->get_all_from_category_id($category_id, $this->input->get('page')??'1');
 		
 		// // $this->load->model('category_model');
 		$categories = $this->category_model->get_all();
 		$category = $this->category_model->get_from_id($category_id);
 		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($categories, $promoted_items, $items);
+		$this->search_view_model->get($categories, $promoted_items, $items, $category_id);
 		
 		$data['title'] = strtoupper($category->category_name);
 		$data['model'] = $this->search_view_model;

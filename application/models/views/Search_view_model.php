@@ -5,6 +5,7 @@ class Search_view_model extends CI_Model {
 	public $promoted_items;
 	public $search_items;
 	public $categories;
+	public $category;
 	
 	// constructor
 	public function __construct()
@@ -14,7 +15,7 @@ class Search_view_model extends CI_Model {
 		$this->categories = array();
 	}
 	
-	public function get($categories, $promoted_items, $items)
+	public function get($categories, $promoted_items, $items, $category_id)
 	{
 		$this->load->library('text_renderer');
 		
@@ -48,6 +49,9 @@ class Search_view_model extends CI_Model {
 			
 			$this->search_items[] = $temp;
 		}
+		
+		$this->category = new class{};
+		$this->category->id = $category_id;
 	}
 }
 ?>

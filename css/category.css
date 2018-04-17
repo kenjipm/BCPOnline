@@ -1,3 +1,13 @@
+.panel-category {
+	padding: 10px 0px 0px 20px;
+	float: left;
+}
+
+.panel-category-item {
+	width: 80%;
+	padding: 10px 20px 10px 0px;
+}
+
 .panel-category-heading { 
 	background-color: #e55026; /* Dark Orange */
 	font-family: lato-light;

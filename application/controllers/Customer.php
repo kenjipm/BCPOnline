@@ -35,7 +35,7 @@ class Customer extends CI_Controller {
 		if ($this->input->method() == "post") $data = $this->profile_edit_do();
 		
 		// Load Header
-        $data_header['css_list'] = array();
+        $data_header['css_list'] = array('profile');
         $data_header['js_list'] = array('simpleUpload', 'photo_upload_simple');
 		$this->load->view('header', $data_header);
 		

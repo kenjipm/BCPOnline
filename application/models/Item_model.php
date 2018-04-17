@@ -237,7 +237,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_promoted_from_category_id($category_id, $limit=6, $offset=0)
+	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=6)
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -259,7 +259,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_category_id($category_id)
+	public function get_all_from_category_id($category_id, $page=1, $limit=16)
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -270,14 +270,14 @@ class Item_model extends CI_Model {
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
-					  ->get($this->table_item);
+					  ->get($this->table_item, $limit??"", $limit?(($page-1)*$limit):"");
 					  
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_following_tenants($following_tenants, $limit=3, $offset=0)
+	public function get_all_from_following_tenants($following_tenants, $offset=0, $limit=3)
 	{
 		$this->db->where('0', '1');
 		foreach ($following_tenants as $following_tenant)
@@ -304,7 +304,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_promoted_from_search($keywords, $limit=6, $offset=0)
+	public function get_all_promoted_from_search($keywords, $offset=0, $limit=6)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');

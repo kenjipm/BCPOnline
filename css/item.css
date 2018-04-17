@@ -1,6 +1,5 @@
 .panel-item-head { 
 	font-family: lato-light;
-    border-top: 1px solid #ddd;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
@@ -10,6 +9,14 @@
 	font-family: lato-light;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
+}
+
+.item-head {
+	
+}
+
+.item-body {
+	
 }
 
 .category{
