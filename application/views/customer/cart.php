@@ -8,7 +8,7 @@
 			foreach($model->items as $item)
 			{
 				?>
-					<div class="cb-row cb-p-5">
+					<div class="cb-row cb-p-5 cb cb-border-bottom">
 						<div class="cb-col-fourth cb-margin-auto">
 							<a href="<?=site_url('item/'.$item->posted_item_id)?>">
 								<img class="col-md-12" src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
@@ -68,6 +68,54 @@
 			}
 			?>
 			<hr/>
+			<div class="cb-row">
+				<div class="cb-col-third-2">
+				</div>
+				<div class="cb-col-third pull-right cb-p-5">
+					<div class="cb-row">
+						<div class="cb-col-third-2">
+							Ongkos Kirim
+						</div>
+						<div class="cb-col-third pull-right">
+							<div class="cb-label"><?=$model->shipping_charge?></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-third-2">
+				</div>
+				<div class="cb-col-third pull-right cb-p-5">
+					<div class="cb-row">
+						<div class="cb-col-third">
+							Total
+						</div>
+						<div class="cb-col-third-2 pull-right">
+							<div class="cb-label"><?=$model->price_total?></div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-fourth-3">
+				</div>
+				<div class="cb-col-fourth cb-p-5">
+				<?php
+					if (count($model->items) > 0)
+					{
+						?>
+						<a href="#" class="cb-button-form " onclick="submit_cart();">Pilih Metode Pembayaran</a>
+						<?php
+					}
+					else
+					{
+						?>
+						<a href="<?=site_url('')?>" class="cb-button-form ">Lanjut Belanja</a>
+						<?php
+					}
+				?>
+				</div>
+			</div>
 		</div>
 	</div>
 	<div class="cb-col-fourth">

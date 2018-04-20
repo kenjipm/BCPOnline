@@ -54,6 +54,7 @@ a:hover { opacity: 0.8; }
 
 .cb-border-round { border-radius: 7px; }
 .cb-border-right { border-right: 1px solid #434747; }
+.cb-border-bottom { border-bottom: 1px solid #434747; }
 
 .cb-pull-right { float: right; }
 .cb-pull-left { float: left; }
