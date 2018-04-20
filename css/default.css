@@ -31,6 +31,10 @@ body {
 	height: 100%;
 }
 
+.cb-font-title { font-family: 'Akrobat ExtraBold', sans-serif; }
+.cb-font-primary-1 { font-family: 'Lato', sans-serif; }
+.cb-font-primary-2 { font-family: 'Lato Light', sans-serif; }
+
 .cb-bg-primary-1, .cb-bg-primary-1-hover:hover		{ background-color: #e55026; }
 .cb-bg-primary-2, .cb-bg-primary-2-hover:hover		{ background-color: #faa528; }
 .cb-bg-primary-3, .cb-bg-primary-3-hover:hover		{ background-color: #ffffff; }
@@ -117,6 +121,7 @@ body {
 
 .cb-input-text { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
 
+[class|="cb-button"] { font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; }
 .cb-button-operational		{ border: none; background-color: #434747; color: #ffffff; padding: 0.75rem; border-radius: 4px; }
 .cb-button-form				{ border: none; background-color: #e55026; color: #ffffff; padding: 0.75rem; border-radius: 4px; }
 .cb-button-group-left		{ border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; border-right: 1px solid #FFF; }
