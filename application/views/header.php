@@ -11,6 +11,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <link rel='stylesheet' href='<?=site_url('css/jquery-ui-1.12.1.custom/jquery-ui.min.css')?>' type='text/css' media='screen'/>
     <link rel='stylesheet' href='<?=site_url('css/jquery-ui-1.12.1.custom/jquery-ui-timepicker-addon.css')?>' type='text/css' media='screen'/>
     <link rel='stylesheet' href='<?=site_url('css/default.css')?>' type='text/css' media='screen'/>
+	
+	<link href="https://fonts.googleapis.com/css?family=Lato:300,400" rel="stylesheet">
     
     <!-- SET JS -->
     <script type='text/javascript' src='<?=site_url('js/jquery-3.2.1.min.js')?>'></script>
