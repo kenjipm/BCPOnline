@@ -1,3 +1,18 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('fonts/Lato-Regular.ttf');
+}
+
+@font-face {
+    font-family: 'Lato Light';
+    src: url('fonts/Lato-Light.ttf');
+}
+
+@font-face {
+    font-family: 'Akrobat ExtraBold';
+    src: url('fonts/Akrobat-ExtraBold.otf');
+}
+
 html {
 	position: relative;
 	min-height: 100%;
@@ -5,7 +20,7 @@ html {
 
 body {
 	margin-bottom: 240px; /* Margin bottom by footer height plus margin 20px*/
-	font: 'Lato Light';
+	font-family: 'Lato', sans-serif;
 	background-color: #434747; /* Dark Grey */
 }
 
@@ -222,6 +237,8 @@ h4 { font-weight: bold; }
 	text-align: center;
 	width: 120px;
 	color: white;
+	font-family: 'Akrobat ExtraBold', sans-serif;
+	font-size: 2rem;
 }
 
 .navbar-cb-strip-text:hover {
@@ -279,7 +296,7 @@ h4 { font-weight: bold; }
 
 .logo-footer {
 	float: left;
-	height: 30px;
+	height: 50px;
 	margin: 0 10px 0 30px;
 }
 
