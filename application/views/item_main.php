@@ -1,3 +1,31 @@
+<div class="cb-panel">
+	<div class="cb-panel-body">
+		<div class="cb-row">
+			<div class="cb-col-half">
+				<div class="cb-row">
+					<div class="cb-col-half">
+						
+					</div>
+					<div class="cb-col-half">
+						
+					</div>
+				</div>
+			</div>
+			<div class="cb-col-half">
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+
+
+
+
+
+
+
 <?php
 	// Model untuk dashboard_main
 	
