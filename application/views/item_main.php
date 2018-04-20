@@ -1,18 +1,57 @@
-<div class="cb-panel">
+<div class="cb-panel cb-pl-2 cb-pr-2">
 	<div class="cb-panel-body">
 		<div class="cb-row">
-			<div class="cb-col-half">
-				<div class="cb-row">
+			<div class="cb-col-fourth-3 cb-pr-4">
+				<div class="cb-row cb-border-round cb-bg-primary-3">
 					<div class="cb-col-half">
-						
+						<div class="cb-row">
+							<div class="cb-col-fourth">
+								<div class="cb-row cb-p-2">
+									<?php
+										foreach ($model->item_variances as $item_variance)
+										{
+											?>
+											<div class="cb-col-full">
+												<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" class="thumbnail cb-col-full" />
+											</div>
+											<?php
+										}
+									?>
+								</div>
+							</div>
+							<div class="cb-col-fourth-3 cb-p-5">
+								<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="thumbnail" style="width:100%"/>
+							</div>
+						</div>
 					</div>
 					<div class="cb-col-half">
-						
+						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->posted_item_name?></h3>
+						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->price?></h3>
+						<br/>
+						<h3 class="cb-font-title cb-txt-primary-1">Pilihan Warna</h3>
+						<div class="cb-row">
+							<?php
+								foreach ($model->item_variances as $item_variance)
+								{
+									?>
+									<button type="button" class="cb-button-secondary cb-mr-4"><?=$item_variance->var_description?></button>
+									<?php
+								}
+							?>
+						</div>
+						<div class="cb-row">
+							<button type="button" class="cb-button-form" onclick="popup.open('popup_buy')">Beli</button>
+						</div>
 					</div>
 				</div>
 			</div>
-			<div class="cb-col-half">
-				
+			<div class="cb-col-fourth cb-bg-primary-3 cb-border-round cb-align-center">
+				<h4>
+					<a class="cb-font-title cb-txt-primary-1" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
+						<?=$model->item->tenant->tenant_name?>
+					</a>
+				</h4>
+				<button type="button" class="<?= $model->item->tenant->btn_class ?>" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
 			</div>
 		</div>
 	</div>

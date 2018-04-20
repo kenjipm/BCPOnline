@@ -32,7 +32,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->id				= $item->tenant->id;
 		$this->item->tenant->tenant_name	= $item->tenant->tenant_name;
 		$this->item->tenant->is_followed	= ($item->tenant->is_followed($this->session->child_id) != null);
-		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "btn-favorited" : "");
+		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");
 		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "Sudah Diikuti" : "Ikuti");
 		
 		foreach ($item_variances as $item_variance)
