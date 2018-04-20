@@ -2,25 +2,25 @@
 	<div class="cb-panel-body">
 		<div class="cb-row">
 			<div class="cb-col-fourth-3 cb-pr-4">
-				<div class="cb-row cb-border-round cb-bg-primary-3">
+				<div class="cb-row cb-border-round cb-bg-primary-3 cb-p-5">
 					<div class="cb-col-half">
 						<div class="cb-row">
-							<div class="cb-col-fourth">
-								<div class="cb-row cb-p-2">
+							<div class="cb-col-fourth cb-p-2">
+								<div class="cb-row item_gallery-vertical">
 									<?php
 										foreach ($model->item_variances as $item_variance)
 										{
 											?>
 											<div class="cb-col-full">
-												<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" class="thumbnail cb-col-full" />
+												<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" class="item_thumbnail-sm cb-border cb-border-round hoverable cb-square" />
 											</div>
 											<?php
 										}
 									?>
 								</div>
 							</div>
-							<div class="cb-col-fourth-3 cb-p-5">
-								<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="thumbnail" style="width:100%"/>
+							<div class="cb-col-fourth-3 cb-p-2">
+								<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/>
 							</div>
 						</div>
 					</div>
