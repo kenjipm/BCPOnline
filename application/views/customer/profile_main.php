@@ -1,6 +1,7 @@
 <div class="cb-txt-primary-1">
 	<h2>PROFIL SAYA</h2>
 </div>
+<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 <div class="cb-row">
 	<div class="cb-col-fifth">
 		<div class="panel-profile-pic-header">
@@ -24,7 +25,6 @@
 		</div>
 	</div>
 	<div class="cb-panel-body cb-bg-primary-3">
-		<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<div class="cb-row cb-p-5">
 				<div class="cb-col-half cb-pl-5 cb-border-right">
 					<div class="cb-row cb-mb-5 cb-mt-5">
@@ -159,11 +159,11 @@
 			<div class="cb-row cb-p-5">
 				<button type="submit" class="cb-button-form cb-margin-auto">SIMPAN</button>
 			</div>
-		</form>
+		
 	</div>
 	
 </div>
-
+</form>
 
 
 

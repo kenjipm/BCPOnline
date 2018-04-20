@@ -63,7 +63,7 @@ class Customer extends CI_Controller {
 	public function cart()
 	{
 		// Load Header
-        $data_header['css_list'] = array();
+        $data_header['css_list'] = array('cart');
         $data_header['js_list'] = array('customer/cart');
 		$this->load->view('header', $data_header);
 		
@@ -74,7 +74,7 @@ class Customer extends CI_Controller {
 		$this->load->model('views/customer/cart_view_model');
 		$this->cart_view_model->get($this->session->cart, $shipping_addresses);
 		
-		$data['title'] = "Keranjang Belanja";
+		$data['title'] = "Keranjang";
 		$data['model'] = $this->cart_view_model;
 		$this->load->view('customer/cart', $data);
 		

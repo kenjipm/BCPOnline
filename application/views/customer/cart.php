@@ -1,28 +1,85 @@
-<?php
-	// Model untuk customer cart
-	
-	// dummy session
-	// $model->items[0] = new class{};
-	// $model->items[0]->id = 1;
-	// $model->items[0]->name = "Charger Samsung";
-	// $model->items[0]->quantity = 2;
-	// $model->items[0]->price = "Rp 250.000";
-	// $model->items[0]->price_total = "Rp 500.000";
-	// $model->items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
-	
-	// $model->items[1] = new class{};
-	// $model->items[1]->id = 2;
-	// $model->items[1]->name = "Dompet Doraemon";
-	// $model->items[1]->quantity = 1;
-	// $model->items[1]->price = "Rp 40.000";
-	// $model->items[1]->price_total = "Rp 40.000";
-	// $model->items[1]->image_one_name = site_url("img/upload/user1/doraemon.jpg");
-	
-	// $model->price_subtotal = "Rp 540.000";
-	// $model->shipping_charge = "Rp 11.000";
-	// $model->address = "Jalan Perjuangan Raya 17, Marga Mulya, Bekasi Utara, Kota Bks, Jawa Barat 17143";
-	// $model->price_total = "Rp 551.000";
-?>
+<div class="cb-txt-primary-1">
+	<h2><?=$title?></h2>
+</div>
+<div class="cb-row">
+	<div class="cb-col-fourth-3">
+		<div class="cb-panel-body cb-bg-primary-3">
+			<?php
+			foreach($model->items as $item)
+			{
+				?>
+					<div class="cb-row cb-p-5">
+						<div class="cb-col-fourth cb-margin-auto">
+							<a href="<?=site_url('item/'.$item->posted_item_id)?>">
+								<img class="col-md-12" src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
+							</a>
+						</div>
+						<div class="cb-col-fourth cb-margin-auto">
+							<div class="cb-row">
+								Produk
+							</div>
+							<div class="cb-row">
+								<a href="<?=site_url('item/'.$item->posted_item_id)?>">
+									<div class="cb-label"><?=$item->posted_item_name?></div>
+								</a>
+							</div>
+							<div class="cb-row cb-pt-5">
+								<?=$item->var_type?>
+							</div>
+							<div class="cb-row">
+								<div class="cb-label"><?=$item->var_description?></div>
+							</div>
+							<div class="cb-row cb-pt-5">
+								<div class="cb-font-title cb-label"><?=$item->price?></div>
+							</div>
+						</div>
+						<div class="cb-col-fourth cb-margin-auto">
+							<div class="cb-row">
+								Jumlah
+							</div>
+							<div class="cb-row">
+								<button class="cb-button-operational cb-button-group-left cb-col-fifth" type="button" onclick="cart_add_do(<?=$item->id?>, 1)">^</button>
+								<input type="text" value="<?=$item->quantity?>" class="cb-input-text cb-button-group-mid cb-col-fifth-2 text-center" readonly="readonly" />
+								<button class="cb-button-operational cb-button-group-right cb-col-fifth" type="button" onclick="cart_sub_do(<?=$item->id?>, 1)">v</button>
+							</div>
+						</div>
+						<div class="cb-col-fourth cb-margin-auto cb-pl-5">
+							<div class="cb-row">
+								Total
+							</div>
+							<div class="cb-row">
+								<div class="cb-col-fifth-4">
+									<div class="cb-label"><?=$item->price_total?></div>
+								</div>
+								<div class="cb-col-fifth">
+									<button class="cb-button-form" type="button" onclick="cart_sub_do(<?=$item->id?>, <?=$item->quantity?>)"> X </button>
+								</div>
+							</div>
+							
+						</div>
+					</div>
+				<?php
+			}
+			if (count($model->items) <= 0)
+			{
+				?>
+				<label>Keranjang Belanja Anda Kosong</label>
+				<?php
+			}
+			?>
+			<hr/>
+		</div>
+	</div>
+	<div class="cb-col-fourth">
+		<div class="cb-panel-body cb-bg-primary-3">
+			asd
+		</div>
+	</div>
+</div>
+
+
+
+
 
 <div class="row">
 
@@ -30,7 +87,7 @@
 		<div class="panel panel-default">
 			<form id="form-cart" action="<?=site_url('billing/cart')?>" method="post">
 				<div class="panel-heading">
-					<h3>Shopping Cart</h3>
+					<h3><?=$title?></h3>
 				</div>
 				<div class="panel-body">
 					<?php
