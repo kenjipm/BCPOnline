@@ -54,7 +54,10 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 
 .cb-border-round	{ border-radius: 7px; }
 .cb-border			{ border: 1px solid #434747; }
+.cb-border-top		{ border-top: 1px solid #434747; }
 .cb-border-right	{ border-right: 1px solid #434747; }
+.cb-border-bottom	{ border-bottom: 1px solid #434747; }
+.cb-border-left		{ border-left: 1px solid #434747; }
 
 .cb-pull-right { float: right; }
 .cb-pull-left { float: left; }
