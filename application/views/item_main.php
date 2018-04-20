@@ -51,7 +51,9 @@
 						<?=$model->item->tenant->tenant_name?>
 					</a>
 				</h4>
-				<button type="button" class="<?= $model->item->tenant->btn_class ?>" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
+				<div class="cb-row cb-align-center">
+					<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
+				</div>
 			</div>
 		</div>
 	</div>

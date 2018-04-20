@@ -142,8 +142,8 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-button-secondary:active		{ background-color: #faa528; color: #ffffff; border: none; }
 .cb-button-secondary-selected	{ background-color: #faa528; color: #ffffff; border: none; }
 
-.cb-align-center { text-align: center; }
-.cb-align-right { text-align: right; }
+.cb-align-center { text-align: center; justify-content: center; }
+.cb-align-right { text-align: right; justify-content: flex-end; }
 .cb-margin-auto { margin: auto; }
 
 .cb-table { display: table; }
