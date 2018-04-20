@@ -17,7 +17,9 @@
 				<div class="cb-txt-primary-2">
 					<h3>Poin saya: </h3>
 				</div>
-				<a href="reward" class=""> TUKARKAN POIN </a>
+				<div class="cb-row cb-p-5">
+					<a href="reward" class="cb-button-form cb-margin-auto"> TUKARKAN POIN </a>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -26,64 +28,136 @@
 			<div class="cb-row cb-p-5">
 				<div class="cb-col-half cb-pl-5 cb-border-right">
 					<div class="cb-row cb-mb-5 cb-mt-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Customer ID </div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Customer ID </div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Nama</div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Nama</div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Alamat</div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Alamat</div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<textarea class="cb-input-text" name="posted_item_description" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
+						<div class="cb-col-third-2">
+							<textarea class="cb-input-text" name="posted_item_description" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
+						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Tanggal Lahir </div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Tanggal Lahir </div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> No. HP</div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> No. HP</div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Email </div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Email </div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+						</div>
 					</div>
 				</div>
-				<div class="cb-col-half">
+				<div class="cb-col-half cb-pl-5">
 					<div class="cb-row cb-mb-5 cb-mt-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Foto Kartu ID </div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Foto Kartu ID </div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<div class="panel-profile-pic-header">
-							<div id="thumbnail-identification_pic" class="thumbnail thumbnail-hover">
-								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+						<div class="cb-col-third-2">
+							<div class="panel-profile-pic-header">
+								<div id="thumbnail-identification_pic" class="thumbnail thumbnail-hover">
+									<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+								</div>
 							</div>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
-						<div class="cb-txt-primary-1">
-							<div class="cb-label"> Link Referral</div>
+						<div class="cb-col-third">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Link Referral</div>
+							</div>
+							<div class="cb-pull-right">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
 						</div>
-						<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>">
-						<button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button>
+						<div class="cb-col-third-2">
+							<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>">
+							<button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button>
+						</div>
 					</div>
 				</div>
 			</div>
 			<div class="cb-row cb-p-5">
-				<button type="submit" class="cb-button-form">SIMPAN</button>
+				<button type="submit" class="cb-button-form cb-margin-auto">SIMPAN</button>
 			</div>
 		</form>
 	</div>
