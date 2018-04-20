@@ -46,6 +46,7 @@ body {
 .cb-txt-secondary-3, .cb-txt-secondary-3-hover:hover	{ color: #e6e6e5; }
 
 .cb-border-round { border-radius: 7px; }
+.cb-border-right { border-right: 1px solid #434747; }
 
 .cb-pull-right { float: right; }
 .cb-pull-left { float: left; }

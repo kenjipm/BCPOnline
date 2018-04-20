@@ -23,8 +23,8 @@
 	</div>
 	<div class="cb-panel-body cb-bg-primary-3">
 		<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
-			<div class="cb-row">
-				<div class="cb-col-half">
+			<div class="cb-row cb-p-5">
+				<div class="cb-col-half cb-pl-5 cb-border-right">
 					<div class="cb-row cb-mb-5 cb-mt-5">
 						<div class="cb-txt-primary-1">
 							<div class="cb-label"> Customer ID </div>
@@ -68,9 +68,8 @@
 							<div class="cb-label"> Foto Kartu ID </div>
 						</div>
 						<div class="panel-profile-pic-header">
-							<div id="thumbnail-profile_pic" class="profile-thumbnail">
-								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_pic?>" style="width:100%">
-								<input id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" data-url="<?=site_url('customer/upload_idpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
+							<div id="thumbnail-identification_pic" class="thumbnail thumbnail-hover">
+								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
 							</div>
 						</div>
 					</div>
@@ -83,6 +82,9 @@
 					</div>
 				</div>
 			</div>
+			<div class="cb-row cb-p-5">
+				<button type="submit" class="cb-button-form">SIMPAN</button>
+			</div>
 		</form>
 	</div>
 	
@@ -91,7 +93,7 @@
 
 
 
-
+<!--
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -100,7 +102,7 @@
 		<div class="panel-body">
 			<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value="<?=$this->session->id?>"/>
-			
+		
 				<div class="form-group">
 					<label class="control-label col-xs-3">Foto Profil:</label>
 					<div class="col-xs-3">
@@ -166,7 +168,7 @@
 							<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
 						</div>
 						<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" class="form-control" style="display:none">
-						<label for="identification_pic" class="btn btn-default">Ubah Foto Kartu ID</label-->
+						<label for="identification_pic" class="btn btn-default">Ubah Foto Kartu ID</label
 					</div>
 				</div>
 				<div class="form-group">
@@ -177,3 +179,4 @@
 		</div>
 	</div>
 </div>
+-->
