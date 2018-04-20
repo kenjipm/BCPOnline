@@ -21,37 +21,67 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel-item-body">
+	<div class="cb-panel-body cb-bg-primary-3">
 		<form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<div class="cb-row">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> Customer ID </div>
+				<div class="cb-col-half">
+					<div class="cb-row cb-mb-5 cb-mt-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Customer ID </div>
+						</div>
+						<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Nama</div>
+						</div>
+						<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Alamat</div>
+						</div>
+						<textarea class="cb-input-text" name="posted_item_description" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Tanggal Lahir </div>
+						</div>
+						<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> No. HP</div>
+						</div>
+						<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Email </div>
+						</div>
+						<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+					</div>
 				</div>
-				<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
-			</div>
-			<div class="cb-row">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> Nama</div>
+				<div class="cb-col-half">
+					<div class="cb-row cb-mb-5 cb-mt-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Foto Kartu ID </div>
+						</div>
+						<div class="panel-profile-pic-header">
+							<div id="thumbnail-profile_pic" class="profile-thumbnail">
+								<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_pic?>" style="width:100%">
+								<input id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" data-url="<?=site_url('customer/upload_idpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
+							</div>
+						</div>
+					</div>
+					<div class="cb-row cb-mb-5">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> Link Referral</div>
+						</div>
+						<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>">
+						<button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button>
+					</div>
 				</div>
-				<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
-			</div>
-			<div class="cb-row">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> Tanggal Lahir </div>
-				</div>
-				<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
-			</div>
-			<div class="cb-row">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> No. HP</div>
-				</div>
-				<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
-			</div>
-			<div class="cb-row">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> Email </div>
-				</div>
-				<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
 			</div>
 		</form>
 	</div>
