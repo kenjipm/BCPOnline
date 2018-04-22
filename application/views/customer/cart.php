@@ -1,8 +1,8 @@
-<div class="cb-txt-primary-1">
+<div class="cb-txt-primary-1 cb-pl-5">
 	<h2><?=$title?></h2>
 </div>
 <div class="cb-row">
-	<div class="cb-col-fourth-3">
+	<div class="cb-col-fourth-3 cb-p-5">
 		<div class="cb-panel-body cb-bg-primary-3">
 			<?php
 			foreach($model->items as $item)
@@ -118,9 +118,38 @@
 			</div>
 		</div>
 	</div>
-	<div class="cb-col-fourth">
-		<div class="cb-panel-body cb-bg-primary-3">
-			asd
+	<div class="cb-col-fourth cb-p-5">
+		<div class="cb-panel-body cb-bg-primary-3 cb-pl-5">
+			<div class="cb-txt-primary-1">
+				<h3><div class="cb-label"> Alamat Kirim </div></h3>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-full cb-align-center">
+					<?php
+						if (count($model->shipping_addresses) > 0)
+						{
+							?>
+							<select name="address_id" id="address_id" class="cb-form-control">
+								<?php
+									foreach ($model->shipping_addresses as $shipping_address)
+									{
+										?>
+										<option value="<?=$shipping_address->id?>">
+											<?=$shipping_address->full_address?>
+										</option>
+										<?php
+									}
+								?>
+							</select>
+							<br/>
+							<?php
+						}
+						?>
+						<button type="button" onclick="popup.open('popup_address'); initMap()" class="cb-button-form"><?=$model->btn_address_text?></button>
+						<?php
+					?>
+				</div>
+			</div>
 		</div>
 	</div>
 </div>
@@ -128,7 +157,7 @@
 
 
 
-
+<!--
 <div class="row">
 
 	<div class="col-md-12">
