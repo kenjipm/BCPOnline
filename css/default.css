@@ -555,10 +555,12 @@ h4 { font-weight: bold; }
 }
 
 .item_thumbnail-sm {
+	padding: 0.5rem;
 	width: 100%;
 }
 
 .item_thumbnail-lg {
+	padding: 1rem;
 	width: 100%;
 }
 
