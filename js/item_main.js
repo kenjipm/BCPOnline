@@ -24,3 +24,7 @@ function cart_add_do() {
 		}
 	});
 }
+
+function select_variance() {
+	
+}

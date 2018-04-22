@@ -53,7 +53,7 @@
 	<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
 		<div class="cb-panel">
 			<div class="cb-panel-heading">
-				<h4 class="cb-txt-primary-1">HOT ITEMS</h4>
+				<h3 class="cb-txt-primary-1 cb-font-title">HOT ITEMS</h3>
 				<!--<a class="pull-right">Lihat Selebihnya</a>-->
 			</div>
 			<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
@@ -152,7 +152,7 @@
 	<div class="cb-col-full">
 		<div class="cb-panel">
 			<div class="cb-panel-heading cb-align-center">
-				<h4 class="cb-txt-primary-1">NEW ITEMS</h4>
+				<h3 class="cb-txt-primary-1 cb-font-title">NEW ITEMS</h3>
 			</div>
 			<div class="cb-panel-body cb-p-2">
 				<div class="item-showcase cb-row">

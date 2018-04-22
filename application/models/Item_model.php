@@ -6,6 +6,8 @@ class Item_model extends CI_Model {
 	private $table_item_variance = 'posted_item_variance';
 	private $table_category = 'category';
 	private $table_tenant_bill = 'tenant_bill';
+	private $table_order_details = 'order_details';
+	private $table_feedback = 'feedback';
 	
 	// table attribute
 	public $id;
@@ -259,7 +261,12 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_category_id($category_id, $page=1, $limit=16)
+	public function get_related_items($item)
+	{
+		return $this->get_all_from_category_id($item->category_id, 1, 10);
+	}
+	
+	public function get_all_from_category_id($category_id, $page=1, $limit=16, $order="RANDOM")
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -269,6 +276,7 @@ class Item_model extends CI_Model {
 					  // ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
+					  ->order_by($this->table_item.'.id', $order)
 					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
 					  ->get($this->table_item, $limit??"", $limit?(($page-1)*$limit):"");
 					  
@@ -578,6 +586,28 @@ class Item_model extends CI_Model {
 		
 		$this->db->where('id', $id);
 		$this->db->delete($this->table_item);
+	}
+	
+	public function calculate_rating()
+	{
+		$query = $this->db
+					  ->select('AVG('.$this->table_feedback.'.rating) AS rating_average, COUNT('.$this->table_feedback.'.id) AS rating_count')
+					  ->join($this->table_order_details, $this->table_feedback.'.order_detail_id' . ' = ' . $this->table_order_details.'.id', 'left')
+					  ->join($this->table_item_variance, $this->table_order_details.'.posted_item_variance_id' . ' = ' . $this->table_item_variance.'.id', 'left')
+					  ->where($this->table_item_variance.'.posted_item_id', $this->id)
+					  ->where($this->table_order_details.'.order_status', ORDER_STATUS['name']['DONE'])
+					  ->get($this->table_feedback);
+		$item = $query->row();
+		
+		if ($item == null)
+		{
+			$item = new class{};
+			$item->rating_average = 0;
+			$item->rating_count = 0;
+		}
+		
+		return $item;
+		
 	}
 	
 	/*

@@ -7,15 +7,21 @@
 						<div class="cb-row">
 							<div class="cb-col-fourth cb-p-2">
 								<div class="cb-row item_gallery-vertical">
+									<div class="cb-col-full">
+										<?php if ($model->item->image_one_name != "") { ?> <img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/> <?php } ?>
+										<?php if ($model->item->image_two_name != "") { ?> <img src="<?=$model->item->image_two_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/> <?php } ?>
+										<?php if ($model->item->image_three_name != "") { ?> <img src="<?=$model->item->image_three_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/> <?php } ?>
+										<?php if ($model->item->image_four_name != "") { ?> <img src="<?=$model->item->image_four_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/> <?php } ?>
+									</div>
 									<?php
-										foreach ($model->item_variances as $item_variance)
+										/*foreach ($model->item_variances as $item_variance)
 										{
 											?>
 											<div class="cb-col-full">
 												<img src="<?=$item_variance->image_two_name?>" alt="<?=$item_variance->var_description?>" class="item_thumbnail-sm cb-border cb-border-round hoverable cb-square" />
 											</div>
 											<?php
-										}
+										}*/
 									?>
 								</div>
 							</div>
@@ -25,7 +31,24 @@
 						</div>
 					</div>
 					<div class="cb-col-half">
+						<div class="<?= $model->item->btn_class ?> cb-heart cb-pull-right" id="btn-toggle_item_favorite" onclick="toggle_item_favorite(<?=$model->item->id?>)"></div>
 						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->posted_item_name?></h3>
+						<div class="cb-row cb-vertical-center">
+							<?php
+								for ($i = 0; $i < 5; $i++)
+								{
+									$cur_value = $model->item->rating->rating_average - $i;
+									if ($cur_value < 0.25) { $star_class = "empty"; }
+									else if ($cur_value < 0.75) { $star_class = "half"; }
+									else { $star_class = "full"; }
+									
+									?>
+									<span class="cb-star cb-star-<?=$star_class?>"></span>
+									<?php
+								}
+							?>
+							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
+						</div>
 						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->price?></h3>
 						<br/>
 						<h3 class="cb-font-title cb-txt-primary-1">Pilihan Warna</h3>
@@ -39,35 +62,87 @@
 								}
 							?>
 						</div>
-						<div class="cb-row">
-							<button type="button" class="cb-button-form" onclick="popup.open('popup_buy')">Beli</button>
+						<div class="cb-row cb-mt-5">
+							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')">Beli</button>
 						</div>
+					</div>
+					<div class="cb-col-full cb-mt-5 cb-border-top">
+						<h3 class="cb-font-title cb-txt-primary-1">Deskripsi Produk</h3>
+						<?=$model->item->posted_item_description?>
 					</div>
 				</div>
 			</div>
-			<div class="cb-col-fourth cb-bg-primary-3 cb-border-round cb-align-center">
+			<div class="cb-col-fourth cb-bg-primary-3 cb-border-round cb-align-center item_tenant_panel">
 				<h4>
 					<a class="cb-font-title cb-txt-primary-1" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
 						<?=$model->item->tenant->tenant_name?>
 					</a>
 				</h4>
 				<div class="cb-row cb-align-center">
-					<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
+					<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-button cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
 
-
-
-
-
-
-
-
-
 <?php
+	if (count($model->other_items) > 0)
+	{
+		?>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-full">
+				<div class="cb-panel">
+					<div class="cb-panel-heading cb-align-center">
+						<h3 class="cb-txt-primary-1 cb-font-title">PRODUK LAINNYA</h3>
+					</div>
+					<div class="cb-panel-body cb-p-2">
+						<div class="item-showcase cb-row">
+							<?php
+								foreach($model->other_items as $other_item)
+								{
+									?>
+									<a href="<?=site_url('item/'.$other_item->id)?>" class="cb-col-fifth">
+										<div class="item_thumbnail cb-border-round">
+											<div class="item_photo">
+												<img src="<?=$other_item->image_one_name?>" alt="<?=$other_item->posted_item_name?>"/>
+											</div>
+											<div class="item_tenant_name">
+											</div>
+											<div class="item_name">
+												<?=$other_item->posted_item_name?>
+											</div>
+											<div class="item_initial_price">
+												
+											</div>
+											<div class="item_current_price">
+												<?=$other_item->price?>
+											</div>
+											<div class="item_rating">
+											</div>
+										</div>
+									</a>
+									<?php
+								}
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+?>
+
+
+
+
+
+
+
+
+
+<?php /*
 	// Model untuk dashboard_main
 	
 	// dummy posted items
@@ -142,7 +217,7 @@
 		</div>
 	</div>
 	
-</div>
+</div>*/?>
 
 <div id="popup_buy" class="popup popup-md">
 	<div class="panel panel-default">
