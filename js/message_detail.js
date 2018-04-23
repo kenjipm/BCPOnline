@@ -7,6 +7,8 @@ $(document).ready(function(){
 	
 	reset_refresh_chat_area_period();
 	init_refresh_chat_area_periodically();
+	
+	$("#message_panel").scrollTop( $("#anchor").offset().top - 30);  
 });
 
 function refresh_chat_area()
@@ -22,6 +24,7 @@ function refresh_chat_area()
 			$("#message_text_area").html("");
 			data.message_texts.forEach(function(item, idx){
 				$("#message_template").find('.message_content').html(item.text);
+				$("#message_template").find('.message_date_sent').html(item.date_sent);
 				$("#message_template").find('.message_sender_name').html(item.sender.name);
 				
 				var message_template = $("#message_template").html();

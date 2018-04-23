@@ -18,9 +18,34 @@ class Message extends CI_Controller {
 	
 	public function index()
 	{
+		redirect('message/detail');
+		// // Load Header
+        // $data_header['css_list'] = array();
+        // $data_header['js_list'] = array();
+		// $this->load->view('header', $data_header);
+		
+		// // Load Body
+		// $account_id = $this->session->id;
+		
+		// $this->load->model('message_inbox_model');
+		// $message_inboxes = $this->message_inbox_model->get_all_from_account_id($account_id);
+		
+		// $this->load->model('views/message_main_view_model');
+		// $this->message_main_view_model->get($message_inboxes);
+		
+		// $data['title'] = "Kotak Masuk";
+		// $data['model'] = $this->message_main_view_model;
+		// $this->load->view('message_main', $data);
+		
+		// // Load Footer
+		// $this->load->view('footer');
+	}
+	
+	public function detail($id=0)
+	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('message_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -29,35 +54,17 @@ class Message extends CI_Controller {
 		$this->load->model('message_inbox_model');
 		$message_inboxes = $this->message_inbox_model->get_all_from_account_id($account_id);
 		
-		$this->load->model('views/message_main_view_model');
-		$this->message_main_view_model->get($message_inboxes);
-		
-		$data['title'] = "Kotak Masuk";
-		$data['model'] = $this->message_main_view_model;
-		$this->load->view('message_main', $data);
-		
-		// Load Footer
-		$this->load->view('footer');
-	}
-	
-	public function detail($id)
-	{
-		// Load Header
-        $data_header['css_list'] = array();
-        $data_header['js_list'] = array('message_detail');
-		$this->load->view('header', $data_header);
-		
-		// Load Body
-		$this->load->model('message_inbox_model');
-		$message_inbox = $this->message_inbox_model->get_from_id($id);
+		if ($id == 0) $message_inbox = new message_inbox_model();
+		else $message_inbox = $this->message_inbox_model->get_from_id($id);
 		
 		$this->load->model('message_text_model');
-		$message_texts = $this->message_text_model->get_all_from_message_inbox_id($id);
+		if ($id == 0) $message_texts = array();
+		else $message_texts = $this->message_text_model->get_all_from_message_inbox_id($id);
 		
 		$this->load->model('views/message_detail_view_model');
-		$this->message_detail_view_model->get($message_inbox, $message_texts);
+		$this->message_detail_view_model->get($message_inboxes, $message_inbox, $message_texts);
 		
-		$data['title'] = "Percakapan dengan ";
+		// $data['title'] = "Percakapan dengan ";
 		$data['model'] = $this->message_detail_view_model;
 		$this->load->view('message_detail', $data);
 		
@@ -76,7 +83,7 @@ class Message extends CI_Controller {
 		$message_texts = $this->message_text_model->get_all_from_message_inbox_id($message_inbox_id);
 		
 		$this->load->model('views/message_detail_view_model');
-		$this->message_detail_view_model->get($message_inbox, $message_texts);
+		$this->message_detail_view_model->get_detail($message_inbox, $message_texts);
 		
 		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 		header("Cache-Control: post-check=0, pre-check=0", false);
