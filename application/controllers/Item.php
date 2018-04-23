@@ -209,7 +209,7 @@ class Item extends CI_Controller {
 		$categories = $this->category_model->get_all();
 		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get($categories, $promoted_items, $items);
+		$this->search_view_model->get_search($categories, $promoted_items, $items);
 		
 		$data['title'] = 'Hasil Pencarian';
 		$data['model'] = $this->search_view_model;

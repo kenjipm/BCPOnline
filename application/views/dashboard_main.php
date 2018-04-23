@@ -53,7 +53,7 @@
 	<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
 		<div class="cb-panel">
 			<div class="cb-panel-heading">
-				<h3 class="cb-txt-primary-1 cb-font-title">HOT ITEMS</h3>
+				<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">HOT ITEMS</div>
 				<!--<a class="pull-right">Lihat Selebihnya</a>-->
 			</div>
 			<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
@@ -105,10 +105,10 @@
 			<div class="cb-col-half cb-p-2">
 				<div class="cb-panel cb-bg-primary-2 cb-border-round cb-p-2">
 					<div class="cb-panel-heading">
-						<h4 class="cb-txt-primary-1">LELANG</h4>
+						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">LELANG</div>
 						<!--<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>-->
 					</div>
-					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
+					<div class="cb-panel-body cb-bg-primary-3 cb-p-5 cb-panel-flex cb-vertical-center">
 						<div class="cb-row">
 							<div class="cb-col-half">
 								<div class="item_photo">
@@ -116,26 +116,26 @@
 								</div>
 							</div>
 							<div class="cb-col-half">
-								<div class="cb-table">
-									<div class="cb-table-row item_name">
+								<div class="cb-col-full cb-row">
+									<div class="cb-row cb-col-full cb-mb-2 item_name">
 										<?=$model->bidding_item->posted_item_name?>
 									</div>
-									<div class="cb-table-row" >
+									<div class="cb-row cb-col-full" >
 										<div class="sub_label">Harga sekarang</div>
 									</div>
-									<div class="cb-table-row" >
+									<div class="cb-row cb-col-full cb-mb-2" >
 										<div class="item_current_price" id="bidding_cur_price_str"><?=$model->bidding_item->price_str?></div>
 									</div>
-									<div class="cb-table-row">
+									<div class="cb-row cb-col-full cb-mb-2">
 									</div>
-									<div class="cb-table-row">
-										<input type="text" class="cb-input-text cb-align-right cb-table-cell" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
-										<button type="button" class="cb-button-operational cb-button-group-left cb-table-cell" id="btn-bid_add" onclick="bid_add_do()">^</button>
-										<button type="button" class="cb-button-operational cb-button-group-right cb-table-cell" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
+									<div class="cb-row cb-col-full cb-mb-2">
+										<input type="text" class="cb-input-text cb-align-right cb-col-tenth-8" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
+										<button type="button" class="cb-button-operational cb-button-group-left cb-col-tenth" id="btn-bid_add" onclick="bid_add_do()">^</button>
+										<button type="button" class="cb-button-operational cb-button-group-right cb-col-tenth" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
 									</div>
-									<div class="cb-table-row">
+									<div class="cb-row cb-col-full cb-mb-2">
 									</div>
-									<div class="cb-table-row">
+									<div class="cb-row cb-col-full cb-mb-2">
 										<button type="button" class="cb-button-form cb-table-cell" onclick="submit_bid()" id="btn-submit_bid">Pasang</button>
 									</div>
 									<div class="" id="bidding_status"></div>
