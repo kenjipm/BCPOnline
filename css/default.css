@@ -132,9 +132,11 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-pr-4 { padding-right: 1.00rem; }
 .cb-pr-5 { padding-right: 1.25rem; }
 
-.cb-panel { display: flex; flex-flow: column; height: 100%; }
-.cb-panel-heading { display: block; border-radius: 7px; }
-.cb-panel-body { flex: 1 1 auto; display: block; border-radius: 7px; overflow: auto; }
+.cb-panel 				{ display: flex; flex-flow: column; height: 100%; }
+.cb-panel-heading 		{ display: block; border-radius: 7px; }
+.cb-panel-body 			{ flex: 1 1 auto; display: block; border-radius: 7px; overflow: auto; }
+.cb-panel-group-top		{ border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+.cb-panel-group-bottom	{ border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0; }
 
 .cb-table-striped {}
 .cb-table-striped:nth-child(odd) {

@@ -33,7 +33,7 @@
 			?>
 			<div class="cb-col-fourth-3 cb-pl-5">
 				<div class="cb-font-title cb-font-size-xxl">&nbsp;	</div>
-				<div id="message_panel" class="cb-border-round cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-height-500">
+				<div id="message_panel" class="cb-border-round cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-height-500 cb-panel-group-top">
 					<div id="message_text_area">
 						<?php
 							foreach($model->message_texts as $message_text)
@@ -59,7 +59,7 @@
 					</div>
 					<div id="anchor"></div>
 				</div>
-				<div class="cb-mt-5 cb-border-round cb-bg-primary-3 cb-p-5 cb-panel-vertical">
+				<div class="cb-mt-5 cb-border-round cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-panel-group-bottom">
 					<div class="cb-row cb-mt-5">
 						<input id="message_inbox_id" type="hidden" value="<?=$model->message_inbox->id?>"/>
 						<input id="message_input" type="text" placeholder="Kirim Pesan..." class="cb-col-tenth-9 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>

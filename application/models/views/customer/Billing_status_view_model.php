@@ -30,7 +30,7 @@ class Billing_status_view_model extends CI_Model {
 		
 		$this->billing->address			= $billing->shipping_address->get_full_address();
 		$this->billing->shipping_charge	= $this->text_renderer->to_rupiah($billing->shipping_charge->fee_amount);
-		$this->billing->total_not_paid	= $this->text_renderer->to_rupiah($billing->total_payable); // awalnnya ikutin amount yg harus dibayar dulu
+		$this->billing->total_not_paid	= $billing->total_payable; // awalnnya ikutin amount yg harus dibayar dulu
 		
 		$this->load->config('payment_method');
 		foreach($payments as $payment)
