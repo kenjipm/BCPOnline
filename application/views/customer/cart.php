@@ -357,7 +357,7 @@
 					<div class="col-sm-9">
 						<div class="panel panel-default">
 							<div class="panel-body" style="height: 400px; width: auto">
-								<?php //$this->load->view('googlemaps'); ?>
+								<?php $this->load->view('googlemaps'); ?>
 							</div>
 						</div>
 					</div>
