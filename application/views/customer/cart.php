@@ -123,7 +123,7 @@
 			<div class="cb-txt-primary-1">
 				<h3><div class="cb-label"> Alamat Kirim </div></h3>
 			</div>
-			<div class="cb-row">
+			<div class="cb-row cb-pb-5">
 				<div class="cb-col-full cb-align-center">
 					<?php
 						if (count($model->shipping_addresses) > 0)

@@ -36,60 +36,77 @@
 			</div>
 		</div>
 	</div>
-	<div class="panel-category-item">
-		<div class="panel-item-head">
-			<h3><?=$title?></h3>
-		</div>
-		<div class="panel-item-body">
-			<div class="cb-row">
-				<?php
-				foreach($model->promoted_items as $promoted_item)
-				{
-					?>
-					<div class="cb-col-fourth">
-						<div class="panel panel-item-head">
-							<a href="<?=site_url('item/'.$promoted_item->id)?>">
-								<div class="panel-body">
-									<img class="col-md-12" src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
-								</div>
-								<div class="panel-footer">
-									<label class="control-label">*<?=$promoted_item->posted_item_name?></label><br/>
-									<label class="control-label"><?=$promoted_item->price?></label><br/>
+	<div class="cb-col-fifth-4">
+		<div class="cb-panel">
+			<div class="cb-panel-heading cb-align-center">
+				<h3 class="cb-txt-primary-1 cb-font-title">PRODUK LAINNYA</h3>
+			</div>
+			<div class="cb-panel-body cb-p-2">
+				<div class="item-showcase cb-row">
+					<?php
+						foreach($model->promoted_items as $promoted_item)
+						{
+							?>
+							<a href="<?=site_url('item/'.$promoted_item->id)?>" class="cb-col-fourth">
+								<div class="item_thumbnail cb-border-round">
+									<div class="item_photo">
+										<img src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
+									</div>
+									<div class="item_tenant_name">
+									</div>
+									<div class="item_name">
+										<?=$promoted_item->posted_item_name?>
+									</div>
+									<div class="item_initial_price">
+										
+									</div>
+									<div class="item_current_price">
+										<?=$promoted_item->price?>
+									</div>
+									<div class="item_rating">
+									</div>
 								</div>
 							</a>
-						</div>
-					</div>
-					<?php
-				}
-				?>
-				<?php
-				foreach($model->search_items as $search_item)
-				{
+							<?php
+						}
 					?>
-					<div class="cb-col-fourth">
-						<div class="panel panel-item-head">
-							<a href="<?=site_url('item/'.$search_item->id)?>">
-								<div class="panel-body">
-									<img class="col-md-12" src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
-								</div>
-								<div class="panel-footer">
-									<label class="control-label"><?=$search_item->posted_item_name?></label><br/>
-									<label class="control-label"><?=$search_item->price?></label>
+					<?php
+						foreach($model->search_items as $search_item)
+						{
+							?>
+							<a href="<?=site_url('item/'.$search_item->id)?>" class="cb-col-fourth">
+								<div class="item_thumbnail cb-border-round">
+									<div class="item_photo">
+										<img src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
+									</div>
+									<div class="item_tenant_name">
+									</div>
+									<div class="item_name">
+										<?=$search_item->posted_item_name?>
+									</div>
+									<div class="item_initial_price">
+										
+									</div>
+									<div class="item_current_price">
+										<?=$search_item->price?>
+									</div>
+									<div class="item_rating">
+									</div>
 								</div>
 							</a>
-						</div>
-					</div>
-					<?php
-				}
-				if (count($model->search_items) <= 0)
-				{
+							<?php
+						}
+						if (count($model->search_items) <= 0)
+						{
+							?>
+							<div class="col-md-4">
+								<label>Hasil pencarian tidak ditemukan</label>
+							</div>
+							<?php
+						}
+						?>
 					?>
-					<div class="col-md-4">
-						<label>Hasil pencarian tidak ditemukan</label>
-					</div>
-					<?php
-				}
-				?>
+				</div>
 			</div>
 		</div>
 	</div>
