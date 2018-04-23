@@ -126,6 +126,14 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-panel-heading { display: block; border-radius: 7px; }
 .cb-panel-body { flex: 1 1 auto; display: block; border-radius: 7px; overflow: auto; }
 
+.cb-table-striped {}
+.cb-table-striped:nth-child(odd) {
+    background-color: #e6e6e5;
+}
+.cb-table-striped:nth-child(even) {
+    background-color: #ffffff;
+}
+
 .cb-input-text { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
 
 [class|="cb-button"] { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
@@ -155,30 +163,7 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-label { font-size: x-large; color: #e55026; }
 .sub_label { font-size: smaller; color: #8c8b8a; }
 
-.cb-heart { color: red; cursor: pointer; }
-.cb-heart-red:before { font-size: 3rem; content: "\2764"; }
-.cb-heart-white:before { font-size: 4rem; content: "\2661"; }
-
-.cb-star:before { font-size: 3rem; content: "\2605\2605\2605\2605\2605"; }
-.cb-star { }
-.cb-star-0-0 { background: #8c8b8a; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-0-5 { background: linear-gradient(to right, #faa528 10%, #8c8b8a 90%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-1-0 { background: linear-gradient(to right, #faa528 20%, #8c8b8a 80%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-1-5 { background: linear-gradient(to right, #faa528 30%, #8c8b8a 70%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-2-0 { background: linear-gradient(to right, #faa528 40%, #8c8b8a 60%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-2-5 { background: linear-gradient(to right, #faa528 50%, #8c8b8a 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-3-0 { background: linear-gradient(to right, #faa528 60%, #8c8b8a 40%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-3-5 { background: linear-gradient(to right, #faa528 70%, #8c8b8a 30%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-4-0 { background: linear-gradient(to right, #faa528 80%, #8c8b8a 20%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-4-5 { background: linear-gradient(to right, #faa528 90%, #8c8b8a 10%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-5-0 { background: #faa528; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-
-/* .cb-star:before { font-size: 3rem; content: "\2605"; }
-.cb-star-empty { color: #8c8b8a; }
-.cb-star-half { background: linear-gradient(to right, #faa528 50%,#8c8b8a 50%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-.cb-star-full { color: #faa528; } */
-
-/* .cb-square { width: 100%; height: 100%; } */
+.cb-square { width: 100%; height: 100%; }
 
 .cb-form-control {
     display: block;
@@ -556,7 +541,6 @@ h4 { font-weight: bold; }
 .item-showcase .item_thumbnail {
 	margin-right: 0.5rem;
 	margin-top: 0.5rem;
-	height: 100%;
 }
 
 .item-gallery {

@@ -1,32 +1,68 @@
-<?php
-	// // Model untuk Bill
-	
-	// // dummy billing list
-	// $model->billings = array();
-	
-	// $model->billings[0] = new class{};
-	// $model->billings[0]->id = 1;
-	// $model->billings[0]->date_created = "03-12-2017";
-	// $model->billings[0]->date_closed = "07-12-2017";
-	// $model->billings[0]->address = "Jalan Perjuangan Raya 17";
-	// $model->billings[0]->shipping_charge = "Rp 25.000,-";
-	// $model->billings[0]->total_payable = "Rp 275.000,-";
-	// $model->billings[1] = new class{};
-	// $model->billings[1]->id = 2;
-	// $model->billings[1]->date_created = "05-12-2017";
-	// $model->billings[1]->date_closed = "08-12-2017";
-	// $model->billings[1]->address = "Jalan Perjuangan Raya 17";
-	// $model->billings[1]->shipping_charge = "Rp 15.000,-";
-	// $model->billings[1]->total_payable = "Rp 165.000,-";
-	// $model->billings[2] = new class{};
-	// $model->billings[2]->id = 3;
-	// $model->billings[2]->date_created = "08-12-2017";
-	// $model->billings[2]->date_closed = "09-12-2017";
-	// $model->billings[2]->address = "Jalan Perjuangan Raya 17";
-	// $model->billings[2]->shipping_charge = "Rp 20.000,-";
-	// $model->billings[2]->total_payable = "Rp 180.000,-";
-	
-?>
+<div class="cb-txt-primary-1 cb-pl-5 cb-align-center cb-font-title">
+	<h2><?=$title?></h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<div class="cb-row cb-pb-3">
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-align-center">Tanggal</div>
+				</div>
+				<div class="cb-col-fifth-4">
+					<div class="cb-label cb-align-center">Alamat</div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-half">
+			<div class="cb-row">
+				<div class="cb-col-fifth-2">
+					<div class="cb-label cb-align-center">Ongkos Kirim</div>
+				</div>
+				<div class="cb-col-fifth-2">
+					<div class="cb-label cb-align-center">Total Harga</div>
+				</div>
+				<div class="cb-col-fifth">
+					
+				</div>
+			</div>
+		</div>
+	</div>
+	<?php
+	foreach($model->billings as $billing)
+	{
+		?>
+		<div class="cb-row cb-border-top cb-p-3 cb-table-striped">
+			<div class="cb-col-half">
+				<div class="cb-row">
+					<div class="cb-col-fifth">
+						<div class="cb-align-center"><?=$billing->date_created?></div>
+					</div>
+					<div class="cb-col-fifth-4">
+						<div class="cb-align-center"><?=$billing->address?></div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-col-half">
+				<div class="cb-row">
+					<div class="cb-col-fifth-2">
+						<div class="cb-align-center"><?=$billing->shipping_charge?></div>
+					</div>
+					<div class="cb-col-fifth-2">
+						<div class="cb-align-center"><?=$billing->total_payable?></div>
+					</div>
+					<div class="cb-col-fifth">
+						<a href="<?=site_url('billing/status/'.$billing->id)?>" class="cb-row cb-col-full">
+							<button class="cb-button-form cb-col-full">LIHAT</button>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
+<!--
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -80,6 +116,7 @@
 		</div>
 	</div>
 </div>
+-->
 
 <div id="popup_OTP" class="popup popup-md">
 	<div class="panel panel-default">
