@@ -47,7 +47,7 @@
 						foreach($model->promoted_items as $promoted_item)
 						{
 							?>
-							<a href="<?=site_url('item/'.$promoted_item->id)?>" class="cb-col-fourth">
+							<a href="<?=site_url('item/'.$promoted_item->id)?>" class="cb-col-fourth cb-pb-3">
 								<div class="item_thumbnail cb-border-round">
 									<div class="item_photo">
 										<img src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
@@ -63,7 +63,9 @@
 									<div class="item_current_price">
 										<?=$promoted_item->price?>
 									</div>
-									<div class="item_rating">
+									<div class="item_rating cb-row cb-vertical-center cb-align-center">
+										<span class="cb-star cb-star-<?=$promoted_item->rating->rating_average_round?>"></span>
+										<span class="cb-ml-2">(<?= $promoted_item->rating->rating_count ?>)</span>
 									</div>
 								</div>
 							</a>
@@ -74,7 +76,7 @@
 						foreach($model->search_items as $search_item)
 						{
 							?>
-							<a href="<?=site_url('item/'.$search_item->id)?>" class="cb-col-fourth">
+							<a href="<?=site_url('item/'.$search_item->id)?>" class="cb-col-fourth cb-pb-3">
 								<div class="item_thumbnail cb-border-round">
 									<div class="item_photo">
 										<img src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
@@ -90,7 +92,9 @@
 									<div class="item_current_price">
 										<?=$search_item->price?>
 									</div>
-									<div class="item_rating">
+									<div class="item_rating cb-row cb-vertical-center cb-align-center">
+										<span class="cb-star cb-star-<?=$search_item->rating->rating_average_round?>"></span>
+										<span class="cb-ml-2">(<?= $search_item->rating->rating_count ?>)</span>
 									</div>
 								</div>
 							</a>
