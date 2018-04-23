@@ -1,7 +1,7 @@
 <div class="cb-row cb-p-5">
 	<div class="cb-col-fourth">
 		<div class="cb-txt-primary-1 cb-font-title cb-align-center cb-font-size-xxl">DAFTAR KOMPLAIN</div>
-		<div class="cb-border-round cb-bg-primary-3 cb-pt-5 cb-pb-5 cb-panel-vertical">
+		<div class="cb-border-round cb-bg-primary-3 cb-pt-5 cb-pb-5 cb-panel-vertical cb-height-500">
 			<?php
 				foreach($model->disputes as $dispute)
 				{
