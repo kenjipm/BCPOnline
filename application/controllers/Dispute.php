@@ -18,9 +18,36 @@ class Dispute extends CI_Controller {
 
 	public function index()
 	{
+		redirect('dispute/detail');
+		
+		// // Load Header
+        // $data_header['css_list'] = array();
+        // $data_header['js_list'] = array();
+		// $this->load->view('header', $data_header);
+		
+		// // Load Body
+		// $account_id = $this->session->id;
+		
+		// $this->load->model('dispute_model');
+		// $disputes = $this->dispute_model->get_all_from_account_id($account_id);
+		
+		// $this->load->model('views/dispute_main_view_model');
+		// $this->dispute_main_view_model->get($disputes);
+		
+		// $data['title'] = "Dispute - Kotak Masuk";
+		// $data['model'] = $this->dispute_main_view_model;
+		// $this->load->view('dispute_main', $data);
+		
+		// // Load Footer
+		// $this->load->view('footer');
+	}
+	
+	public function detail($id=0)
+	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        if ($id == 0) $data_header['js_list'] = array();
+        else $data_header['js_list'] = array('dispute_detail');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -29,33 +56,15 @@ class Dispute extends CI_Controller {
 		$this->load->model('dispute_model');
 		$disputes = $this->dispute_model->get_all_from_account_id($account_id);
 		
-		$this->load->model('views/dispute_main_view_model');
-		$this->dispute_main_view_model->get($disputes);
-		
-		$data['title'] = "Dispute - Kotak Masuk";
-		$data['model'] = $this->dispute_main_view_model;
-		$this->load->view('dispute_main', $data);
-		
-		// Load Footer
-		$this->load->view('footer');
-	}
-	
-	public function detail($id)
-	{
-		// Load Header
-        $data_header['css_list'] = array();
-        $data_header['js_list'] = array('dispute_detail');
-		$this->load->view('header', $data_header);
-		
-		// Load Body
-		$this->load->model('dispute_model');
-		$dispute = $this->dispute_model->get_from_id($id);
+		if ($id == 0) $dispute = new dispute_model();
+		else $dispute = $this->dispute_model->get_from_id($id);
 		
 		$this->load->model('dispute_text_model');
-		$dispute_texts = $this->dispute_text_model->get_all_from_dispute_id($id);
+		if ($id == 0) $dispute_texts = array();
+		else $dispute_texts = $this->dispute_text_model->get_all_from_dispute_id($id);
 		
 		$this->load->model('views/dispute_detail_view_model');
-		$this->dispute_detail_view_model->get($dispute, $dispute_texts);
+		$this->dispute_detail_view_model->get($disputes, $dispute, $dispute_texts);
 		
 		$data['title'] = "Dispute dengan ";
 		$data['model'] = $this->dispute_detail_view_model;
@@ -76,7 +85,7 @@ class Dispute extends CI_Controller {
 		$dispute_texts = $this->dispute_text_model->get_all_from_dispute_id($dispute_id);
 		
 		$this->load->model('views/dispute_detail_view_model');
-		$this->dispute_detail_view_model->get($dispute, $dispute_texts);
+		$this->dispute_detail_view_model->get_detail($dispute, $dispute_texts);
 		
 		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
 		header("Cache-Control: post-check=0, pre-check=0", false);

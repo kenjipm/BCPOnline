@@ -7,6 +7,8 @@ $(document).ready(function(){
 	
 	reset_refresh_chat_area_period();
 	init_refresh_chat_area_periodically();
+	
+	$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30);  
 });
 
 function refresh_chat_area()
@@ -22,11 +24,27 @@ function refresh_chat_area()
 			$("#dispute_text_area").html("");
 			data.dispute_texts.forEach(function(item, idx){
 				$("#dispute_template").find('.dispute_content').html(item.text);
+				$("#dispute_template").find('.dispute_date_sent').html(item.date_sent);
 				$("#dispute_template").find('.dispute_sender_name').html(item.sender.name);
+				
+				if (item.sender.is_you) {
+					$("#dispute_template").find('.dispute_sender_name').addClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_date_sent').addClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_content').addClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_content').addClass('cb-align-right');
+				}
+				else {
+					$("#dispute_template").find('.dispute_sender_name').removeClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_date_sent').removeClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_content').removeClass('cb-pull-right');
+					$("#dispute_template").find('.dispute_content').removeClass('cb-align-right');
+				}
 				
 				var dispute_template = $("#dispute_template").html();
 				
 				$("#dispute_text_area").append(dispute_template);
+				
+				$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30); 
 			});
 		}
 	});

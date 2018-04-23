@@ -136,6 +136,7 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-panel-heading 		{ display: block; border-radius: 7px; }
 .cb-panel-body 			{ flex: 1 1 auto; display: block; border-radius: 7px; overflow: auto; }
 .cb-panel-group-top		{ border-bottom-left-radius: 0; border-bottom-right-radius: 0; margin-bottom: 0; }
+.cb-panel-group-mid		{ border-radius: 0; margin-bottom: 0; margin-top: 0; }
 .cb-panel-group-bottom	{ border-top-left-radius: 0; border-top-right-radius: 0; margin-top: 0; }
 
 .cb-table-striped {}

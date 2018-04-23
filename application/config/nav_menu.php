@@ -99,7 +99,7 @@ $config['top_menu_customer'] = array(
 $config['top_menu_tenant'] = array(
 	'top' => array(
 		'INBOX' => array(
-			'text'	=> "INBOX",
+			'text'	=> "Pesan",
 			'url'	=> "message",
 			),
 		'ORDER' => array(
@@ -110,7 +110,7 @@ $config['top_menu_tenant'] = array(
 	'profile' => array(
 		'PROFILE' => array(
 			'text'	=> "Profil Saya",
-			'url'	=> "",
+			'url'	=> "tenant/profile",
 			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",

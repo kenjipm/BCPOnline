@@ -45,10 +45,10 @@
 									</div>
 									<div class="cb-col-tenth-8 cb-row">
 										<div class="cb-col-full">
-											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg"><?=$message_text->sender->name?></span>
-											<span class="cb-ml-5"><?=$message_text->date_sent?></span>
+											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg <?=$message_text->sender->is_you ? 'cb-pull-right' : ''?>"><?=$message_text->sender->name?></span>
+											<span class="cb-ml-5 cb-mr-5 <?=$message_text->sender->is_you ? 'cb-pull-right' : ''?>"><?=$message_text->date_sent?></span>
 										</div>
-										<div class="cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5">
+										<div class="cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5 <?=$message_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
 											<?=$message_text->text?>
 										</div>
 									</div>
@@ -80,7 +80,7 @@
 		<div class="cb-col-tenth-8 cb-row">
 			<div class="cb-col-full">
 				<span class="message_sender_name cb-txt-primary-1 cb-font-title cb-font-size-lg"><?=$message_text->sender->name?></span>
-				<span class="message_date_sent cb-ml-5"><?=$message_text->date_sent?></span>
+				<span class="message_date_sent cb-ml-5 cb-mr-5"><?=$message_text->date_sent?></span>
 			</div>
 			<div class="message_content cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5">
 				<?=$message_text->text?>

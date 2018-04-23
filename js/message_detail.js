@@ -27,6 +27,19 @@ function refresh_chat_area()
 				$("#message_template").find('.message_date_sent').html(item.date_sent);
 				$("#message_template").find('.message_sender_name').html(item.sender.name);
 				
+				if (item.sender.is_you) {
+					$("#message_template").find('.message_sender_name').addClass('cb-pull-right');
+					$("#message_template").find('.message_date_sent').addClass('cb-pull-right');
+					$("#message_template").find('.message_content').addClass('cb-pull-right');
+					$("#message_template").find('.message_content').addClass('cb-align-right');
+				}
+				else {
+					$("#message_template").find('.message_sender_name').removeClass('cb-pull-right');
+					$("#message_template").find('.message_date_sent').removeClass('cb-pull-right');
+					$("#message_template").find('.message_content').removeClass('cb-pull-right');
+					$("#message_template").find('.message_content').removeClass('cb-align-right');
+				}
+				
 				var message_template = $("#message_template").html();
 				
 				$("#message_text_area").append(message_template);

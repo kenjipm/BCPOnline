@@ -20,7 +20,7 @@ class Message_detail_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $message_inbox->id;
-			$temp->date_created		= date("d M y H:i:s", strtotime($message_inbox->date_created));
+			$temp->date_created		= date("d M y | H:i", strtotime($message_inbox->date_created));
 			
 			$message_inbox->init_account_party_one();
 			$message_inbox->init_account_party_two();
