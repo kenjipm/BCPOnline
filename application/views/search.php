@@ -19,7 +19,7 @@
 <div class="cb-row">
 	<div class="cb-col-fifth">
 		<div class="panel-category">
-			<h3>KATEGORI</h3>
+			<h3 class= "cb-txt-primary-1 cb-font-title">KATEGORI</h3>
 			<div class="panel-category-heading">
 			<?php
 			foreach($model->categories as $category)
@@ -55,7 +55,7 @@
 									<div class="item_tenant_name">
 									</div>
 									<div class="item_name">
-										<?=$promoted_item->posted_item_name?>
+										*<?=$promoted_item->posted_item_name?>
 									</div>
 									<div class="item_initial_price">
 										

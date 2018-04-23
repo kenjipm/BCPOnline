@@ -55,6 +55,7 @@ class Billing extends CI_Controller {
 			$this->load->model('billing_model');
 			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id);
 			
+			$data['title'] = "HISTORI TRANSAKSI";
 			$this->load->model('views/customer/billing_list_view_model');
 			$this->billing_list_view_model->get($billings);
 			

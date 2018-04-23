@@ -126,6 +126,14 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 .cb-panel-heading { display: block; border-radius: 7px; }
 .cb-panel-body { flex: 1 1 auto; display: block; border-radius: 7px; overflow: auto; }
 
+.cb-table-striped {}
+.cb-table-striped: nth-child(odd) {
+    background: #ffffff;
+}
+.cb-table-striped: nth-child(even) {
+    background: #434747;
+}
+
 .cb-input-text { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
 
 [class|="cb-button"] { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
