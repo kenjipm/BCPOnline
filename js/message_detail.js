@@ -30,6 +30,8 @@ function refresh_chat_area()
 				var message_template = $("#message_template").html();
 				
 				$("#message_text_area").append(message_template);
+				
+				$("#message_panel").scrollTop( $("#anchor").offset().top - 30);  
 			});
 		}
 	});
