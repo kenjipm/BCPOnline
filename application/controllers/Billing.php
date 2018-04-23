@@ -131,7 +131,7 @@ class Billing extends CI_Controller {
 		$this->load->model('views/customer/billing_view_model');
 		$this->billing_view_model->get_from_cart($this->session->cart, $shipping_address, $shipping_charge, $new_billing);
 		
-		$data['title'] = "Keranjang Belanja";
+		$data['title'] = "BILLING";
 		$data['model'] = $this->billing_view_model;
 		$this->load->view('customer/billing', $data);
 		
