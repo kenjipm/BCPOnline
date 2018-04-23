@@ -45,6 +45,9 @@ class Dashboard_view_model extends CI_Model {
 			$temp->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);
 			$temp->image_one_name	= $hot_item->posted_item->image_one_name;
 			
+			$hot_item->init_posted_item();
+			$temp->rating			= $hot_item->posted_item->calculate_rating();
+			
 			$this->hot_items[] = $temp;
 		}
 		
@@ -55,6 +58,7 @@ class Dashboard_view_model extends CI_Model {
 			$temp->posted_item_name	= $tenant_item->posted_item_name;
 			$temp->price			= $this->text_renderer->to_rupiah($tenant_item->price);
 			$temp->image_one_name	= $tenant_item->image_one_name;
+			$temp->rating			= $tenant_item->calculate_rating();
 			
 			$this->tenant_items[] = $temp;
 		}

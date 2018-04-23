@@ -79,7 +79,9 @@
 										<div class="item_current_price">
 											<?=$hot_item->promo_price?>
 										</div>
-										<div class="item_rating">
+										<div class="item_rating cb-row cb-vertical-center cb-align-center">
+											<span class="cb-star cb-star-<?=$hot_item->rating->rating_average_round?>"></span>
+											<span class="cb-ml-2">(<?= $hot_item->rating->rating_count ?>)</span>
 										</div>
 									</div>
 								</a>
@@ -176,7 +178,9 @@
 									<div class="item_current_price">
 										<?=$tenant_item->price?>
 									</div>
-									<div class="item_rating">
+									<div class="item_rating cb-row cb-vertical-center cb-align-center">
+										<span class="cb-star cb-star-<?=$tenant_item->rating->rating_average_round?>"></span>
+										<span class="cb-ml-2">(<?= $tenant_item->rating->rating_count ?>)</span>
 									</div>
 								</div>
 							</a>

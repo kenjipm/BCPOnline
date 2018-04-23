@@ -92,6 +92,7 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_all($limit=10, $offset=0)
 	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
 		$this->db->where('tenant_bill.payment_date != 0');
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
@@ -178,6 +179,11 @@ class Hot_item_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function init_posted_item()
+	{
+		$this->posted_item = $this->posted_item->get_from_id($this->posted_item_id);
+		return $this->posted_item;
+	}
 }
 
 ?>
