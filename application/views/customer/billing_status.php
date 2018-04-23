@@ -1,71 +1,280 @@
-<?php
-	// // Model untuk billing_status
-	
-	// // dummy data billing
-	// $model->billing = new class{};
-	// $model->billing->id = 1;
-	// $model->billing->date_created = "03-12-2017";
-	// $model->billing->date_closed = "07-12-2017";
-	// $model->billing->address = "Jalan Moh. Toha no 194";
-	// $model->billing->shipping_charge = "Rp 25.000,-";
-	// $model->billing->total_payable = "Rp 275.000,-";
-	// $model->billing->total_not_paid = "Rp 250.000,-";
-	
-	// // dummy data order list
-	// $model->orders = array();
-	
-	// $model->orders[0] = new class{};
-	// $model->orders[0]->id = 1;
-	// $model->orders[0]->quantity = 1;
-	// $model->orders[0]->posted_item_variance = new class{};
-	// $model->orders[0]->posted_item_variance->posted_item = new class{};
-	// $model->orders[0]->posted_item_variance->posted_item->name = "Djisamsung Galaksih";
-	// $model->orders[0]->posted_item_variance->posted_item->price = "Rp 175.000,-";
-	// $model->orders[0]->posted_item_variance->posted_item->order_status = "Queued";
-	// $model->orders[1] = new class{};
-	// $model->orders[1]->id = 2;
-	// $model->orders[1]->quantity = 1;
-	// $model->orders[1]->posted_item_variance = new class{};
-	// $model->orders[1]->posted_item_variance->posted_item = new class{};
-	// $model->orders[1]->posted_item_variance->posted_item->name = "Repair HP Xiaomi";
-	// $model->orders[1]->posted_item_variance->posted_item->price = "Rp 25.000,-";
-	// $model->orders[1]->posted_item_variance->posted_item->order_status = "Queued";
-	// $model->orders[2] = new class{};
-	// $model->orders[2]->id = 3;
-	// $model->orders[2]->quantity = 2;
-	// $model->orders[2]->posted_item_variance = new class{};
-	// $model->orders[2]->posted_item_variance->posted_item = new class{};
-	// $model->orders[2]->posted_item_variance->posted_item->name = "Kesing Djisamsung";
-	// $model->orders[2]->posted_item_variance->posted_item->price = "Rp 50.000,-";
-	// $model->orders[2]->posted_item_variance->posted_item->order_status = "Queued";
-	
-	// $model->billing->is_paid = false;
-	
-	// $model->payments = array();
-	
-	// $model->payments[0] = new class{};
-	// $model->payments[0]->id = 1;
-	// $model->payments[0]->paid = true;
-	// $model->payments[0]->payment_method = "KlikBCA";
-	// $model->payments[0]->payment_method_description = "<b>KlikBCA: </b>Pembayaran dilakukan melalui www.klikbca.com";
-	// $model->payments[0]->payment_date = "2 Dec 17";
-	// $model->payments[0]->paid_amount = "Rp 25.000,-";
-	// $model->payments[0]->description = "Lunas"; // informasi credit card dll
-	
-	// $model->payments[1] = new class{};
-	// $model->payments[1]->id = 2;
-	// $model->payments[1]->paid = false;
-	// $model->payments[1]->payment_method = "CoD";
-	// $model->payments[1]->payment_method_description = "<b>Cash on Delivery: </b>Pembayaran dilakukan setelah barang tiba di tujuan";
-	// $model->payments[1]->payment_date = "-";
-	// $model->payments[1]->paid_amount = "-";
-	// $model->payments[1]->description = "Menunggu Pembayaran"; // informasi credit card dll
-	
-	// $model->otps = array();
-	// $model->otps[0] = "AF08-EJW3";
-	// $model->otps[1] = "AF08-EJW4";
-?>
+<div class="cb-txt-primary-1 cb-pl-5 cb-align-left cb-font-title">
+	<h2><?=$title?></h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Tanggal </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->date_created?>" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Alamat </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->address?>" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Rincian Order </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-4 cb-pl-3">
+			<div class="cb-row cb-border-bottom">
+				<div class="cb-col-half">
+					<div class="cb-row cb-pb-3">
+						<div class="cb-col-fourth-2">
+							<div class="cb-label cb-align-center">Produk</div>
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-label cb-align-center">Jumlah</div>
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-label cb-align-right">Harga</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+					<div class="cb-row">
+						<div class="cb-col-fourth-2">
+							<div class="cb-label cb-align-center">Status</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<?php
+		foreach($model->orders as $order)
+		{
+			?>
+			<div class="cb-row cb-border-bottom cb-p-3">
+				<div class="cb-col-half">
+					<div class="cb-row">
+						<div class="cb-col-fourth-2">
+							<div class="cb-align-left"><?=$order->posted_item_variance->posted_item->posted_item_name?></div>
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-align-center"><?=$order->quantity?></div>
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-align-right"><?=$order->posted_item_variance->posted_item->price?></div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+					<div class="cb-row">
+						<div class="cb-col-fourth-2">
+							<div class="cb-align-center cb-pl-5" id="order_status-<?=$order->id?>">
+								<?=$order->order_status?>
+								<button data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="pull-right cb-mr-5" type="button">V</button>
+							</div>
+						</div>
+						<div class="cb-col-fourth-2">
+							<div class="cb-row cb-align-right cb-mr-5">
+							<?php
+								if ($order->is_received)
+								{
+									?>
+									<button type="button" class="cb-button-form" id="btn-mark_order_finish-<?=$order->id?>" onclick="mark_order_finish(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">SELESAI</button>
+									<?php
+								}
+							?>
+							<?php
+								if (!$order->is_done)
+								{
+									?>
+									<button type="button" class="cb-button-form" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">KOMPLAIN</button>
+									<form id="form-create_dispute-<?=$order->id?>" method="post" action="<?=site_url('customer/create_dispute')?>">
+										<input type="hidden" name="order_detail_id" value="<?=$order->id?>"/>
+										<input type="hidden" name="tenant_id" value="<?=$order->posted_item_variance->posted_item->tenant_id?>"/>
+									</form>
+									<?php
+								}
+								else
+								{
+									?>
+									<button type="button" class="cb-button-form" id="btn-create_feedback-<?=$order->id?>" onclick="open_popup_feedback(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">ULASAN</button>
+									<?php
+								}
+							?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row">
+				<div id="order_status_history-<?=$order->id?>" class="collapse cb-col-full">
+					<?php
+						foreach($order->order_status_histories as $order_status_history)
+						{
+							?>
+							<div class="cb-row cb-bg-secondary-3 cb-p-2">
+								<i><?=$order_status_history->status?> (<?=$order_status_history->date_added?>)</i>
+							</div>
+							<?php
+						}
+					?>
+				</div>
+			</div>
+			<?php
+			}
+		?>
+			<div class="cb-row">
+				<div class="cb-col-half">
+					<div class="cb-row cb-p-5">
+						<div class="cb-col-fourth-2">
+							<div class="cb-align-left">Subtotal</div>
+						</div>
+						<div class="cb-col-fourth">
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-align-right"><?=$model->billing->total_payable?></div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+				</div>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-half">
+					<div class="cb-row cb-p-5">
+						<div class="cb-col-fourth-2">
+							<div class="cb-align-left">Ongkos Kirim</div>
+						</div>
+						<div class="cb-col-fourth">
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-align-right"><?=$model->billing->shipping_charge?></div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+				</div>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-half">
+					<div class="cb-row cb-p-5">
+						<div class="cb-col-fourth-2">
+							<div class="cb-align-left">Voucher</div>
+						</div>
+						<div class="cb-col-fourth">
+						</div>
+						<div class="cb-col-fourth">
+							<div class="cb-align-right"><?=$model->billing->shipping_charge?></div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+				</div>
+			</div>
+			<div class="cb-row">
+				<div class="cb-col-half">
+					<div class="cb-row cb-p-5">
+						<div class="cb-col-fourth-2">
+							<div class="cb-label cb-align-left">Total Pembayaran</div>
+						</div>
+						<div class="cb-col-fourth-2">
+							<div class="cb-label cb-align-right"><?=$model->billing->total_payable?></div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-half">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Pembayaran </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-4 cb-pl-3">
+			<div class="cb-row cb-border-bottom">
+				<div class="cb-col-full">
+					<div class="cb-row cb-pb-3">
+						<div class="cb-col-fifth">
+							<div class="cb-label cb-align-center">Tanggal</div>
+						</div>
+						<div class="cb-col-fifth-2">
+							<div class="cb-label cb-align-center">Metode Pembayaran</div>
+						</div>
+						<div class="cb-col-fifth-2">
+							<div class="cb-label cb-align-center">Jumlah Pembayaran</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+				foreach($model->payments as $payment)
+				{
+					?>
+					<div class="cb-row cb-border-bottom cb-p-5">
+						<div class="cb-col-full">
+							<div class="cb-row cb-pb-3">
+								<div class="cb-col-fifth">
+									<div class="cb-align-center"><?=$payment->payment_date?></div>
+								</div>
+								<div class="cb-col-fifth-2">
+									<div class="cb-align-center"><?=$payment->payment_method?></div>
+								</div>
+								<div class="cb-col-fifth-2">
+									<div class="cb-align-center"><?=$payment->paid_amount?></div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<?php
+				}
+			?>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Total Belum Dibayar </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text cb-label" id="customer_id" name="customer_id" value="<?=$model->billing->total_not_paid?>" readonly/>
+		</div>
+	</div>
+</div>
 
+<!--
 <div class="row">
 	<div class="col-md-10 col-md-offset-1">
 		<div class="panel panel-default">
@@ -114,7 +323,7 @@
 												</td>
 												<td id="order_status-<?=$order->id?>" >
 													<?=$order->order_status?>
-													<!--button type="button" class="btn btn-default" onclick="toggle_order_status_history(<?=$order->id?>)">V</button-->
+													<!--button type="button" class="btn btn-default" onclick="toggle_order_status_history(<?=$order->id?>)">V</button--><!--
 													<button data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="btn btn-default" type="button">V</button>
 												</td>
 												<td id="order_action-<?=$order->id?>" >
@@ -148,7 +357,7 @@
 												<!--td class="col-xs-1">
 													<a class="btn btn-default" href="<?=site_url('order/transaction_detail/'.$order->id)?>">
 														Lihat
-													</a></td-->	
+													</a></td-->	<!--
 											</tr>
 											<tr id="order_status_history-<?=$order->id?>" class="collapse">
 												<td colspan="5">
@@ -197,7 +406,7 @@
 										<th>Tanggal</th>
 										<th>Pembayaran</th>
 										<th>Jumlah</th>
-										<!--th>Keterangan</th-->
+										<!--th>Keterangan</th--><!--
 										<th></th>
 									</tr>
 								</thead>
@@ -211,19 +420,19 @@
 											<td><?=$payment->payment_method?></td>
 											<td><?=$payment->paid_amount?></td>
 											<!--<td><?=$payment->description?></td>-->
-											<td>
+											<!--<td>
 												<button data-toggle="collapse" data-target="#payment_description-<?=$payment->id?>" class="btn btn-default" type="button">?</button>
 											</td>
 											<!-- DUMMY PEMBAYARAN -->
 											<?php if (!$payment->is_paid) { ?>
-											<td>
+											<!--<td>
 												<a class="btn btn-default" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
 													BAYAR (dummy)
 												</a>
 											</td>	
 											<?php } ?>
 											<!-- ---------------- -->
-										</tr>
+										<!--</tr>
 										<tr id="payment_description-<?=$payment->id?>" class="collapse">
 											<td colspan=4>
 												<div class="panel panel-default">
@@ -250,7 +459,7 @@
 		</div>
 	</div>
 </div>
-
+-->
 <div id="popup_feedback" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">

@@ -255,7 +255,7 @@ class Billing extends CI_Controller {
 		$this->load->model('views/customer/billing_status_view_model');
 		$this->billing_status_view_model->get($billing, $payments, $orders);
 		
-		$data['title'] = "Status Pembayaran";
+		$data['title'] = "STATUS TRANSAKSI";
 		$data['model'] = $this->billing_status_view_model;
 		$this->load->view('customer/billing_status', $data);
 		
