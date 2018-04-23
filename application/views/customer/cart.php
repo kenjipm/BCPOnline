@@ -1,4 +1,4 @@
-<div class="cb-txt-primary-1 cb-pl-5">
+<div class="cb-txt-primary-1 cb-font-title cb-ml-5">
 	<h2><?=$title?></h2>
 </div>
 <form id="form-cart" action="<?=site_url('billing/cart')?>" method="post">
