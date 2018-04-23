@@ -562,9 +562,55 @@ h4 { font-weight: bold; }
 .popup-md { width: 500px; }
 .popup-lg { width: 700px; }
 
+.popup .panel {
+	background-color: #faa528;
+	padding: 1.25rem;
+	border: none;
+	border-radius: 7px; 
+}
+
 .popup .panel-body {
 	max-height: 500px;
 	overflow-y: auto;
+	overflow-x: hidden;
+	background-color: #ffffff;
+	padding: 1.25rem;
+	border-radius: 7px; 
+}
+
+.popup .panel-body input, .popup .panel-body textarea {
+	border: none;
+	background-color: #e6e6e5;
+	color: #434747;
+	padding: 0.75rem;
+	border-radius: 4px;
+	font-size: large;
+}
+
+.popup .panel-body .btn {
+	border: none;
+	font-family: 'Akrobat ExtraBold', sans-serif;
+	font-size: 2rem;
+	padding: 0.75rem;
+	border-radius: 4px;
+	background-color: #e55026;
+	color: #ffffff;
+}
+.popup .panel-body .btn:hover	{ background-color: #faa528; }
+
+.popup .panel-body label{
+	font-family: 'Akrobat ExtraBold', sans-serif;
+	font-size: large;
+	color: #e55026;
+	margin-bottom: 0.75rem;
+}
+
+.popup .panel-heading {
+	background-color: transparent;
+	font-family: 'Akrobat ExtraBold', sans-serif;
+	font-size: x-large;
+	color: #e55026;
+	border: none;
 }
 
 .template {
