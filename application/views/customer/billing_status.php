@@ -271,6 +271,13 @@
 		<div class="cb-col-fifth-2 cb-pl-3">
 			<input type="text" class="cb-row cb-col-full cb-input-text cb-label" id="customer_id" name="customer_id" value="<?=$model->billing->total_not_paid?>" readonly/>
 		</div>
+		<div class="cb-col-fifth-2 cb-p-5">
+			<?php if (!$payment->is_paid) { ?>
+				<a class="cb-button-form" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
+					BAYAR (dummy)
+				</a>
+			<?php } ?>
+		</div>
 	</div>
 </div>
 
