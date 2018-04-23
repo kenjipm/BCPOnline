@@ -603,7 +603,12 @@ class Item_model extends CI_Model {
 		{
 			$item = new class{};
 			$item->rating_average = 0;
+			$item->rating_average_round = "0-0";
 			$item->rating_count = 0;
+		}
+		else
+		{
+			$item->rating_average_round = number_format(round($item->rating_average * 2) / 2, 1, "-", "");
 		}
 		
 		return $item;

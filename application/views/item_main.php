@@ -34,8 +34,9 @@
 						<div class="<?= $model->item->btn_class ?> cb-heart cb-pull-right" id="btn-toggle_item_favorite" onclick="toggle_item_favorite(<?=$model->item->id?>)"></div>
 						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->posted_item_name?></h3>
 						<div class="cb-row cb-vertical-center">
+							<span class="cb-star cb-star-<?=$model->item->rating->rating_average_round?>"></span>
 							<?php
-								for ($i = 0; $i < 5; $i++)
+								/*for ($i = 0; $i < 5; $i++)
 								{
 									$cur_value = $model->item->rating->rating_average - $i;
 									if ($cur_value < 0.25) { $star_class = "empty"; }
@@ -45,13 +46,13 @@
 									?>
 									<span class="cb-star cb-star-<?=$star_class?>"></span>
 									<?php
-								}
+								}*/
 							?>
 							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
 						</div>
 						<h3 class="cb-font-title cb-txt-primary-1"><?=$model->item->price?></h3>
 						<br/>
-						<h3 class="cb-font-title cb-txt-primary-1">Pilihan Warna</h3>
+						<h3 class="cb-font-title cb-txt-primary-1">Pilihan</h3>
 						<div class="cb-row">
 							<?php
 								foreach ($model->item_variances as $item_variance)
@@ -68,7 +69,7 @@
 					</div>
 					<div class="cb-col-full cb-mt-5 cb-border-top">
 						<h3 class="cb-font-title cb-txt-primary-1">Deskripsi Produk</h3>
-						<?=$model->item->posted_item_description?>
+						<div class="cb-bg-secondary-3 cb-border-round cb-p-5"><?=$model->item->posted_item_description?></div>
 					</div>
 				</div>
 			</div>
@@ -118,7 +119,9 @@
 											<div class="item_current_price">
 												<?=$other_item->price?>
 											</div>
-											<div class="item_rating">
+											<div class="item_rating cb-row cb-vertical-center cb-align-center">
+												<span class="cb-star cb-star-<?=$other_item->rating->rating_average_round?>"></span>
+												<span class="cb-ml-2">(<?= $other_item->rating->rating_count ?>)</span>
 											</div>
 										</div>
 									</a>

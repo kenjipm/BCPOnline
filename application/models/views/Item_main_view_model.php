@@ -39,7 +39,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->tenant_name	= $item->tenant->tenant_name;
 		$this->item->tenant->is_followed	= ($item->tenant->is_followed($this->session->child_id) != null);
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");
-		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "Sudah Diikuti" : "Ikuti");
+		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "SUDAH DIIKUTI" : "IKUTI");
 		
 		foreach ($item_variances as $item_variance)
 		{
@@ -65,6 +65,7 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->price = $this->text_renderer->to_rupiah($other_item->price);
 			$other_item_temp->posted_item_description = $other_item->posted_item_description;
 			$other_item_temp->image_one_name = site_url($other_item->image_one_name);
+			$other_item_temp->rating = $other_item->calculate_rating();
 			
 			$this->other_items[] = $other_item_temp;
 		}
