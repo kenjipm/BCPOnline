@@ -1,7 +1,7 @@
 <div class="cb-txt-primary-1 cb-pl-5 cb-align-center cb-font-title">
 	<h2><?=$title?></h2>
 </div>
-<div class="cb-panel-body cb-bg-primary-3 cb-p-5">
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<div class="cb-row">
 		<div class="cb-col-half">
 			<div class="cb-row cb-pb-3">
@@ -51,8 +51,8 @@
 						<div class="cb-align-center"><?=$billing->total_payable?></div>
 					</div>
 					<div class="cb-col-fifth">
-						<a href="<?=site_url('billing/status/'.$billing->id)?>">
-							<button class="cb-button-form">Lihat</button>
+						<a href="<?=site_url('billing/status/'.$billing->id)?>" class="cb-row cb-col-full">
+							<button class="cb-button-form cb-col-full">LIHAT</button>
 						</a>
 					</div>
 				</div>
@@ -62,7 +62,7 @@
 	}
 	?>
 </div>
-
+<!--
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -116,6 +116,7 @@
 		</div>
 	</div>
 </div>
+-->
 
 <div id="popup_OTP" class="popup popup-md">
 	<div class="panel panel-default">
