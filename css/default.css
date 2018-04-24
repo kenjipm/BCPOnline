@@ -166,9 +166,9 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-button-operational:hover	{ background-color: #8c8b8a; }
 .cb-button-form:hover			{ background-color: #faa528; }
-.cb-button-secondary:hover		{ background-color: #faa528; color: #ffffff; border: none; }
-.cb-button-secondary:active		{ background-color: #faa528; color: #ffffff; border: none; }
-.cb-button-secondary-selected	{ background-color: #faa528; color: #ffffff; border: none; }
+.cb-button-secondary:hover		{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
+.cb-button-secondary:active		{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
+.cb-button-secondary-selected	{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
 
 .cb-align-center { text-align: center; justify-content: center; }
 .cb-vertical-center { vertical-align: middle; align-items: center; }
