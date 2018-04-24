@@ -14,16 +14,23 @@ class Item extends CI_Controller {
 		$this->load->model('item_model');
 		$item = $this->item_model->get_from_id($id);
 		
-		$other_items = $this->item_model->get_related_items($item);
+		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
+		{
+			redirect('Item/post_item_detail/'.$id);
+		}
+		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		{
+			$other_items = $this->item_model->get_related_items($item);
 		
-		$this->load->model('posted_item_variance_model');
-		$item_variances = $this->posted_item_variance_model->get_all_from_posted_item_id($id);
-		
-		$item_main_view = $this->load->model('views/item_main_view_model');
-		$this->item_main_view_model->get($item, $item_variances, $other_items);
-		
-		$data['model'] = $this->item_main_view_model;
-		$this->load->view('item_main', $data);
+			$this->load->model('posted_item_variance_model');
+			$item_variances = $this->posted_item_variance_model->get_all_from_posted_item_id($id);
+			
+			$item_main_view = $this->load->model('views/item_main_view_model');
+			$this->item_main_view_model->get($item, $item_variances, $other_items);
+			
+			$data['model'] = $this->item_main_view_model;
+			$this->load->view('item_main', $data);
+		}
 		
 		// Load Footer
 		$this->load->view('footer');

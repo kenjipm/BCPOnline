@@ -6,7 +6,9 @@
 	<div class="cb-col-fifth">
 		<div class="panel-profile-pic-header">
 			<div id="thumbnail-profile_pic" class="profile-thumbnail">
-				<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+				<label for="profile_pic" class="thumbnail hoverable">
+					<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+				</label>
 				<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
 				<div class="panel-profile-pic-footer">
 					<div class="cb-txt-secondary-1">
@@ -132,8 +134,11 @@
 						</div>
 						<div class="cb-col-third-2">
 							<div class="panel-profile-pic-header">
-								<div id="thumbnail-identification_pic" class="thumbnail thumbnail-hover">
-									<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+								<div id="thumbnail-identification_pic">
+									<label for="identification_pic" class="profile-thumbnail hoverable">
+										<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+									</label>
+									<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" style="display:none">
 								</div>
 							</div>
 						</div>
@@ -172,11 +177,8 @@
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Tanggal </div>
 		</div>
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
-		</div>
-		<div class="cb-col-fifth-2">
-			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		<div class="cb-col-fifth-3">
+			<div class="cb-label cb-font-title cb-align-center"> Reward </div>
 		</div>
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Poin yang Ditukarkan </div>
@@ -190,10 +192,7 @@
 			<div class="cb-col-fifth">
 				<div class=" cb-align-center"> <?=$redeem_reward->date_redeemed?> </div>
 			</div>
-			<div class="cb-col-fifth">
-				<div class="cb-align-center"> <?=$redeem_reward->reward->name?> </div>
-			</div>
-			<div class="cb-col-fifth-2">
+			<div class="cb-col-fifth-3">
 				<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
 			</div>
 			<div class="cb-col-fifth">

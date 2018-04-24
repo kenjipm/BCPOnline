@@ -26,6 +26,8 @@ class Post_Item_List_View_Model extends CI_Model{
 			$this->posted_items[$i]->item_type 			= $item->item_type;
 			$this->posted_items[$i]->price				= $this->text_renderer->to_rupiah($item->price);
 			
+			$this->posted_items[$i]->rating = $item->calculate_rating();
+			
 			$i++;
 		}
 		
