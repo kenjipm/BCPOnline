@@ -211,6 +211,9 @@ a:hover, .hoverable:hover { opacity: 0.8; }
 
 /* .cb-square { width: 100%; height: 100%; } */
 
+.cb-icon-message:before { content: ""; }
+.cb-icon-message { background-image: url(icons/message.png); background-size: contain; }
+
 .cb-square { width: 100%; height: 100%; }
 
 .cb-form-control {

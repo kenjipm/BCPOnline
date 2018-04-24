@@ -85,6 +85,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				{
 					?>
 					<a href="<?=site_url($menu_item['url'])?>" class="navbar-cb-top-menu-text">
+						<i class="cb-icon cb-icon-<?=$menu_item['icon']?>"></i>
 						<?=$menu_item['text']?>
 					</a>
 					<?php
