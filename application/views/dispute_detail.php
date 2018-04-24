@@ -21,7 +21,7 @@
 				if (count($model->disputes) <= 0)
 				{
 					?>
-					<h4>Tidak ada pesan di kotak masuk</h4>
+					<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Tidak ada komplain</h4>
 					<?php
 				}
 				?>
