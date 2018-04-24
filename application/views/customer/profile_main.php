@@ -161,9 +161,9 @@
 								</div>
 							</div>
 						</div>
-						<div class="cb-col-third-2">
+						<div class="cb-col-third-2 cb-row">
 							<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly>
-							<button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button>
+							<div onclick="$('#referral_link').select();document.execCommand('Copy');" class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-xl cb-font-primary-1 cb-ml-3 hoverable">SALIN</div>
 						</div>
 					</div>
 				</div>
