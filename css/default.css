@@ -68,6 +68,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-border-right	{ border-right: 1px solid #434747; }
 .cb-border-bottom	{ border-bottom: 1px solid #434747; }
 .cb-border-left		{ border-left: 1px solid #434747; }
+.cb-border-white	{ border-color: #ffffff; }
 
 .cb-pull-right { float: right; }
 .cb-pull-left { float: left; }
