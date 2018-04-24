@@ -2,6 +2,7 @@
 	<h2>Profil Saya</h2>
 </div>
 <form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="<?=$this->session->id?>"/>
 <div class="cb-row">
 	<div class="cb-col-fifth">
 		<div class="panel-profile-pic-header">
