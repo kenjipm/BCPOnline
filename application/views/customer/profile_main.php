@@ -6,9 +6,11 @@
 <div class="cb-row">
 	<div class="cb-col-fifth">
 		<div class="panel-profile-pic-header">
-			<div id="thumbnail-profile_pic" class="profile-thumbnail">
+			<div class="profile-thumbnail">
 				<label for="profile_pic" class="thumbnail hoverable">
-					<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+					<div id="thumbnail-profile_pic">
+						<img src="<?=$model->account->profile_pic?>" alt="<?=$model->account->name?>" style="width:100%">
+					</div>
 				</label>
 				<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
 				<div class="panel-profile-pic-footer">
@@ -139,12 +141,12 @@
 						</div>
 						<div class="cb-col-third-2">
 							<div class="panel-profile-pic-header">
-								<div id="thumbnail-identification_pic">
-									<label for="identification_pic" class="profile-thumbnail hoverable">
+								<label for="identification_pic" class="profile-thumbnail hoverable">
+									<div id="thumbnail-identification_pic">
 										<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
-									</label>
-									<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" style="display:none">
-								</div>
+									</div>
+								</label>
+								<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" style="display:none" class="photo_upload_simple" data-url="<?=site_url('customer/upload_idpic')?>" >
 							</div>
 						</div>
 					</div>
