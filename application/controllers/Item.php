@@ -124,6 +124,38 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function service()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		
+		if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		{
+			$id = $this->session->child_id;
+			
+			$this->load->model('item_model');
+			$items = $this->item_model->get_all_service_items();
+			
+			$this->load->model('views/item_gallery_view_model');
+			$this->item_gallery_view_model->get($items);
+			
+			$data['title'] = "SERVICE";
+			$data['model'] = $this->item_gallery_view_model;
+			$this->load->view('item_gallery', $data);
+		}
+		else // TENANT
+		{
+			
+		}
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function post_item_detail($id)
 	{		
 		// Load Header

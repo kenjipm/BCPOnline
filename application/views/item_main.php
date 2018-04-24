@@ -30,7 +30,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="cb-col-half">
+					<div class="cb-col-half cb-pl-5">
 						<div class="<?= $model->item->btn_class ?> cb-heart cb-pull-right" id="btn-toggle_item_favorite" onclick="toggle_item_favorite(<?=$model->item->id?>)"></div>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl"><?=$model->item->posted_item_name?></div>
 						<div class="cb-row cb-vertical-center">

@@ -239,6 +239,15 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_service_items()
+	{
+		$this->db->where('item_type', 'REPAIR');
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=6)
 	{
 		$query = $this->db

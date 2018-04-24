@@ -123,8 +123,16 @@ $config['top_menu_tenant'] = array(
 			),
 		),
 	'strip' => array(
+		'ITEM' => array(
+			'text'	=> "PRODUKKU",
+			'url'	=> "item/post_item_list",
+			),
+		'TRANSACTION' => array(
+			'text'	=> "PENJUALANKU",
+			'url'	=> "order/order_list",
+			),
 		'DISPUTE' => array(
-			'text'	=> "DISPUTE",
+			'text'	=> "KOMPLAIN CUSTOMER",
 			'url'	=> "dispute",
 			),
 		),
