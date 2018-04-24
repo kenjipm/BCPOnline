@@ -27,7 +27,7 @@ class Favorite_item_view_model extends CI_Model {
 			$favorite_item_temp->posted_item->image_one_name	= site_url($favorite_item->posted_item->image_one_name);
 			$favorite_item_temp->posted_item->posted_item_name	= $favorite_item->posted_item->posted_item_name;
 			$favorite_item_temp->posted_item->price				= $this->text_renderer->to_rupiah($favorite_item->posted_item->price);
-			
+			$favorite_item_temp->rating				= $favorite_item->posted_item->calculate_rating();
 			$this->favorite_items[] = $favorite_item_temp;
 		}
 	}
