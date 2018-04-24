@@ -17,17 +17,12 @@ class Item_gallery_view_model extends CI_Model {
 		$this->load->library('text_renderer');
 		foreach($items as $item)
 		{
-			$item->init_posted_item();
-			
-			$item_temp 		= new class{};
-			$item_temp->id		= $item->id;
-			
-			$item_temp->posted_item 					= new class{};
-			$item_temp->posted_item->id					= $item->posted_item->id;
-			$item_temp->posted_item->image_one_name		= site_url($item->posted_item->image_one_name);
-			$item_temp->posted_item->posted_item_name	= $item->posted_item->posted_item_name;
-			$item_temp->posted_item->price				= $this->text_renderer->to_rupiah($item->posted_item->price);
-			$item_temp->posted_item->rating				= $item->posted_item->calculate_rating();
+			$item_temp 			= new class{};
+			$item_temp->id					= $item->id;
+			$item_temp->image_one_name		= site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
+			$item_temp->posted_item_name	= ($item->posted_item_name != "") ? $item->posted_item_name : $item->posted_item_description;
+			$item_temp->price				= $this->text_renderer->to_rupiah($item->price);
+			$item_temp->rating				= $item->calculate_rating();
 			
 			$this->items[] = $item_temp;
 		}

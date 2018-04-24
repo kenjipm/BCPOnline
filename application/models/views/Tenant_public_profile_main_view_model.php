@@ -23,7 +23,7 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 		$this->tenant->account_id	= $tenant->account_id;
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		
-		$this->tenant->account->profile_pic	= site_url($tenant->account->profile_pic);
+		$this->tenant->account->profile_pic	= site_url(($tenant->account->profile_pic != "") ? $tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
 			
 		$this->tenant->is_followed	= ($tenant->is_followed($this->session->child_id) != null);
 		$this->tenant->btn_class	= ($this->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");

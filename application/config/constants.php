@@ -11,6 +11,13 @@ defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.png
 defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/idpic.png');
 defined('DEFAULT_ITEM_IMAGE') OR define('DEFAULT_ITEM_IMAGE', 'img/default_item.png');
 
+defined('DEFAULT_ITEM_PICTURE') OR define('DEFAULT_ITEM_PICTURE', array(
+	'ORDER' => 'img/default_item_order.png',
+	'BID' => 'img/default_item_bid.png',
+	'REPAIR' => 'img/default_item_repair.png',
+	)
+);
+
 defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 		'name' => array(
 			"WAITING_FOR_PAYMENT"		=> "WAITING_FOR_PAYMENT",

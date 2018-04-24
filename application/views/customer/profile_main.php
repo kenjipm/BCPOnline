@@ -57,6 +57,7 @@
 						</div>
 						<div class="cb-col-third-2">
 							<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+							<span class="text-danger"><?= form_error('name'); ?></span>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
@@ -71,7 +72,7 @@
 							</div>
 						</div>
 						<div class="cb-col-third-2">
-							<textarea class="cb-input-text" name="posted_item_description" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
+							<textarea class="cb-input-text" name="posted_item_description" style="resize:none" readonly/><?=$model->account->address; ?></textarea>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
@@ -87,6 +88,7 @@
 						</div>
 						<div class="cb-col-third-2">
 							<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+							<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
@@ -102,6 +104,7 @@
 						</div>
 						<div class="cb-col-third-2">
 							<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+							<span class="text-danger"><?= form_error('phone_number'); ?></span>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
@@ -117,6 +120,7 @@
 						</div>
 						<div class="cb-col-third-2">
 							<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+							<span class="text-danger"><?= form_error('email'); ?></span>
 						</div>
 					</div>
 				</div>
@@ -155,7 +159,7 @@
 							</div>
 						</div>
 						<div class="cb-col-third-2">
-							<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>">
+							<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly>
 							<button type="button" onclick="$('#referral_link').select();document.execCommand('Copy');" class="btn btn-default">Copy</button>
 						</div>
 					</div>

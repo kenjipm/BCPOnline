@@ -24,7 +24,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->posted_item_name = $item->posted_item_name ? $item->posted_item_name : $item->posted_item_description;
 		$this->item->price = $this->text_renderer->to_rupiah($item->price);
 		$this->item->posted_item_description = $item->posted_item_description;
-		$this->item->image_one_name = $item->image_one_name != "" ? site_url($item->image_one_name) : "";
+		$this->item->image_one_name	= site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 		$this->item->image_two_name = $item->image_two_name != "" ? site_url($item->image_two_name) : "";
 		$this->item->image_three_name = $item->image_three_name != "" ? site_url($item->image_three_name) : "";
 		$this->item->image_four_name = $item->image_four_name != "" ? site_url($item->image_four_name) : "";

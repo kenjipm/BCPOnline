@@ -29,7 +29,7 @@ $config['top_menu_guest'] = array(
 			),
 		'REPAIR' => array(
 			'text'	=> "SERVIS",
-			'url'	=> "item",
+			'url'	=> "item/service",
 			),
 		),
 	);
@@ -81,7 +81,7 @@ $config['top_menu_customer'] = array(
 			),
 		'REPAIR' => array(
 			'text'	=> "SERVIS",
-			'url'	=> "item",
+			'url'	=> "item/service",
 			),
 	
 		// 'FOLLOWED_TENANT' => array(

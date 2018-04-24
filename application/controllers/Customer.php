@@ -333,7 +333,7 @@ class Customer extends CI_Controller {
 	{
 		$this->load->library('form_validation');
 		$this->form_validation->set_rules('name', 'Nama', 'required');
-		$this->form_validation->set_rules('address', 'Alamat', 'required');
+		// $this->form_validation->set_rules('address', 'Alamat', 'required');
 		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
 		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
 		
@@ -387,9 +387,8 @@ class Customer extends CI_Controller {
 				
 				redirect('customer/profile');
 			// }
-			
 		}
-		return $data;
+		//return $data;
 	}
 	
 	public function cart_add_do($is_ajax=false)
