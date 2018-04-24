@@ -1,5 +1,5 @@
 <div class="cb-txt-primary-1">
-	<h2>PROFIL SAYA</h2>
+	<h2>Profil Saya</h2>
 </div>
 <form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 <div class="cb-row">
@@ -16,7 +16,7 @@
 					</div>
 				</div>
 				<div class="cb-txt-primary-2">
-					<h3>Poin saya: </h3>
+					<h3>Poin saya: <?=$model_reward->reward_points?></h3>
 				</div>
 				<div class="cb-row cb-p-5">
 					<a href="reward" class="cb-button-form cb-margin-auto"> TUKARKAN POIN </a>
@@ -161,10 +161,49 @@
 			</div>
 		
 	</div>
-	
 </div>
 </form>
 
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">HISTORI PENUKARAN POIN</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Tanggal </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Poin yang Ditukarkan </div>
+		</div>
+	</div>
+	<?php
+	foreach($model_reward_redeem->redeem_rewards as $redeem_reward)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top">
+			<div class="cb-col-fifth">
+				<div class=" cb-align-center"> <?=$redeem_reward->date_redeemed?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->name?> </div>
+			</div>
+			<div class="cb-col-fifth-2">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->points_needed?> </div>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
 
 
 <!--
