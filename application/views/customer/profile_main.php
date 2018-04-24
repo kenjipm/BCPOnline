@@ -71,7 +71,7 @@
 							</div>
 						</div>
 						<div class="cb-col-third-2">
-							<textarea class="cb-input-text" name="posted_item_description" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
+							<textarea class="cb-input-text" name="address" placeholder="<?=$model->account->address; ?>" style="resize:none" readonly/></textarea>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
