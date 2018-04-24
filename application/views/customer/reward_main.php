@@ -1,34 +1,60 @@
-<?php
 
-	// Model Dummy Untuk Posted Item List
-	// $model->rewards = array();
-	
-	// $model->rewards[0] = new class{};
-	// $model->rewards[0]->id = 1;
-	// $model->rewards[0]->name = "Voucher Tri 10GB";
-	// $model->rewards[0]->date_added = "1 Dec 2017";
-	// $model->rewards[0]->points_needed = "250";
-	// $model->rewards[0]->reward_description = "Voucher internet Tri 10GB (Kuota Reguler)";
-	// $model->rewards[0]->is_claimable = true;
-	// $model->rewards[1] = new class{};
-	// $model->rewards[1]->id = 2;
-	// $model->rewards[1]->name = "Power Bank Sony";
-	// $model->rewards[1]->date_added = "1 Dec 2017";
-	// $model->rewards[1]->points_needed = "2.000";
-	// $model->rewards[1]->reward_description = "Power Bank Sony 5000mAh (1.5A)";
-	// $model->rewards[1]->is_claimable = false;
-	// $model->rewards[2] = new class{};
-	// $model->rewards[2]->id = 3;
-	// $model->rewards[2]->name = "Samsung Galaxy J7";
-	// $model->rewards[2]->date_added = "2 Dec 2017";
-	// $model->rewards[2]->points_needed = "19.000";
-	// $model->rewards[2]->reward_description = "Handphone Samsung Galaxy J7 2017";
-	// $model->rewards[2]->is_claimable = false;
-	
-	// // dummy data reward point customer
-	// $model->reward_points = "1.950";
-?>
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">Informasi Poin</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<h4 class="cb-txt-primary-1 cb-font-title cb-p-5">Poin kamu saat ini: <?=$model->reward_points?></h4>
+	</div>
+	<div class="cb-row cb-pb-5">
+		<a class="cb-button-form" href="redeem_reward">Lihat Reward yang Sudah Diklaim</a>
+	</div>
+</div>
 
+<div class="cb-row cb-pb-5">
+	<h2 class="cb-col-full cb-txt-primary-1 cb-font-title cb-p-5 cb-align-center">Daftar Reward</h2></a>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">	
+	<div class="cb-row cb-pt-5">
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Poin yang Dibutuhkan </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->rewards as $reward)
+	{
+		?>
+			<form id="reward-<?=$reward->id?>" method="post" action="<?=site_url('customer/redeem_reward_do')?>">
+				<input type="hidden" name="reward_id" value="<?=$reward->id?>"/>
+				<div class="cb-row cb-border-top cb-p-5">
+					<div class="cb-col-fifth">
+						<div class="cb-align-center"> <?=$reward->name?> </div>
+					</div>
+					<div class="cb-col-fifth-2">
+						<div class="cb-align-center"> <?=$reward->reward_description?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center"> <?=$reward->points_needed?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center"> 
+							<button type="button" class="cb-button-form" <?=$reward->is_claimable?"":"disabled='disabled'"?> onclick="redeem_reward(<?=$reward->id?>, <?=$reward->points_needed?>)">Redeem</button>
+						</div>
+					</div>
+				</div>
+			</form>
+		<?php
+	}
+	?>
+</div>
+
+<!--
 <div class="col-sm-12">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -68,3 +94,4 @@
 		</div>
 	</div>
 </div>
+-->
