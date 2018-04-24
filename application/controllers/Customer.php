@@ -51,8 +51,24 @@ class Customer extends CI_Controller {
 		$this->load->model('views/customer/profile_main_view_model');
 		$this->profile_main_view_model->get($account, $customer);
 		
+		$this->load->model('redeem_reward_model');
+		$redeem_rewards = $this->redeem_reward_model->get_all();
+		
+		$this->load->model('reward_model');
+		$rewards = $this->reward_model->get_all_not_expired();
+		$reward_points = $customer->reward_points;
+		
+		$this->load->model('views/customer/reward_redeem_view_model');
+		$this->reward_redeem_view_model->get($redeem_rewards, $reward_points);
+		
+		$this->load->model('views/customer/reward_main_view_model');
+		$this->reward_main_view_model->get($rewards, $reward_points);
+		
 		$data['title'] = "Profil";
 		$data['model'] = $this->profile_main_view_model;
+		$data['model_reward'] = $this->reward_main_view_model;
+		$data['model_reward_redeem'] = $this->reward_redeem_view_model;
+		
 		$this->load->view('customer/profile_main', $data);
 		
 		// Load Footer

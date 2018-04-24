@@ -1,36 +1,46 @@
-<?php
-	// Model untuk Page Redeem Reward
-	
-	// dummy data redeem
-	// $model->redeem_rewards = array();
-	
-	// $model->redeem_rewards[0] = new class{};
-	// $model->redeem_rewards[0]->id = 2;
-	// $model->redeem_rewards[0]->redeem_id = "FA98-02R3";
-	// $model->redeem_rewards[0]->date_redeemed = "2 Dec 2017";
-	// $model->redeem_rewards[0]->status = "Belum Diambil";
-	// $model->redeem_rewards[0]->reward = new class{};
-	// $model->redeem_rewards[0]->reward->name = "Voucher Tri 10GB";
-	// $model->redeem_rewards[0]->reward->date_added = "1 Dec 2017";
-	// $model->redeem_rewards[0]->reward->points_needed = "250";
-	// $model->redeem_rewards[0]->reward->reward_description = "Voucher internet Tri 10GB (Kuota Reguler)";
-	
-	// $model->redeem_rewards[1] = new class{};
-	// $model->redeem_rewards[1]->id = 1;
-	// $model->redeem_rewards[1]->redeem_id = "QRC9-M8PP";
-	// $model->redeem_rewards[1]->date_redeemed = "1 Dec 2017";
-	// $model->redeem_rewards[1]->status = "Sudah Diambil";
-	// $model->redeem_rewards[1]->reward = new class{};
-	// $model->redeem_rewards[1]->reward->name = "Power Bank Sony";
-	// $model->redeem_rewards[1]->reward->date_added = "1 Dec 2017";
-	// $model->redeem_rewards[1]->reward->points_needed = "2.000";
-	// $model->redeem_rewards[1]->reward->reward_description = "Power Bank Sony 5000mAh (1.5A)";
-	
-	// // dummy data reward point customer
-	// $model->reward_points = "1.700";
-	
-?>
 
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">HISTORI PENUKARAN POIN</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Tanggal </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Poin yang Ditukarkan </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->redeem_rewards as $redeem_reward)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top">
+			<div class="cb-col-fifth">
+				<div class=" cb-align-center"> <?=$redeem_reward->date_redeemed?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->name?> </div>
+			</div>
+			<div class="cb-col-fifth-2">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$redeem_reward->reward->points_needed?> </div>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+<!--
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -85,3 +95,4 @@
 		</div>
 	</div>
 </div>
+-->
