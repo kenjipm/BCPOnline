@@ -7,11 +7,8 @@
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Tanggal </div>
 		</div>
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
-		</div>
-		<div class="cb-col-fifth-2">
-			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		<div class="cb-col-fifth-3">
+			<div class="cb-label cb-font-title cb-align-center"> Reward </div>
 		</div>
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Poin yang Ditukarkan </div>
@@ -25,10 +22,7 @@
 			<div class="cb-col-fifth">
 				<div class=" cb-align-center"> <?=$redeem_reward->date_redeemed?> </div>
 			</div>
-			<div class="cb-col-fifth">
-				<div class="cb-align-center"> <?=$redeem_reward->reward->name?> </div>
-			</div>
-			<div class="cb-col-fifth-2">
+			<div class="cb-col-fifth-3">
 				<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
 			</div>
 			<div class="cb-col-fifth">

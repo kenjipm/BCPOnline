@@ -16,11 +16,8 @@
 </div>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">	
 	<div class="cb-row cb-pt-5">
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Nama Reward </div>
-		</div>
-		<div class="cb-col-fifth-2">
-			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		<div class="cb-col-fifth-3">
+			<div class="cb-label cb-font-title cb-align-center"> Reward </div>
 		</div>
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Poin yang Dibutuhkan </div>
@@ -33,10 +30,7 @@
 			<form id="reward-<?=$reward->id?>" method="post" action="<?=site_url('customer/redeem_reward_do')?>">
 				<input type="hidden" name="reward_id" value="<?=$reward->id?>"/>
 				<div class="cb-row cb-border-top cb-p-5">
-					<div class="cb-col-fifth">
-						<div class="cb-align-center"> <?=$reward->name?> </div>
-					</div>
-					<div class="cb-col-fifth-2">
+					<div class="cb-col-fifth-3">
 						<div class="cb-align-center"> <?=$reward->reward_description?> </div>
 					</div>
 					<div class="cb-col-fifth">
