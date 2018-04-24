@@ -37,7 +37,7 @@ class Tenant extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function profile($id)
+	public function profile($id=0)
 	{
 		if ($this->session->type != TYPE['name']['TENANT']) // check account type, kalau bukan tenant, liat public profile
 		{

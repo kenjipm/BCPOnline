@@ -130,8 +130,8 @@
 									</div>
 									<div class="cb-row cb-col-full cb-mb-2">
 										<input type="text" class="cb-input-text cb-align-right cb-col-tenth-8" id="bidding_next_price_str" value="<?=$model->bidding_item->start_bid_price?>" readonly/>
-										<button type="button" class="cb-button-operational cb-button-group-left cb-col-tenth" id="btn-bid_add" onclick="bid_add_do()">^</button>
-										<button type="button" class="cb-button-operational cb-button-group-right cb-col-tenth" id="btn-bid_sub" onclick="bid_sub_do()">v</button>
+										<button type="button" class="cb-button-operational cb-button-group-left cb-col-tenth" id="btn-bid_add" onclick="bid_add_do()"><div class="cb-arrow cb-arrow-white cb-arrow-up"></div></button>
+										<button type="button" class="cb-button-operational cb-button-group-right cb-col-tenth" id="btn-bid_sub" onclick="bid_sub_do()"><div class="cb-arrow cb-arrow-white cb-arrow-down"></div></button>
 									</div>
 									<div class="cb-row cb-col-full cb-mb-2">
 									</div>
