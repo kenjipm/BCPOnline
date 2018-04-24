@@ -39,9 +39,9 @@
 									Jumlah
 								</div>
 								<div class="cb-row">
-									<button class="cb-button-operational cb-button-group-left cb-col-fifth" type="button" onclick="cart_add_do(<?=$item->id?>, 1)">^</button>
+									<button class="cb-button-operational cb-button-group-left cb-col-fifth" type="button" onclick="cart_add_do(<?=$item->id?>, 1)"><div class="cb-arrow cb-arrow-white cb-arrow-up"></div></button>
 									<input type="text" value="<?=$item->quantity?>" class="cb-input-text cb-button-group-mid cb-col-fifth-2 text-center" readonly="readonly" />
-									<button class="cb-button-operational cb-button-group-right cb-col-fifth" type="button" onclick="cart_sub_do(<?=$item->id?>, 1)">v</button>
+									<button class="cb-button-operational cb-button-group-right cb-col-fifth" type="button" onclick="cart_sub_do(<?=$item->id?>, 1)"><div class="cb-arrow cb-arrow-white cb-arrow-down"></button>
 								</div>
 							</div>
 							<div class="cb-col-fourth cb-margin-auto cb-pl-5">
