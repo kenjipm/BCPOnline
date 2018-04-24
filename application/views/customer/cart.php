@@ -78,7 +78,7 @@
 								Ongkos Kirim
 							</div>
 							<div class="cb-col-third pull-right">
-								<div class="cb-label align-right"><?=$model->shipping_charge?></div>
+								<div class="cb-label cb-align-right"><?=$model->shipping_charge?></div>
 							</div>
 						</div>
 					</div>
@@ -92,7 +92,7 @@
 								Total
 							</div>
 							<div class="cb-col-third-2 pull-right">
-								<div class="cb-label align-right"><?=$model->price_total?></div>
+								<div class="cb-label cb-align-right"><?=$model->price_total?></div>
 							</div>
 						</div>
 					</div>
@@ -105,13 +105,13 @@
 						if (count($model->items) > 0)
 						{
 							?>
-							<a href="#" class="cb-button-form " onclick="submit_cart();">Pilih Metode Pembayaran</a>
+							<a href="#" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pembayaran</a>
 							<?php
 						}
 						else
 						{
 							?>
-							<a href="<?=site_url('')?>" class="cb-button-form ">Lanjut Belanja</a>
+							<a href="<?=site_url('')?>" class="cb-button-form pull-right">Lanjut Belanja</a>
 							<?php
 						}
 					?>
