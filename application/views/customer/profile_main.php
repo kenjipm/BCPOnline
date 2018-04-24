@@ -2,6 +2,7 @@
 	<h2>Profil Saya</h2>
 </div>
 <form action="<?=site_url('customer/profile')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="<?=$this->session->id?>"/>
 <div class="cb-row">
 	<div class="cb-col-fifth">
 		<div class="panel-profile-pic-header">
@@ -72,7 +73,7 @@
 							</div>
 						</div>
 						<div class="cb-col-third-2">
-							<textarea class="cb-input-text" name="posted_item_description" style="resize:none" readonly/><?=$model->account->address; ?></textarea>
+							<textarea class="cb-input-text" name="address" style="resize:none" readonly/><?=$model->account->address; ?></textarea>
 						</div>
 					</div>
 					<div class="cb-row cb-mb-5">
