@@ -4,7 +4,7 @@
 <form id="form-cart" action="<?=site_url('billing/cart')?>" method="post">
 	<div class="cb-row">
 		<div class="cb-col-fourth-3 cb-p-5">
-			<div class="cb-panel-body cb-bg-primary-3">
+			<div class="cb-panel-body cb-bg-primary-3 cb-p-5">
 				<?php
 				foreach($model->items as $item)
 				{
@@ -98,9 +98,7 @@
 					</div>
 				</div>
 				<div class="cb-row">
-					<div class="cb-col-fourth-3">
-					</div>
-					<div class="cb-col-fourth cb-p-5">
+					<div class="cb-col-full cb-p-5">
 					<?php
 						if (count($model->items) > 0)
 						{
