@@ -39,25 +39,28 @@ class Dispute_detail_view_model extends CI_Model {
 			$this->disputes[] = $temp;
 		}
 		
-		$selected_dispute->init_account_party_one();
-		$selected_dispute->init_account_party_two();
-		$selected_dispute->init_order_detail();
-		
-		$selected_dispute->order_detail->init_posted_item_variance();
-		$selected_dispute->order_detail->posted_item_variance->init_posted_item();
-		
 		$this->dispute->id = $selected_dispute->id;
-		$this->dispute->other_party_name = ($selected_dispute->party_one_id != $this->session->id) ? $selected_dispute->account_party_one->name : $selected_dispute->account_party_two->name;
-		
-		$this->dispute->order_detail = new class{};
-		$this->dispute->order_detail->id = $selected_dispute->order_detail->id;
-		
-		$this->dispute->order_detail->posted_item_variance = new class{};
-		$this->dispute->order_detail->posted_item_variance->var_type = $selected_dispute->order_detail->posted_item_variance->var_type;
-		$this->dispute->order_detail->posted_item_variance->var_description = $selected_dispute->order_detail->posted_item_variance->var_description;
-		
-		$this->dispute->order_detail->posted_item_variance->posted_item = new class{};
-		$this->dispute->order_detail->posted_item_variance->posted_item->posted_item_name = $selected_dispute->order_detail->posted_item_variance->posted_item->posted_item_name;
+		if ($selected_dispute->id != 0)
+		{
+			$selected_dispute->init_account_party_one();
+			$selected_dispute->init_account_party_two();
+			$selected_dispute->init_order_detail();
+			
+			$selected_dispute->order_detail->init_posted_item_variance();
+			$selected_dispute->order_detail->posted_item_variance->init_posted_item();
+			
+			$this->dispute->other_party_name = ($selected_dispute->party_one_id != $this->session->id) ? $selected_dispute->account_party_one->name : $selected_dispute->account_party_two->name;
+			
+			$this->dispute->order_detail = new class{};
+			$this->dispute->order_detail->id = $selected_dispute->order_detail->id;
+			
+			$this->dispute->order_detail->posted_item_variance = new class{};
+			$this->dispute->order_detail->posted_item_variance->var_type = $selected_dispute->order_detail->posted_item_variance->var_type;
+			$this->dispute->order_detail->posted_item_variance->var_description = $selected_dispute->order_detail->posted_item_variance->var_description;
+			
+			$this->dispute->order_detail->posted_item_variance->posted_item = new class{};
+			$this->dispute->order_detail->posted_item_variance->posted_item->posted_item_name = $selected_dispute->order_detail->posted_item_variance->posted_item->posted_item_name;
+		}
 		
 		foreach ($dispute_texts as $dispute_text)
 		{

@@ -38,14 +38,17 @@ $config['top_menu_customer'] = array(
 	'top' => array(
 		'INBOX' => array(
 			'text'	=> "Pesan",
+			'icon'	=> "message",
 			'url'	=> "message",
 			),
 		'BILLING' => array(
 			'text'	=> "Transaksi",
+			'icon'	=> "message",
 			'url'	=> "billing",
 			),
 		'CART' => array(
 			'text'	=> "Keranjang",
+			'icon'	=> "message",
 			'url'	=> "customer/cart",
 			),
 		),
@@ -100,10 +103,12 @@ $config['top_menu_tenant'] = array(
 	'top' => array(
 		'INBOX' => array(
 			'text'	=> "Pesan",
+			'icon'	=> "message",
 			'url'	=> "message",
 			),
 		'ORDER' => array(
 			'text'	=> "Input OTP",
+			'icon'	=> "message",
 			'url'	=> "order/order_list",
 			),
 		),
@@ -146,14 +151,17 @@ $config['top_menu_admin'] = array(
 	'top' => array(
 		'PAY_DEBT' => array(
 			'text'	=> "Tenant Payment",
+			'icon'	=> "message",
 			'url'	=> "admin/tenant_to_pay_list",
 			),
 		'BIDDING' => array(
 			'text'	=> "Bidding",
+			'icon'	=> "message",
 			'url'	=> "bidding_live/bidding_live_list",
 			),
 		'ACCOUNT' => array(
 			'text'	=> "Account",
+			'icon'	=> "message",
 			'url'	=> "account/account_list",
 			),
 		),
