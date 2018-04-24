@@ -146,7 +146,7 @@ class Customer extends CI_Controller {
 		$this->load->model('views/customer/favorite_item_view_model');
 		$this->favorite_item_view_model->get($favorite_items);
 		
-		$data['title'] = "Daftar Barang Favorit";
+		$data['title'] = "FAVORIT";
 		$data['model'] = $this->favorite_item_view_model;
 		$this->load->view('customer/favorite_item', $data);
 		

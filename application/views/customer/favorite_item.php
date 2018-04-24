@@ -1,20 +1,53 @@
-<?php
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl"><?=$title?></div>
+		</div>
+	</div>
+</div>
 
-	// // Model Dummy Untuk Posted Item List
-	// $model->favorite_items = array();
-	
-	// $model->favorite_items[0] = new class{};
-	// $model->favorite_items[0]->id = 1;
-	// $model->favorite_items[0]->name = "Charger Samsung";
-	// $model->favorite_items[0]->price = "Rp 250.000";
-	// $model->favorite_items[0]->image_one_name = site_url("img/upload/user1/charger_samsung.jpg");
-	// $model->favorite_items[1] = new class{};
-	// $model->favorite_items[1]->id = 2;
-	// $model->favorite_items[1]->name = "Charger Wireless";
-	// $model->favorite_items[1]->price = "Rp 350.000";
-	// $model->favorite_items[1]->image_one_name = site_url("img/upload/user1/wireless_samsung.jpg");
-?>
+<div class="cb-panel-body cb-p-5">
+	<div class="item-showcase cb-row">
+		<?php
+			foreach($model->favorite_items as $favorite_item)
+			{
+				?>
+				<a href="<?=site_url('item/'.$favorite_item->posted_item->id)?>" class="cb-col-fifth cb-pb-3">
+					<div class="item_thumbnail cb-border-round">
+						<div class="item_photo">
+							<img src="<?=$favorite_item->posted_item->image_one_name?>" alt="<?=$favorite_item->posted_item->image_one_name?>"/>
+						</div>
+						<div class="item_tenant_name">
+						</div>
+						<div class="item_name">
+							<?=$favorite_item->posted_item->posted_item_name?>
+						</div>
+						<div class="item_initial_price">
+							
+						</div>
+						<div class="item_current_price">
+							<?=$favorite_item->posted_item->price?>
+						</div>
+						<div class="item_rating cb-row cb-vertical-center cb-align-center">
+							<span class="cb-star cb-star-<?=$favorite_item->rating->rating_average_round?>"></span>
+							<span class="cb-ml-2">(<?= $favorite_item->rating->rating_count ?>)</span>
+						</div>
+					</div>
+				</a>
+				<?php
+			}
+			if (count($model->favorite_items) <= 0)
+			{
+				?>
+				<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Belum ada barang yang difavoritkan</h4>
+				<?php
+			}
+			?>
+		?>
+	</div>
+</div>
 
+<!--
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -55,3 +88,4 @@
 	</div>
 	
 </div>
+-->
