@@ -61,14 +61,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<!-- search -->
 		<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search">
-			<div class="input-group">
-				<input name="keywords" type="text" class="form-control navbar-cb-top-search-input" placeholder="Search Items...">
-				<div class="input-group-btn">
-					<button class="btn btn-default navbar-cb-top-search-input" type="submit">
-						<i class="glyphicon glyphicon-search"></i>
-					</button>
-				</div>
-			</div>
+			<?php
+				if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN"))
+				{
+					?>
+						<div class="input-group">
+							<input name="keywords" type="text" class="form-control navbar-cb-top-search-input" placeholder="Search Items...">
+							<div class="input-group-btn">
+								<button class="btn btn-default navbar-cb-top-search-input" type="submit">
+									<i class="glyphicon glyphicon-search"></i>
+								</button>
+							</div>
+						</div>
+					<?php
+				}
+			?>
 		</form>
 		
 		<!-- top menu -->
