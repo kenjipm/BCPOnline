@@ -50,50 +50,55 @@
 </div>
 
 <div class="cb-row">
-	<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
-		<div class="cb-panel">
-			<div class="cb-panel-heading">
-				<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">HOT ITEMS</div>
-				<!--<a class="pull-right">Lihat Selebihnya</a>-->
-			</div>
-			<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
-				<div class="item-gallery-container">
-					<div class="item-gallery">
-						<?php
-							foreach($model->hot_items as $hot_item)
-							{
-								?>
-								<a href="<?=site_url('item/'.$hot_item->id)?>">
-									<div class="item_thumbnail">
-										<div class="item_photo">
-											<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
-										</div>
-										<div class="item_tenant_name">
-										</div>
-										<div class="item_name">
-											<?=$hot_item->posted_item_name?>
-										</div>
-										<div class="item_initial_price">
-											<?=$hot_item->initial_price?>
-										</div>
-										<div class="item_current_price">
-											<?=$hot_item->promo_price?>
-										</div>
-										<div class="item_rating cb-row cb-vertical-center cb-align-center">
-											<span class="cb-star cb-star-<?=$hot_item->rating->rating_average_round?>"></span>
-											<span class="cb-ml-2">(<?= $hot_item->rating->rating_count ?>)</span>
-										</div>
-									</div>
-								</a>
+	<?php
+		if (count($model->hot_items) > 0)
+		{
+			?>
+			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
+				<div class="cb-panel">
+					<div class="cb-panel-heading">
+						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">HOT ITEMS</div>
+						<!--<a class="pull-right">Lihat Selebihnya</a>-->
+					</div>
+					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
+						<div class="item-gallery-container">
+							<div class="item-gallery">
 								<?php
-							}
-						?>
+									foreach($model->hot_items as $hot_item)
+									{
+										?>
+										<a href="<?=site_url('item/'.$hot_item->id)?>">
+											<div class="item_thumbnail">
+												<div class="item_photo">
+													<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
+												</div>
+												<div class="item_tenant_name">
+												</div>
+												<div class="item_name">
+													<?=$hot_item->posted_item_name?>
+												</div>
+												<div class="item_initial_price">
+													<?=$hot_item->initial_price?>
+												</div>
+												<div class="item_current_price">
+													<?=$hot_item->promo_price?>
+												</div>
+												<div class="item_rating cb-row cb-vertical-center cb-align-center">
+													<span class="cb-star cb-star-<?=$hot_item->rating->rating_average_round?>"></span>
+													<span class="cb-ml-2">(<?= $hot_item->rating->rating_count ?>)</span>
+												</div>
+											</div>
+										</a>
+										<?php
+									}
+								?>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-	</div>
-	<?php
+			<?php
+		}
 		if ($model->bidding_item != null)
 		{
 			?>
@@ -150,48 +155,55 @@
 	?>
 </div>
 
-<div class="cb-row">
-	<div class="cb-col-full">
-		<div class="cb-panel">
-			<div class="cb-panel-heading cb-align-center">
-				<h3 class="cb-txt-primary-1 cb-font-title">NEW ITEMS</h3>
-			</div>
-			<div class="cb-panel-body cb-p-2">
-				<div class="item-showcase cb-row">
-					<?php
-						foreach($model->tenant_items as $tenant_item)
-						{
-							?>
-							<a href="<?=site_url('item/'.$tenant_item->id)?>" class="cb-col-fifth">
-								<div class="item_thumbnail cb-border-round">
-									<div class="item_photo">
-										<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
-									</div>
-									<div class="item_tenant_name">
-									</div>
-									<div class="item_name">
-										<?=$tenant_item->posted_item_name?>
-									</div>
-									<div class="item_initial_price">
-										
-									</div>
-									<div class="item_current_price">
-										<?=$tenant_item->price?>
-									</div>
-									<div class="item_rating cb-row cb-vertical-center cb-align-center">
-										<span class="cb-star cb-star-<?=$tenant_item->rating->rating_average_round?>"></span>
-										<span class="cb-ml-2">(<?= $tenant_item->rating->rating_count ?>)</span>
-									</div>
-								</div>
-							</a>
+<?php
+	if (count($model->tenant_items) > 0)
+	{
+		?>
+		<div class="cb-row">
+			<div class="cb-col-full">
+				<div class="cb-panel">
+					<div class="cb-panel-heading cb-align-center">
+						<h3 class="cb-txt-primary-1 cb-font-title">NEW ITEMS</h3>
+					</div>
+					<div class="cb-panel-body cb-p-2">
+						<div class="item-showcase cb-row">
 							<?php
-						}
-					?>
+								foreach($model->tenant_items as $tenant_item)
+								{
+									?>
+									<a href="<?=site_url('item/'.$tenant_item->id)?>" class="cb-col-fifth">
+										<div class="item_thumbnail cb-border-round">
+											<div class="item_photo">
+												<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
+											</div>
+											<div class="item_tenant_name">
+											</div>
+											<div class="item_name">
+												<?=$tenant_item->posted_item_name?>
+											</div>
+											<div class="item_initial_price">
+												
+											</div>
+											<div class="item_current_price">
+												<?=$tenant_item->price?>
+											</div>
+											<div class="item_rating cb-row cb-vertical-center cb-align-center">
+												<span class="cb-star cb-star-<?=$tenant_item->rating->rating_average_round?>"></span>
+												<span class="cb-ml-2">(<?= $tenant_item->rating->rating_count ?>)</span>
+											</div>
+										</div>
+									</a>
+									<?php
+								}
+							?>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
-</div>
+		<?php
+	}
+?>
 
 <div class="">
 	
