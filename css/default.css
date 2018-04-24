@@ -178,7 +178,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-table-row { display: flex; margin-bottom: 0.5rem; }
 .cb-table-cell { flex: 1 1 100%; }
 
-.cb-label { font-size: x-large; color: #e55026; }
+.cb-label { font-size: large; color: #e55026; font-weight: bold; }
 .sub_label { font-size: smaller; color: #8c8b8a; }
 
 .cb-heart { font-size: 3rem; cursor: pointer; }
