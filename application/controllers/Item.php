@@ -140,7 +140,7 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		
-		if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		//if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
 			$id = $this->session->child_id;
 			
@@ -154,7 +154,7 @@ class Item extends CI_Controller {
 			$data['model'] = $this->item_gallery_view_model;
 			$this->load->view('item_gallery', $data);
 		}
-		else // TENANT
+		//else // TENANT
 		{
 			
 		}
