@@ -154,6 +154,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-input-text { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
 .cb-input-text:read-only { background-color: #8c8b8a; }
+.cb-input-select { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
 
 [class|="cb-button"] { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
 .cb-button { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
@@ -215,6 +216,8 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-icon-message:before { content: ""; }
 .cb-icon-message { background-image: url(icons/message.png); background-size: contain; }
+.cb-icon-post-item { background-image: url(icons/Icon_TambahProduct.png); background-size: auto;  background-repeat: no-repeat; background-position: center;}
+.cb-icon-post-repair { background-image: url(icons/Icon_TambahServis.png); background-size: contain; }
 
 .cb-square { width: 100%; height: 100%; }
 

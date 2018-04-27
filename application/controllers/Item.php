@@ -301,6 +301,7 @@ class Item extends CI_Controller {
 		} 
 		else if ($this->input->post('item_type') == "REPAIR")
 		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
 			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
 			$this->form_validation->set_rules('brand_id', 'Brand', 'required');

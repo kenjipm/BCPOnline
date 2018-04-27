@@ -1,3 +1,154 @@
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5" id="choose_type_button" style="display:block">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<div class="cb-icon-post-item"></div>
+		</div>
+		<div class="cb-col-half">
+			<div class="cb-icon-post-repair"></div>
+		</div>
+	</div>
+	<div class="cb-row">
+		<div class="cb-col-half cb-align-center">
+			<button class="cb-button-form" onclick="input_order()" type="button" >TAMBAH BARANG</button>
+		</div>
+		<div class="cb-col-half cb-align-center">
+			<button class="cb-button-form" onclick="input_repair()" type="button" >TAMBAH SERVIS</button>
+		</div>
+	</div>
+</div>
+
+<div id="choose_order" style="display:none">
+	<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+		<div class="cb-align-center cb-font-size-lg">TAMBAH BARANG BARU</div>
+	</div>
+	<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+		<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="item_type" value="ORDER"/>
+		
+		
+		</form>
+	</div>
+</div>
+
+<div id="choose_repair" style="display:none">
+	<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+		<div class="cb-align-center cb-font-size-lg">TAMBAH SERVIS BARU</div>
+	</div>
+	<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+		<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="item_type" value="REPAIR"/>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Nama</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<input type="text" class="cb-input-text cb-col-full" name="posted_item_name" value="<?= set_value('posted_item_name'); ?>"/>
+					<span class="text-danger"><?= form_error('posted_item_name'); ?></span>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Deskripsi</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-9">
+					<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>" style="resize:none"></textarea>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Kategori</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<select class="cb-input-select cb-col-full" name="category_id">
+					<?php
+					foreach ($model->item_category as $category)
+					{
+						?>
+						<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Brand</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<select class="cb-input-select cb-col-full" name="brand_id">
+					<?php
+					foreach ($model->item_brand as $brand)
+					{
+						?>
+						<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-full"><button type="submit" class="cb-button-form cb-pull-right">KIRIM</button></div>
+			</div>
+		</form>
+	</div>
+</div>
+
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
