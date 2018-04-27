@@ -139,6 +139,8 @@ class Posted_item_variance_model extends CI_Model {
 			$i = 0;
 			foreach($temp_var_descriptions as $temp_var_description)
 			{
+				$this->id 				= 0;
+				$this->detail_id 		= 0;
 				$this->var_description 		= $temp_var_description;
 				$this->quantity_available	= $this->input->post('quantity_available')[$i];
 				
@@ -168,9 +170,10 @@ class Posted_item_variance_model extends CI_Model {
 				{
 					$this->load->library('Id_Generator');
 					
-					$db_item->id			= $this->db->insert_id();
-					$db_item->detail_id		= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);
+					$this->id			= $this->db->insert_id();
+					$this->detail_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $this->id);
 					
+					$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 					$this->db->where('id', $db_item->id);
 					$this->db->update($this->table_posted_item_variance, $db_item);
 				}
@@ -314,8 +317,12 @@ class Posted_item_variance_model extends CI_Model {
 			if (isset($file_path['image_two_name'])) $this->db->set('image_two_name', $file_path['image_two_name']);
 			if (isset($file_path['image_three_name'])) $this->db->set('image_three_name', $file_path['image_three_name']);
 			if (isset($file_path['image_four_name'])) $this->db->set('image_four_name', $file_path['image_four_name']);
-			$this->db->where('id', $id);
-			$this->db->update($this->table_posted_item_variance);
+			
+			if (isset($file_path['image_two_name']) || isset($file_path['image_three_name']) || isset($file_path['image_four_name']))
+			{
+				$this->db->where('id', $id);
+				$this->db->update($this->table_posted_item_variance);
+			}
 		}
 	}
 	

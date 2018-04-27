@@ -1,10 +1,10 @@
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5" id="choose_type_button" style="display:block">
 	<div class="cb-row">
-		<div class="cb-col-half">
-			<div class="cb-icon-post-item"></div>
+		<div class="cb-col-half cb-row cb-align-center cb-p-5">
+			<div class="cb-icon cb-icon-lg cb-icon-post-item cb-m-5"></div>
 		</div>
-		<div class="cb-col-half">
-			<div class="cb-icon-post-repair"></div>
+		<div class="cb-col-half cb-row cb-align-center cb-p-5">
+			<div class="cb-icon cb-icon-lg cb-icon-post-repair cb-m-5"></div>
 		</div>
 	</div>
 	<div class="cb-row">
@@ -25,7 +25,15 @@
 		<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="item_type" value="ORDER"/>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
+					<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
+						<div class="cb-icon cb-icon-lg cb-icon-add-item"></div>
+					</label>
+					<input id='image_one_name' name='image_one_name' class="input_file_upload" type='file' style="display:none;"/>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -41,13 +49,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<input type="text" class="cb-input-text cb-col-full" name="posted_item_name" value="<?= set_value('posted_item_name'); ?>"/>
 					<span class="text-danger"><?= form_error('posted_item_name'); ?></span>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -63,13 +71,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= set_value('price'); ?>"/>
 					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -85,13 +93,13 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
 					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -107,12 +115,12 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-9">
-					<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>" style="resize:none"></textarea>
+				<div class="cb-row cb-col-fifth-4">
+					<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>" rows="6" style="resize:none"></textarea>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -128,7 +136,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<select class="cb-input-select cb-col-full" name="category_id">
 					<?php
 					foreach ($model->item_category as $category)
@@ -143,7 +151,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -159,7 +167,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<select class="cb-input-select cb-col-full" name="brand_id">
 					<?php
 					foreach ($model->item_brand as $brand)
@@ -174,7 +182,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
@@ -190,7 +198,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row cb-col-tenth-3">
+				<div class="cb-row cb-col-fifth-2">
 					<select class="cb-input-select cb-col-full" name="var_type">
 					<?php
 					foreach ($model->item_variance as $variance)
@@ -205,71 +213,65 @@
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth cb-row cb-mb-5">
 				</div>
-				<div class="cb-row cb-col-tenth-3">
-					<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
-					<span class="text-danger"><?= form_error('var_desc'); ?></span>
-				</div>
-			</div>
-			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
-				</div>
-				<div class="cb-row cb-col-tenth">
-					<div class="cb-label"> Stok :</div>
-				</div>
-				<div class="cb-row cb-col-tenth-2">
-					<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
-					<span class="text-danger"><?= form_error('quantity_available'); ?></span>
-				</div>
-				<div class="cb-row cb-col-tenth">
-					<input name='image_two_name[]' type='file' class="photo_upload_simple"/>
-				</div>
-				<div class="cb-row cb-col-tenth">
-					<input name='image_three_name[]' type='file' class="photo_upload_simple"/>	
-				</div>
-				<div class="cb-row cb-col-tenth">
-					<input name='image_four_name[]' type='file' class="photo_upload_simple"/>
-				</div>
-			</div>
-			<div class="template" id="div_variance">
-				<div class="cb-row cb-mb-5">
-					<div class="cb-col-tenth">
+				<div class="cb-col-fifth-2 cb-row cb-mb-5">
+					<div class="cb-col-full cb-row cb-mb-5">
+						<div class="cb-row cb-col-fifth cb-label">
+							<div class="pull-left">Deskripsi</div>
+							<div class="pull-right">:</div>
+						</div>
+						<div class="cb-row cb-col-fifth-4">
+							<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
+							<span class="text-danger"><?= form_error('var_desc'); ?></span>
+						</div>
 					</div>
-					<div class="cb-row cb-col-tenth-3">
-						<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
-						<span class="text-danger"><?= form_error('var_desc'); ?></span>
+					<div class="cb-col-full cb-row cb-mb-5">
+						<div class="cb-row cb-col-fifth cb-label">
+							<div class="pull-left">Stok</div>
+							<div class="pull-right">:</div>
+						</div>
+						<div class="cb-row cb-col-fifth-4">
+							<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+							<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+						</div>
 					</div>
-					
 				</div>
-				<div class="cb-row cb-mb-5">
-					<div class="cb-col-tenth">
+				<div class="cb-col-fifth-2 cb-row cb-mb-5">
+					<div class="cb-col-fifth cb-p-1">
+						<label for="image_two_name" class="thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+							<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+						</label>
+						<input id='image_two_name' name='image_two_name[]' class="input_file_upload" type='file' style="display:none;"/>
 					</div>
-					<div class="cb-row cb-col-tenth">
-						<div class="cb-label"> Stok :</div>
+					<div class="cb-col-fifth cb-p-1">
+						<label for="image_three_name" class="thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+							<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+						</label>
+						<input id='image_three_name' name='image_three_name[]' class="input_file_upload" type='file' style="display:none;"/>
 					</div>
-					<div class="cb-row cb-col-tenth-2">
-						<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
-						<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+					<div class="cb-col-fifth cb-p-1">
+						<label for="image_four_name" class="thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+							<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+						</label>
+						<input id='image_four_name' name='image_four_name[]' class="input_file_upload" type='file' style="display:none;"/>
 					</div>
 				</div>
 			</div>
 			<div id="var_desc_list">
 			</div>
+			
 			<div class="cb-row cb-mb-5">
-				<div class="cb-col-tenth">
+				<div class="cb-col-fifth">
 				</div>
-				<div class="cb-col-tenth">
-					<button type="button" onclick="add_variance()" class="cb-button-form">+ TAMBAH</button>
+				<div class="cb-col-fifth cb-row">
+					<button type="button" onclick="add_variance()" class="cb-button-form cb-col-full">+ TAMBAH VARIAN</button>
 				</div>
 			</div>
-			<div class="cb-row cb-mb-5">
-				<div class="cb-col-full">
-					<button type="submit" class="cb-button-form cb-pull-right">KIRIM</button>
+			<div class="cb-row cb-mb-5 cb-align-right">
+				<div class="cb-col-fifth cb-row">
+					<button type="submit" class="cb-button-form cb-col-full">KIRIM</button>
 				</div>
-			</div>
-			<div class="form-group">
-				<div class="col-xs-2 col-xs-offset-10"></div>
 			</div>
 		</form>
 	</div>
@@ -391,6 +393,55 @@
 				<div class="cb-col-full"><button type="submit" class="cb-button-form cb-pull-right">KIRIM</button></div>
 			</div>
 		</form>
+	</div>
+</div>
+			
+<div class="template" id="div_variance">
+	<div class="cb-row cb-mb-5">
+		<div class="cb-col-fifth cb-row cb-mb-5">
+		</div>
+		<div class="cb-col-fifth-2 cb-row cb-mb-5">
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-row cb-col-fifth cb-label">
+					<div class="pull-left">Deskripsi</div>
+					<div class="pull-right">:</div>
+				</div>
+				<div class="cb-row cb-col-fifth-4">
+					<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
+					<span class="text-danger"><?= form_error('var_desc'); ?></span>
+				</div>
+			</div>
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-row cb-col-fifth cb-label">
+					<div class="pull-left">Stok</div>
+					<div class="pull-right">:</div>
+				</div>
+				<div class="cb-row cb-col-fifth-4">
+					<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+					<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-row cb-mb-5">
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_two thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_two_name[]' class="input_image_two input_file_upload" type='file' style="display:none;"/>
+			</div>
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_three thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_three_name[]' class="input_image_three input_file_upload" type='file' style="display:none;"/>
+			</div>
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_four thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_four_name[]' class="input_image_four input_file_upload" type='file' style="display:none;"/>
+			</div>
+		</div>
 	</div>
 </div>
 

@@ -166,6 +166,9 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-button-group-right		{ border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
 .cb-button-group-mid		{ border-radius: 0; margin-left: 0; margin-right: 0; border-left: 1px solid #FFF; border-right: 1px solid #FFF; }
 
+.cb-button-form[disabled]			{ background-color: #8c8b8a; color: #ffffff; }
+.cb-button-form[disabled]:hover	{ background-color: #8c8b8a; color: #ffffff; }
+
 .cb-button-operational:hover	{ background-color: #8c8b8a; }
 .cb-button-form:hover			{ background-color: #faa528; }
 .cb-button-secondary:hover		{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
@@ -215,10 +218,18 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 /* .cb-square { width: 100%; height: 100%; } */
 
+
+.cb-icon { background-size: contain;  background-repeat: no-repeat; background-position: center; }
+.cb-icon-sm { height: 2rem; width: 2rem; }
+.cb-icon-md { height: 5rem; width: 5rem;  }
+.cb-icon-lg { height: 10rem; width: 10rem;  }
+.cb-icon-xl { height: 24rem; width: 24rem;  }
+
 .cb-icon-message:before { content: ""; }
-.cb-icon-message { background-image: url(icons/message.png); background-size: contain; }
-.cb-icon-post-item { background-image: url(icons/Icon_TambahProduct.png); background-size: auto;  background-repeat: no-repeat; background-position: center;}
-.cb-icon-post-repair { background-image: url(icons/Icon_TambahServis.png); background-size: contain; }
+.cb-icon-message { background-image: url(icons/message.png); }
+.cb-icon-add-item { background-image: url(icons/Icon_TambahImage.png); }
+.cb-icon-post-item { background-image: url(icons/Icon_TambahProduct.png); }
+.cb-icon-post-repair { background-image: url(icons/Icon_TambahServis.png); }
 
 .cb-square { width: 100%; height: 100%; }
 
@@ -744,6 +755,11 @@ h4 { font-weight: bold; }
 
 .item_tenant_panel {
 	height: 300px;
+}
+
+.label_upload_file {
+	overflow: auto;
+	word-break: break-all;
 }
 
 /*.cb-panel {
