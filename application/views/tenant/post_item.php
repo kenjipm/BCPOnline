@@ -64,8 +64,8 @@
 					</div>
 				</div>
 				<div class="cb-row cb-col-tenth-3">
-					<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
-					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
+					<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= set_value('price'); ?>"/>
+					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
@@ -86,8 +86,8 @@
 					</div>
 				</div>
 				<div class="cb-row cb-col-tenth-3">
-					<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= set_value('price'); ?>"/>
-					<span class="text-danger"><?= form_error('price'); ?></span>
+					<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
+					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 			</div>
 			<div class="cb-row cb-mb-5">
@@ -208,31 +208,68 @@
 				<div class="cb-col-tenth">
 				</div>
 				<div class="cb-row cb-col-tenth-3">
-					<input type="text" class="cb-input-text cb-col-full" name="var_desc" value="<?= set_value('var_desc'); ?>"/>
+					<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
 					<span class="text-danger"><?= form_error('var_desc'); ?></span>
 				</div>
 			</div>
-			<div class="template" id="div_variance">
-				<div class='col-xs-9 col-xs-offset-3'>
-					<input name='var_desc[]' type='text' class='form-control' readonly/>
-					<input name='quantity_available[]' type='text' class="form-control" readonly/>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
 				</div>
-				<div class='col-xs-9 col-xs-offset-3'>
-					<input name='image_two_name[]' type='file' class="photo_upload_simple"/>			
+				<div class="cb-row cb-col-tenth">
+					<div class="cb-label"> Stok :</div>
+				</div>
+				<div class="cb-row cb-col-tenth-2">
+					<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+					<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+				</div>
+				<div class="cb-row cb-col-tenth">
+					<input name='image_two_name[]' type='file' class="photo_upload_simple"/>
+				</div>
+				<div class="cb-row cb-col-tenth">
 					<input name='image_three_name[]' type='file' class="photo_upload_simple"/>	
+				</div>
+				<div class="cb-row cb-col-tenth">
 					<input name='image_four_name[]' type='file' class="photo_upload_simple"/>
 				</div>
 			</div>
-			
-			<div class="form-group">
-				<div id="var_desc_list">
+			<div class="template" id="div_variance">
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-tenth">
+					</div>
+					<div class="cb-row cb-col-tenth-3">
+						<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
+						<span class="text-danger"><?= form_error('var_desc'); ?></span>
+					</div>
+					
 				</div>
-				<div class="col-sm-2">
-					<button type="button" onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</button>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-tenth">
+					</div>
+					<div class="cb-row cb-col-tenth">
+						<div class="cb-label"> Stok :</div>
+					</div>
+					<div class="cb-row cb-col-tenth-2">
+						<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+						<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+					</div>
+				</div>
+			</div>
+			<div id="var_desc_list">
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+				</div>
+				<div class="cb-col-tenth">
+					<button type="button" onclick="add_variance()" class="cb-button-form">+ TAMBAH</button>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-full">
+					<button type="submit" class="cb-button-form cb-pull-right">KIRIM</button>
 				</div>
 			</div>
 			<div class="form-group">
-				<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
+				<div class="col-xs-2 col-xs-offset-10"></div>
 			</div>
 		</form>
 	</div>
@@ -357,6 +394,7 @@
 	</div>
 </div>
 
+<?php /*
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -563,3 +601,5 @@
 		</div>
 	</div>
 </div>
+
+*/ ?>
