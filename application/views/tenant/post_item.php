@@ -24,8 +24,216 @@
 	<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 		<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="item_type" value="ORDER"/>
-		
-		
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Nama</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<input type="text" class="cb-input-text cb-col-full" name="posted_item_name" value="<?= set_value('posted_item_name'); ?>"/>
+					<span class="text-danger"><?= form_error('posted_item_name'); ?></span>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Harga</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
+					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Berat</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= set_value('price'); ?>"/>
+					<span class="text-danger"><?= form_error('price'); ?></span>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Deskripsi</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-9">
+					<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>" style="resize:none"></textarea>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Kategori</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<select class="cb-input-select cb-col-full" name="category_id">
+					<?php
+					foreach ($model->item_category as $category)
+					{
+						?>
+						<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Brand</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<select class="cb-input-select cb-col-full" name="brand_id">
+					<?php
+					foreach ($model->item_brand as $brand)
+					{
+						?>
+						<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+					<div class="cb-row">
+						<div class="cb-col-fifth-4">
+							<div class="cb-txt-primary-1 cb-pull-left">
+								<div class="cb-label"> Varian</div>
+							</div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center">
+								<div class="cb-txt-primary-1">
+									<div class="cb-label"> : </div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<select class="cb-input-select cb-col-full" name="var_type">
+					<?php
+					foreach ($model->item_variance as $variance)
+					{
+						?>
+						<option value="<?=$variance?>"><?=$variance?></option>			
+						<?php
+					}
+					?>
+					<option value="lainnya">Lainnya</option>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-tenth">
+				</div>
+				<div class="cb-row cb-col-tenth-3">
+					<input type="text" class="cb-input-text cb-col-full" name="var_desc" value="<?= set_value('var_desc'); ?>"/>
+					<span class="text-danger"><?= form_error('var_desc'); ?></span>
+				</div>
+			</div>
+			<div class="template" id="div_variance">
+				<div class='col-xs-9 col-xs-offset-3'>
+					<input name='var_desc[]' type='text' class='form-control' readonly/>
+					<input name='quantity_available[]' type='text' class="form-control" readonly/>
+				</div>
+				<div class='col-xs-9 col-xs-offset-3'>
+					<input name='image_two_name[]' type='file' class="photo_upload_simple"/>			
+					<input name='image_three_name[]' type='file' class="photo_upload_simple"/>	
+					<input name='image_four_name[]' type='file' class="photo_upload_simple"/>
+				</div>
+			</div>
+			
+			<div class="form-group">
+				<div id="var_desc_list">
+				</div>
+				<div class="col-sm-2">
+					<button type="button" onclick="popup.open('popup_add_variance')" class="btn btn-default">Tambah</button>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-xs-2 col-xs-offset-10"><button type="submit" class="btn btn-default">Kirim</button></div>
+			</div>
 		</form>
 	</div>
 </div>

@@ -153,8 +153,12 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-height-500 { height: 500px; }
 
 .cb-input-text { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
+<<<<<<< HEAD
 .cb-input-text:read-only { background-color: #8c8b8a; }
 .cb-input-select { border: none; background-color: #e6e6e5; color: #434747; padding: 0.75rem; border-radius: 4px; font-size: large; }
+=======
+.cb-input-text:read-only { background-color: #8c8b8a; color: #ffffff; }
+>>>>>>> 586bb70b61118a20b315df6af2ec2e55c3cd88b5
 
 [class|="cb-button"] { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
 .cb-button { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
