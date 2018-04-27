@@ -34,9 +34,9 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id = $item->id;
-			$temp->posted_item_name = $item->posted_item_name;
+			$temp->posted_item_name = ($item->posted_item_name != "") ? $item->posted_item_name : $item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
-			$temp->image_one_name = site_url($item->image_one_name);
+			$temp->image_one_name = site_url(($item->image_one_name != "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			
 			$this->tenant->items[] = $temp;

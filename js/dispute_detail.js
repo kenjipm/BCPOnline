@@ -43,8 +43,6 @@ function refresh_chat_area()
 				var dispute_template = $("#dispute_template").html();
 				
 				$("#dispute_text_area").append(dispute_template);
-				
-				$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30); 
 			});
 		}
 	});
@@ -100,6 +98,8 @@ function send_dispute()
 			if (data == "1") { // kalau berhasil, tampilin data ke chat room
 				$("#dispute_input").val('');
 				refresh_chat_area();
+				
+				$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30); 
 			}
 			else if (data == "0") { // kalau gagal, ga usah hapus input nya biar bisa send ulang
 				

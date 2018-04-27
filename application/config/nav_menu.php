@@ -132,7 +132,7 @@ $config['top_menu_tenant'] = array(
 			'url'	=> "order/order_list",
 			),
 		'DISPUTE' => array(
-			'text'	=> "KOMPLAIN CUSTOMER",
+			'text'	=> "KOMPLAIN",
 			'url'	=> "dispute",
 			),
 		),

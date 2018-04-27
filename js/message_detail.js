@@ -43,8 +43,6 @@ function refresh_chat_area()
 				var message_template = $("#message_template").html();
 				
 				$("#message_text_area").append(message_template);
-				
-				$("#message_panel").scrollTop( $("#anchor").offset().top - 30);  
 			});
 		}
 	});
@@ -100,6 +98,8 @@ function send_message()
 			if (data == "1") { // kalau berhasil, tampilin data ke chat room
 				$("#message_input").val('');
 				refresh_chat_area();
+				
+				$("#message_panel").scrollTop( $("#anchor").offset().top - 30);  
 			}
 			else if (data == "0") { // kalau gagal, ga usah hapus input nya biar bisa send ulang
 				
