@@ -18,7 +18,7 @@ class Item extends CI_Controller {
 		{
 			redirect('Item/post_item_detail/'.$id);
 		}
-		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		else //if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
 			$other_items = $this->item_model->get_related_items($item);
 		

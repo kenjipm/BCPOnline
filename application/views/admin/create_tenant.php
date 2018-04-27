@@ -7,7 +7,7 @@
 	$model->tenants->tenant_id = "17120488801"
 ?>
 
-<div class="col-sm-8 col-sm-offset-2">
+<div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			<h3>Daftarkan Tenant Baru</h3>
