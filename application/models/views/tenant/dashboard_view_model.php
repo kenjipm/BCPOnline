@@ -20,6 +20,10 @@ class Dashboard_View_Model extends CI_Model{
 		$this->tenant->unit_number 	= $item->unit_number;
 		$this->tenant->floor 		= $item->floor;
 		
+		$item->init_account();
+		$this->tenant->account = new class{};
+		$this->tenant->account->profile_pic = site_url(($item->account->profile_pic != "") ? $item->account->profile_pic : DEFAULT_PROFILE_PIC_TENANT);
+		
 	}
 	
 	public function get_posted_item($items)

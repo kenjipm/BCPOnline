@@ -1,3 +1,38 @@
+<div class="cb-row cb-p-5">
+	<div class="cb-col-full cb-bg-primary-3 cb-border-round cb-row cb-p-5">
+		<div class="cb-col-fourth">
+			<label for="profile_pic" class="cb-border cb-border-round">
+				<div id="thumbnail-profile_pic">
+					<img src="<?=$model->tenant->account->profile_pic?>" alt="<?=$model->tenant->tenant_name?>" class="cb-border-round">
+				</div>
+			</label>
+		</div>
+		<div class="cb-pl-5 cb-col-fourth-2">
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-fourth cb-font-title cb-font-size-xl cb-txt-primary-1">Nama</div>
+				<div class="cb-col-small cb-font-title cb-font-size-xl cb-txt-primary-1">:</div>
+				<div class="cb-col-fourth-2">
+					<input type="text" class="cb-input-text" value="<?=$model->tenant->tenant_name?>" readonly/>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-fourth cb-font-title cb-font-size-xl cb-txt-primary-1">Unit</div>
+				<div class="cb-col-small cb-font-title cb-font-size-xl cb-txt-primary-1">:</div>
+				<div class="cb-col-fourth-2">
+					<input type="text" class="cb-input-text" value="<?=$model->tenant->unit_number?>" readonly/>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
+				<div class="cb-col-fourth cb-font-title cb-font-size-xl cb-txt-primary-1">Lantai</div>
+				<div class="cb-col-small cb-font-title cb-font-size-xl cb-txt-primary-1">:</div>
+				<div class="cb-col-fourth-2">
+					<input type="text" class="cb-input-text" value="<?=$model->tenant->floor?>" readonly/>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
 <?php
 	// Model untuk dashboard_main
 	
@@ -21,6 +56,7 @@
 	// $model->posted_item[1]->posted_item_name = "Tablet Djisamsung";
 	// $model->posted_item[1]->price = "Rp 1.250.000";
 	
+	/*
 	$model->categories = array();
 	
 	$model->categories[0] = new class{};
@@ -39,7 +75,7 @@
 	$model->categories[6]->category_name = "Reparasi";
 
 	$show_posted_item_div = false;
-?>
+
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel panel-body">
@@ -248,3 +284,5 @@
 		</div>
 	</div>
 </div>
+*/
+?>

@@ -137,7 +137,9 @@ class Tenant_model extends CI_Model {
 		$this->db->where('account_id', $account_id);
 		$query = $this->db->get($this->table_tenant, 1);
 		
-		return $query->row();
+		$result = $query->row();
+		
+		return ($result !== null) ? $this->get_stub_from_db($result) : new tenant_model();
 	}
 	
 	public function insert_from_account($account_id)

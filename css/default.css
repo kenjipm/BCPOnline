@@ -157,6 +157,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 [class|="cb-button"] { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
 .cb-button { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 2rem; padding: 0.75rem; border-radius: 4px;  }
+.cb-button-sm { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 1.75rem; padding: 0.25rem; border-radius: 2px;  }
 .cb-button-operational		{ background-color: #434747; color: #ffffff; }
 .cb-button-form				{ background-color: #e55026; color: #ffffff; }
 .cb-button-secondary		{ background-color: #ffffff; color: #434747; border: 1px solid #434747; }

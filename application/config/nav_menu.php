@@ -106,17 +106,17 @@ $config['top_menu_tenant'] = array(
 			'icon'	=> "message",
 			'url'	=> "message",
 			),
-		'ORDER' => array(
-			'text'	=> "Input OTP",
-			'icon'	=> "message",
-			'url'	=> "order/order_list",
-			),
+		// 'ORDER' => array(
+			// 'text'	=> "Input OTP",
+			// 'icon'	=> "message",
+			// 'url'	=> "order/order_list",
+			// ),
 		),
 	'profile' => array(
-		'PROFILE' => array(
-			'text'	=> "Profil Saya",
-			'url'	=> "tenant/profile",
-			),
+		// 'PROFILE' => array(
+			// 'text'	=> "Profil Saya",
+			// 'url'	=> "tenant/profile",
+			// ),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
