@@ -1,12 +1,319 @@
-<?php
-	// Model untuk Tenant
-	
-	// dummy tenant id
-	$model->tenants = new class{};
-	
-	$model->tenants->tenant_id = "17120488801"
-?>
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<div class="cb-align-center cb-font-size-xl">DAFTARKAN TENANT BARU</div>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<form action="<?=site_url('account/create_tenant')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+		<div class="cb-row cb-col-full cb-txt-primary-1 cb-font-title cb-border-bottom">
+			<div class="cb-align-center cb-font-size-xl">DATA TENANT</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama Tenant</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="tenant_name" value="<?= set_value('tenant_name'); ?>"/>
+				<span class="text-danger"><?= form_error('tenant_name'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nomor Unit</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="unit_number" value="<?= set_value('unit_number'); ?>"/>
+				<span class="text-danger"><?= form_error('unit_number'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Lantai</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="floor" value="<?= set_value('floor'); ?>"/>
+				<span class="text-danger"><?= form_error('floor'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nomor Rekening</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_account" value="<?= set_value('bank_account'); ?>"/>
+				<span class="text-danger"><?= form_error('bank_account'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5 cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Kategori Penjualan</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="selling_category" value="<?= set_value('selling_category'); ?>"/>
+				<span class="text-danger"><?= form_error('selling_category'); ?></span>
+			</div>
+		</div>
+		
+		<!-- Data Diri -->
+		<div class="cb-row cb-col-full cb-txt-primary-1 cb-font-title cb-border-bottom cb-border-top">
+			<div class="cb-align-center cb-font-size-xl">DATA DIRI</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="name" value="<?= set_value('name'); ?>"/>
+				<span class="text-danger"><?= form_error('name'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Alamat</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="address" value="<?= set_value('address'); ?>"/>
+				<span class="text-danger"><?= form_error('address'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Tanggal Lahir</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full datepicker" name="date_of_birth" value="<?= set_value('date_of_birth'); ?>"/>
+				<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> No. HP</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="phone_number" value="<?= set_value('phone_number'); ?>"/>
+				<span class="text-danger"><?= form_error('phone_number'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5 cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> No. KTP</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="identification_no" value="<?= set_value('identification_no'); ?>"/>
+				<span class="text-danger"><?= form_error('identification_no'); ?></span>
+			</div>
+		</div
+		
+		<!-- Account -->
+		<div class="cb-row cb-col-full cb-txt-primary-1 cb-font-title cb-border-bottom cb-border-top">
+			<div class="cb-align-center cb-font-size-xl">INFORMASI AKUN</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> E-mail</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="email" value="<?= set_value('email'); ?>"/>
+				<span class="text-danger"><?= form_error('email'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Password</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="password" class="cb-input-text cb-col-full" name="password" value="<?= set_value('password'); ?>"/>
+				<span class="text-danger"><?= form_error('password'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Ulangi Password</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
+				<span class="text-danger"><?= form_error('passconf'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5 cb-p-5">
+			<div class="cb-col-fifth-4">
+				<?= $error ?? "" ?>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<button type="submit" class="cb-button-form cb-pull-right">BUAT AKUN</button>
+			</div>
+		</div>
+	</form>
+</div>
 
+<?php /*
 <div class="">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -95,3 +402,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>
