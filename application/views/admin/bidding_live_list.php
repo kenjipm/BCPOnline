@@ -1,29 +1,50 @@
-<?php
-	// Model untuk customer
-	
-	// // dummy bidding list
-	// $model->biddings = array();
-	
-	// // Model dummy bidding
-	// $model->biddings[0] = new class{};
-	// $model->biddings[0]->id = 1;
-	// $model->biddings[0]->bid_time = "08-12-2017";
-	// $model->biddings[0]->posted_item = "Djisamsung";
-	// $model->biddings[0]->bidding_price = "Rp 1.700.000,-";
-	// $model->biddings[1] = new class{};
-	// $model->biddings[1]->id = 2;
-	// $model->biddings[1]->bid_time = "17-12-2017";
-	// $model->biddings[1]->posted_item = "Appa";
-	// $model->biddings[1]->bidding_price = "Rp 200.000,-";
-	// $model->biddings[2] = new class{};
-	// $model->biddings[2]->id = 3;
-	// $model->biddings[2]->bid_time = "22-12-2017";
-	// $model->biddings[2]->posted_item = "Tos Ibak";
-	// $model->biddings[2]->bidding_price = "Rp 1.000.000,-";
-	
-	
-	
-?>
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">LELANG TERAKHIR</h3>
+		</div>
+		<div class="cb-col-half cb-p-5">
+			<a class="cb-button-form pull-right" href="<?=site_url('Bidding_live/create_bidding_live')?>">
+				+ Tambah Barang Lelang
+			</a>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-p-5">
+	<div class="item-showcase cb-row">
+		<?php
+			foreach($model->items as $posted_item)
+			{
+			?>
+			<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$posted_item->id)?>" class="cb-col-fifth cb-pb-3">
+				<div class="item_thumbnail cb-border-round">
+					<div class="item_photo">
+						<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>"/>
+					</div>
+					<div class="item_tenant_name">
+					</div>
+					<div class="item_name">
+						<?=$posted_item->posted_item_name?>
+					</div>
+				</div>
+			</a>
+			<?php
+			}
+			if (count($model->items) <= 0)
+			{
+				?>
+				<div class="col-md-4">
+					<label>Tidak ada Barang Lelang</label>
+				</div>
+				<?php
+			}
+			?>
+		?>
+	</div>
+</div>
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -67,3 +88,5 @@
 		</div>
 	</div>
 </div>
+
+*/ ?>

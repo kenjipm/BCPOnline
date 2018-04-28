@@ -1,7 +1,3 @@
-$(document).ready(function(){
-	$(".input_file_upload").on('change', select_file);
-});
-
 var cur_var_idx = 0;
 
 function add_variance(){ 
@@ -43,27 +39,4 @@ function add_variance(){
 	$("#var_desc_list").find("#" + id_image_four).on('change', select_file);
 	
 	cur_var_idx++;
-}
-
-function select_file(event){
-	var element_id = $(this).attr('id');
-	var filepath = $(this).val();
-	
-	var fileparts = filepath.split("\\");
-	var filename = "";
-	if (fileparts.length > 0) {
-		filename = fileparts[fileparts.length - 1];
-	} else {
-		filename = filepath;
-	}
-	// alert(filename);
-	if (filename == "") { // kalau ada file nya
-		$('label[for=' + element_id + '] > div').addClass('cb-icon-add-item');
-		$('label[for=' + element_id + '] > div').addClass('cb-icon-md');
-		$('label[for=' + element_id + '] > div').html("");
-	} else {
-		$('label[for=' + element_id + '] > div').removeClass('cb-icon-add-item');
-		$('label[for=' + element_id + '] > div').removeClass('cb-icon-md');
-		$('label[for=' + element_id + '] > div').html(filename);
-	}
 }

@@ -31,7 +31,8 @@ $(document).ready(function(){
 	// }, function(){
 		// $(".navbar-cb-top-profile-menu").hide();
 	// });
-	
+	$(".input_file_upload").on('change', select_file);
+
 	$(".date_of_birth").datepicker({
 		changeMonth: true,
 		changeYear: true,
@@ -57,3 +58,27 @@ $(document).ready(function(){
 		showMicrosec: false,
 	});
 });
+
+
+function select_file(event){
+	var element_id = $(this).attr('id');
+	var filepath = $(this).val();
+	
+	var fileparts = filepath.split("\\");
+	var filename = "";
+	if (fileparts.length > 0) {
+		filename = fileparts[fileparts.length - 1];
+	} else {
+		filename = filepath;
+	}
+	// alert(filename);
+	if (filename == "") { // kalau ada file nya
+		$('label[for=' + element_id + '] > div').addClass('cb-icon-add-item');
+		$('label[for=' + element_id + '] > div').addClass('cb-icon-md');
+		$('label[for=' + element_id + '] > div').html("");
+	} else {
+		$('label[for=' + element_id + '] > div').removeClass('cb-icon-add-item');
+		$('label[for=' + element_id + '] > div').removeClass('cb-icon-md');
+		$('label[for=' + element_id + '] > div').html(filename);
+	}
+}

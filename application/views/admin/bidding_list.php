@@ -1,29 +1,4 @@
-<?php
-	// Model untuk customer
-	
-	// // dummy bidding list
-	// $model->biddings = array();
-	
-	// // Model dummy bidding
-	// $model->biddings[0] = new class{};
-	// $model->biddings[0]->id = 1;
-	// $model->biddings[0]->bid_time = "08-12-2017";
-	// $model->biddings[0]->posted_item = "Djisamsung";
-	// $model->biddings[0]->bidding_price = "Rp 1.700.000,-";
-	// $model->biddings[1] = new class{};
-	// $model->biddings[1]->id = 2;
-	// $model->biddings[1]->bid_time = "17-12-2017";
-	// $model->biddings[1]->posted_item = "Appa";
-	// $model->biddings[1]->bidding_price = "Rp 200.000,-";
-	// $model->biddings[2] = new class{};
-	// $model->biddings[2]->id = 3;
-	// $model->biddings[2]->bid_time = "22-12-2017";
-	// $model->biddings[2]->posted_item = "Tos Ibak";
-	// $model->biddings[2]->bidding_price = "Rp 1.000.000,-";
-	
-	
-	
-?>
+
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
