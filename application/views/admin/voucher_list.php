@@ -1,37 +1,115 @@
-<?php
-	// Model untuk customer
-	
-	// // dummy voucher list
-	// $model->vouchers = array();
-	
-	// // Model dummy voucher
-	// $model->vouchers[0] = new class{};
-	// $model->vouchers[0]->id = 1;
-	// $model->vouchers[0]->voucher_id = "17120377701";
-	// $model->vouchers[0]->voucher_stock = "10";
-	// $model->vouchers[0]->voucher_brand = "Djisamsung";
-	// $model->vouchers[0]->voucher_description = "Deskripsi voucher Djisamsung";
-	// $model->vouchers[0]->date_added = "03-12-2017";
-	// $model->vouchers[0]->voucher_worth = "Djisamsung";
-	// $model->vouchers[0]->voucher_code = "Deskripsi voucher Djisamsung";
-	// $model->vouchers[1] = new class{};
-	// $model->vouchers[1]->id = 2;
-	// $model->vouchers[1]->voucher_id = "17120577701";
-	// $model->vouchers[1]->voucher_stock = "39";
-	// $model->vouchers[1]->voucher_brand = "Appa";
-	// $model->vouchers[1]->voucher_description = "Deskripsi voucher Appa";
-	// $model->vouchers[1]->date_added = "05-12-2017";
-	// $model->vouchers[2] = new class{};
-	// $model->vouchers[2]->id = 3;
-	// $model->vouchers[2]->voucher_id = "17120977701";
-	// $model->vouchers[2]->voucher_stock = "40";
-	// $model->vouchers[2]->voucher_brand = "Tos Ibak";
-	// $model->vouchers[2]->voucher_description = "Deskripsi voucher Tos Ibak";
-	// $model->vouchers[2]->date_added = "09-12-2017";
-	
-	
-	
-?>
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR VOUCHER</h3>
+		</div>
+		<div class="cb-col-half cb-p-5">
+			<a href="<?=site_url('voucher/create_voucher')?>" class="cb-button-form pull-right">+ TAMBAH VOUCHER</a>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Kode Voucher </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Stok </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->vouchers as $voucher)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth-2">
+				<div class=" cb-align-center"> <?=$voucher->voucher_code?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$voucher->voucher_stock?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$voucher->voucher_description?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<button class="cb-button-form" onclick="popup.open('popup_voucher_detail')">LIHAT</button>
+			</div>
+			<div id="popup_voucher_detail" class="popup popup-md">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						Detil Voucher
+					</div>
+					<div class="panel-body">
+						<form class="form-horizontal">
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Deskripsi:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->voucher_description?>" class="form-control" id="voucher_description" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Nilai Voucher:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->voucher_worth?>" class="form-control" id="voucher_worth" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Jumlah Stok:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Kode Voucher:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Minimal Order:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Pemakaian per Hari:</label>
+								</div>
+								<div class="col-sm-8">
+									<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-7 col-sm-offset-4">
+									<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Tutup</button>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -161,3 +239,5 @@
 		</div>
 	</div>
 </div>
+
+*/ ?>
