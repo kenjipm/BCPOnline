@@ -1,3 +1,47 @@
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">PERMINTAAN BARANG SEO</h3>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Barang </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Harga </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->tenant_bill_list as $tenant_bill)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth-2">
+				<div class=" cb-align-center"> <?=$tenant_bill->tenant_name?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$tenant_bill->posted_item_name?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$tenant_bill->payment_value?></div>
+			</div>
+			<div class="cb-col-fifth">
+				<a href="<?=site_url('Admin/create_tenant_bill_seo/'.$tenant_bill->id)?>" class="cb-button-form">Buat Billing</a>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -46,3 +90,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>

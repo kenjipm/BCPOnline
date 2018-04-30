@@ -8,7 +8,7 @@
 
 <footer class="footer">
 	<div class="container text-center">
-		<button type="button" class="btn btn-default" onclick="container_print()">Print</button>
+		<button type="button" class="cb-button-form" onclick="container_print()">CETAK</button>
 	</div>
 </footer>
 
