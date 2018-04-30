@@ -23,7 +23,7 @@ class Order_List_View_Model extends CI_Model{
 			$this->order_list[$i]->tenant_id			= $order->posted_item_variance->posted_item->tenant_id;
 			$this->order_list[$i]->customer_id			= $order->billing->customer_id;
 			$this->order_list[$i]->address				= $order->billing->shipping_address->address_detail;
-			$this->order_list[$i]->collection_method	= $order->collection_method;
+			$this->order_list[$i]->delivery_method		= $order->billing->delivery_method;
 			$this->order_list[$i]->deliverer			= $order->deliverer->account->name;
 			
 			$i++;

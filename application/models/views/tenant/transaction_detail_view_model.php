@@ -14,7 +14,12 @@ class Transaction_Detail_View_Model extends CI_Model{
 	{
 		$this->transaction_detail = new class{};
 		$this->load->library('Text_renderer');
-			
+		
+		$cur_order_detail = $item;
+		$cur_order_detail->init_billing();
+		$cur_order_detail->billing->init_customer();
+		$cur_order_detail->billing->customer->init_account();
+		
 		$this->transaction_detail->id 					= $item->id;
 		$this->transaction_detail->posted_item_id	 	= $item->posted_item_variance->posted_item->posted_item_id;
 		$this->transaction_detail->posted_item_name 	= $item->posted_item_variance->posted_item->posted_item_name;
@@ -26,6 +31,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->order_status_desc	= ORDER_STATUS['description'][$item->order_status];
 		$this->transaction_detail->order_status			= ORDER_STATUS['name'][$item->order_status];
 		$this->transaction_detail->date_created			= $item->billing->date_created;
+		$this->transaction_detail->account_id			= $cur_order_detail->billing->customer->account->id;
 		$this->transaction_detail->deliverer			= $item->deliverer->account->name;
 		$this->transaction_detail->collection_method	= $item->collection_method;
 		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price);

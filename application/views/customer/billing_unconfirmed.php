@@ -1,7 +1,8 @@
 <div class="cb-txt-primary-1 cb-font-title cb-ml-5">
 	<h2><?=$title?></h2>
 </div>
-<form id="form-cart" action="<?=site_url('billing/cart')?>" method="post">
+<form id="form-cart" action="<?=site_url('billing/confirm')?>" method="post">
+	<input type="hidden" name="billing_id" value="<?=$model->billing_id?>"/>
 	<div class="cb-row">
 		<div class="cb-col-fourth-3 cb-p-5">
 			<div class="cb-panel-body cb-bg-primary-3 cb-p-5">
@@ -98,7 +99,7 @@
 						if (count($model->items) > 0)
 						{
 							?>
-							<a href="#" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pembayaran</a>
+							<a href="#" class="cb-button-form pull-right" onclick="confirm_bill();">Pilih Metode Pembayaran</a>
 							<?php
 						}
 						else

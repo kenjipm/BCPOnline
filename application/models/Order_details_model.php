@@ -166,9 +166,11 @@ class Order_details_model extends CI_Model {
 		$stub->billing->date_created		= $db_item->date_created ?? "";
 		$stub->billing->date_closed			= $db_item->date_closed ?? "";
 		$stub->billing->customer_id			= $db_item->customer_id ?? "";
+		$stub->billing->delivery_method		= $db_item->delivery_method ?? "";
 		
 		$stub->billing->customer					= new Customer_model();
 		$stub->billing->customer->account			= new Account_model();
+		$stub->billing->customer->account->id		= $db_item->account_id ?? "";
 		$stub->billing->customer->account->name		= $db_item->name ?? "";
 		
 		$stub->billing->shipping_address					= new Shipping_address_model();
@@ -213,7 +215,7 @@ class Order_details_model extends CI_Model {
 		$where['order_details.id'] = $id;
 		
 		$this->db->where($where);
-		$this->db->select('*, ' . $this->table_order_details.'.id AS id,' . $this->table_order_details.'.deliverer_id AS deliverer_id');
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id,' . $this->table_order_details.'.deliverer_id AS deliverer_id, ' . 'account.id AS account_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');

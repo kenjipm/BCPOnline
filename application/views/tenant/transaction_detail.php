@@ -91,6 +91,7 @@
 		else if ($model->transaction_detail->item_type == "REPAIR")
 		{
 			?>
+			<form action="<?=site_url('order/transaction_detail/' . $model->transaction_detail->id)?>" class="cb-row cb-col-full" method="post">
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 					<div class="cb-pull-left">Deskripsi</div>
@@ -145,6 +146,18 @@
 					<input type="text" class="cb-row cb-col-full cb-input-text" id="sold_price" value="<?=$model->transaction_detail->sold_price?>" readonly>
 				</div>
 			</div>
+			<div id="add_customer" class="cb-col-full cb-row col-mb-5" style="display:none">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+					<div class="cb-pull-left">Harga Servis</div>
+					<div class="cb-pull-right">:</div>
+				</div>
+				<div class="cb-col-fifth-2 cb-pl-3">
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="discounted_price" name="discounted_price" />
+				</div>
+				<div class="cb-col-fifth cb-pl-3">
+					<button type="submit" class="cb-button cb-button-form">Kirim</button>
+				</div>
+			</div>
 			<div class="cb-col-full cb-row">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 				</div>
@@ -152,20 +165,25 @@
 					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_review')" >Lihat Ulasan</button>
 				</div>
 				<div class="cb-pl-3">
-					<a href="<?=site_url('message/'.$model->transaction_detail->id)?>" class="cb-button cb-button-form">Kirim Pesan</a>
+					<button type="button" class="cb-col-full cb-ml-5 cb-button cb-button-form" id="btn-send_message" onclick="$('#form-message').submit();">KIRIMKAN PESAN</button>
 				</div>
 				<div class="cb-pl-3">
-					<button class="cb-button cb-button-form" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Perbaikan Selesai</button>
+					<button class="cb-button cb-button-form" type="button" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Perbaikan Selesai</button>
 				</div>
-				<div class="cb-pl-3">
+				<div class="cb-pl-3 cb-pt-3">
 					<a class="cb-button cb-button-form" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a>
 				</div>
 			</div>
+			</form>
 			<?php
 		}
 		?>
 	</div>
 </div>
+
+<form id="form-message" method="post" action="<?=site_url('message/open_detail_do')?>" class="cb-row cb-col-full">
+	<input type="hidden" name="receiver_account_id" value="<?=$model->transaction_detail->account_id?>"/>
+</form>
 
 <div id="popup_review" class="popup popup-md">
 	<div class="panel panel-default">
@@ -213,10 +231,10 @@
 				<div class="form-group">
 					<div class="col-sm-10 col-sm-offset-2">
 						<?php if (!$model->transaction_detail->feedback_reply){?>
-						<button type="button" class="btn btn-default" onclick="reply_feedback()" id="btn-reply_feedback">Kirim</button>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Batal</button>
+						<button type="button" class="cb-button-form" onclick="reply_feedback()" id="btn-reply_feedback">Kirim</button>
+						<button type="button" class="cb-button-form" onclick="popup.close('popup_review')">Batal</button>
 						<?php } else { ?>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_review')">Tutup</button>
+						<button type="button" class="cb-button-form" onclick="popup.close('popup_review')">Tutup</button>
 						<?php }	?>
 					</div>
 				</div>
