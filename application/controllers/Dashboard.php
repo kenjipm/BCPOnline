@@ -33,6 +33,10 @@ class Dashboard extends CI_Controller {
 			// $data['model'] = $this->dashboard_view_model;
 			// $this->load->view('admin/dashboard_main', $data);
 		}
+		else if ($this->session->type == TYPE['name']['DELIVERER'])
+		{
+			redirect('order/order_list');
+		}
 		else // CUSTOMER
 		{
 			$this->check_referral();

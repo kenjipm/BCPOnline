@@ -62,7 +62,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<!-- search -->
 		<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search">
 			<?php
-				if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN"))
+				if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN") && ($this->session->type != "DELIVERER"))
 				{
 					?>
 						<div class="input-group">
