@@ -113,7 +113,13 @@ class Bidding_live extends CI_Controller {
 	
 	public function ajax_get_cur_price()
 	{
+		$result = array();
 		$posted_item_id = $this->input->post('bidding_item_id');
+			
+		$this->load->model('item_model');
+		$bidding_item = $this->item_model->get_from_id($posted_item_id);
+		$bid_time_left = $bidding_item->get_bid_time_left();
+		$result["bid_time_left"] = $bid_time_left;
 		
 		$this->load->model('bidding_live_model');
 		$last_bidding_live = $this->bidding_live_model->get_from_posted_item_id($posted_item_id);
@@ -121,7 +127,7 @@ class Bidding_live extends CI_Controller {
 		if ($last_bidding_live != null)
 		{
 			$this->load->library('text_renderer');
-		
+			
 			$result["success"] = "1";
 			$result["cur_price"] = $last_bidding_live->bid_price;
 			$result["cur_price_str"] = $this->text_renderer->to_rupiah($last_bidding_live->bid_price);
@@ -225,6 +231,7 @@ class Bidding_live extends CI_Controller {
 			echo "1"; return "1";
 		}
 	}
+	
 	public function bidding_approve_do()
 	{
 		$password = $this->input->post('password');

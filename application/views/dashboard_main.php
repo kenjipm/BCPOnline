@@ -113,6 +113,7 @@
 					<div class="cb-panel-heading cb-row">
 						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">LELANG</div>
+						<div id="bid_time_left_live" class="cb-txt-primary-3 cb-font-title cb-font-size-xl cb-pl-5"></div>
 						<!--<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>-->
 					</div>
 					<div class="cb-panel-body cb-bg-primary-3 cb-p-5 cb-panel-flex cb-vertical-center">

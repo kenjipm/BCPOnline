@@ -95,7 +95,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		<!-- profile -->
 		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-p-5">
-			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo"/>
+			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>
 			<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
 				<?php
 					foreach ($top_menu_items['profile'] as $menu_item)
