@@ -1,3 +1,47 @@
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">PERMINTAAN HOT ITEM</h3>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Barang </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Harga </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->hot_item_list as $hot_item)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth-2">
+				<div class=" cb-align-center"> <?=$hot_item->tenant_name?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$hot_item->posted_item_name?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$hot_item->promo_price?></div>
+			</div>
+			<div class="cb-col-fifth">
+				<a href="<?=site_url('Item/hot_item_detail/'.$hot_item->id)?>" class="cb-button-form">LIHAT BARANG</a>
+			</div>
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -46,3 +90,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>

@@ -174,10 +174,6 @@ $config['top_menu_admin'] = array(
 			),
 		),
 	'profile' => array(
-		'PROFILE' => array(
-			'text'	=> "Profil Saya",
-			'url'	=> "",
-			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",

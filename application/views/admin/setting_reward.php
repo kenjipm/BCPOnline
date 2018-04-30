@@ -1,11 +1,185 @@
-<?php
-	// Model untuk Deliverer
-	
-	// dummy Deliverer id
-	// $model->rewards = new class{};
-	
-?>
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<div class="cb-align-center cb-font-size-xl">SETTING REWARD</div>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<form action="<?=site_url('reward/setting_reward')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+	<input type="hidden" id="setting_reward_id" name="setting_reward_id" value="<?=$model->setting_reward->id?>"/>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama Event</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="event_name" value="<?=$model->setting_reward->event_name?>"/>
+				<span class="text-danger"><?= form_error('event_name'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Base Percent</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full" name="base_percent" value="<?=$model->setting_reward->base_percent?>"/>
+				<span class="text-danger"><?= form_error('base_percent'); ?></span>
+			</div>
+			<div class="cb-row cb-col-tenth"></div>
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Ratio Percent</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full" name="ratio_percent" value="<?=$model->setting_reward->ratio_percent?>"/>
+				<span class="text-danger"><?= form_error('ratio_percent'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Harga Pembelanjaan</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full" name="price_per_point" value="<?=$model->setting_reward->price_per_point?>"/>
+				<span class="text-danger"><?= form_error('price_per_point'); ?></span>
+			</div>
+			<div class="cb-row cb-col-tenth">
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Poin Didapat</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full" name="point_get" value="<?=$model->setting_reward->point_get?>"/>
+				<span class="text-danger"><?= form_error('point_get'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Berlaku Sejak</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full datetimepicker" name="date_created" value="<?=$model->setting_reward->date_created?>" autocomplete="off"/>
+				<span class="text-danger"><?= form_error('date_created'); ?></span>
+			</div>
+			<div class="cb-row cb-col-tenth">
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Berlaku Hingga</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth">
+				<input type="text" class="cb-input-text cb-col-full datetimepicker" name="date_expired" value="<?=$model->setting_reward->date_expired?>" autocomplete="off"/>
+				<span class="text-danger"><?= form_error('date_expired'); ?></span>
+			</div>
+			<div class="cb-row cb-col-tenth">
+				<input type="checkbox" name="expire" value="forever" <?=$model->setting_reward->is_forever ? "checked" : ""?>>Selamanya
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-tenth-9">
+			</div>
+			<div class="cb-row cb-col-tenth">
+				<button type="submit" class="cb-button-form">KIRIM</button></div>
+				<?php
+					if ($model->is_existed)
+					{
+						?>
+						<button type="button" class="cb-button-form" onclick="popup.open('popup_approval')">Keputusan</button>
+						<?php
+						$this->load->view('admin/popup/approval');
+					}
+				?>
+			</div>
+		</div>
+	</form>
+</div>
 
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -66,3 +240,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>
