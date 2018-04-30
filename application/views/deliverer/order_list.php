@@ -1,44 +1,219 @@
-<div class="cb-col-full cb-txt-primary-1 cb-font-title">
-	<h2 class="cb-align-center">HISTORI PENUKARAN POIN</h2>
-</div>
-<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
-	<div class="cb-row">
-		<div class="cb-col-fifth-2">
-			<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
-		</div>
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Unit </div>
-		</div>
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Lantai </div>
-		</div>
-		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Kode OTP </div>
+<form action="<?=site_url('order/order_list')?>" method="post">
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-full cb-row cb-border-round cb-bg-primary-2 cb-pl-5 cb-pr-5 cb-pb-5 cb-pt-2 cb-align-center">
+			<div class="cb-font-title cb-txt-primary-3 cb-font-size-xl">MASUKKAN OTP</div>
+			<div class="cb-col-full cb-row cb-border-round cb-bg-primary-3 cb-p-5">
+				<div class="cb-col-full cb-row cb-mb-5">
+					<input type="text" class="cb-input-text cb-col-full cb-align-center" name="otp"/>
+				</div>
+				<div class="cb-col-full cb-row cb-align-center">
+					<button class="cb-button cb-button-form cb-col-fifth" type="submit">KIRIM</button>
+				</div>
+			</div>
 		</div>
 	</div>
+</form>
+
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">DAFTAR PENGAMBILAN BARANG</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<?php
-	foreach($model_reward_redeem->redeem_rewards as $redeem_reward)
-	{
-		?>
-		<div class="cb-row cb-p-5 cb-border-top">
-			<div class="cb-col-fifth">
-				<div class=" cb-align-center"> <?=$redeem_reward->date_redeemed?> </div>
+		if ($model->order_list)
+		{
+			?>
+			<div class="cb-row">
+				<div class="cb-col-fifth-2">
+					<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Unit </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Lantai </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Kode OTP </div>
+				</div>
 			</div>
-			<div class="cb-col-fifth-3">
-				<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
-			</div>
-			<div class="cb-col-fifth">
-				<div class="cb-align-center"> <?=$redeem_reward->reward->points_needed?> </div>
-			</div>
-		</div>
-		<?php
-	}
+			<?php
+			foreach($model->order_list as $order)
+			{
+				?>
+				<div class="cb-row cb-p-5 cb-border-top">
+					<div class="cb-col-fifth-2">
+						<div class=" cb-align-center"> <?=$order->tenant?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class=" cb-align-center"> <?=$order->unit_number?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class=" cb-align-center"> <?=$order->floor?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class=" cb-align-center"> <?=$order->otp_deliverer_to_tenant?> </div>
+					</div>
+				</div>
+				<?php
+			}
+		}
+		else
+		{
+			?>
+			Tidak ada barang untuk diambil
+			<?php
+		}
 	?>
 </div>
 
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">DAFTAR PENGIRIMAN BARANG</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<?php
+		if ($model->deliver_order_list)
+		{
+			?>
+			<div class="cb-row">
+				<div class="cb-col-fifth-3">
+					<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Nama Customer </div>
+				</div>
+				<div class="cb-col-fifth">
+				</div>
+			</div>
+			<form action="<?=site_url('order/order_list')?>" method="post">
+			<?php
+				foreach($model->deliver_order_list as $deliver)
+				{
+					?>
+					<input type="hidden" name="bypass_otp" value="<?=$deliver->bypass_otp?>"/>
+					<div class="cb-row cb-p-5 cb-border-top">
+						<div class="cb-col-fifth-3">
+							<div class=" cb-align-center"> <?=$deliver->full_address?> </div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class=" cb-align-center"> <?=$deliver->customer?> </div>
+						</div>
+						<div class="cb-col-fifth">
+							<button type="submit" class="cb-button-form cb-margin-auto">KIRIM TANPA OTP</button>
+						</div>
+					</div>
+					<?php
+				}
+			?>
+			</form>
+			<?php
+		}
+		else
+		{
+			?>
+			Tidak ada barang untuk dikirim
+			<?php
+		}
+	?>
+</div>
 
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">DAFTAR PENGAMBILAN PERBAIKAN</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<?php
+		if ($model->repair_list)
+		{
+			?>
+			<div class="cb-row">
+				<div class="cb-col-fifth-3">
+					<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Nama Customer </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Kode OTP </div>
+				</div>
+			</div>
+			<?php
+			foreach($model->repair_list as $repair)
+			{
+				?>
+				<div class="cb-row cb-p-5 cb-border-top">
+					<div class="cb-col-fifth-3">
+						<div class=" cb-align-center"> <?=$repair->full_address?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class=" cb-align-center"> <?=$repair->customer?> </div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class=" cb-align-center"> <?=$repair->otp_deliverer_to_customer?> </div>
+					</div>
+				</div>
+				<?php
+			}
+		}
+		else
+		{
+			?>
+			Tidak ada barang perbaikan untuk diambil
+			<?php
+		}
+	?>
+</div>
+
+<div class="cb-col-full cb-txt-primary-1 cb-font-title">
+	<h2 class="cb-align-center">DAFTAR PENGIRIMAN PERBAIKAN</h2>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<?php
+		if ($model->deliver_repair_list)
+		{
+			?>
+			<div class="cb-row">
+				<div class="cb-col-fifth-2">
+					<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Unit </div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-label cb-font-title cb-align-center"> Lantai </div>
+				</div>
+			</div>
+			<form action="<?=site_url('order/order_list')?>" method="post">
+			<?php
+				foreach($model->deliver_repair_list as $deliver)
+				{
+					?>
+					<div class="cb-row cb-p-5 cb-border-top">
+						<div class="cb-col-fifth-3">
+							<div class=" cb-align-center"> <?=$deliver->tenant?> </div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class=" cb-align-center"> <?=$deliver->unit_number?> </div>
+						</div>
+						<div class="cb-col-fifth">
+							<div class=" cb-align-center"> <?=$deliver->floor?> </div>
+						</div>
+					</div>
+					<?php
+				}
+			?>
+			</form>
+			<?php
+		}
+		else
+		{
+			?>
+			Tidak ada barang perbaikan untuk dikirim
+			<?php
+		}
+	?>
+</div>
 
 <?php
+/*
 	// Model untuk Order List
 	
 	// dummy data order list
@@ -250,4 +425,5 @@
 		</div>
 	</div>
 </div>
-
+*/
+?>

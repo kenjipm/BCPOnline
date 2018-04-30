@@ -142,10 +142,6 @@ $config['top_menu_deliverer'] = array(
 	'top' => array(
 		),
 	'profile' => array(
-		'PROFILE' => array(
-			'text'	=> "Profil Saya",
-			'url'	=> "",
-			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
@@ -219,19 +215,19 @@ $config['sub_footer'] = array(
 		'sub_menus' => array(
 			'TENTANG' => array(
 				'text'	=> "Tentang",
-				'url'	=> "",
+				'url'	=> "about",
 				),
 			'ATURAN' => array(
 				'text'	=> "Aturan Penggunaan",
-				'url'	=> "",
+				'url'	=> "about/rules",
 				),
 			'PRIVACY' => array(
 				'text'	=> "Kebijakan Privasi",
-				'url'	=> "",
+				'url'	=> "about/privacy",
 				),
 			'NEWS' => array(
 				'text'	=> "Berita & Pengumuman",
-				'url'	=> "",
+				'url'	=> "about/news",
 				),
 			),
 		),
@@ -240,15 +236,15 @@ $config['sub_footer'] = array(
 		'sub_menus' => array(
 			'CONTACT' => array(
 				'text'	=> "Hubungi Cyberia",
-				'url'	=> "",
+				'url'	=> "about/contact",
 				),
 			'COMPLAIN' => array(
 				'text'	=> "Komplain",
-				'url'	=> "",
+				'url'	=> "about/complain",
 				),
 			'TERMS' => array(
 				'text'	=> "Syarat & Ketentuan",
-				'url'	=> "",
+				'url'	=> "about/terms",
 				),
 			),
 		),
@@ -257,19 +253,19 @@ $config['sub_footer'] = array(
 		'sub_menus' => array(
 			'PRODUCT' => array(
 				'text'	=> "Produk & Servis",
-				'url'	=> "",
+				'url'	=> "about/products",
 				),
 			'BIDDING' => array(
-				'text'	=> "Bidding",
-				'url'	=> "",
+				'text'	=> "Lelang",
+				'url'	=> "about/bidding",
 				),
 			'HOT_ITEMS' => array(
 				'text'	=> "Hot Items",
-				'url'	=> "",
+				'url'	=> "about/hot_items",
 				),
 			'TRANSACTION' => array(
 				'text'	=> "Transaksi",
-				'url'	=> "",
+				'url'	=> "about/transaction",
 				),
 			),
 		),

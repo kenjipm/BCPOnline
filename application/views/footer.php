@@ -20,7 +20,7 @@
 							foreach ($sub_footer_item['sub_menus'] as $sub_menu)
 							{
 								?>
-								<li><a href="<?=$sub_menu['url']?>"><?=$sub_menu['text']?></a></li>
+								<li><a href="<?=site_url($sub_menu['url'])?>"><?=$sub_menu['text']?></a></li>
 								<?php
 							}
 						?>

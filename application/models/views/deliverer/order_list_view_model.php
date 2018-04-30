@@ -42,6 +42,7 @@ class Order_List_View_Model extends CI_Model{
 			$this->deliver_order_list[$i]->kecamatan 	= $deliver->billing->shipping_address->kecamatan;
 			$this->deliver_order_list[$i]->kelurahan	= $deliver->billing->shipping_address->kelurahan;
 			$this->deliver_order_list[$i]->postal_code	= $deliver->billing->shipping_address->postal_code;
+			$this->deliver_order_list[$i]->full_address	= $deliver->billing->shipping_address->get_full_address();
 			$this->deliver_order_list[$i]->customer		= $deliver->billing->customer->account->name;
 			
 			$i++;
@@ -59,6 +60,7 @@ class Order_List_View_Model extends CI_Model{
 			$this->repair_list[$i]->kecamatan 		= $repair->billing->shipping_address->kecamatan;
 			$this->repair_list[$i]->kelurahan		= $repair->billing->shipping_address->kelurahan;
 			$this->repair_list[$i]->postal_code		= $repair->billing->shipping_address->postal_code;
+			$this->repair_list[$i]->full_address	= $repair->billing->shipping_address->get_full_address();
 			$this->repair_list[$i]->customer		= $repair->billing->customer->account->name;
 			$this->repair_list[$i]->otp_deliverer_to_customer = $repair->otp_deliverer_to_customer;
 			
