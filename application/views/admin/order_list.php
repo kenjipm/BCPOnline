@@ -43,7 +43,7 @@
 						<div class="cb-align-center"> <?=$order->address?> </div>
 					</div>
 					<div class="cb-col-fifth">
-						<div class="cb-align-center"> <?=$order->collection_method?> </div>
+						<div class="cb-align-center"> <?=$order->delivery_method?> </div>
 					</div>
 					<div class="cb-col-fifth">
 						<select class="cb-input-select cb-row cb-col-full" name="deliverer_id[]">

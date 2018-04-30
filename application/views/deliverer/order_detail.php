@@ -1,6 +1,97 @@
 <?php
 if ($model->order_list){
 ?>
+
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR BARANG</h3>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row cb-mb-5">
+		<div class="cb-col-fifth">
+			<div class="cb-row">
+				<div class="cb-col-fifth-4">
+					<div class="cb-txt-primary-1 cb-pull-left">
+						<div class="cb-label"> OTP</div>
+					</div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-align-center">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> : </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-row cb-col-fifth-2">
+			<input type="text" class="cb-input-text cb-col-full" name="otp" value="<?=$model->order_list[0]->otp?>" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-mb-5">
+		<div class="cb-col-fifth">
+			<div class="cb-row">
+				<div class="cb-col-fifth-4">
+					<div class="cb-txt-primary-1 cb-pull-left">
+						<div class="cb-label"> Customer</div>
+					</div>
+				</div>
+				<div class="cb-col-fifth">
+					<div class="cb-align-center">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> : </div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-row cb-col-fifth-2">
+			<input type="text" class="cb-input-text cb-col-full" name="customer_name" value="<?=$model->order_list[0]->customer_name?>" readonly/>
+		</div>
+	</div>
+	
+	<div class="cb-row">
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Nama </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Jumlah </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->order_list as $order)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth-2">
+				<div class=" cb-align-center"><?=$order->posted_item_name . " (" . $order->var_type . ": " . $order->var_description . ")"?> </div>
+			</div>
+			<div class="cb-col-fifth-2">
+				<div class=" cb-align-center"><?=$order->posted_item_description?> </div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class=" cb-align-center"><?=$order->quantity?> </div>
+			</div>
+		</div>
+	<?php
+	}
+	?>
+</div>	
+<?php
+}
+	
+?>
+
+<?php /*
+if ($model->order_list){
+?>
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -49,5 +140,5 @@ if ($model->order_list){
 </div>
 <?php
 }
-	
+	*/
 ?>
