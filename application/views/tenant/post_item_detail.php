@@ -124,17 +124,17 @@
 							<div class="cb-col-fifth-2 cb-row cb-mb-5">
 								<div class="cb-col-fifth cb-row cb-p-1">
 									<div id="thumbnail-image_two_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_two_name[$i]?>" alt="<?=$model->posted_item->image_two_name[$i]?>"/>
+										<img src="<?=$model->posted_item->image_two_name[$i]?>" alt=""/>
 									</div>
 								</div>
 								<div class="cb-col-fifth cb-p-1">
 									<div id="thumbnail-image_three_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="<?=$model->posted_item->image_three_name[$i]?>" />
+										<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="" />
 									</div>
 								</div>
 								<div class="cb-col-fifth cb-p-1">
 									<div id="thumbnail-image_four_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="<?=$model->posted_item->image_four_name[$i]?>" />
+										<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="" />
 									</div>
 								</div>
 							</div>
@@ -151,13 +151,13 @@
 					if (!$model->posted_item->is_hot_item)
 					{
 						?>
-							<a class="cb-button cb-button-form cb-ml-3" href="<?=site_url('Item/hot_item/'.$model->posted_item->id)?>">Set as Hot Item</a>
+							<a class="cb-button cb-button-form cb-ml-3" href="<?=site_url('Item/hot_item/'.$model->posted_item->id)?>">AJUKAN HOT ITEM</a>
 						<?php
 					}
 					else if (!$model->posted_item->is_hot_item_confirmed)
 					{
 						?>
-							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Konfirmasi Admin</button>
+							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Konfirmasi Hot Item</button>
 						<?php
 					}
 					else if (!$model->posted_item->is_hot_item_paid)
@@ -176,13 +176,13 @@
 					if (!$model->posted_item->is_seo_item)
 					{
 						?>
-							<a class="cb-button cb-button-form cb-ml-3" href="<?=site_url('Item/seo_item_do/'.$model->posted_item->id)?>">Set as SEO</a>
+							<a class="cb-button cb-button-form cb-ml-3" onclick="seo_item_do(<?=$model->posted_item->id?>)" href="#">AJUKAN PROMOTED</a>
 						<?php
 					}
 					else if (!$model->posted_item->is_seo_item_confirmed)
 					{
 						?>
-							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Konfirmasi Admin</button>
+							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Konfirmasi Promoted</button>
 						<?php
 					}
 					else if (!$model->posted_item->is_seo_item_paid)

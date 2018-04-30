@@ -76,7 +76,7 @@ class Item extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('tenant/create_hot_item');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -91,6 +91,10 @@ class Item extends CI_Controller {
 		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
 		{
 			$this->load->view('tenant/create_hot_item', $data);
+		}
+		else
+		{
+			redirect('Item/post_item_detail/'.$id);
 		}
 		
 		// Load Footer

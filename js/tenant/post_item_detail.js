@@ -1,3 +1,9 @@
+function seo_item_do(posted_item_id) {
+	if (confirm("Ajukan produk untuk menjadi promoted?")) {
+		window.location = base_url + '/item/seo_item_do/' + posted_item_id;
+	}
+}
+
 
 function bayar_hot_item_dummy(hot_item_id){
 	$.ajax({

@@ -57,6 +57,11 @@ $(document).ready(function(){
 		showMillisec: false,
 		showMicrosec: false,
 	});
+	
+	// $("img").on("error", function(){
+		// // Replacing image source
+		// $(this).attr('src', base_url + '/img/default_image.png');
+	// });
 });
 
 
