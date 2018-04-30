@@ -56,7 +56,8 @@
 			?>
 			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
 				<div class="cb-panel">
-					<div class="cb-panel-heading">
+					<div class="cb-panel-heading cb-row">
+						<div class="cb-icon cb-icon-sm cb-icon-flag cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">HOT ITEMS</div>
 						<!--<a class="pull-right">Lihat Selebihnya</a>-->
 					</div>
@@ -109,7 +110,8 @@
 			
 			<div class="cb-col-half cb-p-2">
 				<div class="cb-panel cb-bg-primary-2 cb-border-round cb-p-2">
-					<div class="cb-panel-heading">
+					<div class="cb-panel-heading cb-row">
+						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">LELANG</div>
 						<!--<a class="cb-pull-right cb-txt-primary-1" href="<?=site_url('bidding')?>">Lihat Selebihnya</a>-->
 					</div>
@@ -141,7 +143,7 @@
 									<div class="cb-row cb-col-full cb-mb-2">
 									</div>
 									<div class="cb-row cb-col-full cb-mb-2">
-										<button type="button" class="cb-button-form cb-table-cell" onclick="submit_bid()" id="btn-submit_bid">Pasang</button>
+										<button type="button" class="cb-button-form cb-table-cell" onclick="submit_bid()" id="btn-submit_bid">PASANG</button>
 									</div>
 									<div class="" id="bidding_status"></div>
 								</div>
@@ -204,6 +206,54 @@
 		<?php
 	}
 ?>
+
+<!-- POPUP BID SUCCESS -->
+<div id="popup_bid_success" class="popup popup-md">
+	<div class="panel panel-default cb-row">
+		<div class="cb-col-full cb-row cb-bg-image cb-bg-image-popup_bidding cb-txt-primary-3 cb-font-title cb-align-center cb-border-round">
+			<div class="cb-col-full cb-row cb-font-size-dhuar cb-align-center cb-mt-xl">SELAMAT</div>
+			<div class="cb-col-full cb-row cb-font-size-xxl cb-align-center cb-pb-5">Anda pemasang harga tertinggi</div>
+			<div class="cb-col-fifth"></div>
+			<div class="cb-col-fifth-3 cb-row cb-bg-primary-2 cb-mb-5 cb-border-round">
+				<div class="cb-col-full cb-font-size-xxl"><span id="bid_win_price"></span></div>
+				<div class="cb-col-full cb-font-size-lg">waktu tersisa</div>
+				<div class="cb-col-full cb-font-size-lg"><span id="bid_time_left"></span></div>
+			</div>
+			<div class="cb-col-fifth"></div>
+			<div class="cb-col-fifth cb-row cb-mb-5">
+				<button type="button" class="cb-button cb-button-alternative cb-col-full" onclick="popup.close('popup_bid_success')">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
+<?php
+/*
+<!-- POPUP BID SUCCESS -->
+<div id="popup_bid_success" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Harga Tertinggi!
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<h4>Selamat! Harga yang Anda ajukan adalah harga tertinggi!</h4>
+						Lelang masih terbuka untuk <span id="bid_time_left"></span>
+						<br/>
+						<br/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-12">
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_bid_success')">OK</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
 
 <div class="">
 	
@@ -270,7 +320,7 @@
 					</div>
 				</div>
 				<?php
-			}*/
+			}
 		?>
 		
 		<!-------- BIDDING -------->
@@ -333,7 +383,7 @@
 					</div>
 				</div>
 				<?php
-			}*/
+			}
 		?>
 	
 		<!-------- FOLLOWING TENANT NEW ITEMS -------->
@@ -371,7 +421,7 @@
 					</div>
 				</div>
 				<?php
-			}*/
+			}
 		?>
 		
 		<!-------- SEARCH INPUT -------->
@@ -430,34 +480,11 @@
 					</div>
 				</div>
 				<?php
-			}*/
+			}
 		?>
 	</div>
 	
 </div>
+*/
 
-<!-- POPUP BID SUCCESS -->
-<div id="popup_bid_success" class="popup popup-md">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			Harga Tertinggi!
-		</div>
-		<div class="panel-body">
-			<form>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<h4>Selamat! Harga yang Anda ajukan adalah harga tertinggi!</h4>
-						Lelang masih terbuka untuk <span id="bid_time_left"></span>
-						<br/>
-						<br/>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-12">
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_bid_success')">OK</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+?>

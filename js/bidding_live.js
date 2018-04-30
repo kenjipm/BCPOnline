@@ -121,6 +121,7 @@ function submit_bid()
 					// $("#btn-bid_add").prop("disabled", true);
 					// $("#btn-submit_bid").prop("disabled", true);
 					// $("#bidding_status").html("Bidding berhasil dipasang");
+					$("#bid_win_price").html(data.bid_win_price);
 					$("#bid_time_left").html(data.bid_time_left);
 					popup.open('popup_bid_success');
 				}

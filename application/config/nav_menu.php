@@ -43,12 +43,12 @@ $config['top_menu_customer'] = array(
 			),
 		'BILLING' => array(
 			'text'	=> "Transaksi",
-			'icon'	=> "message",
+			'icon'	=> "document",
 			'url'	=> "billing",
 			),
 		'CART' => array(
 			'text'	=> "Keranjang",
-			'icon'	=> "message",
+			'icon'	=> "cart",
 			'url'	=> "customer/cart",
 			),
 		),
@@ -160,12 +160,12 @@ $config['top_menu_admin'] = array(
 			),
 		'BIDDING' => array(
 			'text'	=> "Bidding",
-			'icon'	=> "message",
+			'icon'	=> "speaker",
 			'url'	=> "bidding_live/bidding_live_list",
 			),
 		'ACCOUNT' => array(
 			'text'	=> "Account",
-			'icon'	=> "message",
+			'icon'	=> "document",
 			'url'	=> "account/account_list",
 			),
 		),
@@ -266,6 +266,39 @@ $config['sub_footer'] = array(
 			'TRANSACTION' => array(
 				'text'	=> "Transaksi",
 				'url'	=> "about/transaction",
+				),
+			),
+		),
+	);
+	
+$config['sub_footer_right'] = array(
+	'RIGHT' => array(
+		'text'	=> "&nbsp;",
+		'sub_menus' => array(
+			'CONTACT' => array(
+				'text'	=> "cyberia.id",
+				'icon'	=> "twitter",
+				'url'	=> "http://www.twitter.com/cyberia.id",
+				),
+			'COMPLAIN' => array(
+				'text'	=> "cs@cyberia.com",
+				'icon'	=> "googleplus",
+				'url'	=> "http://plus.google.com/cyberia.id",
+				),
+			),
+		),
+	'LEFT' => array(
+		'text'	=> "Ikuti Kami",
+		'sub_menus' => array(
+			'INSTAGRAM' => array(
+				'text'	=> "cyberia.id",
+				'icon'	=> "instagram",
+				'url'	=> "http://www.instagram.com/cyberia.id",
+				),
+			'FACEBOOK' => array(
+				'text'	=> "Cyberia Online Shopping",
+				'icon'	=> "facebook",
+				'url'	=> "http://www.facebook.com/cyberia.id",
 				),
 			),
 		),

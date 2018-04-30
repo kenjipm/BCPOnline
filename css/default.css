@@ -47,6 +47,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-font-size-lg { font-size: large; }
 .cb-font-size-xl { font-size: x-large; }
 .cb-font-size-xxl { font-size: xx-large; }
+.cb-font-size-dhuar { font-size: 7.5rem; line-height: 6rem; }
 
 .cb-bg-primary-1, .cb-bg-primary-1-hover:hover		{ background-color: #e55026; }
 .cb-bg-primary-2, .cb-bg-primary-2-hover:hover		{ background-color: #faa528; }
@@ -84,12 +85,14 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-mt-3 { margin-top: 0.75rem; }
 .cb-mt-4 { margin-top: 1.00rem; }
 .cb-mt-5 { margin-top: 1.25rem; }
+.cb-mt-xl { margin-top: 2.5rem; }
 
 .cb-mb-1 { margin-bottom: 0.25rem; }
 .cb-mb-2 { margin-bottom: 0.50rem; }
 .cb-mb-3 { margin-bottom: 0.75rem; }
 .cb-mb-4 { margin-bottom: 1.00rem; }
 .cb-mb-5 { margin-bottom: 1.25rem; }
+.cb-mb-xl { margin-bottom: 2.5rem; }
 
 .cb-ml-1 { margin-left: 0.25rem; }
 .cb-ml-2 { margin-left: 0.50rem; }
@@ -161,6 +164,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-button-sm { border: none; font-family: 'Akrobat ExtraBold', sans-serif; font-size: 1.75rem; padding: 0.25rem; border-radius: 2px;  }
 .cb-button-operational		{ background-color: #434747; color: #ffffff; }
 .cb-button-form				{ background-color: #e55026; color: #ffffff; }
+.cb-button-alternative		{ background-color: #faa528; color: #ffffff; }
 .cb-button-secondary		{ background-color: #ffffff; color: #434747; border: 1px solid #434747; }
 .cb-button-group-left		{ border-top-right-radius: 0; border-bottom-right-radius: 0; margin-right: 0; border-right: 1px solid #FFF; }
 .cb-button-group-right		{ border-top-left-radius: 0; border-bottom-left-radius: 0; margin-left: 0; }
@@ -171,6 +175,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-button-operational:hover	{ background-color: #8c8b8a; }
 .cb-button-form:hover			{ background-color: #faa528; }
+.cb-button-alternative:hover	{ background-color: #e55026; }
 .cb-button-secondary:hover		{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
 .cb-button-secondary:active		{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
 .cb-button-secondary-selected	{ background-color: #faa528; color: #ffffff; border-color: #faa528; }
@@ -178,6 +183,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-align-center { text-align: center; justify-content: center; }
 .cb-vertical-center { vertical-align: middle; align-items: center; }
 .cb-align-right { text-align: right; justify-content: flex-end; }
+.cb-align-left { text-align: left; justify-content: flex-start; }
 .cb-margin-auto { margin: auto; }
 
 .cb-table { display: table; }
@@ -219,17 +225,35 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 /* .cb-square { width: 100%; height: 100%; } */
 
 
-.cb-icon { background-size: contain;  background-repeat: no-repeat; background-position: center; }
-.cb-icon-sm { height: 2rem; width: 2rem; }
+.cb-icon { background-size: contain;  background-repeat: no-repeat; background-position: center; font-size: medium; }
+.cb-icon-sm { height: 2.5rem; width: 2.5rem; }
 .cb-icon-md { height: 5rem; width: 5rem;  }
 .cb-icon-lg { height: 10rem; width: 10rem;  }
 .cb-icon-xl { height: 24rem; width: 24rem;  }
 
-.cb-icon-message:before { content: ""; }
-.cb-icon-message { background-image: url(icons/message.png); }
+.cb-icon-p-sm { padding-left: 3.5rem; }
+
+.cb-icon-camera { background-image: url(icons/camera.png); }
+.cb-icon-cart { background-image: url(icons/cart.png); }
+.cb-icon-document { background-image: url(icons/document.png); }
+.cb-icon-facebook { background-image: url(icons/facebook.png); }
+.cb-icon-flag { background-image: url(icons/flag.png); }
+.cb-icon-googleplus { background-image: url(icons/googleplus.png); }
 .cb-icon-add-item { background-image: url(icons/Icon_TambahImage.png); }
 .cb-icon-post-item { background-image: url(icons/Icon_TambahProduct.png); }
 .cb-icon-post-repair { background-image: url(icons/Icon_TambahServis.png); }
+.cb-icon-instagram { background-image: url(icons/instagram.png); }
+.cb-icon-message { background-image: url(icons/message.png); }
+.cb-icon-right-1 { background-image: url(icons/right-1.png); }
+.cb-icon-right-2 { background-image: url(icons/right-2.png); }
+.cb-icon-speaker { background-image: url(icons/speaker.png); }
+.cb-icon-twitter { background-image: url(icons/twitter.png); }
+
+.cb-bg-image { background-size: cover;  background-repeat: no-repeat; background-position: center; font-size: medium; }
+
+.cb-bg-image-md { height: 2.5rem; width: 2.5rem; }
+
+.cb-bg-image-popup_bidding { background-image: url(backgrounds/popup_bidding.png); }
 
 .cb-square { width: 100%; height: 100%; }
 
@@ -378,20 +402,20 @@ h4 { font-weight: bold; }
 }
 
 .navbar-cb-top {
-	height: 105px;
+	min-height: 105px;
 	width: 100%;
-	display: table;
+	/* display: table; */
 }
 
 .navbar-cb-top > * {
-	display: table-cell;
+	/* display: table-cell; */
 	vertical-align: middle;
 }
 
 .navbar-cb-logo {
 	/* position: relative; */
 	/* float: left; */
-	width: 250px;
+	min-width: 250px;
 	padding: 0 15px;
 	
 }
@@ -399,6 +423,7 @@ h4 { font-weight: bold; }
 .navbar-cb-top-search {
 	/* float: left; */
 	/* padding: 0 30% 0 0; */
+	min-width: 250px;
 }
 
 .navbar-cb-top-search-input {
@@ -407,13 +432,13 @@ h4 { font-weight: bold; }
 
 .navbar-cb-top-menu {
 	/* float: right; */
-	width: 30%;
+	min-width: 380px;
 	text-align:right;
 	right: 0;
 }
 
 .navbar-cb-top-menu-text {
-	padding: 0 25px;
+	/* padding: 0 25px; */
 	color: white;
 }
 
@@ -422,7 +447,7 @@ h4 { font-weight: bold; }
 }
 
 .navbar-cb-top-profile {
-	width: 50px;
+	min-width: 70px;
 	padding-left: 20px;
 	padding-right: 20px;
 	position: relative;
@@ -438,7 +463,7 @@ h4 { font-weight: bold; }
 	position: absolute;
 	right: 20px;
     border-radius: 7px;
-	width: 120px;
+	min-width: 120px;
 }
 
 .hover_menu.navbar-cb-strip-product {
@@ -532,6 +557,12 @@ h4 { font-weight: bold; }
 	float: left;
 	height: 160px; /* Set the fixed height of the footer here */
 	margin-left: 30px;
+}
+
+.sub-footer-col-right {
+	float: right;
+	height: 160px; /* Set the fixed height of the footer here */
+	margin-right: 30px;
 }
 
 .sub-footer-list {

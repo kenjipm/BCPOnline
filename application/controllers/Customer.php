@@ -551,6 +551,8 @@ class Customer extends CI_Controller {
 			$second_left = $bid_time_left % 3600 % 60;
 			
 			// $json_result->bid_time_left = str_pad($hour_left, 2) . ":" . str_pad($minute_left, 2) . ":" . str_pad($second_left, 2);
+			$this->load->library('text_renderer');
+			$json_result->bid_win_price = $this->text_renderer->to_rupiah($bidding_next_price);
 			$json_result->bid_time_left = $hour_left . " jam " . $minute_left . " menit " . $second_left . " detik";
 		}
 		

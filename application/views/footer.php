@@ -28,6 +28,30 @@
 				</div>
 				<?php
 			}
+			$sub_footer_right_items = $this->config->item('sub_footer_right');
+			foreach($sub_footer_right_items as $sub_footer_right_item)
+			{
+				?>
+				<div class="sub-footer-col-right">
+					<h4><?=$sub_footer_right_item['text']?></h4>
+					<ul class="sub-footer-list">
+						<?php
+							foreach ($sub_footer_right_item['sub_menus'] as $sub_menu)
+							{
+								?>
+								<li>
+									<a href="<?=$sub_menu['url']?>" target="_blank">
+										<span class="cb-icon cb-icon-sm cb-icon-p-sm cb-icon-<?=$sub_menu['icon']?> cb-vertical-center"></span>
+										<?=$sub_menu['text']?>
+									</a>
+								</li>
+								<?php
+							}
+						?>
+					</ul>
+				</div>
+				<?php
+			}
 		?>
 	</div>
 	

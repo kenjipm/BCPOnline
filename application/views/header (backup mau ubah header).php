@@ -55,12 +55,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 </div> <!-- div overlay -->
 
 <div class="nav-cb">
-	<div class="navbar-cb-top cb-row cb-vertical-center">
+	<div class="navbar-cb-top">
 		<!-- logo -->
-		<a class="navbar-cb-logo cb-col-tenth-2 cb-p-5" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
+		<a class="navbar-cb-logo" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
 		
 		<!-- search -->
-		<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search cb-col-tenth-4 cb-p-5">
+		<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search">
 			<?php
 				if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN") && ($this->session->type != "DELIVERER"))
 				{
@@ -79,12 +79,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</form>
 		
 		<!-- top menu -->
-		<div class="navbar-cb-top-menu cb-col-tenth-3 cb-row cb-align-right cb-p-5">
+		<div class="navbar-cb-top-menu">
 			<?php
 				foreach ($top_menu_items['top'] as $menu_item)
 				{
 					?>
-					<a href="<?=site_url($menu_item['url'])?>" class="navbar-cb-top-menu-text cb-col-third cb-row">
+					<a href="<?=site_url($menu_item['url'])?>" class="navbar-cb-top-menu-text">
 						<span class="cb-icon cb-icon-sm cb-icon-p-sm cb-icon-<?=$menu_item['icon']?> cb-vertical-center"></span>
 						<?=$menu_item['text']?>
 					</a>
@@ -94,20 +94,20 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		
 		<!-- profile -->
-		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-p-5">
+		<div class="navbar-cb-top-profile">
 			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo"/>
-			<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
+			<ul class="hover_menu navbar-cb-top-profile-menu">
 				<?php
 					foreach ($top_menu_items['profile'] as $menu_item)
 					{
 						?>
-						<div class="cb-col-full cb-align-left cb-p-3"><a href="<?=site_url($menu_item['url'])?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
+						<li><a href="<?=site_url($menu_item['url'])?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
 							<?=$menu_item['text']?>
-						</a></div>
+						</a></li>
 						<?php
 					}
 				?>
-			</div>
+			</ul>
 		</div>
 	</div>
 
