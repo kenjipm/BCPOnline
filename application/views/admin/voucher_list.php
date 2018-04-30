@@ -50,7 +50,7 @@
 									<label>Deskripsi:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->voucher_description?>" class="form-control" id="voucher_description" readonly>
+									<input type="text" value="<?=$voucher->voucher_description?>" class="form-control" id="voucher_description" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -58,7 +58,7 @@
 									<label>Nilai Voucher:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->voucher_worth?>" class="form-control" id="voucher_worth" readonly>
+									<input type="text" value="<?=$voucher->voucher_worth?>" class="form-control" id="voucher_worth" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -66,7 +66,7 @@
 									<label>Jumlah Stok:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
+									<input type="text" value="<?=$voucher->voucher_stock?>" class="form-control" name="voucher_stock" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -74,7 +74,7 @@
 									<label>Kode Voucher:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->voucher_code?>" class="form-control" name="voucher_code" readonly>
+									<input type="text" value="<?=$voucher->voucher_code?>" class="form-control" name="voucher_code" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -82,7 +82,7 @@
 									<label>Minimal Order:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->min_order_price?>" class="form-control" name="min_order_price" readonly>
+									<input type="text" value="<?=$voucher->min_order_price?>" class="form-control" name="min_order_price" readonly>
 								</div>
 							</div>
 							<div class="form-group">
@@ -90,12 +90,12 @@
 									<label>Pemakaian per Hari:</label>
 								</div>
 								<div class="col-sm-8">
-									<input type="text" value="<?=$model->vouchers[0]->use_per_day?>" class="form-control" name="use_per_day" readonly>
+									<input type="text" value="<?=$voucher->use_per_day?>" class="form-control" name="use_per_day" readonly>
 								</div>
 							</div>
 							<div class="form-group">
 								<div class="col-sm-7 col-sm-offset-4">
-									<button type="button" class="btn btn-default" onclick="popup.close('popup_voucher_detail')">Tutup</button>
+									<button type="button" class="cb-button-form" onclick="popup.close('popup_voucher_detail')">Tutup</button>
 								</div>
 							</div>
 						</form>
