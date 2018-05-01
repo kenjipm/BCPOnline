@@ -110,22 +110,6 @@
 	/* margin-left: 30px; */
 }
 
-.slider-compact {
-	height: 100%;
-	float: left;
-}
-
-.cb-slider-arrow-container {
-	height: 100%;
-	position: absolute;
-	z-index: 10;
-}
-
-.slider-dot {
-	transform: translateY(-150%);
-	z-index: 10;
-}
-
 .cb-slider {
 	height: 100%;
 }

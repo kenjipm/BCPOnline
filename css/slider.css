@@ -7,9 +7,30 @@
   /* margin: auto; */
 /* } */
 
+
+.slider-compact {
+	height: 100%;
+	float: left;
+}
+
+.cb-slider-arrow-container {
+	height: 100%;
+	position: absolute;
+	z-index: 10;
+}
+
+.slider-dot {
+	position: absolute;
+	bottom: 0;
+	transform: translateY(-150%);
+	z-index: 10;
+}
+
 /* Hide the images by default */
 .slider-slide {
-    display: none;
+    /* display: none; */
+	position: absolute;
+	float: left;
 }
 
 /* Next & previous buttons */
@@ -20,9 +41,10 @@
   width: auto;
   /* margin-top: -22px; */
   padding: 16px;
-  color: white;
+  /* background-color: rgba(255,255,255,0.5); */
+  color: #8c8b8a;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 3rem;
   transition: 0.6s ease;
   border-radius: 0 3px 3px 0;
 }
@@ -32,7 +54,7 @@
   /* float: left; */
   left: 0;
   position: absolute;
-  border-radius: 3px 0 0 3px;
+  border-radius: 0 3px 3px 0;
 }
 
 /* Position the "next button" to the right */
@@ -45,39 +67,80 @@
 
 /* On hover, add a black background color with a little bit see-through */
 .slider-prev:hover, .slider-next:hover {
-  background-color: rgba(0,0,0,0.8);
+  /* background-color: rgba(0,0,0,0.5); */
+  /* background-color: #faa528; */
+  /* opacity: 0.5; */
+  color: #faa528;
 }
 
 /* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
-  height: 15px;
-  width: 15px;
-  margin: 0 2px;
+  height: 1rem;
+  width: 1rem;
+  margin: 0 0.5rem;
   background-color: #bbb;
   border-radius: 50%;
   /* display: inline-block; */
   transition: background-color 0.6s ease;
+  z-index: 10;
 }
 
 .active, .dot:hover {
-  background-color: #717171;
+  background-color: #faa528;
 }
 
 /* Fading animation */
-.fade {
-  -webkit-animation-name: fade;
-  -webkit-animation-duration: 1.5s;
-  animation-name: fade;
-  animation-duration: 1.5s;
+.fadein {
+  -webkit-animation-name: fadein;
+  -webkit-animation-duration: 1s;
+  animation-name: fadein;
+  animation-duration: 1s;
 }
 
-@-webkit-keyframes fade {
+.fadeout {
+  -webkit-animation-name: fadeout;
+  -webkit-animation-duration: 1s;
+  animation-name: fadeout;
+  animation-duration: 1s;
+}
+/*
+@-webkit-keyframes fadein {
   from {opacity: .4} 
   to {opacity: 1}
 }
 
-@keyframes fade {
+@keyframes fadein {
   from {opacity: .4} 
   to {opacity: 1}
+}*/
+
+@-webkit-keyframes fadein {
+  from {transform: translateX(100%); } 
+  to {transform: translateX(0); }
+}
+
+@keyframes fadein {
+  from {transform: translateX(100%); } 
+  to {transform: translateX(0);}
+}
+/*
+@-webkit-keyframes fadeout {
+  from {opacity: .6} 
+  to {opacity: 0}
+}
+
+@keyframes fadeout {
+  from {opacity: .6} 
+  to {opacity: 0}
+}*/
+
+@-webkit-keyframes fadeout {
+  from {transform: translateX(0); } 
+  to {transform: translateX(calc(-100% - 1px));}
+}
+
+@keyframes fadeout {
+  from {transform: translateX(0); } 
+  to {transform: translateX(calc(-100% - 1px));}
 }

@@ -18,7 +18,7 @@
 									foreach($ad_box['images'] as $image)
 									{
 										?>
-										<div class="cb-col-full slider-slide ad_box-slider">
+										<div class="cb-col-full slider-slide ad_box-slider fadein">
 											<a href="<?=site_url($image['url'])?>">
 												<img src="<?=site_url($image['path'])?>" alt=""/>
 											</a>
