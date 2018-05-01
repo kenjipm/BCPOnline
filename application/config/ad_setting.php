@@ -8,15 +8,15 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex1-1.jpg',
-					'url'	=> '',
+					'url'	=> 'item/54',
 				),
 				array(
 					'path'	=> 'img/ad_box/ex1-2.jpg',
-					'url'	=> '',
+					'url'	=> 'item/56',
 				),
 				array(
 					'path'	=> 'img/ad_box/ex1-3.jpg',
-					'url'	=> '',
+					'url'	=> 'item/55',
 				),
 			),
 		),
@@ -26,7 +26,7 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex2.jpg',
-					'url'	=> '',
+					'url'	=> 'item/56',
 				),
 			),
 		),
@@ -36,7 +36,7 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex3.jpg',
-					'url'	=> '',
+					'url'	=> 'item/54',
 				),
 			),
 		),
@@ -46,7 +46,7 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex4.jpg',
-					'url'	=> '',
+					'url'	=> 'item/54',
 				),
 			),
 		),
@@ -56,7 +56,7 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex5.jpg',
-					'url'	=> '',
+					'url'	=> 'item/56',
 				),
 			),
 		),
@@ -66,7 +66,7 @@ $config['DASHBOARD_BOX'] = array(
 		'images'	=> array(
 				array(
 					'path'	=> 'img/ad_box/ex6.jpg',
-					'url'	=> '',
+					'url'	=> 'item/56',
 				),
 			),
 		),
