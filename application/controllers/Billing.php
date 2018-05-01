@@ -52,6 +52,10 @@ class Billing extends CI_Controller {
 		}
 		else // if ($this->session->userdata('type') == TYPE['name']['CUSTOMER']) // CUSTOMER
 		{
+			if ($this->input->method() == "post") redirect('order/get_item_customer_do');
+			
+			$this->load->view('customer/repair_list', $data);
+			
 			$this->load->model('billing_model');
 			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id);
 			
