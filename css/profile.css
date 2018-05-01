@@ -9,21 +9,18 @@
 }
 
 .panel-item-head { 
-	font-family: lato-light;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 }
 
 .panel-item-body { 
 	background: #ffffff;
-	font-family: lato-light;
     border-bottom-right-radius: 3px;
     border-bottom-left-radius: 3px;
 	padding: 0px 10px;
 }
 
 .panel-profile-pic-header { 
-	font-family: lato-light;
 	border-radius: 4px;
 	padding: 0px 10px;
 }

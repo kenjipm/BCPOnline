@@ -13,13 +13,13 @@
 					</div>
 				</label>
 				<input id="profile_pic" name="profile_pic" value="<?=$model->account->profile_pic?>" data-url="<?=site_url('customer/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
-				<div class="panel-profile-pic-footer">
-					<div class="cb-txt-secondary-1">
-						<h4>Bergabung sejak</br>
-						<?=$model->account->date_joined?>
-						</h4>
+				
+				<div class="cb-txt-secondary-1">
+					<div class="cb-font-primary-1 cb-align-center">Bergabung sejak</br>
+					<?=$model->account->date_joined?>
 					</div>
 				</div>
+				
 				<div class="cb-txt-primary-2">
 					<h3>Poin saya: <?=$model_reward->reward_points?></h3>
 				</div>
