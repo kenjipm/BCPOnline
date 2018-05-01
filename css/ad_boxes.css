@@ -8,10 +8,11 @@
 	/* margin-right: -5px; */
 	/* margin-left: -5px; */
 	height: 300px;
+	position: relative;
 }
 
 .ad_box {
-/* position: relative; */
+	position: relative;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -28,6 +29,7 @@
 	-ms-flex: 0 0 12.5%;
 	flex: 0 0 12.5%;
 	max-width: 12.5%;
+	min-width: 160px;
 }
 
 .ad_box.c2 {
@@ -35,6 +37,7 @@
 	-ms-flex: 0 0 25%;
 	flex: 0 0 25%;
 	max-width: 25%;
+	min-width: 320px;
 }
 
 .ad_box.c3 {
@@ -42,6 +45,7 @@
 	-ms-flex: 0 0 37.5%;
 	flex: 0 0 37.5%;
 	max-width: 37.5%;
+	min-width: 480px;
 }
 
 .ad_box.c4 {
@@ -49,6 +53,7 @@
 	-ms-flex: 0 0 50%;
 	flex: 0 0 50%;
 	max-width: 50%;
+	min-width: 640px;
 }
 
 .ad_box.c5 {
@@ -56,6 +61,7 @@
 	-ms-flex: 0 0 62.5%;
 	flex: 0 0 62.5%;
 	max-width: 62.5%;
+	min-width: 800px;
 }
 
 .ad_box.c6 {
@@ -63,6 +69,7 @@
 	-ms-flex: 0 0 75%;
 	flex: 0 0 75%;
 	max-width: 75%;
+	min-width: 960px;
 }
 
 .ad_box.c7 {
@@ -70,6 +77,7 @@
 	-ms-flex: 0 0 87.5%;
 	flex: 0 0 87.5%;
 	max-width: 87.5%;
+	min-width: 1120px;
 }
 
 .ad_box.c8 {
@@ -77,14 +85,17 @@
 	-ms-flex: 0 0 100%;
 	flex: 0 0 100%;
 	max-width: 100%;
+	min-width: 1280px;
 }
 
 .ad_box.r1 {
 	height: 50%;
+	min-height: 160px;
 }
 
 .ad_box.r2 {
 	height: 100%;
+	min-height: 320px;
 }
 
 .ad_box-image {
@@ -96,9 +107,25 @@
 .ad_box-slider {
 	height: 100%;
 	width: 100%;
-	margin-left: 30px;
+	/* margin-left: 30px; */
 }
 
 .slider-compact {
+	height: 100%;
+	float: left;
+}
+
+.cb-slider-arrow-container {
+	height: 100%;
+	position: absolute;
+	z-index: 10;
+}
+
+.slider-dot {
+	transform: translateY(-150%);
+	z-index: 10;
+}
+
+.cb-slider {
 	height: 100%;
 }

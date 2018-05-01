@@ -8,28 +8,34 @@
 					if ($ad_box['type'] == 'slider')
 					{
 						?>
-						<!-- Previous button -->
-						<a class="slider-prev" onclick="plusSlides(-1)">&#10094;</a>
-						<div class="slider-compact">
-							<?php
-								foreach($ad_box['images'] as $image)
-								{
-									?>
-									<div class="slider-slide ad_box-slider">
-										<a href="<?=site_url($image['url'])?>">
-											<img src="<?=site_url($image['path'])?>" alt=""/>
-										</a>
-									</div>
-									<?php
-								}
-							?>
-						</div>
-						<!-- Next button -->
-						<a class="slider-next" onclick="plusSlides(1)">&#10095;</a>
-						<div style="text-align:center">
-							<span class="dot" onclick="currentSlide(1)"></span> 
-							<span class="dot" onclick="currentSlide(2)"></span> 
-							<span class="dot" onclick="currentSlide(3)"></span> 
+						<div class="cb-col-full cb-slider">
+							<!-- Previous button -->
+							<div class="cb-col-tenth cb-row cb-vertical-center cb-position-left cb-slider-arrow-container">
+								<a class="slider-prev" onclick="plusSlides(-1)">&#10094;</a>
+							</div>
+							<div class="cb-col-full slider-compact">
+								<?php
+									foreach($ad_box['images'] as $image)
+									{
+										?>
+										<div class="cb-col-full slider-slide ad_box-slider">
+											<a href="<?=site_url($image['url'])?>">
+												<img src="<?=site_url($image['path'])?>" alt=""/>
+											</a>
+										</div>
+										<?php
+									}
+								?>
+							</div>
+							<!-- Next button -->
+							<div class="cb-col-tenth cb-row cb-vertical-center cb-position-right cb-slider-arrow-container">
+								<a class="slider-next" onclick="plusSlides(1)">&#10095;</a>
+							</div>
+							<div class="cb-col-full cb-row slider-dot cb-align-center" style="text-align:center">
+								<span class="dot" onclick="currentSlide(1)"></span> 
+								<span class="dot" onclick="currentSlide(2)"></span> 
+								<span class="dot" onclick="currentSlide(3)"></span> 
+							</div>
 						</div>
 						<?php
 					}

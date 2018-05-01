@@ -1,3 +1,5 @@
+var TICK_COUNT_SLIDE = 99999;
+
 $(document).ready(function(){
 	// $(".slider-compact").slick({
 		// arrows: false,
@@ -5,7 +7,15 @@ $(document).ready(function(){
 	// });
 	
 	showSlides(slideIndex);
+	startSlideshow();
 });
+
+function startSlideshow() {
+	setTimeout(function(){
+		plusSlides(1);
+		startSlideshow();
+	}, TICK_COUNT_SLIDE * 1000);
+}
 
 var slideIndex = 1;
 
