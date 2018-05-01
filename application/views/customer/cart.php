@@ -118,7 +118,7 @@
 			</div>
 		</div>
 		<div class="cb-col-fourth cb-pr-5 cb-pt-5">
-			<div class="cb-panel-body cb-bg-primary-3 cb-pl-5">
+			<div class="cb-panel-body cb-bg-primary-3 cb-p-5">
 				<div class="cb-txt-primary-1">
 					<h3><div class="cb-label"> Alamat Kirim </div></h3>
 				</div>

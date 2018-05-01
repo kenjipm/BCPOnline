@@ -296,14 +296,21 @@ class Item_model extends CI_Model {
 	
 	public function get_all_from_following_tenants($following_tenants, $offset=0, $limit=10)
 	{
-		$this->db->where('0', '1');
+		$this->db->or_group_start();
+		$this->db->where('0', "1");
 		foreach ($following_tenants as $following_tenant)
 		{
 			$this->db->or_where('tenant_id', $following_tenant->tenant_id);
 			$this->db->where('item_type', "ORDER");
 		}
+		$this->db->group_end();
 		$query = $this->db
-					  ->order_by('id', 'DESC')
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->order_by($this->table_item.'.id', 'DESC')
 					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
