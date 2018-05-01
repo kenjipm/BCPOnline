@@ -79,7 +79,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</form>
 		
 		<!-- top menu -->
-		<div class="navbar-cb-top-menu cb-col-tenth-3 cb-row cb-align-right cb-p-5">
+		<div class="navbar-cb-top-menu cb-col-fill cb-row cb-align-right cb-p-5">
 			<?php
 				foreach ($top_menu_items['top'] as $menu_item)
 				{
@@ -94,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div>
 		
 		<!-- profile -->
-		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-p-5">
+		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-pb-5 cb-pt-5">
 			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>
 			<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
 				<?php
