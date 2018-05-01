@@ -18,7 +18,7 @@
 									foreach($ad_box['images'] as $image)
 									{
 										?>
-										<div class="cb-col-full slider-slide ad_box-slider fadein">
+										<div class="cb-col-full slider-slide ad_box-slider fadeout">
 											<a href="<?=site_url($image['url'])?>">
 												<img src="<?=site_url($image['path'])?>" alt=""/>
 											</a>
@@ -32,9 +32,14 @@
 								<a class="slider-next" onclick="plusSlides(1)">&#10095;</a>
 							</div>
 							<div class="cb-col-full cb-row slider-dot cb-align-center" style="text-align:center">
-								<span class="dot" onclick="currentSlide(1)"></span> 
-								<span class="dot" onclick="currentSlide(2)"></span> 
-								<span class="dot" onclick="currentSlide(3)"></span> 
+								<?php
+									for ($i = 1; $i <= count($ad_box); $i++)
+									{
+										?>
+										<span class="dot" onclick="currentSlide(<?=$i?>)"></span> 
+										<?php
+									}
+								?>
 							</div>
 						</div>
 						<?php

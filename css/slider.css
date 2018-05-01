@@ -93,54 +93,102 @@
 /* Fading animation */
 .fadein {
   -webkit-animation-name: fadein;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: 1.5s;
   animation-name: fadein;
   animation-duration: 1s;
 }
 
 .fadeout {
   -webkit-animation-name: fadeout;
-  -webkit-animation-duration: 1s;
+  -webkit-animation-duration: 1.5s;
   animation-name: fadeout;
   animation-duration: 1s;
 }
-/*
+
+.fadeinleft {
+  -webkit-animation-name: fadeinleft;
+  -webkit-animation-duration: 1s;
+  animation-name: fadeinleft;
+  animation-duration: 1s;
+}
+
+.fadeinright {
+  -webkit-animation-name: fadeinright;
+  -webkit-animation-duration: 1s;
+  animation-name: fadeinright;
+  animation-duration: 1s;
+}
+
+.fadeoutleft {
+  -webkit-animation-name: fadeoutleft;
+  -webkit-animation-duration: 1s;
+  animation-name: fadeoutleft;
+  animation-duration: 1s;
+}
+
+.fadeoutright {
+  -webkit-animation-name: fadeoutright;
+  -webkit-animation-duration: 1s;
+  animation-name: fadeoutright;
+  animation-duration: 1s;
+}
+
 @-webkit-keyframes fadein {
-  from {opacity: .4} 
+  from {opacity: .2} 
   to {opacity: 1}
 }
 
 @keyframes fadein {
-  from {opacity: .4} 
+  from {opacity: .2} 
   to {opacity: 1}
-}*/
+}
 
-@-webkit-keyframes fadein {
+@-webkit-keyframes fadeout {
+  from {opacity: .8} 
+  to {opacity: 0}
+}
+
+@keyframes fadeout {
+  from {opacity: } 
+  to {opacity: 0}
+}
+
+@-webkit-keyframes fadeinleft {
   from {transform: translateX(100%); } 
   to {transform: translateX(0); }
 }
 
-@keyframes fadein {
+@keyframes fadeinleft {
   from {transform: translateX(100%); } 
   to {transform: translateX(0);}
 }
-/*
-@-webkit-keyframes fadeout {
-  from {opacity: .6} 
-  to {opacity: 0}
+
+@-webkit-keyframes fadeinright {
+  from {transform: translateX(-100%); } 
+  to {transform: translateX(0); }
 }
 
-@keyframes fadeout {
-  from {opacity: .6} 
-  to {opacity: 0}
-}*/
-
-@-webkit-keyframes fadeout {
-  from {transform: translateX(0); } 
-  to {transform: translateX(calc(-100% - 1px));}
+@keyframes fadeinright {
+  from {transform: translateX(-100%); } 
+  to {transform: translateX(0);}
 }
 
-@keyframes fadeout {
+@-webkit-keyframes fadeoutleft {
   from {transform: translateX(0); } 
-  to {transform: translateX(calc(-100% - 1px));}
+  to {transform: translateX(-100%);}
+}
+
+@keyframes fadeoutleft {
+  from {transform: translateX(0); } 
+  to {transform: translateX(-100%);}
+}
+
+@-webkit-keyframes fadeoutright {
+  from {transform: translateX(0); } 
+  to {transform: translateX(100%);}
+}
+
+@keyframes fadeoutright {
+  from {transform: translateX(0); } 
+  to {transform: translateX(100%);}
 }
