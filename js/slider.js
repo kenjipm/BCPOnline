@@ -1,4 +1,4 @@
-var TICK_COUNT_SLIDE = 99999;
+var TICK_COUNT_SLIDE = 3;
 
 $(document).ready(function(){
 	// $(".slider-compact").slick({
