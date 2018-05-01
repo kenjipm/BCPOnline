@@ -74,8 +74,12 @@ function update_price_live()
 			
 			if (data.bid_time_left != "0") {
 				var bid_time_left = parseInt(data.bid_time_left);
-				for (var i = 0; i < TICK_COUNT_REFRESH; i++) {
-					render_bid_time_left_live(bid_time_left - i, i);
+				if (bid_time_left > 0) {
+					for (var i = 0; i < TICK_COUNT_REFRESH; i++) {
+						render_bid_time_left_live(bid_time_left - i, i);
+					}
+				} else { // kalo abis waktu
+					location.reload();
 				}
 			}
 			
