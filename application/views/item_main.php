@@ -57,7 +57,7 @@
 								foreach ($model->item_variances as $item_variance)
 								{
 									?>
-									<button type="button" class="cb-button-secondary cb-mr-4"><?=$item_variance->var_description?></button>
+									<button type="button" class="cb-button-secondary cb-mr-4" onclick="popup.open('popup_variance-<?=$item_variance->id?>')"><?=$item_variance->var_description?></button>
 									<?php
 								}
 							?>
@@ -72,13 +72,20 @@
 					</div>
 				</div>
 			</div>
-			<div class="cb-col-fourth cb-bg-primary-3 cb-border-round cb-align-center item_tenant_panel">
-				<h4>
-					<a class="cb-font-title cb-txt-primary-1" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
+			<div class="cb-col-fourth cb-row cb-bg-primary-3 cb-border-round cb-align-center item_tenant_panel">
+				<div class="cb-col-third"></div>
+				<div class="cb-col-third cb-pt-5">
+					<div id="thumbnail-profile_pic" class="thumbnail">
+						<img src="<?=$model->item->tenant->account->profile_pic?>" alt="<?=$model->item->tenant->tenant_name?>" style="width:100%">
+					</div>
+				</div>
+				<div class="cb-col-third"></div>
+				<div class="cb-col-full cb-p-5">
+					<a class="cb-font-title cb-txt-primary-1 cb-font-size-xl" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
 						<?=$model->item->tenant->tenant_name?>
 					</a>
 				</h4>
-				<div class="cb-row cb-align-center">
+				<div class="cb-col-full cb-row cb-align-center">
 					<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-button cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
 				</div>
 			</div>
@@ -136,7 +143,43 @@
 	}
 ?>
 
-
+<?php
+	foreach ($model->item_variances as $item_variance)
+	{
+		?>
+		<div id="popup_variance-<?=$item_variance->id?>" class="popup popup-lg">
+			<div class="panel panel-default">
+				<div class="panel-heading">
+					<?=$item_variance->var_type . " " . $item_variance->var_description?>
+				</div>
+				<div class="panel-body">
+					<div class="cb-row cb-col-full cb-p-5 cb-align-center">
+						<?php if ($item_variance->image_two_name != "") { ?>
+							<div class="cb-row cb-col-third"><div class="thumbnail">
+								<img src="<?=$item_variance->image_two_name?>" alt="" style="width:100%">
+							</div></div>
+						<?php } ?>
+						<?php if ($item_variance->image_three_name != "") { ?>
+							<div class="cb-row cb-col-third"><div class="thumbnail">
+								<img src="<?=$item_variance->image_three_name?>" alt="" style="width:100%">
+							</div></div>
+						<?php } ?>
+						<?php if ($item_variance->image_four_name != "") { ?>
+							<div class="cb-row cb-col-third"><div class="thumbnail">
+								<img src="<?=$item_variance->image_four_name?>" alt="" style="width:100%">
+							</div></div>
+						<?php } ?>
+					</div>
+					<div class="cb-row cb-col-full cb-align-center">
+						<button onclick="popup.close('popup_variance-<?=$item_variance->id?>')" type="button" class="cb-button cb-button-form cb-col-third">OK</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<button type="button" class="cb-button-secondary cb-mr-4"><?=$item_variance->var_description?></button>
+		<?php
+	}
+?>
 
 
 

@@ -41,6 +41,10 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");
 		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "SUDAH DIIKUTI" : "IKUTI");
 		
+		$item->tenant->init_account();
+		$this->item->tenant->account = new class{};
+		$this->item->tenant->account->profile_pic	= site_url(($item->tenant->account->profile_pic != "") ? $item->tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
+		
 		foreach ($item_variances as $item_variance)
 		{
 			$item_variance_temp = new class{};
@@ -49,9 +53,9 @@ class Item_main_view_model extends CI_Model {
 			$item_variance_temp->var_type				= $item_variance->var_type;
 			$item_variance_temp->var_description		= $item_variance->var_description;
 			$item_variance_temp->quantity_available		= $item_variance->quantity_available;
-			$item_variance_temp->image_two_name			= site_url($item_variance->image_two_name);
-			$item_variance_temp->image_three_name		= site_url($item_variance->image_three_name);
-			$item_variance_temp->image_four_name		= site_url($item_variance->image_four_name);
+			$item_variance_temp->image_two_name			= !in_array($item_variance->image_two_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_two_name) : "";
+			$item_variance_temp->image_three_name		= !in_array($item_variance->image_three_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_three_name) : "";
+			$item_variance_temp->image_four_name		= !in_array($item_variance->image_four_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_four_name) : "";
 			
 			$this->item_variances[] = $item_variance_temp;
 		}

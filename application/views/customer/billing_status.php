@@ -89,7 +89,7 @@
 						<div class="cb-col-fourth-2">
 							<div class="cb-align-center cb-pl-5" id="order_status-<?=$order->id?>">
 								<?=$order->order_status?>
-								<button data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="pull-right cb-mr-5" type="button">V</button>
+								<button type="button" data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="cb-button cb-button-operational pull-right"><div class="cb-arrow cb-arrow-white cb-arrow-down"></div></button>
 							</div>
 						</div>
 						<div class="cb-col-fourth-2">
