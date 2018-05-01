@@ -1,45 +1,47 @@
-<div class="col-sm-10 col-sm-offset-1">
-	<div class="panel panel-default">
-		<div class="panel-heading">
-			<h3><?=$title?></h3>
+<div class="cb-panel-heading cb-pl-5 cb-pr-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">DAFTAR ALAMAT KIRIM</div>
 		</div>
-		<div class="panel-body">
-		<div>
-			<button type="button" onclick="popup.open('popup_address'); initMap()" class="btn btn-default">Tambah</button>
-		</div>
-			<div class="table-responsive">
-				<table class="table table-striped table-bordered">
-					<thead>
-						<td> <label class="control-label">Utama</label></td>
-						<td> <label class="control-label">Alamat</label></td>
-						<td> </td>
-					</thead>
-					<tbody>
-						<?php
-						foreach($model->shipping_addresses as $shipping_address)
-						{
-							?>
-							<tr>
-								<td>
-									<input type="radio" name="is_primary" <?=$shipping_address->is_primary_attr?> onclick="shipping_address_set_primary(<?=$shipping_address->id?>)"/>
-								</td>
-								<td>
-									<?=$shipping_address->full_address?>
-								</td>
-								<td>
-									<a onclick="shipping_address_delete(<?=$shipping_address->id?>)">
-										<button class="btn btn-default">Hapus</button>
-									</a>
-								</td>
-							</tr>
-							<?php
-						}
-						?>
-					</tbody>
-				</table>
-			</div>
+		<div class="cb-col-half">
+			<a class="cb-button-form pull-right" onclick="popup.open('popup_address'); initMap();">
+				+ TAMBAH ALAMAT
+			</a>
 		</div>
 	</div>
+</div>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-tenth cb-align-center">
+			<div class="cb-label cb-font-title"> Utama </div>
+		</div>
+		<div class="cb-col-tenth-9">
+			<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
+		</div>
+		<?php /*<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center">  </div>
+		</div>*/ ?>
+	</div>
+	<?php
+	foreach($model->shipping_addresses as $shipping_address)
+	{
+		?>
+		<div class="cb-row cb-pt-5 cb-pb-5 cb-border-top">
+			<div class="cb-col-tenth cb-align-center">
+				<input type="radio" name="is_primary" <?=$shipping_address->is_primary_attr?> onclick="shipping_address_set_primary(<?=$shipping_address->id?>)"/>
+			</div>
+			<div class="cb-col-tenth-9">
+				<div class="cb-align-center"> <?=$shipping_address->full_address?> </div>
+			</div>
+			<?php /*<div class="cb-col-fifth">
+				<div class="cb-align-center">
+					<button class="cb-button cb-button-form" type="button" onclick="shipping_address_delete(<?=$shipping_address->id?>)"> Hapus </button>
+				</div>
+			</div>*/ ?>
+		</div>
+		<?php
+	}
+	?>
 </div>
 
 <!---------------- POP UP TAMBAH ALAMAT --------------------->
@@ -112,3 +114,51 @@
 		</div>
 	</div>
 </div>
+
+<?php
+/*
+<div class="col-sm-10 col-sm-offset-1">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			<h3><?=$title?></h3>
+		</div>
+		<div class="panel-body">
+		<div>
+			<button type="button" onclick="popup.open('popup_address'); initMap()" class="btn btn-default">Tambah</button>
+		</div>
+			<div class="table-responsive">
+				<table class="table table-striped table-bordered">
+					<thead>
+						<td> <label class="control-label">Utama</label></td>
+						<td> <label class="control-label">Alamat</label></td>
+						<td> </td>
+					</thead>
+					<tbody>
+						<?php
+						foreach($model->shipping_addresses as $shipping_address)
+						{
+							?>
+							<tr>
+								<td>
+									<input type="radio" name="is_primary" <?=$shipping_address->is_primary_attr?> onclick="shipping_address_set_primary(<?=$shipping_address->id?>)"/>
+								</td>
+								<td>
+									<?=$shipping_address->full_address?>
+								</td>
+								<td>
+									<a onclick="shipping_address_delete(<?=$shipping_address->id?>)">
+										<button class="btn btn-default">Hapus</button>
+									</a>
+								</td>
+							</tr>
+							<?php
+						}
+						?>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+*/
+?>

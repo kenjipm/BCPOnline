@@ -48,20 +48,33 @@ class Item extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		// $this->load->model('Category_model');
-		$this->load->model('Brand_model');
-		$categories = $this->category_model->get_all();
-		$brands = $this->Brand_model->get_all();
-		$this->load->model('views/tenant/post_item_view_model');
-		$this->post_item_view_model->get($categories, $brands);
-		$data['model'] = $this->post_item_view_model;
 		
 		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
 		{
+			// $this->load->model('Category_model');
+			$this->load->model('Brand_model');
+			$categories = $this->category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			$this->load->model('views/tenant/post_item_view_model');
+			$this->post_item_view_model->get($categories, $brands);
+			$data['model'] = $this->post_item_view_model;
+			
 			$this->load->view('tenant/post_item', $data);
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
 		{
+			// $this->load->model('Category_model');
+			$this->load->model('Brand_model');
+			$this->load->model('Item_model');
+			$categories = $this->category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			// $items = $this->Item_model->get_all_for_admin();
+			
+			$unconfirmed_item = $this->Item_model->get_unconfirmed_bidding_item();
+			
+			$this->load->model('views/admin/create_bidding_view_model');
+			$this->create_bidding_view_model->get($categories, $brands, $unconfirmed_item);
+			$data['model'] = $this->create_bidding_view_model;
 			$this->load->view('admin/create_bidding', $data);
 		}
 		
@@ -335,7 +348,7 @@ class Item extends CI_Controller {
 			$this->Tag_model->insert_from_post($this->Item_model->id);
 			
 			if ($this->input->post('item_type') == "BID")
-				redirect('bidding/bidding_list');
+				redirect('bidding_live/bidding_live_list');
 			else
 				redirect('Item/post_item_list');
 		}

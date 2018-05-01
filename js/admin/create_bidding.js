@@ -15,7 +15,8 @@ $(document).ready(function(){
 					if (data.code == "-1"){
 						alert("Password Salah");
 					} else if (data.code == "1"){
-						location.reload();
+						// location.reload();
+						window.location = base_url + "/bidding_live/bidding_live_list";
 					} else {
 						alert("Unknown Error");
 					}
@@ -39,7 +40,8 @@ $(document).ready(function(){
 					if (data.code == "-1"){
 						alert("Password Salah");
 					} else if (data.code == "1"){
-						location.reload();
+						// location.reload();
+						window.location = base_url + "/bidding_live/bidding_live_list";
 					} else {
 						alert("Unknown Error");
 					}

@@ -22,6 +22,8 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 		$this->tenant->id			= $tenant->id;
 		$this->tenant->account_id	= $tenant->account_id;
 		$this->tenant->tenant_name	= $tenant->tenant_name;
+		$this->tenant->unit_number	= $tenant->unit_number;
+		$this->tenant->floor	= $tenant->floor;
 		
 		$this->tenant->account->profile_pic	= site_url(($tenant->account->profile_pic != "") ? $tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
 			

@@ -10,9 +10,23 @@
 				</div>
 			</div>
 			<div class="cb-col-fourth-3 cb-pl-5">
-				<div class="cb-row">
+				<div class="cb-row cb-mb-5">
 					<div class="cb-col-full">
 						<h3 class="cb-txt-primary-1 cb-font-title"><?=$model->tenant->tenant_name?></h3>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-tenth cb-font-title cb-font-size-lg cb-txt-primary-1">Unit</div>
+					<div class="cb-col-small cb-font-title cb-font-size-lg cb-txt-primary-1">:</div>
+					<div class="cb-col-tenth-5">
+						<input type="text" class="cb-input-text" value="<?=$model->tenant->unit_number?>" readonly/>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-tenth cb-font-title cb-font-size-lg cb-txt-primary-1">Lantai</div>
+					<div class="cb-col-small cb-font-title cb-font-size-lg cb-txt-primary-1">:</div>
+					<div class="cb-col-tenth-5">
+						<input type="text" class="cb-input-text" value="<?=$model->tenant->floor?>" readonly/>
 					</div>
 				</div>
 				<div class="cb-row">

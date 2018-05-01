@@ -154,8 +154,8 @@ $config['top_menu_deliverer'] = array(
 $config['top_menu_admin'] = array(
 	'top' => array(
 		'PAY_DEBT' => array(
-			'text'	=> "Tenant Payment",
-			'icon'	=> "message",
+			'text'	=> "Payment",
+			'icon'	=> "document",
 			'url'	=> "admin/tenant_to_pay_list",
 			),
 		'BIDDING' => array(
@@ -165,7 +165,7 @@ $config['top_menu_admin'] = array(
 			),
 		'ACCOUNT' => array(
 			'text'	=> "Account",
-			'icon'	=> "document",
+			'icon'	=> "flag",
 			'url'	=> "account/account_list",
 			),
 		),

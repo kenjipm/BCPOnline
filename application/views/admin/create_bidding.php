@@ -5,10 +5,26 @@
 	<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 		<input type="hidden" name="item_type" value="BID"/>
 		<input type="hidden" id="posted_item_id" name="posted_item_id" value="<?=$model->bidding_item->id?>"/>
+		<input type="hidden" id="quantity_available" name="quantity_available" value="1"/>
 		<div class="cb-row cb-mb-5">
 			<div class="cb-col-fifth">
 				<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
-					<div class="cb-icon cb-icon-lg cb-icon-add-item"></div>
+					<?php
+						if ($model->bidding_item->image_one_name != "")
+						{
+							?>
+							<div>
+								<img src="<?=$model->bidding_item->image_one_name?>" alt="">
+							</div>
+							<?php
+						}
+						else
+						{
+							?>
+							<div class="cb-icon cb-icon-lg cb-icon-add-item"></div>
+							<?php
+						}
+					?>
 				</label>
 				<input id='image_one_name' name='image_one_name' class="input_file_upload" type='file' style="display:none;"/>
 			</div>
@@ -62,7 +78,7 @@
 				<div class="cb-row">
 					<div class="cb-col-fifth-4">
 						<div class="cb-txt-primary-1 cb-pull-left">
-							<div class="cb-label"> Berat</div>
+							<div class="cb-label"> Berat (g) </div>
 						</div>
 					</div>
 					<div class="cb-col-fifth">
@@ -97,7 +113,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-4">
-				<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= (set_value('posted_item_description') == "") ? $model->bidding_item->posted_item_description : "" ?>" rows="6" style="resize:none"></textarea>
+				<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= (set_value('posted_item_description') == "") ? $model->bidding_item->posted_item_description : "" ?>" rows="6" style="resize:none"><?= (set_value('posted_item_description') == "") ? $model->bidding_item->posted_item_description : "" ?></textarea>
 			</div>
 		</div>
 		<div class="cb-row cb-mb-5">
@@ -180,7 +196,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-2">
-				<select class="cb-input-select cb-col-full" name="var_type">
+				<select class="cb-input-select cb-col-full" name="posted_item_variance_name">
 				<?php
 				foreach ($model->bidding_variance as $variance)
 				{
@@ -199,7 +215,7 @@
 			<div class="cb-col-fifth-2 cb-row cb-mb-5">
 				<div class="cb-col-full cb-row cb-mb-5">
 					<div class="cb-row cb-col-full">
-						<input type="text" class="cb-input-text cb-col-full" name="var_desc" value="<?= (set_value('posted_item_variance_description') == "") ? $model->bidding_item->var_description : "" ?>"/>
+						<input type="text" class="cb-input-text cb-col-full" name="posted_item_variance_description" value="<?= (set_value('posted_item_variance_description') == "") ? $model->bidding_item->var_description : "" ?>"/>
 						<span class="text-danger"><?= form_error('var_desc'); ?></span>
 					</div>
 				</div>
@@ -257,8 +273,8 @@
 				if ($model->is_existed)
 				{
 					?>
-					<div class="cb-col-fifth cb-row">
-						<button type="button" class="cb-button-form cb-col-full" onclick="popup.open('popup_approval')">Keputusan</button>
+					<div class="cb-col-fifth cb-row cb-pl-5">
+						<button type="button" class="cb-button-form cb-col-full" onclick="popup.open('popup_approval')">KEPUTUSAN</button>
 					</div>
 					<?php
 					$this->load->view('admin/popup/approval');

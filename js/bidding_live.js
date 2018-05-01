@@ -2,6 +2,8 @@ var bidding_step = 0;
 var bidding_cur_price = 0;
 var bidding_min_price = 0;
 
+var TICK_COUNT_REFRESH = 5;
+
 $(document).ready(function(){
 	bidding_cur_price = parseInt($("#bidding_cur_price").val());
 	bidding_step = parseInt($("#bidding_step").val());
@@ -29,6 +31,19 @@ function bidding_next_price_format(step=0)
 	$("#bidding_next_price_str").val(price);
 }
 
+function render_bid_time_left_live(bid_time_left, second_wait)
+{
+	setTimeout(function(){
+		var hour_left = Math.floor(bid_time_left / 3600);
+		var minute_left = Math.floor((bid_time_left % 3600) / 60);
+		var second_left = bid_time_left % 3600 % 60;
+		
+		var bid_time_left_live = hour_left + ":" + minute_left + ":" + second_left;
+		// console.log(bid_time_left);
+		$("#bid_time_left_live").html(bid_time_left_live);
+	}, second_wait * 1000);
+}
+
 function update_price_live()
 {
 	var bidding_item_id = $("#bidding_item_id").val();
@@ -54,11 +69,21 @@ function update_price_live()
 				if (bidding_next_price < bidding_cur_price) {
 					$("#bidding_next_price").val(bidding_cur_price + bidding_step);
 				}
-			} else {
 				
 			}
-				
-			setTimeout(update_price_live, 3000);
+			
+			if (data.bid_time_left != "0") {
+				var bid_time_left = parseInt(data.bid_time_left);
+				if (bid_time_left > 0) {
+					for (var i = 0; i < TICK_COUNT_REFRESH; i++) {
+						render_bid_time_left_live(bid_time_left - i, i);
+					}
+				} else { // kalo abis waktu
+					location.reload();
+				}
+			}
+			
+			setTimeout(update_price_live, TICK_COUNT_REFRESH * 1000);
 		}
 	});
 }
