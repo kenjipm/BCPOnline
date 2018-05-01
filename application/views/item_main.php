@@ -51,17 +51,27 @@
 							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
 						</div>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl"><?=$model->item->price?></div>
-						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl cb-mt-5">Pilihan</div>
-						<div class="cb-row">
-							<?php
-								foreach ($model->item_variances as $item_variance)
-								{
-									?>
-									<button type="button" class="cb-button-secondary cb-mr-4" onclick="popup.open('popup_variance-<?=$item_variance->id?>')"><?=$item_variance->var_description?></button>
+						<?php
+							if ($model->item->item_type == "ORDER")
+							{
+								?>
+								<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl cb-mt-5">Pilihan</div>
+								<div class="cb-row">
 									<?php
-								}
-							?>
-						</div>
+										foreach ($model->item_variances as $item_variance)
+										{
+											if ($item_variance->var_description != "")
+											{
+												?>
+												<button type="button" class="cb-button-secondary cb-mr-4" onclick="popup.open('popup_variance-<?=$item_variance->id?>')"><?=$item_variance->var_description?></button>
+												<?php
+											}
+										}
+									?>
+								</div>
+								<?php
+							}
+						?>
 						<div class="cb-row cb-mt-5">
 							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')">BELI</button>
 						</div>
@@ -176,7 +186,6 @@
 				</div>
 			</div>
 		</div>
-		<button type="button" class="cb-button-secondary cb-mr-4"><?=$item_variance->var_description?></button>
 		<?php
 	}
 ?>
