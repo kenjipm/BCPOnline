@@ -7,6 +7,7 @@ class Order_List_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{	
+		$this->orders = array();
 	}
 	
 	public function get($billings)

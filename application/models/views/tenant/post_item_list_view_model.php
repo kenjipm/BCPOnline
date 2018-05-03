@@ -6,6 +6,7 @@ class Post_Item_List_View_Model extends CI_Model{
 	// constructor
 	public function __construct()
 	{	
+		$this->posted_items = array();
 	}
 	
 	public function get($items)
