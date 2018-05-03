@@ -35,7 +35,7 @@
 			</div>
 			<div class="cb-col-fifth-2 cb-row cb-pl-3">
 				<select class="cb-input-select cb-col-tenth-9" id="tenant_id">
-					<!--option value="-1">Semua</option-->	
+					<option value="-1">Semua</option>	
 					<?php
 						foreach ($model->tenants as $tenant)
 						{

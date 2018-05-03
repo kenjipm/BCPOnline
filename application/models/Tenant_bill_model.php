@@ -188,6 +188,7 @@ class Tenant_bill_model extends CI_Model {
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
 		$this->db->where('posted_item_id', $posted_item_id);
+		$this->db->where('hot_item_id IS NULL');
 		$this->db->set('payment_date', date("Y-m-d H:i:s"));
 		$this->db->update($this->table_tenant_bill);
 		

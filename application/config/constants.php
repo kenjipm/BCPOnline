@@ -34,7 +34,7 @@ defined('REPORT_TYPES') OR define('REPORT_TYPES', array(
 		// 'tenant_opt'	=> true,
 		// ),
 	'HOT_ITEM'			=> array(
-		'description'	=> 'Hot Item',
+		'description'	=> 'Hot & Promoted Item',
 		'tenant_opt'	=> true,
 		),
 	)

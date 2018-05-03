@@ -351,6 +351,13 @@ class Admin extends CI_Controller {
 		// }
 		else if ($report_type == "HOT_ITEM")
 		{
+			$transactions = $this->report_model->get_all_hot_item_from_tenant_and_date($tenant_id, $start_date, $end_date);
+			
+			$this->load->model('views/admin/report_by_hot_item_view_model');
+			$this->report_by_hot_item_view_model->get($transactions);
+			
+			$view_data['model'] = $this->report_by_hot_item_view_model;
+			$json_result->view = $this->load->view('admin/report_by_hot_item', $view_data, true);
 			
 		}
 		else
