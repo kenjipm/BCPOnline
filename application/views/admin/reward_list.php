@@ -81,7 +81,7 @@
 	?>
 	<div class="cb-row cb-p-5">
 		<a class="cb-button-form" onclick="popup.open('popup_setting_reward')">
-			SETTING REWARD
+			ATURAN POIN
 		</a>
 	</div>
 </div>
@@ -91,7 +91,7 @@
 <div id="popup_setting_reward" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
-			Setting Reward
+			ATURAN POIN
 		</div>
 		<div class="panel-body">
 			<form class="form-horizontal">

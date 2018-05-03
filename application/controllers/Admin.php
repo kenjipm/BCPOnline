@@ -128,7 +128,7 @@ class Admin extends CI_Controller {
 			$this->load->model('Tenant_bill_model');
 			$this->Tenant_bill_model->insert_from_post();
 			
-			redirect('Item/post_item_list');
+			redirect('Item/hot_item_list');
 		}
 	}
 	
