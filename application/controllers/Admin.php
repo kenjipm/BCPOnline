@@ -337,12 +337,18 @@ class Admin extends CI_Controller {
 		}
 		else if ($report_type == "BY_TENANT")
 		{
+			$transactions = $this->report_model->get_all_transaction_from_tenant_and_date($tenant_id, $start_date, $end_date);
 			
-		}
-		else if ($report_type == "BY_ITEM")
-		{
+			$this->load->model('views/admin/report_by_tenant_view_model');
+			$this->report_by_tenant_view_model->get($transactions);
 			
+			$view_data['model'] = $this->report_by_tenant_view_model;
+			$json_result->view = $this->load->view('admin/report_by_tenant', $view_data, true);
 		}
+		// else if ($report_type == "BY_ITEM")
+		// {
+			
+		// }
 		else if ($report_type == "HOT_ITEM")
 		{
 			

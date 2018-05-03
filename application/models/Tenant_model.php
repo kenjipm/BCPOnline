@@ -124,6 +124,7 @@ class Tenant_model extends CI_Model {
 	{
 		$this->load->model('Tenant_model');
 		
+		$this->db->select('*, tenant.id AS tenant_id');
 		$this->db->join('account', 'account.id=' . $this->table_tenant . '.account_id', 'left');
 		
 		$query = $this->db->get($this->table_tenant);

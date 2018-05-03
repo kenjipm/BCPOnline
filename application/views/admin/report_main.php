@@ -34,8 +34,8 @@
 				<div class="cb-pull-right">:</div>
 			</div>
 			<div class="cb-col-fifth-2 cb-row cb-pl-3">
-				<select class="cb-input-select cb-col-full" id="tenant_id">
-					<option value="0">Semua</option>	
+				<select class="cb-input-select cb-col-tenth-9" id="tenant_id">
+					<!--option value="-1">Semua</option-->	
 					<?php
 						foreach ($model->tenants as $tenant)
 						{
@@ -53,9 +53,9 @@
 				<div class="cb-pull-right">:</div>
 			</div>
 			<div class="cb-col-fifth-2 cb-row cb-pl-3 cb-vertical-center">
-				<input type="text" class="cb-col-tenth-4 cb-input-text datepicker" id="start_date"/>
+				<input type="text" class="cb-col-tenth-4 cb-input-text datepicker" id="start_date" value="<?=date("Y-m-d")?>"/>
 				<div class="cb-col-tenth cb-align-center">s/d</div>
-				<input type="text" class="cb-col-tenth-4 cb-input-text datepicker" id="end_date"/>
+				<input type="text" class="cb-col-tenth-4 cb-input-text datepicker" id="end_date" value="<?=date("Y-m-d")?>"/>
 			</div>
 		</div>
 		<div class="cb-col-full cb-row cb-mb-5">

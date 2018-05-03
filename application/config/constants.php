@@ -29,10 +29,10 @@ defined('REPORT_TYPES') OR define('REPORT_TYPES', array(
 		'description'	=> 'Transaksi Tenant',
 		'tenant_opt'	=> true,
 		),
-	'BY_ITEM'			=> array(
-		'description'	=> 'Barang Tenant',
-		'tenant_opt'	=> true,
-		),
+	// 'BY_ITEM'			=> array(
+		// 'description'	=> 'Barang Tenant',
+		// 'tenant_opt'	=> true,
+		// ),
 	'HOT_ITEM'			=> array(
 		'description'	=> 'Hot Item',
 		'tenant_opt'	=> true,

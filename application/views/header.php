@@ -5,7 +5,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 <head>
 	<meta charset='utf-8'>
     <title><?=COMPANY_NAME?></title>
-	<link rel="icon" href="<?=base_url('img/favicon.gif');?>" type="image/gif">
+	<link rel="icon" href="<?=base_url('img/favicon.png');?>" type="image/png">
     <!-- SET CSS -->
     <link rel='stylesheet' href='<?=site_url('css/bootstrap/css/bootstrap.min.css')?>' type='text/css' media='screen'/>
     <link rel='stylesheet' href='<?=site_url('css/jquery-ui-1.12.1.custom/jquery-ui.min.css')?>' type='text/css' media='screen'/>

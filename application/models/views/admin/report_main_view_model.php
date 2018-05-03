@@ -19,7 +19,7 @@ class report_main_view_model extends CI_Model {
 		{	
 			$this->tenants[$i] = new class{};
 			
-			$this->tenants[$i]->id 				= $tenant->id;
+			$this->tenants[$i]->id 				= $tenant->tenant_id;
 			$this->tenants[$i]->tenant_name 	= $tenant->tenant_name;
 			
 			$i++;
