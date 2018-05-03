@@ -153,20 +153,20 @@ $config['top_menu_deliverer'] = array(
 
 $config['top_menu_admin'] = array(
 	'top' => array(
+		'ACCOUNT' => array(
+			'text'	=> "Account",
+			'icon'	=> "flag",
+			'url'	=> "account/account_list",
+			),
 		'PAY_DEBT' => array(
 			'text'	=> "Payment",
 			'icon'	=> "document",
 			'url'	=> "admin/tenant_to_pay_list",
 			),
-		'BIDDING' => array(
-			'text'	=> "Bidding",
-			'icon'	=> "speaker",
-			'url'	=> "bidding_live/bidding_live_list",
-			),
-		'ACCOUNT' => array(
-			'text'	=> "Account",
-			'icon'	=> "flag",
-			'url'	=> "account/account_list",
+		'REPORT' => array(
+			'text'	=> "Laporan",
+			'icon'	=> "document",
+			'url'	=> "admin/report",
 			),
 		),
 	'profile' => array(
@@ -176,6 +176,10 @@ $config['top_menu_admin'] = array(
 			),
 		),
 	'strip' => array(
+		'ORDER' => array(
+			'text'	=> "KIRIM BARANG",
+			'url'	=> "order/order_list",
+			),
 		'VOUCHER' => array(
 			'text'	=> "VOUCHER",
 			'url'	=> "voucher/voucher_list",
@@ -192,9 +196,10 @@ $config['top_menu_admin'] = array(
 			'text'	=> "SEO ITEM",
 			'url'	=> "admin/seo_item_list",
 			),
-		'ORDER' => array(
-			'text'	=> "KIRIM BARANG",
-			'url'	=> "order/order_list",
+		'BIDDING' => array(
+			'text'	=> "LELANG",
+			//'icon'	=> "speaker",
+			'url'	=> "bidding_live/bidding_live_list",
 			),
 		'BILLING' => array(
 			'text'	=> "BILLING",

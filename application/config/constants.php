@@ -20,6 +20,26 @@ defined('DEFAULT_ITEM_PICTURE') OR define('DEFAULT_ITEM_PICTURE', array(
 	)
 );
 
+defined('REPORT_TYPES') OR define('REPORT_TYPES', array(
+	'BY_TRANSACTION'	=> array(
+		'description'	=> 'Semua Transaksi',
+		'tenant_opt'	=> false,
+		),
+	'BY_TENANT'			=> array(
+		'description'	=> 'Transaksi Tenant',
+		'tenant_opt'	=> true,
+		),
+	'BY_ITEM'			=> array(
+		'description'	=> 'Barang Tenant',
+		'tenant_opt'	=> true,
+		),
+	'HOT_ITEM'			=> array(
+		'description'	=> 'Hot Item',
+		'tenant_opt'	=> true,
+		),
+	)
+);
+
 defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 		'name' => array(
 			"WAITING_FOR_PAYMENT"		=> "WAITING_FOR_PAYMENT",

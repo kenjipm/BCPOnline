@@ -139,7 +139,8 @@ function submit_bid()
 				}
 				else if (data.code == "-9") {
 					// $("#bidding_status").html("Harap lakukan deposit terlebih dahulu");
-					window.location = base_url + '/bidding_live';
+					//window.location = base_url + '/bidding_live';
+					popup.open('popup_bid_deposit');
 				}
 				else if (data.code == "1") {
 					// $("#btn-bid_sub").prop("disabled", true);
