@@ -111,15 +111,15 @@ class Message_inbox_model extends CI_Model {
 		$where['party_one_id'] = $account_id;
 		$or_where['party_two_id'] = $account_id;
 		
-		$this->db->select('*, ' . $this->table_message_inbox . '.id AS id');
+		$this->db->select('*, ' . $this->table_message_inbox . '.id AS id, MAX(' . $this->table_message_text.'.id) AS last_message_text_id');
 		$this->db->join($this->table_message_text, $this->table_message_inbox.'.id' . ' = ' . $this->table_message_text.'.message_inbox_id', 'left');
 		
 		$this->db->where($where);
 		$this->db->or_where($or_where);
 		
+		$this->db->order_by('last_message_text_id', 'DESC');
 		$this->db->group_by($this->table_message_inbox.'.id');
 		$this->db->distinct();
-		$this->db->order_by($this->table_message_text.'.message_inbox_id', 'DESC');
 		
 		$query = $this->db->get($this->table_message_inbox);
 		$results = $query->result();

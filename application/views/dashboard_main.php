@@ -239,6 +239,30 @@
 	</div>
 </div>
 
+<!-- POPUP BID DEPOSIT -->
+
+<div id="popup_bid_deposit" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Deposit Lelang
+		</div>
+		<div class="panel-body">
+			<form>
+				<div class="form-group">
+					<div class="col-sm-12">
+						Untuk dapat mengikuti lelang, harap melakukan deposit dulu melalui transfer ke rekening 123456789 BCA a/n PT SAMP sejumlah <b>Rp 100.000</b>
+						<button type="button" onclick="dummy_deposit_done()" class="btn btn-default">Deposit (dummy)</button>
+					</div>
+					<div class="col-sm-12">
+						<a class="btn btn-default" href="<?=site_url('about/bidding')?>">Pelajari Lebih Lanjut</a>
+						<button type="button" class="btn btn-default cb-pull-right" onclick="popup.close('popup_bid_deposit')">TUTUP</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
 <?php
 /*
 <!-- POPUP BID SUCCESS -->

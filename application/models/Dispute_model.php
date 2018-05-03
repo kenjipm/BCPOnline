@@ -3,6 +3,7 @@
 class Dispute_model extends CI_Model {
 	
 	private $table_dispute = 'dispute';
+	private $table_dispute_text = 'dispute_text';
 	
 	// table attribute
 	public $id;
@@ -102,6 +103,13 @@ class Dispute_model extends CI_Model {
 	
 	public function get_all()
 	{
+		$this->db->select('*, ' . $this->table_dispute . '.id AS id, MAX(' . $this->table_dispute_text.'.id) AS last_dispute_text_id');
+		$this->db->join($this->table_dispute_text, $this->table_dispute.'.id' . ' = ' . $this->table_dispute_text.'.dispute_id', 'left');
+		
+		$this->db->order_by('last_dispute_text_id', 'DESC');
+		$this->db->group_by($this->table_dispute.'.id');
+		$this->db->distinct();
+		
 		$query = $this->db->get($this->table_dispute);
 		$results = $query->result();
 		
@@ -137,8 +145,16 @@ class Dispute_model extends CI_Model {
 		$where['party_one_id'] = $account_id;
 		$or_where['party_two_id'] = $account_id;
 		
+		$this->db->select('*, ' . $this->table_dispute . '.id AS id, MAX(' . $this->table_dispute_text.'.id) AS last_dispute_text_id');
+		$this->db->join($this->table_dispute_text, $this->table_dispute.'.id' . ' = ' . $this->table_dispute_text.'.dispute_id', 'left');
+		
 		$this->db->where($where);
 		$this->db->or_where($or_where);
+		
+		$this->db->order_by('last_dispute_text_id', 'DESC');
+		$this->db->group_by($this->table_dispute.'.id');
+		$this->db->distinct();
+		
 		$query = $this->db->get($this->table_dispute);
 		$results = $query->result();
 		

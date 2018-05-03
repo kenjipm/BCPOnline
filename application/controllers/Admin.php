@@ -290,4 +290,75 @@ class Admin extends CI_Controller {
 	{
 		$this->load->view('footer_print');
 	}
+	
+	public function report()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('admin/report_main');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('tenant_model');
+		$tenants = $this->tenant_model->get_all();
+		
+		$this->load->model('views/admin/report_main_view_model');
+		$this->report_main_view_model->get($tenants);
+		
+		$data['model'] = $this->report_main_view_model;
+		$this->load->view('admin/report_main', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function get_report()
+	{
+		$json_result = new class{};
+		$json_result->code = "1";
+		$json_result->view = "";
+		
+		$report_type = $this->input->post('report_type');
+		$tenant_id = $this->input->post('tenant_id');
+		$start_date = $this->input->post('start_date');
+		$end_date = $this->input->post('end_date');
+		
+		$view_data = array();
+		$this->load->model('report_model');
+		if ($report_type == "BY_TRANSACTION")
+		{
+			$transactions = $this->report_model->get_all_transaction_from_date($start_date, $end_date);
+			
+			$this->load->model('views/admin/report_by_transaction_view_model');
+			$this->report_by_transaction_view_model->get($transactions);
+			
+			$view_data['model'] = $this->report_by_transaction_view_model;
+			$json_result->view = $this->load->view('admin/report_by_transaction', $view_data, true);
+		}
+		else if ($report_type == "BY_TENANT")
+		{
+			
+		}
+		else if ($report_type == "BY_ITEM")
+		{
+			
+		}
+		else if ($report_type == "HOT_ITEM")
+		{
+			
+		}
+		else
+		{
+			$json_result->code = "0";
+			$json_result->view = "";
+			// error
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
+	
 }
