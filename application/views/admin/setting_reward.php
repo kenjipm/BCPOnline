@@ -1,5 +1,5 @@
 <div class="cb-col-full cb-txt-primary-1 cb-font-title">
-	<div class="cb-align-center cb-font-size-xl">SETTING REWARD</div>
+	<div class="cb-align-center cb-font-size-xl">UBAH ATURAN POIN</div>
 </div>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<form action="<?=site_url('reward/setting_reward')?>" class="form-horizontal" method="post" enctype="multipart/form-data">

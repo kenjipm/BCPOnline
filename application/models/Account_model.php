@@ -163,6 +163,18 @@ class Account_model extends CI_Model {
 		return ($item !== null);
 	}
 	
+	public function update_password($old_password)
+	{
+		$where['id'] = 0;
+		$where['password'] = md5($old_password);
+		
+		$this->password	= md5($this->input->post('new_password'));
+		
+		$this->db->where($where);
+		$this->db->set('password', $this->password);
+		$this->db->update($this->table_account);
+	}
+	
 	public function map_list($accounts)
 	{
 		$result = array();

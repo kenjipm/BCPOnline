@@ -170,6 +170,10 @@ $config['top_menu_admin'] = array(
 			),
 		),
 	'profile' => array(
+		'SETTING' => array(
+			'text'	=> "Setting",
+			'url'	=> "account/setting",
+			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
