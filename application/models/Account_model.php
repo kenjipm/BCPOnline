@@ -173,6 +173,9 @@ class Account_model extends CI_Model {
 		$this->db->where($where);
 		$this->db->set('password', $this->password);
 		$this->db->update($this->table_account);
+		
+		return $this->db->affected_rows();
+		
 	}
 	
 	public function map_list($accounts)

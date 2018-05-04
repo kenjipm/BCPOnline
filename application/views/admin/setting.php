@@ -2,6 +2,15 @@
 	<div class="cb-align-center cb-font-size-xl">UBAH PASSWORD SUPER ADMIN</div>
 </div>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<?php if ($message) { ?>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-full">
+			<div class="cb-txt-primary-1 cb-align-center cb-border-bottom">
+				<div class="cb-label cb-font-size-xl"> <?=$message?></div>
+			</div>
+		</div>
+	</div>
+	<?php } ?>
 	<form action="<?=site_url('account/setting')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 		<div class="cb-row cb-p-5">
 			<div class="cb-col-fifth">
