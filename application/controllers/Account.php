@@ -145,10 +145,31 @@ class Account extends CI_Controller {
 		
 		// Load Body
 		$data['model'] = new class{};
+		$data['message'] = "";
+		if ($this->input->get('err') !== null)
+		{
+			$data['message'] = $this->get_error_message($this->input->get('err'));
+		}
 		$this->load->view('admin/setting', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	private function get_error_message($error_code)
+	{
+		if ($error_code == 1)
+		{
+			return "Password lama salah";
+		}
+		else if ($error_code == 0)
+		{
+			return "Password berhasil diubah";
+		}
+		else
+		{
+			return "Unknown Error";
+		}
 	}
 	
 	public function setting_do()
@@ -169,9 +190,17 @@ class Account extends CI_Controller {
 		{
 			$this->load->model('Account_model');
 			
-			$this->Account_model->update_password($this->input->post('old_password'));
+			$result = $this->Account_model->update_password($this->input->post('old_password'));
 			
-			redirect('account/setting');
+			
+			if ($result <= 0)
+			{
+				redirect('account/setting?err=1');
+			}
+			else
+			{
+				redirect('account/setting?err=0');
+			}
 		}
 	}
 	
