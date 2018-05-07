@@ -100,9 +100,24 @@
 		</div>
 	</div>
 </div>
-<div class="cb-row">
-	<?php ?>
+<div class="cb-row cb-align-center">
+	<a href="5">
+		<div class="cb-icon cb-icon-sm cb-icon-left-2"></div>
+	</a>
 	<a href="<?=site_url('item/category/' .$model->category->id)?>">
+		<div class="cb-icon cb-icon-sm cb-icon-left-1"></div>
+	</a>
+	<a href="6">
 		1
 	</a>
+	<a href="<?=site_url('item/category/' .$model->category->id)?>">
+		2
+	</a>
+	<a href="5">
+		<div class="cb-icon cb-icon-sm cb-icon-right-1"></div>
+	</a>
+	<a href="<?=site_url('item/category/' .$model->category->id)?>">
+		<div class="cb-icon cb-icon-sm cb-icon-right-2"></div>
+	</a>
 </div>
+
