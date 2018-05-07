@@ -328,7 +328,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_promoted_from_search($keywords, $offset=0, $limit=6)
+	public function get_all_promoted_from_search($keywords, $offset=0, $limit=4)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -350,7 +350,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_from_search($keywords)
+	public function get_from_search($keywords, $offset=0, $limit=16)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -362,7 +362,7 @@ class Item_model extends CI_Model {
 		// {
 			// $this->db->or_like('name', $keyword);
 		// }
-		$query = $this->db->get($this->table_item);
+		$query = $this->db->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();

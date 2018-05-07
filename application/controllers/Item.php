@@ -248,7 +248,7 @@ class Item extends CI_Controller {
 		$this->load->view('admin/post_item_detail', $data);
 	}
 	
-	public function search()
+	public function search($page=1)
 	{
 		// Load Header
         $data_header['css_list'] = array('category');
@@ -260,7 +260,7 @@ class Item extends CI_Controller {
 		
 		$this->load->model('item_model');
 		$promoted_items = $this->item_model->get_all_promoted_from_search($keywords);
-		$items = $this->item_model->get_from_search($keywords);
+		$items = $this->item_model->get_from_search($keywords, $page);
 		
 		$categories = $this->category_model->get_all();
 		
