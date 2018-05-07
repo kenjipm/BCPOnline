@@ -128,6 +128,14 @@ defined('POSTED_ITEM_VARIANCE_TYPE') OR define('POSTED_ITEM_VARIANCE_TYPE', arra
 	)
 );
 
+defined('PAGINATION') OR define('PAGINATION', array(
+		'type' => array(
+			"LIMIT_ITEM"		=> 2,
+			"LIMIT_CATEGORY"	=> 16,
+		),
+	)
+);
+
 defined('TYPE') OR define('TYPE', array(
 		'name' => array(
 			'CUSTOMER'				=> 'CUSTOMER',
