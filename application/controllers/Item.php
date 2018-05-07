@@ -257,15 +257,18 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		$keywords = $this->input->get('keywords');
+		// $page = $this->input->get('page') ?? 1;
 		
 		$this->load->model('item_model');
 		$promoted_items = $this->item_model->get_all_promoted_from_search($keywords);
 		$items = $this->item_model->get_from_search($keywords, (($page - 1) * PAGINATION['type']['LIMIT_ITEM']));
+		$item_count = $this->item_model->count_from_search($keywords);
 		
 		$categories = $this->category_model->get_all();
 		
 		$this->load->model('views/search_view_model');
-		$this->search_view_model->get_search($categories, $promoted_items, $items);
+		$this->search_view_model->get_search($categories, $promoted_items, $items, $keywords);
+		$this->search_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = 'Hasil Pencarian';
 		$data['model'] = $this->search_view_model;
@@ -275,7 +278,7 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function category($category_id)
+	public function category($category_id, $page=1)
 	{
 		// Load Header
         $data_header['css_list'] = array('category', 'item');
@@ -285,7 +288,8 @@ class Item extends CI_Controller {
 		// Load Body
 		$this->load->model('item_model');
 		$promoted_items = $this->item_model->get_all_promoted_from_category_id($category_id);
-		$items = $this->item_model->get_all_from_category_id($category_id, $this->input->get('page')??'1');
+		$items = $this->item_model->get_all_from_category_id($category_id, (($page - 1) * PAGINATION['type']['LIMIT_CATEGORY']));
+		$item_count = $this->item_model->count_from_category_id($category_id);
 		
 		// // $this->load->model('category_model');
 		$categories = $this->category_model->get_all();
@@ -293,6 +297,7 @@ class Item extends CI_Controller {
 		
 		$this->load->model('views/search_view_model');
 		$this->search_view_model->get($categories, $promoted_items, $items, $category_id);
+		$this->search_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = strtoupper($category->category_name);
 		$data['model'] = $this->search_view_model;

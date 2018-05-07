@@ -275,7 +275,7 @@ class Item_model extends CI_Model {
 		return $this->get_all_from_category_id($item->category_id, 1, 10);
 	}
 	
-	public function get_all_from_category_id($category_id, $page=1, $limit=16, $order="RANDOM")
+	public function get_all_from_category_id($category_id, $offset=0, $limit=16, $order="RANDOM")
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -287,11 +287,27 @@ class Item_model extends CI_Model {
 					  ->distinct()
 					  ->order_by($this->table_item.'.id', $order)
 					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
-					  ->get($this->table_item, $limit??"", $limit?(($page-1)*$limit):"");
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 					  
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_from_category_id($category_id)
+	{
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->where('category_id', $category_id)
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->get($this->table_item);
+					  
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
 	}
 	
 	public function get_all_from_following_tenants($following_tenants, $offset=0, $limit=10)
@@ -350,7 +366,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_from_search($keywords, $offset=0, $limit=2)
+	public function get_from_search($keywords, $offset=0, $limit=20)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -366,6 +382,21 @@ class Item_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_from_search($keywords)
+	{
+		$this->db->select($this->table_item.'.id');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->like('posted_item_name', $keywords);
+		$this->db->group_by($this->table_item.'.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
 	}
 	
 	public function get_last_bidding_item()
