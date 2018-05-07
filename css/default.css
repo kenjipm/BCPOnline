@@ -248,6 +248,8 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-icon-message { background-image: url(icons/message.png); }
 .cb-icon-right-1 { background-image: url(icons/right-1.png); }
 .cb-icon-right-2 { background-image: url(icons/right-2.png); }
+.cb-icon-left-1 { background-image: url(icons/right-1.png); transform: rotate(180deg);}
+.cb-icon-left-2 { background-image: url(icons/right-2.png); transform: rotate(180deg);}
 .cb-icon-speaker { background-image: url(icons/speaker.png); }
 .cb-icon-twitter { background-image: url(icons/twitter.png); }
 
