@@ -260,7 +260,7 @@ class Item extends CI_Controller {
 		
 		$this->load->model('item_model');
 		$promoted_items = $this->item_model->get_all_promoted_from_search($keywords);
-		$items = $this->item_model->get_from_search($keywords, $page);
+		$items = $this->item_model->get_from_search($keywords, (($page - 1) * PAGINATION['type']['LIMIT_ITEM']));
 		
 		$categories = $this->category_model->get_all();
 		
