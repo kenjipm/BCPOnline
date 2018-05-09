@@ -1,29 +1,46 @@
-<?php
-	// Model untuk customer
-	
-	// // dummy brand list
-	// $model->brands = array();
-	
-	// // Model dummy brand
-	// $model->brands[0] = new class{};
-	// $model->brands[0]->id = 1;
-	// $model->brands[0]->brand_id = "17120377701";
-	// $model->brands[0]->brand_name = "Djisamsung";
-	// $model->brands[0]->brand_description = "Deskripsi Brand Djisamsung";
-	// $model->brands[1] = new class{};
-	// $model->brands[1]->id = 1;
-	// $model->brands[1]->brand_id = "17120377701";
-	// $model->brands[1]->brand_name = "Appa";
-	// $model->brands[1]->brand_description = "Deskripsi Brand Appa";
-	// $model->brands[2] = new class{};
-	// $model->brands[2]->id = 1;
-	// $model->brands[2]->brand_id = "17120377701";
-	// $model->brands[2]->brand_name = "Tos Ibak";
-	// $model->brands[2]->brand_description = "Deskripsi Brand Tos Ibak";
-	
-	
-	
-?>
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR BRAND</h3>
+		</div>
+		<div class="cb-col-half cb-p-5">
+			<a href="<?=site_url('brand/create_brand')?>" class="cb-button-form pull-right">+ TAMBAH BRAND</a>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth">
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Nama </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->brands as $brand)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth">
+			</div>
+			<div class="cb-col-fifth">
+				<div class=" cb-align-center"> <?=$brand->brand_name?> </div>
+			</div>
+			<div class="cb-col-fifth-2">
+				<div class="cb-align-center"> <?=$brand->brand_description?> </div>
+			</div>
+			
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -74,3 +91,4 @@
 		</div>
 	</div>
 </div>
+*/?>
