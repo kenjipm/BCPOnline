@@ -1,26 +1,46 @@
-<?php
-	// Model untuk customer
-	
-	// dummy category list
-	// $model->categories = array();
-	
-	// // Model dummy category
-	// $model->categories[0] = new class{};
-	// $model->categories[0]->id = 1;
-	// $model->categories[0]->category_name = "Tablet";
-	// $model->categories[0]->category_description = "Deskripsi category Tablet";
-	// $model->categories[1] = new class{};
-	// $model->categories[1]->id = 2;
-	// $model->categories[1]->category_name = "Laptop";
-	// $model->categories[1]->category_description = "Deskripsi category Laptop";
-	// $model->categories[2] = new class{};
-	// $model->categories[2]->id = 3;
-	// $model->categories[2]->category_name = "Hape";
-	// $model->categories[2]->category_description = "Deskripsi category Hape";
-	
-	
-	
-?>
+<div class="cb-panel-heading cb-pl-5">
+	<div class="cb-row">
+		<div class="cb-col-half">
+			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR KATEGORI</h3>
+		</div>
+		<div class="cb-col-half cb-p-5">
+			<a href="<?=site_url('category/create_category')?>" class="cb-button-form pull-right">+ TAMBAH KATEGORI</a>
+		</div>
+	</div>
+</div>
+
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row">
+		<div class="cb-col-fifth">
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Nama </div>
+		</div>
+		<div class="cb-col-fifth-2">
+			<div class="cb-label cb-font-title cb-align-center"> Deskripsi </div>
+		</div>
+	</div>
+	<?php
+	foreach($model->categories as $category)
+	{
+		?>
+		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
+			<div class="cb-col-fifth">
+			</div>
+			<div class="cb-col-fifth">
+				<div class=" cb-align-center"> <?=$category->category_name?> </div>
+			</div>
+			<div class="cb-col-fifth-2">
+				<div class="cb-align-center"> <?=$category->category_description?> </div>
+			</div>
+			
+		</div>
+		<?php
+	}
+	?>
+</div>
+
+<?php /*
 <div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">
@@ -71,3 +91,4 @@
 		</div>
 	</div>
 </div>
+*/ ?>

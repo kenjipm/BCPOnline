@@ -192,6 +192,14 @@ $config['top_menu_admin'] = array(
 			'text'	=> "REWARD",
 			'url'	=> "reward/reward_list",
 			),
+		'BRAND' => array(
+			'text'	=> "BRAND",
+			'url'	=> "brand/brand_list",
+			),
+		'CATEGORY' => array(
+			'text'	=> "KATEGORI",
+			'url'	=> "category/category_list",
+			),
 		'HOT_ITEM' => array(
 			'text'	=> "HOT ITEM",
 			'url'	=> "admin/hot_item_list",
