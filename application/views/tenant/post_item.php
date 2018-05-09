@@ -59,7 +59,7 @@
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Harga</div>
+								<div class="cb-label"> Harga (Rp)</div>
 							</div>
 						</div>
 						<div class="cb-col-fifth">
@@ -81,7 +81,7 @@
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
 							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Berat</div>
+								<div class="cb-label"> Berat (g)</div>
 							</div>
 						</div>
 						<div class="cb-col-fifth">
