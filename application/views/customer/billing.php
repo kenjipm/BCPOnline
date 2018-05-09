@@ -72,7 +72,7 @@
 			foreach($model->orders as $order)
 			{
 				?>
-				<div class="cb-row cb-border-bottom cb-p-3">
+				<div class="cb-row cb-border-bottom cb-p-5">
 					<div class="cb-col-half">
 						<div class="cb-row">
 							<div class="cb-col-fourth-2">
@@ -248,7 +248,11 @@
 				</div>
 			</div>
 			<div class="cb-col-fifth-2 cb-pl-3">
-				<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" placeholder="Masukkan kode voucher"/>
+				<input type="text" class="cb-row cb-col-full cb-input-text" id="voucher_code" name="voucher_code" placeholder="Masukkan kode voucher"/>
+				<span id="voucher_code_status"></span>
+			</div>
+			<div class="cb-col-fifth cb-pl-3">
+				<button type="button" class="cb-button-form" onclick="cek_kode_voucher()">Cek Kode Voucher</button>
 			</div>
 		</div>
 		<input type="hidden" name="date_created" value="<?=$model->billing->date_created?>"/>

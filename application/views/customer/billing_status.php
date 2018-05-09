@@ -70,7 +70,7 @@
 		foreach($model->orders as $order)
 		{
 			?>
-			<div class="cb-row cb-border-bottom cb-p-3">
+			<div class="cb-row cb-border-bottom">
 				<div class="cb-col-half">
 					<div class="cb-row">
 						<div class="cb-col-fourth-2">
