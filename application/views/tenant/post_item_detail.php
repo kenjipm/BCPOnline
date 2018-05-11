@@ -195,7 +195,7 @@
 					else // if ($is_seo_item_paid)
 					{
 						?>
-							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Sudah SEO Item</button>
+							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Sudah Promoted Item</button>
 						<?php
 					}
 				?>

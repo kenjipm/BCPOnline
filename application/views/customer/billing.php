@@ -82,7 +82,7 @@
 								<div class="cb-align-center"><?=$order->quantity?></div>
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$order->posted_item_variance->posted_item->price?></div>
+								<div class="cb-align-center pull-right"><?=$order->posted_item_variance->posted_item->price?></div>
 							</div>
 						</div>
 					</div>
@@ -121,7 +121,7 @@
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->total_payable?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->total_payable?></div>
 							</div>
 						</div>
 					</div>
@@ -137,7 +137,7 @@
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->shipping_charge->fee_amount?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
 							</div>
 						</div>
 					</div>
@@ -153,7 +153,7 @@
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->shipping_charge->fee_amount?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
 							</div>
 						</div>
 					</div>
