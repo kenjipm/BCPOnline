@@ -168,7 +168,7 @@ class Posted_item_variance_model extends CI_Model {
 				$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 				if ($this->db->insert($this->table_posted_item_variance, $db_item))
 				{
-					$this->load->library('Id_Generator');
+					$this->load->library('Id_generator');
 					
 					$this->id			= $this->db->insert_id();
 					$this->detail_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $this->id);
@@ -191,7 +191,7 @@ class Posted_item_variance_model extends CI_Model {
 			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 			if ($this->db->insert($this->table_posted_item_variance, $db_item))
 			{
-				$this->load->library('Id_Generator');
+				$this->load->library('Id_generator');
 				
 				$db_item->id			= $this->db->insert_id();
 				$db_item->detail_id		= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);
@@ -211,7 +211,7 @@ class Posted_item_variance_model extends CI_Model {
 			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 			if ($this->db->insert($this->table_posted_item_variance, $db_item))
 			{
-				$this->load->library('Id_Generator');
+				$this->load->library('Id_generator');
 				
 				$db_item->id			= $this->db->insert_id();
 				$db_item->detail_id		= $this->id_generator->generate(TYPE['name']['POSTED_ITEM_VARIANCE'], $db_item->id);

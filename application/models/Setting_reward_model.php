@@ -137,7 +137,7 @@ class Setting_reward_model extends CI_Model {
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		if ($this->db->insert($this->table_setting_reward, $db_item))
 		{
-			$this->load->library('Id_Generator');
+			$this->load->library('Id_generator');
 			
 			$db_item->id				= $this->db->insert_id();
 			$db_item->setting_reward_id	= $this->id_generator->generate(TYPE['name']['SETTING_REWARD'], $db_item->id);

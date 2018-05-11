@@ -187,7 +187,7 @@ class Dispute_model extends CI_Model {
 	public function update_natural_id()
 	{
 		$this->load->library('id_generator');
-		$this->dispute_id = $this->id_generator->generate(TYPE['name']['dispute'], $this->id);
+		$this->dispute_id = $this->id_generator->generate(TYPE['name']['DISPUTE'], $this->id);
 		
 		$this->db->set('dispute_id', $this->dispute_id)
 				 ->where('id', $this->id)

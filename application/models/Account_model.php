@@ -271,7 +271,7 @@ class Account_model extends CI_Model {
 			
 			if ($this->child_model->id) // kalau berhasil masukin child
 			{
-				$this->load->library('Id_Generator');
+				$this->load->library('Id_generator');
 				$natural_id	= $this->id_generator->generate($type, $this->child_model->id);
 				$this->child_model->update_natural_id($natural_id);
 				

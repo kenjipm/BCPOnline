@@ -6,7 +6,7 @@ $(function(){
 		{
 			allowedExts		: ["jpg", "jpeg", "jpe", "jif", "jfif", "jfi", "png", "gif"],
 			allowedTypes	: ["image/pjpeg", "image/jpeg", "image/png", "image/x-png", "image/gif", "image/x-gif"],
-			maxFileSize		: 1048576, //1MB in bytes
+			maxFileSize		: 20971520, //1MB in bytes
 			name			: element_name,
 			start: function(file){
 				//upload started

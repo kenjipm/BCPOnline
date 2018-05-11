@@ -91,7 +91,7 @@
 							<div class="cb-col-fourth-2">
 								<div class="cb-align-center cb-pl-5" id="order_status\">
 									Menunggu Pembayaran
-									<button data-toggle="collapse" data-target="#order_status_history" class="pull-right cb-mr-5" type="button">V</button>
+									<button type="button" data-toggle="collapse" data-target="#order_status_history-<?=$order->posted_item_variance->id?>" class="cb-button cb-button-operational pull-right"><div class="cb-arrow cb-arrow-white cb-arrow-down"></div></button>
 								</div>
 							</div>
 							<div class="cb-col-fourth-2">
@@ -103,7 +103,7 @@
 					</div>
 				</div>
 				<div class="cb-row">
-					<div id="order_status_history" class="collapse cb-col-full">
+					<div id="order_status_history-<?=$order->posted_item_variance->id?>" class="collapse cb-col-full">
 						<div class="cb-row cb-bg-secondary-3 cb-p-5">
 							<i> Pesanan dibuat (<?=$model->billing->date_created?>)</i>
 						</div>

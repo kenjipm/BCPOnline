@@ -51,7 +51,7 @@
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
-					<div class="cb-pull-left">Deskripsi Promo</div>
+					<div class="cb-pull-left">Pesan untuk Admin</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">

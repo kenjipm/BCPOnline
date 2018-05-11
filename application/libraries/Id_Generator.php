@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Id_Generator {
+class Id_generator {
 
 	public function generate($type, $id)
 	{

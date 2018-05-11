@@ -245,8 +245,8 @@ defined('TYPE') OR define('TYPE', array(
 			'MESSAGE_INBOX'			=> 'Message_model',
 			'DISPUTE'				=> 'Dispute_model',
 			'FEEDBACK'				=> 'Feedback_model',
-			'TENANT_BILL'			=> 'Tenant_Bill_model',
-			'TENANT_PAY_RECEIPT'	=> 'Tenant_Pay_Receipt_model',
+			'TENANT_BILL'			=> 'Tenant_bill_model',
+			'TENANT_PAY_RECEIPT'	=> 'Tenant_pay_receipt_model',
 			'POINT_HISTORY'			=> 'Point_history_model'
 		),
 		'TOP_MENU' => array(

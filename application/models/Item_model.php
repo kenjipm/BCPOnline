@@ -509,7 +509,7 @@ class Item_model extends CI_Model {
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		if ($this->db->insert($this->table_item, $db_item))
 		{
-			$this->load->library('Id_Generator');
+			$this->load->library('Id_generator');
 			
 			$this->id				= $this->db->insert_id();
 			$this->posted_item_id	= $this->id_generator->generate(TYPE['name']['POSTED_ITEM'], $this->id);

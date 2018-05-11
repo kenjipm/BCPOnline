@@ -250,10 +250,10 @@ class Tenant_bill_model extends CI_Model {
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		if ($this->db->insert($this->table_tenant_bill, $db_item))
 		{
-			$this->load->library('Id_Generator');
+			$this->load->library('Id_generator');
 			
 			$db_item->id		= $this->db->insert_id();
-			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['tenant_bill'], $db_item->id);
+			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['TENANT_BILL'], $db_item->id);
 			
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_tenant_bill, $db_item);
@@ -297,10 +297,10 @@ class Tenant_bill_model extends CI_Model {
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		if ($this->db->insert($this->table_tenant_bill, $db_item))
 		{
-			$this->load->library('Id_Generator');
+			$this->load->library('Id_generator');
 			
 			$db_item->id		= $this->db->insert_id();
-			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['tenant_bill'], $db_item->id);
+			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['TENANT_BILL'], $db_item->id);
 			
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_tenant_bill, $db_item);

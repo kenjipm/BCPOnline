@@ -160,7 +160,7 @@ class Shipping_address_model extends CI_Model {
 			$this->id	= $this->db->insert_id();
 			$type = TYPE['name']['SHIPPING_ADDRESS'];
 		
-			$this->load->library('Id_Generator');
+			$this->load->library('Id_generator');
 			$natural_id	= $this->id_generator->generate($type, $this->id);
 			
 			$this->address_id		= $natural_id;
