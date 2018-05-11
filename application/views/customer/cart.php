@@ -12,30 +12,30 @@
 						<div class="cb-row cb-p-5 cb cb-border-bottom">
 							<div class="cb-col-fourth cb-margin-auto">
 								<a href="<?=site_url('item/'.$item->posted_item_id)?>">
-									<img class="col-md-12" src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
+									<img class="cb-col-full" src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
 								</a>
 							</div>
 							<div class="cb-col-fourth cb-margin-auto">
-								<div class="cb-row">
+								<div class="cb-row cb-col-full">
 									Produk
 								</div>
-								<div class="cb-row">
+								<div class="cb-row cb-col-full">
 									<a href="<?=site_url('item/'.$item->posted_item_id)?>">
 										<div class="cb-label"><?=$item->posted_item_name?></div>
 									</a>
 								</div>
-								<div class="cb-row cb-pt-5">
+								<div class="cb-row cb-pt-5 cb-col-full">
 									<?=$item->var_type?>
 								</div>
-								<div class="cb-row">
+								<div class="cb-row cb-col-full">
 									<div class="cb-label"><?=$item->var_description?></div>
 								</div>
-								<div class="cb-row cb-pt-5">
+								<div class="cb-row cb-pt-5 cb-col-full">
 									<div class="cb-font-title cb-label"><?=$item->price?></div>
 								</div>
 							</div>
 							<div class="cb-col-fourth cb-margin-auto">
-								<div class="cb-row">
+								<div class="cb-row cb-col-full">
 									Jumlah
 								</div>
 								<div class="cb-row">
@@ -45,7 +45,7 @@
 								</div>
 							</div>
 							<div class="cb-col-fourth cb-margin-auto cb-pl-5">
-								<div class="cb-row">
+								<div class="cb-row cb-col-full">
 									Total
 								</div>
 								<div class="cb-row">
