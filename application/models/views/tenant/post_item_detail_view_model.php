@@ -56,7 +56,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			if ($tenant_bill != null)
 			{
 				$this->posted_item->is_hot_item_confirmed = true;
-				if ($tenant_bill->is_paid())
+				if ($tenant_bill->is_paid_hot_item())
 				{
 					$this->posted_item->is_hot_item_paid = true;
 					if ($tenant_bill->is_expired())
@@ -76,7 +76,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			if ($tenant_bill != null)
 			{
 				$this->posted_item->is_seo_item_confirmed = true;
-				if ($tenant_bill->is_paid())
+				if ($tenant_bill->is_paid_seo_item())
 				{
 					$this->posted_item->is_seo_item_paid = true;
 					if ($tenant_bill->is_expired())

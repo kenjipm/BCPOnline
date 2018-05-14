@@ -8,14 +8,17 @@
 
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<div class="cb-row">
-		<div class="cb-col-fifth-2">
+		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Tenant </div>
 		</div>
 		<div class="cb-col-fifth">
 			<div class="cb-label cb-font-title cb-align-center"> Barang </div>
 		</div>
 		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Harga </div>
+			<div class="cb-label cb-font-title cb-align-center"> Harga Promo </div>
+		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center"> Tujuan Promo </div>
 		</div>
 	</div>
 	<?php
@@ -23,7 +26,7 @@
 	{
 		?>
 		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
-			<div class="cb-col-fifth-2">
+			<div class="cb-col-fifth">
 				<div class=" cb-align-center"> <?=$hot_item->tenant_name?> </div>
 			</div>
 			<div class="cb-col-fifth">
@@ -31,6 +34,9 @@
 			</div>
 			<div class="cb-col-fifth">
 				<div class="cb-align-center"> <?=$hot_item->promo_price?></div>
+			</div>
+			<div class="cb-col-fifth">
+				<div class="cb-align-center"> <?=$hot_item->promo_description?></div>
 			</div>
 			<div class="cb-col-fifth">
 				<a href="<?=site_url('Item/hot_item_detail/'.$hot_item->id)?>" class="cb-button-form">LIHAT BARANG</a>

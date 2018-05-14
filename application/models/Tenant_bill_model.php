@@ -162,9 +162,14 @@ class Tenant_bill_model extends CI_Model {
 		// return ($items !== null) ? $this->map_list($items) : array();
 	// }
 	
-	public function is_paid()
+	public function is_paid_hot_item()
 	{
-		return ($this->payment_date != 0); // "0000-00-00 00:00:00"
+		return (($this->payment_date != 0) && ($this->hot_item_id != NULL)); // "0000-00-00 00:00:00"
+	}
+	
+	public function is_paid_seo_item()
+	{
+		return (($this->payment_date != 0) && ($this->hot_item_id == NULL)); // "0000-00-00 00:00:00"
 	}
 	
 	public function is_expired()
