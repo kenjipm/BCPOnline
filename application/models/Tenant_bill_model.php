@@ -217,6 +217,7 @@ class Tenant_bill_model extends CI_Model {
 	public function get_from_seo_item_id($posted_item_id)
 	{
 		$where['posted_item_id'] = $posted_item_id;
+		$where['hot_item_id'] = NULL;
 		
 		$this->db->where($where);
 		$this->db->where('admin_id is NOT NULL');
@@ -230,6 +231,7 @@ class Tenant_bill_model extends CI_Model {
 	public function get_registered_seo($posted_item_id)
 	{
 		$where['posted_item_id'] = $posted_item_id;
+		$where['hot_item_id'] = NULL;
 		
 		$this->db->where($where);
 		$query = $this->db->get($this->table_tenant_bill, 1);

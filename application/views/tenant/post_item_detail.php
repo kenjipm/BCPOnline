@@ -163,6 +163,15 @@
 					else if (!$model->posted_item->is_hot_item_paid)
 					{
 						?>
+							<div class="cb-col-full cb-row cb-mb-5">
+								<div class="cb-col-fifth cb-label cb-txt-primary-1">
+									<div class="cb-pull-left">Jumlah Tagihan</div>
+									<div class="cb-pull-right">:</div>
+								</div>
+								<div class="cb-col-fifth-2 cb-pl-3">
+									<input type="text" class="cb-row cb-col-full cb-input-text" id="var_type" value="<?=$model->posted_item->payment_value?>" readonly>
+								</div>
+							</div>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" onclick="bayar_hot_item_dummy(<?=$model->posted_item->hot_item_id?>)">Bayar (dummy)</button>
 						<?php

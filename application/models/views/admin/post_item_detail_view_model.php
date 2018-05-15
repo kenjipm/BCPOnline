@@ -8,6 +8,8 @@ class Post_Item_Detail_View_Model extends CI_Model{
 	public function __construct()
 	{
 		$this->posted_item = new class{};
+		$this->posted_item->is_hot_item = false;
+		$this->posted_item->is_hot_item_confirmed = false;
 		$this->posted_item->is_hot_item_paid = false;
 	}
 	
@@ -48,11 +50,18 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		{
 			$this->load->model('tenant_bill_model');
 			$tenant_bill = $this->tenant_bill_model->get_from_hot_item_id($hot_item->id);
+			$this->posted_item->is_hot_item = true;
+			$this->posted_item->hot_item_id = $hot_item->id;
 			if ($tenant_bill != null)
 			{
+				$this->posted_item->is_hot_item_confirmed = true;
 				if ($tenant_bill->is_paid_hot_item())
 				{
 					$this->posted_item->is_hot_item_paid = true;
+					if ($tenant_bill->is_expired())
+					{
+						$this->posted_item->is_hot_item = false;
+					}
 				}
 			}
 		}
