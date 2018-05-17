@@ -1,7 +1,7 @@
 <div class="cb-panel-heading cb-pl-5">
 	<div class="cb-row">
 		<div class="cb-col-half">
-			<h3 class="cb-txt-primary-1 cb-font-title">PERMINTAAN BARANG SEO</h3>
+			<h3 class="cb-txt-primary-1 cb-font-title">PERMINTAAN BARANG PROMO</h3>
 		</div>
 	</div>
 </div>

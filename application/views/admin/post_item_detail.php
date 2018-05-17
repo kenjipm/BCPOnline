@@ -140,11 +140,38 @@
 				}
 			?>
 		</div>
-		<div class="cb-col-full cb-row">
-			<div class="cb-col-fifth cb-label cb-txt-primary-1">
+		<?php
+		if (!$model->posted_item->is_hot_item_confirmed)
+		{
+			?>
+			<div class="cb-col-full cb-row">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+				</div>
+				<a class="cb-button-form" href="<?=site_url('Admin/create_tenant_bill/'.$model->posted_item->id)?>">Buat Billing Tenant</a>
 			</div>
-			<a class="cb-button-form" href="<?=site_url('Admin/create_tenant_bill/'.$model->posted_item->id)?>">Buat Billing Tenant</a>
-		</div>
+			<?php
+		}
+		else if (!$model->posted_item->is_hot_item_paid)
+		{
+			?>
+			<div class="cb-col-full cb-row">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+				</div>
+				<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>
+			</div>
+			<?php
+		}
+		else // if ($is_hot_item_paid)
+		{
+			?>
+			<div class="cb-col-full cb-row">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+				</div>
+				<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Sudah Hot Item</button>
+			</div>
+			<?php
+		}
+		?>
 	</div>
 </div>
 

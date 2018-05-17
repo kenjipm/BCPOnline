@@ -238,11 +238,14 @@ class Item extends CI_Controller {
 		$this->load->model('Hot_item_model');
 		$this->load->model('Item_model');
 		$this->load->model('Posted_item_variance_model');
+		$this->load->model('Tenant_bill_model');
 		$item_id = $this->Hot_item_model->get_posted_item_id($id);
 		$item = $this->Item_model->get_from_id($item_id);
 		$posted_item_variance = $this->Posted_item_variance_model->get_all($item_id);
+		$hot_item = $this->Hot_item_model->get_from_posted_item_id($item->id);
+		
 		$this->load->model('views/admin/post_item_detail_view_model');
-		$this->post_item_detail_view_model->get($item, $posted_item_variance, $id);
+		$this->post_item_detail_view_model->get($item, $posted_item_variance, $id, $hot_item);
 		$data['model'] = $this->post_item_detail_view_model;
 		
 		$this->load->view('admin/post_item_detail', $data);

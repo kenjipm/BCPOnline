@@ -45,10 +45,10 @@
 					</div>
 				</div>
 			</div>
-			<div class="cb-col-fifth-4 cb-pl-3">
+			<div class="cb-col-fifth-4">
 				<div class="cb-row cb-border-bottom">
 					<div class="cb-col-half">
-						<div class="cb-row cb-pb-3">
+						<div class="cb-row">
 							<div class="cb-col-fourth-2">
 								<div class="cb-label cb-align-center">Produk</div>
 							</div>
@@ -82,7 +82,7 @@
 								<div class="cb-align-center"><?=$order->quantity?></div>
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$order->posted_item_variance->posted_item->price?></div>
+								<div class="cb-align-center pull-right"><?=$order->posted_item_variance->posted_item->price?></div>
 							</div>
 						</div>
 					</div>
@@ -102,7 +102,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-row">
+				<div class="cb-row cb-p-5">
 					<div id="order_status_history-<?=$order->posted_item_variance->id?>" class="collapse cb-col-full">
 						<div class="cb-row cb-bg-secondary-3 cb-p-5">
 							<i> Pesanan dibuat (<?=$model->billing->date_created?>)</i>
@@ -112,57 +112,57 @@
 				<?php
 				}
 			?>
-				<div class="cb-row">
+				<div class="cb-row cb-p-5">
 					<div class="cb-col-half">
-						<div class="cb-row cb-p-5 cb-pr-1">
+						<div class="cb-row">
 							<div class="cb-col-fourth-2">
 								<div class="cb-align-left">Subtotal</div>
 							</div>
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->total_payable?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->total_payable?></div>
 							</div>
 						</div>
 					</div>
 					<div class="cb-col-half">
 					</div>
 				</div>
-				<div class="cb-row">
+				<div class="cb-row cb-p-5">
 					<div class="cb-col-half">
-						<div class="cb-row cb-p-5 cb-pr-1">
+						<div class="cb-row">
 							<div class="cb-col-fourth-2">
 								<div class="cb-align-left">Ongkos Kirim</div>
 							</div>
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->shipping_charge->fee_amount?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
 							</div>
 						</div>
 					</div>
 					<div class="cb-col-half">
 					</div>
 				</div>
-				<div class="cb-row">
+				<div class="cb-row cb-p-5">
 					<div class="cb-col-half">
-						<div class="cb-row cb-p-5 cb-pr-1">
+						<div class="cb-row">
 							<div class="cb-col-fourth-2">
 								<div class="cb-align-left">Voucher</div>
 							</div>
 							<div class="cb-col-fourth">
 							</div>
 							<div class="cb-col-fourth">
-								<div class="cb-align-right"><?=$model->billing->shipping_charge->fee_amount?></div>
+								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
 							</div>
 						</div>
 					</div>
 					<div class="cb-col-half">
 					</div>
 				</div>
-				<div class="cb-row">
+				<div class="cb-row cb-p-5">
 					<div class="cb-col-half">
-						<div class="cb-row cb-p-5 cb-pr-1">
+						<div class="cb-row">
 							<div class="cb-col-fourth-2">
 								<div class="cb-label cb-align-left">Total Pembayaran</div>
 							</div>

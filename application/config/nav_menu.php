@@ -205,7 +205,7 @@ $config['top_menu_admin'] = array(
 			'url'	=> "admin/hot_item_list",
 			),
 		'SEO_ITEM' => array(
-			'text'	=> "SEO ITEM",
+			'text'	=> "PROMOTED ITEM",
 			'url'	=> "admin/seo_item_list",
 			),
 		'BIDDING' => array(
