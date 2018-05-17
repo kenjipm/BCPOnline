@@ -33,7 +33,26 @@
 				<div class="cb-align-center"> <?=$tenant_bill->payment_value?></div>
 			</div>
 			<div class="cb-col-fifth">
-				<a href="<?=site_url('Admin/create_tenant_bill_seo/'.$tenant_bill->id)?>" class="cb-button-form">Buat Billing</a>
+				<?php
+				if (!$tenant_bill->is_seo_item_confirmed)
+				{
+					?>
+					<a href="<?=site_url('Admin/create_tenant_bill_seo/'.$tenant_bill->id)?>" class="cb-button-form">Buat Billing</a>
+					<?php
+				}
+				else if (!$tenant_bill->is_seo_item_paid)
+				{
+					?>
+					<button type="button" class="cb-button-form" disabled>Menunggu Pembayaran</button>
+					<?php
+				}
+				else // if ($is_seo_item_paid)
+				{
+					?>
+					<button type="button" class="cb-button-form" disabled>Sudah Promoted</button>
+					<?php
+				}
+				?>
 			</div>
 		</div>
 		<?php
