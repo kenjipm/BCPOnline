@@ -181,7 +181,7 @@ $config['top_menu_admin'] = array(
 		),
 	'strip' => array(
 		'ORDER' => array(
-			'text'	=> "KIRIM BARANG",
+			'text'	=> "DAFTAR ORDER",
 			'url'	=> "order/order_list",
 			),
 		'VOUCHER' => array(

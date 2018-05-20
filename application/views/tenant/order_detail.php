@@ -33,7 +33,7 @@
 			<div class="cb-row">
 				<div class="cb-col-fifth-4">
 					<div class="cb-txt-primary-1 cb-pull-left">
-						<div class="cb-label"> Customer</div>
+						<div class="cb-label"> Pengirim</div>
 					</div>
 				</div>
 				<div class="cb-col-fifth">
