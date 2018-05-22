@@ -26,6 +26,7 @@ class Report_model extends CI_Model {
 	public function get_all_transaction_from_date($start_date, $end_date)
 	{
 		$this->db->select('
+			billing.bill_id AS natural_billing_id,
 			billing.date_created AS date_bill_created,
 			SUM(order_details.sold_price * order_details.quantity) AS total_price,
 			SUM(CASE WHEN (
@@ -59,6 +60,7 @@ class Report_model extends CI_Model {
 	{
 		$this->db->select('
 			billing.id AS billing_id,
+			billing.bill_id AS natural_billing_id,
 			billing.date_created AS date_bill_created,
 			posted_item.posted_item_name AS posted_item_name,
 			tenant.tenant_name AS tenant_name,

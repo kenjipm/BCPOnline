@@ -4,6 +4,7 @@ class Dispute_model extends CI_Model {
 	
 	private $table_dispute = 'dispute';
 	private $table_dispute_text = 'dispute_text';
+	private $table_order_detail = 'order_detail';
 	
 	// table attribute
 	public $id;

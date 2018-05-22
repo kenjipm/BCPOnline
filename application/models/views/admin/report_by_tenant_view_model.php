@@ -34,6 +34,7 @@ class report_by_tenant_view_model extends CI_Model {
 			{
 				$this->transactions[$key] = new class{};
 				
+				$this->transactions[$key]->natural_billing_id 			= $transaction->natural_billing_id;
 				$this->transactions[$key]->date_bill_created 			= $transaction->date_bill_created;
 				$this->transactions[$key]->tenant_name		 			= $transaction->tenant_name;
 				$this->transactions[$key]->posted_items 				= array();

@@ -30,7 +30,7 @@ class Message_detail_view_model extends CI_Model {
 			$last_message_text = $message_inbox->get_last_message_text();
 			$is_last_message_text_exist = ($last_message_text != null);
 			
-			$temp->msg_preview_date = $is_last_message_text_exist ? " (" . date("d M y H:i:s", strtotime($last_message_text->date_sent)) . ")" : "";
+			$temp->msg_preview_date = $is_last_message_text_exist ? date("d M y H:i:s", strtotime($last_message_text->date_sent)) : "";
 			$temp->msg_preview_text = $is_last_message_text_exist ? $last_message_text->text : "";
 			
 			if ($is_last_message_text_exist) $last_message_text->init_account_sender();

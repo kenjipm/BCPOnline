@@ -9,7 +9,10 @@
 					<a href="<?=site_url('dispute/detail/'.$dispute->id)?>" class="cb-col-full cb-row <?=($dispute->id == $model->dispute->id) ? 'cb-bg-primary-2' : ''?>">
 						<div class="cb-col-full cb-row cb-p-5 cb-font-title <?=($dispute->id == $model->dispute->id) ? 'cb-txt-primary-3' : 'cb-txt-primary-1'?>">
 							<div class="cb-pl-5">
-								<h4><?=$dispute->other_party_name?></h4>
+								<div class="cb-txt-primary-1 cb-font-size-lg">
+									<?=$dispute->other_party_name?> | <?= $dispute->natural_billing_id ?>
+								</div>
+								<div class="cb-txt-secondary-2 cb-font-size-sm"><?= $dispute->msg_preview_date ?></div>
 							</div>
 						</div>
 						<div class="cb-col-full cb-row cb-pl-5 cb-pr-5">
@@ -35,7 +38,7 @@
 				<div class="cb-font-title cb-font-size-xxl">&nbsp;</div>
 				<div class="cb-border-round cb-panel-group-top cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-border-bottom">
 					<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg">Atas Pembelian:</span>
-					<a class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-lg cb-ml-3" href="<?=site_url('order/transaction_detail/'.$model->dispute->order_detail->id)?>">
+					<a class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-lg cb-ml-3" href="<?=site_url('billing/detail/'.$model->dispute->billing->id)?>">
 						<?=$model->dispute->order_detail->posted_item_variance->posted_item->posted_item_name?> (<?=$model->dispute->order_detail->posted_item_variance->var_description?>)
 					</a>
 				</div>

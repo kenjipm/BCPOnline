@@ -9,7 +9,10 @@
 					<a href="<?=site_url('message/detail/'.$message_inbox->id)?>" class="cb-col-full cb-row <?=($message_inbox->id == $model->message_inbox->id) ? 'cb-bg-primary-2' : ''?>">
 						<div class="cb-col-full cb-row cb-p-5 cb-font-title <?=($message_inbox->id == $model->message_inbox->id) ? 'cb-txt-primary-3' : 'cb-txt-primary-1'?>">
 							<div class="cb-pl-5">
-								<h4><?=$message_inbox->other_party_name?></h4>
+								<div class="cb-txt-primary-1 cb-font-size-lg">
+									<?=$message_inbox->other_party_name?>
+								</div>
+								<div class="cb-txt-secondary-2 cb-font-size-sm"><?= $message_inbox->msg_preview_date ?></div>
 							</div>
 						</div>
 						<div class="cb-col-full cb-row cb-pl-5 cb-pr-5">

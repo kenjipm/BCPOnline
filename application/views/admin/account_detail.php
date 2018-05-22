@@ -150,11 +150,14 @@
 			<input type="text" class="cb-input-text cb-col-full" name="status" value="<?=$model->account->status ?>" readonly/>
 		</div>
 		<div class="cb-row cb-col-fifth cb-pl-5" <?php if ($model->account->status == "ACTIVE"){?> style="display:none"<?php } ?>>
-			<button type="button" class="cb-button-form" onclick="popup.open('popup_unblock')">AKTIVASI</button>
+			<button type="button" class="cb-button-form" onclick="unblock_account()">AKTIVASI</button>
 		</div>
 		<div class="cb-row cb-col-fifth cb-pl-5" <?php if ($model->account->status == "INACTIVE"){?> style="display:none"<?php } ?>>
-			<button type="button" class="cb-button-form" onclick="popup.open('popup_block')">BLOKIR</button>
+			<button type="button" class="cb-button-form" onclick="block_account()">BLOKIR</button>
 		</div>
+		<?php
+			$this->load->view('admin/popup/approval');
+		?>
 	</div>
 </div>
 	

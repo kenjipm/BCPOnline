@@ -374,4 +374,22 @@ class Admin extends CI_Controller {
 		echo json_encode($json_result);
 	}
 	
+	public function validate_superadmin()
+	{
+		$password = $this->input->post('password');
+		$json_result = new class{};
+		$json_result->code = "-1";
+		
+		$this->load->model('account_model');
+		if ($this->account_model->is_superadmin($password)) // if true
+		{
+			$json_result->code = "1";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
 }
