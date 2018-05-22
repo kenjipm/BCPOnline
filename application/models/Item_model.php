@@ -525,6 +525,51 @@ class Item_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function update_from_post()
+	{
+		$this->get_from_id($this->input->post('id'));
+		
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		$this->item_type				= $this->input->post('item_type');
+		if ($this->item_type == "ORDER")
+		{
+			$this->posted_item_id			= "";
+			$this->posted_item_name			= $this->input->post('posted_item_name');
+			$this->price					= $this->input->post('price');
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= NULL;
+			$this->is_confirmed				= 0;
+			$this->unit_weight				= $this->input->post('unit_weight');
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= $cur_tenant->id;
+			$this->brand_id					= $this->input->post('brand_id');
+		} 
+		else if ($this->item_type == "REPAIR")
+		{
+			$this->posted_item_id			= "";
+			$this->price					= "25000";
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= NULL;
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= $cur_tenant->id;
+			$this->brand_id					= $this->input->post('brand_id');
+		}
+		
+		// update data
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		
+		$this->db->where('id', $db_item->id);
+		$this->db->update($this->table_item, $db_item);
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
 	public function get_all_variance_quantity_available()
 	{
 		$this->load->model('posted_item_variance_model');

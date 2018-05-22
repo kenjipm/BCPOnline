@@ -78,7 +78,9 @@ class Category_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$query = $this->db->get($this->table_category);
+		$query = $this->db
+					->order_by('category_name', 'ASC')
+					->get($this->table_category);
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();

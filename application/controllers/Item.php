@@ -203,6 +203,8 @@ class Item extends CI_Controller {
 		}
 		else // TENANT
 		{
+			if ($this->input->method() == "post") $data = $this->item_edit_do();
+			
 			$this->load->model('Item_model');
 			$item = $this->Item_model->get_from_id($id);
 			
@@ -359,6 +361,40 @@ class Item extends CI_Controller {
 				redirect('bidding_live/bidding_live_list');
 			else
 				redirect('Item/post_item_list');
+		}
+	}
+	
+	public function item_edit_do()
+	{
+		$this->load->library('form_validation');
+
+		if ($this->input->post('item_type') == "ORDER")
+		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
+			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
+			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		} 
+		else if ($this->input->post('item_type') == "REPAIR")
+		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		}
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Item_model');
+			$this->load->model('Posted_item_variance_model');
+			$this->load->model('Tag_model');
+			$this->Item_model->update_from_post();
+			$this->Posted_item_variance_model->update_from_post($this->Item_model->id);
+			
+			redirect('item/post_item_list');
 		}
 	}
 	
