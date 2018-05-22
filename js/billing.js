@@ -22,7 +22,9 @@ function cek_kode_voucher(then_submit=false) {
 		},
 		success: function(data) {
 			if (data == "1") { // == true
-				$("#voucher_code_status").html("Voucher diterima");
+				if (voucher_code != "") {
+					$("#voucher_code_status").html("Voucher diterima");
+				}
 				if (then_submit)
 				{
 					submit_form();

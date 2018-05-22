@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class OTP_Generator {
+class Otp_Generator {
 	
 	public function generate($length=6)
 	{
