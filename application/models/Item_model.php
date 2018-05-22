@@ -366,7 +366,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_from_search($keywords, $offset=0, $limit=20)
+	public function get_from_search($keywords, $offset=0, $limit=20, $order="RANDOM")
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -374,6 +374,7 @@ class Item_model extends CI_Model {
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
 		$this->db->distinct();
+		$this->db->order_by($this->table_item.'.id', $order);
 		// foreach (explode(" ", $keywords) as $keyword) // untuk search per word
 		// {
 			// $this->db->or_like('name', $keyword);
