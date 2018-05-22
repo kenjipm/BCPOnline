@@ -84,7 +84,9 @@ class Brand_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$query = $this->db->get($this->table_brand);
+		$query = $this->db
+					->order_by('brand_name', 'ASC')
+					->get($this->table_brand);
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
