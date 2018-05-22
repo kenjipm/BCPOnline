@@ -633,6 +633,7 @@ h4 { font-weight: bold; }
 .popup-sm { width: 300px; }
 .popup-md { width: 500px; }
 .popup-lg { width: 700px; }
+.popup-fs { width: 90%; height: 90%; }
 
 .popup .panel {
 	background-color: #faa528;

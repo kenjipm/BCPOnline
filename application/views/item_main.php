@@ -5,7 +5,7 @@
 				<div class="cb-row cb-border-round cb-bg-primary-3 cb-p-5">
 					<div class="cb-col-half">
 						<div class="cb-row">
-							<div class="cb-col-fourth cb-p-2">
+							<!--div class="cb-col-fourth cb-p-2">
 								<div class="cb-row item_gallery-vertical">
 									<div class="cb-col-full">
 										<?php if ($model->item->image_one_name != "") { ?> <img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/> <?php } ?>
@@ -24,9 +24,9 @@
 										}*/
 									?>
 								</div>
-							</div>
-							<div class="cb-col-fourth-3 cb-p-2">
-								<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round"/>
+							</div-->
+							<div class="cb-col-full cb-p-2">
+								<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>" class="item_thumbnail-lg cb-border cb-border-round image_zoomable"/>
 							</div>
 						</div>
 					</div>
@@ -166,22 +166,22 @@
 					<div class="cb-row cb-col-full cb-p-5 cb-align-center">
 						<?php if ($item_variance->image_two_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_two_name?>" alt="" style="width:100%">
+								<img src="<?=$item_variance->image_two_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
 							</div></div>
 						<?php } ?>
 						<?php if ($item_variance->image_three_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_three_name?>" alt="" style="width:100%">
+								<img src="<?=$item_variance->image_three_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
 							</div></div>
 						<?php } ?>
 						<?php if ($item_variance->image_four_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_four_name?>" alt="" style="width:100%">
+								<img src="<?=$item_variance->image_four_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
 							</div></div>
 						<?php } ?>
 					</div>
 					<div class="cb-row cb-col-full cb-align-center">
-						<button onclick="popup.close('popup_variance-<?=$item_variance->id?>')" type="button" class="cb-button cb-button-form cb-col-third">OK</button>
+						<button onclick="popup.close('popup_variance-<?=$item_variance->id?>')" type="button" class="cb-button cb-button-form cb-col-third">TUTUP</button>
 					</div>
 				</div>
 			</div>
@@ -336,6 +336,17 @@
 					</div>
 				</div>
 			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_image_zoomed" class="popup">
+	<div class="cb-bg-primary-2 cb-border-round cb-p-5">
+		<div class="cb-bg-secondary-3 cb-row cb-align-center cb-border-round cb-p-5">
+			<img id="image_zoomed" class="thumbnail" src="" alt=""/>
+			<div class="cb-row cb-col-full cb-align-center">
+				<button type="button" class="cb-button cb-button-form cb-b" onclick="popup.close('popup_image_zoomed')">TUTUP</button>
+			</div>
 		</div>
 	</div>
 </div>

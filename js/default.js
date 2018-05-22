@@ -58,6 +58,11 @@ $(document).ready(function(){
 		showMicrosec: false,
 	});
 	
+	$(".image_zoomable").click(function(){
+		$("#image_zoomed").attr('src', $(this).attr('src'));
+		popup.open('popup_image_zoomed');
+	});
+	
 	// $("img").on("error", function(){
 		// // Replacing image source
 		// $(this).attr('src', base_url + '/img/default_image.png');

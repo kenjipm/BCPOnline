@@ -38,7 +38,7 @@
 				<div class="cb-font-title cb-font-size-xxl">&nbsp;</div>
 				<div class="cb-border-round cb-panel-group-top cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-border-bottom">
 					<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg">Atas Pembelian:</span>
-					<a class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-lg cb-ml-3" href="<?=site_url('billing/detail/'.$model->dispute->billing->id)?>">
+					<a class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-lg cb-ml-3" href="<?=$model->dispute->detail_link?>">
 						<?=$model->dispute->order_detail->posted_item_variance->posted_item->posted_item_name?> (<?=$model->dispute->order_detail->posted_item_variance->var_description?>)
 					</a>
 				</div>

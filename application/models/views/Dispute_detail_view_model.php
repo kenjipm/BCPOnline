@@ -62,6 +62,8 @@ class Dispute_detail_view_model extends CI_Model {
 			$this->dispute->billing = new class{};
 			$this->dispute->billing->id = $selected_dispute->order_detail->billing->id;
 			
+			$this->dispute->detail_link = ($this->session->type == TYPE['name']['ADMIN']) ? site_url('billing/detail/'.$selected_dispute->order_detail->billing->id) : site_url('billing/status/'.$selected_dispute->order_detail->billing->id);
+			
 			$this->dispute->order_detail->posted_item_variance = new class{};
 			$this->dispute->order_detail->posted_item_variance->var_type = $selected_dispute->order_detail->posted_item_variance->var_type;
 			$this->dispute->order_detail->posted_item_variance->var_description = $selected_dispute->order_detail->posted_item_variance->var_description;
