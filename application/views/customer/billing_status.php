@@ -89,7 +89,7 @@
 						<div class="cb-col-fourth-2">
 							<div class="cb-align-center cb-pl-5" id="order_status-<?=$order->id?>">
 								<?=$order->order_status?>
-								<button type="button" data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="cb-button cb-button-operational pull-right"><div class="cb-arrow cb-arrow-white cb-arrow-down"></div></button>
+								<button type="button" data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="cb-button cb-button-operational pull-right"><div class="cb-arrow cb-arrow-white cb-arrow-up"></div></button>
 							</div>
 						</div>
 						<div class="cb-col-fourth-2">
@@ -126,7 +126,7 @@
 				</div>
 			</div>
 			<div class="cb-row">
-				<div id="order_status_history-<?=$order->id?>" class="collapse cb-col-full">
+				<div id="order_status_history-<?=$order->id?>" class="collapse in cb-col-full">
 					<?php
 						foreach($order->order_status_histories as $order_status_history)
 						{
