@@ -340,10 +340,12 @@
 	</div>
 </div>
 
-<div id="popup_image_zoomed" class="popup">
-	<div class="cb-bg-primary-2 cb-border-round cb-p-5">
-		<div class="cb-bg-secondary-3 cb-row cb-align-center cb-border-round cb-p-5">
-			<img id="image_zoomed" class="thumbnail" src="" alt=""/>
+<div id="popup_image_zoomed" class="popup popup-fs cb-row">
+	<div class="cb-bg-primary-2 cb-border-round cb-p-5 popup-fs-container">
+		<div class="cb-bg-secondary-3 cb-row cb-align-center cb-border-round cb-p-5 popup-fs-container">
+			<div class="cb-col-full cb-align-center popup-fs-content">
+				<img id="image_zoomed" class="thumbnail" src="" alt=""/>
+			</div>
 			<div class="cb-row cb-col-full cb-align-center">
 				<button type="button" class="cb-button cb-button-form cb-b" onclick="popup.close('popup_image_zoomed')">TUTUP</button>
 			</div>

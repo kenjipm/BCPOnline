@@ -44,7 +44,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth">
-				<input type="text" class="cb-input-text cb-col-full" name="base_percent" value="<?=$model->setting_reward->base_percent?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="base_percent" value="<?=$model->setting_reward->base_percent?>"/>
 				<span class="text-danger"><?= form_error('base_percent'); ?></span>
 			</div>
 			<div class="cb-row cb-col-tenth"></div>
@@ -65,7 +65,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth">
-				<input type="text" class="cb-input-text cb-col-full" name="ratio_percent" value="<?=$model->setting_reward->ratio_percent?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="ratio_percent" value="<?=$model->setting_reward->ratio_percent?>"/>
 				<span class="text-danger"><?= form_error('ratio_percent'); ?></span>
 			</div>
 		</div>
@@ -87,7 +87,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth">
-				<input type="text" class="cb-input-text cb-col-full" name="price_per_point" value="<?=$model->setting_reward->price_per_point?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="price_per_point" value="<?=$model->setting_reward->price_per_point?>"/>
+				<input type="hidden" id="price_per_point" name="price_per_point" value="<?=$model->setting_reward->price_per_point?>"/>
 				<span class="text-danger"><?= form_error('price_per_point'); ?></span>
 			</div>
 			<div class="cb-row cb-col-tenth">
@@ -109,7 +110,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth">
-				<input type="text" class="cb-input-text cb-col-full" name="point_get" value="<?=$model->setting_reward->point_get?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="point_get" value="<?=$model->setting_reward->point_get?>"/>
 				<span class="text-danger"><?= form_error('point_get'); ?></span>
 			</div>
 		</div>

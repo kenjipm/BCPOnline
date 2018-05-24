@@ -63,12 +63,70 @@ $(document).ready(function(){
 		popup.open('popup_image_zoomed');
 	});
 	
+	// $(".input_thousand_separator").load(function(){
+	// alert("tes");
+		// // var real_id = $(this).attr("real_id");
+		// // $("#"+real_id).hide();
+		// to_thousand_separator();
+	// });
+	$(".input_thousand_separator").keyup(function(){
+		var value = $(this).val();
+		value = value.replace(/\D+/g, ''); // replace all non-digit
+		
+		if (isNaN(value) || (value == "")){
+			value = 0;
+			$(this).val(0);
+		}
+		else
+		{
+			value = parseInt(value);
+		
+			value = "" + value;
+			value = value.split("");
+			value = value.reverse();
+			var result = "";
+			value.forEach(function(c, i) {
+				if ((i > 0) && (i % 3 == 0)) {
+					result += ".";
+				}
+				result += c;
+			});
+			result = result.split("");
+			result = result.reverse();
+			result = result.join("");
+			
+			$(this).val(result);
+			
+			value = value.reverse();
+			value = value.join("");
+		}
+		var real_id = $(this).attr("realid");
+		$("#"+real_id).val(value);
+		
+	});
+	
+	$(".input_number").keyup(function(){
+		var value = $(this).val();
+		value = value.replace(/\D+/g, ''); // replace all non-digit
+		
+		if (isNaN(value) || (value == "")){
+			value = 0;
+			$(this).val(0);
+		}
+		else
+		{
+			value = parseInt(value);
+			$(this).val(value);
+		}
+		
+		
+	});
+	
 	// $("img").on("error", function(){
 		// // Replacing image source
 		// $(this).attr('src', base_url + '/img/default_image.png');
 	// });
 });
-
 
 function select_file(event){
 	var element_id = $(this).attr('id');

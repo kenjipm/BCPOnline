@@ -43,7 +43,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="points_needed"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="points_needed"/>
+				<input type="hidden" id="points_needed" name="points_needed"/>
 				<span class="text-danger"><?= form_error('points_needed'); ?></span>
 			</div>
 		</div>

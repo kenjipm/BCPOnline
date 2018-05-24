@@ -72,7 +72,8 @@
 					</div>
 				</div>
 				<div class="cb-row cb-col-fifth-2">
-					<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= set_value('price'); ?>"/>
+					<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="price" value="<?= set_value('price'); ?>"/>
+					<input type="hidden" id="price" name="price" value="<?= set_value('price'); ?>"/>
 					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
@@ -94,7 +95,7 @@
 					</div>
 				</div>
 				<div class="cb-row cb-col-fifth-2">
-					<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
+					<input type="text" class="cb-input-text cb-col-full input_number" name="unit_weight" value="<?= set_value('unit_weight'); ?>"/>
 					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 			</div>
@@ -232,7 +233,7 @@
 							<div class="pull-right">:</div>
 						</div>
 						<div class="cb-row cb-col-fifth-4">
-							<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+							<input type="text" class="cb-input-text cb-col-full input_number" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
 							<span class="text-danger"><?= form_error('quantity_available'); ?></span>
 						</div>
 					</div>

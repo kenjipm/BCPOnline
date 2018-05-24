@@ -89,7 +89,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="voucher_worth"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="voucher_worth"/>
+				<input type="hidden" id="voucher_worth" name="voucher_worth"/>
 				<span class="text-danger"><?= form_error('voucher_worth'); ?></span>
 			</div>
 		</div>
@@ -111,7 +112,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="voucher_stock"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="voucher_stock"/>
 				<span class="text-danger"><?= form_error('voucher_stock'); ?></span>
 			</div>
 		</div>
@@ -155,7 +156,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="min_order_price"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="min_order_price"/>
+				<input type="hidden" id="min_order_price" name="min_order_price"/>
 				<span class="text-danger"><?= form_error('min_order_price'); ?></span>
 			</div>
 		</div>
@@ -199,7 +201,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="use_per_day"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="use_per_day"/>
 				<span class="text-danger"><?= form_error('use_per_day'); ?></span>
 			</div>
 		</div>

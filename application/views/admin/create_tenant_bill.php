@@ -66,7 +66,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="payment_value"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="payment_value"/>
+				<input type="hidden" id="payment_value" name="payment_value"/>
 				<span class="text-danger"><?= form_error('payment_value'); ?></span>
 			</div>
 		</div>

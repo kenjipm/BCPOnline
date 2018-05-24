@@ -69,7 +69,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-2">
-				<input type="text" class="cb-input-text cb-col-full" name="price" value="<?= (set_value('price') == "") ? $model->bidding_item->price : "" ?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="price" value="<?= (set_value('price') == "") ? $model->bidding_item->price : "" ?>"/>
+				<input type="hidden" id="price" name="price" value="<?= (set_value('price') == "") ? $model->bidding_item->price : "" ?>"/>
 				<span class="text-danger"><?= form_error('price'); ?></span>
 			</div>
 		</div>
@@ -91,7 +92,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-2">
-				<input type="text" class="cb-input-text cb-col-full" name="unit_weight" value="<?= (set_value('unit_weight') == "") ? $model->bidding_item->unit_weight : "" ?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_number" name="unit_weight" value="<?= (set_value('unit_weight') == "") ? $model->bidding_item->unit_weight : "" ?>"/>
 				<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 			</div>
 		</div>
@@ -239,7 +240,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-2">
-				<input type="text" class="cb-input-text cb-col-full" name="bidding_max_range" value="<?= (set_value('bidding_max_range') == "") ? $model->bidding_item->bidding_max_range : "" ?>"/>
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="bidding_max_range" value="<?= (set_value('bidding_max_range') == "") ? $model->bidding_item->bidding_max_range : "" ?>"/>
+				<input type="hidden" id="bidding_max_range" name="bidding_max_range" value="<?= (set_value('bidding_max_range') == "") ? $model->bidding_item->bidding_max_range : "" ?>"/>
 				<span class="text-danger"><?= form_error('bidding_max_range'); ?></span>
 			</div>
 		</div>

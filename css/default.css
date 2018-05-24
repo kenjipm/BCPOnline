@@ -621,6 +621,19 @@ h4 { font-weight: bold; }
 	display: none;
 }
 
+#image_zoomed {
+	zoom: 3;  //increase if you have very small images
+
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
+}
+
 .popup {
 	display: none;
 	position: fixed;
@@ -634,6 +647,9 @@ h4 { font-weight: bold; }
 .popup-md { width: 500px; }
 .popup-lg { width: 700px; }
 .popup-fs { width: 90%; height: 90%; }
+
+.popup-fs-container { height: 100%; }
+.popup-fs-content { height: 90%; }
 
 .popup .panel {
 	background-color: #faa528;
