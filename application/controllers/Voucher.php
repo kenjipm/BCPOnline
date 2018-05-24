@@ -28,13 +28,23 @@ class Voucher extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('Voucher_model');
-		$vouchers = $this->Voucher_model->get_all();
-		$this->load->model('views/admin/voucher_list_view_model');
-		$this->voucher_list_view_model->get($vouchers);
-		$data['model'] = $this->voucher_list_view_model;
-		
-		$this->load->view('admin/voucher_list', $data);
-		
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
+		{
+			$vouchers = $this->Voucher_model->get_all();
+			$this->load->model('views/admin/voucher_list_view_model');
+			$this->voucher_list_view_model->get($vouchers);
+			$data['model'] = $this->voucher_list_view_model;
+			$this->load->view('admin/voucher_list', $data);
+		} 
+		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		{
+			$vouchers = $this->Voucher_model->get_all_active();
+			$this->load->model('views/customer/voucher_list_view_model');
+			$this->voucher_list_view_model->get($vouchers);
+			$data['model'] = $this->voucher_list_view_model;
+			$this->load->view('customer/voucher_list', $data);
+		}
+	
 		// Load Footer
 		$this->load->view('footer');
 	}

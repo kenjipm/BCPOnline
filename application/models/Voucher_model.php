@@ -139,9 +139,17 @@ class Voucher_model extends CI_Model {
 		return ($voucher !== null) ? $this->get_stub_from_db($voucher) : null;
 	}
 	
+	public function get_all_active()
+	{	
+		$this->db->where('date_expired >',  date('Y-m-d H:i:s'));
+		$query = $this->db->get($this->table_voucher);
+		$vouchers = $query->result();
+		
+		return ($vouchers !== null) ? $this->map_list($vouchers) : null;
+	}
+	
 	public function get_all()
 	{	
-		
 		$query = $this->db->get($this->table_voucher);
 		$vouchers = $query->result();
 		

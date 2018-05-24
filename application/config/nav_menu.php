@@ -83,7 +83,10 @@ $config['top_menu_customer'] = array(
 			'text'	=> "SERVIS",
 			'url'	=> "item/service",
 			),
-	
+		'VOUCHER' => array(
+			'text'	=> "DAFTAR VOUCHER",
+			'url'	=> "voucher/voucher_list",
+			),
 		// 'FOLLOWED_TENANT' => array(
 			// 'text'	=> "Tenant",
 			// 'url'	=> "customer/followed_tenant",
