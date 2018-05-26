@@ -60,6 +60,16 @@
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+					<div class="cb-pull-left">Hot Item Hingga</div>
+					<div class="cb-pull-right">:</div>
+				</div>
+				<div class="cb-col-fifth-2 cb-pl-3">
+					<input type="text" class="cb-input-text cb-col-full cb-row datepicker" name="date_expired_req" value="<?= set_value('date_expired_req'); ?>"/>
+					<span class="text-danger"><?= form_error('date_expired_req'); ?></span>
+				</div>
+			</div>
+			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth">
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">

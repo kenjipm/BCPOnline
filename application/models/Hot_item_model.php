@@ -10,6 +10,7 @@ class Hot_item_model extends CI_Model {
 	public $hot_item_id;
 	public $promo_price;
 	public $promo_description;
+	public $date_expired_req;
 	public $posted_item_id;
 	
 	public $posted_item;
@@ -24,6 +25,7 @@ class Hot_item_model extends CI_Model {
 		$this->hot_item_id			= "";
 		$this->promo_price			= 0;
 		$this->promo_description	= "";
+		$this->date_expired_req		= "";
 		$this->posted_item_id		= 0;
 		
 		$this->load->model('item_model');
@@ -38,6 +40,7 @@ class Hot_item_model extends CI_Model {
 		$this->hot_item_id			= $db_item->hot_item_id;
 		$this->promo_price			= $db_item->promo_price;
 		$this->promo_description	= $db_item->promo_description;
+		$this->date_expired_req		= $db_item->date_expired_req;
 		$this->posted_item_id		= $db_item->posted_item_id;
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
@@ -56,6 +59,7 @@ class Hot_item_model extends CI_Model {
 		$db_item->hot_item_id		= $this->hot_item_id;
 		$db_item->promo_price		= $this->promo_price;
 		$db_item->promo_description	= $this->promo_description;
+		$db_item->date_expired_req	= $this->date_expired_req;
 		$db_item->posted_item_id	= $this->posted_item_id;
 		
 		return $db_item;
@@ -70,6 +74,7 @@ class Hot_item_model extends CI_Model {
 		$stub->hot_item_id			= $db_item->hot_item_id;
 		$stub->promo_price			= $db_item->promo_price;
 		$stub->promo_description	= $db_item->promo_description;
+		$stub->date_expired_req		= $db_item->date_expired_req;
 		$stub->posted_item_id		= $db_item->posted_item_id;
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
@@ -147,6 +152,7 @@ class Hot_item_model extends CI_Model {
 		$this->hot_item_id			= "";
 		$this->promo_price			= $this->input->post('promo_price');
 		$this->promo_description 	= $this->input->post('promo_description');
+		$this->date_expired_req 	= $this->input->post('date_expired_req');
 		$this->posted_item_id		= $posted_item_id;
 	
 		

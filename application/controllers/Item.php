@@ -201,7 +201,7 @@ class Item extends CI_Controller {
 			
 			$this->load->view('admin/post_item_detail', $data);
 		}
-		else // TENANT
+		else if ($this->session->userdata('type') == TYPE['name']['TENANT']) // TENANT
 		{
 			if ($this->input->method() == "post") $data = $this->item_edit_do();
 			
@@ -217,8 +217,12 @@ class Item extends CI_Controller {
 			$this->load->model('tenant_bill_model');
 			$seo_item = $this->tenant_bill_model->get_registered_seo($id);
 			
+			$this->load->model('Brand_model');
+			$categories = $this->category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			
 			$this->load->model('views/tenant/post_item_detail_view_model');
-			$this->post_item_detail_view_model->get($item, $posted_item_variance, $hot_item, $seo_item);
+			$this->post_item_detail_view_model->get($item, $posted_item_variance, $hot_item, $seo_item, $categories, $brands);
 			
 			$data['model'] = $this->post_item_detail_view_model;
 			
@@ -403,6 +407,7 @@ class Item extends CI_Controller {
 		$this->load->library('form_validation');
 
 		$this->form_validation->set_rules('promo_description', 'Deskripsi', 'required');
+		$this->form_validation->set_rules('date_expired_req', 'Permintaan waktu', 'required');
 		$this->form_validation->set_rules('promo_price', 'Harga', 'required|integer');
 		
 		if ($this->form_validation->run() == TRUE)

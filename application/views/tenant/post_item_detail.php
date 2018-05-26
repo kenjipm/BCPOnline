@@ -7,13 +7,16 @@
 		if ($model->posted_item->item_type == "ORDER")
 		{
 			?>
+			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="item_type" value="ORDER"/>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 					<div class="cb-pull-left">Nama Barang</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->posted_item_name?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->posted_item_name?>">
+					<span class="text-danger"><?= form_error('posted_item_name'); ?></span>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -22,7 +25,8 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="price" value="<?=$model->posted_item->price?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="price" value="<?=$model->posted_item->price?>">
+					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -31,7 +35,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="type" value="<?=$model->posted_item->item_type?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="type" value="<?=$model->posted_item->item_type?>" readonly/>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -40,7 +44,8 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="unit_weight" value="<?=$model->posted_item->unit_weight?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="unit_weight" value="<?=$model->posted_item->unit_weight?>">
+					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -49,7 +54,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<textarea class="cb-row cb-input-text cb-col-full" name="posted_item_description" rows="6" style="resize:none" readonly><?=$model->posted_item->posted_item_description?></textarea>
+					<textarea class="cb-row cb-input-text cb-col-full" name="posted_item_description" rows="6" style="resize:none"><?=$model->posted_item->posted_item_description?></textarea>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -68,8 +73,19 @@
 					<div class="cb-pull-left">Kategori</div>
 					<div class="cb-pull-right">:</div>
 				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="category" value="<?=$model->posted_item->category->category_name?>" readonly>
+				<div class="cb-row cb-col-fifth-2 cb-pl-3">
+					<select class="cb-input-select cb-col-full" name="category_id">
+					<option value="<?=$model->posted_item->category_id?>"><?=$model->posted_item->category->category_name?></option>
+					<?php
+					foreach ($model->item_category as $category)
+					{
+						?>
+						<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -77,8 +93,19 @@
 					<div class="cb-pull-left">Brand</div>
 					<div class="cb-pull-right">:</div>
 				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="collection_method" value="<?=$model->posted_item->brand->brand_name?>" readonly>
+				<div class="cb-row cb-col-fifth-2 cb-pl-3">
+					<select class="cb-input-select cb-col-full" name="brand_id">
+					<option value="<?=$model->posted_item->brand_id?>"><?=$model->posted_item->brand->brand_name?></option>
+					<?php
+					foreach ($model->item_brand as $brand)
+					{
+						?>
+						<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -86,8 +113,18 @@
 					<div class="cb-pull-left">Varian</div>
 					<div class="cb-pull-right">:</div>
 				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="var_type" value="<?=$model->posted_item->var_type[0]?>" readonly>
+				<div class="cb-row cb-col-fifth-2 cb-pl-3">
+					<select class="cb-input-select cb-col-full" name="var_type">
+					<?php
+					foreach ($model->item_variance as $variance)
+					{
+						?>
+						<option value="<?=$variance?>"><?=$variance?></option>			
+						<?php
+					}
+					?>
+					<option value="lainnya">Lainnya</option>
+					</select>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -106,7 +143,8 @@
 										<div class="cb-pull-right">:</div>
 									</div>
 									<div class="cb-col-fifth-4 cb-pl-3">
-										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->var_desc[$i]?>" readonly>
+										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->var_desc[$i]?>">
+										<span class="text-danger"><?= form_error('var_desc'); ?></span>
 									</div>
 								</div>
 								<div class="cb-col-full cb-row cb-mb-5">
@@ -115,7 +153,8 @@
 										<div class="cb-pull-right">:</div>
 									</div>
 									<div class="cb-col-fifth-4 cb-pl-3">
-										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->quantity_available[$i]?>" readonly>
+										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->quantity_available[$i]?>">
+										<span class="text-danger"><?= form_error('quantity_available'); ?></span>
 									</div>
 								</div>
 								<div class="cb-col-full cb-row">
@@ -144,6 +183,12 @@
 					}
 				?>
 			</div>
+			<div class="cb-row cb-mb-5 cb-align-right">
+				<div class="cb-col-fifth cb-row">
+					<button type="submit" class="cb-button-form cb-col-full">KIRIM</button>
+				</div>
+			</div>
+			
 			<div class="cb-col-full cb-row">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 				</div>
@@ -218,6 +263,7 @@
 					}
 				?>
 			</div>
+			</form>
 			<?php
 		}
 		else if ($model->transaction_detail->item_type == "REPAIR")
