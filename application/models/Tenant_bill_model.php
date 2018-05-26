@@ -185,6 +185,10 @@ class Tenant_bill_model extends CI_Model {
 		$this->db->set('payment_date', date("Y-m-d H:i:s"));
 		$this->db->update($this->table_tenant_bill);
 		
+		$this->db->where('id', $hot_item_id);
+		$this->db->set('is_done', 1);
+		$this->db->update('hot_item');
+		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	

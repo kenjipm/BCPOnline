@@ -18,7 +18,7 @@
 			<div class="cb-label cb-font-title cb-align-center"> Harga Promo </div>
 		</div>
 		<div class="cb-col-fifth">
-			<div class="cb-label cb-font-title cb-align-center"> Tujuan Promo </div>
+			<div class="cb-label cb-font-title cb-align-center"> Pesan </div>
 		</div>
 	</div>
 	<?php

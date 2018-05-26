@@ -12,6 +12,7 @@ class Hot_item_model extends CI_Model {
 	public $promo_description;
 	public $date_expired_req;
 	public $posted_item_id;
+	public $is_done;
 	
 	public $posted_item;
 	public $tenant;
@@ -27,6 +28,7 @@ class Hot_item_model extends CI_Model {
 		$this->promo_description	= "";
 		$this->date_expired_req		= "";
 		$this->posted_item_id		= 0;
+		$this->is_done				= 0;
 		
 		$this->load->model('item_model');
 		$this->posted_item	= new item_model();
@@ -42,6 +44,7 @@ class Hot_item_model extends CI_Model {
 		$this->promo_description	= $db_item->promo_description;
 		$this->date_expired_req		= $db_item->date_expired_req;
 		$this->posted_item_id		= $db_item->posted_item_id;
+		$this->is_done				= $db_item->is_done;
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$this->posted_item->price				= $db_item->price ?? "";
@@ -61,6 +64,7 @@ class Hot_item_model extends CI_Model {
 		$db_item->promo_description	= $this->promo_description;
 		$db_item->date_expired_req	= $this->date_expired_req;
 		$db_item->posted_item_id	= $this->posted_item_id;
+		$db_item->is_done			= $this->is_done;
 		
 		return $db_item;
 	}
@@ -76,6 +80,7 @@ class Hot_item_model extends CI_Model {
 		$stub->promo_description	= $db_item->promo_description;
 		$stub->date_expired_req		= $db_item->date_expired_req;
 		$stub->posted_item_id		= $db_item->posted_item_id;
+		$stub->is_done				= $db_item->is_done;
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$stub->posted_item->price				= $db_item->price ?? "";
@@ -99,6 +104,7 @@ class Hot_item_model extends CI_Model {
 	{
 		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
 		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
@@ -113,9 +119,12 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_all_registered()
 	{
+		$where['hot_item.is_done'] = 0;
+		
 		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, '. $this->table_hot_item.'.id AS id');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join('tenant', $this->table_item.'.tenant_id = tenant.id', 'left');
+		$this->db->where($where);
 		$query = $this->db->get($this->table_hot_item);
 		$hot_items = $query->result();
 		
@@ -154,6 +163,7 @@ class Hot_item_model extends CI_Model {
 		$this->promo_description 	= $this->input->post('promo_description');
 		$this->date_expired_req 	= $this->input->post('date_expired_req');
 		$this->posted_item_id		= $posted_item_id;
+		$this->is_done				= 0;
 	
 		
 		// insert data, then generate [reward_id] based on [id]
