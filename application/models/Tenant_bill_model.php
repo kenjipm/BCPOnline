@@ -317,7 +317,30 @@ class Tenant_bill_model extends CI_Model {
 			$this->db->update($this->table_tenant_bill, $db_item);
 		}
 		
+		$this->send_confirm_to_tenant($this->tenant_id);
+		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function send_confirm_to_tenant($tenant_id)
+	{
+		$this->load->model('message_inbox_model');
+		$party_one_id = $this->session->id;
+		$party_two_id = $tenant_id;
+		$cur_message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
+		
+		if ($cur_message_inbox == null)
+		{
+			$cur_message_inbox = new message_inbox_model();
+			$cur_message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
+		}
+		
+		$this->load->model('message_text_model');
+		$cur_message_text = new message_text_model();
+		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
+		$cur_message_text->sender_id = $this->session->id;
+		$cur_message_text->text = "Barang promosi sudah dikonfirmasi. Silakan cek produk untuk pembayaran";
+		$cur_message_text->insert_from_stub();
 	}
 }
 
