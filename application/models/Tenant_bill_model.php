@@ -326,7 +326,15 @@ class Tenant_bill_model extends CI_Model {
 	{
 		$this->load->model('message_inbox_model');
 		$party_one_id = $this->session->id;
-		$party_two_id = $tenant_id;
+		
+		$where['id'] = $tenant_id;
+		
+		$this->db->where($where);
+		$query = $this->db->get('tenant', 1);
+		$tenant = $query->row();
+		
+		$party_two_id = $tenant->account_id;
+		
 		$cur_message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
 		
 		if ($cur_message_inbox == null)

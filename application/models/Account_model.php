@@ -236,7 +236,7 @@ class Account_model extends CI_Model {
 		$query = $this->db->get($this->table_account);
 		$items = $query->result();
 		
-		return ($accounts !== null) ? $this->map_list($accounts) : null;
+		return ($items !== null) ? $this->map_list($items) : null;
 	}
 	
 	// insert new account from form post
@@ -283,6 +283,32 @@ class Account_model extends CI_Model {
 		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
+	public function check_old_password()
+	{
+		$where['password'] = md5($this->input->post('old_password'));
+		$where['id'] = $this->input->post('id');
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null);
+	}
+	
+	public function update_new_password()
+	{
+		$where['id'] = $this->input->post('id');
+		
+		$this->password	= md5($this->input->post('password'));
+		
+		$this->db->where($where);
+		$this->db->set('password', $this->password);
+		$this->db->update($this->table_account);
+		
+		return $this->db->affected_rows();
+		
 	}
 	
 	// insert new account from form post

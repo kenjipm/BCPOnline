@@ -37,6 +37,78 @@ class Tenant extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function account()
+	{
+		if ($this->session->type != TYPE['name']['TENANT']) // check account type, kalau bukan tenant, liat public profile
+		{
+			redirect('tenant/public_profile/'.$id);
+		}
+		
+		if ($this->input->method() == "post") $this->account_edit_do();
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('account_model');
+		$account = $this->account_model->get_from_id($this->session->id);
+		
+		$this->load->model('tenant_model');
+		$tenant = $this->tenant_model->get_from_id($this->session->child_id);
+		
+		$this->load->model('views/tenant/account_view_model');
+		$this->account_view_model->get($account, $tenant);
+		
+		$data['model'] = $this->account_view_model;
+		
+		$this->load->view('tenant/account', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function account_edit_do()
+	{
+		$this->load->model('Account_model');
+		$this->load->library('form_validation');
+		
+		$this->form_validation->set_rules('name', 'Nama', 'required');
+		$this->form_validation->set_rules('address', 'Alamat', 'required');
+		$this->form_validation->set_rules('date_of_birth', 'Tanggal Lahir', 'required');
+		$this->form_validation->set_rules('phone_number', 'No HP', 'required');
+		$this->form_validation->set_rules('identification_no', 'No Identitas', 'required');	
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email');
+		
+		// $this->form_validation->set_rules('password', 'Password', 'required');
+		// $this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->Account_model->update_from_post();
+			
+			//redirect('customer/profile');
+		}
+		
+		if ($this->input->post('old_password') != "")
+		{
+			if ($this->Account_model->check_old_password())
+			{
+				$this->form_validation->set_rules('password', 'Password', 'required');
+				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
+				$this->Account_model->update_new_password();
+				
+				redirect('tenant/account');
+			}
+			else
+			{
+				//print_r("Password Lama Salah");
+			}
+		}
+		
+	}
+	
 	public function profile($id=0)
 	{
 		if ($this->session->type != TYPE['name']['TENANT']) // check account type, kalau bukan tenant, liat public profile
