@@ -388,6 +388,22 @@ class Customer extends CI_Controller {
 				redirect('customer/profile');
 			// }
 		}
+		
+		if ($this->input->post('old_password') != "")
+		{
+			if ($this->Account_model->check_old_password())
+			{
+				$this->form_validation->set_rules('password', 'Password', 'required');
+				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
+				$this->Account_model->update_new_password();
+				
+				redirect('customer/profile');
+			}
+			else
+			{
+				//print_r("Password Lama Salah");
+			}
+		}
 		//return $data;
 	}
 	

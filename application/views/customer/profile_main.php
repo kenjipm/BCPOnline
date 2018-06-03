@@ -29,164 +29,219 @@
 			</div>
 		</div>
 	</div>
-	<div class="cb-panel-body cb-bg-primary-3">
-			<div class="cb-row cb-p-5">
-				<div class="cb-col-half cb-pl-5 cb-border-right">
-					<div class="cb-row cb-mb-5 cb-mt-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Customer ID </div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+	<div class="cb-col-fifth-4 cb-panel-body cb-bg-primary-3">
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-half cb-pl-5 cb-border-right">
+				<div class="cb-row cb-mb-5 cb-mt-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Customer ID </div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Nama</div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="text" class="cb-input-text" id="customer_id" name="customer_id" value="<?=$model->account->customer_id?>" readonly/>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama</div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
-							<span class="text-danger"><?= form_error('name'); ?></span>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Alamat</div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="text" class="cb-input-text" id="name" name="name" value="<?=$model->account->name?>">
+						<span class="text-danger"><?= form_error('name'); ?></span>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Alamat</div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<textarea class="cb-input-text" name="address" style="resize:none" readonly/><?=$model->account->address; ?></textarea>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Tanggal Lahir </div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<textarea class="cb-input-text" name="address" style="resize:none" readonly/><?=$model->account->address; ?></textarea>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Tanggal Lahir </div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
-							<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> No. HP</div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="text" class="cb-input-text" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth?>">
+						<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> No. HP</div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
-							<span class="text-danger"><?= form_error('phone_number'); ?></span>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Email </div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="text" class="cb-input-text" id="phone_number" name="phone_number" value="<?=$model->account->phone_number?>">
+						<span class="text-danger"><?= form_error('phone_number'); ?></span>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Email </div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
 							</div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
-							<span class="text-danger"><?= form_error('email'); ?></span>
+					</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="text" class="cb-input-text" id="email" name="email" value="<?=$model->account->email?>">
+						<span class="text-danger"><?= form_error('email'); ?></span>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Password Lama</div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="password" class="cb-input-text cb-col-full" id="old_password" name="old_password" value="<?= set_value('old_password'); ?>" />
+						<div class="cb-row">
+							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 						</div>
 					</div>
 				</div>
-				<div class="cb-col-half cb-pl-5">
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Alamat Kirim </div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Password Baru </div>
 						</div>
-						<div class="cb-col-third-2 cb-pl-5">
-							<a href="<?=site_url('customer/shipping_address')?>" class="cb-button cb-button-form">LIHAT</a>
-						</div>
-					</div>
-					<div class="cb-row cb-mb-5 cb-mt-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Foto Kartu ID </div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
-							</div>
-						</div>
-						<div class="cb-col-third-2">
-							<div class="panel-profile-pic-header">
-								<label for="identification_pic" class="profile-thumbnail hoverable">
-									<div id="thumbnail-identification_pic">
-										<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
-									</div>
-								</label>
-								<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" style="display:none" class="photo_upload_simple" data-url="<?=site_url('customer/upload_idpic')?>" >
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
 							</div>
 						</div>
 					</div>
-					<div class="cb-row cb-mb-5">
-						<div class="cb-col-third">
-							<div class="cb-txt-primary-1 cb-pull-left">
-								<div class="cb-label"> Link Referral</div>
-							</div>
-							<div class="cb-pull-right">
-								<div class="cb-txt-primary-1">
-									<div class="cb-label"> : </div>
-								</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="password" class="cb-input-text cb-col-full" name="password" value="<?= set_value('password'); ?>"/>
+						<div class="cb-row">
+							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
+							<span class="text-danger"><?= form_error('password'); ?></span>
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Ulangi Password</div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
 							</div>
 						</div>
-						<div class="cb-col-third-2 cb-row cb-pl-5">
-							<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly>
-							<div onclick="$('#referral_link').select();document.execCommand('Copy');" class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-xl cb-font-primary-1 cb-ml-3 hoverable">SALIN</div>
+					</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
+						<div class="cb-row">
+							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
+							<span class="text-danger"><?= form_error('passconf'); ?></span>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="cb-row cb-p-5">
-				<button type="submit" class="cb-button-form cb-margin-auto">SIMPAN</button>
+			<div class="cb-col-half cb-pl-5">
+				<div class="cb-row cb-mb-5 cb-mt-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Alamat Kirim </div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+					<div class="cb-col-third-2 cb-pl-5">
+						<a href="<?=site_url('customer/shipping_address')?>" class="cb-button cb-button-form">LIHAT</a>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5 cb-mt-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Foto Kartu ID </div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+					<div class="cb-col-third-2">
+						<div class="panel-profile-pic-header">
+							<label for="identification_pic" class="profile-thumbnail hoverable">
+								<div id="thumbnail-identification_pic">
+									<img src="<?=$model->account->identification_pic?>" alt="<?=$model->account->identification_no?>" style="width:100%">
+								</div>
+							</label>
+							<input type="file" id="identification_pic" name="identification_pic" value="<?=$model->account->identification_pic?>" style="display:none" class="photo_upload_simple" data-url="<?=site_url('customer/upload_idpic')?>" >
+						</div>
+					</div>
+				</div>
+				<div class="cb-row cb-mb-5">
+					<div class="cb-col-third">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Link Referral</div>
+						</div>
+						<div class="cb-pull-right">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+					<div class="cb-col-third-2 cb-row cb-pl-5">
+						<input type="text" class="cb-input-text" id="referral_link" name="referral_link" value="<?=$model->account->referral_link?>" readonly>
+						<div onclick="$('#referral_link').select();document.execCommand('Copy');" class="cb-txt-primary-1 cb-txt-primary-2-hover cb-font-size-xl cb-font-primary-1 cb-ml-3 hoverable">SALIN</div>
+					</div>
+				</div>
 			</div>
-		
+		</div>
+		<div class="cb-row cb-p-5">
+			<button type="submit" class="cb-button-form cb-margin-auto">SIMPAN</button>
+		</div>
 	</div>
 </div>
 </form>

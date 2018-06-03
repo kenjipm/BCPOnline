@@ -116,10 +116,10 @@ $config['top_menu_tenant'] = array(
 			// ),
 		),
 	'profile' => array(
-		// 'PROFILE' => array(
-			// 'text'	=> "Profil Saya",
-			// 'url'	=> "tenant/profile",
-			// ),
+		'PROFILE' => array(
+			'text'	=> "Akun Saya",
+			'url'	=> "tenant/account",
+			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
