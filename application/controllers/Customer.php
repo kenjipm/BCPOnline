@@ -476,6 +476,50 @@ class Customer extends CI_Controller {
 		echo "1";
 	}
 	
+	public function cart_set_do($is_ajax=false)
+	{
+		$posted_item_variance_id = $this->input->post('posted_item_variance_id');
+		$this->load->model('posted_item_variance_model');
+		$posted_item_variance = $this->posted_item_variance_model->get_from_id($posted_item_variance_id);
+		
+		if ($posted_item_variance != null) // siapatau pas di set, item tiba2 udah ke delete
+		{
+			$posted_item_variance->init_posted_item();
+			
+			$quantity = $this->input->post('quantity');
+			$cart = $this->session->cart;
+			
+			if (!isset($cart[$posted_item_variance_id]))
+			{
+				$cart[$posted_item_variance_id] = array();
+				$cart[$posted_item_variance_id]['name']				= $posted_item_variance->posted_item->posted_item_name;
+				$cart[$posted_item_variance_id]['price']			= $posted_item_variance->posted_item->price;
+				$cart[$posted_item_variance_id]['voucher_cut_price']	= 0;
+				$cart[$posted_item_variance_id]['var_type']			= $posted_item_variance->var_type;
+				$cart[$posted_item_variance_id]['var_description']	= $posted_item_variance->var_description;
+				$cart[$posted_item_variance_id]['quantity']			= 0;
+			}
+			
+			$cart[$posted_item_variance_id]['quantity'] = $quantity;
+			
+			// kalau stok ga mencukupi
+			if ($cart[$posted_item_variance_id]['quantity'] > $posted_item_variance->quantity_available)
+			{
+				$cart[$posted_item_variance_id]['quantity'] = $posted_item_variance->quantity_available;
+			}
+			if ($cart[$posted_item_variance_id]['quantity'] <= 0)
+			{
+				unset($cart[$posted_item_variance_id]);
+			}
+			
+			$this->session->cart = $cart;
+		}
+		
+		if (!$is_ajax) $this->default_redirect();
+		
+		echo "1";
+	}
+	
 	public function bid_post_do()
 	{
 		$bidding_item_id = $this->input->post('bidding_item_id');
