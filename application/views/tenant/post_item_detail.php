@@ -26,7 +26,8 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="price" name="price" value="<?=$model->posted_item->price?>">
+					<input type="text" class="cb-row cb-col-full cb-input-text input_thousand_separator" realid="price" value="<?=$model->posted_item->price_str?>">
+					<input type="hidden" id="price" name="price" value="<?=$model->posted_item->price?>">
 					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
@@ -64,9 +65,12 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-pl-3">
-					<div id="thumbnail-image_one_name" class="thumbnail">
-						<img src="<?=$model->posted_item->image_one_name?>" alt="<?=$model->posted_item->posted_item_name?>">
-					</div>
+					<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
+						<div id="thumbnail-image_one_name">
+							<img src="<?=$model->posted_item->image_one_name_view?>" alt="<?=$model->posted_item->posted_item_name?>">
+						</div>
+					</label>
+					<input type="file" id="image_one_name" name="image_one_name" value="<?=$model->posted_item->image_one_name?>" style="display:none" class="input_file_upload" >
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -163,20 +167,29 @@
 								</div>
 							</div>
 							<div class="cb-col-fifth-2 cb-row cb-mb-5">
-								<div class="cb-col-fifth cb-row cb-p-1">
-									<div id="thumbnail-image_two_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_two_name[$i]?>" alt=""/>
-									</div>
+								<div class="cb-col-fifth cb-p-1">
+									<label for="image_two_name-<?=$i?>" class="hoverable cb-m-5 cb-align-center cb-vertical-center cb-row label_upload_file">
+										<div id="thumbnail-image_two_name" class="thumbnail">
+											<img src="<?=$model->posted_item->image_two_name_view[$i]?>" alt=""/>
+										</div>
+									</label>
+									<input type="file" id="image_two_name-<?=$i?>" name="image_two_name[]" value="<?=$model->posted_item->image_two_name[$i]?>" style="display:none" class="input_file_upload" >
 								</div>
 								<div class="cb-col-fifth cb-p-1">
-									<div id="thumbnail-image_three_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_three_name[$i]?>" alt="" />
-									</div>
+									<label for="image_three_name-<?=$i?>" class="hoverable cb-m-5 cb-align-center cb-vertical-center cb-row label_upload_file">
+										<div id="thumbnail-image_three_name" class="thumbnail">
+											<img src="<?=$model->posted_item->image_three_name_view[$i]?>" alt="" />
+										</div>
+									</label>
+									<input type="file" id="image_three_name-<?=$i?>" name="image_three_name[]" value="<?=$model->posted_item->image_three_name[$i]?>" style="display:none" class="input_file_upload">
 								</div>
 								<div class="cb-col-fifth cb-p-1">
-									<div id="thumbnail-image_four_name" class="thumbnail">
-										<img src="<?=$model->posted_item->image_four_name[$i]?>" alt="" />
-									</div>
+									<label for="image_four_name-<?=$i?>" class=" hoverable cb-m-5 cb-align-center cb-vertical-center cb-row label_upload_file">
+										<div id="thumbnail-image_four_name" class="thumbnail">
+											<img src="<?=$model->posted_item->image_four_name_view[$i]?>" alt="" />
+										</div>
+									</label>
+									<input type="file" id="image_four_name-<?=$i?>" name="image_four_name[]" value="<?=$model->posted_item->image_four_name[$i]?>" style="display:none" class="input_file_upload">
 								</div>
 							</div>
 						</div>
