@@ -78,6 +78,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		$i = 0;
 		foreach($posted_item_variances as $posted_item_variance)
 		{
+			$this->posted_item->var_id[$i] 				= $posted_item_variance->id;
 			$this->posted_item->var_type[$i] 			= $posted_item_variance->var_type;
 			$this->posted_item->var_desc[$i] 			= $posted_item_variance->var_description;
 			$this->posted_item->quantity_available[$i] 	= $posted_item_variance->quantity_available;

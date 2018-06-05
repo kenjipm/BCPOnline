@@ -385,7 +385,6 @@ class Customer extends CI_Controller {
 				$this->load->model('Account_model');
 				$this->Account_model->update_from_post();
 				
-				redirect('customer/profile');
 			// }
 		}
 		

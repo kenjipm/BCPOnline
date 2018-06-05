@@ -534,13 +534,11 @@ class Item_model extends CI_Model {
 		$this->item_type				= $this->input->post('item_type');
 		if ($this->item_type == "ORDER")
 		{
-			$this->posted_item_id			= "";
-			$this->posted_item_name			= $this->input->post('posted_item_name');
+			$this->id						= $this->input->post('id');
+			$this->posted_item_name			= $this->input->post('item_name');
 			$this->price					= $this->input->post('price');
-			$this->date_posted				= date("Y-m-d H:i:s", time());
 			$this->date_updated				= date("Y-m-d H:i:s", time());
 			$this->date_expired				= NULL;
-			$this->is_confirmed				= 0;
 			$this->unit_weight				= $this->input->post('unit_weight');
 			$this->posted_item_description	= $this->input->post('posted_item_description');
 			$this->category_id				= $this->input->post('category_id');
@@ -549,7 +547,7 @@ class Item_model extends CI_Model {
 		} 
 		else if ($this->item_type == "REPAIR")
 		{
-			$this->posted_item_id			= "";
+			$this->id						= ($this->input->post('id'));
 			$this->price					= "25000";
 			$this->date_posted				= date("Y-m-d H:i:s", time());
 			$this->date_updated				= date("Y-m-d H:i:s", time());
@@ -562,7 +560,6 @@ class Item_model extends CI_Model {
 		
 		// update data
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-		
 		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 		
 		$this->db->where('id', $db_item->id);
@@ -570,6 +567,7 @@ class Item_model extends CI_Model {
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
+	
 	public function get_all_variance_quantity_available()
 	{
 		$this->load->model('posted_item_variance_model');
