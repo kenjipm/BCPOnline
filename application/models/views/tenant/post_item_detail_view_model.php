@@ -32,11 +32,13 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			
 		$this->posted_item->id 						= $item->id;
 		$this->posted_item->posted_item_name 		= $item->posted_item_name;
-		$this->posted_item->price					= $this->text_renderer->to_rupiah($item->price);
+		$this->posted_item->price_str				= $this->text_renderer->to_rupiah($item->price);
+		$this->posted_item->price					= $item->price;
 		$this->posted_item->item_type 				= $item->item_type;
 		$this->posted_item->unit_weight				= $item->unit_weight;
 		$this->posted_item->posted_item_description	= $item->posted_item_description;
-		$this->posted_item->image_one_name			= site_url($item->image_one_name);
+		$this->posted_item->image_one_name_view		= site_url($item->image_one_name);
+		$this->posted_item->image_one_name			= $item->image_one_name;
 		
 		$this->posted_item->category				= new class{};
 		$this->posted_item->category_id				= $item->category_id;
@@ -82,9 +84,12 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$this->posted_item->var_type[$i] 			= $posted_item_variance->var_type;
 			$this->posted_item->var_desc[$i] 			= $posted_item_variance->var_description;
 			$this->posted_item->quantity_available[$i] 	= $posted_item_variance->quantity_available;
-			$this->posted_item->image_two_name[$i] 		= site_url($posted_item_variance->image_two_name);
-			$this->posted_item->image_three_name[$i] 	= site_url($posted_item_variance->image_three_name);
-			$this->posted_item->image_four_name[$i] 	= site_url($posted_item_variance->image_four_name);
+			$this->posted_item->image_two_name_view[$i] 		= site_url($posted_item_variance->image_two_name);
+			$this->posted_item->image_three_name_view[$i] 	= site_url($posted_item_variance->image_three_name);
+			$this->posted_item->image_four_name_view[$i] 	= site_url($posted_item_variance->image_four_name);
+			$this->posted_item->image_two_name[$i] 		= $posted_item_variance->image_two_name;
+			$this->posted_item->image_three_name[$i] 	= $posted_item_variance->image_three_name;
+			$this->posted_item->image_four_name[$i] 	= $posted_item_variance->image_four_name;
 			
 			$i++;
 		}

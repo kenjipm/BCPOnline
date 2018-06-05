@@ -544,6 +544,8 @@ class Item_model extends CI_Model {
 			$this->category_id				= $this->input->post('category_id');
 			$this->tenant_id				= $cur_tenant->id;
 			$this->brand_id					= $this->input->post('brand_id');
+			
+			$this->upload_image($this->id);
 		} 
 		else if ($this->item_type == "REPAIR")
 		{

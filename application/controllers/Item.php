@@ -184,7 +184,7 @@ class Item extends CI_Controller {
 	{		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('tenant/post_item_detail');
+        $data_header['js_list'] = array('tenant/post_item_detail', 'simpleUpload', 'photo_upload_simple');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
