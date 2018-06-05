@@ -18,10 +18,24 @@ html {
 	min-height: 100%;
 }
 
-body {
-	margin-bottom: 240px; /* Margin bottom by footer height plus margin 20px*/
-	font-family: 'Lato', sans-serif;
-	background-color: #434747; /* Dark Grey */
+@media screen
+{
+	body {
+		margin-bottom: 240px; /* Margin bottom by footer height plus margin 20px*/
+		font-family: 'Lato', sans-serif;
+		background-color: #434747; /* Dark Grey */
+	}
+}
+
+@media print
+{
+	body {
+		font-family: 'Lato', sans-serif;
+		font-size: 10px;
+	}
+	table {
+		page-break-inside: avoid;
+	}
 }
 
 a, a:hover, a:active, a:visited, a:focus, a:focus-within { text-decoration: none; }

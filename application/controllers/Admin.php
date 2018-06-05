@@ -302,8 +302,13 @@ class Admin extends CI_Controller {
 		$this->load->model('tenant_model');
 		$tenants = $this->tenant_model->get_all();
 		
+		$categories = $this->category_model->get_all();
+		
+		$this->load->model('brand_model');
+		$brands = $this->brand_model->get_all();
+		
 		$this->load->model('views/admin/report_main_view_model');
-		$this->report_main_view_model->get($tenants);
+		$this->report_main_view_model->get($tenants, $categories, $brands);
 		
 		$data['model'] = $this->report_main_view_model;
 		$this->load->view('admin/report_main', $data);
@@ -320,6 +325,9 @@ class Admin extends CI_Controller {
 		
 		$report_type = $this->input->post('report_type');
 		$tenant_id = $this->input->post('tenant_id');
+		$category_id = $this->input->post('category_id');
+		$brand_id = $this->input->post('brand_id');
+		$keywords = $this->input->post('keywords');
 		$start_date = $this->input->post('start_date');
 		$end_date = $this->input->post('end_date');
 		
@@ -344,6 +352,26 @@ class Admin extends CI_Controller {
 			
 			$view_data['model'] = $this->report_by_tenant_view_model;
 			$json_result->view = $this->load->view('admin/report_by_tenant', $view_data, true);
+		}
+		else if ($report_type == "PRODUCT_BY_TENANT")
+		{
+			$transactions = $this->report_model->get_all_product_by_tenant_from_date($tenant_id, $start_date, $end_date);
+			
+			$this->load->model('views/admin/report_product_by_tenant_view_model');
+			$this->report_product_by_tenant_view_model->get($transactions);
+			
+			$view_data['model'] = $this->report_product_by_tenant_view_model;
+			$json_result->view = $this->load->view('admin/report_product_by_tenant', $view_data, true);
+		}
+		else if ($report_type == "BY_PRODUCT")
+		{
+			$transactions = $this->report_model->get_all_from_category_brand_and_date($category_id, $brand_id, $keywords, $start_date, $end_date);
+			
+			$this->load->model('views/admin/report_by_product_view_model');
+			$this->report_by_product_view_model->get($transactions);
+			
+			$view_data['model'] = $this->report_by_product_view_model;
+			$json_result->view = $this->load->view('admin/report_by_product', $view_data, true);
 		}
 		// else if ($report_type == "BY_ITEM")
 		// {
@@ -372,6 +400,52 @@ class Admin extends CI_Controller {
 		header("Pragma: no-cache");
 		header("Content-Type: application/json; charset=utf-8");
 		echo json_encode($json_result);
+	}
+	
+	public function report_print_preview()
+	{
+		$report_type 	= $this->input->post('cur_report_type');
+		$tenant_id 		= $this->input->post('cur_tenant_id');
+		$category_id 	= $this->input->post('cur_category_id');
+		$brand_id 		= $this->input->post('cur_brand_id');
+		$keywords 		= $this->input->post('cur_keywords');
+		$start_date 	= $this->input->post('cur_start_date');
+		$end_date 		= $this->input->post('cur_end_date');
+		$report_html 	= $this->input->post('report_html');
+		
+		$tenant = "";
+		$category = "";
+		$brand = "";
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header_print_preview', $data_header);
+		
+		// Load Body
+		if ((REPORT_TYPES[$report_type]['tenant_opt']) && ($tenant_id != "-1")) {
+			$this->load->model('tenant_model');
+			$tenant = $this->tenant_model->get_from_id($tenant_id);
+		}
+		
+		if ((REPORT_TYPES[$report_type]['category_opt']) && ($category_id != "-1")) {
+			$category = $this->category_model->get_from_id($category_id);
+		}
+		
+		if ((REPORT_TYPES[$report_type]['brand_opt']) && ($brand_id != "-1")) {
+			$this->load->model('brand_model');
+			$brand = $this->brand_model->get_from_id($brand_id);
+		}
+		
+		$this->load->model('views/admin/report_print_preview_view_model');
+		$this->report_print_preview_view_model->get($report_type, $tenant, $category, $brand, $keywords, $start_date, $end_date, $report_html);
+		
+		$data['model'] = $this->report_print_preview_view_model;
+		$data['title'] = REPORT_TYPES[$report_type]['description'];
+		$this->load->view('admin/report_print_preview', $data);
+		
+		// Load Footer
+		$this->load->view('footer_print_preview');
 	}
 	
 	public function validate_superadmin()

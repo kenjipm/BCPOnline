@@ -28,10 +28,13 @@ function container_print()
 						print_window.document.write(print_html);
 						print_window.document.close();
 						print_window.focus();
-						setTimeout(function(){
-							print_window.print();
-							print_window.close();
-						}, 100);
+						$(print_window.document).ready(function(){
+							setTimeout(function(){
+								print_window.document.title = $("#print_title").val();
+								print_window.print();
+								print_window.close();
+							}, 1000);
+						});
 						
 						// $("#print_frame").html(print_html);	
 						// window.frames["print_frame"].document.open();

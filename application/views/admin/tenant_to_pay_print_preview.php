@@ -1,3 +1,5 @@
+<input type="hidden" id="print_title" value="<?= $model->print_title ?? "Untitled" ?>"/>
+
 <!--div class="col-sm-10 col-sm-offset-1">
 	<div class="panel panel-default">
 		<div class="panel-heading">

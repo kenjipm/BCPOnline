@@ -2,6 +2,8 @@
 
 class Tenant_to_pay_print_preview_view_model extends CI_Model {
 	
+	public $print_title;
+	
 	public $tenant;
 	public $order_details;
 	
@@ -16,6 +18,8 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 	
 	public function get($tenant, $order_details)
 	{
+		$this->print_title			= null;
+		
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		$this->tenant->unit_number	= $tenant->unit_number;
 		$this->tenant->floor		= $tenant->floor;
@@ -42,6 +46,8 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 			$this->order_details[] = $temp_order_detail;
 		}
 		$this->tenant->total_unpaid = $this->text_renderer->to_rupiah($this->tenant->total_unpaid);
+		
+		$this->print_title = $tenant->tenant_name . " - " . $tenant->unit_number . " - " $tenant->floor . " (" . date("d M Y") . ")";
 	}
 }
 ?>

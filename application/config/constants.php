@@ -24,18 +24,37 @@ defined('REPORT_TYPES') OR define('REPORT_TYPES', array(
 	'BY_TRANSACTION'	=> array(
 		'description'	=> 'Semua Transaksi',
 		'tenant_opt'	=> false,
+		'category_opt'	=> false,
+		'brand_opt'		=> false,
+		'keywords_opt'	=> false,
 		),
 	'BY_TENANT'			=> array(
 		'description'	=> 'Transaksi Tenant',
 		'tenant_opt'	=> true,
+		'category_opt'	=> false,
+		'brand_opt'		=> false,
+		'keywords_opt'	=> false,
 		),
-	// 'BY_ITEM'			=> array(
-		// 'description'	=> 'Barang Tenant',
-		// 'tenant_opt'	=> true,
-		// ),
+	'PRODUCT_BY_TENANT'	=> array(
+		'description'	=> 'Barang Tenant',
+		'tenant_opt'	=> true,
+		'category_opt'	=> false,
+		'brand_opt'		=> false,
+		'keywords_opt'	=> false,
+		),
+	'BY_PRODUCT'			=> array(
+		'description'	=> 'Semua Barang',
+		'tenant_opt'	=> false,
+		'category_opt'	=> true,
+		'brand_opt'		=> true,
+		'keywords_opt'	=> true,
+		),
 	'HOT_ITEM'			=> array(
 		'description'	=> 'Hot & Promoted Item',
 		'tenant_opt'	=> true,
+		'category_opt'	=> false,
+		'brand_opt'		=> false,
+		'keywords_opt'	=> false,
 		),
 	)
 );
