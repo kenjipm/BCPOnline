@@ -9,13 +9,14 @@
 			?>
 			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="item_type" value="ORDER"/>
+			<input type="hidden" name="id" value=<?=$model->posted_item->id?>>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 					<div class="cb-pull-left">Nama Barang</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->posted_item_name?>">
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" name="item_name" value="<?=$model->posted_item->posted_item_name?>">
 					<span class="text-danger"><?= form_error('posted_item_name'); ?></span>
 				</div>
 			</div>
@@ -25,7 +26,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="price" value="<?=$model->posted_item->price?>">
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="price" name="price" value="<?=$model->posted_item->price?>">
 					<span class="text-danger"><?= form_error('price'); ?></span>
 				</div>
 			</div>
@@ -44,7 +45,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="unit_weight" value="<?=$model->posted_item->unit_weight?>">
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="unit_weight" name="unit_weight" value="<?=$model->posted_item->unit_weight?>">
 					<span class="text-danger"><?= form_error('unit_weight'); ?></span>
 				</div>
 			</div>
@@ -94,7 +95,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-row cb-col-fifth-2 cb-pl-3">
-					<select class="cb-input-select cb-col-full" name="brand_id">
+					<select class="cb-input-select cb-col-full" id="brand_id" name="brand_id">
 					<option value="<?=$model->posted_item->brand_id?>"><?=$model->posted_item->brand->brand_name?></option>
 					<?php
 					foreach ($model->item_brand as $brand)
@@ -114,7 +115,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-row cb-col-fifth-2 cb-pl-3">
-					<select class="cb-input-select cb-col-full" name="var_type">
+					<select class="cb-input-select cb-col-full" id="var_type" name="var_type">
 					<?php
 					foreach ($model->item_variance as $variance)
 					{
@@ -133,6 +134,7 @@
 					foreach ($model->posted_item->var_desc as $var_desc)
 					{
 						?>
+						<input type="hidden" name="var_id[]" value=<?=$model->posted_item->var_id[$i]?>>
 						<div class="cb-row cb-mb-5">
 							<div class="cb-col-fifth cb-row cb-mb-5">
 							</div>
@@ -143,7 +145,7 @@
 										<div class="cb-pull-right">:</div>
 									</div>
 									<div class="cb-col-fifth-4 cb-pl-3">
-										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->var_desc[$i]?>">
+										<input type="text" class="cb-row cb-col-full cb-input-text" name="var_desc[]" value="<?=$model->posted_item->var_desc[$i]?>">
 										<span class="text-danger"><?= form_error('var_desc'); ?></span>
 									</div>
 								</div>
@@ -153,7 +155,7 @@
 										<div class="cb-pull-right">:</div>
 									</div>
 									<div class="cb-col-fifth-4 cb-pl-3">
-										<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->quantity_available[$i]?>">
+										<input type="text" class="cb-row cb-col-full cb-input-text" name="quantity_available[]" value="<?=$model->posted_item->quantity_available[$i]?>">
 										<span class="text-danger"><?= form_error('quantity_available'); ?></span>
 									</div>
 								</div>

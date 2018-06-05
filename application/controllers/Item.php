@@ -374,7 +374,7 @@ class Item extends CI_Controller {
 
 		if ($this->input->post('item_type') == "ORDER")
 		{
-			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('item_name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
 			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
 			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
