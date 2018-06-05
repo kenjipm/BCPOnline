@@ -114,6 +114,25 @@ class Billing extends CI_Controller {
 	// view billing dari shopping cart
 	public function cart()
 	{
+		$is_cart_valid = true;
+		$cart = $this->session->cart;
+		$this->load->model('posted_item_variance_model');
+		foreach ($cart as $posted_item_variance_id => $cart_item)
+		{
+			$posted_item_variance = $this->posted_item_variance_model->get_from_id($posted_item_variance_id);
+			if ($cart[$posted_item_variance_id]['quantity'] > $posted_item_variance->quantity_available)
+			{
+				$cart[$posted_item_variance_id]['quantity'] = $posted_item_variance->quantity_available;
+				
+				$is_cart_valid = false;
+			}
+		}
+		if (!$is_cart_valid)
+		{
+			$this->session->cart = $cart;
+			redirect('customer/cart');
+		}
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array('billing');

@@ -40,7 +40,7 @@
 								</div>
 								<div class="cb-row">
 									<button class="cb-button-operational cb-button-group-left cb-col-fifth" type="button" onclick="cart_add_do(<?=$item->id?>, 1)"><div class="cb-arrow cb-arrow-white cb-arrow-up"></div></button>
-									<input type="text" value="<?=$item->quantity?>" class="cb-input-text cb-button-group-mid cb-col-fifth-2 text-center" readonly="readonly" />
+									<input type="text" value="<?=$item->quantity?>" class="item_quantity cb-input-text cb-button-group-mid cb-col-fifth-2 text-center" var_id="<?=$item->id?>" />
 									<button class="cb-button-operational cb-button-group-right cb-col-fifth" type="button" onclick="cart_sub_do(<?=$item->id?>, 1)"><div class="cb-arrow cb-arrow-white cb-arrow-down"></button>
 								</div>
 							</div>
@@ -103,7 +103,7 @@
 						if (count($model->items) > 0)
 						{
 							?>
-							<a href="#" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pembayaran</a>
+							<a href="#" id="submit_button" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pembayaran</a>
 							<?php
 						}
 						else
