@@ -98,6 +98,9 @@ class Redeem_reward_model extends CI_Model {
 	
 	public function get_all()
 	{
+		$where['customer_id'] = $this->session->child_id;
+		
+		$this->db->where($where);
 		$query = $this->db->get($this->table_redeem_reward);
 		$redeem_rewards = $query->result();
 		
