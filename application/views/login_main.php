@@ -54,7 +54,7 @@
 					<div class="cb-col-tenth-6">
 						<button type="submit" class="cb-button-form">MASUK</button>
 						<a href="<?=site_url('account/signup')?>">
-							<button class="cb-button-form">DAFTAR</button>
+							<button type="button" class="cb-button-form">DAFTAR</button>
 						</a>
 					</div>
 				</div>
