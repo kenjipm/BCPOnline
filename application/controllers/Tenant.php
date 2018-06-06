@@ -99,7 +99,6 @@ class Tenant extends CI_Controller {
 				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
 				$this->Account_model->update_new_password();
 				
-				redirect('tenant/account');
 			}
 			else
 			{
@@ -107,6 +106,7 @@ class Tenant extends CI_Controller {
 			}
 		}
 		
+		redirect('tenant/account');
 	}
 	
 	public function profile($id=0)

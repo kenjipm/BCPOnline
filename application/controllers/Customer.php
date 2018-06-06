@@ -396,13 +396,14 @@ class Customer extends CI_Controller {
 				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
 				$this->Account_model->update_new_password();
 				
-				redirect('customer/profile');
 			}
 			else
 			{
 				//print_r("Password Lama Salah");
 			}
 		}
+		
+		redirect('customer/profile');
 		//return $data;
 	}
 	
