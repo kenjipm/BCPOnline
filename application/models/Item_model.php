@@ -8,6 +8,7 @@ class Item_model extends CI_Model {
 	private $table_tenant_bill = 'tenant_bill';
 	private $table_order_details = 'order_details';
 	private $table_feedback = 'feedback';
+	private $table_hot_item = 'hot_item';
 	
 	// table attribute
 	public $id;
@@ -34,6 +35,7 @@ class Item_model extends CI_Model {
 	public $category;
 	public $brand;
 	public $tenant;
+	public $hot_item;
 	
 	// stub attribute
 	public $quantity_available;
@@ -590,6 +592,14 @@ class Item_model extends CI_Model {
 		$this->load->model('favorite_item_model');
 		$favorite_id = $this->favorite_item_model->is_favorite($customer_id, $this->id);
 		return $favorite_id;
+	}
+	
+	public function get_hot_item()
+	{
+		$this->load->model('Hot_item_model');
+		$this->hot_item = new Hot_item_model();
+		$this->hot_item = $this->hot_item->get_registered_from_posted_item_id($this->id);
+		return $this->hot_item;
 	}
 	
 	public function init_tenant()

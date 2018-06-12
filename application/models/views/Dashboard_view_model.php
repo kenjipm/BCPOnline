@@ -60,6 +60,14 @@ class Dashboard_view_model extends CI_Model {
 			$temp->image_one_name	= $tenant_item->image_one_name;
 			$temp->rating			= $tenant_item->calculate_rating();
 			
+			$tenant_item->get_hot_item();
+			$temp->is_hot_item = ($tenant_item->hot_item != null);
+			if ($tenant_item->hot_item != null)
+			{
+				$temp->hot_item = new class{};
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($tenant_item->hot_item->promo_price);
+			}
+			
 			$this->tenant_items[] = $temp;
 		}
 		

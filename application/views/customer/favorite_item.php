@@ -23,10 +23,10 @@
 							<?=$favorite_item->posted_item->posted_item_name?>
 						</div>
 						<div class="item_initial_price">
-							
+							<?= $favorite_item->is_hot_item ? $favorite_item->posted_item->price : "" ?>
 						</div>
 						<div class="item_current_price">
-							<?=$favorite_item->posted_item->price?>
+							<?= $favorite_item->is_hot_item ? $favorite_item->hot_item->promo_price : $favorite_item->posted_item->price ?>
 						</div>
 						<div class="item_rating cb-row cb-vertical-center cb-align-center">
 							<span class="cb-star cb-star-<?=$favorite_item->rating->rating_average_round?>"></span>

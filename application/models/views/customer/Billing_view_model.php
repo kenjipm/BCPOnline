@@ -66,6 +66,9 @@ class Billing_view_model extends CI_Model {
 			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
 			$posted_item_variance->init_posted_item();
 			
+			$posted_item_variance->posted_item->get_hot_item();
+			$posted_item_variance->posted_item->is_hot_item = ($posted_item_variance->posted_item->hot_item != null);
+			
 			$temp_order = new class{};
 			$temp_order->quantity									= $cart_item['quantity'];
 			$temp_order->posted_item_variance						= new class{};
@@ -74,8 +77,8 @@ class Billing_view_model extends CI_Model {
 			$temp_order->posted_item_variance->var_description		= $posted_item_variance->var_description;
 			$temp_order->posted_item_variance->posted_item			= new class{};
 			$temp_order->posted_item_variance->posted_item->name	= $posted_item_variance->posted_item->posted_item_name;
-			$temp_order->posted_item_variance->posted_item->price	= $this->text_renderer->to_rupiah($posted_item_variance->posted_item->price);
-			$temp_order->price_total								= $this->text_renderer->to_rupiah($cart_item['quantity'] * $posted_item_variance->posted_item->price);
+			$temp_order->posted_item_variance->posted_item->price	= $this->text_renderer->to_rupiah($posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price);
+			$temp_order->price_total								= $this->text_renderer->to_rupiah($cart_item['quantity'] * ($posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price));
 			
 			$this->orders[] = $temp_order; // baru di add ke array items
 		}

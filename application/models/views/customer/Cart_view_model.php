@@ -33,18 +33,21 @@ class Cart_view_model extends CI_Model {
 			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
 			$posted_item_variance->init_posted_item();
 			
+			$posted_item_variance->posted_item->get_hot_item();
+			$posted_item_variance->posted_item->is_hot_item = ($posted_item_variance->posted_item->hot_item != null);
+			
 			$temp = new class{};
 			
 			$temp->id				= $posted_item_variance->id;
 			$temp->posted_item_id	= $posted_item_variance->posted_item->id;
 			$temp->posted_item_name	= $posted_item_variance->posted_item->posted_item_name;
-			$temp->price			= $posted_item_variance->posted_item->price;
-			$temp->image_one_name	= site_url($posted_item_variance->image_two_name);
+			$temp->price			= $posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price;
+			$temp->image_one_name	= site_url($posted_item_variance->posted_item->image_one_name);
 			$temp->var_type			= $posted_item_variance->var_type;
 			$temp->var_description	= $posted_item_variance->var_description;
 			
 			$temp->quantity			= $cart_item['quantity'];
-			$temp->price_total		= $cart_item['quantity'] * $posted_item_variance->posted_item->price;
+			$temp->price_total		= $cart_item['quantity'] * ($posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price);
 			
 			$this->price_subtotal	+= $temp->price_total; // dijumlahkan dulu ke subtotal nya
 			

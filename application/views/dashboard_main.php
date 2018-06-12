@@ -196,10 +196,10 @@
 												<?=$tenant_item->posted_item_name?>
 											</div>
 											<div class="item_initial_price">
-												
+												<?= $tenant_item->is_hot_item ? $tenant_item->price : "" ?>
 											</div>
 											<div class="item_current_price">
-												<?=$tenant_item->price?>
+												<?= $tenant_item->is_hot_item ? $tenant_item->hot_item->promo_price : $tenant_item->price ?>
 											</div>
 											<div class="item_rating cb-row cb-vertical-center cb-align-center">
 												<span class="cb-star cb-star-<?=$tenant_item->rating->rating_average_round?>"></span>

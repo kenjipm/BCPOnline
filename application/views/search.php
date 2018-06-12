@@ -42,10 +42,10 @@
 									*<?=$promoted_item->posted_item_name?>
 								</div>
 								<div class="item_initial_price">
-									
+									<?= $promoted_item->is_hot_item ? $promoted_item->price : "" ?>
 								</div>
 								<div class="item_current_price">
-									<?=$promoted_item->price?>
+									<?= $promoted_item->is_hot_item ? $promoted_item->hot_item->promo_price : $promoted_item->price ?>
 								</div>
 								<div class="item_rating cb-row cb-vertical-center cb-align-center">
 									<span class="cb-star cb-star-<?=$promoted_item->rating->rating_average_round?>"></span>
@@ -71,10 +71,10 @@
 									<?=$search_item->posted_item_name?>
 								</div>
 								<div class="item_initial_price">
-									
+									<?= $search_item->is_hot_item ? $search_item->price : "" ?>
 								</div>
 								<div class="item_current_price">
-									<?=$search_item->price?>
+									<?= $search_item->is_hot_item ? $search_item->hot_item->promo_price : $search_item->price ?>
 								</div>
 								<div class="item_rating cb-row cb-vertical-center cb-align-center">
 									<span class="cb-star cb-star-<?=$search_item->rating->rating_average_round?>"></span>

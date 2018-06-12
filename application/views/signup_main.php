@@ -24,7 +24,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="name" value="<?= set_value('tenant_name'); ?>"/>
+				<input type="text" class="cb-input-text cb-col-full" name="name" value="<?= set_value('name'); ?>"/>
 				<span class="text-danger"><?= form_error('name'); ?></span>
 			</div>
 		</div>
@@ -46,7 +46,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full" name="address" value="<?= set_value('unit_number'); ?>"/>
+				<input type="text" class="cb-input-text cb-col-full" name="address" value="<?= set_value('address'); ?>"/>
 				<span class="text-danger"><?= form_error('address'); ?></span>
 			</div>
 		</div>

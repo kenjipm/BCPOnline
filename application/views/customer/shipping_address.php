@@ -57,7 +57,7 @@
 						<label>Alamat</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="text" name="address_detail" class="form-control"/>
+						<input type="text" name="address_detail" id="address_detail" class="form-control"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -106,7 +106,7 @@
 				</div> */ ?>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
-						<button type="submit" class="btn btn-default">Tambah</button>
+						<button type="submit" class="btn btn-default" id="btn-address_add">Tambah</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_address')">Batal</button>
 					</div>
 				</div>
