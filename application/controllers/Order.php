@@ -192,8 +192,14 @@ class Order extends CI_Controller {
 		
 		if ($this->form_validation->run() == TRUE)
 		{
-			$this->load->model('Negotiated_price_model');
-			$this->Negotiated_price_model->insert_from_post($id);
+			$this->load->model('negotiated_price_model');
+			$this->negotiated_price_model->insert_from_post($id);
+			
+			$this->load->model('payment_model');
+			$payment = $this->payment_model;
+			$payment->paid_amount			= 0;
+			$payment->billing_id			= $this->input->post('billing_id');
+			$payment->insert();
 			
 			redirect('Order/order_list');
 		}

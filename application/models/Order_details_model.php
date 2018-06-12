@@ -870,6 +870,12 @@ class Order_details_model extends CI_Model {
 	{
 		$this->db->set('order_status', ORDER_STATUS['name']['QUEUED'])
 				 ->where('billing_id', $billing_id)
+				 ->where('order_status', ORDER_STATUS['name']['WAITING_FOR_PAYMENT'])
+				 ->update($this->table_order_details);
+		
+		$this->db->set('order_status', ORDER_STATUS['name']['REPAIRING'])
+				 ->where('billing_id', $billing_id)
+				 ->where('order_status', ORDER_STATUS['name']['COST_CALCULATED'])
 				 ->update($this->table_order_details);
 				 
 		$this->load->model('Order_status_history_model');

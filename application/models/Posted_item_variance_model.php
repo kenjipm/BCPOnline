@@ -187,7 +187,7 @@ class Posted_item_variance_model extends CI_Model {
 		else if ($item_type == "REPAIR")
 		{
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
-				
+			$this->quantity_available	= 100;
 			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
 			if ($this->db->insert($this->table_posted_item_variance, $db_item))
 			{
@@ -206,6 +206,7 @@ class Posted_item_variance_model extends CI_Model {
 		{
 			$this->var_type				= $this->input->post('posted_item_variance_name');
 			$this->var_description		= $this->input->post('posted_item_variance_description');
+			$this->quantity_available	= 1;
 			$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 				
 			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini

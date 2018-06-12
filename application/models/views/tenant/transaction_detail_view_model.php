@@ -32,6 +32,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->order_status			= ORDER_STATUS['name'][$item->order_status];
 		$this->transaction_detail->date_created			= $item->billing->date_created;
 		$this->transaction_detail->account_id			= $cur_order_detail->billing->customer->account->id;
+		$this->transaction_detail->billing_id			= $cur_order_detail->billing->id;
 		$this->transaction_detail->deliverer			= $item->deliverer->account->name;
 		$this->transaction_detail->collection_method	= $item->collection_method;
 		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price);
