@@ -2,10 +2,16 @@ var base_url = "/BCPOnline";
 
 var popup = {
 	open: function(popup_id) {
-		$("#overlay, #"+popup_id).fadeIn(250);
+		var cur_opacity = parseFloat($("#overlay").css("opacity"));
+		$("#"+popup_id).fadeIn(250);
+		if (cur_opacity < 0.5) $("#overlay").fadeIn(250);
+		$("#overlay").css("opacity", cur_opacity + 0.25);
 	},
 	close: function(popup_id) {
-		$("#overlay, #"+popup_id).fadeOut(250);
+		var cur_opacity = parseFloat($("#overlay").css("opacity"));
+		$("#"+popup_id).fadeOut(250);
+		if (cur_opacity < 0.5) $("#overlay").fadeOut(250);
+		$("#overlay").css("opacity", cur_opacity - 0.25);
 	}
 }
 

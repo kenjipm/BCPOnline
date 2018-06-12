@@ -10,8 +10,8 @@ function shipping_address_delete(shipping_address_id)
 				shipping_address_id: shipping_address_id
 			},
 			success: function(data) {
+				location.reload();
 				if (data == "1") {
-					location.reload();
 				}
 				else if (data == "0") {
 					

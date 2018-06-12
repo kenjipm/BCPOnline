@@ -129,6 +129,7 @@ class Shipping_address_model extends CI_Model {
 		$this->db->where('shipping_address.customer_id', $customer_id);
 		$this->db->order_by('billing.date_created', 'DESC');
 		$this->db->order_by('is_primary', 'DESC');
+		// $this->db->distinct();
 		$query = $this->db->get($this->table_shipping_address);
 		$items = $query->result();
 		

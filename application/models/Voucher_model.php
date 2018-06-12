@@ -242,6 +242,7 @@ class Voucher_model extends CI_Model {
 						}
 					}
 				}
+				if ($total_order == 0) { return 0; } // berarti ga ada brand yg kena voucher
 				if (!$voucher->is_order_sufficient($total_order)) { return -4; }
 				
 				foreach ($cart as $id => $cart_item)
