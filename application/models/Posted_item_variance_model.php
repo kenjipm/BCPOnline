@@ -246,26 +246,9 @@ class Posted_item_variance_model extends CI_Model {
 			foreach($temp_var_descriptions as $temp_var_description)
 			{
 				$this->id 					= $this->input->post('var_id')[$i];
+				$this->get_from_id($this->input->post('var_id')[$i]);
 				$this->var_description 		= $temp_var_description;
 				$this->quantity_available	= $this->input->post('quantity_available')[$i];
-				
-				$_FILES['image_two_name']['name']		= $files['image_two_name']['name'][$i];
-				$_FILES['image_two_name']['type']		= $files['image_two_name']['type'][$i];
-				$_FILES['image_two_name']['tmp_name']	= $files['image_two_name']['tmp_name'][$i];
-				$_FILES['image_two_name']['error']		= $files['image_two_name']['error'][$i];
-				$_FILES['image_two_name']['size']		= $files['image_two_name']['size'][$i];
-				
-				$_FILES['image_three_name']['name']		= $files['image_three_name']['name'][$i];
-				$_FILES['image_three_name']['type']		= $files['image_three_name']['type'][$i];
-				$_FILES['image_three_name']['tmp_name']	= $files['image_three_name']['tmp_name'][$i];
-				$_FILES['image_three_name']['error']	= $files['image_three_name']['error'][$i];
-				$_FILES['image_three_name']['size']		= $files['image_three_name']['size'][$i];
-				
-				$_FILES['image_four_name']['name']		= $files['image_four_name']['name'][$i];
-				$_FILES['image_four_name']['type']		= $files['image_four_name']['type'][$i];
-				$_FILES['image_four_name']['tmp_name']	= $files['image_four_name']['tmp_name'][$i];
-				$_FILES['image_four_name']['error']		= $files['image_four_name']['error'][$i];
-				$_FILES['image_four_name']['size']		= $files['image_four_name']['size'][$i];
 				
 					// insert data, then generate [account_id] based on [id]
 				$this->load->library('Id_generator');
@@ -276,6 +259,24 @@ class Posted_item_variance_model extends CI_Model {
 				
 				$this->db->where('id', $db_item->id);
 				$this->db->update($this->table_posted_item_variance, $db_item);
+				
+				$_FILES['image_two_name']['name']		= $files['image_two_name']['name'][$i] ?? "";
+				$_FILES['image_two_name']['type']		= $files['image_two_name']['type'][$i];
+				$_FILES['image_two_name']['tmp_name']	= $files['image_two_name']['tmp_name'][$i];
+				$_FILES['image_two_name']['error']		= $files['image_two_name']['error'][$i];
+				$_FILES['image_two_name']['size']		= $files['image_two_name']['size'][$i];
+				
+				$_FILES['image_three_name']['name']		= $files['image_three_name']['name'][$i] ?? "";
+				$_FILES['image_three_name']['type']		= $files['image_three_name']['type'][$i];
+				$_FILES['image_three_name']['tmp_name']	= $files['image_three_name']['tmp_name'][$i];
+				$_FILES['image_three_name']['error']	= $files['image_three_name']['error'][$i];
+				$_FILES['image_three_name']['size']		= $files['image_three_name']['size'][$i];
+				
+				$_FILES['image_four_name']['name']		= $files['image_four_name']['name'][$i] ?? "";
+				$_FILES['image_four_name']['type']		= $files['image_four_name']['type'][$i];
+				$_FILES['image_four_name']['tmp_name']	= $files['image_four_name']['tmp_name'][$i];
+				$_FILES['image_four_name']['error']		= $files['image_four_name']['error'][$i];
+				$_FILES['image_four_name']['size']		= $files['image_four_name']['size'][$i];
 				
 				$this->upload_image($db_item->id, $i);
 				
@@ -298,7 +299,7 @@ class Posted_item_variance_model extends CI_Model {
 		$config_compress_image = $this->config->item('compress_image_variance');
 		$this->load->library('image_lib');
 		
-		if ($_FILES['image_two_name']['name'])
+		if ($_FILES['image_two_name']['name'] != "")
 		{
 			$config_upload_image['file_name'] = $index."-1.jpg";
 			$this->upload->initialize($config_upload_image);
@@ -323,7 +324,7 @@ class Posted_item_variance_model extends CI_Model {
 			}
 		}
 		
-		if ($_FILES['image_three_name']['name'])
+		if ($_FILES['image_three_name']['name'] != "")
 		{
 			$config_upload_image['file_name'] = $index."-2.jpg";
 			$this->upload->initialize($config_upload_image);
@@ -348,7 +349,7 @@ class Posted_item_variance_model extends CI_Model {
 			}
 		}
 		
-		if ($_FILES['image_four_name']['name'])
+		if ($_FILES['image_four_name']['name'] != "")
 		{
 			$config_upload_image['file_name'] = $index."-3.jpg";
 			$this->upload->initialize($config_upload_image);
@@ -373,17 +374,15 @@ class Posted_item_variance_model extends CI_Model {
 			}
 		}
 		
-		if (count($data['error']) == 0)
+		if ((count($data['error']) == 0) &&
+		(isset($file_path['image_two_name']) || isset($file_path['image_three_name']) || isset($file_path['image_four_name'])))
 		{
 			if (isset($file_path['image_two_name'])) $this->db->set('image_two_name', $file_path['image_two_name']);
 			if (isset($file_path['image_three_name'])) $this->db->set('image_three_name', $file_path['image_three_name']);
 			if (isset($file_path['image_four_name'])) $this->db->set('image_four_name', $file_path['image_four_name']);
 			
-			if (isset($file_path['image_two_name']) || isset($file_path['image_three_name']) || isset($file_path['image_four_name']))
-			{
-				$this->db->where('id', $id);
-				$this->db->update($this->table_posted_item_variance);
-			}
+			$this->db->where('id', $id);
+			$this->db->update($this->table_posted_item_variance);
 		}
 	}
 	
