@@ -61,12 +61,33 @@ class Tenant extends CI_Controller {
 		$this->load->model('views/tenant/account_view_model');
 		$this->account_view_model->get($account, $tenant);
 		
+		$data['message'] = "";
+		if ($this->input->get('err') !== null)
+		{
+			$data['message'] = $this->get_error_message($this->input->get('err'));
+		}
 		$data['model'] = $this->account_view_model;
 		
 		$this->load->view('tenant/account', $data);
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	private function get_error_message($error_code)
+	{
+		if ($error_code == 1)
+		{
+			return "Password lama salah";
+		}
+		else if ($error_code == 0)
+		{
+			return "Profil berhasil diubah";
+		}
+		else
+		{
+			return "Terjadi kesalahan";
+		}
 	}
 	
 	public function account_edit_do()
@@ -97,16 +118,26 @@ class Tenant extends CI_Controller {
 			{
 				$this->form_validation->set_rules('password', 'Password', 'required');
 				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
-				$this->Account_model->update_new_password();
-				
+				if ($this->form_validation->run() == TRUE)
+				{
+					$result = $this->Account_model->update_new_password();
+					if ($result <= 0)
+					{
+						redirect('tenant/account?err=2');
+					}
+					else
+					{
+						redirect('tenant/account?err=0');
+					}
+				}
 			}
 			else
 			{
-				//print_r("Password Lama Salah");
+				redirect('tenant/account?err=1');
 			}
 		}
 		
-		redirect('tenant/account');
+		redirect('tenant/account?err=0');
 	}
 	
 	public function profile($id=0)

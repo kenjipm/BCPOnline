@@ -21,7 +21,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<button type="button" class="btn btn-default" onclick="popup.open('popup_select_brand')">Lihat Brand</button>
+				<button type="button" class="cb-button-form" onclick="popup.open('popup_select_brand')">Lihat Brand</button>
 			</div>
 			<div id="popup_select_brand" class="popup popup-md">
 				<div class="panel panel-default">
@@ -42,7 +42,7 @@
 						</div>
 						<div class="form-group">
 							<div class="col-sm-7">
-								<button type="button" class="btn btn-default" onclick="popup.close('popup_select_brand')">OK</button>
+								<button type="button" class="cb-button-form" onclick="popup.close('popup_select_brand')">OK</button>
 							</div>
 						</div>
 					</div>
@@ -209,7 +209,7 @@
 			<div class="cb-col-fifth-4">
 			</div>
 			<div class="cb-row cb-col-fifth">
-				<button type="submit" class="btn btn-default">Kirim</button>
+				<button type="submit" class="cb-button-form">Kirim</button>
 			</div>
 		</div>
 	</form>

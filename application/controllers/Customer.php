@@ -65,6 +65,11 @@ class Customer extends CI_Controller {
 		$this->reward_main_view_model->get($rewards, $reward_points);
 		
 		$data['title'] = "Profil";
+		$data['message'] = "";
+		if ($this->input->get('err') !== null)
+		{
+			$data['message'] = $this->get_error_message($this->input->get('err'));
+		}
 		$data['model'] = $this->profile_main_view_model;
 		$data['model_reward'] = $this->reward_main_view_model;
 		$data['model_reward_redeem'] = $this->reward_redeem_view_model;
@@ -329,6 +334,22 @@ class Customer extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	private function get_error_message($error_code)
+	{
+		if ($error_code == 1)
+		{
+			return "Password lama salah";
+		}
+		else if ($error_code == 0)
+		{
+			return "Profil berhasil diubah";
+		}
+		else
+		{
+			return "Terjadi kesalahan";
+		}
+	}
+	
 	public function profile_edit_do()
 	{
 		$this->load->library('form_validation');
@@ -394,16 +415,25 @@ class Customer extends CI_Controller {
 			{
 				$this->form_validation->set_rules('password', 'Password', 'required');
 				$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[password]');
-				$this->Account_model->update_new_password();
-				
-			}
-			else
+				if ($this->form_validation->run() == TRUE)
+				{
+					$result = $this->Account_model->update_new_password();
+					if ($result <= 0)
+					{
+						redirect('customer/profile?err=2');
+					}
+					else
+					{
+						redirect('customer/profile?err=0');
+					}
+				}
+			} else
 			{
-				//print_r("Password Lama Salah");
+				redirect('customer/profile?err=1');
 			}
 		}
 		
-		redirect('customer/profile');
+		redirect('customer/profile?err=0');
 		//return $data;
 	}
 	
