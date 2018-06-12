@@ -253,6 +253,7 @@ class Order_details_model extends CI_Model {
 		$this->db->select('*, ' . $this->table_order_details.'.id AS order_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->join('voucher', 'voucher.id=' . $this->table_order_details.'.voucher_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();

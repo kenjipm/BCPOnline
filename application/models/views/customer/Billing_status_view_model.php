@@ -54,6 +54,8 @@ class Billing_status_view_model extends CI_Model {
 		}
 		
 		$this->load->model('order_status_history_model');
+		$this->billing->subtotal = 0;
+		$this->billing->voucher_cut_price = 0;
 		foreach ($orders as $order)
 		{
 			$temp_order = new class{};
@@ -83,12 +85,15 @@ class Billing_status_view_model extends CI_Model {
 				
 				$temp_order->order_status_histories[] = $temp_order_status_history;
 			}
-			
+			$this->billing->subtotal += ($order->sold_price * $order->quantity);
+			$this->billing->voucher_cut_price += $order->voucher_worth;
 			$this->orders[] = $temp_order;
 		}
 		
 		$this->billing->is_paid = ($this->billing->total_not_paid <= 0);
 		
+		$this->billing->subtotal = $this->text_renderer->to_rupiah($this->billing->subtotal);
+		$this->billing->voucher_cut_price = $this->text_renderer->to_rupiah($this->billing->voucher_cut_price);
 		$this->billing->total_payable = $this->text_renderer->to_rupiah($this->billing->total_payable);
 		$this->billing->total_not_paid = $this->text_renderer->to_rupiah($this->billing->total_not_paid);
 	}
