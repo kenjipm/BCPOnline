@@ -6,6 +6,7 @@
 	</div>
 </div>
 
+<?php if ($model->order_list) { ?>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<div class="cb-row cb-mb-5">
 		<div class="cb-col-fifth">
@@ -80,6 +81,18 @@
 	}
 	?>
 </div>	
+
+<?php }  else { ?>
+<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<div class="cb-row cb-mb-5">
+		<div class="cb-col-fifth-4">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> KODE OTP SALAH </div>
+			</div>
+		</div>
+	</div>
+</div>
+<?php } ?>
 
 <?php /*
 <div class="">
