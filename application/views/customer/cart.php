@@ -69,7 +69,7 @@
 				}
 				?>
 				<hr/>
-				<div class="cb-row">
+				<?php /* <div class="cb-row">
 					<div class="cb-col-third-2">
 					</div>
 					<div class="cb-col-third pull-right cb-p-5">
@@ -82,7 +82,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */ ?>
 				<div class="cb-row">
 					<div class="cb-col-third-2">
 					</div>
@@ -348,7 +348,7 @@
 						<input type="text" name="postal_code" class="form-control"/>
 					</div>
 				</div>
-				<div class="form-group">
+				<?php /* <div class="form-group">
 					<div class="col-sm-3">
 						<label>Peta</label>
 					</div>
@@ -359,7 +359,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */ ?>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
 						<button type="submit" class="btn btn-default">Tambah</button>

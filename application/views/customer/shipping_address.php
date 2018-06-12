@@ -30,14 +30,14 @@
 			<div class="cb-col-tenth cb-align-center">
 				<input type="radio" name="is_primary" <?=$shipping_address->is_primary_attr?> onclick="shipping_address_set_primary(<?=$shipping_address->id?>)"/>
 			</div>
-			<div class="cb-col-tenth-9">
+			<div class="cb-col-tenth-7">
 				<div class="cb-align-center"> <?=$shipping_address->full_address?> </div>
 			</div>
-			<?php /*<div class="cb-col-fifth">
+			<div class="cb-col-tenth-2">
 				<div class="cb-align-center">
 					<button class="cb-button cb-button-form" type="button" onclick="shipping_address_delete(<?=$shipping_address->id?>)"> Hapus </button>
 				</div>
-			</div>*/ ?>
+			</div>
 		</div>
 		<?php
 	}
@@ -92,7 +92,7 @@
 						<input type="text" name="postal_code" class="form-control"/>
 					</div>
 				</div>
-				<div class="form-group">
+				<?php /* <div class="form-group">
 					<div class="col-sm-3">
 						<label>Peta</label>
 					</div>
@@ -103,7 +103,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> */ ?>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
 						<button type="submit" class="btn btn-default">Tambah</button>

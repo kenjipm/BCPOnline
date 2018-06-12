@@ -166,17 +166,17 @@
 					<div class="cb-row cb-col-full cb-p-5 cb-align-center">
 						<?php if ($item_variance->image_two_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_two_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
+								<img src="<?=$item_variance->image_two_name?>" alt="" style="width:100%" class="image_zoomable" onclick="" />
 							</div></div>
 						<?php } ?>
 						<?php if ($item_variance->image_three_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_three_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
+								<img src="<?=$item_variance->image_three_name?>" alt="" style="width:100%" class="image_zoomable" onclick="" />
 							</div></div>
 						<?php } ?>
 						<?php if ($item_variance->image_four_name != "") { ?>
 							<div class="cb-row cb-col-third"><div class="thumbnail">
-								<img src="<?=$item_variance->image_four_name?>" alt="" style="width:100%" class="image_zoomable" onclick="popup.close('popup_variance-<?=$item_variance->id?>')" />
+								<img src="<?=$item_variance->image_four_name?>" alt="" style="width:100%" class="image_zoomable" onclick="" />
 							</div></div>
 						<?php } ?>
 					</div>
