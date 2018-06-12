@@ -54,6 +54,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 </div> <!-- div overlay -->
 
+<?php
+	if (!isset($no_loading_overlay)) { ?> <div id="loading"> <img src="<?=site_url('img/loading.png')?>" id="loading_image"/> </div> <?php }
+?>
+
 <div class="nav-cb">
 	<div class="navbar-cb-top cb-row cb-vertical-center">
 		<!-- logo -->

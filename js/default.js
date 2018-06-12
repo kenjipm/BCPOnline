@@ -142,6 +142,12 @@ $(document).ready(function(){
 	// });
 });
 
+$(document).bind("ajaxSend", function(){
+	$("#loading").show();
+}).bind("ajaxComplete", function(){
+	$("#loading").hide();
+});
+
 function check_address_detail() {
 	var address_detail = $("#address_detail").val();
 	if (address_detail != "") {

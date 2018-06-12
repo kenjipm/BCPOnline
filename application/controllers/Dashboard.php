@@ -72,6 +72,7 @@ class Dashboard extends CI_Controller {
 				$last_bidding->bid_time = null;
 			}
 			
+			$data_header['no_loading_overlay'] = true;
 			$this->load->view('header', $data_header);
 			
 			$this->load->model('views/dashboard_view_model');
