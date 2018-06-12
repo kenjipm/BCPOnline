@@ -182,7 +182,10 @@ class Billing_model extends CI_Model {
 			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
 			$posted_item_variance->init_posted_item();
 			
-			$this->total_payable += $cart_item['quantity'] * $posted_item_variance->posted_item->price;
+			$posted_item_variance->posted_item->get_hot_item();
+			$posted_item_variance->posted_item->is_hot_item = ($posted_item_variance->posted_item->hot_item != null);
+			
+			$this->total_payable += $cart_item['quantity'] * ($posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price);
 		}
 		
 		$this->total_payable		+= $shipping_charge->fee_amount;

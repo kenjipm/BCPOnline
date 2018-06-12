@@ -422,9 +422,12 @@ class Customer extends CI_Controller {
 			
 			if (!isset($cart[$posted_item_variance_id]))
 			{
+				$posted_item_variance->posted_item->get_hot_item();
+				$posted_item_variance->posted_item->is_hot_item = ($posted_item_variance->posted_item->hot_item != null);
+				
 				$cart[$posted_item_variance_id] = array();
 				$cart[$posted_item_variance_id]['name']				= $posted_item_variance->posted_item->posted_item_name;
-				$cart[$posted_item_variance_id]['price']			= $posted_item_variance->posted_item->price;
+				$cart[$posted_item_variance_id]['price']			= $posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price;
 				$cart[$posted_item_variance_id]['voucher_cut_price']	= 0;
 				$cart[$posted_item_variance_id]['var_type']			= $posted_item_variance->var_type;
 				$cart[$posted_item_variance_id]['var_description']	= $posted_item_variance->var_description;

@@ -213,6 +213,7 @@ class Account extends CI_Controller {
 		$this->form_validation->set_rules('phone_number', 'No HP', 'required|is_unique[account.phone_number]');
 		
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email|is_unique[account.email]');
+		$this->form_validation->set_rules('identification_no', 'Nomor KTP', 'trim|required|is_unique[account.identification_no]');
 		$this->form_validation->set_rules('password', 'Password',
 			array(
 				'required',

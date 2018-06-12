@@ -41,11 +41,20 @@ class Search_view_model extends CI_Model {
 		foreach ($promoted_items as $promoted_item)
 		{
 			$temp = new class{};
+			
 			$temp->id = $promoted_item->id;
 			$temp->posted_item_name = $promoted_item->posted_item_name ? $promoted_item->posted_item_name : $promoted_item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($promoted_item->price);
 			$temp->image_one_name = site_url($promoted_item->image_one_name);
 			$temp->rating = $promoted_item->calculate_rating();
+			
+			$promoted_item->get_hot_item();
+			$temp->is_hot_item = ($promoted_item->hot_item != null);
+			if ($promoted_item->hot_item != null)
+			{
+				$temp->hot_item = new class{};
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($promoted_item->hot_item->promo_price);
+			}
 			
 			$this->promoted_items[] = $temp;
 		}
@@ -58,6 +67,14 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
 			$temp->image_one_name = site_url($item->image_one_name);
 			$temp->rating = $item->calculate_rating();
+			
+			$item->get_hot_item();
+			$temp->is_hot_item = ($item->hot_item != null);
+			if ($item->hot_item != null)
+			{
+				$temp->hot_item = new class{};
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($item->hot_item->promo_price);
+			}
 			
 			$this->search_items[] = $temp;
 		}
@@ -91,6 +108,14 @@ class Search_view_model extends CI_Model {
 			$temp->image_one_name = site_url($promoted_item->image_one_name);
 			$temp->rating = $promoted_item->calculate_rating();
 			
+			$promoted_item->get_hot_item();
+			$temp->is_hot_item = ($promoted_item->hot_item != null);
+			if ($promoted_item->hot_item != null)
+			{
+				$temp->hot_item = new class{};
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($promoted_item->hot_item->promo_price);
+			}
+			
 			$this->promoted_items[] = $temp;
 		}
 		
@@ -102,6 +127,14 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
 			$temp->image_one_name = site_url($item->image_one_name);
 			$temp->rating = $item->calculate_rating();
+			
+			$item->get_hot_item();
+			$temp->is_hot_item = ($item->hot_item != null);
+			if ($item->hot_item != null)
+			{
+				$temp->hot_item = new class{};
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($item->hot_item->promo_price);
+			}
 			
 			$this->search_items[] = $temp;
 		}

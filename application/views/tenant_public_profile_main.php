@@ -68,10 +68,10 @@
 												<?=$item->posted_item_name?>
 											</div>
 											<div class="item_initial_price">
-												
+												<?= $item->is_hot_item ? $item->price : "" ?>
 											</div>
 											<div class="item_current_price">
-												<?=$item->price?>
+												<?= $item->is_hot_item ? $item->hot_item->promo_price : $item->price ?>
 											</div>
 											<div class="item_rating cb-row cb-vertical-center cb-align-center">
 												<span class="cb-star cb-star-<?=$item->rating->rating_average_round?>"></span>

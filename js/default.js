@@ -128,11 +128,28 @@ $(document).ready(function(){
 		
 	});
 	
+	$("#btn-address_add").prop("disabled", true);
+	$("#address_detail").change(function(){
+		check_address_detail();
+	});
+	$("#address_detail").keyup(function(){
+		check_address_detail();
+	});
+	
 	// $("img").on("error", function(){
 		// // Replacing image source
 		// $(this).attr('src', base_url + '/img/default_image.png');
 	// });
 });
+
+function check_address_detail() {
+	var address_detail = $("#address_detail").val();
+	if (address_detail != "") {
+		$("#btn-address_add").prop("disabled", false);
+	} else {
+		$("#btn-address_add").prop("disabled", true);
+	}
+}
 
 function select_file(event){
 	var element_id = $(this).attr('id');

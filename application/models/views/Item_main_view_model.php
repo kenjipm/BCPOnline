@@ -42,6 +42,14 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");
 		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "SUDAH DIIKUTI" : "IKUTI");
 		
+		$item->get_hot_item();
+		$this->item->is_hot_item = ($item->hot_item != null);
+		if ($item->hot_item != null)
+		{
+			$this->item->hot_item = new class{};
+			$this->item->hot_item->promo_price = $this->text_renderer->to_rupiah($item->hot_item->promo_price);
+		}
+		
 		$item->tenant->init_account();
 		$this->item->tenant->account = new class{};
 		$this->item->tenant->account->profile_pic	= site_url(($item->tenant->account->profile_pic != "") ? $item->tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
@@ -71,6 +79,14 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->posted_item_description = $other_item->posted_item_description;
 			$other_item_temp->image_one_name = site_url($other_item->image_one_name);
 			$other_item_temp->rating = $other_item->calculate_rating();
+			
+			$other_item->get_hot_item();
+			$other_item_temp->is_hot_item = ($other_item->hot_item != null);
+			if ($other_item->hot_item != null)
+			{
+				$other_item_temp->hot_item = new class{};
+				$other_item_temp->hot_item->promo_price = $this->text_renderer->to_rupiah($other_item->hot_item->promo_price);
+			}
 			
 			$this->other_items[] = $other_item_temp;
 		}
