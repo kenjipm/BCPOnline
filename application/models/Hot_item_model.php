@@ -156,6 +156,24 @@ class Hot_item_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	// get hot_item detail
+	public function get_registered_from_posted_item_id($posted_item_id)
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_hot_item.'.posted_item_id', $posted_item_id);
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$query = $this->db
+					  ->order_by($this->table_hot_item.'.id', 'DESC')
+					  ->get('tenant_bill', 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function insert_from_post($posted_item_id)
 	{	
 		$this->hot_item_id			= "";

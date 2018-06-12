@@ -598,7 +598,7 @@ class Item_model extends CI_Model {
 	{
 		$this->load->model('Hot_item_model');
 		$this->hot_item = new Hot_item_model();
-		$this->hot_item = $this->hot_item->get_from_posted_item_id($this->id);
+		$this->hot_item = $this->hot_item->get_registered_from_posted_item_id($this->id);
 		return $this->hot_item;
 	}
 	
