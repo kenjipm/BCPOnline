@@ -187,7 +187,7 @@
 				{
 					?>
 					<div class="cb-row cb-p-5 cb-border-top">
-						<div class="cb-col-fifth-3">
+						<div class="cb-col-fifth-2">
 							<div class=" cb-align-center"> <?=$deliver->tenant?> </div>
 						</div>
 						<div class="cb-col-fifth">

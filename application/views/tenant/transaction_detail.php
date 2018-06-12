@@ -92,6 +92,7 @@
 		{
 			?>
 			<form action="<?=site_url('order/transaction_detail/' . $model->transaction_detail->id)?>" class="cb-row cb-col-full" method="post">
+			<input type="hidden" value="<?=$model->transaction_detail->billing_id?>" name="billing_id" />
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 					<div class="cb-pull-left">Deskripsi</div>

@@ -162,7 +162,6 @@ class Voucher_model extends CI_Model {
 		$this->voucher_id			= "";
 		$this->voucher_worth		= $this->input->post('voucher_worth');
 		$this->voucher_description	= $this->input->post('voucher_description');
-		$this->date_added			= date("d-m-Y");
 		$this->date_expired			= $this->input->post('date_expired');
 		$this->voucher_stock		= $this->input->post('voucher_stock');
 		$this->voucher_code			= $this->input->post('voucher_code');

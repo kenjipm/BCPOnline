@@ -112,59 +112,12 @@
 				<?php
 				}
 			?>
+
 				<div class="cb-row cb-p-5">
 					<div class="cb-col-half">
 						<div class="cb-row">
 							<div class="cb-col-fourth-2">
-								<div class="cb-align-left">Subtotal</div>
-							</div>
-							<div class="cb-col-fourth">
-							</div>
-							<div class="cb-col-fourth">
-								<div class="cb-align-center pull-right"><?=$model->billing->total_payable?></div>
-							</div>
-						</div>
-					</div>
-					<div class="cb-col-half">
-					</div>
-				</div>
-				<div class="cb-row cb-p-5">
-					<div class="cb-col-half">
-						<div class="cb-row">
-							<div class="cb-col-fourth-2">
-								<div class="cb-align-left">Ongkos Kirim</div>
-							</div>
-							<div class="cb-col-fourth">
-							</div>
-							<div class="cb-col-fourth">
-								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
-							</div>
-						</div>
-					</div>
-					<div class="cb-col-half">
-					</div>
-				</div>
-				<div class="cb-row cb-p-5">
-					<div class="cb-col-half">
-						<div class="cb-row">
-							<div class="cb-col-fourth-2">
-								<div class="cb-align-left">Voucher</div>
-							</div>
-							<div class="cb-col-fourth">
-							</div>
-							<div class="cb-col-fourth">
-								<div class="cb-align-center pull-right"><?=$model->billing->shipping_charge->fee_amount?></div>
-							</div>
-						</div>
-					</div>
-					<div class="cb-col-half">
-					</div>
-				</div>
-				<div class="cb-row cb-p-5">
-					<div class="cb-col-half">
-						<div class="cb-row">
-							<div class="cb-col-fourth-2">
-								<div class="cb-label cb-align-left">Total Pembayaran</div>
+								<div class="cb-label cb-align-left">Subtotal</div>
 							</div>
 							<div class="cb-col-fourth-2">
 								<div class="cb-label cb-align-right"><?=$model->billing->total_payable?></div>

@@ -189,8 +189,20 @@ class Negotiated_price_model extends CI_Model {
 		
 		$this->db->where('id', $this->order_id);
 		$this->db->set('sold_price', $this->discounted_price + $this->offered_price);
-		$this->db->set('order_status', ORDER_STATUS['name']['REPAIRING']);
+		$this->db->set('order_status', ORDER_STATUS['name']['COST_CALCULATED']);
 		$this->db->update('order_details');
+		
+		$this->billing_id = $this->input->post('billing_id');
+		
+		$this->db->select('billing.total_payable');
+		$this->db->where('billing.id', $this->billing_id);	
+		$query = $this->db->get('billing', 1);
+		$items = $query->row();	
+		$this->total_payable = $items->total_payable;
+		
+		$this->db->where('id', $this->billing_id);
+		$this->db->set('total_payable', $this->discounted_price);
+		$this->db->update('billing');
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 
