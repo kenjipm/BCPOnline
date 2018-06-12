@@ -6,6 +6,15 @@
 <form action="<?=site_url('tenant/account')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 <input type="hidden" name="id" value="<?=$this->session->id?>"/>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
+	<?php if ($message) { ?>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-full">
+			<div class="cb-txt-primary-1 cb-align-center cb-border-bottom">
+				<div class="cb-label cb-font-size-xl"> <?=$message?></div>
+			</div>
+		</div>
+	</div>
+	<?php } ?>
 	<div class="cb-row cb-p-5">
 		<div class="cb-col-fifth">
 			<div class="cb-row">
