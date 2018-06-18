@@ -48,6 +48,7 @@ class Dispute extends CI_Controller {
         $data_header['css_list'] = array();
         if ($id == 0) $data_header['js_list'] = array();
         else $data_header['js_list'] = array('dispute_detail');
+		$data_header['no_loading_overlay'] = true;
 		$this->load->view('header', $data_header);
 		
 		// Load Body
