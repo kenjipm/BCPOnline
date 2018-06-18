@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 18, 2018 at 03:04 PM
+-- Generation Time: Jun 18, 2018 at 03:45 PM
 -- Server version: 10.1.28-MariaDB
 -- PHP Version: 7.0.25
 
@@ -51,7 +51,7 @@ CREATE TABLE `account` (
 
 INSERT INTO `account` (`id`, `account_id`, `name`, `address`, `date_of_birth`, `phone_number`, `email`, `password`, `identification_no`, `identification_pic`, `last_login`, `status`, `date_joined`, `profile_pic`) VALUES
 (0, 'ADM0000', 'Super Admin', 'Jalan', '1978-04-04', '0816263612', 'admin0@cyberia.com', '6572bdaff799084b973320f43f09b363', '', '', '0000-00-00 00:00:00', '', '2018-04-03 15:27:06', ''),
-(2, 'ADM00001', 'Admin Default', '', '0000-00-00', '', 'admin1@cyberia.com', 'e10adc3949ba59abbe56e057f20f883e', '', '', '2018-06-13 13:03:56', 'active', '2017-12-14 06:35:41', ''),
+(2, 'ADM00001', 'Admin Default', '', '0000-00-00', '', 'admin1@cyberia.com', 'e10adc3949ba59abbe56e057f20f883e', '', '', '2018-06-18 20:41:08', 'active', '2017-12-14 06:35:41', ''),
 (3, 'TNT00000', 'Tenant Admin', '', '0000-00-00', '', 'tenant.admin@cyberia.com', 'e10adc3949ba59abbe56e057f20f883e', '', '', '2018-03-21 11:49:08', '', '2018-03-20 16:19:35', ''),
 (13, 'TNT00004', 'Mr. Lee Byung-chule', 'Jl. Pahlawan 123', '1910-02-13', '08123212323', 'lee@samsung.com', 'e10adc3949ba59abbe56e057f20f883e', '123123123123125', '', '2018-06-13 13:03:41', 'ACTIVE', '2018-03-20 16:55:40', ''),
 (14, 'TNT00005', 'Mr. Lei Jun', 'Jl. Pahlawan 123', '1969-12-16', '08123123123', 'lei@xiaomi.com', 'e10adc3949ba59abbe56e057f20f883e', '12321232123213', '', '2018-05-03 20:23:01', 'ACTIVE', '2018-03-20 16:58:19', ''),
@@ -294,7 +294,8 @@ CREATE TABLE `dispute_text` (
   `date_sent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `text` varchar(1000) NOT NULL DEFAULT '',
   `sender_id` int(15) NOT NULL,
-  `dispute_id` int(15) NOT NULL
+  `dispute_id` int(15) NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -440,40 +441,41 @@ CREATE TABLE `message_text` (
   `date_sent` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `text` varchar(5000) NOT NULL DEFAULT '',
   `sender_id` int(15) NOT NULL,
-  `message_inbox_id` int(15) NOT NULL
+  `message_inbox_id` int(15) NOT NULL,
+  `is_read` tinyint(1) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `message_text`
 --
 
-INSERT INTO `message_text` (`id`, `date_sent`, `text`, `sender_id`, `message_inbox_id`) VALUES
-(20, '2018-03-20 18:11:48', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 86WMRJ', 2, 12),
-(21, '2018-03-20 18:11:48', 'Nama Pengirim: Anto, Kode OTP: T8BSGY', 2, 13),
-(22, '2018-03-24 07:31:05', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: Y2GG7R', 2, 12),
-(23, '2018-03-24 07:31:05', 'Nama Pengirim: Anto, Kode OTP: B7KPYN', 2, 13),
-(24, '2018-03-28 03:42:17', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.005.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/22\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(25, '2018-04-03 12:10:55', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/23\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(26, '2018-04-03 12:14:50', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.300.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/24\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(27, '2018-04-03 12:15:13', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/25\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(28, '2018-04-03 12:15:46', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.300.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/26\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(29, '2018-04-04 04:03:12', 'Nama Pengirim: Tenant Admin, Kode OTP: L02M5B', 2, 12),
-(30, '2018-04-04 04:03:12', 'Nama Pengirim: Anto, Kode OTP: C8R3T7', 2, 13),
-(31, '2018-04-28 12:37:04', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 4EI1Y1', 2, 14),
-(32, '2018-04-28 12:37:04', 'Nama Pengirim: Dudung, Kode OTP: XMYBDJ', 2, 13),
-(33, '2018-04-30 14:25:01', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/28\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13),
-(34, '2018-04-30 14:36:41', 'Nama Pengirim: Tenant Admin, Kode OTP: YVJGMS', 2, 14),
-(35, '2018-04-30 14:36:41', 'Nama Pengirim: Dudung, Kode OTP: XTJWKN', 2, 13),
-(36, '2018-04-30 14:37:27', 'Okeey', 15, 13),
-(37, '2018-04-30 14:50:26', 'Nama Pengirim: Anto, Kode OTP: 4MTRAI', 2, 15),
-(38, '2018-04-30 14:50:26', 'Nama Pengirim: Bayu, Kode OTP: M50SO5', 2, 12),
-(39, '2018-04-30 15:32:51', 'Wah meledaknya berkeping2. beli baru wae?', 13, 16),
-(40, '2018-04-30 15:33:09', 'Iya lah ya uda ga bisa ini mah', 13, 16),
-(41, '2018-04-30 16:01:45', 'Buang beli baru kaka', 13, 17),
-(42, '2018-04-30 16:06:30', 'Nama Pengirim: Anto, Kode OTP: 003PSO', 13, 17),
-(43, '2018-05-02 03:57:35', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 8RS9NF', 2, 14),
-(44, '2018-05-02 03:57:36', 'Nama Pengirim: Dudung, Kode OTP: GAQFSS', 2, 13),
-(45, '2018-05-09 03:53:00', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/32\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13);
+INSERT INTO `message_text` (`id`, `date_sent`, `text`, `sender_id`, `message_inbox_id`, `is_read`) VALUES
+(20, '2018-03-20 18:11:48', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 86WMRJ', 2, 12, 0),
+(21, '2018-03-20 18:11:48', 'Nama Pengirim: Anto, Kode OTP: T8BSGY', 2, 13, 0),
+(22, '2018-03-24 07:31:05', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: Y2GG7R', 2, 12, 0),
+(23, '2018-03-24 07:31:05', 'Nama Pengirim: Anto, Kode OTP: B7KPYN', 2, 13, 0),
+(24, '2018-03-28 03:42:17', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.005.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/22\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(25, '2018-04-03 12:10:55', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/23\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(26, '2018-04-03 12:14:50', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.300.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/24\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(27, '2018-04-03 12:15:13', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/25\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(28, '2018-04-03 12:15:46', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.300.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/26\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(29, '2018-04-04 04:03:12', 'Nama Pengirim: Tenant Admin, Kode OTP: L02M5B', 2, 12, 0),
+(30, '2018-04-04 04:03:12', 'Nama Pengirim: Anto, Kode OTP: C8R3T7', 2, 13, 0),
+(31, '2018-04-28 12:37:04', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 4EI1Y1', 2, 14, 0),
+(32, '2018-04-28 12:37:04', 'Nama Pengirim: Dudung, Kode OTP: XMYBDJ', 2, 13, 0),
+(33, '2018-04-30 14:25:01', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/28\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0),
+(34, '2018-04-30 14:36:41', 'Nama Pengirim: Tenant Admin, Kode OTP: YVJGMS', 2, 14, 0),
+(35, '2018-04-30 14:36:41', 'Nama Pengirim: Dudung, Kode OTP: XTJWKN', 2, 13, 0),
+(36, '2018-04-30 14:37:27', 'Okeey', 15, 13, 0),
+(37, '2018-04-30 14:50:26', 'Nama Pengirim: Anto, Kode OTP: 4MTRAI', 2, 15, 0),
+(38, '2018-04-30 14:50:26', 'Nama Pengirim: Bayu, Kode OTP: M50SO5', 2, 12, 0),
+(39, '2018-04-30 15:32:51', 'Wah meledaknya berkeping2. beli baru wae?', 13, 16, 0),
+(40, '2018-04-30 15:33:09', 'Iya lah ya uda ga bisa ini mah', 13, 16, 0),
+(41, '2018-04-30 16:01:45', 'Buang beli baru kaka', 13, 17, 0),
+(42, '2018-04-30 16:06:30', 'Nama Pengirim: Anto, Kode OTP: 003PSO', 13, 17, 0),
+(43, '2018-05-02 03:57:35', 'Nama Pengirim: Mr. Lee Byung-chul, Kode OTP: 8RS9NF', 2, 14, 0),
+(44, '2018-05-02 03:57:36', 'Nama Pengirim: Dudung, Kode OTP: GAQFSS', 2, 13, 0),
+(45, '2018-05-09 03:53:00', 'Selamat! Anda memenangkan lelang untuk barang Djisamsung Not Balok dengan harga Rp 1.800.000,-. Harap segera konfirmasi alamat dan pengiriman melalui link berikut: <a href=\'/BCPOnline/customer/billing_unconfirmed/32\'>KONFIRMASI ALAMAT DAN PENGIRIMAN</a>', 2, 13, 0);
 
 -- --------------------------------------------------------
 
