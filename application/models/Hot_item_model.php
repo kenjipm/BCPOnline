@@ -216,6 +216,16 @@ class Hot_item_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function count_registered_hot_item()
+	{
+		
+		$query = $this->db->get($this->table_hot_item, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_dispute : 0;
+	}
+	
 	public function init_posted_item()
 	{
 		$this->posted_item = $this->posted_item->get_from_id($this->posted_item_id);

@@ -53,7 +53,6 @@
 					<div class="cb-col-fifth">
 						<a href="<?=site_url('billing/status/'.$billing->id)?>" class="cb-row cb-col-full">
 							<button class="cb-button-form cb-col-full">
-							<?=$billing->count_unread_order?>
 							<?php if ($billing->count_unread_order > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 							LIHAT
 							</button>

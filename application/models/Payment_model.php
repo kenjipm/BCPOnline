@@ -119,6 +119,18 @@ class Payment_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_total_paid_from_billing_id($billing_id)
+	{
+		$where['billing_id'] = $billing_id;
+		
+		$this->db->select('SUM(paid_amount) AS total_paid');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_payment, 1);
+		$result = $query->row();
+		
+		return ($result !== null) ? $result->total_paid : 0;
+	}
+	
 	public function insert()
 	{
 		$this->load->library('id_generator');

@@ -3,7 +3,7 @@
 		DAFTAR BARANG
 	</div>
 	
-	<?php if ($model->repair_list){ ?>
+	<?php if (count($model->repair_list) > 0){ ?>
 	<div class="cb-col-full cb-row cb-panel-body cb-bg-primary-3 cb-p-5">
 
 		<div class="cb-col-full cb-row cb-mb-5">

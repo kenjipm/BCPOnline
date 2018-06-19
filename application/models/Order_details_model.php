@@ -390,7 +390,8 @@ class Order_details_model extends CI_Model {
 		$where['billing.customer_id'] = $customer_id;
 		$where[$this->table_order_details. '.otp_deliverer_to_customer'] = $otp;
 		$where[$this->table_order_details. '.order_status'] = ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'];
-		
+		// print_r($otp);
+		// print_r($customer_id);
 		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
@@ -399,14 +400,14 @@ class Order_details_model extends CI_Model {
 		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
 		$this->db->where($where);
 		$query = $this->db->get($this->table_order_details);
-		$items = $query->result();
-		
-		foreach($items as $item)
+		$orders = $query->result();
+		// print_r($orders);
+		foreach($orders as $order)
 		{
-			$this->update_order_status($item->id, ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'], ORDER_STATUS['name']['DELIVERING_TO_TENANT']);
+			$this->update_order_status($order->id, ORDER_STATUS['name']['PICKING_FROM_CUSTOMER'], ORDER_STATUS['name']['DELIVERING_TO_TENANT']);
 		}
 		
-		return ($items !== null) ? $this->map_list($items) : array();
+		return ($orders !== null) ? $this->map_list($orders) : array();
 	}
 	
 	public function get_all_from_otp_tenant_to_deliverer($otp, $deliverer_id)
@@ -1019,6 +1020,25 @@ class Order_details_model extends CI_Model {
 		return (count($items) > 0);
 	}
 	
+	public function count_queued_item()
+	{
+		$this->db->select('
+			COUNT(order_details.id) AS queued_item
+		');
+		
+		$this->db->where('order_details.order_status', ORDER_STATUS['name']['QUEUED']);
+		$this->db->where('order_details.deliverer_id = ', NULL);
+		
+		$this->db->group_by('order_details.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->queued_item : 0;
+	}
+	
 	public function count_all_unread_order_tenant()
 	{
 		$this->db->select('
@@ -1080,6 +1100,8 @@ class Order_details_model extends CI_Model {
 						->where('order_details_id', $this->id)
 						// ->where('billing.customer_id', $this->session->child_id)
 						->update($this->table_order_status_history);
+						
+		return ($result != null) ? $result->queued_item : 0;
 	}
 	
 	public function init_billing()

@@ -402,7 +402,8 @@ class Billing extends CI_Controller {
 			$payment = new Payment_model();
 			$payment = $payment->get_from_id($id);
 			$payment->init_billing();
-			$payment->paid_amount	= $payment->billing->total_payable; // dummy ceritanya bayar semua aja
+			$total_paid = $payment->get_total_paid_from_billing_id($payment->billing->id);
+			$payment->paid_amount	= $payment->billing->total_payable - $total_paid; // dummy ceritanya bayar semua aja
 			$payable_left = $payment->set_paid($id);
 			
 			if ($payable_left <= 0)
