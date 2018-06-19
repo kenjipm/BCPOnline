@@ -1018,6 +1018,25 @@ class Order_details_model extends CI_Model {
 		return (count($items) > 0);
 	}
 	
+	public function count_queued_item()
+	{
+		$this->db->select('
+			COUNT(order_details.id) AS queued_item
+		');
+		
+		$this->db->where('order_details.order_status', ORDER_STATUS['name']['QUEUED']);
+		$this->db->where('order_details.deliverer_id = ', NULL);
+		
+		$this->db->group_by('order_details.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->queued_item : 0;
+	}
+	
 	public function init_billing()
 	{
 		$this->billing = $this->billing->get_from_id($this->billing_id);

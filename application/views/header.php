@@ -60,7 +60,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			else if ($user_type == "ADMIN")
 			{
 				$notifs['admin_payment'] = 1;
-				$notifs['admin_order'] = 1;
+				$notifs['admin_order'] = $this->order_details_model->count_queued_item();
 				$notifs['admin_reward'] = 1;
 				$notifs['admin_hot_item'] = 1;
 				$notifs['admin_promoted_item'] = 1;
