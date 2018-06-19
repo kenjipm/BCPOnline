@@ -3,6 +3,7 @@
 class Order_details_model extends CI_Model {
 	
 	private $table_order_details = 'order_details';
+	private $table_order_status_history = 'order_status_history';
 	
 	// table attribute
 	public $id;
@@ -1016,6 +1017,69 @@ class Order_details_model extends CI_Model {
 		$items = $query->result();
 		
 		return (count($items) > 0);
+	}
+	
+	public function count_all_unread_order_tenant()
+	{
+		$this->db->select('
+			COUNT(order_details.id) AS unread_order
+		');
+		
+		$this->db->join('order_status_history', 'order_status_history.order_details_id = order_details.id', 'left');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id = order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id = posted_item_variance.posted_item_id', 'left');
+		
+		$this->db->where('0', "1");
+		$this->db->or_group_start();
+			foreach(ORDER_NOTIFICATION["TENANT"] as $order_notification)
+				$this->db->or_where('order_status_history.status', $order_notification);
+		$this->db->group_end();
+		
+		$this->db->where('order_status_history.is_read_tenant', 0);
+		$this->db->where('posted_item.tenant_id', $this->session->child_id);
+		
+		$this->db->group_by('order_details.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_order : 0;
+	}
+	
+	public function count_unread_order_status_tenant()
+	{
+		$this->db->select('
+			COUNT(order_status_history.id) AS unread_order_status
+		');
+		
+		$this->db->join('order_status_history', 'order_status_history.order_details_id = order_details.id', 'left');
+		
+		$this->db->where('0', "1");
+		$this->db->or_group_start();
+			foreach(ORDER_NOTIFICATION["TENANT"] as $order_notification)
+				$this->db->or_where('order_status_history.status', $order_notification);
+		$this->db->group_end();
+		
+		$this->db->where('order_details.id', $this->id);
+		$this->db->where('order_status_history.is_read_tenant', 0);
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_order_status : 0;
+	}
+	
+	public function mark_as_read_order_status_tenant()
+	{
+		return $this->db->set('is_read_tenant', 1)
+						// ->join('order_details', 'order_status_history.order_details_id = order_details.id', 'left');
+						// ->join('billing', 'order_details.billing_id = billing.id', 'left');
+						->where('order_details_id', $this->id)
+						// ->where('billing.customer_id', $this->session->child_id)
+						->update($this->table_order_status_history);
 	}
 	
 	public function init_billing()

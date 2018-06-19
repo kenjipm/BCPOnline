@@ -39,7 +39,7 @@ class Dashboard_view_model extends CI_Model {
 		foreach ($hot_items as $hot_item)
 		{
 			$temp = new class{};
-			$temp->id				= $hot_item->id;
+			$temp->id				= $hot_item->posted_item_id;
 			$temp->posted_item_name	= $hot_item->posted_item->posted_item_name;
 			$temp->initial_price	= $this->text_renderer->to_rupiah($hot_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);

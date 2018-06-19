@@ -155,6 +155,32 @@ defined('PAGINATION') OR define('PAGINATION', array(
 	)
 );
 
+defined('ORDER_NOTIFICATION') OR define('ORDER_NOTIFICATION', array(
+		'CUSTOMER' => array(
+			"WAITING_FOR_PAYMENT",
+			"QUEUED",
+			"PICKING_FROM_TENANT",
+			"DELIVERING_TO_CUSTOMER",
+			"RECEIVED",
+			"DONE",
+			"PICKING_FROM_CUSTOMER",
+			"DELIVERING_TO_TENANT",
+			"TENANT_RECEIVED",
+			"COST_CALCULATED",
+			"REPAIRING",
+			"REPAIR_FINISHED",
+			"REFUNDED",
+			"REPAIR_CANCELLED",
+		),
+		'TENANT' => array(
+			"QUEUED",
+			"PICKING_FROM_TENANT",
+			"PICKING_FROM_CUSTOMER",
+			"DELIVERING_TO_TENANT",
+		),
+	)
+);
+
 defined('TYPE') OR define('TYPE', array(
 		'name' => array(
 			'CUSTOMER'				=> 'CUSTOMER',

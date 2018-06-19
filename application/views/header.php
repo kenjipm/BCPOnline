@@ -48,13 +48,13 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			if ($user_type == "CUSTOMER")
 			{
 				$notifs['customer_inbox'] = $this->message_inbox_model->count_unread_message_inbox_by_account();
-				$notifs['customer_transaction'] = 1;
+				$notifs['customer_transaction'] = $this->billing_model->count_all_unread_billing_customer();
 				$notifs['customer_cart'] = count($this->session->cart);
 			}
 			else if ($user_type == "TENANT")
 			{
 				$notifs['tenant_inbox'] = $this->message_inbox_model->count_unread_message_inbox_by_account();
-				$notifs['tenant_transaction'] = 1;
+				$notifs['tenant_transaction'] = $this->order_details_model->count_all_unread_order_tenant();
 				$notifs['tenant_dispute'] = $this->dispute_model->count_unread_dispute_by_account();
 			}
 			else if ($user_type == "ADMIN")

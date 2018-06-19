@@ -4,6 +4,8 @@ class Billing_model extends CI_Model {
 	
 	// Nama tabel di DB
 	private $table_billing = 'billing';
+	private $table_order_details = 'order_details';
+	private $table_order_status_history = 'order_status_history';
 	
 	// table attribute
 	public $id;
@@ -222,6 +224,78 @@ class Billing_model extends CI_Model {
 				 ->set('shipping_charge_id', $db_item->shipping_charge_id)
 				 ->where('id', $db_item->id)
 				 ->update($this->table_billing);
+	}
+	
+	public function count_all_unread_billing_customer()
+	{
+		$this->db->select('
+			COUNT(billing.id) AS unread_billing
+		');
+		
+		$this->db->join('order_details', 'order_details.billing_id = billing.id', 'left');
+		$this->db->join('order_status_history', 'order_status_history.order_details_id = order_details.id', 'left');
+		
+		$this->db->where('0', "1");
+		$this->db->or_group_start();
+			foreach(ORDER_NOTIFICATION["CUSTOMER"] as $order_notification)
+				$this->db->or_where('order_status_history.status', $order_notification);
+		$this->db->group_end();
+		
+		$this->db->where('order_status_history.is_read_customer', 0);
+		$this->db->where('billing.customer_id', $this->session->child_id);
+		
+		$this->db->group_by('billing.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_billing, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_billing : 0;
+	}
+	
+	public function count_unread_order_customer()
+	{
+		$this->db->select('
+			COUNT(order_details.id) AS unread_order
+		');
+		
+		$this->db->join('order_status_history', 'order_status_history.order_details_id = order_details.id', 'left');
+		
+		$this->db->where('0', "1");
+		$this->db->or_group_start();
+			foreach(ORDER_NOTIFICATION["CUSTOMER"] as $order_notification)
+				$this->db->or_where('order_status_history.status', $order_notification);
+		$this->db->group_end();
+		
+		$this->db->where('order_details.billing_id', $this->id);
+		$this->db->where('order_status_history.is_read_customer', 0);
+		
+		$this->db->group_by('order_details.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		// echo $this->db->last_query();
+		// echo "<br/><br/><br/>";
+		return ($result != null) ? $result->unread_order : 0;
+	}
+	
+	public function mark_as_read_order_status_customer()
+	{
+		return $this->db->query('
+			UPDATE order_status_history LEFT JOIN order_details
+			ON order_status_history.order_details_id = order_details.id
+			SET order_status_history.is_read_customer = 1
+			WHERE order_details.billing_id = ' . $this->id . '
+		');
+		// return $this->db->set('is_read_customer', 1)
+						// // ->join('order_details', 'order_status_history.order_details_id = order_details.id', 'left')
+						// // ->join('billing', 'order_details.billing_id = billing.id', 'left');
+						// ->where('order_details.billing_id', $this->id)
+						// // ->where('billing.customer_id', $this->session->child_id)
+						// ->update('order_status_history LEFT JOIN order_details ON order_status_history.order_details_id = order_details.id');
 	}
 	
 	public function update_natural_id($natural_id)

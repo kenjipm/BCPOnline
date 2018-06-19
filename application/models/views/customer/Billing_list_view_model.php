@@ -29,6 +29,8 @@ class Billing_list_view_model extends CI_Model {
 			// $temp_billing->total_payable	= $this->text_renderer->to_rupiah($billing->calculate_total_payable());
 			$temp_billing->total_payable	= $this->text_renderer->to_rupiah($billing->total_payable);
 			
+			$temp_billing->count_unread_order = $billing->count_unread_order_customer();
+			
 			$this->billings[] = $temp_billing;
 		}
 	}
