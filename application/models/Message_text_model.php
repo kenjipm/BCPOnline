@@ -11,6 +11,7 @@ class Message_text_model extends CI_Model {
 	public $text;
 	public $sender_id;
 	public $message_inbox_id;
+	public $is_read;
 	
 	// relation table
 	public $message_inbox;
@@ -26,6 +27,7 @@ class Message_text_model extends CI_Model {
 		$this->text					= "";
 		$this->sender_id			= "";
 		$this->message_inbox_id		= "";
+		$this->is_read				= 0;
 		
 		$this->load->model('Message_inbox_model');
 		$this->load->model('Account_model');
@@ -42,6 +44,7 @@ class Message_text_model extends CI_Model {
 		$this->text				= $db_item->text;
 		$this->sender_id		= $db_item->sender_id;
 		$this->message_inbox_id	= $db_item->message_inbox_id;
+		$this->is_read	= $db_item->is_read;
 		
 		return $this;
 	}
@@ -56,6 +59,7 @@ class Message_text_model extends CI_Model {
 		$db_item->text				= $this->text;
 		$db_item->sender_id			= $this->sender_id;
 		$db_item->message_inbox_id	= $this->message_inbox_id;
+		$db_item->is_read	= $this->is_read;
 		
 		return $db_item;
 	}
@@ -70,6 +74,7 @@ class Message_text_model extends CI_Model {
 		$stub->text				= $db_item->text;
 		$stub->sender_id		= $db_item->sender_id;
 		$stub->message_inbox_id	= $db_item->message_inbox_id;
+		$stub->is_read			= $db_item->is_read;
 		
 		return $stub;
 	}

@@ -8,28 +8,34 @@ $config['top_menu_guest'] = array(
 		'LOGIN' => array(
 			'text'	=> "Login",
 			'url'	=> "login",
+			'notif'	=> "",
 			),
 		'DAFTAR' => array(
 			'text'	=> "Daftar",
 			'url'	=> "account/signup",
+			'notif'	=> "",
 			),
 		),
 	'strip' => array(
 		'DASHBOARD' => array(
 			'text'	=> "BERANDA",
 			'url'	=> "",
+			'notif'	=> "",
 			),
 		'PRODUCT' => array(
 			'text'	=> "PRODUK",
 			'url'	=> "",
+			'notif'	=> "",
 			),
 		'FAVORITE_ITEM' => array(
 			'text'	=> "FAVORIT",
 			'url'	=> "customer/favorite_item",
+			'notif'	=> "",
 			),
 		'REPAIR' => array(
 			'text'	=> "SERVIS",
 			'url'	=> "item/service",
+			'notif'	=> "",
 			),
 		),
 	);
@@ -40,52 +46,63 @@ $config['top_menu_customer'] = array(
 			'text'	=> "Pesan",
 			'icon'	=> "message",
 			'url'	=> "message",
+			'notif'	=> "customer_inbox",
 			),
 		'BILLING' => array(
 			'text'	=> "Transaksi",
 			'icon'	=> "document",
 			'url'	=> "billing",
+			'notif'	=> "customer_transaction",
 			),
 		'CART' => array(
 			'text'	=> "Keranjang",
 			'icon'	=> "cart",
 			'url'	=> "customer/cart",
+			'notif'	=> "customer_cart",
 			),
 		),
 	'profile' => array(
 		'PROFILE' => array(
 			'text'	=> "Profil Saya",
 			'url'	=> "customer/profile",
+			'notif'	=> "",
 			),
 		'REWARD' => array(
 			'text'	=> "Reward",
 			'url'	=> "customer/reward",
+			'notif'	=> "",
 			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
+			'notif'	=> "",
 			),
 		),
 	'strip' => array(
 		'DASHBOARD' => array(
 			'text'	=> "BERANDA",
 			'url'	=> "",
+			'notif'	=> "",
 			),
 		'PRODUCT' => array(
 			'text'	=> "PRODUK",
 			'url'	=> "",
+			'notif'	=> "",
 			),
 		'FAVORITE_ITEM' => array(
 			'text'	=> "FAVORIT",
 			'url'	=> "customer/favorite_item",
+			'notif'	=> "",
 			),
 		'REPAIR' => array(
 			'text'	=> "SERVIS",
 			'url'	=> "item/service",
+			'notif'	=> "",
 			),
 		'VOUCHER' => array(
 			'text'	=> "DAFTAR VOUCHER",
 			'url'	=> "voucher/voucher_list",
+			'notif'	=> "",
 			),
 		// 'FOLLOWED_TENANT' => array(
 			// 'text'	=> "Tenant",
@@ -108,6 +125,7 @@ $config['top_menu_tenant'] = array(
 			'text'	=> "Pesan",
 			'icon'	=> "message",
 			'url'	=> "message",
+			'notif'	=> "tenant_inbox",
 			),
 		// 'ORDER' => array(
 			// 'text'	=> "Input OTP",
@@ -119,24 +137,29 @@ $config['top_menu_tenant'] = array(
 		'PROFILE' => array(
 			'text'	=> "Akun Saya",
 			'url'	=> "tenant/account",
+			'notif'	=> "",
 			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
+			'notif'	=> "",
 			),
 		),
 	'strip' => array(
 		'ITEM' => array(
 			'text'	=> "PRODUKKU",
 			'url'	=> "item/post_item_list",
+			'notif'	=> "",
 			),
 		'TRANSACTION' => array(
 			'text'	=> "PENJUALANKU",
 			'url'	=> "order/order_list",
+			'notif'	=> "tenant_transaction",
 			),
 		'DISPUTE' => array(
 			'text'	=> "KOMPLAIN",
 			'url'	=> "dispute",
+			'notif'	=> "tenant_dispute",
 			),
 		),
 	);
@@ -148,6 +171,7 @@ $config['top_menu_deliverer'] = array(
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
+			'notif'	=> "",
 			),
 		),
 	'strip' => array(
@@ -160,69 +184,84 @@ $config['top_menu_admin'] = array(
 			'text'	=> "Account",
 			'icon'	=> "flag",
 			'url'	=> "account/account_list",
+			'notif' => "",
 			),
 		'PAY_DEBT' => array(
 			'text'	=> "Payment",
 			'icon'	=> "document",
 			'url'	=> "admin/tenant_to_pay_list",
+			'notif' => "admin_payment",
 			),
 		'REPORT' => array(
 			'text'	=> "Laporan",
 			'icon'	=> "document",
 			'url'	=> "admin/report",
+			'notif' => "",
 			),
 		),
 	'profile' => array(
 		'SETTING' => array(
 			'text'	=> "Setting",
 			'url'	=> "account/setting",
+			'notif' => "",
 			),
 		'LOGOUT' => array(
 			'text'	=> "Logout",
 			'url'	=> "login/logout",
+			'notif' => "",
 			),
 		),
 	'strip' => array(
 		'ORDER' => array(
 			'text'	=> "DAFTAR ORDER",
 			'url'	=> "order/order_list",
+			'notif' => "admin_order",
 			),
 		'VOUCHER' => array(
 			'text'	=> "VOUCHER",
 			'url'	=> "voucher/voucher_list",
+			'notif' => "",
 			),
 		'REWARD' => array(
 			'text'	=> "REWARD",
 			'url'	=> "reward/reward_list",
+			'notif' => "admin_reward",
 			),
 		'BRAND' => array(
 			'text'	=> "BRAND",
 			'url'	=> "brand/brand_list",
+			'notif' => "",
 			),
 		'CATEGORY' => array(
 			'text'	=> "KATEGORI",
 			'url'	=> "category/category_list",
+			'notif' => "",
 			),
 		'HOT_ITEM' => array(
 			'text'	=> "HOT ITEM",
 			'url'	=> "admin/hot_item_list",
+			'notif' => "admin_hot_item",
 			),
 		'SEO_ITEM' => array(
 			'text'	=> "PROMOTED ITEM",
 			'url'	=> "admin/seo_item_list",
+			'notif' => "admin_promoted_item",
 			),
 		'BIDDING' => array(
 			'text'	=> "LELANG",
 			//'icon'	=> "speaker",
 			'url'	=> "bidding_live/bidding_live_list",
+			'notif' => "admin_bidding",
 			),
 		'BILLING' => array(
 			'text'	=> "BILLING",
 			'url'	=> "billing",
+			'notif' => "",
 			),
 		'DISPUTE' => array(
 			'text'	=> "DISPUTE",
 			'url'	=> "dispute",
+			'notif' => "",
 			),
 		),
 	);
@@ -324,4 +363,19 @@ $config['sub_footer_right'] = array(
 		),
 	);
 	
+$config['notif'] = array(
+		''						=> 0,
+		'customer_inbox'		=> 0,
+		'customer_transaction'	=> 0,
+		'customer_cart'			=> 0,
+		'tenant_inbox'			=> 0,
+		'tenant_transaction'	=> 0,
+		'tenant_dispute'		=> 0,
+		'admin_payment'			=> 0,
+		'admin_order'			=> 0,
+		'admin_reward'			=> 0,
+		'admin_hot_item'		=> 0,
+		'admin_promoted_item'	=> 0,
+		'admin_bidding'			=> 0,
+	);
 ?>

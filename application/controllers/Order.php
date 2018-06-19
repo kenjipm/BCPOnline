@@ -90,7 +90,7 @@ class Order extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('billing', 'tenant/billing_list');
+        $data_header['js_list'] = array('billing', 'tenant/billing');
 		$this->load->view('header', $data_header);
 		
 		// Load Body

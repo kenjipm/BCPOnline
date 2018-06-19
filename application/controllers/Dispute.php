@@ -59,7 +59,11 @@ class Dispute extends CI_Controller {
 		else $disputes = $this->dispute_model->get_all_from_account_id($account_id);
 		
 		if ($id == 0) $dispute = new dispute_model();
-		else $dispute = $this->dispute_model->get_from_id($id);
+		else
+		{
+			$dispute = $this->dispute_model->get_from_id($id);
+			if ($this->session->type != "ADMIN") $this->dispute_model->mark_as_read_dispute_text();
+		}
 		
 		$this->load->model('dispute_text_model');
 		if ($id == 0) $dispute_texts = array();

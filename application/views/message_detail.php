@@ -10,6 +10,7 @@
 						<div class="cb-col-full cb-row cb-p-5 cb-font-title <?=($message_inbox->id == $model->message_inbox->id) ? 'cb-txt-primary-3' : 'cb-txt-primary-1'?>">
 							<div class="cb-pl-5">
 								<div class="cb-txt-primary-1 cb-font-size-lg">
+									<?php if ($message_inbox->unread_message_count > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 									<?=$message_inbox->other_party_name?>
 								</div>
 								<div class="cb-txt-secondary-2 cb-font-size-sm"><?= $message_inbox->msg_preview_date ?></div>

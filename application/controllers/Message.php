@@ -57,10 +57,14 @@ class Message extends CI_Controller {
 		$message_inboxes = $this->message_inbox_model->get_all_from_account_id($account_id);
 		
 		if ($id == 0) $message_inbox = new message_inbox_model();
-		else $message_inbox = $this->message_inbox_model->get_from_id($id);
+		else
+		{
+			$message_inbox = $this->message_inbox_model->get_from_id($id);
+			$this->message_inbox_model->mark_as_read_message_text();
+		}
 		
 		$this->load->model('message_text_model');
-		if ($id == 0) $message_texts = array();
+		if ($id == 0) { $message_texts = array(); }
 		else $message_texts = $this->message_text_model->get_all_from_message_inbox_id($id);
 		
 		$this->load->model('views/message_detail_view_model');

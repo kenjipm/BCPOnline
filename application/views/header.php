@@ -36,13 +36,38 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		$user_type = "GUEST";
 		$profile_pic = site_url('img/profpic.png');
 		
+		$this->load->config('nav_menu');
+		$notifs = $this->config->item('notif');
+		
 		if ($is_logged_in)
 		{
 			$user_type = $this->session->type;
 			if ($this->session->profile_pic) $profile_pic = site_url($this->session->profile_pic);
+			
+			// ambil notif
+			if ($user_type == "CUSTOMER")
+			{
+				$notifs['customer_inbox'] = $this->message_inbox_model->count_unread_message_inbox_by_account();
+				$notifs['customer_transaction'] = 1;
+				$notifs['customer_cart'] = count($this->session->cart);
+			}
+			else if ($user_type == "TENANT")
+			{
+				$notifs['tenant_inbox'] = $this->message_inbox_model->count_unread_message_inbox_by_account();
+				$notifs['tenant_transaction'] = 1;
+				$notifs['tenant_dispute'] = $this->dispute_model->count_unread_dispute_by_account();
+			}
+			else if ($user_type == "ADMIN")
+			{
+				$notifs['admin_payment'] = 1;
+				$notifs['admin_order'] = 1;
+				$notifs['admin_reward'] = 1;
+				$notifs['admin_hot_item'] = 1;
+				$notifs['admin_promoted_item'] = 1;
+				$notifs['admin_bidding'] = 1;
+			}
 		}
 		
-		$this->load->config('nav_menu');
 		$top_menu_items = $this->config->item(TYPE['TOP_MENU'][$user_type]);
 		
 		$categories = $this->category_model->get_all();
@@ -91,6 +116,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					<a href="<?=site_url($menu_item['url'])?>" class="navbar-cb-top-menu-text cb-col-third cb-row">
 						<span class="cb-icon cb-icon-sm cb-icon-p-sm cb-icon-<?=$menu_item['icon']?> cb-vertical-center"></span>
 						<?=$menu_item['text']?>
+						<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 					</a>
 					<?php
 				}
@@ -107,6 +133,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						?>
 						<div class="cb-col-full cb-align-left cb-p-3"><a href="<?=site_url($menu_item['url'])?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
 							<?=$menu_item['text']?>
+							<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 						</a></div>
 						<?php
 					}
@@ -121,6 +148,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			{
 				?>
 				<a href="<?=site_url($menu_item['url'])?>" class="navbar-cb-strip-text" id="navbar-cb-strip-<?=$menu_name?>">
+					<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 					<?=$menu_item['text']?>
 				</a>
 				<?php

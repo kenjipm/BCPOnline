@@ -36,6 +36,8 @@ class Message_detail_view_model extends CI_Model {
 			if ($is_last_message_text_exist) $last_message_text->init_account_sender();
 			$temp->msg_preview_name = $is_last_message_text_exist ? $last_message_text->account_sender->name . ": " : "";
 			
+			$temp->unread_message_count = $message_inbox->count_unread_message_text();
+			
 			$this->message_inboxes[] = $temp;
 		}
 		

@@ -149,6 +149,57 @@ class Message_inbox_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function count_unread_message_inbox_by_account()
+	{
+		$this->db->select('
+			COUNT(message_inbox.id) AS unread_message_inbox
+		');
+		
+		$this->db->join('message_text', 'message_text.message_inbox_id = message_inbox.id', 'left');
+		
+		$this->db->group_start();
+			$this->db->where('message_inbox.party_one_id', $this->session->id);
+			$this->db->or_where('message_inbox.party_two_id', $this->session->id);
+		$this->db->group_end();
+		
+		$this->db->where('message_text.is_read', 0);
+		$this->db->where('message_text.sender_id <> ', $this->session->id);
+		
+		$this->db->group_by('message_inbox.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_message_inbox, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_message_inbox : 0;
+	}
+	
+	public function count_unread_message_text()
+	{
+		$this->db->select('
+			COUNT(message_text.id) AS unread_message_count
+		');
+		
+		$this->db->join('message_text', 'message_text.message_inbox_id = message_inbox.id', 'left');
+		$this->db->where('message_inbox.id', $this->id);
+		$this->db->where('message_text.is_read', 0);
+		$this->db->where('message_text.sender_id <> ', $this->session->id);
+		$query = $this->db->get($this->table_message_inbox, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_message_count : 0;
+	}
+	
+	public function mark_as_read_message_text()
+	{
+		return $this->db->set('is_read', 1)
+				 ->where('message_inbox_id', $this->id)
+				 ->where('message_text.sender_id <> ', $this->session->id)
+				 ->update($this->table_message_text);
+	}
+	
 	public function update_natural_id()
 	{
 		$this->load->library('id_generator');

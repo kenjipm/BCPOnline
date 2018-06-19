@@ -10,6 +10,7 @@
 						<div class="cb-col-full cb-row cb-p-5 cb-font-title <?=($dispute->id == $model->dispute->id) ? 'cb-txt-primary-3' : 'cb-txt-primary-1'?>">
 							<div class="cb-pl-5">
 								<div class="cb-txt-primary-1 cb-font-size-lg">
+									<?php if ($dispute->unread_dispute_count > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 									<?=$dispute->other_party_name?> | <?= $dispute->natural_billing_id ?>
 								</div>
 								<div class="cb-txt-secondary-2 cb-font-size-sm"><?= $dispute->msg_preview_date ?></div>

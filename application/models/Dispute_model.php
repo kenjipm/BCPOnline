@@ -185,6 +185,57 @@ class Dispute_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function count_unread_dispute_by_account()
+	{
+		$this->db->select('
+			COUNT(dispute.id) AS unread_dispute
+		');
+		
+		$this->db->join('dispute_text', 'dispute_text.dispute_id = dispute.id', 'left');
+		
+		$this->db->group_start();
+			$this->db->where('dispute.party_one_id', $this->session->id);
+			$this->db->or_where('dispute.party_two_id', $this->session->id);
+		$this->db->group_end();
+		
+		$this->db->where('dispute_text.is_read', 0);
+		$this->db->where('dispute_text.sender_id <> ', $this->session->id);
+		
+		$this->db->group_by('dispute.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_dispute, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_dispute : 0;
+	}
+	
+	public function count_unread_dispute_text()
+	{
+		$this->db->select('
+			COUNT(dispute_text.id) AS unread_dispute_count
+		');
+		
+		$this->db->join('dispute_text', 'dispute_text.dispute_id = dispute.id', 'left');
+		$this->db->where('dispute.id', $this->id);
+		$this->db->where('dispute_text.is_read', 0);
+		$this->db->where('dispute_text.sender_id <> ', $this->session->id);
+		$query = $this->db->get($this->table_dispute, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unread_dispute_count : 0;
+	}
+	
+	public function mark_as_read_dispute_text()
+	{
+		return $this->db->set('is_read', 1)
+				 ->where('dispute_id', $this->id)
+				 ->where('dispute_text.sender_id <> ', $this->session->id)
+				 ->update($this->table_dispute_text);
+	}
+	
 	public function update_natural_id()
 	{
 		$this->load->library('id_generator');

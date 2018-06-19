@@ -37,6 +37,8 @@ class Dispute_detail_view_model extends CI_Model {
 			if ($is_last_dispute_text_exist) $last_dispute_text->init_account_sender();
 			$temp->msg_preview_name = $is_last_dispute_text_exist ? $last_dispute_text->account_sender->name . ": " : "";
 			
+			$temp->unread_dispute_count = $dispute->count_unread_dispute_text();
+			
 			$dispute->order_detail->init_billing();
 			$temp->natural_billing_id = $dispute->order_detail->billing->bill_id;
 			
