@@ -63,7 +63,7 @@
 					</a>
 				</div>
 				<div class="cb-col-tenth cb-row cb-pl-2 cb-pr-2">
-					<a target="_blank" href="<?=site_url('order/transaction_detail_print/'.$order->id)?>" class="cb-button-sm cb-button-form cb-col-full cb-align-center">
+					<a target="_blank" href="<?=site_url('order/transaction_detail_print_preview/'.$order->id)?>" class="cb-button-sm cb-button-form cb-col-full cb-align-center">
 						CETAK
 					</a>
 				</div>
