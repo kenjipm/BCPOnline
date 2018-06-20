@@ -29,8 +29,11 @@
 			<div class="cb-col-tenth-3">
 				<div class="cb-label cb-font-title cb-align-center"> Status </div>
 			</div>
-			<div class="cb-col-tenth-3">
+			<div class="cb-col-tenth-2">
 				<div class="cb-label cb-font-title cb-align-center"> Total Harga </div>
+			</div>
+			<div class="cb-col-tenth">
+				<div class="cb-label cb-font-title cb-align-center">  </div>
 			</div>
 			<div class="cb-col-tenth">
 				<div class="cb-label cb-font-title cb-align-center">  </div>
@@ -50,13 +53,18 @@
 				<div class="cb-col-tenth-3">
 					<div class="cb-align-center"> <?=$order->order_status?> </div>
 				</div>
-				<div class="cb-col-tenth-3">
+				<div class="cb-col-tenth-2">
 					<div class="cb-align-center"> <?=$order->sold_price?> </div>
 				</div>
-				<div class="cb-col-tenth cb-row">
+				<div class="cb-col-tenth cb-row cb-pl-2 cb-pr-2">
 					<a href="<?=site_url('order/transaction_detail/'.$order->id)?>" class="cb-button-sm cb-button-form cb-col-full cb-align-center">
 						<?php if ($order->count_unread_order_status > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 						LIHAT
+					</a>
+				</div>
+				<div class="cb-col-tenth cb-row cb-pl-2 cb-pr-2">
+					<a target="_blank" href="<?=site_url('order/transaction_detail_print/'.$order->id)?>" class="cb-button-sm cb-button-form cb-col-full cb-align-center">
+						CETAK
 					</a>
 				</div>
 			</div>

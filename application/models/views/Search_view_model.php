@@ -45,7 +45,7 @@ class Search_view_model extends CI_Model {
 			$temp->id = $promoted_item->id;
 			$temp->posted_item_name = $promoted_item->posted_item_name ? $promoted_item->posted_item_name : $promoted_item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($promoted_item->price);
-			$temp->image_one_name = site_url($promoted_item->image_one_name);
+			$temp->image_one_name = site_url(($promoted_item->image_one_name !== "") ? $promoted_item->image_one_name : DEFAULT_ITEM_PICTURE[$promoted_item->item_type]);
 			$temp->rating = $promoted_item->calculate_rating();
 			
 			$promoted_item->get_hot_item();
@@ -65,7 +65,7 @@ class Search_view_model extends CI_Model {
 			$temp->id = $item->id;
 			$temp->posted_item_name = $item->posted_item_name ? $item->posted_item_name : $item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
-			$temp->image_one_name = site_url($item->image_one_name);
+			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			
 			$item->get_hot_item();
@@ -105,7 +105,7 @@ class Search_view_model extends CI_Model {
 			$temp->id = $promoted_item->id;
 			$temp->posted_item_name = $promoted_item->posted_item_name ? $promoted_item->posted_item_name : $promoted_item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($promoted_item->price);
-			$temp->image_one_name = site_url($promoted_item->image_one_name);
+			$temp->image_one_name = site_url(($promoted_item->image_one_name !== "") ? $promoted_item->image_one_name : DEFAULT_ITEM_PICTURE[$promoted_item->item_type]);
 			$temp->rating = $promoted_item->calculate_rating();
 			
 			$promoted_item->get_hot_item();
@@ -125,7 +125,7 @@ class Search_view_model extends CI_Model {
 			$temp->id = $item->id;
 			$temp->posted_item_name = $item->posted_item_name ? $item->posted_item_name : $item->posted_item_description;
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
-			$temp->image_one_name = site_url($item->image_one_name);
+			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			
 			$item->get_hot_item();

@@ -87,6 +87,37 @@ class Order extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function transaction_detail_print($id)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header_print_preview', $data_header);
+		
+		// Load Body
+		$data['title'] = "Detail Transaksi";
+		$data['model'] = new class{};
+		
+		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
+		{
+			$this->load->model('Order_details_model');
+			$order = $this->Order_details_model->get_from_id($id);
+			$this->load->model('views/tenant/transaction_detail_view_model');
+			$this->transaction_detail_view_model->get($order);
+			$order->mark_as_read_order_status_tenant();
+			$data['model'] = $this->transaction_detail_view_model;
+			
+			$this->load->view('tenant/transaction_detail_print', $data);
+		}
+		else
+		{
+			redirect('');
+		}
+		
+		// Load Footer
+		$this->load->view('footer_print_preview');
+	}
+	
 	public function order_list()
 	{
 		// Load Header

@@ -77,7 +77,7 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->posted_item_name = $other_item->posted_item_name ? $other_item->posted_item_name : $other_item->posted_item_description;
 			$other_item_temp->price = $this->text_renderer->to_rupiah($other_item->price);
 			$other_item_temp->posted_item_description = $other_item->posted_item_description;
-			$other_item_temp->image_one_name = site_url($other_item->image_one_name);
+			$other_item_temp->image_one_name = site_url(($other_item->image_one_name !== "") ? $other_item->image_one_name : DEFAULT_ITEM_PICTURE[$other_item->item_type]);
 			$other_item_temp->rating = $other_item->calculate_rating();
 			
 			$other_item->get_hot_item();
