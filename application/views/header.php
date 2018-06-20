@@ -59,11 +59,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			}
 			else if ($user_type == "ADMIN")
 			{
-				$notifs['admin_payment'] = $this->tenant_pay_receipt_model->count_unpaid_tenant();
+				$notifs['admin_payment'] = $this->order_details_model->count_unpaid_tenant();
 				$notifs['admin_order'] = $this->order_details_model->count_queued_item();
 				$notifs['admin_reward'] = 1;
 				$notifs['admin_hot_item'] = 1;
-				$notifs['admin_promoted_item'] = 1;
+				$notifs['admin_promoted_item'] = $this->tenant_bill_model->count_registered_seo();
 				$notifs['admin_bidding'] = 1;
 			}
 		}

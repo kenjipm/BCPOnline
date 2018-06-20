@@ -1039,6 +1039,28 @@ class Order_details_model extends CI_Model {
 		return ($result != null) ? $result->queued_item : 0;
 	}
 	
+	public function count_unpaid_tenant()
+	{
+		$this->db->select('
+			COUNT(order_details.id) AS unpaid_tenant
+		');
+		
+		$where['order_details.tnt_paid_receipt_id'] = NULL;
+		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
+		
+		$this->db->where($where);
+		
+		$this->db->group_by('order_details.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_order_details, 1);
+		
+		$result = $query->row();
+		print_r($result);
+		
+		return ($result != null) ? $result->unpaid_tenant : 0;
+	}
+	
 	public function count_all_unread_order_tenant()
 	{
 		$this->db->select('

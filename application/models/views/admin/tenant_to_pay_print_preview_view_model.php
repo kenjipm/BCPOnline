@@ -47,7 +47,7 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 		}
 		$this->tenant->total_unpaid = $this->text_renderer->to_rupiah($this->tenant->total_unpaid);
 		
-		$this->print_title = $tenant->tenant_name . " - " . $tenant->unit_number . " - " $tenant->floor . " (" . date("d M Y") . ")";
+		$this->print_title = $tenant->tenant_name . " - " . $tenant->unit_number . " - " . $tenant->floor . " (" . date("d M Y") . ")";
 	}
 }
 ?>

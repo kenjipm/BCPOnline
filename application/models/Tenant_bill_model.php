@@ -350,6 +350,28 @@ class Tenant_bill_model extends CI_Model {
 		$cur_message_text->text = "Barang promosi sudah dikonfirmasi. Silakan cek produk untuk pembayaran";
 		$cur_message_text->insert_from_stub();
 	}
+	
+	public function count_registered_seo()
+	{
+		$this->db->select('
+			COUNT(tenant_bill.id) AS registered_seo
+		');
+		
+		$where['tenant_bill.payment_date'] = null;
+		$where['tenant_bill.hot_item_id'] = null;
+		
+		$this->db->where($where);
+		
+		$this->db->group_by('tenant_bill.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		
+		$result = $query->row();
+		print_r($result);
+		
+		return ($result != null) ? $result->registered_seo : 0;
+	}
 }
 
 ?>
