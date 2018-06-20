@@ -133,6 +133,24 @@ class Tenant_pay_receipt_model extends CI_Model {
 				 ->where('id', $this->id)
 				 ->update($this->table_tenant_pay_receipt);
 	}
+	
+	public function count_unpaid_tenant()
+	{
+		$this->db->select('
+			COUNT(tenant_pay_receipt.id) AS unpaid_tenant
+		');
+		
+		$this->db->where('tenant_pay_receipt.paid_amount', 0);
+		
+		$this->db->group_by('tenant_pay_receipt.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_tenant_pay_receipt, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->unpaid_tenant : 0;
+	}
 }
 
 ?>
