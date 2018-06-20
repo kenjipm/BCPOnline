@@ -87,7 +87,7 @@ class Order extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function transaction_detail_print($id)
+	public function transaction_detail_print_preview($id)
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -98,16 +98,17 @@ class Order extends CI_Controller {
 		$data['title'] = "Detail Transaksi";
 		$data['model'] = new class{};
 		
-		if ($this->session->userdata('type') == TYPE['name']['TENANT']) // dummy
+		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
 		{
-			$this->load->model('Order_details_model');
-			$order = $this->Order_details_model->get_from_id($id);
-			$this->load->model('views/tenant/transaction_detail_view_model');
-			$this->transaction_detail_view_model->get($order);
-			$order->mark_as_read_order_status_tenant();
-			$data['model'] = $this->transaction_detail_view_model;
+			$order = new order_details_model();
+			$order->id = $id;
+			$delivery_information = $order->get_delivery_information();
 			
-			$this->load->view('tenant/transaction_detail_print', $data);
+			$this->load->model('views/tenant/transaction_detail_print_preview_view_model');
+			$this->transaction_detail_print_preview_view_model->get($delivery_information);
+			$data['model'] = $this->transaction_detail_print_preview_view_model;
+			
+			$this->load->view('tenant/transaction_detail_print_preview', $data);
 		}
 		else
 		{

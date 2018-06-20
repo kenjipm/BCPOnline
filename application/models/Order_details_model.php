@@ -991,6 +991,45 @@ class Order_details_model extends CI_Model {
 		$cur_message_text->insert_from_stub();
 	}
 	
+	public function get_delivery_information()
+	{
+		$query = $this->db->query('
+			SELECT 
+				billing.delivery_method,
+				billing.bill_id,
+				tenant.tenant_name,
+				account.name AS customer_name,
+				account.phone_number,
+				shipping_address.city,
+				shipping_address.kecamatan,
+				shipping_address.kelurahan,
+				shipping_address.postal_code,
+				shipping_address.address_detail,
+				posted_item.posted_item_name,
+				order_details.quantity
+			FROM order_details
+				LEFT JOIN billing
+					ON order_details.billing_id = billing.id
+				LEFT JOIN shipping_address
+					ON billing.shipping_address_id = shipping_address.id
+				LEFT JOIN customer
+					ON billing.customer_id = customer.id
+				LEFT JOIN account
+					ON customer.account_id = account.id
+				LEFT JOIN posted_item_variance
+					ON order_details.posted_item_variance_id = posted_item_variance.id
+				LEFT JOIN posted_item
+					ON posted_item_variance.posted_item_id = posted_item.id
+				LEFT JOIN tenant
+					ON posted_item.tenant_id = tenant.id
+			WHERE order_details.id = '.$this->id.'
+		');
+		
+		$result = $query->row();
+		
+		return $result;
+	}
+	
 	public function get_tenants_to_pay()
 	{
 		$where[$this->table_order_details.'.tnt_paid_receipt_id'] = null;
