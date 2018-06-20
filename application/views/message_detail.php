@@ -65,9 +65,16 @@
 				</div>
 				<div class="cb-mt-5 cb-border-round cb-bg-primary-3 cb-p-5 cb-panel-vertical cb-panel-group-bottom">
 					<div class="cb-row cb-mt-5">
-						<input id="message_inbox_id" type="hidden" value="<?=$model->message_inbox->id?>"/>
-						<input id="message_input" type="text" placeholder="Kirim Pesan..." class="cb-col-tenth-9 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
-						<button onclick="send_message()" class="cb-col-tenth cb-button cb-button-form" id="btn-message_send">KIRIM</button>
+						<form method="POST" class="cb-col-full cb-row" id="form_message" enctype="multipart/form-data">
+							<input id="message_inbox_id" name="message_inbox_id" type="hidden" value="<?=$model->message_inbox->id?>"/>
+							<input id='image_name' name='image_name' class="input_file_upload_move" type='file' style="display:none;"/>
+							<div for='image_name' class="cb-col-full" id="image_name_display" ></div>
+							<label for="image_name" class="cb-col-tenth cb-button cb-bg-secondary-2 cb-icon cb-icon-camera hoverable label_upload_file cb-vertical-center cb-row">
+								<div class="cb-icon cb-icon-sm cb-icon-add-item"></div>
+							</label>
+							<input id="message_input" type="text" name="text" placeholder="Kirim Pesan..." class="cb-col-tenth-8 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
+							<button onclick="send_message()" class="cb-col-tenth cb-button cb-button-form" id="btn-message_send">KIRIM</button>
+						</form>
 					</div>
 				</div>
 			</div>
@@ -83,11 +90,15 @@
 		</div>
 		<div class="cb-col-tenth-8 cb-row">
 			<div class="cb-col-full">
-				<span class="message_sender_name cb-txt-primary-1 cb-font-title cb-font-size-lg"><?=$message_text->sender->name?></span>
-				<span class="message_date_sent cb-ml-5 cb-mr-5"><?=$message_text->date_sent?></span>
+				<span class="message_sender_name cb-txt-primary-1 cb-font-title cb-font-size-lg"></span>
+				<span class="message_date_sent cb-ml-5 cb-mr-5"></span>
 			</div>
 			<div class="message_content cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5">
-				<?=$message_text->text?>
+			</div>
+			<div class="cb-row message_image_container">
+				<div class="cb-col-half cb-border-round cb-bg-secondary-3 cb-p-5">
+					<img class="message_image" src=""/>
+				</div>
 			</div>
 		</div>
 	</div>

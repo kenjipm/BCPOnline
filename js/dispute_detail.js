@@ -8,7 +8,9 @@ $(document).ready(function(){
 	reset_refresh_chat_area_period();
 	init_refresh_chat_area_periodically();
 	
-	$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30);  
+	setTimeout(function(){
+		$("#dispute_panel").scrollTop($("#dispute_panel").prop("scrollHeight") + 2000);
+	}, 2000);
 });
 
 function refresh_chat_area()
@@ -26,18 +28,26 @@ function refresh_chat_area()
 				$("#dispute_template").find('.dispute_content').html(item.text);
 				$("#dispute_template").find('.dispute_date_sent').html(item.date_sent);
 				$("#dispute_template").find('.dispute_sender_name').html(item.sender.name);
+				if (item.image_name != "")
+				{
+					$("#dispute_template").find('.dispute_image_container').show();
+					$("#dispute_template").find('.dispute_image').attr("src", item.image_name);
+				}
+				else $("#dispute_template").find('.dispute_image_container').hide();
 				
 				if (item.sender.is_you) {
 					$("#dispute_template").find('.dispute_sender_name').addClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_date_sent').addClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').addClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').addClass('cb-align-right');
+					$("#dispute_template").find('.dispute_image_container').addClass('cb-align-right');
 				}
 				else {
 					$("#dispute_template").find('.dispute_sender_name').removeClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_date_sent').removeClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').removeClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').removeClass('cb-align-right');
+					$("#dispute_template").find('.dispute_image_container').removeClass('cb-align-right');
 				}
 				
 				var dispute_template = $("#dispute_template").html();
@@ -82,24 +92,38 @@ function send_dispute()
 	$("#dispute_input").attr("disabled", "disabled");
 	$("#btn-dispute_send").attr("disabled", "disabled");
 	
+	var form_data = new FormData();
+	var files = $('#image_name')[0].files[0];
+	form_data.append('image_name', files);
+	form_data.append('text', $("#dispute_input").val());
+	form_data.append('dispute_id', $("#dispute_id").val());
+	
 	$.ajax({
 		type: "POST",
 		url: base_url + "/dispute/send_dispute_do/",
-		data:
-		{
-			text: $("#dispute_input").val(),
-			dispute_id: $("#dispute_id").val()
-		},
+		data: form_data,
+		// {
+			// text: $("#dispute_input").val(),
+			// dispute_id: $("#dispute_id").val()
+		// },
+		contentType: false,
+		processData: false,
 		success: function(data) {
 			reset_refresh_chat_area_period();
 			$("#dispute_input").removeAttr("disabled");
 			$("#btn-dispute_send").removeAttr("disabled");
 			
 			if (data == "1") { // kalau berhasil, tampilin data ke chat room
+				$("#image_name").val('');
+				$("#image_name_display").html('');
 				$("#dispute_input").val('');
 				refresh_chat_area();
 				
-				$("#dispute_panel").scrollTop( $("#anchor").offset().top - 30); 
+				setTimeout(function(){
+					$("#dispute_panel").scrollTop($("#dispute_panel").prop("scrollHeight") + 2000);
+				}, 1000);
+				
+				$("#dispute_input").focus();
 			}
 			else if (data == "0") { // kalau gagal, ga usah hapus input nya biar bisa send ulang
 				

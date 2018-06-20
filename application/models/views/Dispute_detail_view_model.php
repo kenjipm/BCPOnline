@@ -80,6 +80,7 @@ class Dispute_detail_view_model extends CI_Model {
 			$temp->id				= $dispute_text->id;
 			$temp->date_sent		= date("d M y | H:i", strtotime($dispute_text->date_sent));
 			$temp->text				= $dispute_text->text;
+			$temp->image_name		= ($dispute_text->image_name != "") ? site_url($dispute_text->image_name) : "";
 			
 			$dispute_text->init_account_sender();
 			$temp->sender			= new class{};
@@ -119,6 +120,7 @@ class Dispute_detail_view_model extends CI_Model {
 			$temp->id				= $dispute_text->id;
 			$temp->date_sent		= date("d M y | H:i", strtotime($dispute_text->date_sent));
 			$temp->text				= $dispute_text->text;
+			$temp->image_name		= ($dispute_text->image_name != "") ? site_url($dispute_text->image_name) : "";
 			
 			$dispute_text->init_account_sender();
 			$temp->sender			= new class{};

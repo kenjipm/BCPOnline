@@ -55,6 +55,7 @@ class Message_detail_view_model extends CI_Model {
 			$temp->id				= $message_text->id;
 			$temp->date_sent		= date("d M y | H:i", strtotime($message_text->date_sent));
 			$temp->text				= $message_text->text;
+			$temp->image_name		= ($message_text->image_name != "") ? site_url($message_text->image_name) : "";
 			
 			$message_text->init_account_sender();
 			$temp->sender			= new class{};
@@ -82,6 +83,7 @@ class Message_detail_view_model extends CI_Model {
 			$temp->id				= $message_text->id;
 			$temp->date_sent		= date("d M y | H:i", strtotime($message_text->date_sent));
 			$temp->text				= $message_text->text;
+			$temp->image_name		= ($message_text->image_name != "") ? site_url($message_text->image_name) : "";
 			
 			$message_text->init_account_sender();
 			$temp->sender			= new class{};

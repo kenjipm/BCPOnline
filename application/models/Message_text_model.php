@@ -9,6 +9,7 @@ class Message_text_model extends CI_Model {
 	public $id;
 	public $date_sent;
 	public $text;
+	public $image_name;
 	public $sender_id;
 	public $message_inbox_id;
 	public $is_read;
@@ -25,6 +26,7 @@ class Message_text_model extends CI_Model {
 		$this->id					= 0;
 		$this->date_sent			= date("Y-m-d H:i:s");
 		$this->text					= "";
+		$this->image_name			= "";
 		$this->sender_id			= "";
 		$this->message_inbox_id		= "";
 		$this->is_read				= 0;
@@ -42,6 +44,7 @@ class Message_text_model extends CI_Model {
 		$this->id				= $db_item->id;
 		$this->date_sent		= $db_item->date_sent;
 		$this->text				= $db_item->text;
+		$this->image_name		= $db_item->image_name;
 		$this->sender_id		= $db_item->sender_id;
 		$this->message_inbox_id	= $db_item->message_inbox_id;
 		$this->is_read	= $db_item->is_read;
@@ -57,6 +60,7 @@ class Message_text_model extends CI_Model {
 		$db_item->id				= $this->id;
 		$db_item->date_sent			= $this->date_sent;
 		$db_item->text				= $this->text;
+		$db_item->image_name		= $this->image_name;
 		$db_item->sender_id			= $this->sender_id;
 		$db_item->message_inbox_id	= $this->message_inbox_id;
 		$db_item->is_read	= $this->is_read;
@@ -72,6 +76,7 @@ class Message_text_model extends CI_Model {
 		$stub->id				= $db_item->id;
 		$stub->date_sent		= $db_item->date_sent;
 		$stub->text				= $db_item->text;
+		$stub->image_name		= $db_item->image_name;
 		$stub->sender_id		= $db_item->sender_id;
 		$stub->message_inbox_id	= $db_item->message_inbox_id;
 		$stub->is_read			= $db_item->is_read;
@@ -150,9 +155,56 @@ class Message_text_model extends CI_Model {
 		$this->db->insert($this->table_message_text, $db_item);
 		$this->id	= $this->db->insert_id();
 		
+		if (isset($_FILES['image_name']['name'])) $this->upload_image();
+		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 		
 		return $this->id;
+	}
+	
+	public function upload_image()
+	{
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
+		
+		$config_upload_image = $this->config->item('upload_image_message');
+		$config_upload_image['upload_path'] .= $this->session->account_id."/message/".$this->message_inbox_id."/";
+		$config_upload_image['file_name'] = $this->id.".jpg";
+
+		$this->load->library('upload', $config_upload_image);
+		
+		$config_compress_image = $this->config->item('compress_image_item');
+		$this->load->library('image_lib');
+		
+		if ($_FILES['image_name']['name'])
+		{
+			if (!is_dir($config_upload_image['upload_path'])) {
+				mkdir($config_upload_image['upload_path'], 0777, true);
+			}
+			if (!$this->upload->do_upload('image_name'))
+			{
+				$data['error'] = $this->upload->display_errors('', '');
+			}
+			else
+			{
+				$file_path['image_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['image_name'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->db->set('image_name', $file_path['image_name']);
+			$this->db->where('id', $this->id);
+			$this->db->update($this->table_message_text);
+		}
 	}
 	
 	public function init_account_sender()

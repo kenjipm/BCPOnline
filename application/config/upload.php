@@ -25,6 +25,22 @@ $config['upload_image'] = array(
 	'overwrite'		=> true
 );
 
+$config['upload_image_message'] = array(
+	'upload_path'	=> 'img/upload/',
+	'allowed_types'	=> 'gif|jpg|png|jpeg|jpe|jig|jfif|jfi',
+	'max_size'		=> 20480,
+	'file_name'		=> 'msg_default.jpg',
+	'overwrite'		=> true
+);
+
+$config['upload_image_dispute'] = array(
+	'upload_path'	=> 'img/upload/',
+	'allowed_types'	=> 'gif|jpg|png|jpeg|jpe|jig|jfif|jfi',
+	'max_size'		=> 20480,
+	'file_name'		=> 'msg_default.jpg',
+	'overwrite'		=> true
+);
+
 $config['compress_image_item'] = array(
 	'image_library'		=> 'gd2',
 	// 'create_thumb'		=> TRUE,

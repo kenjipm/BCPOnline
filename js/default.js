@@ -38,6 +38,7 @@ $(document).ready(function(){
 		// $(".navbar-cb-top-profile-menu").hide();
 	// });
 	$(".input_file_upload").on('change', select_file);
+	$(".input_file_upload_move").on('change', select_file_move);
 
 	$(".date_of_birth").datepicker({
 		changeMonth: true,
@@ -177,6 +178,25 @@ function select_file(event){
 		$('label[for=' + element_id + '] > div').removeClass('cb-icon-add-item');
 		$('label[for=' + element_id + '] > div').removeClass('cb-icon-md');
 		$('label[for=' + element_id + '] > div').html(filename);
+	}
+}
+
+function select_file_move(event){
+	var element_id = $(this).attr('id');
+	var filepath = $(this).val();
+	
+	var fileparts = filepath.split("\\");
+	var filename = "";
+	if (fileparts.length > 0) {
+		filename = fileparts[fileparts.length - 1];
+	} else {
+		filename = filepath;
+	}
+	
+	if (filename == "") { // kalau ada file nya
+		$('div[for=' + element_id + ']').html(filename);
+	} else {
+		$('div[for=' + element_id + ']').html(filename);
 	}
 }
 
