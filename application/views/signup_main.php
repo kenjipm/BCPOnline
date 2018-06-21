@@ -68,7 +68,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full datepicker" name="date_of_birth" value="<?= set_value('date_of_birth'); ?>"/>
+				<input type="text" class="cb-input-text cb-col-full datepicker date_of_birth" name="date_of_birth" value="<?= set_value('date_of_birth'); ?>"/>
 				<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
 			</div>
 		</div>

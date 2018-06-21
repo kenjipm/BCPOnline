@@ -328,6 +328,14 @@ defined('TYPE') OR define('TYPE', array(
 	)
 );
 
+defined('ADMIN_EMAILS') OR define('ADMIN_EMAILS', array(
+		0 => "admin0@cyberia.co.id",
+		1 => "admin1@cyberia.co.id",
+		2 => "admin2@cyberia.co.id",
+		3 => "admin3@cyberia.co.id",
+	)
+);
+
 /*
 |--------------------------------------------------------------------------
 | Application Production

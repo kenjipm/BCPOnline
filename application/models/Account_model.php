@@ -229,6 +229,18 @@ class Account_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	public function get_from_forgot_password($email, $phone_number)
+	{
+		$where['email'] = $email;
+		$where['phone_number'] = $phone_number;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_account, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function get_all()
 	{
 		$this->load->model('Account_model');
@@ -304,6 +316,18 @@ class Account_model extends CI_Model {
 		$this->password	= md5($this->input->post('password'));
 		
 		$this->db->where($where);
+		$this->db->set('password', $this->password);
+		$this->db->update($this->table_account);
+		
+		return $this->db->affected_rows();
+		
+	}
+	
+	public function forgot_password($new_password)
+	{
+		$this->password	= md5($new_password);
+		
+		$this->db->where('id', $this->id);
 		$this->db->set('password', $this->password);
 		$this->db->update($this->table_account);
 		

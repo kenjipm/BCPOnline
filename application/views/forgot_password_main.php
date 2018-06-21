@@ -6,7 +6,7 @@
 	</div>
 	<div class="cb-row cb-col-half">
 		<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
-			<form action="<?=site_url('login/validate')?>" class="form-horizontal" method="post">
+			<form action="<?=site_url('login/forgot_password')?>" class="form-horizontal" method="post">
 				<div class="cb-row cb-p-5">
 					<div class="cb-col-fifth">
 						<div class="cb-row">
@@ -33,7 +33,7 @@
 						<div class="cb-row">
 							<div class="cb-col-fifth-4">
 								<div class="cb-txt-primary-1 cb-pull-left">
-									<div class="cb-label"> Password</div>
+									<div class="cb-label"> No HP </div>
 								</div>
 							</div>
 							<div class="cb-col-fifth">
@@ -46,23 +46,20 @@
 						</div>
 					</div>
 					<div class="cb-row cb-col-fifth-4">
-						<input type="password" class="cb-input-text cb-col-full" name="password"/>
+						<input type="text" class="cb-input-text cb-col-full" name="phone_number"/>
 					</div>
-				</div>
-				<div class="cb-row cb-p-2 cb-align-right">
-					<div class="cb-col-tenth-4"><a href="<?=site_url('login/forgot_password')?>">Lupa Password</a></div>
 				</div>
 				<div class="cb-row cb-p-5">
-					<div class="cb-col-tenth-4"></div>
+					<div class="cb-col-tenth-2"></div>
 					<div class="cb-col-tenth-6">
-						<button type="submit" class="cb-button-form">MASUK</button>
-						<a href="<?=site_url('account/signup')?>">
-							<button type="button" class="cb-button-form">DAFTAR</button>
+						<button type="submit" class="cb-button-form">RESET PASSWORD</button>
+						<a href="<?=site_url('login')?>">
+							<button type="button" class="cb-button-form">BATAL</button>
 						</a>
 					</div>
+					<div class="cb-col-tenth-2"></div>
 				</div>
 				<span><?=$message?></span>
-				<input type="hidden" id="return_url" name="return_url" value="<?=$return_url?>"/>
 			</div>
 		</div>
 	</div>		
