@@ -5,10 +5,10 @@
 	
 	$notifs['admin_payment'] = $this->order_details_model->count_unpaid_tenant();
 	$notifs['admin_order'] = $this->order_details_model->count_queued_item();
-	$notifs['admin_reward'] = 1;
-	$notifs['admin_hot_item'] = 1;
+	$notifs['admin_reward'] = $this->setting_reward_model->count_registered_setting();
+	$notifs['admin_hot_item'] = $this->tenant_bill_model->count_registered_hot();
 	$notifs['admin_promoted_item'] = $this->tenant_bill_model->count_registered_seo();
-	$notifs['admin_bidding'] = 1;
+	$notifs['admin_bidding'] = $this->item_model->count_registered_bidding();
 	
 	$dashboard_menu_admin = $this->config->item('dashboard_menu_admin');
 ?>

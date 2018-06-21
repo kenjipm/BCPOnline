@@ -351,6 +351,28 @@ class Tenant_bill_model extends CI_Model {
 		$cur_message_text->insert_from_stub();
 	}
 	
+	public function count_registered_hot()
+	{
+		$this->db->select('
+			COUNT(tenant_bill.id) AS registered_hot
+		');
+		
+		$where['tenant_bill.payment_date'] = null;
+		$where['hot_item.is_done'] = 0;
+		
+		$this->db->where($where);
+		
+		$this->db->join('hot_item', 'hot_item.id = '. $this->table_tenant_bill . '.hot_item_id', 'left');
+		$this->db->group_by('tenant_bill.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->registered_seo : 0;
+	}
+	
 	public function count_registered_seo()
 	{
 		$this->db->select('
@@ -368,7 +390,6 @@ class Tenant_bill_model extends CI_Model {
 		$query = $this->db->get($this->table_tenant_bill, 1);
 		
 		$result = $query->row();
-		print_r($result);
 		
 		return ($result != null) ? $result->registered_seo : 0;
 	}

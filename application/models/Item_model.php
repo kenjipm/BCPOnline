@@ -682,6 +682,27 @@ class Item_model extends CI_Model {
 		$this->db->update($this->table_item);
 	}
 	
+	public function count_registered_bidding()
+	{
+		$this->db->select('
+			COUNT(posted_item.id) AS registered_bidding
+		');
+		
+		$where['posted_item.is_confirmed'] = 0;
+		$where['posted_item.item_type'] = 'BID';
+		
+		$this->db->where($where);
+		
+		$this->db->group_by('posted_item.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_item, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->registered_bidding : 0;
+	}
+	
 	public function delete_from_id($id)
 	{
 		$this->db->where('posted_item_id', $id);

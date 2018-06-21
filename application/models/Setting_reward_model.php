@@ -172,7 +172,27 @@ class Setting_reward_model extends CI_Model {
 		
 		return ($setting_reward !== null) ? $this->get_new_stub_from_db($setting_reward) : new Setting_reward_model();
 	}
-
+	
+	public function count_registered_setting()
+	{
+		$this->db->select('
+			COUNT(setting_reward.id) AS registered_setting
+		');
+		
+		$where['setting_reward.is_confirmed'] = 0;
+		
+		$this->db->where($where);
+		
+		$this->db->group_by('setting_reward.id');
+		$this->db->distinct();
+		
+		$query = $this->db->get($this->table_setting_reward, 1);
+		
+		$result = $query->row();
+		
+		return ($result != null) ? $result->registered_setting : 0;
+	}
+	
 	public function set_is_confirmed($value=1)
 	{
 		$this->db->set('is_confirmed', 1);
