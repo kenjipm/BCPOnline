@@ -185,7 +185,7 @@ class Login extends CI_Controller {
 	{
 		if ($type == TYPE['name']['CUSTOMER'])
 		{
-			redirect('dashboard');
+			redirect('');
 		}
 		else if ($type == TYPE['name']['TENANT'])
 		{
@@ -193,7 +193,7 @@ class Login extends CI_Controller {
 		}
 		else if ($type == TYPE['name']['ADMIN'])
 		{
-			redirect('dashboard');
+			redirect('');
 		}
 		else if ($type == TYPE['name']['DELIVERER'])
 		{

@@ -13,25 +13,12 @@ class Dashboard extends CI_Controller {
 		}
 		else if ($this->session->type == TYPE['name']['ADMIN'])
 		{
-			redirect('order/order_list');
-			// // Load Header
-			// $data_header['css_list'] = array();
-			// $data_header['js_list'] = array();
-			// $this->load->view('header', $data_header);
+			$data_header['css_list'] = array();
+			$data_header['js_list'] = array();
+			$this->load->view('header', $data_header);
 			
-			// // $this->load->model('category_model');
-			// $categories = $this->category_model->get_all();
-			
-			// $this->load->model('brand_model');
-			// $brands = $this->brand_model->get_all();
-			
-			// $this->load->model('hot_item_model');
-			// $hot_items = $this->hot_item_model->get_all(6);
-			
-			// $this->load->model('views/admin/dashboard_view_model');
-			// $this->dashboard_view_model->get($categories, $brands, $hot_items);
-			// $data['model'] = $this->dashboard_view_model;
-			// $this->load->view('admin/dashboard_main', $data);
+			$data['model'] = new class{};
+			$this->load->view('admin/dashboard_main', $data);
 		}
 		else if ($this->session->type == TYPE['name']['DELIVERER'])
 		{

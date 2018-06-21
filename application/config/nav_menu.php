@@ -180,24 +180,24 @@ $config['top_menu_deliverer'] = array(
 
 $config['top_menu_admin'] = array(
 	'top' => array(
-		'ACCOUNT' => array(
-			'text'	=> "Account",
-			'icon'	=> "flag",
-			'url'	=> "account/account_list",
-			'notif' => "",
-			),
-		'PAY_DEBT' => array(
-			'text'	=> "Payment",
-			'icon'	=> "document",
-			'url'	=> "admin/tenant_to_pay_list",
-			'notif' => "admin_payment",
-			),
-		'REPORT' => array(
-			'text'	=> "Laporan",
-			'icon'	=> "document",
-			'url'	=> "admin/report",
-			'notif' => "",
-			),
+		// 'ACCOUNT' => array(
+			// 'text'	=> "Account",
+			// 'icon'	=> "flag",
+			// 'url'	=> "account/account_list",
+			// 'notif' => "",
+			// ),
+		// 'PAY_DEBT' => array(
+			// 'text'	=> "Payment",
+			// 'icon'	=> "document",
+			// 'url'	=> "admin/tenant_to_pay_list",
+			// 'notif' => "admin_payment",
+			// ),
+		// 'REPORT' => array(
+			// 'text'	=> "Laporan",
+			// 'icon'	=> "document",
+			// 'url'	=> "admin/report",
+			// 'notif' => "",
+			// ),
 		),
 	'profile' => array(
 		'SETTING' => array(
@@ -212,20 +212,77 @@ $config['top_menu_admin'] = array(
 			),
 		),
 	'strip' => array(
+		// 'ORDER' => array(
+			// 'text'	=> "DAFTAR ORDER",
+			// 'url'	=> "order/order_list",
+			// 'notif' => "admin_order",
+			// ),
+		// 'VOUCHER' => array(
+			// 'text'	=> "VOUCHER",
+			// 'url'	=> "voucher/voucher_list",
+			// 'notif' => "",
+			// ),
+		// 'REWARD' => array(
+			// 'text'	=> "REWARD",
+			// 'url'	=> "reward/reward_list",
+			// 'notif' => "admin_reward",
+			// ),
+		// 'BRAND' => array(
+			// 'text'	=> "BRAND",
+			// 'url'	=> "brand/brand_list",
+			// 'notif' => "",
+			// ),
+		// 'CATEGORY' => array(
+			// 'text'	=> "KATEGORI",
+			// 'url'	=> "category/category_list",
+			// 'notif' => "",
+			// ),
+		// 'HOT_ITEM' => array(
+			// 'text'	=> "HOT ITEM",
+			// 'url'	=> "admin/hot_item_list",
+			// 'notif' => "admin_hot_item",
+			// ),
+		// 'SEO_ITEM' => array(
+			// 'text'	=> "PROMOTED ITEM",
+			// 'url'	=> "admin/seo_item_list",
+			// 'notif' => "admin_promoted_item",
+			// ),
+		// 'BIDDING' => array(
+			// 'text'	=> "LELANG",
+			// //'icon'	=> "speaker",
+			// 'url'	=> "bidding_live/bidding_live_list",
+			// 'notif' => "admin_bidding",
+			// ),
+		// 'BILLING' => array(
+			// 'text'	=> "BILLING",
+			// 'url'	=> "billing",
+			// 'notif' => "",
+			// ),
+		// 'DISPUTE' => array(
+			// 'text'	=> "DISPUTE",
+			// 'url'	=> "dispute",
+			// 'notif' => "",
+			// ),
+		),
+	);
+
+$config['dashboard_menu_admin'] = array(
+	'OPERASIONAL' => array(
 		'ORDER' => array(
 			'text'	=> "DAFTAR ORDER",
 			'url'	=> "order/order_list",
 			'notif' => "admin_order",
 			),
-		'VOUCHER' => array(
-			'text'	=> "VOUCHER",
-			'url'	=> "voucher/voucher_list",
+		'DISPUTE' => array(
+			'text'	=> "DISPUTE",
+			'url'	=> "dispute",
 			'notif' => "",
 			),
-		'REWARD' => array(
-			'text'	=> "REWARD",
-			'url'	=> "reward/reward_list",
-			'notif' => "admin_reward",
+		'PAY_DEBT' => array(
+			'text'	=> "PAYMENT",
+			'icon'	=> "document",
+			'url'	=> "admin/tenant_to_pay_list",
+			'notif' => "admin_payment",
 			),
 		'BRAND' => array(
 			'text'	=> "BRAND",
@@ -237,6 +294,14 @@ $config['top_menu_admin'] = array(
 			'url'	=> "category/category_list",
 			'notif' => "",
 			),
+		'ACCOUNT' => array(
+			'text'	=> "ACCOUNT",
+			'icon'	=> "flag",
+			'url'	=> "account/account_list",
+			'notif' => "",
+			),
+		),
+	'PROMOSI' => array(
 		'HOT_ITEM' => array(
 			'text'	=> "HOT ITEM",
 			'url'	=> "admin/hot_item_list",
@@ -247,20 +312,35 @@ $config['top_menu_admin'] = array(
 			'url'	=> "admin/seo_item_list",
 			'notif' => "admin_promoted_item",
 			),
+		),
+	'MARKETING' => array(
+		'VOUCHER' => array(
+			'text'	=> "VOUCHER",
+			'url'	=> "voucher/voucher_list",
+			'notif' => "",
+			),
+		'REWARD' => array(
+			'text'	=> "REWARD",
+			'url'	=> "reward/reward_list",
+			'notif' => "admin_reward",
+			),
 		'BIDDING' => array(
 			'text'	=> "LELANG",
 			//'icon'	=> "speaker",
 			'url'	=> "bidding_live/bidding_live_list",
 			'notif' => "admin_bidding",
 			),
+		),
+	'LAPORAN' => array(
+		'REPORT' => array(
+			'text'	=> "LAPORAN",
+			'icon'	=> "document",
+			'url'	=> "admin/report",
+			'notif' => "",
+			),
 		'BILLING' => array(
 			'text'	=> "BILLING",
 			'url'	=> "billing",
-			'notif' => "",
-			),
-		'DISPUTE' => array(
-			'text'	=> "DISPUTE",
-			'url'	=> "dispute",
 			'notif' => "",
 			),
 		),
