@@ -1095,7 +1095,6 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details, 1);
 		
 		$result = $query->row();
-		print_r($result);
 		
 		return ($result != null) ? $result->unpaid_tenant : 0;
 	}
