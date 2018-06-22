@@ -1,5 +1,5 @@
 <div class="cb-col-full cb-txt-primary-1 cb-font-title">
-	<div class="cb-align-center cb-font-size-xl">LOGIN</div>
+	<div class="cb-align-center cb-font-size-xl">LUPA PASSWORD</div>
 </div>
 <div class="cb-row">
 	<div class="cb-col-fourth">
