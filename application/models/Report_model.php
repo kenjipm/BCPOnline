@@ -63,6 +63,7 @@ class Report_model extends CI_Model {
 			billing.bill_id AS natural_billing_id,
 			billing.date_created AS date_bill_created,
 			posted_item.posted_item_name AS posted_item_name,
+			posted_item.posted_item_description AS posted_item_description,
 			tenant.tenant_name AS tenant_name,
 			order_details.quantity AS quantity,
 			order_details.sold_price AS sold_price,
@@ -102,6 +103,7 @@ class Report_model extends CI_Model {
 			tenant.id AS tenant_id,
 			tenant.tenant_name AS tenant_name,
 			posted_item.posted_item_name AS posted_item_name,
+			posted_item.posted_item_description AS posted_item_description,
 			SUM(order_details.quantity) AS quantity,
 			SUM(order_details.sold_price) AS total_price,
 		');
@@ -110,6 +112,7 @@ class Report_model extends CI_Model {
 		$this->db->join('posted_item_variance', 'order_details.posted_item_variance_id = posted_item_variance.id', 'left');
 		$this->db->join('posted_item', 'posted_item_variance.posted_item_id = posted_item.id', 'left');
 		$this->db->join('tenant', 'posted_item.tenant_id = tenant.id', 'left');
+		$this->db->where('posted_item.item_type', 'ORDER');
 		$this->db->where('billing.date_created >= ', $start_date);
 		$this->db->where('billing.date_created <= ', "DATE_ADD('".$end_date."', INTERVAL 1 DAY)", false);
 		if ($tenant_id != -1) $this->db->where('tenant.id', $tenant_id);
@@ -131,6 +134,7 @@ class Report_model extends CI_Model {
 			posted_item.id AS posted_item_id,
 			tenant.tenant_name AS tenant_name,
 			posted_item.posted_item_name AS posted_item_name,
+			posted_item.posted_item_description AS posted_item_description,
 			SUM(order_details.quantity) AS quantity,
 			SUM(order_details.sold_price) AS total_price,
 		');
@@ -139,6 +143,7 @@ class Report_model extends CI_Model {
 		$this->db->join('posted_item_variance', 'order_details.posted_item_variance_id = posted_item_variance.id', 'left');
 		$this->db->join('posted_item', 'posted_item_variance.posted_item_id = posted_item.id', 'left');
 		$this->db->join('tenant', 'posted_item.tenant_id = tenant.id', 'left');
+		$this->db->where('posted_item.item_type', 'ORDER');
 		$this->db->where('billing.date_created >= ', $start_date);
 		$this->db->where('billing.date_created <= ', "DATE_ADD('".$end_date."', INTERVAL 1 DAY)", false);
 		if ($category_id != -1) $this->db->where('posted_item.category_id', $category_id);
@@ -175,6 +180,7 @@ class Report_model extends CI_Model {
 				tenant_bill.payment_value AS payment_value,
 				tenant.tenant_name AS tenant_name,
 				posted_item.posted_item_name AS posted_item_name,
+				posted_item.posted_item_description AS posted_item_description,
 				CASE WHEN tenant_bill.hot_item_id IS NULL THEN 'SEO' ELSE 'HOT_ITEM' END AS payment_type,
 				CASE WHEN tenant_bill.hot_item_id IS NULL THEN posted_item.price ELSE hot_item.promo_price END AS promo_price,
 				CASE WHEN tenant_bill.hot_item_id IS NULL THEN '' ELSE hot_item.promo_description END AS promo_description

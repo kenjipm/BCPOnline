@@ -13,7 +13,7 @@ function mark_order_finish(order_detail_id, tenant_id)
 					// $("#btn-mark_order_finish-" + order_detail_id).attr('disabled', 'disabled');
 					// $("#btn-mark_order_finish-" + order_detail_id).html('Sudah Selesai');
 					
-					$("#order_action-" + order_detail_id).html("<button type='button' class='btn btn-default' id='btn-create_feedback-" + order_detail_id + "' onclick='open_popup_feedback(" + order_detail_id + ", " + tenant_id + ")'>Review</button>");
+					$("#order_action-" + order_detail_id).html("<button type='button' class='cb-button-form' id='btn-create_feedback-" + order_detail_id + "' onclick='open_popup_feedback(" + order_detail_id + ", " + tenant_id + ")'>ULASAN</button>");
 					$("#btn-mark_order_finish-" + order_detail_id).remove();
 					$("#btn-create_dispute-" + order_detail_id).remove();
 				}

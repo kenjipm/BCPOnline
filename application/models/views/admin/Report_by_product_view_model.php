@@ -25,7 +25,7 @@ class report_by_product_view_model extends CI_Model {
 		{	
 			$this->transactions[$i] = new class{};
 			
-			$this->transactions[$i]->posted_item_name 	= $transaction->posted_item_name;
+			$this->transactions[$i]->posted_item_name 	= ($transaction->posted_item_name != "") ? $transaction->posted_item_name : $transaction->posted_item_description;
 			$this->transactions[$i]->tenant_name 		= $transaction->tenant_name;
 			$this->transactions[$i]->quantity 			= $transaction->quantity;
 			$this->transactions[$i]->total_price 		= $this->text_renderer->to_rupiah($transaction->total_price);

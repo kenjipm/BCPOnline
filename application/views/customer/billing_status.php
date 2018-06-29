@@ -93,7 +93,7 @@
 							</div>
 						</div>
 						<div class="cb-col-fourth-2">
-							<div class="cb-row cb-align-right cb-mr-5">
+							<div class="cb-row cb-align-right cb-mr-5" id="order_action-<?=$order->id?>">
 							<?php
 								if ($order->is_received)
 								{

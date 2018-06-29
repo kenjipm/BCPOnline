@@ -279,11 +279,16 @@
 						<button type="button" class="cb-button-form cb-col-full" onclick="popup.open('popup_approval')">KEPUTUSAN</button>
 					</div>
 					<?php
-					$this->load->view('admin/popup/approval');
 				}
 			?>
 		</div>
 	</form>
+	<?php
+		if ($model->is_existed)
+		{
+			$this->load->view('admin/popup/approval');
+		}
+	?>
 </div>
 
 <?php /*

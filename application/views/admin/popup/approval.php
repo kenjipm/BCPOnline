@@ -1,10 +1,18 @@
+<script type='text/javascript'>
+	$("#popup-password").keypress(function(e) {
+		if(e.which == 13) {
+			$("#popup-btn_approve").click();
+		}
+	});
+</script>
+
 <div id="popup_approval" class="popup popup-md">
 	<div class="panel panel-default">
 		<div class="panel-heading">
 			Masukkan Password
 		</div>
 		<div class="panel-body">
-			<form class="form-horizontal" method="post" id="popup-form_approval">
+			<div class="form-horizontal" method="post" id="popup-form_approval">
 				<div class="form-group">
 					<div class="col-sm-3">
 						<label>Password</label>
@@ -20,7 +28,7 @@
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_approval')">Batal</button>
 					</div>
 				</div>
-			</form>
+			</div>
 		</div>
 	</div>
 </div>

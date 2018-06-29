@@ -58,7 +58,7 @@ class report_by_tenant_view_model extends CI_Model {
 			$this->total_admin_not_paid_price 	+= $transaction->total_done_paid_price - $transaction->total_admin_paid_price;
 			
 			$item_temp = new class{};
-			$item_temp->posted_item_name 	= $transaction->posted_item_name;
+			$item_temp->posted_item_name 	= ($transaction->posted_item_name != "") ? $transaction->posted_item_name : $transaction->posted_item_description;
 			$item_temp->quantity 			= $transaction->quantity;
 			$item_temp->sold_price 			= $this->text_renderer->to_rupiah($transaction->sold_price);
 			$item_temp->total_price			= $this->text_renderer->to_rupiah($transaction->total_price);
