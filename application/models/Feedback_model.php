@@ -134,6 +134,34 @@ class Feedback_model extends CI_Model {
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
+	public function get_all_from_posted_item_id($id)
+	{
+		$query = $this->db->query('
+			SELECT
+				feedback_text,
+				rating,
+				account.name
+			FROM feedback
+				LEFT JOIN order_details
+					ON feedback.order_detail_id = order_details.id
+				LEFT JOIN posted_item_variance
+					ON order_details.posted_item_variance_id = posted_item_variance.id
+				LEFT JOIN posted_item
+					ON posted_item_variance.posted_item_id = posted_item.id
+				LEFT JOIN billing
+					ON order_details.billing_id = billing.id
+				LEFT JOIN customer
+					ON billing.customer_id = customer.id
+				LEFT JOIN account
+					ON customer.account_id = account.id
+			WHERE posted_item.id = ' . $id . '
+			ORDER BY feedback.id DESC
+		');
+		
+		$result = $query->result();
+		return $result;
+	}
+	
 	public function update_natural_id()
 	{
 		$this->load->library('id_generator');

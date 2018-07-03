@@ -5,6 +5,7 @@ class Item_main_view_model extends CI_Model {
 	public $item;
 	public $item_variances;
 	public $other_items;
+	public $feedbacks;
 	
 	// constructor
 	public function __construct()
@@ -14,9 +15,10 @@ class Item_main_view_model extends CI_Model {
 		$this->item = new class{};
 		$this->item_variances = array();
 		$this->other_items = array();
+		$this->feedbacks = array();
 	}
 	
-	public function get($item, $item_variances, $other_items)
+	public function get($item, $item_variances, $other_items, $feedbacks)
 	{
 		$this->load->library('text_renderer');
 		
@@ -90,6 +92,17 @@ class Item_main_view_model extends CI_Model {
 			}
 			
 			$this->other_items[] = $other_item_temp;
+		}
+		
+		foreach ($feedbacks as $feedback)
+		{
+			$feedback_temp = new class{};
+			
+			$feedback_temp->feedback_text = $feedback->feedback_text;
+			$feedback_temp->rating_class = number_format(round($feedback->rating * 2) / 2, 1, "-", "");
+			$feedback_temp->account_name = $feedback->name;
+			
+			$this->feedbacks[] = $feedback_temp;
 		}
 	}
 }

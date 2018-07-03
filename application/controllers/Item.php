@@ -18,6 +18,11 @@ class Item extends CI_Controller {
 		{
 			redirect('Item/post_item_detail/'.$id);
 		}
+		else if (($this->session->userdata('type') == TYPE['name']['ADMIN']) ||
+				 ($this->session->userdata('type') == TYPE['name']['DELIVERER']))
+		{
+			redirect('');
+		}
 		else //if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
 			$other_items = $this->item_model->get_related_items($item);
@@ -25,8 +30,11 @@ class Item extends CI_Controller {
 			$this->load->model('posted_item_variance_model');
 			$item_variances = $this->posted_item_variance_model->get_all_from_posted_item_id($id);
 			
+			$this->load->model('feedback_model');
+			$feedbacks = $this->feedback_model->get_all_from_posted_item_id($id);
+			
 			$item_main_view = $this->load->model('views/item_main_view_model');
-			$this->item_main_view_model->get($item, $item_variances, $other_items);
+			$this->item_main_view_model->get($item, $item_variances, $other_items, $feedbacks);
 			
 			$data['model'] = $this->item_main_view_model;
 			$this->load->view('item_main', $data);

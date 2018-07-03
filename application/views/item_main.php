@@ -112,7 +112,7 @@
 	if (count($model->other_items) > 0)
 	{
 		?>
-		<div class="cb-row cb-mb-5">
+		<div class="cb-row">
 			<div class="cb-col-full">
 				<div class="cb-panel">
 					<div class="cb-panel-heading cb-align-center">
@@ -146,6 +146,39 @@
 											</div>
 										</div>
 									</a>
+									<?php
+								}
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<?php
+	}
+?>
+
+<?php
+	if (count($model->feedbacks) > 0)
+	{
+		?>
+		<div class="cb-panel cb-pl-2 cb-pr-2 cb-mb-5">
+			<div class="cb-panel-heading cb-align-center">
+				<h3 class="cb-txt-primary-1 cb-font-title">ULASAN BARANG</h3>
+			</div>
+			<div class="cb-panel-body">
+				<div class="cb-row">
+					<div class="cb-col-full cb-pr-4">
+						<div class="cb-row cb-border-round cb-bg-primary-3 cb-p-5">
+							<?php
+								foreach($model->feedbacks as $feedback)
+								{
+									?>
+									<div class="cb-row cb-col-full cb-border-bottom cb-pb-5 cb-pt-5">
+										<div class="cb-col-full cb-font-size-lg cb-font-title cb-txt-primary-1"><?=$feedback->account_name?></div>
+										<div class="cb-star cb-star-sm cb-star-<?=$feedback->rating_class?>"></div>
+										<div class="cb-col-full"><?=$feedback->feedback_text?></div>
+									</div>
 									<?php
 								}
 							?>

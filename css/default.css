@@ -218,8 +218,11 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-arrow-black { border-color: #434747; }
 .cb-arrow-down { transform: rotate(-45deg); }
 .cb-arrow-up { transform: rotate(135deg); }
+.cb-arrow-left { transform: rotate(45deg); }
+.cb-arrow-right { transform: rotate(-135deg); }
 
 .cb-star:before { font-size: 3rem; content: "\2605\2605\2605\2605\2605"; }
+.cb-star-sm:before { font-size: 2rem; }
 .cb-star { }
 .cb-star-0-0 { background: #8c8b8a; -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 .cb-star-0-5 { background: linear-gradient(to left,  #8c8b8a 90%, #faa528 10%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
@@ -560,6 +563,42 @@ h4 { font-weight: bold; }
 .navbar-cb-strip-text:hover {
 	color: #434747;
 	margin-bottom: 80px; /* Margin bottom by footer height plus margin 20px*/
+}
+
+#ad-sidebar {
+	position: fixed;
+	z-index: 10000;
+	top: 50%;
+	/* right: -370px; */
+	right: 0px;
+	transform: translate(0, -50%);
+	width: 400px;
+	max-height: 70%;
+}
+
+#ad-sidebar-handle {
+	height: fit-content;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#ad-sidebar-content {
+	border-top-left-radius: 0;
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+}
+
+#ad-sidebar-content img {
+	zoom: 3;  //increase if you have very small images
+
+    display: block;
+    margin: auto;
+
+    height: auto;
+    max-height: 100%;
+
+    width: auto;
+    max-width: 100%;
 }
 
 .footer {

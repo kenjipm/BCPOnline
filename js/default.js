@@ -24,6 +24,8 @@ function init_hover_menu(hovered_element, menu_element) {
 }
 
 $(document).ready(function(){
+	// toggle_ad_sidebar(); // kalau ad-sidebar mau default terbuka, ini di comment
+	
 	init_hover_menu(".navbar-cb-top-profile-photo", ".navbar-cb-top-profile-menu");
 	init_hover_menu("#navbar-cb-strip-PRODUCT", ".navbar-cb-strip-product");
 	// $(".navbar-cb-top-profile-photo, .navbar-cb-top-profile-menu").hover(function(){
@@ -218,3 +220,22 @@ $(document).delegate('textarea', 'keydown', function(e) {
     this.selectionEnd = start + 1;
   }
 });
+
+function toggle_ad_sidebar() {
+	var handle_width = $("#ad-sidebar-handle").width();
+	var content_width = $("#ad-sidebar-content").width();
+	var cur_position = $("#ad-sidebar").css('right');
+	
+	if (cur_position != '0px') {
+		// $("#ad-sidebar-toggle").html('>>');
+		$("#ad-sidebar-toggle-button").removeClass('cb-arrow-left');
+		$("#ad-sidebar-toggle-button").addClass('cb-arrow-right');
+		$("#ad-sidebar").animate({right: '0px'}, "slow");
+	}
+	else {
+		// $("#ad-sidebar-toggle").html('<<');
+		$("#ad-sidebar-toggle-button").removeClass('cb-arrow-right');
+		$("#ad-sidebar-toggle-button").addClass('cb-arrow-left');
+		$("#ad-sidebar").animate({right: -content_width}, "slow");
+	}
+}
