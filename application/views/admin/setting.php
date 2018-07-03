@@ -30,7 +30,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="password" class="cb-input-text cb-col-full" name="old_password" value="<?= set_value('old_password'); ?>"/>
+				<input type="password" class="cb-input-text cb-col-tenth-9" id="old_password" name="old_password" value="<?= set_value('old_password'); ?>"/>
+				<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('old_password')"></button>
 				<span class="text-danger"><?= form_error('old_password'); ?></span>
 			</div>
 		</div>
@@ -52,7 +53,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="password" class="cb-input-text cb-col-full" name="new_password" value="<?= set_value('new_password'); ?>"/>
+				<input type="password" class="cb-input-text cb-col-tenth-9" id="new_password" name="new_password" value="<?= set_value('new_password'); ?>"/>
+				<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('new_password')"></button>
 				<span class="text-danger"><?= form_error('new_password'); ?></span>
 			</div>
 		</div>
@@ -74,7 +76,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
+				<input type="password" class="cb-input-text cb-col-tenth-9" id="passconf" name="passconf" value="<?= set_value('passconf'); ?>"/>
+				<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('passconf')"></button>
 				<span class="text-danger"><?= form_error('passconf'); ?></span>
 			</div>
 		</div>

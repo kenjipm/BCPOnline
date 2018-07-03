@@ -151,6 +151,15 @@ $(document).bind("ajaxSend", function(){
 	$("#loading").hide();
 });
 
+function peek_password(peeked_id) {
+	var cur_type = $("#" + peeked_id).attr("type");
+	if (cur_type == "password") {
+		 $("#" + peeked_id).attr("type", "text");
+	} else {
+		 $("#" + peeked_id).attr("type", "password");
+	}
+}
+
 function check_address_detail() {
 	var address_detail = $("#address_detail").val();
 	if (address_detail != "") {

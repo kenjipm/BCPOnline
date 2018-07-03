@@ -147,7 +147,8 @@
 						</div>
 					</div>
 					<div class="cb-col-third-2 cb-pl-5">
-						<input type="password" class="cb-input-text cb-col-full" id="old_password" name="old_password" value="<?= set_value('old_password'); ?>" />
+						<input type="password" class="cb-input-text cb-col-tenth-9" id="old_password" name="old_password" value="<?= set_value('old_password'); ?>" />
+						<button type="button" class="cb-icon cb-icon-sm cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('old_password')"></button>
 						<div class="cb-row">
 							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 						</div>
@@ -165,7 +166,8 @@
 						</div>
 					</div>
 					<div class="cb-col-third-2 cb-pl-5">
-						<input type="password" class="cb-input-text cb-col-full" name="password" value="<?= set_value('password'); ?>"/>
+						<input type="password" class="cb-input-text cb-col-tenth-9" id="password" name="password" value="<?= set_value('password'); ?>"/>
+						<button type="button" class="cb-icon cb-icon-sm cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('password')"></button>
 						<div class="cb-row">
 							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 							<span class="text-danger"><?= form_error('password'); ?></span>
@@ -184,7 +186,8 @@
 						</div>
 					</div>
 					<div class="cb-col-third-2 cb-pl-5">
-						<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
+						<input type="password" class="cb-input-text cb-col-tenth-9" id="passconf" name="passconf" value="<?= set_value('passconf'); ?>"/>
+						<button type="button" class="cb-icon cb-icon-sm cb-icon-eye cb-col-tenth cb-button" onclick="peek_password('passconf')"></button>
 						<div class="cb-row">
 							<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 							<span class="text-danger"><?= form_error('passconf'); ?></span>

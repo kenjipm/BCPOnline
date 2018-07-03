@@ -18,7 +18,8 @@
 						<label>Password</label>
 					</div>
 					<div class="col-sm-9">
-						<input type="password" name="password" id="popup-password" value="" class="form-control"/>
+						<input type="password" name="password" id="popup-password" value="" class="cb-col-tenth-9"/>
+						<button type="button" class="cb-icon cb-icon-sm cb-icon-eye cb-col-tenth cb-button" onclick="peek_password('popup-password')"></button>
 					</div>
 				</div>
 				<div class="form-group">

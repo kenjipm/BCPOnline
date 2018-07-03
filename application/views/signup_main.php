@@ -160,7 +160,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="password" class="cb-input-text cb-col-full" name="password" value="<?= set_value('password'); ?>"/>
+				<input id="signup_password" type="password" class="cb-input-text cb-col-tenth-9" name="password" value="<?= set_value('password'); ?>"/>
+						<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('signup_password')"></button>
 				<span class="text-danger"><?= form_error('password'); ?></span>
 			</div>
 		</div>
@@ -182,7 +183,8 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
+				<input id="signup_passconf" type="password" class="cb-input-text cb-col-tenth-9" name="passconf" value="<?= set_value('passconf'); ?>"/>
+				<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('signup_passconf')"></button>
 				<span class="text-danger"><?= form_error('passconf'); ?></span>
 			</div>
 		</div>

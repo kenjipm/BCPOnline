@@ -46,7 +46,8 @@
 						</div>
 					</div>
 					<div class="cb-row cb-col-fifth-4">
-						<input type="password" class="cb-input-text cb-col-full" name="password"/>
+						<input id="login_password" type="password" class="cb-input-text cb-col-tenth-9 cb-button-group-left" name="password"/>
+						<button type="button" class="cb-icon cb-icon-eye cb-col-tenth cb-button cb-button-group-right" onclick="peek_password('login_password')"></button>
 					</div>
 				</div>
 				<div class="cb-row cb-p-2 cb-align-right">

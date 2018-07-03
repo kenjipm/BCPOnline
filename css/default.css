@@ -269,6 +269,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-icon-left-2 { background-image: url(icons/right-2.png); transform: rotate(180deg);}
 .cb-icon-speaker { background-image: url(icons/speaker.png); }
 .cb-icon-twitter { background-image: url(icons/twitter.png); }
+.cb-icon-eye { background-image: url(icons/eye.png); }
 
 .cb-bg-image { background-size: cover;  background-repeat: no-repeat; background-position: center; font-size: medium; }
 
