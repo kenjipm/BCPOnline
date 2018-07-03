@@ -284,7 +284,7 @@ class Item_model extends CI_Model {
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
 					  ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
-					  // ->where('item_type', 'ORDER')
+					  ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->order_by($this->table_item.'.id', $order)
@@ -720,6 +720,7 @@ class Item_model extends CI_Model {
 					  ->join($this->table_item_variance, $this->table_order_details.'.posted_item_variance_id' . ' = ' . $this->table_item_variance.'.id', 'left')
 					  ->where($this->table_item_variance.'.posted_item_id', $this->id)
 					  ->where($this->table_order_details.'.order_status', ORDER_STATUS['name']['DONE'])
+					  // ->group_by($this->table_feedback.'.id')
 					  ->get($this->table_feedback);
 		$item = $query->row();
 		

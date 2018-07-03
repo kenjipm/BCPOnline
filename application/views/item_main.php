@@ -337,7 +337,8 @@
 				<div class="form-group">
 					<div class="col-sm-12">
 						<a class="btn btn-default" href="<?=site_url('customer/cart')?>">Lanjut ke Keranjang</a>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_buy_success')">Lanjut Belanja</button>
+						<a class="btn btn-default" href="<?=site_url('item/category/'.$model->item->category_id)?>">Lanjut Belanja</a>
+						<!--<button type="button" class="btn btn-default" onclick="popup.close('popup_buy_success')">Lanjut Belanja</button>-->
 					</div>
 				</div>
 			</form>

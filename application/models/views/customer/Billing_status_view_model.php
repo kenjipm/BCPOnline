@@ -86,7 +86,7 @@ class Billing_status_view_model extends CI_Model {
 				$temp_order->order_status_histories[] = $temp_order_status_history;
 			}
 			$this->billing->subtotal += ($order->sold_price * $order->quantity);
-			$this->billing->voucher_cut_price += $order->voucher_worth;
+			$this->billing->voucher_cut_price = $order->voucher_worth;
 			$this->orders[] = $temp_order;
 		}
 		
