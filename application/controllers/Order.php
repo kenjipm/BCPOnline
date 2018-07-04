@@ -206,6 +206,17 @@ class Order extends CI_Controller {
 	
 	}
 	
+	public function cancel_repair($id)
+	{
+		if ($this->input->method() == "post") 
+		{
+			$this->load->model('Order_details_model');
+			
+			$this->Order_details_model->cancel_repair($id);
+			redirect('Order/transaction_detail/' . $id);
+		}
+	}
+	
 	public function notify_repair_finished($id)
 	{
 		if ($this->input->method() == "post") 

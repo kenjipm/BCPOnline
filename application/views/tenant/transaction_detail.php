@@ -163,16 +163,17 @@
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 				</div>
 				<div class="cb-pl-3">
-					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_review')" >Lihat Ulasan</button>
+					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_review')" <?php if ($model->transaction_detail->order_status !== "DONE"){?> style="display:none"<?php } ?> >Lihat Ulasan</button>
+					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_cancel_repair')" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>PERBAIKAN BATAL</button>
 				</div>
 				<div class="cb-pl-3">
 					<button type="button" class="cb-col-full cb-ml-5 cb-button cb-button-form" id="btn-send_message" onclick="$('#form-message').submit();">KIRIMKAN PESAN</button>
 				</div>
 				<div class="cb-pl-3">
-					<button class="cb-button cb-button-form" type="button" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>Perbaikan Selesai</button>
+					<button class="cb-button cb-button-form" type="button" onclick="popup.open('popup_notify_finished')"  <?php if ($model->transaction_detail->order_status !== "REPAIRING"){?> style="display:none"<?php } ?>>PERBAIKAN SELESAI</button>
 				</div>
 				<div class="cb-pl-3 cb-pt-3">
-					<a class="cb-button cb-button-form" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>Masukkan Harga Servis</a>
+					<a class="cb-button cb-button-form" onclick="set_nego_price()" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>MASUKKAN HARGA SERVIS</a>
 				</div>
 			</div>
 			</form>
@@ -237,6 +238,29 @@
 						<?php } else { ?>
 						<button type="button" class="cb-button-form" onclick="popup.close('popup_review')">Tutup</button>
 						<?php }	?>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+
+<div id="popup_cancel_repair" class="popup popup-md">
+	<div class="panel panel-default">
+		<div class="panel-heading">
+			Konfirmasi Pembatalan Perbaikan
+		</div>
+		<div class="panel-body">
+			<form action="<?=site_url('order/cancel_repair/' . $model->transaction_detail->id)?>" class="form-horizontal" method="post">
+				<div class="form-group">
+					<div class="col-sm-10 col-sm-offset-2">
+						<label>Batalkan perbaikan?</label>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-8 col-sm-offset-4">
+						<button type="submit" class="btn btn-default" onclick="popup.close('popup_cancel_repair')">Ya</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_cancel_repair')">Batal</button>
 					</div>
 				</div>
 			</form>
