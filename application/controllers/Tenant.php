@@ -14,10 +14,10 @@ class Tenant extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array("tenant/dashboard");
+        $data_header['js_list'] = array('tenant/dashboard', 'simpleUpload', 'photo_upload_simple');
 		$this->load->view('header', $data_header);
 		
-		// Load Body
+		// Load Body		
 		$this->load->model('Item_model');
 		$this->load->model('Tenant_model');
 		$this->load->model('Order_details_model');
@@ -183,6 +183,56 @@ class Tenant extends CI_Controller {
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function upload_profpic()
+	{
+		$data['error'] = array();
+		$file_path = array();
+		$this->load->config('upload');
+		
+		$config_upload_profpic = $this->config->item('upload_profpic');
+		$config_upload_profpic['upload_path'] .= $this->session->account_id."/";
+		$this->load->library('upload', $config_upload_profpic);
+		
+		$config_compress_image = $this->config->item('compress_image_profpic');
+		$this->load->library('image_lib');
+		
+		if ($_FILES['profile_pic']['name'])
+		{
+			if (!is_dir($config_upload_profpic['upload_path'])) {
+				mkdir($config_upload_profpic['upload_path']);
+			}
+			if (!$this->upload->do_upload('profile_pic'))
+			{
+				$data['error'] = $this->upload->display_errors('', '');
+			}
+			else
+			{
+				$file_path['profile_pic'] = $config_upload_profpic['upload_path'].$this->upload->data('file_name');
+				
+				$config_compress_image['source_image'] = $file_path['profile_pic'];
+				$this->image_lib->initialize($config_compress_image);
+				if (!$this->image_lib->resize())
+				{
+					$data['error'] = $this->image_lib->display_errors();
+				}
+			}
+		}
+		
+		if (count($data['error']) == 0)
+		{
+			$this->load->model('Account_model');
+			$this->Account_model->update_profile_pic($this->session->id, $file_path['profile_pic']);
+			
+			$data['image_url'] = site_url($file_path['profile_pic']);
+		}
+			
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($data);
 	}
 	
 	public function reply_feedback()

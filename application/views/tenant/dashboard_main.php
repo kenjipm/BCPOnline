@@ -6,6 +6,7 @@
 					<img src="<?=$model->tenant->account->profile_pic?>" alt="<?=$model->tenant->tenant_name?>" class="cb-border-round">
 				</div>
 			</label>
+			<input id="profile_pic" name="profile_pic" value="<?=$model->tenant->account->profile_pic?>" data-url="<?=site_url('tenant/upload_profpic')?>" type="file" class="photo_upload_simple" style="display:none"/>
 		</div>
 		<div class="cb-pl-5 cb-col-fourth-2">
 			<div class="cb-row cb-mb-5">
