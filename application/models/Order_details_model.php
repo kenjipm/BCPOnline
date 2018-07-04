@@ -1130,7 +1130,10 @@ class Order_details_model extends CI_Model {
 		
 		$where['order_details.tnt_paid_receipt_id'] = NULL;
 		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
+		$where['posted_item.item_type != '] = "BID";
 		
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->where($where);
 		
 		$this->db->group_by('order_details.id');

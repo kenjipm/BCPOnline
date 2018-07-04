@@ -163,7 +163,7 @@
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 				</div>
 				<div class="cb-pl-3">
-					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_review')" <?php if ($model->transaction_detail->order_status !== "DONE"){?> style="display:none"<?php } ?> >Lihat Ulasan</button>
+					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_review')"  >Lihat Ulasan</button>
 					<button type="button" class="cb-button cb-button-form" onclick="popup.open('popup_cancel_repair')" <?php if ($model->transaction_detail->order_status !== "TENANT_RECEIVED"){?> style="display:none"<?php } ?>>PERBAIKAN BATAL</button>
 				</div>
 				<div class="cb-pl-3">
