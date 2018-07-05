@@ -82,6 +82,20 @@ class Brand_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	public function get_from_voucher_id($voucher_id)
+	{
+		$where['voucher_brand.voucher_id'] = $voucher_id;
+		
+		$this->db->where($where);
+		$this->db->join('voucher_brand', 'voucher_brand.brand_id=' . $this->table_brand . '.id', 'left');
+		$query = $this->db
+					->order_by('brand_name', 'ASC')
+					->get($this->table_brand);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all()
 	{
 		$query = $this->db
