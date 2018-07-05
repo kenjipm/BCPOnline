@@ -6,6 +6,9 @@ class Shipping_address_model extends CI_Model {
 	
 	public $id;
 	public $address_id;
+	public $ro_province_id;
+	public $province;
+	public $ro_city_id;
 	public $city;
 	public $kecamatan;
 	public $kelurahan;
@@ -24,6 +27,9 @@ class Shipping_address_model extends CI_Model {
 		
 		$this->id				= 0;
 		$this->address_id		= "";
+		$this->ro_province_id	= 0;
+		$this->province			= "";
+		$this->ro_city_id		= 0;
 		$this->city				= "";
 		$this->kecamatan		= "";
 		$this->kelurahan		= "";
@@ -42,6 +48,9 @@ class Shipping_address_model extends CI_Model {
 		{
 			$this->id				= $db_item->id;
 			$this->address_id		= $db_item->address_id;
+			$this->ro_province_id	= $db_item->ro_province_id;
+			$this->province			= $db_item->province;
+			$this->ro_city_id		= $db_item->ro_city_id;
 			$this->city				= $db_item->city;
 			$this->kecamatan		= $db_item->kecamatan;
 			$this->kelurahan		= $db_item->kelurahan;
@@ -60,6 +69,9 @@ class Shipping_address_model extends CI_Model {
 		
 		$db_item->id = $this->id;
 		$db_item->address_id = $this->address_id;
+		$db_item->ro_province_id = $this->ro_province_id;
+		$db_item->province = $this->province;
+		$db_item->ro_city_id = $this->ro_city_id;
 		$db_item->city = $this->city;
 		$db_item->kecamatan = $this->kecamatan;
 		$db_item->kelurahan = $this->kelurahan;
@@ -79,6 +91,9 @@ class Shipping_address_model extends CI_Model {
 		{
 			$stub->id				= $db_item->id;
 			$stub->address_id		= $db_item->address_id;
+			$stub->ro_province_id	= $db_item->ro_province_id;
+			$stub->province			= $db_item->province;
+			$stub->ro_city_id		= $db_item->ro_city_id;
 			$stub->city				= $db_item->city;
 			$stub->kecamatan		= $db_item->kecamatan;
 			$stub->kelurahan		= $db_item->kelurahan;
@@ -141,6 +156,9 @@ class Shipping_address_model extends CI_Model {
 		$last_address = new shipping_address_model();
 		$last_address->get_by_customer_id($this->session->child_id);
 		
+		$this->ro_province_id	= $address->ro_province_id;
+		$this->province			= $address->province;
+		$this->ro_city_id		= $address->ro_city_id;
 		$this->city				= $address->city;
 		$this->kecamatan		= $address->kecamatan;
 		$this->kelurahan		= $address->kelurahan;
@@ -204,6 +222,7 @@ class Shipping_address_model extends CI_Model {
 		$this->full_address  .= $this->kecamatan ? ($this->full_address ? ", " : "").$this->kecamatan : "";
 		$this->full_address  .= $this->city ? ($this->full_address ? ", " : "").$this->city : "";
 		$this->full_address  .= $this->postal_code ? ($this->full_address ? ", " : "").$this->postal_code : "";
+		$this->full_address  .= $this->province ? ($this->full_address ? ", " : "").$this->province : "";
 		
 		return $this->full_address;
 	}

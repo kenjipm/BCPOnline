@@ -135,7 +135,7 @@ class Billing extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('billing');
+        $data_header['js_list'] = array('billing', 'ro_shipping_fee');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -352,6 +352,7 @@ class Billing extends CI_Controller {
 			$billing->shipping_charge_id	= $shipping_charge->id;
 			$billing->setting_reward_id		= $setting_reward->id;
 			$billing->calculate_total_payable_from_cart($this->session->cart);
+			$billing->total_payable += $shipping_charge->fee_amount;
 			$billing->insert();
 			
 			$this->load->model('order_details_model');

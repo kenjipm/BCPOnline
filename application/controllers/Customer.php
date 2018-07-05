@@ -85,7 +85,7 @@ class Customer extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array('cart');
-        $data_header['js_list'] = array('customer/cart');
+        $data_header['js_list'] = array('customer/cart', 'ro_shipping_address');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -211,7 +211,7 @@ class Customer extends CI_Controller {
 	{
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('customer/shipping_address');
+        $data_header['js_list'] = array('customer/shipping_address', 'ro_shipping_address');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -667,6 +667,9 @@ class Customer extends CI_Controller {
 	public function address_add_do()
 	{
 		$address = new class{};
+		$address->ro_province_id	= $this->input->post('ro_province_id');
+		$address->province			= $this->input->post('province');
+		$address->ro_city_id		= $this->input->post('ro_city_id');
 		$address->city				= $this->input->post('city');
 		$address->kecamatan			= $this->input->post('kecamatan');
 		$address->kelurahan			= $this->input->post('kelurahan');
@@ -866,6 +869,112 @@ class Customer extends CI_Controller {
 	public function load_googlemaps()
 	{
 		$this->load->view('googlemaps');
+	}
+	
+	public function ro_get_province()
+	{
+		$this->load->config('delivery_method');
+		$ro_province_api_url = $this->config->item('ro_province_api_url');
+		
+		$json_result = "";
+		$obj_result = json_decode(file_get_contents($ro_province_api_url));
+		if (isset($obj_result->rajaongkir))
+		{
+			if (isset($obj_result->rajaongkir->status))
+			{
+				if ($obj_result->rajaongkir->status->code == 200)
+				{
+					$json_result = $obj_result->rajaongkir->results;
+				}
+			}
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
+	
+	public function ro_get_city()
+	{
+		$province_id = $this->input->get('province_id');
+		
+		$this->load->config('delivery_method');
+		$ro_province_api_url = $this->config->item('ro_city_api_url') . "&province=" . $province_id;
+		
+		$json_result = "";
+		$obj_result = json_decode(file_get_contents($ro_province_api_url));
+		if (isset($obj_result->rajaongkir))
+		{
+			if (isset($obj_result->rajaongkir->status))
+			{
+				if ($obj_result->rajaongkir->status->code == 200)
+				{
+					$json_result = $obj_result->rajaongkir->results;
+				}
+			}
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
+	}
+	
+	public function ro_calculate_fee_from_store()
+	{
+		$destination = $this->input->get('destination');
+		$weight = $this->input->get('weight');
+		$courier = $this->input->get('courier');
+		
+		$this->load->config('delivery_method');
+		$ro_fee_from_store_api_url =
+			$this->config->item('ro_fee_from_store_api_url');// .
+			// "&destination=" . $destination .
+			// "&weight=" . $weight .
+			// "&courier=" . $courier;
+		$key = $this->config->item('ro_api_key');
+		$origin = $this->config->item('store_city_id');
+		
+		$data = array(
+			'key' => $key,
+			'origin' => $origin,
+			'destination' => $destination,
+			'weight' => $weight,
+			'courier' => $courier,
+		);
+		$options = array(
+			'http' => array(
+					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method'  => 'POST',
+					'content' => http_build_query($data)
+				)
+			);
+		$context  = stream_context_create($options);
+		
+		$json_result = "";
+		$obj_result = json_decode(file_get_contents($ro_fee_from_store_api_url, false, $context));
+		if (isset($obj_result->rajaongkir))
+		{
+			if (isset($obj_result->rajaongkir->status))
+			{
+				if ($obj_result->rajaongkir->status->code == 200)
+				{
+					// if (count($obj_result->rajaongkir->results) > 0)
+					{
+						$json_result = $obj_result->rajaongkir->results;
+					}
+				}
+			}
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($json_result);
 	}
 	
 	public function default_redirect()

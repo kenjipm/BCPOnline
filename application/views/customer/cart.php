@@ -318,10 +318,22 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">
+						<label>Provinsi</label>
+					</div>
+					<div class="col-sm-6">
+						<select id="ro_province_id" name="ro_province_id" class="form-control">
+						</select>
+						<input type="hidden" id="province" name="province"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
 						<label>Kota</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" name="city" class="form-control"/>
+						<select id="ro_city_id" name="ro_city_id" class="form-control">
+						</select>
+						<input type="hidden" id="city" name="city"/>
 					</div>
 				</div>
 				<div class="form-group">

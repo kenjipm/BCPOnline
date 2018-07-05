@@ -2,6 +2,7 @@
 	<h2><?=$title?></h2>
 </div>
 <form action="<?=site_url('billing/'.$model->billing->action)?>" method="post" class="form-horizontal" id="form_billing">
+	<input type="hidden" id="total_weight" value="<?=$model->billing->total_weight?>"/>
 	<input type="hidden" name="billing_id" value="<?=$model->billing->id?>"/>
 	<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 		<div class="cb-row cb-p-5">
@@ -31,7 +32,8 @@
 				</div>
 			</div>
 			<div class="cb-col-fifth-2 cb-pl-3">
-				<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->shipping_address->full_address?>" readonly/>
+				<input type="hidden" id="ro_city_id" name="ro_city_id" value="<?=$model->billing->shipping_address->ro_city_id?>"/>
+				<input type="text" class="cb-row cb-col-full cb-input-text" id="full_address" name="full_address" value="<?=$model->billing->shipping_address->full_address?>" readonly/>
 			</div>
 		</div>
 		<div class="cb-row cb-p-5">
@@ -178,7 +180,7 @@
 						if ($i % 3 == 0) { ?> <div class="cb-row"> <?php $div_row_opened = true; } 
 						?>
 						<div class="cb-col-third cb-p-5">
-							<input type="radio" name="delivery_method" id="delivery_method-<?=$delivery_method->name?>" value="<?=$delivery_method->name ?>" <?=$delivery_method->selected?"checked=\"checked\"":""?>/>
+							<input type="radio" name="delivery_method" id="delivery_method-<?=$delivery_method->name?>" value="<?=$delivery_method->ro_api_code ?>" <?=$delivery_method->selected?"checked=\"checked\"":""?>/>
 							<label><?=$delivery_method->description?></label>
 						</div>
 						<?php
@@ -187,6 +189,37 @@
 					}
 					if ($div_row_opened) { ?> </div> <?php }
 				?>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-txt-primary-1 cb-pull-left">
+					<div class="cb-label"> Jenis Layanan </div>
+				</div>
+				<div class="cb-pull-right">
+					<div class="cb-txt-primary-1">
+						<div class="cb-label"> : </div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-col-fifth-2 cb-pl-3">
+				<select id="fee_amount" name="fee_amount" class="form-control">
+				</select>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-txt-primary-1 cb-pull-left">
+					<div class="cb-label"> Ongkir </div>
+				</div>
+				<div class="cb-pull-right">
+					<div class="cb-txt-primary-1">
+						<div class="cb-label"> : </div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-col-fifth-2 cb-pl-3">
+				<span id="fee_amount_str"></span>
 			</div>
 		</div>
 		<div class="cb-row cb-p-5">
@@ -212,8 +245,6 @@
 		<input type="hidden" name="date_closed" value="<?=$model->billing->date_closed?>"/>
 		<input type="hidden" name="customer_id" value="<?=$model->billing->customer_id?>"/>
 		<input type="hidden" name="shipping_address_id" value="<?=$model->billing->shipping_address->id?>"/>
-		
-		<input type="hidden" name="fee_amount" value="<?=$model->billing->shipping_charge->fee_amount?>"/>
 		
 		<div class="cb-row cb-p-5">
 			<div class="cb-col-fifth-4">

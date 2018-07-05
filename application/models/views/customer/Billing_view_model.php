@@ -61,6 +61,7 @@ class Billing_view_model extends CI_Model {
 		$this->load->library('text_renderer');
 		
 		$this->load->model('posted_item_variance_model');
+		$this->billing->total_weight = 0;
 		foreach ($cart as $id => $cart_item)
 		{
 			$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
@@ -81,6 +82,7 @@ class Billing_view_model extends CI_Model {
 			$temp_order->price_total								= $this->text_renderer->to_rupiah($cart_item['quantity'] * ($posted_item_variance->posted_item->is_hot_item ? $posted_item_variance->posted_item->hot_item->promo_price : $posted_item_variance->posted_item->price));
 			
 			$this->orders[] = $temp_order; // baru di add ke array items
+			$this->billing->total_weight += intval($posted_item_variance->posted_item->unit_weight) * $temp_order->quantity;
 		}
 			
 		$this->billing->id				= $new_billing->id;
@@ -97,6 +99,7 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;
 		$this->billing->shipping_address = new class{};
 		$this->billing->shipping_address->id			= $shipping_address->id ?? 0;
+		$this->billing->shipping_address->ro_city_id	= $shipping_address->ro_city_id;
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
 		
 		$this->load->config('payment_method');
@@ -129,6 +132,7 @@ class Billing_view_model extends CI_Model {
 			
 			$temp_delivery_method = new class{};
 			$temp_delivery_method->name = $cur_delivery_method['name'];
+			$temp_delivery_method->ro_api_code = $cur_delivery_method['ro_api_code'];
 			$temp_delivery_method->description = $cur_delivery_method['description'];
 			$temp_delivery_method->selected = count($this->delivery_methods) == 0; // select elemen pertama dulu aja
 			
@@ -141,6 +145,7 @@ class Billing_view_model extends CI_Model {
 		$this->load->library('text_renderer');
 		
 		$this->load->model('posted_item_variance_model');
+		$this->billing->total_weight = 0;
 		foreach ($order_details as $order_detail)
 		{
 			$posted_item_variance = $this->posted_item_variance_model->get_from_id($order_detail->posted_item_variance_id);
@@ -158,6 +163,7 @@ class Billing_view_model extends CI_Model {
 			$temp_order->price_total								= $this->text_renderer->to_rupiah($order_detail->quantity * $order_detail->sold_price);
 			
 			$this->orders[] = $temp_order; // baru di add ke array items
+			$this->billing->total_weight += intval($posted_item_variance->posted_item->unit_weight) * $temp_order->quantity;
 		}
 			
 		$this->billing->id				= $unconfirmed_billing->id;
@@ -174,6 +180,7 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_charge->fee_amount	= $shipping_charge->fee_amount;
 		$this->billing->shipping_address = new class{};
 		$this->billing->shipping_address->id			= $shipping_address->id ?? 0;
+		$this->billing->shipping_address->ro_city_id	= $shipping_address->ro_city_id;
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
 		
 		$this->load->config('payment_method');
@@ -206,6 +213,7 @@ class Billing_view_model extends CI_Model {
 			
 			$temp_delivery_method = new class{};
 			$temp_delivery_method->name = $cur_delivery_method['name'];
+			$temp_delivery_method->ro_api_code = $cur_delivery_method['ro_api_code'];
 			$temp_delivery_method->description = $cur_delivery_method['description'];
 			$temp_delivery_method->selected = count($this->delivery_methods) == 0; // select elemen pertama dulu aja
 			
