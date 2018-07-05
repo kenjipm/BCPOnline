@@ -28,11 +28,18 @@ class Voucher extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('Voucher_model');
+		$this->load->model('Brand_model');
 		if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
 		{
 			$vouchers = $this->Voucher_model->get_all();
+			$i = 0;
+			foreach($vouchers as $voucher)
+			{
+				$brands[$i] = $this->Brand_model->get_from_voucher_id($voucher->id);
+				$i++;
+			}
 			$this->load->model('views/admin/voucher_list_view_model');
-			$this->voucher_list_view_model->get($vouchers);
+			$this->voucher_list_view_model->get($vouchers, $brands);
 			$data['model'] = $this->voucher_list_view_model;
 			$this->load->view('admin/voucher_list', $data);
 		} 

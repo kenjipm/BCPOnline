@@ -277,6 +277,7 @@ class Tenant_bill_model extends CI_Model {
 	{	
 		$this->payment_expiration	= $this->input->post('payment_expiration');
 		$this->payment_value		= $this->input->post('payment_value');
+		$this->tenant_id			= $this->input->post('tenant_id');
 		$this->admin_id				= $this->session->child_id;
 		
 		// insert data, then generate [reward_id] based on [id]
@@ -287,6 +288,8 @@ class Tenant_bill_model extends CI_Model {
 		$this->db->set('payment_expiration', $this->payment_expiration);
 		$this->db->where('id', $id);
 		$this->db->update($this->table_tenant_bill);
+		
+		$this->send_confirm_to_tenant($this->tenant_id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}

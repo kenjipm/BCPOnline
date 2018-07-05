@@ -47,6 +47,21 @@
 						<form class="form-horizontal">
 							<div class="form-group">
 								<div class="col-sm-4">
+									<label>Berlaku untuk:</label>
+								</div>
+								<div class="col-sm-8">
+								<?php
+								foreach($voucher->brand_name as $brand_name)
+								{
+									?>
+									<input type="text" value="<?=$brand_name?>" . " " class="form-control" id="voucher_description" readonly>
+									<?php
+								}
+								?>
+								</div>
+							</div>
+							<div class="form-group">
+								<div class="col-sm-4">
 									<label>Deskripsi:</label>
 								</div>
 								<div class="col-sm-8">
