@@ -380,7 +380,7 @@ $config['encryption_key'] = '3ef55bb7fbcce3d0a07a5c8facf43dab';
 */
 $config['sess_driver'] = 'files';
 $config['sess_cookie_name'] = 'bcpsess';
-$config['sess_expiration'] = 604800;
+$config['sess_expiration'] = 604800; // 7 hari
 $config['sess_save_path'] = NULL;
 $config['sess_match_ip'] = FALSE;
 $config['sess_time_to_update'] = 300;

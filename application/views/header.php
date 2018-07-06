@@ -86,25 +86,28 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
 	////////////// CONFIG ///////////////
-	/* kalau mau ada ad-sidebar, kasih 2 slash di awal baris ini. kalau ga ada, hapus 2 slash di awal baris ini. 
-?>
-<div id="ad-sidebar" class="cb-row">
-	<div class="cb-row cb-col-full">
-		<div id="ad-sidebar-handle" class="cb-row cb-col-tenth cb-bg-primary-2 cb-border-round cb-txt-primary-3 cb-p-5" onclick="toggle_ad_sidebar()">
-			<div id="ad-sidebar-toggle" class="cb-button cb-button-alternative">
-				<div id="ad-sidebar-toggle-button" class="cb-arrow cb-arrow-right">
+	/* kalau mau ada ad-sidebar, kasih 2 slash di awal baris ini. kalau ga ada, hapus 2 slash di awal baris ini.
+	if (($user_type == "CUSTOMER") || ($user_type == "GUEST"))
+	{
+		?>
+		<div id="ad-sidebar" class="cb-row">
+			<div class="cb-row cb-col-full">
+				<div id="ad-sidebar-handle" class="cb-row cb-col-tenth cb-border-round cb-txt-primary-3 cb-p-5" onclick="toggle_ad_sidebar()">
+					<div id="ad-sidebar-toggle" class="">
+						<div id="ad-sidebar-toggle-button" class="cb-arrow cb-arrow-right">
+						</div>
+					</div>
+					<span id="ad-sidebar-text"></span>
+				</div>
+				<div id="ad-sidebar-content" class="cb-row cb-col-tenth-9 cb-border-round cb-txt-primary-3">
+					<div class="cb-p-5 cb-col-full">
+						<img src="<?=site_url('img/ad_box/ad-sidebar.png')?>" alt="" class="cb-bg-primary-3 cb-m-5"/>
+					</div>
 				</div>
 			</div>
-			<span id="ad-sidebar-text"></span>
-		</div>
-		<div id="ad-sidebar-content" class="cb-row cb-col-tenth-9 cb-bg-primary-2 cb-border-round cb-txt-primary-3">
-			<div class="cb-p-5 cb-col-full">
-				<img src="<?=site_url('img/ad_box/ad-sidebar.png')?>" alt="" class="cb-bg-primary-3 cb-m-5"/>
-			</div>
-		</div>
-	</div>
-</div> <!-- div ad-sidebar -->
-<?php
+		</div> <!-- div ad-sidebar -->
+		<?php
+	}
 	// */
 ?>
 

@@ -2,6 +2,7 @@
 	<h2><?=$title?></h2>
 </div>
 <form action="<?=site_url('billing/'.$model->billing->action)?>" method="post" class="form-horizontal" id="form_billing">
+	<input type="hidden" id="free_delivery_methods" value="<?=$model->free_delivery_methods?>"/>
 	<input type="hidden" id="total_weight" value="<?=$model->billing->total_weight?>"/>
 	<input type="hidden" name="billing_id" value="<?=$model->billing->id?>"/>
 	<div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
@@ -188,6 +189,12 @@
 						$i++;
 					}
 					if ($div_row_opened) { ?> </div> <?php }
+					if (count($model->delivery_methods) == 0)
+					{
+						?>
+						Lokasi Anda tidak masuk dalam area service (perbaikan barang)
+						<?php
+					}
 				?>
 			</div>
 		</div>
@@ -250,7 +257,7 @@
 			<div class="cb-col-fifth-4">
 			</div>
 			<div class="cb-col-fifth">
-				<button type="button" class="cb-button-form pull-right" onclick="<?=$model->billing->is_voucher_available?'cek_kode_voucher(true)':'submit_form()'?>">
+				<button type="button" class="cb-button-form pull-right" onclick="<?=$model->billing->is_voucher_available?'cek_kode_voucher(true)':'submit_form()'?>" <?=(count($model->delivery_methods) > 0) ? "" : "disabled='disabled'"?>>
 				<?=$model->billing->action_name?>
 				</button>
 			</div>

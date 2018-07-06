@@ -569,12 +569,12 @@ h4 { font-weight: bold; }
 #ad-sidebar {
 	position: fixed;
 	z-index: 10000;
-	top: 50%;
+	top: 30%;
 	/* right: -370px; */
 	right: 0px;
 	transform: translate(0, -50%);
-	width: 400px;
-	max-height: 70%;
+	width: 200px;
+	max-height: 25%;
 }
 
 #ad-sidebar-handle {
