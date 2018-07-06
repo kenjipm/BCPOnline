@@ -35,7 +35,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->billing_id			= $cur_order_detail->billing->id;
 		$this->transaction_detail->deliverer			= $item->deliverer->account->name;
 		$this->transaction_detail->collection_method	= $item->collection_method;
-		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price);
+		$this->transaction_detail->sold_price 			= $this->text_renderer->to_rupiah($item->sold_price * $item->quantity);
 		$this->transaction_detail->feedback 			= $item->feedback->feedback_text;
 		$this->transaction_detail->feedback_reply		= $item->feedback->feedback_reply;
 		$this->transaction_detail->rating	 			= $item->feedback->rating;

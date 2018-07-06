@@ -46,8 +46,14 @@ class Voucher extends CI_Controller {
 		else if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
 			$vouchers = $this->Voucher_model->get_all_active();
+			$i = 0;
+			foreach($vouchers as $voucher)
+			{
+				$brands[$i] = $this->Brand_model->get_from_voucher_id($voucher->id);
+				$i++;
+			}
 			$this->load->model('views/customer/voucher_list_view_model');
-			$this->voucher_list_view_model->get($vouchers);
+			$this->voucher_list_view_model->get($vouchers, $brands);
 			$data['model'] = $this->voucher_list_view_model;
 			$this->load->view('customer/voucher_list', $data);
 		}

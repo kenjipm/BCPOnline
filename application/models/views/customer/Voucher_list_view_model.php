@@ -3,13 +3,15 @@
 class Voucher_List_View_Model {
 	
 	public $vouchers;
+	public $brands;
 	// constructor
 	public function __construct()
 	{
 		$this->vouchers = array();
+		$this->brands = array();
 	}
 	
-	public function get($vouchers)
+	public function get($vouchers, $brands)
 	{
 		$i = 0;
 		foreach($vouchers as $voucher)
@@ -29,6 +31,17 @@ class Voucher_List_View_Model {
 			$i++;
 		}
 		
+		$i = 0;
+		foreach($brands as $brand)
+		{
+			$j = 0;
+			foreach($brand as $brand_name)
+			{
+				$this->vouchers[$i]->brand_name[$j] = $brand_name->brand_name;
+				$j++;
+			}
+			$i++;
+		}
 	}
 	
 	

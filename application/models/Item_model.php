@@ -373,6 +373,7 @@ class Item_model extends CI_Model {
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->where('item_type', 'ORDER');
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
 		$this->db->distinct();
@@ -392,6 +393,7 @@ class Item_model extends CI_Model {
 		$this->db->select($this->table_item.'.id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->where('item_type', 'ORDER');
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
 		$this->db->distinct();

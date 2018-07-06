@@ -1,7 +1,7 @@
 <div class="cb-row cb-p-5">
 	<div class="cb-col-full cb-bg-primary-3 cb-border-round cb-row cb-p-5">
 		<div class="cb-col-fourth">
-			<label for="profile_pic" class="cb-border cb-border-round">
+			<label for="profile_pic" class="cb-border cb-border-round hoverable">
 				<div id="thumbnail-profile_pic">
 					<img src="<?=$model->tenant->account->profile_pic?>" alt="<?=$model->tenant->tenant_name?>" class="cb-border-round">
 				</div>

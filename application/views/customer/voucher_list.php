@@ -3,6 +3,9 @@
 		<div class="cb-col-half">
 			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR VOUCHER</h3>
 		</div>
+		<div class="cb-col-half cb-p-5">
+			<a href="<?=site_url('voucher/create_voucher')?>" class="cb-button-form pull-right">+ TAMBAH VOUCHER</a>
+		</div>
 	</div>
 </div>
 
@@ -42,6 +45,21 @@
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal">
+							<div class="form-group">
+								<div class="col-sm-4">
+									<label>Berlaku untuk:</label>
+								</div>
+								<div class="col-sm-8">
+								<?php
+								foreach($voucher->brand_name as $brand_name)
+								{
+									?>
+									<input type="text" value="<?=$brand_name?>" . " " class="form-control" id="voucher_description" readonly>
+									<?php
+								}
+								?>
+								</div>
+							</div>
 							<div class="form-group">
 								<div class="col-sm-4">
 									<label>Deskripsi:</label>
