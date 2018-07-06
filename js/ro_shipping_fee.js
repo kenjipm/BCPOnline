@@ -11,33 +11,42 @@ $(document).ready(function(){
 });
 
 function ro_calculate_fee_from_store() {
+	var free_delivery_methods = $("#free_delivery_methods").val();
 	var courier = $("[name=delivery_method]:checked").val();
 	var weight = $("#total_weight").val();
 	var destination = $("#ro_city_id").val();
 	
-	$.ajax({
-		type: "GET",
-		url: base_url + "/customer/ro_calculate_fee_from_store/",
-		data:
-		{
-			courier: courier,
-			weight: weight,
-			destination: destination,
-		},
-		success: function(data) {
-			if (data != "") {
-				$("#fee_amount").html("");
-				data.forEach(function(courier, idx){
-					courier.costs.forEach(function(service, jdx){
-						var option_html = "<option value='" + service.cost[0].value + "'>" + courier.name + " - " + service.service + " (" + service.description + ", " + service.cost[0].etd + " Hari Kerja)</option>";
-						$("#fee_amount").append(option_html);
-						update_fee();
+	if (free_delivery_methods.indexOf(courier) < 0) {
+		$.ajax({
+			type: "GET",
+			url: base_url + "/customer/ro_calculate_fee_from_store/",
+			data:
+			{
+				courier: courier,
+				weight: weight,
+				destination: destination,
+			},
+			success: function(data) {
+				if (data != "") {
+					$("#fee_amount").html("");
+					data.forEach(function(courier, idx){
+						courier.costs.forEach(function(service, jdx){
+							var option_html = "<option value='" + service.cost[0].value + "'>" + courier.name + " - " + service.service + " (" + service.description + ", " + service.cost[0].etd + " Hari Kerja)</option>";
+							$("#fee_amount").append(option_html);
+							update_fee();
+						});
 					});
-				});
+				}
+				else alert('Gagal mendapatkan informasi ongkos kirim, silakan muat ulang halaman');
 			}
-			else alert('Gagal mendapatkan informasi ongkos kirim, silakan muat ulang halaman');
-		}
-	});
+		});
+	}
+	else {
+		$("#fee_amount").html("");
+		var option_html = "<option value='0'>Kurir Cyberku</option>";
+		$("#fee_amount").append(option_html);
+		update_fee();
+	}
 }
 
 function update_fee() {

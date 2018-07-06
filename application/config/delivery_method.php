@@ -6,7 +6,7 @@ $config['delivery_methods'] = array('CYBERIA', 'JNE', 'TIKI', 'POS');
 $config['no_tracking_delivery_methods'] = array('CYBERIA');
 
 $config['order_delivery_methods'] = array('JNE', 'TIKI', 'POS');
-$config['repair_delivery_methods'] = array('JNE', 'TIKI', 'POS');
+$config['repair_delivery_methods'] = array('CYBERIA');
 
 $config['store_city_id'] = 55;
 
