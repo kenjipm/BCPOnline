@@ -11,7 +11,7 @@ class About extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Tentang Cyberia";
+		$data['title'] = "Tentang Cyberku";
 		$this->load->view('about/about_main', $data);
 		
 		// Load Footer
@@ -71,7 +71,7 @@ class About extends CI_Controller {
 		$this->load->view('header', $data_header);
 		
 		// Load Body
-		$data['title'] = "Hubungi Cyberia";
+		$data['title'] = "Hubungi Cyberku";
 		$this->load->view('about/contact', $data);
 		
 		// Load Footer

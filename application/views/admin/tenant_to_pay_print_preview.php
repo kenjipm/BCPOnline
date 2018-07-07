@@ -81,7 +81,7 @@
 			<div class="row">
 				<div class="col-xs-1"></div>
 				<div class="col-xs-3 text-center">
-					<label>Cyberia</label>
+					<label>Cyberku</label>
 					<br/><br/><br/><br/>
 					<div style="border-bottom: 1px solid #000"></div>
 				</div>

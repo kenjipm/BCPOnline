@@ -124,7 +124,7 @@ class Login extends CI_Controller {
 			$i = 0;
 			while (!$is_email_sent && ($i < count(ADMIN_EMAILS)))
 			{
-				$this->email->from(ADMIN_EMAILS[$i], 'Admin Cyberia');
+				$this->email->from(ADMIN_EMAILS[$i], 'Admin Cyberku');
 				$this->email->to($email);
 
 				$this->email->subject('Permintaan Reset Password');

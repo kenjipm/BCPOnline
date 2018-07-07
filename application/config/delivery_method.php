@@ -1,12 +1,12 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-$config['delivery_methods'] = array('CYBERIA', 'JNE', 'TIKI', 'POS');
+$config['delivery_methods'] = array('CYBERKU', 'JNE', 'TIKI', 'POS');
 
-$config['no_tracking_delivery_methods'] = array('CYBERIA');
+$config['no_tracking_delivery_methods'] = array('CYBERKU');
 
 $config['order_delivery_methods'] = array('JNE', 'TIKI', 'POS');
-$config['repair_delivery_methods'] = array('CYBERIA');
+$config['repair_delivery_methods'] = array('CYBERKU');
 
 $config['store_city_id'] = 55;
 
@@ -24,9 +24,9 @@ $config['ro_city_api_url'] = 'https://api.rajaongkir.com/starter/city?key='.$ro_
 $config['ro_fee_from_store_api_url'] = 'https://api.rajaongkir.com/starter/cost';//?key='.$ro_api_key;//.'&origin='.$store_city_id; 
 $config['ro_fee_to_store_api_url'] = 'https://api.rajaongkir.com/starter/cost?key='.$ro_api_key;//.'&destination='.$store_city_id; 
 
-$config['CYBERIA'] = array(
-	'name'				=> 'CYBERIA',
-	'description'		=> 'Cyberia Delivery',
+$config['CYBERKU'] = array(
+	'name'				=> 'CYBERKU',
+	'description'		=> 'Cyberku Delivery',
 	'long_description'	=> '',
 	'ro_api_code'		=> '',
 	'status_api_url'	=> '',

@@ -349,8 +349,8 @@ $config['dashboard_menu_admin'] = array(
 	
 
 $config['sub_footer'] = array(
-	'CYBERIA' => array(
-		'text'	=> "Cyberia",
+	'CYBERKU' => array(
+		'text'	=> "Cyberku",
 		'sub_menus' => array(
 			'TENTANG' => array(
 				'text'	=> "Tentang",
@@ -374,7 +374,7 @@ $config['sub_footer'] = array(
 		'text'	=> "Bantuan",
 		'sub_menus' => array(
 			'CONTACT' => array(
-				'text'	=> "Hubungi Cyberia",
+				'text'	=> "Hubungi Cyberku",
 				'url'	=> "about/contact",
 				),
 			'COMPLAIN' => array(
@@ -415,14 +415,14 @@ $config['sub_footer_right'] = array(
 		'text'	=> "&nbsp;",
 		'sub_menus' => array(
 			'CONTACT' => array(
-				'text'	=> "cyberia.id",
+				'text'	=> "cyberku.id",
 				'icon'	=> "twitter",
-				'url'	=> "http://www.twitter.com/cyberia.id",
+				'url'	=> "http://www.twitter.com/cyberku.id",
 				),
 			'COMPLAIN' => array(
 				'text'	=> "cs@cyberia.com",
 				'icon'	=> "googleplus",
-				'url'	=> "http://plus.google.com/cyberia.id",
+				'url'	=> "http://plus.google.com/cyberku.id",
 				),
 			),
 		),
@@ -430,14 +430,14 @@ $config['sub_footer_right'] = array(
 		'text'	=> "Ikuti Kami",
 		'sub_menus' => array(
 			'INSTAGRAM' => array(
-				'text'	=> "cyberia.id",
+				'text'	=> "cyberku.id",
 				'icon'	=> "instagram",
-				'url'	=> "http://www.instagram.com/cyberia.id",
+				'url'	=> "http://www.instagram.com/cyberku.id",
 				),
 			'FACEBOOK' => array(
-				'text'	=> "Cyberia Online Shopping",
+				'text'	=> "Cyberku Online Shopping",
 				'icon'	=> "facebook",
-				'url'	=> "http://www.facebook.com/cyberia.id",
+				'url'	=> "http://www.facebook.com/cyberku.id",
 				),
 			),
 		),

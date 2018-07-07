@@ -341,7 +341,7 @@ defined('ADMIN_EMAILS') OR define('ADMIN_EMAILS', array(
 | Application Production
 |--------------------------------------------------------------------------
 */
-defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberia');
+defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberku');
 defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
 
 /*
