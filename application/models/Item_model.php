@@ -9,6 +9,7 @@ class Item_model extends CI_Model {
 	private $table_order_details = 'order_details';
 	private $table_feedback = 'feedback';
 	private $table_hot_item = 'hot_item';
+	private $table_favorite_item = 'favorite_item';
 	
 	// table attribute
 	public $id;
@@ -736,6 +737,25 @@ class Item_model extends CI_Model {
 		else
 		{
 			$item->rating_average_round = number_format(round($item->rating_average * 2) / 2, 1, "-", "");
+		}
+		
+		return $item;
+		
+	}
+	
+	public function calculate_favorite()
+	{
+		$query = $this->db
+					  ->select('COUNT('.$this->table_favorite_item.'.id) AS favorite_count')
+					  ->join($this->table_item, $this->table_favorite_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left')
+					  ->where($this->table_item.'.id', $this->id)
+					  ->get($this->table_favorite_item);
+		$item = $query->row();
+		
+		if ($item == null)
+		{
+			$item = new class{};
+			$item->favorite_count = 0;
 		}
 		
 		return $item;

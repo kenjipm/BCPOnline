@@ -113,7 +113,7 @@ class Hot_item_model extends CI_Model {
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->group_by('posted_item.id');
 		$query = $this->db
-					  ->order_by($this->table_hot_item.'.id', 'DESC')
+					  ->order_by($this->table_hot_item.'.id', 'RANDOM')
 					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		
 		$items = $query->result();

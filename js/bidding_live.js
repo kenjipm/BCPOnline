@@ -146,7 +146,7 @@ function submit_bid()
 					// $("#btn-bid_sub").prop("disabled", true);
 					// $("#btn-bid_add").prop("disabled", true);
 					// $("#btn-submit_bid").prop("disabled", true);
-					// $("#bidding_status").html("Bidding berhasil dipasang");
+					$("#bidding_status").html("Harga berhasil dipasang");
 					$("#bid_win_price").html(data.bid_win_price);
 					$("#bid_time_left").html(data.bid_time_left);
 					popup.open('popup_bid_success');
@@ -154,6 +154,10 @@ function submit_bid()
 				else { // kalau blm daftar customer
 					window.location = base_url + '/login' + '?return_url=' + window.location.href;
 				}
+				
+				setTimeout(function(){
+					$("#bidding_status").html("");
+				}, 5000);
 			}
 		});
 	}

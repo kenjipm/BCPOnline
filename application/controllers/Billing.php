@@ -349,6 +349,7 @@ class Billing extends CI_Controller {
 			$billing->date_closed			= $this->input->post('date_closed');
 			$billing->customer_id			= $this->input->post('customer_id');
 			$billing->shipping_address_id	= $this->input->post('shipping_address_id');
+			$billing->delivery_type			= $this->input->post('delivery_type');
 			$billing->shipping_charge_id	= $shipping_charge->id;
 			$billing->setting_reward_id		= $setting_reward->id;
 			$billing->calculate_total_payable_from_cart($this->session->cart);

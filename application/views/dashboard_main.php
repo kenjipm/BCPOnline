@@ -81,14 +81,21 @@
 										?>
 										<a href="<?=site_url('item/'.$hot_item->id)?>">
 											<div class="item_thumbnail">
+												<div class="item_heart">
+													<div class="item_heart_icon cb-heart-red cb-heart">
+														<div class="item_heart_count"><?=$hot_item->favorite->favorite_count?></div>
+													</div>
+												</div>
 												<div class="item_photo">
 													<img src="<?=$hot_item->image_one_name?>" alt="<?=$hot_item->posted_item_name?>"/>
 												</div>
 												<div class="item_tenant_name">
+													<?=$hot_item->tenant->tenant_name?>
 												</div>
 												<div class="item_name">
 													<?=$hot_item->posted_item_name?>
 												</div>
+												<div class="item_separator"></div>
 												<div class="item_initial_price">
 													<?=$hot_item->initial_price?>
 												</div>
@@ -187,16 +194,23 @@
 									?>
 									<a href="<?=site_url('item/'.$tenant_item->id)?>" class="cb-col-fifth">
 										<div class="item_thumbnail cb-border-round">
+											<div class="item_heart">
+												<div class="item_heart_icon cb-heart-red cb-heart">
+													<div class="item_heart_count"><?=$tenant_item->favorite->favorite_count?></div>
+												</div>
+											</div>
 											<div class="item_photo">
 												<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
 											</div>
 											<div class="item_tenant_name">
+												<?=$tenant_item->tenant->tenant_name?>
 											</div>
 											<div class="item_name">
 												<?=$tenant_item->posted_item_name?>
 											</div>
+											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $tenant_item->is_hot_item ? $tenant_item->price : "" ?>
+												<?= $tenant_item->is_hot_item ? $tenant_item->price : "&nbsp;" ?>
 											</div>
 											<div class="item_current_price">
 												<?= $tenant_item->is_hot_item ? $tenant_item->hot_item->promo_price : $tenant_item->price ?>

@@ -212,6 +212,7 @@
 			<div class="cb-col-fifth-2 cb-pl-3">
 				<select id="fee_amount" name="fee_amount" class="form-control">
 				</select>
+				<input type="hidden" id="delivery_type" name="delivery_type" value=""/>
 			</div>
 		</div>
 		<div class="cb-row cb-p-5">

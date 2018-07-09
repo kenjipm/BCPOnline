@@ -7,11 +7,11 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		
-		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
-		{
-			$return_url = $this->input->post_get('return_url') ?? "";
-			redirect('login?return_url='.$return_url);
-		}
+		// if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		// {
+			// $return_url = $this->input->post_get('return_url') ?? "";
+			// redirect('login?return_url='.$return_url);
+		// }
 	}
 
 	public function index()

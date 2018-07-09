@@ -16,6 +16,7 @@ class Dispute_detail_view_model extends CI_Model {
 	
 	public function get($disputes, $selected_dispute, $dispute_texts)
 	{
+		$this->load->model('tenant_model');
 		foreach ($disputes as $dispute)
 		{
 			$temp = new class{};
@@ -27,6 +28,12 @@ class Dispute_detail_view_model extends CI_Model {
 			$dispute->init_order_detail();
 			$is_party_one = ($this->session->id == $dispute->account_party_one->id);
 			$temp->other_party_name = !$is_party_one ? $dispute->account_party_one->name : $dispute->account_party_two->name;
+			
+			$other_account = !$is_party_one ? $dispute->account_party_one : $dispute->account_party_two;
+			if ($other_account->get_type($other_account->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+				$temp->other_party_name = $tenant->tenant_name;
+			}
 			
 			$last_dispute_text = $dispute->get_last_dispute_text();
 			$is_last_dispute_text_exist = ($last_dispute_text != null);
@@ -56,6 +63,12 @@ class Dispute_detail_view_model extends CI_Model {
 			$selected_dispute->order_detail->posted_item_variance->init_posted_item();
 			
 			$this->dispute->other_party_name = ($selected_dispute->party_one_id != $this->session->id) ? $selected_dispute->account_party_one->name : $selected_dispute->account_party_two->name;
+			
+			$other_account = ($selected_dispute->party_one_id != $this->session->id) ? $selected_dispute->account_party_one : $selected_dispute->account_party_two;
+			if ($other_account->get_type($other_account->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+				$this->dispute->other_party_name = $tenant->tenant_name;
+			}
 			
 			$this->dispute->order_detail = new class{};
 			$this->dispute->order_detail->id = $selected_dispute->order_detail->id;
@@ -88,12 +101,18 @@ class Dispute_detail_view_model extends CI_Model {
 			$temp->sender->name		= $dispute_text->account_sender->name;
 			$temp->sender->is_you	= ($dispute_text->account_sender->id == $this->session->id);
 			
+			if ($dispute_text->account_sender->get_type($dispute_text->account_sender->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($dispute_text->account_sender->id);
+				$temp->sender->name = $tenant->tenant_name;
+			}
+			
 			$this->dispute_texts[] = $temp;
 		}
 	}
 	
 	public function get_detail($dispute, $dispute_texts)
 	{
+		$this->load->model('tenant_model');
 		$dispute->init_account_party_one();
 		$dispute->init_account_party_two();
 		$dispute->init_order_detail();
@@ -104,6 +123,12 @@ class Dispute_detail_view_model extends CI_Model {
 		$this->dispute->id = $dispute->id;
 		$this->dispute->other_party_name = ($dispute->party_one_id != $this->session->id) ? $dispute->account_party_one->name : $dispute->account_party_two->name;
 		
+		$other_account = ($dispute->party_one_id != $this->session->id) ? $dispute->account_party_one : $dispute->account_party_two;
+		if ($other_account->get_type($other_account->id) == "TENANT") {
+			$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+			$this->dispute->other_party_name = $tenant->tenant_name;
+		}
+			
 		$this->dispute->order_detail = new class{};
 		$this->dispute->order_detail->id = $dispute->order_detail->id;
 		
@@ -127,6 +152,11 @@ class Dispute_detail_view_model extends CI_Model {
 			$temp->sender->id		= $dispute_text->account_sender->id;
 			$temp->sender->name		= $dispute_text->account_sender->name;
 			$temp->sender->is_you	= ($dispute_text->account_sender->id == $this->session->id);
+			
+			if ($dispute_text->account_sender->get_type($dispute_text->account_sender->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($dispute_text->account_sender->id);
+				$temp->sender->name = $tenant->tenant_name;
+			}
 			
 			$this->dispute_texts[] = $temp;
 		}

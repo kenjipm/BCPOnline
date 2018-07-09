@@ -14,16 +14,23 @@
 				?>
 				<a href="<?=site_url('item/'.$favorite_item->posted_item->id)?>" class="cb-col-fifth cb-pb-3">
 					<div class="item_thumbnail cb-border-round">
+						<div class="item_heart">
+							<div class="item_heart_icon cb-heart-red cb-heart">
+								<div class="item_heart_count"><?=$favorite_item->favorite->favorite_count?></div>
+							</div>
+						</div>
 						<div class="item_photo">
 							<img src="<?=$favorite_item->posted_item->image_one_name?>" alt="<?=$favorite_item->posted_item->image_one_name?>"/>
 						</div>
 						<div class="item_tenant_name">
+							<?=$favorite_item->tenant->tenant_name?>
 						</div>
 						<div class="item_name">
 							<?=$favorite_item->posted_item->posted_item_name?>
 						</div>
+						<div class="item_separator"></div>
 						<div class="item_initial_price">
-							<?= $favorite_item->is_hot_item ? $favorite_item->posted_item->price : "" ?>
+							<?= $favorite_item->is_hot_item ? $favorite_item->posted_item->price : "&nbsp;" ?>
 						</div>
 						<div class="item_current_price">
 							<?= $favorite_item->is_hot_item ? $favorite_item->hot_item->promo_price : $favorite_item->posted_item->price ?>

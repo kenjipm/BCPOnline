@@ -1,3 +1,7 @@
+$(document).ready(function(){
+	
+});
+
 function mark_order_finish(order_detail_id, tenant_id)
 {
 	if (confirm("Apakah pesanan ini sudah selesai dan tidak ada komplain?")) {
@@ -54,13 +58,17 @@ function open_popup_feedback(order_detail_id, tenant_id)
 				var feedback = data.feedback;
 				$("#feedback-rating").val(feedback.rating);
 				$("#feedback-feedback_text").val(feedback.feedback_text);
-				$("#btn-create_feedback").html("Ubah");
+				$("#feedback-rating").prop("disabled", true);
+				$("#feedback-feedback_text").prop("disabled", true);
+				// $("#btn-create_feedback").html("Ubah");
+				$("#btn-create_feedback").remove();
+				$("#btn-cancel_feedback").html("TUTUP");
 			}
 			else
 			{
 				$("#feedback-rating").val(5);
 				$("#feedback-feedback_text").val("");
-				$("#btn-create_feedback").html("Kirim");
+				$("#btn-create_feedback").html("KIRIM");
 			}
 			popup.open('popup_feedback');
 		}
@@ -74,22 +82,29 @@ function create_feedback()
 	var rating = $("#feedback-rating").val();
 	var feedback_text = $("#feedback-feedback_text").val();
 	
-	$.ajax({
-		type: "POST",
-		url: base_url + "/customer/create_feedback",
-		data:
-		{
-			order_detail_id: order_detail_id,
-			feedback_text: feedback_text,
-			rating: rating,
-			feedback_for: tenant_id
-		},
-		success: function(data) {
-			console.log(data);
-			popup.close('popup_feedback');
-			popup.open('popup_feedback_success');
-		}
-	});
+	if (feedback_text == "") {
+		$("#feedback-feedback_text").attr("placeholder", "Ulasan wajib diisi...");
+		$("#feedback-feedback_text").focus();
+	} else {
+		$.ajax({
+			type: "POST",
+			url: base_url + "/customer/create_feedback",
+			data:
+			{
+				order_detail_id: order_detail_id,
+				feedback_text: feedback_text,
+				rating: rating,
+				feedback_for: tenant_id
+			},
+			success: function(data) {
+				// console.log(data);
+				popup.close('popup_feedback');
+				popup.open('popup_feedback_success');
+				$("#btn-create_feedback").remove();
+				$("#btn-cancel_feedback").html("TUTUP");
+			}
+		});
+	}
 }
 
 function toggle_order_status_history(order_status_history_id)

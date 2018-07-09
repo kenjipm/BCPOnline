@@ -29,6 +29,7 @@
 						<div class="item_name">
 							<?=$posted_item->posted_item_name?>
 						</div>
+						<div class="item_separator"></div>
 						<div class="item_initial_price">
 							
 						</div>

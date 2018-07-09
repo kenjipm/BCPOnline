@@ -47,6 +47,11 @@ class Dashboard_view_model extends CI_Model {
 			
 			$hot_item->init_posted_item();
 			$temp->rating			= $hot_item->posted_item->calculate_rating();
+			$temp->favorite			= $hot_item->posted_item->calculate_favorite();
+			
+			$hot_item->posted_item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $hot_item->posted_item->tenant->tenant_name;
 			
 			$this->hot_items[] = $temp;
 		}
@@ -59,6 +64,11 @@ class Dashboard_view_model extends CI_Model {
 			$temp->price			= $this->text_renderer->to_rupiah($tenant_item->price);
 			$temp->image_one_name	= $tenant_item->image_one_name;
 			$temp->rating			= $tenant_item->calculate_rating();
+			$temp->favorite			= $tenant_item->calculate_favorite();
+			
+			$tenant_item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $tenant_item->tenant->tenant_name;
 			
 			$tenant_item->get_hot_item();
 			$temp->is_hot_item = ($tenant_item->hot_item != null);

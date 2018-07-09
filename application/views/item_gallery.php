@@ -14,14 +14,21 @@
 				?>
 				<a href="<?=site_url('item/'.$item->id)?>" class="cb-col-fifth cb-pb-3">
 					<div class="item_thumbnail cb-border-round">
+						<div class="item_heart">
+							<div class="item_heart_icon cb-heart-red cb-heart">
+								<div class="item_heart_count"><?=$item->favorite->favorite_count?></div>
+							</div>
+						</div>
 						<div class="item_photo">
 							<img src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
 						</div>
 						<div class="item_tenant_name">
+							<?=$item->tenant->tenant_name?>
 						</div>
 						<div class="item_name">
 							<?=$item->posted_item_name?>
 						</div>
+						<div class="item_separator"></div>
 						<div class="item_initial_price">
 							
 						</div>

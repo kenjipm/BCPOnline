@@ -34,7 +34,7 @@
 						<div class="<?= $model->item->btn_class ?> cb-heart cb-pull-right" id="btn-toggle_item_favorite" onclick="toggle_item_favorite(<?=$model->item->id?>)"></div>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl"><?=$model->item->posted_item_name?></div>
 						<div class="cb-row cb-vertical-center">
-							<span class="cb-star cb-star-<?=$model->item->rating->rating_average_round?>"></span>
+							<a href="#feedback" class="cb-star cb-star-<?=$model->item->rating->rating_average_round?>"></a>
 							<?php
 								/*for ($i = 0; $i < 5; $i++)
 								{
@@ -51,7 +51,7 @@
 							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
 						</div>
 						<div class="item_initial_price">
-							<?= $model->item->is_hot_item ? $model->item->price : "" ?>
+							<?= $model->item->is_hot_item ? $model->item->price : "&nbsp;" ?>
 						</div>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl item_current_price">
 							<?= $model->item->is_hot_item ? $model->item->hot_item->promo_price : $model->item->price ?>
@@ -59,26 +59,29 @@
 						<?php
 							if ($model->item->item_type == "ORDER")
 							{
-								?>
-								<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl cb-mt-5">Pilihan</div>
-								<div class="cb-row">
-									<?php
-										foreach ($model->item_variances as $item_variance)
-										{
-											if ($item_variance->var_description != "")
-											{
-												?>
-												<button type="button" class="cb-button-secondary cb-mr-4" onclick="popup.open('popup_variance-<?=$item_variance->id?>')"><?=$item_variance->var_description?></button>
-												<?php
-											}
-										}
+								if ($model->item->total_quantity_available > 0)
+								{
 									?>
-								</div>
-								<?php
+									<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl cb-mt-5">Pilihan</div>
+									<div class="cb-row">
+										<?php
+											foreach ($model->item_variances as $item_variance)
+											{
+												if ($item_variance->var_description != "")
+												{
+													?>
+													<button type="button" class="cb-button-secondary cb-mr-4" onclick="popup.open('popup_variance-<?=$item_variance->id?>')"><?=$item_variance->var_description?></button>
+													<?php
+												}
+											}
+										?>
+									</div>
+									<?php
+								}
 							}
 						?>
 						<div class="cb-row cb-mt-5">
-							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')">BELI</button>
+							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')" <?=$model->item->is_empty_stock ? "disabled='disabled'" : ""?>><?=$model->item->is_empty_stock ? "STOK HABIS" : "BELI"?></button>
 						</div>
 					</div>
 					<div class="cb-col-full cb-mt-5 cb-border-top">
@@ -126,6 +129,11 @@
 									?>
 									<a href="<?=site_url('item/'.$other_item->id)?>" class="cb-col-fifth">
 										<div class="item_thumbnail cb-border-round">
+											<div class="item_heart">
+												<div class="item_heart_icon cb-heart-red cb-heart">
+													<div class="item_heart_count"><?=$other_item->favorite->favorite_count?></div>
+												</div>
+											</div>
 											<div class="item_photo">
 												<img src="<?=$other_item->image_one_name?>" alt="<?=$other_item->posted_item_name?>"/>
 											</div>
@@ -134,8 +142,9 @@
 											<div class="item_name">
 												<?=$other_item->posted_item_name?>
 											</div>
+											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $other_item->is_hot_item ? $other_item->price : "" ?>
+												<?= $other_item->is_hot_item ? $other_item->price : "&nbsp;" ?>
 											</div>
 											<div class="item_current_price">
 												<?= $other_item->is_hot_item ? $other_item->hot_item->promo_price : $other_item->price ?>
@@ -162,7 +171,7 @@
 	if (count($model->feedbacks) > 0)
 	{
 		?>
-		<div class="cb-panel cb-pl-2 cb-pr-2 cb-mb-5">
+		<div class="cb-panel cb-pl-2 cb-pr-2 cb-mb-5" id="feedback">
 			<div class="cb-panel-heading cb-align-center">
 				<h3 class="cb-txt-primary-1 cb-font-title">ULASAN BARANG</h3>
 			</div>
@@ -319,21 +328,40 @@
 		<div class="panel-body">
 			<form class="form-horizontal" method="post" action="<?=site_url('customer/cart_add_do')?>">
 				<div class="form-group">
-					<div class="col-sm-3">
-						<label><?=$model->item_variances[0]->var_type?></label>
-					</div>
-					<div class="col-sm-9">
-						<select name="posted_item_variance_id" id="posted_item_variance_id" class="form-control">
-							<?php
-								foreach ($model->item_variances as $item_variance)
-								{
-									?>
-									<option value="<?=$item_variance->id?>"><?=$item_variance->var_description ? $item_variance->var_description : "-"?></option>
-									<?php
-								}
-							?>
-						</select>
-					</div>
+					<?php
+						if ($model->item->item_type == "ORDER")
+						{
+							if ($model->item->total_quantity_available > 0)
+							{
+								?>
+								<div class="col-sm-3">
+									<label><?=$model->item_variances[0]->var_type?></label>
+								</div>
+								<div class="col-sm-9">
+									<select name="posted_item_variance_id" id="posted_item_variance_id" class="form-control">
+										<?php
+											foreach ($model->item_variances as $item_variance)
+											{
+												?>
+												<option value="<?=$item_variance->id?>"><?=$item_variance->var_description ? $item_variance->var_description : "-"?></option>
+												<?php
+											}
+										?>
+									</select>
+								</div>
+								<?php
+							}
+						}
+						else
+						{
+							foreach ($model->item_variances as $item_variance)
+							{
+								?>
+								<input type="hidden" name="posted_item_variance_id" id="posted_item_variance_id" value="<?=$item_variance->id?>"/>
+								<?php
+							}
+						}
+					?>
 					<div class="col-sm-3">
 						<label>Jumlah</label>
 					</div>
@@ -344,7 +372,7 @@
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
 						<input type="hidden" name="return_url" value="item/<?=$model->item->id?>"/>
-						<button type="button" class="btn btn-default" onclick="cart_add_do()">Beli</button>
+						<button type="button" class="btn btn-default" onclick="cart_add_do()" <?=$model->item->is_empty_stock ? "disabled='disabled'" : ""?>>Beli</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_buy')">Batal</button>
 					</div>
 				</div>

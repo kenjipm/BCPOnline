@@ -491,14 +491,14 @@
 				<div class="form-group">
 					<label class="control-label col-xs-3">Pesan:</label>
 					<div class="col-xs-9">
-						<textarea class="form-control" id="feedback-feedback_text"></textarea>
+						<textarea class="form-control" id="feedback-feedback_text" placeholder="Tulis ulasan singkat mengenai produk ini..."></textarea>
 					</div>
 				</div>
 				<div class="form-group">
 					<label class="control-label col-xs-3"></label>
 					<div class="col-xs-9">
-						<button type="button" class="btn btn-default" onclick="create_feedback()" id="btn-create_feedback">Kirim</button>
-						<button type="button" class="btn btn-default" onclick="popup.close('popup_feedback')">Batal</button>
+						<button type="button" class="btn btn-default" onclick="create_feedback()" id="btn-create_feedback">KIRIM</button>
+						<button type="button" class="btn btn-default" onclick="popup.close('popup_feedback')" id="btn-cancel_feedback">BATAL</button>
 					</div>
 				</div>
 			</div>

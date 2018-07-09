@@ -36,6 +36,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->btn_class	= ($this->item->is_favorite ? "cb-heart-red" : "cb-heart-white");
 		$this->item->btn_text	= ($this->item->is_favorite ? "" : "");
 		$this->item->rating = $item->calculate_rating();
+		$this->item->favorite = $item->calculate_favorite();
 		
 		$item->init_tenant();
 		$this->item->tenant = new class{};
@@ -57,20 +58,26 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->account = new class{};
 		$this->item->tenant->account->profile_pic	= site_url(($item->tenant->account->profile_pic != "") ? $item->tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
 		
+		$this->item->total_quantity_available = 0;
 		foreach ($item_variances as $item_variance)
 		{
-			$item_variance_temp = new class{};
-			
-			$item_variance_temp->id						= $item_variance->id;
-			$item_variance_temp->var_type				= $item_variance->var_type;
-			$item_variance_temp->var_description		= $item_variance->var_description;
-			$item_variance_temp->quantity_available		= $item_variance->quantity_available;
-			$item_variance_temp->image_two_name			= !in_array($item_variance->image_two_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_two_name) : "";
-			$item_variance_temp->image_three_name		= !in_array($item_variance->image_three_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_three_name) : "";
-			$item_variance_temp->image_four_name		= !in_array($item_variance->image_four_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_four_name) : "";
-			
-			$this->item_variances[] = $item_variance_temp;
+			if ($item_variance->quantity_available > 0)
+			{
+				$item_variance_temp = new class{};
+				
+				$item_variance_temp->id						= $item_variance->id;
+				$item_variance_temp->var_type				= $item_variance->var_type;
+				$item_variance_temp->var_description		= $item_variance->var_description;
+				$item_variance_temp->quantity_available		= $item_variance->quantity_available;
+				$item_variance_temp->image_two_name			= !in_array($item_variance->image_two_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_two_name) : "";
+				$item_variance_temp->image_three_name		= !in_array($item_variance->image_three_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_three_name) : "";
+				$item_variance_temp->image_four_name		= !in_array($item_variance->image_four_name, DEFAULT_ITEM_PICTURE) ? site_url($item_variance->image_four_name) : "";
+				
+				$this->item_variances[] = $item_variance_temp;
+				$this->item->total_quantity_available += $item_variance_temp->quantity_available;
+			}
 		}
+		$this->item->is_empty_stock = ($this->item->item_type == "ORDER") && ($this->item->total_quantity_available <= 0);
 		
 		foreach ($other_items as $other_item)
 		{
@@ -82,6 +89,7 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->posted_item_description = $other_item->posted_item_description;
 			$other_item_temp->image_one_name = site_url(($other_item->image_one_name !== "") ? $other_item->image_one_name : DEFAULT_ITEM_PICTURE[$other_item->item_type]);
 			$other_item_temp->rating = $other_item->calculate_rating();
+			$other_item_temp->favorite = $other_item->calculate_favorite();
 			
 			$other_item->get_hot_item();
 			$other_item_temp->is_hot_item = ($other_item->hot_item != null);

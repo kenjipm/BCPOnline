@@ -33,16 +33,23 @@
 						?>
 						<a href="<?=site_url('item/'.$promoted_item->id)?>" class="cb-col-fourth cb-pb-3">
 							<div class="item_thumbnail cb-border-round">
+								<div class="item_heart">
+									<div class="item_heart_icon cb-heart-red cb-heart">
+										<div class="item_heart_count"><?=$promoted_item->favorite->favorite_count?></div>
+									</div>
+								</div>
 								<div class="item_photo">
 									<img src="<?=$promoted_item->image_one_name?>" alt="<?=$promoted_item->posted_item_name?>"/>
 								</div>
 								<div class="item_tenant_name">
+									<?=$promoted_item->tenant->tenant_name?>
 								</div>
 								<div class="item_name">
 									*<?=$promoted_item->posted_item_name?>
 								</div>
+								<div class="item_separator"></div>
 								<div class="item_initial_price">
-									<?= $promoted_item->is_hot_item ? $promoted_item->price : "" ?>
+									<?= $promoted_item->is_hot_item ? $promoted_item->price : "&nbsp;" ?>
 								</div>
 								<div class="item_current_price">
 									<?= $promoted_item->is_hot_item ? $promoted_item->hot_item->promo_price : $promoted_item->price ?>
@@ -62,16 +69,23 @@
 						?>
 						<a href="<?=site_url('item/'.$search_item->id)?>" class="cb-col-fourth cb-pb-3">
 							<div class="item_thumbnail cb-border-round">
+								<div class="item_heart">
+									<div class="item_heart_icon cb-heart-red cb-heart">
+										<div class="item_heart_count"><?=$search_item->favorite->favorite_count?></div>
+									</div>
+								</div>
 								<div class="item_photo">
 									<img src="<?=$search_item->image_one_name?>" alt="<?=$search_item->posted_item_name?>"/>
 								</div>
 								<div class="item_tenant_name">
+									<?=$search_item->tenant->tenant_name?>
 								</div>
 								<div class="item_name">
 									<?=$search_item->posted_item_name?>
 								</div>
+								<div class="item_separator"></div>
 								<div class="item_initial_price">
-									<?= $search_item->is_hot_item ? $search_item->price : "" ?>
+									<?= $search_item->is_hot_item ? $search_item->price : "&nbsp;" ?>
 								</div>
 								<div class="item_current_price">
 									<?= $search_item->is_hot_item ? $search_item->hot_item->promo_price : $search_item->price ?>

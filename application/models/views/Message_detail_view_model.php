@@ -16,6 +16,7 @@ class Message_detail_view_model extends CI_Model {
 	
 	public function get($message_inboxes, $selected_message_inbox, $message_texts)
 	{
+		$this->load->model('tenant_model');
 		foreach ($message_inboxes as $message_inbox)
 		{
 			$temp = new class{};
@@ -26,6 +27,12 @@ class Message_detail_view_model extends CI_Model {
 			$message_inbox->init_account_party_two();
 			$is_party_one = ($this->session->id == $message_inbox->account_party_one->id);
 			$temp->other_party_name = !$is_party_one ? $message_inbox->account_party_one->name : $message_inbox->account_party_two->name;
+			
+			$other_account = !$is_party_one ? $message_inbox->account_party_one : $message_inbox->account_party_two;
+			if ($other_account->get_type($other_account->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+				$temp->other_party_name = $tenant->tenant_name;
+			}
 			
 			$last_message_text = $message_inbox->get_last_message_text();
 			$is_last_message_text_exist = ($last_message_text != null);
@@ -46,7 +53,14 @@ class Message_detail_view_model extends CI_Model {
 		{
 			$selected_message_inbox->init_account_party_one();
 			$selected_message_inbox->init_account_party_two();
-			$this->message_inbox->other_party_name = ($selected_message_inbox->party_one_id != $this->session->id) ? $selected_message_inbox->account_party_one->name : $selected_message_inbox->account_party_two->name;
+			$is_party_one = ($selected_message_inbox->party_one_id == $this->session->id);
+			$this->message_inbox->other_party_name = !$is_party_one ? $selected_message_inbox->account_party_one->name : $selected_message_inbox->account_party_two->name;
+			
+			$other_account = !$is_party_one ? $selected_message_inbox->account_party_one : $selected_message_inbox->account_party_two;
+			if ($other_account->get_type($other_account->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+				$this->message_inbox->other_party_name = $tenant->tenant_name;
+			}
 		}
 		
 		foreach ($message_texts as $message_text)
@@ -62,6 +76,11 @@ class Message_detail_view_model extends CI_Model {
 			$temp->sender->id		= $message_text->account_sender->id;
 			$temp->sender->name		= $message_text->account_sender->name;
 			$temp->sender->is_you	= ($message_text->account_sender->id == $this->session->id);
+			
+			if ($message_text->account_sender->get_type($message_text->account_sender->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($message_text->account_sender->id);
+				$temp->sender->name = $tenant->tenant_name;
+			}
 			
 			$this->message_texts[] = $temp;
 		}
@@ -69,12 +88,20 @@ class Message_detail_view_model extends CI_Model {
 	
 	public function get_detail($selected_message_inbox, $message_texts)
 	{
+		$this->load->model('tenant_model');
 		$this->message_inbox->id = $selected_message_inbox->id;
 		if ($selected_message_inbox->id != 0)
 		{
 			$selected_message_inbox->init_account_party_one();
 			$selected_message_inbox->init_account_party_two();
-			$this->message_inbox->other_party_name = ($selected_message_inbox->party_one_id != $this->session->id) ? $selected_message_inbox->account_party_one->name : $selected_message_inbox->account_party_two->name;
+			$is_party_one = ($selected_message_inbox->party_one_id == $this->session->id);
+			$this->message_inbox->other_party_name = !$is_party_one ? $selected_message_inbox->account_party_one->name : $selected_message_inbox->account_party_two->name;
+			
+			$other_account = !$is_party_one ? $selected_message_inbox->account_party_one : $selected_message_inbox->account_party_two;
+			if ($other_account->get_type($other_account->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($other_account->id);
+				$this->message_inbox->other_party_name = $tenant->tenant_name;
+			}
 		}
 		
 		foreach ($message_texts as $message_text)
@@ -90,6 +117,11 @@ class Message_detail_view_model extends CI_Model {
 			$temp->sender->id		= $message_text->account_sender->id;
 			$temp->sender->name		= $message_text->account_sender->name;
 			$temp->sender->is_you	= ($message_text->account_sender->id == $this->session->id);
+			
+			if ($message_text->account_sender->get_type($message_text->account_sender->id) == "TENANT") {
+				$tenant = $this->tenant_model->get_by_account_id($message_text->account_sender->id);
+				$temp->sender->name = $tenant->tenant_name;
+			}
 			
 			$this->message_texts[] = $temp;
 		}

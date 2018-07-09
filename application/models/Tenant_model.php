@@ -7,6 +7,7 @@ class Tenant_model extends CI_Model {
 	
 	public $id;
 	public $tenant_id;
+	public $tenant_name;
 	public $account_id;
 	public $unit_number;
 	public $floor;

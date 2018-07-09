@@ -28,6 +28,7 @@ class Post_Item_List_View_Model extends CI_Model{
 			$this->posted_items[$i]->price				= $this->text_renderer->to_rupiah($item->price);
 			
 			$this->posted_items[$i]->rating = $item->calculate_rating();
+			$this->posted_items[$i]->favorite = $item->calculate_favorite();
 			
 			$i++;
 		}

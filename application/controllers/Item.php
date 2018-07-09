@@ -25,6 +25,10 @@ class Item extends CI_Controller {
 		}
 		else //if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
+			if ($item->item_type == "BID")
+			{
+				redirect('');
+			}
 			$other_items = $this->item_model->get_related_items($item);
 		
 			$this->load->model('posted_item_variance_model');

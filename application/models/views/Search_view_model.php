@@ -47,6 +47,11 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($promoted_item->price);
 			$temp->image_one_name = site_url(($promoted_item->image_one_name !== "") ? $promoted_item->image_one_name : DEFAULT_ITEM_PICTURE[$promoted_item->item_type]);
 			$temp->rating = $promoted_item->calculate_rating();
+			$temp->favorite = $promoted_item->calculate_favorite();
+			
+			$promoted_item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $promoted_item->tenant->tenant_name;
 			
 			$promoted_item->get_hot_item();
 			$temp->is_hot_item = ($promoted_item->hot_item != null);
@@ -67,6 +72,11 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
 			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
+			$temp->favorite = $item->calculate_favorite();
+			
+			$item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $item->tenant->tenant_name;
 			
 			$item->get_hot_item();
 			$temp->is_hot_item = ($item->hot_item != null);
@@ -107,6 +117,11 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($promoted_item->price);
 			$temp->image_one_name = site_url(($promoted_item->image_one_name !== "") ? $promoted_item->image_one_name : DEFAULT_ITEM_PICTURE[$promoted_item->item_type]);
 			$temp->rating = $promoted_item->calculate_rating();
+			$temp->favorite = $promoted_item->calculate_favorite();
+			
+			$promoted_item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $promoted_item->tenant->tenant_name;
 			
 			$promoted_item->get_hot_item();
 			$temp->is_hot_item = ($promoted_item->hot_item != null);
@@ -127,6 +142,11 @@ class Search_view_model extends CI_Model {
 			$temp->price = $this->text_renderer->to_rupiah($item->price);
 			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
+			$temp->favorite = $item->calculate_favorite();
+			
+			$item->init_tenant();
+			$temp->tenant = new class{};
+			$temp->tenant->tenant_name	= $item->tenant->tenant_name;
 			
 			$item->get_hot_item();
 			$temp->is_hot_item = ($item->hot_item != null);

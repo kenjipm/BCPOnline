@@ -31,7 +31,7 @@ function ro_calculate_fee_from_store() {
 					$("#fee_amount").html("");
 					data.forEach(function(courier, idx){
 						courier.costs.forEach(function(service, jdx){
-							var option_html = "<option value='" + service.cost[0].value + "'>" + courier.name + " - " + service.service + " (" + service.description + ", " + service.cost[0].etd + " Hari Kerja)</option>";
+							var option_html = "<option value='" + service.cost[0].value + "' delivery_type='" + service.service + "'>" + courier.name + " - " + service.service + " (" + service.description + ", " + service.cost[0].etd + " Hari Kerja)</option>";
 							$("#fee_amount").append(option_html);
 							update_fee();
 						});
@@ -43,7 +43,7 @@ function ro_calculate_fee_from_store() {
 	}
 	else {
 		$("#fee_amount").html("");
-		var option_html = "<option value='0'>Kurir Cyberku</option>";
+		var option_html = "<option value='0' delivery_type=''>Kurir Cyberku</option>";
 		$("#fee_amount").append(option_html);
 		update_fee();
 	}
@@ -52,6 +52,8 @@ function ro_calculate_fee_from_store() {
 function update_fee() {
 	var fee_amount_str = price_format($("#fee_amount option:selected").val());
 	$("#fee_amount_str").html(fee_amount_str);
+	
+	$("#delivery_type").val($("#fee_amount option:selected").attr("delivery_type"));
 }
 
 function price_format(to_rupiah)

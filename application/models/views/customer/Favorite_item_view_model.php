@@ -28,6 +28,11 @@ class Favorite_item_view_model extends CI_Model {
 			$favorite_item_temp->posted_item->posted_item_name	= $favorite_item->posted_item->posted_item_name;
 			$favorite_item_temp->posted_item->price				= $this->text_renderer->to_rupiah($favorite_item->posted_item->price);
 			$favorite_item_temp->rating				= $favorite_item->posted_item->calculate_rating();
+			$favorite_item_temp->favorite			= $favorite_item->posted_item->calculate_favorite();
+			
+			$favorite_item->posted_item->init_tenant();
+			$favorite_item_temp->tenant = new class{};
+			$favorite_item_temp->tenant->tenant_name	= $favorite_item->posted_item->tenant->tenant_name;
 			
 			$favorite_item->posted_item->get_hot_item();
 			$favorite_item_temp->is_hot_item = ($favorite_item->posted_item->hot_item != null);
