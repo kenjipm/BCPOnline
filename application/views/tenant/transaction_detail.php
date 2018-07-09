@@ -199,14 +199,8 @@
 						<label>Rating</label>
 					</div>
 					<div class="col-sm-10">
-					<?php
-						for($i=0; $i<$model->transaction_detail->rating; $i++)
-						{
-						?>
-							<div class="col-xs-1">*</div>
-						<?php	
-						}
-					?>
+						<span class="cb-star cb-star-<?=$model->transaction_detail->rating?>"></span>
+				
 					</div>
 				</div>
 				<div class="form-group">
