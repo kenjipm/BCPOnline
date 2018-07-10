@@ -59,6 +59,14 @@ class Login extends CI_Controller {
 		$password = $this->input->post('password');
 		$return_url = $this->input->post('return_url');
 		
+		if (isset($this->session->blocked_until)) // kalau gagal login 5x tea
+		{
+			if (time() <= $this->session->blocked_until)
+			{
+				redirect('login?err=5');
+			}
+		}
+		
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_from_login($email, $password);
 		$id = "";
@@ -69,7 +77,7 @@ class Login extends CI_Controller {
 		
 		if ($user !== null)
 		{
-		
+			$this->session->fail_count = 0;
 			if ($user->is_blocked())
 			{
 				redirect('login?err=6');
@@ -93,6 +101,7 @@ class Login extends CI_Controller {
 				'cart' => array()
 			);
 			
+			// $this->session->sess_destroy();
 			$this->session->set_userdata($userdata);
 			
 			if ($return_url != "") redirect($return_url);
@@ -100,7 +109,16 @@ class Login extends CI_Controller {
 			$this->default_redirect($type);
 		}
 		
-		$this->session->sess_destroy();
+		if (isset($this->session->id)) $this->session->sess_destroy(); // kalau gagal login, session id dll dihapus
+		
+		if (isset($this->session->fail_count)) $this->session->fail_count++;
+		else $this->session->fail_count = 1;
+		
+		if ($this->session->fail_count >= 5)
+		{
+			$this->session->blocked_until = time() + (5 * 60); // 5 menit dari sekarang
+		}
+		
 		redirect('login?err=1');
 	}
 	
@@ -162,6 +180,10 @@ class Login extends CI_Controller {
 		else if ($error_code == 2)
 		{
 			return "Email / No HP tidak cocok";
+		}
+		else if ($error_code == 5)
+		{
+			return "Anda telah gagal melakukan login beberapa kali, Anda dapat mencoba login kembali setelah 5 menit.";
 		}
 		else if ($error_code == 6)
 		{

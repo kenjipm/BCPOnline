@@ -34,6 +34,8 @@ class Dashboard extends CI_Controller {
 			$this->load->model('hot_item_model');
 			$hot_items = $this->hot_item_model->get_all(6);
 			
+			$flash_items = $this->hot_item_model->get_all_flash();
+			
 			$this->load->model('following_tenant_model');
 			$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
 			
@@ -58,12 +60,16 @@ class Dashboard extends CI_Controller {
 				$last_bidding = new class{};
 				$last_bidding->bid_time = null;
 			}
+			if (count($flash_items) > 0)
+			{
+				$data_header['js_list'][] = 'flash_sale';
+			}
 			
 			$data_header['no_loading_overlay'] = true;
 			$this->load->view('header', $data_header);
 			
 			$this->load->model('views/dashboard_view_model');
-			$this->dashboard_view_model->get($categories, $hot_items, $tenant_items, $bidding_item, $last_bidding);
+			$this->dashboard_view_model->get($categories, $hot_items, $flash_items, $tenant_items, $bidding_item, $last_bidding);
 			$data['model'] = $this->dashboard_view_model;
 			$this->load->view('dashboard_main', $data);
 		}

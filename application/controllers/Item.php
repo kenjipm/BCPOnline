@@ -491,5 +491,30 @@ class Item extends CI_Controller {
 		echo json_encode($data);
 	}
 	
-	
+	public function ajax_get_flash_time_left()
+	{
+		$result = array();
+		$posted_item_id = $this->input->post('bidding_item_id');
+			
+		$this->load->model('hot_item_model');
+		$flash_item = $this->hot_item_model->get_first_flash($posted_item_id);
+		
+		if ($flash_item != null)
+		{
+			$result["success"] = "1";
+			
+			$flash_time_left = $flash_item->get_flash_time_left();
+			$result["flash_time_left"] = $flash_time_left;
+		}
+		else 
+		{
+			$result["success"] = "0";
+		}
+		
+		header("Cache-Control: no-store, no-cache, must-revalidate, max-age=0");
+		header("Cache-Control: post-check=0, pre-check=0", false);
+		header("Pragma: no-cache");
+		header("Content-Type: application/json; charset=utf-8");
+		echo json_encode($result);
+	}
 }

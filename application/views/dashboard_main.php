@@ -173,6 +173,63 @@
 			</div>
 			<?php
 		}
+		else if (count($model->flash_items) > 0)
+		{
+			?>
+			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
+				<div class="cb-panel">
+					<div class="cb-panel-heading cb-row">
+						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>
+						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">FLASH SALE</div>
+						<div id="flash_time_left" class="cb-txt-primary-3 cb-font-title cb-font-size-xl cb-pl-5"></div>
+						<!--<a class="pull-right">Lihat Selebihnya</a>-->
+					</div>
+					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
+						<div class="item-gallery-container">
+							<div class="item-gallery">
+								<?php
+									foreach($model->flash_items as $flash_item)
+									{
+										?>
+										<a href="<?=site_url('item/'.$flash_item->id)?>">
+											<div class="item_thumbnail">
+												<div class="item_heart">
+													<div class="item_heart_icon cb-heart-red cb-heart">
+														<div class="item_heart_count"><?=$flash_item->favorite->favorite_count?></div>
+													</div>
+												</div>
+												<div class="item_photo">
+													<img src="<?=$flash_item->image_one_name?>" alt="<?=$flash_item->posted_item_name?>"/>
+												</div>
+												<div class="item_tenant_name">
+													<?=$flash_item->tenant->tenant_name?>
+												</div>
+												<div class="item_name">
+													<?=$flash_item->posted_item_name?>
+												</div>
+												<div class="item_separator"></div>
+												<div class="item_initial_price">
+													<?=$flash_item->initial_price?>
+												</div>
+												<div class="item_current_price">
+													<?=$flash_item->promo_price?>
+												</div>
+												<div class="item_rating cb-row cb-vertical-center cb-align-center">
+													<span class="cb-star cb-star-<?=$flash_item->rating->rating_average_round?>"></span>
+													<span class="cb-ml-2">(<?= $flash_item->rating->rating_count ?>)</span>
+												</div>
+											</div>
+										</a>
+										<?php
+									}
+								?>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<?php
+		}
 	?>
 </div>
 

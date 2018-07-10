@@ -46,6 +46,7 @@ class Hot_item_model extends CI_Model {
 		$this->date_expired_req		= $db_item->date_expired_req;
 		$this->posted_item_id		= $db_item->posted_item_id;
 		$this->is_done				= $db_item->is_done;
+		$this->payment_expiration	= $db_item->payment_expiration ?? "";
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$this->posted_item->price				= $db_item->price ?? "";
@@ -66,6 +67,7 @@ class Hot_item_model extends CI_Model {
 		$db_item->date_expired_req	= $this->date_expired_req;
 		$db_item->posted_item_id	= $this->posted_item_id;
 		$db_item->is_done			= $this->is_done;
+		$db_item->payment_expiration= $this->payment_expiration ?? "";
 		
 		return $db_item;
 	}
@@ -82,6 +84,7 @@ class Hot_item_model extends CI_Model {
 		$stub->date_expired_req		= $db_item->date_expired_req;
 		$stub->posted_item_id		= $db_item->posted_item_id;
 		$stub->is_done				= $db_item->is_done;
+		$stub->payment_expiration	= $db_item->payment_expiration ?? "";
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$stub->posted_item->price				= $db_item->price ?? "";
@@ -107,6 +110,7 @@ class Hot_item_model extends CI_Model {
 		$this->db->where('tenant_bill.payment_date != 0');
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'ORDER');
 		$this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
@@ -119,6 +123,53 @@ class Hot_item_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_flash($limit=10, $offset=0)
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'FLASH');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		$query = $this->db
+					  ->order_by($this->table_hot_item.'.id', 'RANDOM')
+					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
+		
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_first_flash()
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'FLASH');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		$query = $this->db
+					  ->order_by('tenant_bill.payment_expiration')
+					  ->get('tenant_bill', 1); // kalau ga ada limit, jgn taro offset nya
+		
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
+	public function get_flash_time_left()
+	{
+		return strtotime($this->payment_expiration) - time();
 	}
 	
 	public function get_all_registered()

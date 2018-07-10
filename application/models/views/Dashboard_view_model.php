@@ -7,6 +7,7 @@ class Dashboard_view_model extends CI_Model {
 	public $categories;
 	public $tenant_items;
 	public $hot_items;
+	public $flash_items;
 	public $bidding_item;
 	
 	// constructor
@@ -16,10 +17,11 @@ class Dashboard_view_model extends CI_Model {
 		$this->categories = array();
 		$this->tenant_items = array();
 		$this->hot_items = array();
+		$this->flash_items = array();
 		$this->bidding_item = null;
 	}
 	
-	public function get($categories, $hot_items, $tenant_items, $bidding_item, $last_bidding)
+	public function get($categories, $hot_items, $flash_items, $tenant_items, $bidding_item, $last_bidding)
 	{
 		$this->load->library('text_renderer');
 		
@@ -54,6 +56,24 @@ class Dashboard_view_model extends CI_Model {
 			$temp->tenant->tenant_name	= $hot_item->posted_item->tenant->tenant_name;
 			
 			$this->hot_items[] = $temp;
+		}
+		
+		
+		foreach ($flash_items as $flash_item)
+		{
+			$temp = new class{};
+			$temp->id				= $flash_item->posted_item_id;
+			$temp->posted_item_name	= $flash_item->posted_item->posted_item_name;
+			$temp->initial_price	= $this->text_renderer->to_rupiah($flash_item->posted_item->price);
+			$temp->promo_price		= $this->text_renderer->to_rupiah($flash_item->promo_price);
+			$temp->image_one_name	= $flash_item->posted_item->image_one_name;
+			$temp->payment_expiration	= $flash_item->payment_expiration;
+			
+			$flash_item->init_posted_item();
+			$temp->rating			= $flash_item->posted_item->calculate_rating();
+			$temp->favorite			= $flash_item->posted_item->calculate_favorite();
+			
+			$this->flash_items[] = $temp;
 		}
 		
 		foreach ($tenant_items as $tenant_item)
