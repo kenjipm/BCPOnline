@@ -22,6 +22,8 @@ class Order_List_View_Model extends CI_Model{
 			$this->orders[$i]->date_created	= date("d-M-Y H:i:s", strtotime($order->billing->date_created));
 			$this->orders[$i]->date_closed	= date("d-M-Y H:i:s", strtotime($order->billing->date_closed));
 			$this->orders[$i]->sold_price	= $this->text_renderer->to_rupiah($order->sold_price * $order->quantity);
+			$this->orders[$i]->customer_name = $order->billing->customer->account->name;
+			$this->orders[$i]->item_type	= $order->posted_item_variance->posted_item->item_type;
 			
 			$this->orders[$i]->count_unread_order_status	= $order->count_unread_order_status_tenant();
 			

@@ -54,20 +54,11 @@
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
-					<div class="cb-pull-left">Nama Pengirim</div>
+					<div class="cb-pull-left">Nama Customer</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="deliverer_name" value="<?=$model->transaction_detail->deliverer?>" readonly>
-				</div>
-			</div>
-			<div class="cb-col-full cb-row cb-mb-5">
-				<div class="cb-col-fifth cb-label cb-txt-primary-1">
-					<div class="cb-pull-left">Cara Pengiriman</div>
-					<div class="cb-pull-right">:</div>
-				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="collection_method" value="<?=$model->transaction_detail->collection_method?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_name" value="<?=$model->transaction_detail->customer_name?>" readonly>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -122,20 +113,11 @@
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
-					<div class="cb-pull-left">Nama Pengirim</div>
+					<div class="cb-pull-left">Nama Customer</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="deliverer_name" value="<?=$model->transaction_detail->deliverer?>" readonly>
-				</div>
-			</div>
-			<div class="cb-col-full cb-row cb-mb-5">
-				<div class="cb-col-fifth cb-label cb-txt-primary-1">
-					<div class="cb-pull-left">Cara Pengiriman</div>
-					<div class="cb-pull-right">:</div>
-				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="collection_method" value="<?=$model->transaction_detail->collection_method?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_name" value="<?=$model->transaction_detail->customer_name?>" readonly>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">

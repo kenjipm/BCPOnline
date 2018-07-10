@@ -219,10 +219,10 @@ class Order_details_model extends CI_Model {
 		$this->db->select('*, ' . $this->table_order_details.'.id AS id,' . $this->table_order_details.'.deliverer_id AS deliverer_id, ' . 'account.id AS account_id');
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
-		$this->db->join('deliverer', 'deliverer.id=' .$this->table_order_details . '.deliverer_id', 'left');
-		$this->db->join('account', 'account.id=deliverer.account_id', 'left');
 		$this->db->join('feedback', 'feedback.order_detail_id='. $this->table_order_details . '.id', 'left');
 		$this->db->join('billing', 'billing.id='. $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('customer', 'billing.customer_id=customer.id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$query = $this->db->get($this->table_order_details, 1);
 		$item = $query->row();
 		
@@ -288,6 +288,8 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' . $this->table_order_details . '.billing_id', 'left');
+		$this->db->join('customer', 'billing.customer_id=customer.id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->where($where);
 		$this->db->order_by('date_created', 'DESC');
 		$query = $this->db->get($this->table_order_details);
