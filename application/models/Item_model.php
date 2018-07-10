@@ -560,6 +560,7 @@ class Item_model extends CI_Model {
 			$this->date_updated				= date("Y-m-d H:i:s", time());
 			$this->date_expired				= NULL;
 			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->unit_weight				= 1000;
 			$this->category_id				= $this->input->post('category_id');
 			$this->tenant_id				= $cur_tenant->id;
 			$this->brand_id					= $this->input->post('brand_id');

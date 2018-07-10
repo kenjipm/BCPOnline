@@ -279,7 +279,8 @@
 		else if ($model->posted_item->item_type == "REPAIR")
 		{
 			?>
-			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal cb-col-full" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="item_type" value="REPAIR"/>
 			<input type="hidden" name="id" value=<?=$model->posted_item->id?>>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
