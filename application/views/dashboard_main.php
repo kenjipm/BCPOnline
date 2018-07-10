@@ -202,7 +202,6 @@
 													<img src="<?=$flash_item->image_one_name?>" alt="<?=$flash_item->posted_item_name?>"/>
 												</div>
 												<div class="item_tenant_name">
-													<?=$flash_item->tenant->tenant_name?>
 												</div>
 												<div class="item_name">
 													<?=$flash_item->posted_item_name?>

@@ -90,23 +90,30 @@
 					</div>
 				</div>
 			</div>
-			<div class="cb-col-fourth cb-row cb-bg-primary-3 cb-border-round cb-align-center item_tenant_panel">
-				<div class="cb-col-third"></div>
-				<div class="cb-col-third cb-pt-5">
-					<div id="thumbnail-profile_pic" class="thumbnail">
-						<img src="<?=$model->item->tenant->account->profile_pic?>" alt="<?=$model->item->tenant->tenant_name?>" style="width:100%">
+			<?php
+				if (!$model->item->tenant->account->is_tenant_admin)
+				{
+					?>
+					<div class="cb-col-fourth cb-row cb-bg-primary-3 cb-border-round cb-align-center item_tenant_panel">
+						<div class="cb-col-third"></div>
+						<div class="cb-col-third cb-pt-5">
+							<div id="thumbnail-profile_pic" class="thumbnail">
+								<img src="<?=$model->item->tenant->account->profile_pic?>" alt="<?=$model->item->tenant->tenant_name?>" style="width:100%">
+							</div>
+						</div>
+						<div class="cb-col-third"></div>
+						<div class="cb-col-full cb-p-5">
+							<a class="cb-font-title cb-txt-primary-1 cb-font-size-xl" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
+								<?=$model->item->tenant->tenant_name?>
+							</a>
+							<div class="cb-col-full cb-row cb-align-center">
+								<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-button cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
+							</div>
+						</div>
 					</div>
-				</div>
-				<div class="cb-col-third"></div>
-				<div class="cb-col-full cb-p-5">
-					<a class="cb-font-title cb-txt-primary-1 cb-font-size-xl" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
-						<?=$model->item->tenant->tenant_name?>
-					</a>
-				</h4>
-				<div class="cb-col-full cb-row cb-align-center">
-					<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-button cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
-				</div>
-			</div>
+					<?php
+				}
+			?>
 		</div>
 	</div>
 </div>

@@ -56,6 +56,7 @@ class Item_main_view_model extends CI_Model {
 		
 		$item->tenant->init_account();
 		$this->item->tenant->account = new class{};
+		$this->item->tenant->account->is_tenant_admin = in_array($item->tenant->account->email, TENANT_ADMIN_EMAILS);
 		$this->item->tenant->account->profile_pic	= site_url(($item->tenant->account->profile_pic != "") ? $item->tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
 		
 		$this->item->total_quantity_available = 0;

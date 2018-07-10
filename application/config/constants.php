@@ -341,6 +341,11 @@ defined('ADMIN_EMAILS') OR define('ADMIN_EMAILS', array(
 	)
 );
 
+defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
+		0 => "tenant.admin@cyberia.com",
+	)
+);
+
 /*
 |--------------------------------------------------------------------------
 | Application Production
