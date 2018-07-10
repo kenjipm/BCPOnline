@@ -254,7 +254,7 @@ class Order extends CI_Controller {
 		$this->load->model('Order_details_model');
 		$orders = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('otp'), $this->session->child_id);
 		$repairs = $this->Order_details_model->get_all_from_otp_tenant_to_deliverer($this->input->post('otp'), $this->session->child_id);
-		$items = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('bypass_otp'), $this->session->child_id);
+		$items = $this->Order_details_model->get_all_from_otp_customer_to_deliverer($this->input->post('bypass_otp'), $this->session->child_id, $this->input->post('delivery_receipt_no'));
 		
 		$this->load->model('views/deliverer/order_detail_view_model');
 		if ($orders) $this->order_detail_view_model->get_order($orders);

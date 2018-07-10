@@ -24,6 +24,7 @@ class Billing_status_view_model extends CI_Model {
 		
 		$this->billing->id				= $billing->id;
 		$this->billing->delivery_method	= $cur_delivery_config['description'];
+		$this->billing->delivery_type	= $billing->delivery_type;
 		$this->billing->date_created	= $billing->date_created;
 		$this->billing->date_closed		= $billing->date_closed;
 		$this->billing->total_payable	= $billing->total_payable;
@@ -70,8 +71,9 @@ class Billing_status_view_model extends CI_Model {
 					$temp_order->posted_item_variance->posted_item->posted_item_name = $order->posted_item_variance->posted_item->posted_item_name . " (" . $order->posted_item_variance->var_description . ")";
 					$temp_order->posted_item_variance->posted_item->price = $this->text_renderer->to_rupiah($order->sold_price);
 					$temp_order->posted_item_variance->posted_item->tenant_id = $order->posted_item_variance->posted_item->tenant_id;
+					// $temp_order->delivery_receipt_no = $order->delivery_receipt_no;
 					$temp_order->order_status = ORDER_STATUS['description'][$order->order_status];
-					$temp_order->is_received = ($order->order_status == ORDER_STATUS['name']['RECEIVED']);
+					$temp_order->is_received = (($order->order_status == ORDER_STATUS['name']['RECEIVED']) || ($order->order_status == ORDER_STATUS['name']['RECEIVED_BY_COURIER']));
 					$temp_order->is_done = ($order->order_status == ORDER_STATUS['name']['DONE']);
 				}
 			}
@@ -81,6 +83,7 @@ class Billing_status_view_model extends CI_Model {
 			{
 				$temp_order_status_history = new class{};
 				$temp_order_status_history->status		= ORDER_STATUS['description'][$order_status_history->status];
+				$temp_order_status_history->status		.= ($order_status_history->status == "RECEIVED_BY_COURIER") ? " (Resi: ".$order->delivery_receipt_no.")" : "";
 				$temp_order_status_history->date_added	= date("d M y H:i:s", strtotime($order_status_history->date_added));
 				
 				$temp_order->order_status_histories[] = $temp_order_status_history;

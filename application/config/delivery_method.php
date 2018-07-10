@@ -32,7 +32,7 @@ $config['CYBERKU'] = array(
 	'status_api_url'	=> '',
 );
 
-$config['JNE'] = array(
+$config['jne'] = array(
 	'name'				=> 'JNE',
 	'description'		=> 'JNE',
 	'long_description'	=> '',
@@ -40,7 +40,7 @@ $config['JNE'] = array(
 	'status_api_url'	=> '',
 );
 
-$config['TIKI'] = array(
+$config['tiki'] = array(
 	'name'				=> 'TIKI',
 	'description'		=> 'TIKI',
 	'long_description'	=> '',
@@ -48,7 +48,7 @@ $config['TIKI'] = array(
 	'status_api_url'	=> '',
 );
 
-$config['POS'] = array(
+$config['pos'] = array(
 	'name'				=> 'POS',
 	'description'		=> 'POS INDONESIA',
 	'long_description'	=> '',

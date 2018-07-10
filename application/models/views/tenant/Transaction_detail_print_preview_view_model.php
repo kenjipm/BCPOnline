@@ -12,7 +12,11 @@ class Transaction_Detail_Print_Preview_View_Model extends CI_Model{
 	
 	public function get($delivery_information)
 	{
-		$this->delivery_information->delivery_method 	= $delivery_information->delivery_method  ;
+		$this->load->config('delivery_method');
+		$cur_delivery_config = $this->config->item($delivery_information->delivery_method);
+		
+		$this->delivery_information->delivery_method 	= $cur_delivery_config['description']  	  ;
+		$this->delivery_information->delivery_type	 	= $delivery_information->delivery_type    ;
 		$this->delivery_information->bill_id 			= $delivery_information->bill_id          ;
 		$this->delivery_information->tenant_name 		= $delivery_information->tenant_name      ;
 		$this->delivery_information->customer_name 		= $delivery_information->customer_name    ;

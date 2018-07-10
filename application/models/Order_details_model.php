@@ -12,6 +12,7 @@ class Order_details_model extends CI_Model {
 	public $offered_price;
 	public $sold_price;
 	public $order_status;
+	public $delivery_receipt_no;
 	public $otp_deliverer_to_tenant;
 	public $collection_method;
 	public $otp_customer_to_deliverer;
@@ -86,6 +87,7 @@ class Order_details_model extends CI_Model {
 		$this->offered_price			= $db_item->offered_price;
 		$this->sold_price				= $db_item->sold_price;
 		$this->order_status				= $db_item->order_status;
+		$this->delivery_receipt_no				= $db_item->delivery_receipt_no;
 		$this->otp_deliverer_to_tenant		= $db_item->otp_deliverer_to_tenant;
 		$this->collection_method		= $db_item->collection_method;
 		$this->otp_customer_to_deliverer	= $db_item->otp_customer_to_deliverer;
@@ -111,6 +113,7 @@ class Order_details_model extends CI_Model {
 		$db_item->offered_price				= $this->offered_price;
 		$db_item->sold_price				= $this->sold_price;
 		$db_item->order_status				= $this->order_status;
+		$db_item->delivery_receipt_no				= $this->delivery_receipt_no;
 		$db_item->otp_deliverer_to_tenant		= $this->otp_deliverer_to_tenant;
 		$db_item->collection_method			= $this->collection_method;
 		$db_item->otp_customer_to_deliverer		= $this->otp_customer_to_deliverer;
@@ -136,6 +139,7 @@ class Order_details_model extends CI_Model {
 		$stub->offered_price			= $db_item->offered_price;
 		$stub->sold_price				= $db_item->sold_price;
 		$stub->order_status				= $db_item->order_status;
+		$stub->delivery_receipt_no				= $db_item->delivery_receipt_no;
 		$stub->otp_deliverer_to_tenant	= $db_item->otp_deliverer_to_tenant;
 		$stub->collection_method		= $db_item->collection_method;
 		$stub->otp_customer_to_deliverer = $db_item->otp_customer_to_deliverer;
@@ -358,7 +362,7 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_otp_customer_to_deliverer($otp, $deliverer_id)
+	public function get_all_from_otp_customer_to_deliverer($otp, $deliverer_id, $delivery_receipt_no="")
 	{
 		$this->load->model('Deliverer_model');
 		
@@ -376,9 +380,19 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
-		foreach($items as $item)
+		if ($delivery_receipt_no == "") // kalau kirim otp / bypass otp
 		{
-			$this->update_order_status($item->id, ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'], ORDER_STATUS['name']['RECEIVED']);
+			foreach($items as $item)
+			{
+				$this->update_order_status($item->id, ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'], ORDER_STATUS['name']['RECEIVED']);
+			}
+		}
+		else // if ($delivery_receipt_no != "") // kalau kirim ke kurir
+		{
+			foreach($items as $item)
+			{
+				$this->update_order_status($item->id, ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER'], ORDER_STATUS['name']['RECEIVED_BY_COURIER'], $delivery_receipt_no);
+			}
 		}
 		
 		return ($items !== null) ? $this->map_list($items) : array();
@@ -869,24 +883,43 @@ class Order_details_model extends CI_Model {
 		$this->db->trans_complete();
 	}
 	
-	public function update_order_status($order_id, $cur_status, $status, $customer_id=0)
+	public function update_order_status($order_id, $cur_status, $status, $delivery_receipt_no="")
 	{
-		if ($customer_id != 0)
-		{
-			// $this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
-			// $this->db->where('billing.customer_id', $customer_id);
-			// $this->db->where('order_details.billing_id = billing.id');
-		}
+		// if ($customer_id != 0)
+		// {
+			// // $this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
+			// // $this->db->where('billing.customer_id', $customer_id);
+			// // $this->db->where('order_details.billing_id = billing.id');
+		// }
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
 		
 		$this->db->where('order_details.id', $order_id);
 		$this->db->where('order_details.order_status', $cur_status);
 		
 		$this->db->set('order_details.order_status', $status);
+		if ($delivery_receipt_no != "") $this->db->set('order_details.delivery_receipt_no', $delivery_receipt_no);
 		$result = $this->db->update('order_details');
+		$affected_rows = $this->db->affected_rows();
 		
-		$this->load->model('Order_status_history_model');
-		$this->Order_status_history_model->insert($order_id, $status);
+		if ($affected_rows > 0)
+		{
+			$this->load->model('Order_status_history_model');
+			$this->Order_status_history_model->insert($order_id, $status);
+		}
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+		
+		return $affected_rows;
+	}
+	
+	public function update_delivery_receipt_no($order_id, $delivery_receipt_no)
+	{
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$this->db->where('order_details.id', $order_id);
+		
+		$this->db->set('order_details.delivery_receipt_no', $delivery_receipt_no);
+		$result = $this->db->update('order_details');
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 		
@@ -1042,6 +1075,7 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT 
 				billing.delivery_method,
+				billing.delivery_type,
 				billing.bill_id,
 				tenant.tenant_name,
 				account.name AS customer_name,
