@@ -551,7 +551,6 @@ class Item_model extends CI_Model {
 			$this->tenant_id				= $cur_tenant->id;
 			$this->brand_id					= $this->input->post('brand_id');
 			
-			$this->upload_image($this->id);
 		} 
 		else if ($this->item_type == "REPAIR")
 		{
@@ -572,6 +571,8 @@ class Item_model extends CI_Model {
 		
 		$this->db->where('id', $db_item->id);
 		$this->db->update($this->table_item, $db_item);
+		
+		$this->upload_image($this->id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}

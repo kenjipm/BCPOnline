@@ -198,11 +198,6 @@
 					}
 				?>
 			</div>
-			<div class="cb-row cb-mb-5 cb-align-right">
-				<div class="cb-col-fifth cb-row">
-					<button type="submit" class="cb-button-form cb-col-full">KIRIM</button>
-				</div>
-			</div>
 			
 			<div class="cb-col-full cb-row">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
@@ -281,16 +276,18 @@
 			</form>
 			<?php
 		}
-		else if ($model->transaction_detail->item_type == "REPAIR")
+		else if ($model->posted_item->item_type == "REPAIR")
 		{
 			?>
+			<form action="<?=site_url('item/post_item_detail/' . $model->posted_item->id)?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" value=<?=$model->posted_item->id?>>
 			<div class="cb-col-full cb-row cb-mb-5">
 				<div class="cb-col-fifth cb-label cb-txt-primary-1">
 					<div class="cb-pull-left">Nama</div>
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->posted_item_name?>" readonly>
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="posted_item_name" name="item_name" value="SERVIS" readonly/>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -299,7 +296,21 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->posted_item_description?>" readonly>
+					<textarea class="cb-row cb-input-text cb-col-full" name="posted_item_description" rows="6" style="resize:none"><?=$model->posted_item->posted_item_description?></textarea>
+				</div>
+			</div>
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+					<div class="cb-pull-left">Gambar</div>
+					<div class="cb-pull-right">:</div>
+				</div>
+				<div class="cb-pl-3">
+					<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
+						<div id="thumbnail-image_one_name">
+							<img src="<?=$model->posted_item->image_one_name_view?>" alt="<?=$model->posted_item->posted_item_name?>">
+						</div>
+					</label>
+					<input type="file" id="image_one_name" name="image_one_name" value="<?=$model->posted_item->image_one_name?>" style="display:none" class="input_file_upload" >
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -307,10 +318,47 @@
 					<div class="cb-pull-left">Kategori</div>
 					<div class="cb-pull-right">:</div>
 				</div>
-				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->posted_item->category->category_name?>" readonly>
+				<div class="cb-row cb-col-fifth-2 cb-pl-3">
+					<select class="cb-input-select cb-col-full" name="category_id">
+					<option value="<?=$model->posted_item->category_id?>"><?=$model->posted_item->category->category_name?></option>
+					<?php
+					foreach ($model->item_category as $category)
+					{
+						?>
+						<option value="<?=$category->id?>"><?=$category->category_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
 				</div>
 			</div>
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-col-fifth cb-label cb-txt-primary-1">
+					<div class="cb-pull-left">Brand</div>
+					<div class="cb-pull-right">:</div>
+				</div>
+				<div class="cb-row cb-col-fifth-2 cb-pl-3">
+					<select class="cb-input-select cb-col-full" id="brand_id" name="brand_id">
+					<option value="<?=$model->posted_item->brand_id?>"><?=$model->posted_item->brand->brand_name?></option>
+					<?php
+					foreach ($model->item_brand as $brand)
+					{
+						?>
+						<option value="<?=$brand->id?>"><?=$brand->brand_name?></option>			
+						<?php
+						$i++;
+					}
+					?>
+					</select>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5 cb-align-right">
+				<div class="cb-col-fifth cb-row">
+					<button type="submit" class="cb-button-form cb-col-full">KIRIM</button>
+				</div>
+			</div>
+			</form>
 			<?php
 		}
 		?>

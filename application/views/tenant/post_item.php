@@ -286,6 +286,14 @@
 		<form action="<?=site_url('item/post_item')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="item_type" value="REPAIR"/>
 			<div class="cb-row cb-mb-5">
+				<div class="cb-col-fifth">
+					<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
+						<div class="cb-icon cb-icon-lg cb-icon-add-item"></div>
+					</label>
+					<input id='image_one_name' name='image_one_name' class="input_file_upload" type='file' style="display:none;"/>
+				</div>
+			</div>
+			<div class="cb-row cb-mb-5">
 				<div class="cb-col-tenth">
 					<div class="cb-row">
 						<div class="cb-col-fifth-4">
