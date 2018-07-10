@@ -35,6 +35,21 @@
 	<div class="cb-row cb-p-5">
 		<div class="cb-col-fifth">
 			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Pengiriman </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->billing->delivery_method?> (<?=$model->billing->delivery_type?>)" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
 				<div class="cb-label"> Rincian Order </div>
 			</div>
 			<div class="cb-pull-right">

@@ -91,6 +91,10 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->rating = $other_item->calculate_rating();
 			$other_item_temp->favorite = $other_item->calculate_favorite();
 			
+			$other_item->init_tenant();
+			$other_item_temp->tenant = new class{};
+			$other_item_temp->tenant->tenant_name	= $other_item->tenant->tenant_name;
+			
 			$other_item->get_hot_item();
 			$other_item_temp->is_hot_item = ($other_item->hot_item != null);
 			if ($other_item->hot_item != null)

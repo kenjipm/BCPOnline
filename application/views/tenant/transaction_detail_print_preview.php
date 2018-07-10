@@ -7,7 +7,7 @@
 			<?=$model->delivery_information->bill_id?>
 		</div>
 		<div class="cb-col-fifth">
-			<?=$model->delivery_information->delivery_method?>
+			<?=$model->delivery_information->delivery_method?> (<?=$model->delivery_information->delivery_type?>)
 		</div>
 	</div>
 

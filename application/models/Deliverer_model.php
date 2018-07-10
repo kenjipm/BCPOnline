@@ -129,8 +129,9 @@ class Deliverer_model extends CI_Model {
 		$this->db->select('*, deliverer.id AS id, deliverer.account_id AS account_id');
 		$this->db->join($this->table_order_details, $this->table_order_details. '.deliverer_id=deliverer.id', 'left');
 		$this->db->where($this->table_order_details. '.deliverer_id is NOT NULL');
-		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['RECEIVED']); // Dummy
-		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['DONE']); // Dummy
+		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['RECEIVED']);
+		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['RECEIVED_BY_COURIER']);
+		$this->db->where($this->table_order_details. '.order_status !=', ORDER_STATUS['name']['DONE']);
 		
 		$query = $this->db->get('deliverer');
 		$items = $query->result();

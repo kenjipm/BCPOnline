@@ -138,6 +138,7 @@
 												<img src="<?=$other_item->image_one_name?>" alt="<?=$other_item->posted_item_name?>"/>
 											</div>
 											<div class="item_tenant_name">
+												<?=$other_item->tenant->tenant_name?>
 											</div>
 											<div class="item_name">
 												<?=$other_item->posted_item_name?>

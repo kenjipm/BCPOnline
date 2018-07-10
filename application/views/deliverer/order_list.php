@@ -75,11 +75,13 @@
 		{
 			?>
 			<div class="cb-row">
-				<div class="cb-col-fifth-3">
+				<div class="cb-col-fifth-2">
 					<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
 				</div>
 				<div class="cb-col-fifth">
 					<div class="cb-label cb-font-title cb-align-center"> Nama Customer </div>
+				</div>
+				<div class="cb-col-fifth">
 				</div>
 				<div class="cb-col-fifth">
 				</div>
@@ -91,7 +93,7 @@
 					?>
 					<input type="hidden" name="bypass_otp" value="<?=$deliver->bypass_otp?>"/>
 					<div class="cb-row cb-p-5 cb-border-top">
-						<div class="cb-col-fifth-3">
+						<div class="cb-col-fifth-2">
 							<div class=" cb-align-center"> <?=$deliver->full_address?> </div>
 						</div>
 						<div class="cb-col-fifth">
@@ -99,6 +101,33 @@
 						</div>
 						<div class="cb-col-fifth">
 							<button type="submit" class="cb-button-form cb-margin-auto">KIRIM TANPA OTP</button>
+						</div>
+						<div class="cb-col-fifth">
+							<button type="button" class="cb-button-form cb-margin-auto" onclick="popup.open('popup_resi-<?=$deliver->id?>')" >MASUKKAN RESI</button>
+						</div>
+					</div>
+					<div id="popup_resi-<?=$deliver->id?>" class="popup popup-md">
+						<div class="panel panel-default">
+							<div class="panel-heading">
+								Masukkan Resi
+							</div>
+							<div class="panel-body">
+								<div class="form-group">
+									
+									<div class="col-sm-3">
+										<label>No Resi</label>
+									</div>
+									<div class="col-sm-9">
+										<input type="text" name="delivery_receipt_no" value="" class="form-control"/>
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-9 col-sm-offset-3">
+										<button type="submit" class="btn btn-default">MASUKKAN</button>
+										<button type="button" class="btn btn-default" onclick="popup.close('popup_resi-<?=$deliver->id?>'); $('[name=delivery_receipt_no]').val('');">BATAL</button>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 					<?php
