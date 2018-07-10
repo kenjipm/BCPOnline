@@ -30,6 +30,7 @@ class Transaction_Detail_View_Model extends CI_Model{
 		$this->transaction_detail->quantity				= $item->quantity;
 		$this->transaction_detail->order_status_desc	= ORDER_STATUS['description'][$item->order_status];
 		$this->transaction_detail->order_status			= ORDER_STATUS['name'][$item->order_status];
+		$this->transaction_detail->customer_name		= $item->billing->customer->account->name;
 		$this->transaction_detail->date_created			= $item->billing->date_created;
 		$this->transaction_detail->account_id			= $cur_order_detail->billing->customer->account->id;
 		$this->transaction_detail->billing_id			= $cur_order_detail->billing->id;

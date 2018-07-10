@@ -94,6 +94,72 @@
 				<span class="text-danger"><?= form_error('bank_account'); ?></span>
 			</div>
 		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama Bank </div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_name" value="<?= set_value('bank_name'); ?>"/>
+				<span class="text-danger"><?= form_error('bank_name'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Cabang Bank</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_branch" value="<?= set_value('bank_branch'); ?>"/>
+				<span class="text-danger"><?= form_error('bank_branch'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-p-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label">Atas Nama</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_account_owner" value="<?= set_value('bank_account_owner'); ?>"/>
+				<span class="text-danger"><?= form_error('bank_account_owner'); ?></span>
+			</div>
+		</div>
 		<div class="cb-row cb-mb-5 cb-p-5">
 			<div class="cb-col-fifth">
 				<div class="cb-row">

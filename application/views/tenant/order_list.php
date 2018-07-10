@@ -20,13 +20,16 @@
 	</div>
 	<div class="cb-col-full cb-row cb-panel-body cb-bg-primary-3 cb-p-5">
 		<div class="cb-col-full cb-row">
-			<div class="cb-col-tenth-3">
+			<div class="cb-col-tenth">
+				<div class="cb-label cb-font-title cb-align-center">  </div>
+			</div>
+			<div class="cb-col-tenth">
 				<div class="cb-label cb-font-title cb-align-center"> Tanggal </div>
 			</div>
-			<!--div class="cb-col-tenth-6">
-				<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
-			</div-->
-			<div class="cb-col-tenth-3">
+			<div class="cb-col-tenth-2">
+				<div class="cb-label cb-font-title cb-align-center"> Customer </div>
+			</div>
+			<div class="cb-col-tenth-2">
 				<div class="cb-label cb-font-title cb-align-center"> Status </div>
 			</div>
 			<div class="cb-col-tenth-2">
@@ -44,13 +47,16 @@
 		{
 			?>
 			<div class="cb-col-full cb-row cb-p-5 cb-border-top cb-table-striped">
-				<div class="cb-col-tenth-3">
+				<div class="cb-col-tenth">
+					<div class=" cb-align-center"> <?=$order->item_type?> </div>
+				</div>
+				<div class="cb-col-tenth">
 					<div class=" cb-align-center"> <?=$order->date_created?> </div>
 				</div>
-				<!--div class="cb-col-tenth-6">
-					<div class="cb-align-center"> <?=$redeem_reward->reward->reward_description?> </div>
-				</div-->
-				<div class="cb-col-tenth-3">
+				<div class="cb-col-tenth-2">
+					<div class="cb-align-center"> <?=$order->customer_name?> </div>
+				</div>
+				<div class="cb-col-tenth-2">
 					<div class="cb-align-center"> <?=$order->order_status?> </div>
 				</div>
 				<div class="cb-col-tenth-2">

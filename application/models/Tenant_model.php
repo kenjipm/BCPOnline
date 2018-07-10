@@ -11,6 +11,10 @@ class Tenant_model extends CI_Model {
 	public $account_id;
 	public $unit_number;
 	public $floor;
+	public $bank_account;
+	public $bank_account_owner;
+	public $bank_name;
+	public $bank_branch;
 	public $selling_category;
 	public $is_open;
 	
@@ -28,6 +32,9 @@ class Tenant_model extends CI_Model {
 		$this->unit_number		= "";
 		$this->floor			= "";
 		$this->bank_account		= "";
+		$this->bank_account_owner	= "";
+		$this->bank_name 		= "";
+		$this->bank_branch		= "";
 		$this->selling_category	= "";
 		$this->is_open			= 1;
 		
@@ -47,6 +54,9 @@ class Tenant_model extends CI_Model {
 		$this->unit_number			= $db_item->unit_number;
 		$this->floor				= $db_item->floor;
 		$this->bank_account			= $db_item->bank_account;
+		$this->bank_account_owner	= $db_item->bank_account_owner;
+		$this->bank_name			= $db_item->bank_name;
+		$this->bank_branch			= $db_item->bank_branch;
 		$this->selling_category		= $db_item->selling_category;
 		$this->is_open				= $db_item->is_open;
 		
@@ -70,6 +80,9 @@ class Tenant_model extends CI_Model {
 		$db_item->unit_number		= $this->unit_number;
 		$db_item->floor				= $this->floor;
 		$db_item->bank_account		= $this->bank_account;
+		$db_item->bank_account_owner = $this->bank_account_owner;
+		$db_item->bank_name			= $this->bank_name;
+		$db_item->bank_branch		= $this->bank_branch;
 		$db_item->selling_category	= $this->selling_category;
 		$db_item->is_open			= $this->is_open;
 		
@@ -88,6 +101,9 @@ class Tenant_model extends CI_Model {
 		$stub->unit_number		= $db_item->unit_number;
 		$stub->floor			= $db_item->floor;
 		$stub->bank_account		= $db_item->bank_account;
+		$stub->bank_account_owner = $db_item->bank_account_owner;
+		$stub->bank_name		= $db_item->bank_name;
+		$stub->bank_branch		= $db_item->bank_branch;
 		$stub->selling_category	= $db_item->selling_category;
 		$stub->is_open			= $db_item->is_open;
 		
@@ -152,6 +168,9 @@ class Tenant_model extends CI_Model {
 		$this->unit_number			= $this->input->post('unit_number');
 		$this->floor				= $this->input->post('floor');
 		$this->bank_account			= $this->input->post('bank_account');
+		$this->bank_account_owner	= $this->input->post('bank_account_owner');
+		$this->bank_name			= $this->input->post('bank_name');
+		$this->bank_branch			= $this->input->post('bank_branch');
 		$this->selling_category		= $this->input->post('selling_category');
 		$this->is_open				= true;
 		
