@@ -5,8 +5,8 @@ $config['delivery_methods'] = array('CYBERKU', 'JNE', 'TIKI', 'POS');
 
 $config['no_tracking_delivery_methods'] = array('CYBERKU');
 
-$config['order_delivery_methods'] = array('JNE', 'TIKI', 'POS');
-$config['repair_delivery_methods'] = array('CYBERKU');
+$config['order_delivery_methods'] = array('jne', 'tiki', 'pos');
+$config['repair_delivery_methods'] = array('cyberku');
 
 $config['store_city_id'] = 55;
 
@@ -24,8 +24,8 @@ $config['ro_city_api_url'] = 'https://api.rajaongkir.com/starter/city?key='.$ro_
 $config['ro_fee_from_store_api_url'] = 'https://api.rajaongkir.com/starter/cost';//?key='.$ro_api_key;//.'&origin='.$store_city_id; 
 $config['ro_fee_to_store_api_url'] = 'https://api.rajaongkir.com/starter/cost?key='.$ro_api_key;//.'&destination='.$store_city_id; 
 
-$config['CYBERKU'] = array(
-	'name'				=> 'CYBERKU',
+$config['cyberku'] = array(
+	'name'				=> 'cyberku',
 	'description'		=> 'Cyberku Delivery',
 	'long_description'	=> '',
 	'ro_api_code'		=> '',
@@ -33,7 +33,7 @@ $config['CYBERKU'] = array(
 );
 
 $config['jne'] = array(
-	'name'				=> 'JNE',
+	'name'				=> 'jne',
 	'description'		=> 'JNE',
 	'long_description'	=> '',
 	'ro_api_code'		=> 'jne',
@@ -41,7 +41,7 @@ $config['jne'] = array(
 );
 
 $config['tiki'] = array(
-	'name'				=> 'TIKI',
+	'name'				=> 'tiki',
 	'description'		=> 'TIKI',
 	'long_description'	=> '',
 	'ro_api_code'		=> 'tiki',
@@ -49,7 +49,7 @@ $config['tiki'] = array(
 );
 
 $config['pos'] = array(
-	'name'				=> 'POS',
+	'name'				=> 'pos',
 	'description'		=> 'POS INDONESIA',
 	'long_description'	=> '',
 	'ro_api_code'		=> 'pos',

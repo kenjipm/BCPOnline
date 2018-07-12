@@ -78,7 +78,7 @@ class Item_main_view_model extends CI_Model {
 				$this->item->total_quantity_available += $item_variance_temp->quantity_available;
 			}
 		}
-		$this->item->is_empty_stock = ($this->item->item_type == "ORDER") && ($this->item->total_quantity_available <= 0);
+		$this->item->is_empty_stock = (($this->item->item_type == "ORDER") || ($this->item->item_type == "FLASH")) && ($this->item->total_quantity_available <= 0);
 		
 		foreach ($other_items as $other_item)
 		{

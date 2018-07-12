@@ -125,7 +125,7 @@ class Hot_item_model extends CI_Model {
 	public function get_all_flash($limit=10, $offset=0)
 	{
 		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
-		$this->db->where('tenant_bill.payment_date != 0');
+		// $this->db->where('tenant_bill.payment_date != 0');
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->where($this->table_item.'.item_type', 'FLASH');

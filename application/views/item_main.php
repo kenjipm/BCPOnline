@@ -57,7 +57,7 @@
 							<?= $model->item->is_hot_item ? $model->item->hot_item->promo_price : $model->item->price ?>
 						</div>
 						<?php
-							if ($model->item->item_type == "ORDER")
+							if (($model->item->item_type == "ORDER") || ($model->item->item_type == "FLASH"))
 							{
 								if ($model->item->total_quantity_available > 0)
 								{
@@ -337,7 +337,7 @@
 			<form class="form-horizontal" method="post" action="<?=site_url('customer/cart_add_do')?>">
 				<div class="form-group">
 					<?php
-						if ($model->item->item_type == "ORDER")
+						if (($model->item->item_type == "ORDER") || ($model->item->item_type == "FLASH"))
 						{
 							if ($model->item->total_quantity_available > 0)
 							{

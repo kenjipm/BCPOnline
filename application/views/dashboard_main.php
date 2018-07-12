@@ -173,7 +173,7 @@
 			</div>
 			<?php
 		}
-		else if (count($model->flash_items) > 0)
+		 if (count($model->flash_items) > 0)
 		{
 			?>
 			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
