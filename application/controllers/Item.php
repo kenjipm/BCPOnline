@@ -494,14 +494,15 @@ class Item extends CI_Controller {
 	public function ajax_get_flash_time_left()
 	{
 		$result = array();
-		$posted_item_id = $this->input->post('bidding_item_id');
+		// $posted_item_id = $this->input->post('bidding_item_id');
 			
 		$this->load->model('hot_item_model');
-		$flash_item = $this->hot_item_model->get_first_flash($posted_item_id);
+		$flash_item = $this->hot_item_model->get_first_flash();
 		
 		if ($flash_item != null)
 		{
 			$result["success"] = "1";
+			// $result["item"] = $flash_item;
 			
 			$flash_time_left = $flash_item->get_flash_time_left();
 			$result["flash_time_left"] = $flash_time_left;

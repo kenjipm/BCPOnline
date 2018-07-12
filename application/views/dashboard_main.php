@@ -173,11 +173,11 @@
 			</div>
 			<?php
 		}
-		 if (count($model->flash_items) > 0)
+		else if (count($model->flash_items) > 0)
 		{
 			?>
-			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
-				<div class="cb-panel">
+			<div class="cb-col-half cb-p-2">
+				<div class="cb-panel cb-bg-primary-2 cb-border-round cb-p-2">
 					<div class="cb-panel-heading cb-row">
 						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">FLASH SALE</div>

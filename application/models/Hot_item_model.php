@@ -145,7 +145,7 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_first_flash()
 	{
-		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, ' . $this->table_hot_item.'.id AS id');
 		$this->db->where('tenant_bill.payment_date != 0');
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
@@ -168,7 +168,7 @@ class Hot_item_model extends CI_Model {
 	{
 		$this->db->select('payment_expiration');
 		$this->db->where('hot_item_id', $this->id);
-		$this->db->get('tenant_bill', 1);
+		$query = $this->db->get('tenant_bill', 1);
 		
 		$item = $query->row();
 		return ($item !== null) ? strtotime($item->payment_expiration) - time() : 0;
