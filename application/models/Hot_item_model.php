@@ -46,7 +46,6 @@ class Hot_item_model extends CI_Model {
 		$this->date_expired_req		= $db_item->date_expired_req;
 		$this->posted_item_id		= $db_item->posted_item_id;
 		$this->is_done				= $db_item->is_done;
-		$this->payment_expiration	= $db_item->payment_expiration ?? "";
 		
 		$this->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$this->posted_item->price				= $db_item->price ?? "";
@@ -67,7 +66,6 @@ class Hot_item_model extends CI_Model {
 		$db_item->date_expired_req	= $this->date_expired_req;
 		$db_item->posted_item_id	= $this->posted_item_id;
 		$db_item->is_done			= $this->is_done;
-		$db_item->payment_expiration= $this->payment_expiration ?? "";
 		
 		return $db_item;
 	}
@@ -84,7 +82,6 @@ class Hot_item_model extends CI_Model {
 		$stub->date_expired_req		= $db_item->date_expired_req;
 		$stub->posted_item_id		= $db_item->posted_item_id;
 		$stub->is_done				= $db_item->is_done;
-		$stub->payment_expiration	= $db_item->payment_expiration ?? "";
 		
 		$stub->posted_item->posted_item_name	= $db_item->posted_item_name ?? "";
 		$stub->posted_item->price				= $db_item->price ?? "";
@@ -169,7 +166,12 @@ class Hot_item_model extends CI_Model {
 	
 	public function get_flash_time_left()
 	{
-		return strtotime($this->payment_expiration) - time();
+		$this->db->select('payment_expiration');
+		$this->db->where('hot_item_id', $this->id);
+		$this->db->get('tenant_bill', 1);
+		
+		$item = $query->row();
+		return ($item !== null) ? strtotime($item->payment_expiration) - time() : 0;
 	}
 	
 	public function get_all_registered()

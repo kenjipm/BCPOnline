@@ -67,7 +67,7 @@ class Dashboard_view_model extends CI_Model {
 			$temp->initial_price	= $this->text_renderer->to_rupiah($flash_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($flash_item->promo_price);
 			$temp->image_one_name	= $flash_item->posted_item->image_one_name;
-			$temp->payment_expiration	= $flash_item->payment_expiration;
+			// $temp->payment_expiration	= $flash_item->payment_expiration;
 			
 			$flash_item->init_posted_item();
 			$temp->rating			= $flash_item->posted_item->calculate_rating();
