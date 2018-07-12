@@ -231,6 +231,34 @@ class Hot_item_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	public function insert_flash_item($posted_item_id)
+	{
+		$this->hot_item_id			= "";
+		$this->promo_price			= $this->input->post('promo_price');
+		$this->promo_description 	= "Flash Sale";
+		$this->date_expired_req 	= $this->input->post('date_expired');
+		$this->posted_item_id		= $posted_item_id;
+		$this->is_done				= 1;
+	
+		
+		// insert data, then generate [reward_id] based on [id]
+		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
+		
+		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		if ($this->db->insert($this->table_hot_item, $db_item))
+		{
+			$this->load->library('Id_generator');
+			
+			$db_item->id		= $this->db->insert_id();
+			$db_item->hot_item_id	= $this->id_generator->generate(TYPE['name']['HOT_ITEM'], $db_item->id);
+			
+			$this->db->where('id', $db_item->id);
+			$this->db->update($this->table_hot_item, $db_item);
+		}
+		
+		$this->db->trans_complete(); // selesai nge lock db transaction
+	}
+	
 	public function insert_from_post($posted_item_id)
 	{	
 		$this->hot_item_id			= "";

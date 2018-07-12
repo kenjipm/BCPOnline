@@ -75,6 +75,142 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function flash_sale_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Item_model');
+		$flash_sales = $this->Item_model->get_all_flash_sale();
+		
+		$this->load->model('views/admin/flash_sale_view_model');
+		$this->flash_sale_view_model->get($flash_sales);
+		
+		$data['model'] = $this->flash_sale_view_model;
+		$data['title'] = "Daftar Barang Flash Sale";
+		$this->load->view('admin/flash_sale_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function create_flash_sale()
+	{
+		if ($this->input->method() == "post") $this->create_flash_sale_do();
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array("admin/flash_sale");
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
+		{
+			$this->load->model('Brand_model');
+			$this->load->model('Category_model');
+			$categories = $this->Category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			$this->load->model('views/admin/create_flash_sale_view_model');
+			$this->create_flash_sale_view_model->get($categories, $brands);
+			$data['model'] = $this->create_flash_sale_view_model;
+			
+			$this->load->view('admin/create_flash_sale', $data);
+		}
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function create_flash_sale_do()
+	{
+		$this->load->library('form_validation');
+
+		if ($this->input->post('item_type') == "FLASH")
+		{
+			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
+			$this->form_validation->set_rules('price', 'Harga awal', 'required|integer');
+			$this->form_validation->set_rules('promo_price', 'Harga promo', 'required|integer');
+			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
+			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
+			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('date_expired', 'Tanggal Berlaku', 'required');
+			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
+			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+		} 
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Item_model');
+			$this->load->model('Posted_item_variance_model');
+			$this->load->model('Tag_model');
+			$this->load->model('Hot_item_model');
+			$this->load->model('Tenant_bill_model');
+			$this->Item_model->insert_from_post();
+			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
+			$this->Tag_model->insert_from_post($this->Item_model->id);
+			$this->Hot_item_model->insert_flash_item($this->Item_model->id);
+			$this->Tenant_bill_model->insert_flash_item($this->Item_model->id, $this->Hot_item_model->id);
+			
+			redirect('admin/flash_sale_list');
+		}
+	}
+	
+	public function flash_sale_detail($id)
+	{		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array('admin/flash_sale_detail', 'simpleUpload', 'photo_upload_simple');
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
+		{
+			$this->load->model('Item_model');
+			$this->load->model('Posted_item_variance_model');
+			$item = $this->Item_model->get_from_id($id);
+			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+			$this->load->model('views/admin/flash_sale_detail_view_model');
+			$this->flash_sale_detail_view_model->get($item, $posted_item_variance, $id);
+			$data['model'] = $this->flash_sale_detail_view_model;
+			
+			$this->load->view('admin/flash_sale_detail', $data);
+		}
+		/* else if ($this->session->userdata('type') == TYPE['name']['TENANT']) // TENANT
+		{
+			if ($this->input->method() == "post") $data = $this->item_edit_do();
+			
+			$this->load->model('Item_model');
+			$item = $this->Item_model->get_from_id($id);
+			
+			$this->load->model('Posted_item_variance_model');
+			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
+			
+			$this->load->model('hot_item_model');
+			$hot_item = $this->hot_item_model->get_from_posted_item_id($item->id);
+			
+			$this->load->model('tenant_bill_model');
+			$seo_item = $this->tenant_bill_model->get_registered_seo($id);
+			
+			$this->load->model('Brand_model');
+			$categories = $this->category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			
+			$this->load->model('views/tenant/post_item_detail_view_model');
+			$this->post_item_detail_view_model->get($item, $posted_item_variance, $hot_item, $seo_item, $categories, $brands);
+			
+			$data['model'] = $this->post_item_detail_view_model;
+			
+			$this->load->view('tenant/post_item_detail', $data);
+		}*/
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function create_tenant_bill($id)
 	{
 		if ($this->input->method() == "post") $this->create_tenant_bill_do();

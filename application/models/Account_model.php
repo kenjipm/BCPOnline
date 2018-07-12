@@ -168,7 +168,7 @@ class Account_model extends CI_Model {
 	
 	public function update_password($old_password)
 	{
-		$where['id'] = 0;
+		$where['id'] = $this->session->id;;
 		$where['password'] = md5($old_password);
 		
 		$this->password	= md5($this->input->post('new_password'));

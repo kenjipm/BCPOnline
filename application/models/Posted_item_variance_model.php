@@ -130,7 +130,7 @@ class Posted_item_variance_model extends CI_Model {
 		$this->posted_item_id		= $posted_item_id;
 		$this->init_posted_item();
 		
-		if ($item_type == "ORDER")
+		if (($item_type == "ORDER") || ($item_type == "FLASH"))
 		{
 			$this->var_type				= $this->input->post('var_type');
 			$files = $_FILES;

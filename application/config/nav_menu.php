@@ -312,6 +312,11 @@ $config['dashboard_menu_admin'] = array(
 			'url'	=> "admin/seo_item_list",
 			'notif' => "admin_promoted_item",
 			),
+		'FLASH_SALE' => array(
+			'text'	=> "FLASH SALE",
+			'url'	=> "admin/flash_sale_list",
+			'notif' => "",
+			),
 		),
 	'MARKETING' => array(
 		'VOUCHER' => array(
