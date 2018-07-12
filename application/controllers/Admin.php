@@ -152,6 +152,7 @@ class Admin extends CI_Controller {
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
 			$this->Tag_model->insert_from_post($this->Item_model->id);
 			$this->Hot_item_model->insert_flash_item($this->Item_model->id);
+			print_r($this->Hot_item_model->id);
 			$this->Tenant_bill_model->insert_flash_item($this->Item_model->id, $this->Hot_item_model->id);
 			
 			redirect('admin/flash_sale_list');

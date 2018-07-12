@@ -249,9 +249,10 @@ class Hot_item_model extends CI_Model {
 		{
 			$this->load->library('Id_generator');
 			
-			$db_item->id		= $this->db->insert_id();
-			$db_item->hot_item_id	= $this->id_generator->generate(TYPE['name']['HOT_ITEM'], $db_item->id);
+			$this->id		= $this->db->insert_id();
+			$this->hot_item_id	= $this->id_generator->generate(TYPE['name']['HOT_ITEM'], $this->id);
 			
+			$db_item = $this->get_db_from_stub($this);
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_hot_item, $db_item);
 		}
