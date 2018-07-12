@@ -3,7 +3,7 @@
 </div>
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<form action="<?=site_url('admin/create_flash_sale')?>" class="form-horizontal" method="post" enctype="multipart/form-data">
-		<input type="hidden" name="item_type" value="FLASH_SALE"/>
+		<input type="hidden" name="item_type" value="FLASH"/>
 		<div class="cb-row cb-mb-5">
 			<div class="cb-col-fifth">
 				<label for="image_one_name" class="thumbnail hoverable cb-m-5 cb-icon-xl cb-align-center cb-vertical-center cb-row label_upload_file">
@@ -98,6 +98,28 @@
 			</div>
 			<div class="cb-row cb-col-fifth-4">
 				<textarea class="cb-input-text cb-col-full" name="posted_item_description" value="<?= set_value('posted_item_description'); ?>" rows="6" style="resize:none"></textarea>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Berlaku Hingga</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-2">
+				<input type="text" class="cb-input-text cb-col-full datetimepicker" name="date_expired" value="<?=set_value('date_expired') ?>"/>
+				<span class="text-danger"><?= form_error('date_expired'); ?></span>
 			</div>
 		</div>
 		<div class="cb-row cb-mb-5">

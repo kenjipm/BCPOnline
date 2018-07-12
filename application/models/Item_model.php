@@ -253,7 +253,11 @@ class Item_model extends CI_Model {
 	
 	public function get_all_flash_sale()
 	{
+		$this->db->where('item_type', 'FLASH');
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
 		
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=6)
@@ -500,6 +504,21 @@ class Item_model extends CI_Model {
 			$this->tenant_id				= $cur_tenant->id;
 			$this->brand_id					= $this->input->post('brand_id');
 		}
+		else if ($this->item_type == "FLASH")
+		{
+			$this->posted_item_id			= "";
+			$this->posted_item_name			= $this->input->post('posted_item_name');
+			$this->price					= $this->input->post('price');
+			$this->date_posted				= date("Y-m-d H:i:s", time());
+			$this->date_updated				= date("Y-m-d H:i:s", time());
+			$this->date_expired				= $this->input->post('date_expired');
+			$this->is_confirmed				= 1;
+			$this->unit_weight				= $this->input->post('unit_weight');
+			$this->posted_item_description	= $this->input->post('posted_item_description');
+			$this->category_id				= $this->input->post('category_id');
+			$this->tenant_id				= 0;
+			$this->brand_id					= $this->input->post('brand_id');
+		} 
 		else // BID
 		{
 			$this->posted_item_id			= "";
