@@ -156,6 +156,29 @@ class Account extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function setting_password()
+	{
+		// kalau signup account baru
+		if ($this->input->method() == "post") $this->setting_password_do();
+		
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$data['model'] = new class{};
+		$data['message'] = "";
+		if ($this->input->get('err') !== null)
+		{
+			$data['message'] = $this->get_error_message($this->input->get('err'));
+		}
+		$this->load->view('admin/setting', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	private function get_error_message($error_code)
 	{
 		if ($error_code == 1)
@@ -200,6 +223,38 @@ class Account extends CI_Controller {
 			else
 			{
 				redirect('account/setting?err=0');
+			}
+		}
+	}
+	
+	public function setting_password_do()
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('old_password', 'Password Lama', 'required');
+		$this->form_validation->set_rules('new_password', 'Password',
+			array(
+				'required',
+				'regex_match[/^.*((?=.*\d)(?=.*[a-zA-Z])|(?=.*[a-zA-Z])(?=.*[-!$%^&*()_+|~=`{}\[\]:";\'<>?,.\/])|(?=.*[-!$%^&*()_+|~=`{}\[\]:";\'<>?,.\/])(?=.*\d)).*$/]'
+			),
+			array(
+				'regex_match'      => '%s harus mengandung dua variasi (huruf, angka, simbol)',
+			));
+		$this->form_validation->set_rules('passconf', 'Pengulangan Password', 'trim|required|matches[new_password]');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Account_model');
+			
+			$result = $this->Account_model->update_password($this->input->post('old_password'));
+			
+			
+			if ($result <= 0)
+			{
+				redirect('account/setting_password?err=1');
+			}
+			else
+			{
+				redirect('account/setting_password?err=0');
 			}
 		}
 	}
