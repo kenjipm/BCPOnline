@@ -251,6 +251,11 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_flash_sale()
+	{
+		
+	}
+	
 	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=6)
 	{
 		$query = $this->db

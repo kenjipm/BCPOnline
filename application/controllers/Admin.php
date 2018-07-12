@@ -75,6 +75,53 @@ class Admin extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function flash_sale_list()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('Item_model');
+		$flash_sales = $this->Item_model->get_all_flash_sale();
+		
+		$this->load->model('views/admin/flash_sale_view_model');
+		$this->flash_sale_view_model->get($flash_sales);
+		
+		$data['model'] = $this->flash_sale_view_model;
+		$data['title'] = "Daftar Barang Flash Sale";
+		$this->load->view('admin/flash_sale_list', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function create_flash_sale()
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		if ($this->session->userdata('type') == TYPE['name']['ADMIN'])
+		{
+			$this->load->model('Brand_model');
+			$this->load->model('Category_model');
+			$categories = $this->Category_model->get_all();
+			$brands = $this->Brand_model->get_all();
+			$this->load->model('views/admin/create_flash_sale_view_model');
+			$this->create_flash_sale_view_model->get($categories, $brands);
+			$data['model'] = $this->create_flash_sale_view_model;
+			
+			$this->load->view('admin/create_flash_sale', $data);
+		}
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function create_tenant_bill($id)
 	{
 		if ($this->input->method() == "post") $this->create_tenant_bill_do();
