@@ -16,6 +16,7 @@ defined('DEFAULT_ITEM_PICTURE') OR define('DEFAULT_ITEM_PICTURE', array(
 	'ORDER' => 'img/default_item_order.png',
 	'BID' => 'img/default_item_bid.png',
 	'REPAIR' => 'img/default_item_repair.png',
+	'FLASH' => 'img/default_item.png',
 	'' => 'img/default_item.png',
 	)
 );
