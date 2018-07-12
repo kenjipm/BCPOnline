@@ -75,11 +75,14 @@
 		{
 			?>
 			<div class="cb-row">
-				<div class="cb-col-fifth-2">
+				<div class="cb-col-tenth-3">
 					<div class="cb-label cb-font-title cb-align-center"> Alamat </div>
 				</div>
-				<div class="cb-col-fifth">
+				<div class="cb-col-tenth-2">
 					<div class="cb-label cb-font-title cb-align-center"> Nama Customer </div>
+				</div>
+				<div class="cb-col-tenth-2">
+					<div class="cb-label cb-font-title cb-align-center"> Kurir </div>
 				</div>
 				<div class="cb-col-fifth">
 				</div>
@@ -93,17 +96,22 @@
 					?>
 					<input type="hidden" name="bypass_otp" value="<?=$deliver->bypass_otp?>"/>
 					<div class="cb-row cb-p-5 cb-border-top">
-						<div class="cb-col-fifth-2">
+						<div class="cb-col-tenth-3">
 							<div class=" cb-align-center"> <?=$deliver->full_address?> </div>
 						</div>
-						<div class="cb-col-fifth">
+						<div class="cb-col-tenth-2">
 							<div class=" cb-align-center"> <?=$deliver->customer?> </div>
 						</div>
-						<div class="cb-col-fifth">
-							<button type="submit" class="cb-button-form cb-margin-auto">KIRIM TANPA OTP</button>
+						<div class="cb-col-tenth-2">
+							<div class=" cb-align-center"> <?=$deliver->method?> </div>
 						</div>
-						<div class="cb-col-fifth">
+						<div class="cb-row cb-col-tenth-3">
+							<div class="cb-col-half">
+							<button type="submit" class="cb-button-form cb-margin-auto">KIRIM TANPA OTP</button>
+							</div>
+							<div class="cb-col-half">
 							<button type="button" class="cb-button-form cb-margin-auto" onclick="popup.open('popup_resi-<?=$deliver->id?>')" >MASUKKAN RESI</button>
+							</div>							
 						</div>
 					</div>
 					<div id="popup_resi-<?=$deliver->id?>" class="popup popup-md">

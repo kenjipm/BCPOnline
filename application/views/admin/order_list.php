@@ -62,13 +62,30 @@
 				<?php
 			}
 			?>
-		<div class="cb-row">
-			<div class="cb-col-tenth-9">
+		<?php
+			if ($model->idle_deliverer)
+			{
+				?>
+			<div class="cb-row">
+				<div class="cb-col-tenth-9">
+				</div>
+				<div class="cb-col-tenth">
+					<button type="submit" class="cb-button-form">KIRIM</button>
+				</div>
 			</div>
-			<div class="cb-col-tenth">
-				<button type="submit" class="cb-button-form">KIRIM</button>
+		<?php 
+			} else {
+		?>
+			<div class="cb-row">
+				<div class="cb-col-tenth-9">
+				</div>
+				<div class="cb-col-tenth">
+					<button type="submit" class="cb-button-form" disabled>KIRIM</button>
+				</div>
 			</div>
-		</div>
+		<?php 
+			}
+		?>
 		<?php 
 		} else {
 		?>
