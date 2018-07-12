@@ -39,7 +39,7 @@
 				<div class="cb-row">
 					<div class="cb-col-fifth-4">
 						<div class="cb-txt-primary-1 cb-pull-left">
-							<div class="cb-label"> Harga (Rp)</div>
+							<div class="cb-label"> Harga Awal (Rp)</div>
 						</div>
 					</div>
 					<div class="cb-col-fifth">
@@ -55,6 +55,29 @@
 				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="price" value="<?= set_value('price'); ?>"/>
 				<input type="hidden" id="price" name="price" value="<?= set_value('price'); ?>"/>
 				<span class="text-danger"><?= form_error('price'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Harga Promo (Rp)</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-2">
+				<input type="text" class="cb-input-text cb-col-full input_thousand_separator" realid="promo_price" value="<?= set_value('promo_price'); ?>"/>
+				<input type="hidden" id="promo_price" name="promo_price" value="<?= set_value('promo_price'); ?>"/>
+				<span class="text-danger"><?= form_error('promo_price'); ?></span>
 			</div>
 		</div>
 		<div class="cb-row cb-mb-5">

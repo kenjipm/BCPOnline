@@ -131,7 +131,8 @@ class Admin extends CI_Controller {
 		if ($this->input->post('item_type') == "FLASH")
 		{
 			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
-			$this->form_validation->set_rules('price', 'Harga', 'required|integer');
+			$this->form_validation->set_rules('price', 'Harga awal', 'required|integer');
+			$this->form_validation->set_rules('promo_price', 'Harga promo', 'required|integer');
 			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
 			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
@@ -145,9 +146,13 @@ class Admin extends CI_Controller {
 			$this->load->model('Item_model');
 			$this->load->model('Posted_item_variance_model');
 			$this->load->model('Tag_model');
+			$this->load->model('Hot_item_model');
+			$this->load->model('Tenant_bill_model');
 			$this->Item_model->insert_from_post();
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
 			$this->Tag_model->insert_from_post($this->Item_model->id);
+			$this->Hot_item_model->insert_flash_item($this->Item_model->id);
+			$this->Tenant_bill_model->insert_flash_item($this->Item_model->id, $this->Hot_item_model->id);
 			
 			redirect('admin/flash_sale_list');
 		}
