@@ -173,6 +173,7 @@ class Order_details_model extends CI_Model {
 		$stub->billing->date_closed			= $db_item->date_closed ?? "";
 		$stub->billing->customer_id			= $db_item->customer_id ?? "";
 		$stub->billing->delivery_method		= $db_item->delivery_method ?? "";
+		$stub->billing->delivery_type		= $db_item->delivery_type ?? "";
 		
 		$stub->billing->customer					= new Customer_model();
 		$stub->billing->customer->account			= new Account_model();

@@ -46,7 +46,10 @@ class Order_List_View_Model extends CI_Model{
 			$this->deliver_order_list[$i]->postal_code	= $deliver->billing->shipping_address->postal_code;
 			$this->deliver_order_list[$i]->full_address	= $deliver->billing->shipping_address->get_full_address();
 			$this->deliver_order_list[$i]->customer		= $deliver->billing->customer->account->name;
-			$this->deliver_order_list[$i]->method		= $deliver->billing->delivery_method . $deliver->billing->delivery_type;
+			
+			$delivery_config = $this->config->item($deliver->billing->delivery_method);
+			$this->deliver_order_list[$i]->method		= $delivery_config['description'] . " (" .$deliver->billing->delivery_type . ")";
+			
 			$i++;
 		}
 	}
