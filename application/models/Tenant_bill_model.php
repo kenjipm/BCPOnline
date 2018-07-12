@@ -303,7 +303,7 @@ class Tenant_bill_model extends CI_Model {
 		$this->posted_item_id		= $posted_item_id;
 		$this->hot_item_id			= $hot_item_id;
 		$this->admin_id				= $this->session->child_id;
-		$this->payment_date			= "";
+		$this->payment_date			= date("Y-m-d H:i:s", time());;
 		
 		// insert data, then generate [reward_id] based on [id]
 		$this->db->trans_start(); // buat nge lock db transaction (biar kalo fail ke rollback)
