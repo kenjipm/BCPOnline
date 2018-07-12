@@ -301,3 +301,52 @@
 		</div>
 	</form>
 </div>
+
+<div class="template" id="div_variance">
+	<div class="cb-row cb-mb-5">
+		<div class="cb-col-fifth cb-row cb-mb-5">
+		</div>
+		<div class="cb-col-fifth-2 cb-row cb-mb-5">
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-row cb-col-fifth cb-label">
+					<div class="pull-left">Deskripsi</div>
+					<div class="pull-right">:</div>
+				</div>
+				<div class="cb-row cb-col-fifth-4">
+					<input type="text" class="cb-input-text cb-col-full" name="var_desc[]" value="<?= set_value('var_desc'); ?>"/>
+					<span class="text-danger"><?= form_error('var_desc'); ?></span>
+				</div>
+			</div>
+			<div class="cb-col-full cb-row cb-mb-5">
+				<div class="cb-row cb-col-fifth cb-label">
+					<div class="pull-left">Stok</div>
+					<div class="pull-right">:</div>
+				</div>
+				<div class="cb-row cb-col-fifth-4">
+					<input type="text" class="cb-input-text cb-col-full" name="quantity_available[]" value="<?= set_value('quantity_available'); ?>"/>
+					<span class="text-danger"><?= form_error('quantity_available'); ?></span>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-row cb-mb-5">
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_two thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_two_name[]' class="input_image_two input_file_upload" type='file' style="display:none;"/>
+			</div>
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_three thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_three_name[]' class="input_image_three input_file_upload" type='file' style="display:none;"/>
+			</div>
+			<div class="cb-col-fifth cb-p-1">
+				<label class="label_image_four thumbnail hoverable cb-m-5 cb-icon-lg cb-align-center cb-vertical-center cb-row label_upload_file">
+					<div class="cb-icon cb-icon-md cb-icon-add-item"></div>
+				</label>
+				<input name='image_four_name[]' class="input_image_four input_file_upload" type='file' style="display:none;"/>
+			</div>
+		</div>
+	</div>
+</div>
