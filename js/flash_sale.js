@@ -1,4 +1,4 @@
-var TICK_COUNT_REFRESH_FLASH = 5;
+var TICK_COUNT_REFRESH_FLASH = 10;
 
 $(document).ready(function(){
 	update_flash_time();
