@@ -133,9 +133,10 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga awal', 'required|integer');
 			$this->form_validation->set_rules('promo_price', 'Harga promo', 'required|integer');
-			$this->form_validation->set_rules('quantity_avalaible', 'Jumlah Stok', 'integer');
+			$this->form_validation->set_rules('quantity_available', 'Jumlah Stok', 'required|integer');
 			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
+			$this->form_validation->set_rules('var_desc', 'Deskripsi Varian', 'required');
 			$this->form_validation->set_rules('date_expired', 'Tanggal Berlaku', 'required');
 			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
 			$this->form_validation->set_rules('brand_id', 'Brand', 'required');

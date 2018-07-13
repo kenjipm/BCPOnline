@@ -69,7 +69,11 @@
 		?>
 		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
 			<div class="cb-col-fifth-2">
+				<?php if ($order->posted_item_name){ ?>
 				<div class=" cb-align-center"><?=$order->posted_item_name . " (" . $order->var_type . ": " . $order->var_description . ")"?> </div>
+				<?php } else { ?>
+				<div class=" cb-align-center">Servis</div>
+				<?php } ?>
 			</div>
 			<div class="cb-col-fifth-2">
 				<div class=" cb-align-center"><?=$order->posted_item_description?> </div>

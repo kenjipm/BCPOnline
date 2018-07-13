@@ -237,7 +237,7 @@ class Item extends CI_Controller {
 			
 			$this->load->model('tenant_bill_model');
 			$seo_item = $this->tenant_bill_model->get_registered_seo($id);
-			
+
 			$this->load->model('Brand_model');
 			$categories = $this->category_model->get_all();
 			$brands = $this->Brand_model->get_all();

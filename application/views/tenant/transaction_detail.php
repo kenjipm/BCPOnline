@@ -31,7 +31,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="desc" value="<?=$model->transaction_detail->posted_item_description?>" readonly>
+					<textarea class="cb-row cb-input-text cb-col-full" name="posted_item_description" rows="6" style="resize:none" readonly><?=$model->transaction_detail->posted_item_description?></textarea>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -90,7 +90,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="item_name" value="<?=$model->transaction_detail->posted_item_description?>" readonly>
+					<textarea class="cb-row cb-input-text cb-col-full" name="posted_item_description" rows="6" style="resize:none" readonly><?=$model->transaction_detail->posted_item_description?></textarea>
 				</div>
 			</div>
 			<div class="cb-col-full cb-row cb-mb-5">
@@ -135,7 +135,8 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text" id="discounted_price" name="discounted_price" />
+					<input type="text" class="cb-row cb-col-full cb-input-text input_thousand_separator" realid="discounted_price" name="discounted_price" />
+					<input type="hidden" id="discounted_price" name="discounted_price" value="<?= set_value('discounted_price'); ?>">
 				</div>
 				<div class="cb-col-fifth cb-pl-3">
 					<button type="submit" class="cb-button cb-button-form">Kirim</button>
@@ -177,12 +178,8 @@
 		<div class="panel-body">
 			<form class="form-horizontal">
 				<div class="form-group">
-					<div class="col-sm-2">
-						<label>Rating</label>
-					</div>
-					<div class="col-sm-10">
+					<div class="item_rating cb-row cb-vertical-center cb-align-center">
 						<span class="cb-star cb-star-<?=$model->transaction_detail->rating?>"></span>
-				
 					</div>
 				</div>
 				<div class="form-group">

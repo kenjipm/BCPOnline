@@ -210,6 +210,7 @@ class Tenant_bill_model extends CI_Model {
 		$where['hot_item_id'] = $hot_item_id;
 		
 		$this->db->where($where);
+		$this->db->where('admin_id is NOT NULL');
 		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_tenant_bill, 1);
 		$item = $query->row();
@@ -238,6 +239,7 @@ class Tenant_bill_model extends CI_Model {
 		$where['hot_item_id'] = NULL;
 		
 		$this->db->where($where);
+		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_tenant_bill, 1);
 		$seo_item = $query->row();
 		
@@ -263,9 +265,10 @@ class Tenant_bill_model extends CI_Model {
 		{
 			$this->load->library('Id_generator');
 			
-			$db_item->id		= $this->db->insert_id();
-			$db_item->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['TENANT_BILL'], $db_item->id);
+			$this->id				= $this->db->insert_id();
+			$this->tenant_bill_id	= $this->id_generator->generate(TYPE['name']['TENANT_BILL'], $db_item->id);
 			
+			$db_item = $this->get_db_from_stub($this);
 			$this->db->where('id', $db_item->id);
 			$this->db->update($this->table_tenant_bill, $db_item);
 		}

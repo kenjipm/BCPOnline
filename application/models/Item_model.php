@@ -373,7 +373,7 @@ class Item_model extends CI_Model {
 		$this->db->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left');
 		$this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->where($this->table_tenant_bill.'.payment_date > 0');
-		$this->db->where($this->table_tenant_bill.'.payment_expiration < CURDATE()');
+		$this->db->where($this->table_tenant_bill.'.payment_expiration > CURDATE()');
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
 		$this->db->distinct();
@@ -384,7 +384,7 @@ class Item_model extends CI_Model {
 		// }
 		$query = $this->db->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
-		
+		// print_r($items);
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
