@@ -100,7 +100,7 @@ $config['top_menu_customer'] = array(
 			'notif'	=> "",
 			),
 		'VOUCHER' => array(
-			'text'	=> "DAFTAR VOUCHER",
+			'text'	=> "VOUCHER",
 			'url'	=> "voucher/voucher_list",
 			'notif'	=> "",
 			),
