@@ -222,6 +222,16 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_service_tenant()
+	{
+		$this->db->where('item_type', 'REPAIR');
+		$this->db->where('tenant_id', $this->session->child_id);
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_all_for_admin($limit=9, $offset=0)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id, ' . $this->table_item. '.tenant_id AS tenant_id');
