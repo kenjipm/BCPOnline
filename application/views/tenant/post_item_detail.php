@@ -273,6 +273,11 @@
 					}
 				?>
 			</div>
+			<div class="cb-row cb-mb-5 cb-align-right">
+				<div class="cb-col-fifth cb-row">
+					<button type="submit" class="cb-button-form cb-col-full">KIRIM</button>
+				</div>
+			</div>
 			</form>
 			<?php
 		}

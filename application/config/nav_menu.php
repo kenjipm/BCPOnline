@@ -161,6 +161,11 @@ $config['top_menu_tenant'] = array(
 			'url'	=> "dispute",
 			'notif'	=> "tenant_dispute",
 			),
+		'SERVICE' => array(
+			'text'	=> "SERVIS",
+			'url'	=> "item/service",
+			'notif'	=> "",
+			),
 		),
 	);
 

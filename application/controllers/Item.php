@@ -169,7 +169,19 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		
-		//if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
+		if ($this->session->userdata('type') == TYPE['name']['TENANT'])
+		{			
+			$this->load->model('item_model');
+			$items = $this->item_model->get_all_service_tenant();
+			
+			$this->load->model('views/tenant/service_list_view_model');
+			$this->service_list_view_model->get($items);
+			
+			$data['title'] = "SERVICE KU";
+			$data['model'] = $this->service_list_view_model;
+			$this->load->view('tenant/service_list', $data);
+		}
+		else //if ($this->session->userdata('type') == TYPE['name']['CUSTOMER'])
 		{
 			$id = $this->session->child_id;
 			
@@ -183,10 +195,7 @@ class Item extends CI_Controller {
 			$data['model'] = $this->item_gallery_view_model;
 			$this->load->view('item_gallery', $data);
 		}
-		//else // TENANT
-		{
-			
-		}
+		
 		
 		// Load Footer
 		$this->load->view('footer');
@@ -409,7 +418,10 @@ class Item extends CI_Controller {
 			$this->Item_model->update_from_post();
 			$this->Posted_item_variance_model->update_from_post($this->Item_model->id);
 			
-			redirect('item/post_item_list');
+			if ($this->input->post('item_type') == "ORDER")
+				redirect('item/post_item_list');
+			else if ($this->input->post('item_type') == "REPAIR")
+				redirect('item/service');
 		}
 	}
 	
