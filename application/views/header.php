@@ -154,7 +154,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		<!-- profile -->
 		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-pb-5 cb-pt-5">
 			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>
-	<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
+			<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
 				<?php
 					if (isset($this->session->name))
 					{
@@ -169,7 +169,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					foreach ($top_menu_items['profile'] as $menu_item)
 					{
 						?>
-						<div class="cb-col-full cb-align-left cb-p-3"><a href="(<?=($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
+						<div class="cb-col-full cb-align-left cb-p-3"><a href="<?=($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
 							<?=$menu_item['text']?>
 							<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 						</a></div>

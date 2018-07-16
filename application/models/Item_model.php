@@ -252,13 +252,23 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_service_items()
+	public function get_all_service_items($offset=0, $limit=20, $order="RANDOM")
 	{
 		$this->db->where('item_type', 'REPAIR');
-		$query = $this->db->get($this->table_item);
+		$this->db->order_by('id', $order);
+		$query = $this->db->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_service_items()
+	{
+		$this->db->where('item_type', 'REPAIR');
+		$query = $this->db->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
 	}
 	
 	public function get_all_flash_sale()
@@ -332,7 +342,7 @@ class Item_model extends CI_Model {
 		return $num_rows;
 	}
 	
-	public function get_all_from_following_tenants($following_tenants, $offset=0, $limit=10)
+	public function get_all_from_following_tenants($following_tenants, $offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->or_group_start();
 		$this->db->where('0', "1");
@@ -348,22 +358,53 @@ class Item_model extends CI_Model {
 					  ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
-					  ->order_by($this->table_item.'.id', 'DESC')
+					  ->order_by($this->table_item.'.id', $order)
 					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_tenant_id($tenant_id, $limit=99)
+	public function count_all_from_following_tenants($following_tenants)
+	{
+		$this->db->or_group_start();
+		$this->db->where('0', "1");
+		foreach ($following_tenants as $following_tenant)
+		{
+			$this->db->or_where('tenant_id', $following_tenant->tenant_id);
+			$this->db->where('item_type', "ORDER");
+		}
+		$this->db->group_end();
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
+	
+	public function get_all_from_tenant_id($tenant_id, $offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->where('tenant_id', $tenant_id);
 		$query = $this->db
-					  ->order_by('id', 'DESC')
-					  ->get($this->table_item, $limit);
+					  ->order_by('id', $order)
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_from_tenant_id($tenant_id)
+	{
+		$this->db->where('tenant_id', $tenant_id);
+		$query = $this->db->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
 	}
 	
 	public function get_all_promoted_from_search($keywords, $offset=0, $limit=4)
@@ -419,6 +460,87 @@ class Item_model extends CI_Model {
 		$this->db->distinct();
 		
 		$query = $this->db->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
+	
+	public function get_all_hot_items($offset=0, $limit=20, $order="RANDOM")
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, ' . $this->table_item.'.id AS id');
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'ORDER');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		$query = $this->db
+					  ->order_by($this->table_hot_item.'.id', $order)
+					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
+		
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_hot_items()
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		$this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'ORDER');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		
+		$query = $this->db->get('tenant_bill');
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
+	
+	
+	public function get_all_flash_items($offset=0, $limit=20, $order="RANDOM")
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, ' . $this->table_item.'.id AS id');
+		// $this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'FLASH');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		$query = $this->db
+					  ->order_by($this->table_hot_item.'.id', $order)
+					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
+		
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_flash_items()
+	{
+		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id');
+		// $this->db->where('tenant_bill.payment_date != 0');
+		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
+		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
+		$this->db->where($this->table_item.'.item_type', 'FLASH');
+		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
+		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
+		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
+		$this->db->group_by('posted_item.id');
+		
+		$query = $this->db->get('tenant_bill');
 		$num_rows = $query->num_rows();
 		
 		return $num_rows;

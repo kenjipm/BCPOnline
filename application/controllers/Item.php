@@ -160,7 +160,7 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	public function service()
+	public function service($page=1)
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -187,9 +187,11 @@ class Item extends CI_Controller {
 			
 			$this->load->model('item_model');
 			$items = $this->item_model->get_all_service_items();
+			$item_count = $this->item_model->count_all_service_items();
 			
 			$this->load->model('views/item_gallery_view_model');
 			$this->item_gallery_view_model->get($items);
+			$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 			
 			$data['title'] = "SERVICE";
 			$data['model'] = $this->item_gallery_view_model;
@@ -333,6 +335,81 @@ class Item extends CI_Controller {
 		$data['model'] = $this->search_view_model;
 		$this->load->view('search', $data);
 		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function hot_items($page=1)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('item_model');
+		$items = $this->item_model->get_all_hot_items();
+		$item_count = $this->item_model->count_all_hot_items();
+		
+		$this->load->model('views/item_gallery_view_model');
+		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
+		
+		$data['title'] = "HOT ITEMS";
+		$data['model'] = $this->item_gallery_view_model;
+		$this->load->view('item_gallery', $data);
+			
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function flash_items($page=1)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('item_model');
+		$items = $this->item_model->get_all_flash_items();
+		$item_count = $this->item_model->count_all_flash_items();
+		
+		$this->load->model('views/item_gallery_view_model');
+		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
+		
+		$data['title'] = "FLASH ITEMS";
+		$data['model'] = $this->item_gallery_view_model;
+		$this->load->view('item_gallery', $data);
+			
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function tenant_items($page=1)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('following_tenant_model');
+		$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
+		
+		$this->load->model('item_model');
+		$items = $this->item_model->get_all_from_following_tenants($following_tenants);
+		$item_count = $this->item_model->count_all_from_following_tenants($following_tenants);
+		
+		$this->load->model('views/item_gallery_view_model');
+		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
+		
+		$data['title'] = "NEW ITEMS";
+		$data['model'] = $this->item_gallery_view_model;
+		$this->load->view('item_gallery', $data);
+			
 		// Load Footer
 		$this->load->view('footer');
 	}

@@ -279,6 +279,11 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-square { width: 100%; height: 100%; }
 
+.cb-panel-heading .cb-pull-right { margin-left: auto; }
+.cb-panel-heading .cb-pull-bottom { margin-top: auto; }
+.cb-panel-heading .cb-pull-left { margin-right: auto; }
+.cb-panel-heading .cb-pull-top { margin-bottom: auto; }
+
 .cb-form-control {
     display: block;
     width: 100%;

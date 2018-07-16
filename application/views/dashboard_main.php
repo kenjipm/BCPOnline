@@ -70,7 +70,7 @@
 					<div class="cb-panel-heading cb-row">
 						<div class="cb-icon cb-icon-sm cb-icon-flag cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">HOT ITEMS</div>
-						<!--<a class="pull-right">Lihat Selebihnya</a>-->
+						<a class="cb-pull-right cb-txt-primary-2 cb-pull-bottom" href="<?=site_url('item/hot_items')?>">Lihat Selebihnya > ></a>
 					</div>
 					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
 						<div class="item-gallery-container">
@@ -182,6 +182,7 @@
 						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>
 						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">FLASH SALE</div>
 						<div id="flash_time_left" class="cb-txt-primary-3 cb-font-title cb-font-size-xl cb-pl-5"></div>
+						<a class="cb-pull-right cb-txt-primary-1 cb-pull-bottom" href="<?=site_url('item/flash_items')?>">Lihat Selebihnya > ></a>
 						<!--<a class="pull-right">Lihat Selebihnya</a>-->
 					</div>
 					<div class="cb-panel-body cb-bg-primary-3 cb-p-2">
@@ -239,10 +240,10 @@
 		<div class="cb-row">
 			<div class="cb-col-full">
 				<div class="cb-panel">
-					<div class="cb-panel-heading cb-align-center">
-						<h3 class="cb-txt-primary-1 cb-font-title">NEW ITEMS</h3>
+					<div class="cb-panel-heading cb-align-center cb-mt-5">
+						<div class="cb-txt-primary-1 cb-font-title cb-font-size-xl">NEW ITEMS</div>
 					</div>
-					<div class="cb-panel-body cb-p-2">
+					<div class="cb-panel-body cb-pl-2 cb-pr-2">
 						<div class="item-showcase cb-row">
 							<?php
 								foreach($model->tenant_items as $tenant_item)
@@ -281,6 +282,9 @@
 								}
 							?>
 						</div>
+						<a class="cb-row cb-border-round cb-align-center cb-pt-3 cb-pb-3 cb-mt-5 cb-mb-5 cb-bg-primary-2 cb-font-title cb-font-size-xl cb-txt-secondary-1" href="<?=site_url('item/tenant_items')?>">
+							LIHAT SELEBIHNYA
+						</a>
 					</div>
 				</div>
 			</div>

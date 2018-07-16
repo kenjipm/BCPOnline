@@ -53,6 +53,7 @@ class Item_main_view_model extends CI_Model {
 		{
 			$this->item->hot_item = new class{};
 			$this->item->hot_item->promo_price = $this->text_renderer->to_rupiah($item->hot_item->promo_price);
+			$this->item->discount_percentage = "-" . ceil(($item->price - $item->hot_item->promo_price) / $item->price * 100) . "%";
 		}
 		
 		$item->tenant->init_account();

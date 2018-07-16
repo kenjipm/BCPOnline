@@ -30,10 +30,10 @@
 						</div>
 						<div class="item_separator"></div>
 						<div class="item_initial_price">
-							<?=""?>
+							<?= $item->is_hot_item ? $item->price : "" ?>
 						</div>
 						<div class="item_current_price">
-							<?=$item->price?>
+							<?= $item->is_hot_item ? $item->hot_item->promo_price : $item->price ?>
 						</div>
 						<div class="item_rating cb-row cb-vertical-center cb-align-center">
 							<span class="cb-star cb-star-<?=$item->rating->rating_average_round?>"></span>
@@ -52,4 +52,49 @@
 			?>
 		?>
 	</div>
+</div>
+
+<div class="cb-row cb-align-center">
+	<?php if ($model->pagination->first_page) { ?>
+		<a href='<?=$model->base_url . '1' . $model->url_parameter?>'>
+			<div class="cb-icon cb-icon-sm cb-icon-left-2"></div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->prev_page) { ?>
+		<a href='<?=$model->base_url . $model->pagination->prev_page . $model->url_parameter?>'>
+			<div class="cb-icon cb-icon-sm cb-icon-left-1"></div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->first_page_number) { ?>
+		<a href='<?=$model->base_url . $model->pagination->first_page_number . $model->url_parameter?>'>
+			<div class="<?=$model->pagination->current_page == 1 ? 'cb-txt-primary-2' : 'cb-txt-secondary-2'?> cb-font-size-lg">1 &nbsp;</div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->is_prev_dots) { ?>
+		<div class="cb-txt-secondary-2 cb-font-size-lg"> . . . &nbsp;</div>
+	<?php } ?>
+	<?php foreach ($model->pagination->pages as $page) { ?>
+		<a href='<?=$model->base_url . $page . $model->url_parameter?>'>
+			<div class="<?=$page == $model->pagination->current_page ? 'cb-txt-primary-2' : 'cb-txt-secondary-2'?> cb-font-size-lg"><?=$page?> &nbsp;</div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->is_next_dots) { ?>
+		<div class="cb-txt-secondary-2 cb-font-size-lg"> . . . &nbsp; </div>
+	<?php } ?>
+	<?php if ($model->pagination->last_page_number) { ?>
+		<a href='<?=$model->base_url . $model->pagination->last_page_number . $model->url_parameter?>'>
+			<div class="<?=$model->pagination->current_page == $model->pagination->last_page_number ? 'cb-txt-primary-2' : 'cb-txt-secondary-2'?> cb-font-size-lg"><?=$model->pagination->last_page_number?></div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->next_page) { ?>
+		<a href='<?=$model->base_url . $model->pagination->next_page . $model->url_parameter?>'>
+			<div class="cb-icon cb-icon-sm cb-icon-right-1"></div>
+		</a>
+	<?php } ?>
+	<?php if ($model->pagination->last_page) { ?>
+		<a href='<?=$model->base_url . $model->pagination->last_page . $model->url_parameter?>'>
+			<div class="cb-icon cb-icon-sm cb-icon-right-2"></div>
+		</a>
+	<?php } ?>
+	
 </div>

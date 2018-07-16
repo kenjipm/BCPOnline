@@ -50,9 +50,17 @@
 							?>
 							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
 						</div>
-						<div class="item_initial_price">
-							<?= $model->item->is_hot_item ? $model->item->price : "" ?>
-						</div>
+							<?php
+								if ($model->item->is_hot_item)
+								{
+									?>
+									<span class="item_initial_price">
+										<?=$model->item->price?>
+									</span>&nbsp;
+									<span class="cb-border-round cb-bg-primary-1 cb-txt-primary-3 cb-p-2">&bull;&nbsp;&nbsp;<?=$model->item->discount_percentage?></span>
+									<?php
+								}
+							?>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl item_current_price">
 							<?= $model->item->is_hot_item ? $model->item->hot_item->promo_price : $model->item->price ?>
 						</div>

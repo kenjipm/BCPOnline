@@ -421,6 +421,42 @@ class Billing extends CI_Controller {
 				$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
 				
 				$this->recursive_point_increment($point_get, "", $payment->billing->id, $this->session->child_id);
+		
+				// kirim email ke tenant ybs
+				$order_details = $this->order_details_model->get_all_from_billing_id($payment->billing->id);
+				$sent_tenant_email = array();
+				
+				$this->load->library('email');
+				foreach($order_details as $order_detail)
+				{
+					$order_detail->init_posted_item_variance();
+					$order_detail->posted_item_variance->init_posted_item();
+					$order_detail->posted_item_variance->posted_item->init_tenant();
+					$order_detail->posted_item_variance->posted_item->tenant->init_account();
+					
+					$email = $order_detail->posted_item_variance->posted_item->tenant->account->email;
+					$tenant_name = $order_detail->posted_item_variance->posted_item->tenant->tenant_name;
+					
+					$is_email_sent = false;
+					$i = 0;
+					while (!$is_email_sent && ($i < count(ADMIN_EMAILS)))
+					{
+						$this->email->from(ADMIN_EMAILS[$i], 'Admin '.COMPANY_NAME);
+						$this->email->to($email);
+
+						$this->email->subject('Pesanan Baru!');
+						$this->email->message("Halo, ".$tenant_name."! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku");
+
+						$is_email_sent = $this->email->send();
+						
+						$i++;
+					}
+					
+					if ($is_email_sent)
+					{
+						$sent_tenant_email[] = $email;
+					}
+				}
 			}
 			
 		$this->db->trans_complete();

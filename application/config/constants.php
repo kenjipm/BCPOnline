@@ -16,7 +16,7 @@ defined('DEFAULT_ITEM_PICTURE') OR define('DEFAULT_ITEM_PICTURE', array(
 	'ORDER' => 'img/default_item_order.png',
 	'BID' => 'img/default_item_bid.png',
 	'REPAIR' => 'img/default_item_repair.png',
-	'FLASH' => 'img/default_item.png',
+	'FLASH' => 'img/default_item_flash.png',
 	'' => 'img/default_item.png',
 	)
 );
@@ -347,6 +347,7 @@ defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
 	)
 );
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Production
@@ -354,6 +355,7 @@ defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
 */
 defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberku');
 defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
+// defined('EMAIL_RETRY_COUNT') OR define('EMAIL_RETRY_COUNT', 3);
 
 /*
 |--------------------------------------------------------------------------

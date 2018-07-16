@@ -172,7 +172,7 @@ class Tenant extends CI_Controller {
 		$cur_tenant = $this->tenant_model->get_from_id($id);
 		
 		$this->load->model('item_model');
-		$items = $this->item_model->get_all_from_tenant_id($id, 6);
+		$items = $this->item_model->get_all_from_tenant_id($id, 0, 6);
 		
 		$this->load->model('views/tenant_public_profile_main_view_model');
 		$this->tenant_public_profile_main_view_model->get($cur_tenant, $items);
