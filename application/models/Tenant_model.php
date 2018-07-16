@@ -146,6 +146,7 @@ class Tenant_model extends CI_Model {
 		$this->load->model('Tenant_model');
 		
 		$this->db->select('*, tenant.id AS tenant_id');
+		$this->db->where('tenant.id != 0');
 		$this->db->join('account', 'account.id=' . $this->table_tenant . '.account_id', 'left');
 		
 		$query = $this->db->get($this->table_tenant);
@@ -184,6 +185,27 @@ class Tenant_model extends CI_Model {
 		{
 			$this->id	= $this->db->insert_id();
 		}
+		
+		$this->db->trans_complete();
+	}
+	
+	public function update_bank_info($account_id)
+	{
+		$this->bank_account			= $this->input->post('bank_account');
+		$this->bank_account_owner	= $this->input->post('bank_account_owner');
+		$this->bank_name			= $this->input->post('bank_name');
+		$this->bank_branch			= $this->input->post('bank_branch');
+		
+		$this->db->trans_start();
+		
+		$this->db->where('account_id', $account_id);
+		
+		$this->db->set('bank_account', $this->bank_account);
+		$this->db->set('bank_account_owner', $this->bank_account_owner);
+		$this->db->set('bank_name', $this->bank_name);
+		$this->db->set('bank_branch', $this->bank_branch);
+		
+		$this->db->update('tenant');
 		
 		$this->db->trans_complete();
 	}

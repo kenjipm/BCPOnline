@@ -41,6 +41,7 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 			$temp->image_one_name = site_url(($item->image_one_name != "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			$temp->favorite = $item->calculate_favorite();
+			$temp->item_type = $item->item_type;
 			
 			$item->get_hot_item();
 			$temp->is_hot_item = ($item->hot_item != null);

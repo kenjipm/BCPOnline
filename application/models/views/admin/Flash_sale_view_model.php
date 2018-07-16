@@ -24,6 +24,8 @@ class Flash_Sale_View_Model extends CI_Model{
 			$this->items[$i]->image_one_name	= site_url($item->image_one_name);
 			$this->items[$i]->posted_item_name 	= $item->posted_item_name;
 			$this->items[$i]->posted_item_description 	= $item->posted_item_description;
+			
+			$i++;
 		}
 		
 	}

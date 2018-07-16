@@ -60,22 +60,25 @@
 		</div>
 		<div class="cb-col-fifth-4 cb-pl-3">
 			<div class="cb-row cb-border-bottom">
-				<div class="cb-col-half">
+				<div class="cb-col-fifth-3">
 					<div class="cb-row cb-pb-3">
-						<div class="cb-col-fourth-2">
+						<div class="cb-col-fifth">
+							<div class="cb-label cb-align-center">Tenant</div>
+						</div>
+						<div class="cb-col-half">
 							<div class="cb-label cb-align-center">Produk</div>
 						</div>
-						<div class="cb-col-fourth">
-							<div class="cb-label cb-align-center">Jumlah</div>
+						<div class="cb-col-tenth">
+							<div class="cb-label cb-align-center">Jml</div>
 						</div>
-						<div class="cb-col-fourth">
-							<div class="cb-label cb-align-right">Harga</div>
+						<div class="cb-col-fifth">
+							<div class="cb-label cb-align-center">Harga</div>
 						</div>
 					</div>
 				</div>
-				<div class="cb-col-half">
+				<div class="cb-col-fifth-2">
 					<div class="cb-row">
-						<div class="cb-col-fourth-2">
+						<div class="cb-col-fifth-3">
 							<div class="cb-label cb-align-center">Status</div>
 						</div>
 					</div>
@@ -86,28 +89,35 @@
 		{
 			?>
 			<div class="cb-row cb-border-bottom cb-p-5">
-				<div class="cb-col-half">
+				<div class="cb-col-fifth-3">
 					<div class="cb-row">
-						<div class="cb-col-fourth-2">
-							<div class="cb-align-left"><?=$order->posted_item_variance->posted_item->posted_item_name?></div>
+						<div class="cb-col-fifth">
+							<div class="cb-align-center"><?=$order->posted_item_variance->posted_item->tenant->tenant_name?> </div>
 						</div>
-						<div class="cb-col-fourth">
+						<div class="cb-col-half">
+							<?php if ($order->posted_item_variance->var_description){ ?>
+							<div class=" cb-align-center"><?=$order->posted_item_variance->posted_item->posted_item_name?> </div>
+							<?php } else { ?>
+							<div class=" cb-align-center">Servis</div>
+							<?php } ?>
+						</div>
+						<div class="cb-col-tenth">
 							<div class="cb-align-center"><?=$order->quantity?></div>
 						</div>
-						<div class="cb-col-fourth">
+						<div class="cb-col-fifth">
 							<div class="cb-align-right"><?=$order->posted_item_variance->posted_item->price?></div>
 						</div>
 					</div>
 				</div>
-				<div class="cb-col-half">
+				<div class="cb-col-fifth-2">
 					<div class="cb-row">
-						<div class="cb-col-fourth-2">
+						<div class="cb-col-fifth-3">
 							<div class="cb-align-center cb-pl-5" id="order_status-<?=$order->id?>">
 								<?=$order->order_status?>
 								<button type="button" data-toggle="collapse" data-target="#order_status_history-<?=$order->id?>" class="cb-button cb-button-operational pull-right"><div class="cb-arrow cb-arrow-white cb-arrow-up"></div></button>
 							</div>
 						</div>
-						<div class="cb-col-fourth-2">
+						<div class="cb-col-fifth-2">
 							<div class="cb-row cb-align-right cb-mr-5" id="order_action-<?=$order->id?>">
 							<?php
 								if ($order->is_received)

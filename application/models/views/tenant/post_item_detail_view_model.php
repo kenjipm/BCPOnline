@@ -84,7 +84,7 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			$this->posted_item->var_type[$i] 			= $posted_item_variance->var_type;
 			$this->posted_item->var_desc[$i] 			= $posted_item_variance->var_description;
 			$this->posted_item->quantity_available[$i] 	= $posted_item_variance->quantity_available;
-			$this->posted_item->image_two_name_view[$i] 		= site_url($posted_item_variance->image_two_name);
+			$this->posted_item->image_two_name_view[$i] 	= site_url($posted_item_variance->image_two_name);
 			$this->posted_item->image_three_name_view[$i] 	= site_url($posted_item_variance->image_three_name);
 			$this->posted_item->image_four_name_view[$i] 	= site_url($posted_item_variance->image_four_name);
 			$this->posted_item->image_two_name[$i] 		= $posted_item_variance->image_two_name;
@@ -96,13 +96,14 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		
 		if ($hot_item != null)
 		{
-			$this->load->model('tenant_bill_model');
-			$tenant_bill = $this->tenant_bill_model->get_from_hot_item_id($hot_item->id);
 			$this->posted_item->is_hot_item = true;
 			$this->posted_item->hot_item_id = $hot_item->id;
+			$this->load->model('tenant_bill_model');
+			$tenant_bill = $this->tenant_bill_model->get_from_hot_item_id($hot_item->id);
 			if ($tenant_bill != null)
 			{
 				$this->posted_item->is_hot_item_confirmed = true;
+				$this->posted_item->payment_value_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
 				$this->posted_item->payment_value = $tenant_bill->payment_value;
 				if ($tenant_bill->is_paid_hot_item())
 				{
@@ -117,18 +118,19 @@ class Post_Item_Detail_View_Model extends CI_Model{
 		
 		if ($seo_item != null)
 		{
-			$this->load->model('tenant_bill_model');
-			$tenant_bill = $this->tenant_bill_model->get_from_seo_item_id($seo_item->posted_item_id);
 			$this->posted_item->is_seo_item = true;
 			$this->posted_item->seo_item_id = $seo_item->id;
-			if ($tenant_bill != null)
+			$this->load->model('tenant_bill_model');
+			$tenant_bill = $this->tenant_bill_model->get_from_seo_item_id($seo_item->posted_item_id);
+			if (($tenant_bill != null) && ($tenant_bill->is_confirmed_seo_item()))
 			{
 				$this->posted_item->is_seo_item_confirmed = true;
+				$this->posted_item->payment_value_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
 				$this->posted_item->payment_value = $tenant_bill->payment_value;
 				if ($tenant_bill->is_paid_seo_item())
 				{
 					$this->posted_item->is_seo_item_paid = true;
-					if ($tenant_bill->is_expired())
+					if (($tenant_bill->payment_expiration !== 0) && ($tenant_bill->is_expired()))
 					{
 						$this->posted_item->is_seo_item = false;
 					}

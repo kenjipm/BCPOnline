@@ -5,17 +5,19 @@
 	<div class="cb-row">
 		<div class="cb-col-half">
 			<div class="cb-row cb-pb-3">
+				<div class="cb-col-tenth">
+				</div>
 				<div class="cb-col-fifth">
 					<div class="cb-label cb-align-center">Tanggal</div>
 				</div>
-				<div class="cb-col-fifth-4">
+				<div class="cb-col-fifth-3">
 					<div class="cb-label cb-align-center">Alamat</div>
 				</div>
 			</div>
 		</div>
 		<div class="cb-col-half">
 			<div class="cb-row">
-				<div class="cb-col-fifth-2">
+				<div class="cb-col-fifth">
 					<div class="cb-label cb-align-center">Ongkos Kirim</div>
 				</div>
 				<div class="cb-col-fifth-2">
@@ -34,17 +36,20 @@
 		<div class="cb-row cb-border-top cb-p-3 cb-table-striped">
 			<div class="cb-col-half">
 				<div class="cb-row">
+					<div class="cb-col-tenth">
+					
+					</div>
 					<div class="cb-col-fifth">
 						<div class="cb-align-center"><?=$billing->date_created?></div>
 					</div>
-					<div class="cb-col-fifth-4">
+					<div class="cb-col-fifth-3">
 						<div class="cb-align-center"><?=$billing->address?></div>
 					</div>
 				</div>
 			</div>
 			<div class="cb-col-half">
 				<div class="cb-row">
-					<div class="cb-col-fifth-2">
+					<div class="cb-col-fifth">
 						<div class="cb-align-center"><?=$billing->shipping_charge?></div>
 					</div>
 					<div class="cb-col-fifth-2">

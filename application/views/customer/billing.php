@@ -79,7 +79,11 @@
 					<div class="cb-col-half">
 						<div class="cb-row">
 							<div class="cb-col-fourth-2">
-								<div class="cb-align-left"><?=$order->posted_item_variance->posted_item->name?></div>
+								<?php if ($order->posted_item_variance->posted_item->name){ ?>
+								<div class=" cb-align-center"><?=$order->posted_item_variance->posted_item->name?> </div>
+								<?php } else { ?>
+								<div class=" cb-align-center">Servis</div>
+								<?php } ?>
 							</div>
 							<div class="cb-col-fourth">
 								<div class="cb-align-center"><?=$order->quantity?></div>

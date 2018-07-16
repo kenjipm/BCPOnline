@@ -85,6 +85,8 @@ class Account extends CI_Controller {
 	
 	public function account_detail($id)
 	{
+		if ($this->input->method() == "post") $this->tenant_edit_do($id);
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array('admin/account_detail');
@@ -93,8 +95,19 @@ class Account extends CI_Controller {
 		// Load Body
 		$this->load->model('Account_model');
 		$account = $this->Account_model->get_from_id($id);
-		$this->load->model('views/admin/account_detail_view_model');
-		$this->account_detail_view_model->get($account);
+		$type = $this->Account_model->get_type($id);
+		if ($type == "TENANT")
+		{
+			$this->load->model('Tenant_model');
+			$tenant = $this->Tenant_model->get_by_account_id($id);
+			$this->load->model('views/admin/account_detail_view_model');
+			$this->account_detail_view_model->get_tenant($account, $tenant);
+		}
+		else
+		{
+			$this->load->model('views/admin/account_detail_view_model');
+			$this->account_detail_view_model->get($account);
+		}
 		$data['model'] = $this->account_detail_view_model;
 		
 		$this->load->view('admin/account_detail', $data);
@@ -119,6 +132,25 @@ class Account extends CI_Controller {
 		
 		// Load Footer
 		$this->load->view('footer');
+	}
+	
+	public function tenant_edit_do($id)
+	{
+		$this->load->library('form_validation');
+		$this->form_validation->set_rules('bank_name', 'Nama Bank', 'required');
+		$this->form_validation->set_rules('bank_branch', 'Cabang Bank', 'required');
+		$this->form_validation->set_rules('bank_account', 'Nomor Rekening', 'required');
+		$this->form_validation->set_rules('bank_account_owner', 'Pemilik Rekening', 'required');
+		$this->form_validation->set_rules('phone_number', 'Nomor HP', 'required');
+		
+		if ($this->form_validation->run() == TRUE)
+		{
+			$this->load->model('Account_model');
+			$this->load->model('Tenant_model');
+			
+			$result = $this->Account_model->update_from_post();
+			$result = $this->Tenant_model->update_bank_info($id);
+		}
 	}
 	
 	public function create_deliverer()
