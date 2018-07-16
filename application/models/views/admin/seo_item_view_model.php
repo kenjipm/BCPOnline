@@ -28,7 +28,7 @@ class Seo_Item_View_Model extends CI_Model{
 			
 			$this->load->model('tenant_bill_model');
 			$tenant_bill_seo = $this->tenant_bill_model->get_from_seo_item_id($this->tenant_bill_list[$i]->posted_item_id);
-			if ($tenant_bill_seo != null)
+			if (($tenant_bill_seo != null) && ($tenant_bill_seo->is_confirmed_seo_item()))
 			{
 				$this->tenant_bill_list[$i]->is_seo_item_confirmed = true;
 				if ($tenant_bill_seo->is_paid_seo_item())

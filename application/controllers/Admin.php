@@ -63,7 +63,7 @@ class Admin extends CI_Controller {
 		// Load Body
 		$this->load->model('Tenant_bill_model');
 		$tenant_bills = $this->Tenant_bill_model->get_all_seo_unpaid_by_tenants();
-		
+
 		$this->load->model('views/admin/seo_item_view_model');
 		$this->seo_item_view_model->get($tenant_bills);
 		

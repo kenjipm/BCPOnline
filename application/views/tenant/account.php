@@ -33,7 +33,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" id="name" name="name" value="<?=$model->account->name ?>" />
+			<input type="text" class="cb-input-text cb-col-full" id="name" name="name" value="<?=$model->account->name ?>" readonly/>
 			<span class="text-danger"><?= form_error('name'); ?></span>
 		</div>
 	</div>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" id="address" name="address" value="<?=$model->account->address ?>" />
+			<input type="text" class="cb-input-text cb-col-full" id="address" name="address" value="<?=$model->account->address ?>" readonly/>
 			<span class="text-danger"><?= form_error('address'); ?></span>
 		</div>
 	</div>
@@ -77,7 +77,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full datepicker" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth ?>" />
+			<input type="text" class="cb-input-text cb-col-full datepicker" id="date_of_birth" name="date_of_birth" value="<?=$model->account->date_of_birth ?>" readonly/>
 			<span class="text-danger"><?= form_error('date_of_birth'); ?></span>
 		</div>
 	</div>
@@ -99,7 +99,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" id="phone_number" name="phone_number" value="<?=$model->account->phone_number ?>" />
+			<input type="text" class="cb-input-text cb-col-full" id="phone_number" name="phone_number" value="<?=$model->account->phone_number ?>" readonly />
 			<span class="text-danger"><?= form_error('phone_number'); ?></span>
 		</div>
 	</div>
@@ -121,7 +121,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" id="identification_no" name="identification_no" value="<?=$model->account->identification_no ?>" />
+			<input type="text" class="cb-input-text cb-col-full" id="identification_no" name="identification_no" value="<?=$model->account->identification_no ?>" readonly/>
 			<span class="text-danger"><?= form_error('identification_no'); ?></span>
 		</div>
 	</div>
@@ -143,7 +143,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" id="email" name="email" value="<?=$model->account->email ?>" />
+			<input type="text" class="cb-input-text cb-col-full" id="email" name="email" value="<?=$model->account->email ?>" readonly/>
 			<span class="text-danger"><?= form_error('email'); ?></span>
 		</div>
 	</div>
@@ -166,7 +166,6 @@
 		</div>
 		<div class="cb-row cb-col-fifth-3">
 			<input type="password" class="cb-input-text cb-col-full" id="old_password" name="old_password" value="<?= set_value('old_password'); ?>" />
-			<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 		</div>
 	</div>
 	<div class="cb-row cb-p-5">
@@ -188,7 +187,6 @@
 		</div>
 		<div class="cb-row cb-col-fifth-3">
 			<input type="password" class="cb-input-text cb-col-full" name="password" value="<?= set_value('password'); ?>"/>
-			<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 			<span class="text-danger"><?= form_error('password'); ?></span>
 		</div>
 	</div>
@@ -211,12 +209,11 @@
 		</div>
 		<div class="cb-row cb-col-fifth-3">
 			<input type="password" class="cb-input-text cb-col-full" name="passconf" value="<?= set_value('passconf'); ?>"/>
-			<span class="text-info">Kosongkan jika tidak ingin mengubah password</span>
 			<span class="text-danger"><?= form_error('passconf'); ?></span>
 		</div>
 	</div>
 	<div class="cb-row cb-p-5">
-		<button type="submit" class="cb-button-form cb-margin-auto">SIMPAN</button>
+		<button type="submit" class="cb-button-form cb-margin-auto">UBAH PASSWORD</button>
 	</div>
 </div>
 </form>	

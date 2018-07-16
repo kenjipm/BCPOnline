@@ -2,6 +2,8 @@
 <div class="cb-col-full cb-txt-primary-1 cb-font-title">
 	<div class="cb-align-center cb-font-size-xl">DETIL AKUN</div>
 </div>
+<form action="<?=site_url('account/account_detail/' . $model->account->id)?>" class="form-horizontal" method="post" enctype="multipart/form-data">
+<input type="hidden" name="id" value="<?= $model->account->id ?>">
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<div class="cb-row cb-mb-5">
 		<div class="cb-col-fifth">
@@ -21,7 +23,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" value="<?=$model->account->name ?>" readonly/>
+			<input type="text" class="cb-input-text cb-col-full" name="name" value="<?=$model->account->name ?>" readonly/>
 		</div>
 	</div>
 	<div class="cb-row cb-mb-5">
@@ -42,7 +44,7 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
-			<input type="text" class="cb-input-text cb-col-full" value="<?=$model->account->address ?>" readonly/>
+			<input type="text" class="cb-input-text cb-col-full" name="address" value="<?=$model->account->address ?>" readonly/>
 		</div>
 	</div>
 	<div class="cb-row cb-mb-5">
@@ -84,7 +86,19 @@
 			</div>
 		</div>
 		<div class="cb-row cb-col-fifth-3">
+			<?php if ($model->account->type == "TENANT") 
+			{
+			?>
+			<input type="text" class="cb-input-text cb-col-full" name="phone_number" value="<?=$model->account->phone_number ?>"/>
+			<span class="text-danger"><?= form_error('phone_number'); ?></span>
+			<?php
+			} else
+			{
+			?>
 			<input type="text" class="cb-input-text cb-col-full" name="phone_number" value="<?=$model->account->phone_number ?>" readonly/>
+			<?php
+			}
+			?>
 		</div>
 	</div>
 	<div class="cb-row cb-mb-5">
@@ -129,6 +143,100 @@
 			<input type="text" class="cb-input-text cb-col-full" name="email" value="<?=$model->account->email ?>" readonly/>
 		</div>
 	</div>
+	<?php if ($model->account->type == "TENANT") 
+	{
+	?>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> No. Rekening</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_account" value="<?=$model->account->bank_account ?>"/>
+				<span class="text-danger"><?= form_error('bank_account'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Atas Nama</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_account_owner" value="<?=$model->account->bank_account_owner ?>"/>
+				<span class="text-danger"><?= form_error('bank_account_owner'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Nama Bank</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_name" value="<?=$model->account->bank_name ?>"/>
+				<span class="text-danger"><?= form_error('bank_name'); ?></span>
+			</div>
+		</div>
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-fifth">
+				<div class="cb-row">
+					<div class="cb-col-fifth-4">
+						<div class="cb-txt-primary-1 cb-pull-left">
+							<div class="cb-label"> Cabang Bank</div>
+						</div>
+					</div>
+					<div class="cb-col-fifth">
+						<div class="cb-align-center">
+							<div class="cb-txt-primary-1">
+								<div class="cb-label"> : </div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="cb-row cb-col-fifth-3">
+				<input type="text" class="cb-input-text cb-col-full" name="bank_branch" value="<?=$model->account->bank_branch ?>"/>
+				<span class="text-danger"><?= form_error('bank_branch'); ?></span>
+			</div>
+		</div>
+	<?php
+	}
+	?>
 	<div class="cb-row cb-mb-5">
 		<div class="cb-col-fifth">
 			<div class="cb-row">
@@ -145,7 +253,7 @@
 					</div>
 				</div>
 			</div>
-		</div>
+		</div>		
 		<div class="cb-row cb-col-fifth-3">
 			<input type="text" class="cb-input-text cb-col-full" name="status" value="<?=$model->account->status ?>" readonly/>
 		</div>
@@ -159,7 +267,17 @@
 			$this->load->view('admin/popup/approval');
 		?>
 	</div>
+	<?php if ($model->account->type == "TENANT") 
+	{
+	?>
+	<div class="cb-row cb-p-5">
+		<button type="submit" class="cb-button-form cb-margin-auto">UBAH AKUN</button>
+	</div>
+	<?php
+	}
+	?>
 </div>
+</form>
 	
 
 <div id="popup_unblock" class="popup popup-md">

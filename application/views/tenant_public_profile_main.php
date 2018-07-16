@@ -56,6 +56,8 @@
 							<?php
 								foreach($model->tenant->items as $item)
 								{
+									if ($item->item_type == "ORDER")
+									{
 									?>
 									<a href="<?=site_url('item/'.$item->id)?>" class="cb-col-fifth">
 										<div class="item_thumbnail cb-border-round">
@@ -86,6 +88,59 @@
 										</div>
 									</a>
 									<?php
+									}
+								}
+							?>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="cb-row cb-mb-5">
+			<div class="cb-col-full">
+				<div class="cb-panel">
+					<div class="cb-panel-heading cb-align-center">
+						<h3 class="cb-txt-primary-1 cb-font-title">JASA SERVIS DARI TOKO INI</h3>
+					</div>
+					<div class="cb-panel-body cb-p-2">
+						<div class="item-showcase cb-row">
+							<?php
+								foreach($model->tenant->items as $item)
+								{
+									if ($item->item_type == "REPAIR")
+									{
+									?>
+									<a href="<?=site_url('item/'.$item->id)?>" class="cb-col-fifth">
+										<div class="item_thumbnail cb-border-round">
+											<div class="item_heart">
+												<div class="item_heart_icon cb-heart-red cb-heart">
+													<div class="item_heart_count"><?=$item->favorite->favorite_count?></div>
+												</div>
+											</div>
+											<div class="item_photo">
+												<img src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
+											</div>
+											<div class="item_tenant_name">
+											</div>
+											<div class="item_name">
+												<?=$item->posted_item_name?>
+											</div>
+											<div class="item_separator"></div>
+											<div class="item_initial_price">
+												<?= $item->is_hot_item ? $item->price : "&nbsp;" ?>
+											</div>
+											<div class="item_current_price">
+												<?= $item->is_hot_item ? $item->hot_item->promo_price : $item->price ?>
+											</div>
+											<div class="item_rating cb-row cb-vertical-center cb-align-center">
+												<span class="cb-star cb-star-<?=$item->rating->rating_average_round?>"></span>
+												<span class="cb-ml-2">(<?= $item->rating->rating_count ?>)</span>
+											</div>
+										</div>
+									</a>
+									<?php
+									}
 								}
 							?>
 						</div>
