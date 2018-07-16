@@ -30,7 +30,7 @@
 						</div>
 						<div class="item_separator"></div>
 						<div class="item_initial_price">
-							<?= $favorite_item->is_hot_item ? $favorite_item->posted_item->price : "&nbsp;" ?>
+							<?= $favorite_item->is_hot_item ? $favorite_item->posted_item->price : "" ?>
 						</div>
 						<div class="item_current_price">
 							<?= $favorite_item->is_hot_item ? $favorite_item->hot_item->promo_price : $favorite_item->posted_item->price ?>

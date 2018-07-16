@@ -8,14 +8,14 @@ function container_print()
 	// get header print html data
 	$.ajax({
 		type: "GET",
-		url: base_url + "/admin/get_header_print/",
+		url: base_url + "/account/get_header_print/",
 		success: function(data) {
 			header_html = data;
 	
 			// get footer print html data
 			$.ajax({
 				type: "GET",
-				url: base_url + "/admin/get_footer_print/",
+				url: base_url + "/account/get_footer_print/",
 				success: function(data) {
 					footer_html = data;
 					

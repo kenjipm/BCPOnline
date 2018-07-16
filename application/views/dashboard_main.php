@@ -65,7 +65,7 @@
 		if (count($model->hot_items) > 0)
 		{
 			?>
-			<div class="<?=($model->bidding_item != null)?'cb-col-half':'cb-col-full'?> cb-p-2">
+			<div class="<?=(($model->bidding_item != null) || (count($model->flash_items) > 0))?'cb-col-half':'cb-col-full'?> cb-p-2">
 				<div class="cb-panel">
 					<div class="cb-panel-heading cb-row">
 						<div class="cb-icon cb-icon-sm cb-icon-flag cb-mr-2"></div>
@@ -266,7 +266,7 @@
 											</div>
 											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $tenant_item->is_hot_item ? $tenant_item->price : "&nbsp;" ?>
+												<?= $tenant_item->is_hot_item ? $tenant_item->price : "" ?>
 											</div>
 											<div class="item_current_price">
 												<?= $tenant_item->is_hot_item ? $tenant_item->hot_item->promo_price : $tenant_item->price ?>

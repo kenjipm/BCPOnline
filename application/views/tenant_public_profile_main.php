@@ -74,7 +74,7 @@
 											</div>
 											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $item->is_hot_item ? $item->price : "&nbsp;" ?>
+												<?= $item->is_hot_item ? $item->price : "" ?>
 											</div>
 											<div class="item_current_price">
 												<?= $item->is_hot_item ? $item->hot_item->promo_price : $item->price ?>

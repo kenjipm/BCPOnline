@@ -45,6 +45,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->is_followed	= ($item->tenant->is_followed($this->session->child_id) != null);
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");
 		$this->item->tenant->btn_text	= ($this->item->tenant->is_followed ? "SUDAH DIIKUTI" : "IKUTI");
+		$this->item->tenant->rating = $item->tenant->calculate_rating();
 		
 		$item->get_hot_item();
 		$this->item->is_hot_item = ($item->hot_item != null);
@@ -58,6 +59,7 @@ class Item_main_view_model extends CI_Model {
 		$this->item->tenant->account = new class{};
 		$this->item->tenant->account->is_tenant_admin = in_array($item->tenant->account->email, TENANT_ADMIN_EMAILS);
 		$this->item->tenant->account->profile_pic	= site_url(($item->tenant->account->profile_pic != "") ? $item->tenant->account->profile_pic : DEFAULT_PROFILE_PIC);
+		$this->item->tenant->account->is_blocked = $item->tenant->account->is_blocked();
 		
 		$this->item->total_quantity_available = 0;
 		foreach ($item_variances as $item_variance)
@@ -112,6 +114,7 @@ class Item_main_view_model extends CI_Model {
 			$feedback_temp = new class{};
 			
 			$feedback_temp->feedback_text = $feedback->feedback_text;
+			$feedback_temp->feedback_reply = $feedback->feedback_reply;
 			$feedback_temp->rating_class = number_format(round($feedback->rating * 2) / 2, 1, "-", "");
 			$feedback_temp->account_name = $feedback->name;
 			

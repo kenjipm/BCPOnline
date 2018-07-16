@@ -139,6 +139,7 @@ class Feedback_model extends CI_Model {
 		$query = $this->db->query('
 			SELECT
 				feedback_text,
+				feedback_reply,
 				rating,
 				account.name
 			FROM feedback

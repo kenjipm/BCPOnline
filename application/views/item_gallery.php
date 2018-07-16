@@ -30,7 +30,7 @@
 						</div>
 						<div class="item_separator"></div>
 						<div class="item_initial_price">
-							
+							<?=""?>
 						</div>
 						<div class="item_current_price">
 							<?=$item->price?>

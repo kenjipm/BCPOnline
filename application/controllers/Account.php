@@ -54,6 +54,12 @@ class Account extends CI_Controller {
 	// Admin View
 	public function account_list()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -342,6 +348,18 @@ class Account extends CI_Controller {
 			
 			redirect('account/signup_success');
 		}
+	}
+	
+	public function get_header_print()
+	{
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header_print', $data_header);
+	}
+	
+	public function get_footer_print()
+	{
+		$this->load->view('footer_print');
 	}
 	
 }

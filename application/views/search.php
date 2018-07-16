@@ -49,7 +49,7 @@
 								</div>
 								<div class="item_separator"></div>
 								<div class="item_initial_price">
-									<?= $promoted_item->is_hot_item ? $promoted_item->price : "&nbsp;" ?>
+									<?= $promoted_item->is_hot_item ? $promoted_item->price : "" ?>
 								</div>
 								<div class="item_current_price">
 									<?= $promoted_item->is_hot_item ? $promoted_item->hot_item->promo_price : $promoted_item->price ?>
@@ -85,7 +85,7 @@
 								</div>
 								<div class="item_separator"></div>
 								<div class="item_initial_price">
-									<?= $search_item->is_hot_item ? $search_item->price : "&nbsp;" ?>
+									<?= $search_item->is_hot_item ? $search_item->price : "" ?>
 								</div>
 								<div class="item_current_price">
 									<?= $search_item->is_hot_item ? $search_item->hot_item->promo_price : $search_item->price ?>

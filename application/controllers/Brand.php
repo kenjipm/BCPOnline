@@ -21,6 +21,12 @@ class Brand extends CI_Controller {
 	// Admin View
 	public function brand_list()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -41,6 +47,12 @@ class Brand extends CI_Controller {
 	// Admin Post Brand
 	public function create_brand()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// kalau create brand baru
 		if ($this->input->method() == "post") $this->post_brand_do();
 		

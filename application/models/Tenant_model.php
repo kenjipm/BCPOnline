@@ -4,6 +4,10 @@ class Tenant_model extends CI_Model {
 	
 	private $table_default = 'tenant';
 	private $table_tenant = 'tenant';
+	private $table_feedback = 'feedback';
+	private $table_order_details = 'order_details';
+	private $table_item = 'posted_item';
+	private $table_item_variance = 'posted_item_variance';
 	
 	public $id;
 	public $tenant_id;
@@ -212,6 +216,35 @@ class Tenant_model extends CI_Model {
 		return $this->account;
 	}
 
+	public function calculate_rating()
+	{
+		$query = $this->db
+					  ->select('AVG('.$this->table_feedback.'.rating) AS rating_average, COUNT('.$this->table_feedback.'.id) AS rating_count')
+					  ->join($this->table_order_details, $this->table_feedback.'.order_detail_id' . ' = ' . $this->table_order_details.'.id', 'left')
+					  ->join($this->table_item_variance, $this->table_order_details.'.posted_item_variance_id' . ' = ' . $this->table_item_variance.'.id', 'left')
+					  ->join($this->table_item, $this->table_item_variance.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left')
+					  ->where($this->table_item.'.tenant_id', $this->id)
+					  ->where($this->table_order_details.'.order_status', ORDER_STATUS['name']['DONE'])
+					  // ->group_by($this->table_feedback.'.id')
+					  ->get($this->table_feedback);
+		$item = $query->row();
+		
+		if ($item == null)
+		{
+			$item = new class{};
+			$item->rating_average = 0;
+			$item->rating_average_round = "0-0";
+			$item->rating_count = 0;
+		}
+		else
+		{
+			$item->rating_average_round = number_format(round($item->rating_average * 2) / 2, 1, "-", "");
+		}
+		
+		return $item;
+		
+	}
+	
 }
 
 ?>

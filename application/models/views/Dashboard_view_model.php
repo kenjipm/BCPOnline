@@ -45,7 +45,7 @@ class Dashboard_view_model extends CI_Model {
 			$temp->posted_item_name	= $hot_item->posted_item->posted_item_name;
 			$temp->initial_price	= $this->text_renderer->to_rupiah($hot_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);
-			$temp->image_one_name	= $hot_item->posted_item->image_one_name;
+			$temp->image_one_name	= site_url(($hot_item->posted_item->image_one_name !== "") ? $hot_item->posted_item->image_one_name : DEFAULT_ITEM_PICTURE[$hot_item->posted_item->item_type]);
 			
 			$hot_item->init_posted_item();
 			$temp->rating			= $hot_item->posted_item->calculate_rating();
@@ -66,7 +66,7 @@ class Dashboard_view_model extends CI_Model {
 			$temp->posted_item_name	= $flash_item->posted_item->posted_item_name;
 			$temp->initial_price	= $this->text_renderer->to_rupiah($flash_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($flash_item->promo_price);
-			$temp->image_one_name	= $flash_item->posted_item->image_one_name;
+			$temp->image_one_name	= site_url(($flash_item->posted_item->image_one_name !== "") ? $flash_item->posted_item->image_one_name : DEFAULT_ITEM_PICTURE[$flash_item->posted_item->item_type]);
 			// $temp->payment_expiration	= $flash_item->payment_expiration;
 			
 			$flash_item->init_posted_item();
@@ -82,7 +82,7 @@ class Dashboard_view_model extends CI_Model {
 			$temp->id				= $tenant_item->id;
 			$temp->posted_item_name	= $tenant_item->posted_item_name;
 			$temp->price			= $this->text_renderer->to_rupiah($tenant_item->price);
-			$temp->image_one_name	= $tenant_item->image_one_name;
+			$temp->image_one_name	= site_url(($tenant_item->image_one_name !== "") ? $tenant_item->image_one_name : DEFAULT_ITEM_PICTURE[$tenant_item->item_type]);
 			$temp->rating			= $tenant_item->calculate_rating();
 			$temp->favorite			= $tenant_item->calculate_favorite();
 			
@@ -125,7 +125,7 @@ class Dashboard_view_model extends CI_Model {
 			$this->bidding_item->price = $bidding_item->price;
 			$this->bidding_item->bidding_step = $bidding_item->bidding_max_range;
 			$this->bidding_item->price_str = $this->text_renderer->to_rupiah($bidding_item->price);
-			$this->bidding_item->image_one_name	= $bidding_item->image_one_name;
+			$this->bidding_item->image_one_name	= site_url(($bidding_item->image_one_name !== "") ? $bidding_item->image_one_name : DEFAULT_ITEM_PICTURE[$bidding_item->item_type]);
 			
 			$this->bidding_item->start_bid_price	= $bidding_item->price + $bidding_item->bidding_max_range;
 		}

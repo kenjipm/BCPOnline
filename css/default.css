@@ -504,6 +504,15 @@ h4 { font-weight: bold; }
     border-radius: 7px;
 	z-index: 100;
 	width: 240px;
+	background-color: #e55026;
+}
+
+.hover_menu-text.navbar-cb-strip-product-text {
+	color: #ffffff;
+}
+
+.hover_menu-text.navbar-cb-strip-product-text:hover {
+	color: #434747;
 }
 
 /*.navbar-cb-top-profile-menu > li {

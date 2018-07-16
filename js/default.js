@@ -21,6 +21,14 @@ function init_hover_menu(hovered_element, menu_element) {
 	}, function(){
 		$(menu_element).hide();
 	});
+	
+	$(hovered_element + ", " + menu_element).click(function(){
+		if ($(menu_element).is(":visible")) {
+			$(menu_element).hide();
+		} else {
+			$(menu_element).show();
+		}
+	});
 }
 
 $(document).ready(function(){

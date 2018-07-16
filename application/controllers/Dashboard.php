@@ -34,7 +34,7 @@ class Dashboard extends CI_Controller {
 			$this->load->model('hot_item_model');
 			$hot_items = $this->hot_item_model->get_all(6);
 			
-			$flash_items = $this->hot_item_model->get_all_flash();
+			$flash_items = $this->hot_item_model->get_all_flash(99);
 			
 			$this->load->model('following_tenant_model');
 			$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);

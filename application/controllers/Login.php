@@ -70,6 +70,7 @@ class Login extends CI_Controller {
 		$this->load->model('Account_model');
 		$user = $this->Account_model->get_from_login($email, $password);
 		$id = "";
+		$name = "";
 		$child_id = "";
 		$account_id = "";
 		$profile_pic = "";
@@ -84,6 +85,7 @@ class Login extends CI_Controller {
 			}
 			
 			$id = $user->id;
+			$name = $user->name;
 			$child_id = $user->child_id;
 			$account_id = $user->account_id;
 			$profile_pic = $user->profile_pic;
@@ -94,6 +96,7 @@ class Login extends CI_Controller {
 		// {
 			$userdata = array(
 				'id' => $id,
+				'name' => $name,
 				'child_id' => $child_id,
 				'account_id' => $account_id,
 				'profile_pic' => $profile_pic,

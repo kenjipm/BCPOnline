@@ -39,6 +39,12 @@ class Reward extends CI_Controller {
 	// Admin view
 	public function reward_list()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -61,6 +67,12 @@ class Reward extends CI_Controller {
 	
 	public function create_reward()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// kalau create reward baru
 		if ($this->input->method() == "post") $this->post_reward_do();
 		
@@ -96,6 +108,12 @@ class Reward extends CI_Controller {
 	
 	public function setting_reward()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// kalau create reward baru
 		if ($this->input->method() == "post") $this->post_setting_reward_do();
 		

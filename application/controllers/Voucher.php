@@ -64,6 +64,12 @@ class Voucher extends CI_Controller {
 	
 	public function create_voucher()
 	{
+		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		if ($this->input->method() == "post") $this->post_voucher_do();
 		
 		// Load Header

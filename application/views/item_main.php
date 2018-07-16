@@ -51,7 +51,7 @@
 							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
 						</div>
 						<div class="item_initial_price">
-							<?= $model->item->is_hot_item ? $model->item->price : "&nbsp;" ?>
+							<?= $model->item->is_hot_item ? $model->item->price : "" ?>
 						</div>
 						<div class="cb-font-title cb-txt-primary-1 cb-font-size-xl item_current_price">
 							<?= $model->item->is_hot_item ? $model->item->hot_item->promo_price : $model->item->price ?>
@@ -81,7 +81,7 @@
 							}
 						?>
 						<div class="cb-row cb-mt-5">
-							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')" <?=$model->item->is_empty_stock ? "disabled='disabled'" : ""?>><?=$model->item->is_empty_stock ? "STOK HABIS" : "BELI"?></button>
+							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')" <?=$model->item->is_empty_stock ? "disabled='disabled'" : ($model->item->tenant->account->is_blocked ? "disabled='disabled'" : "")?>><?=$model->item->is_empty_stock ? "STOK HABIS" : ($model->item->tenant->account->is_blocked ? "TENANT TIDAK AKTIF" : "BELI")?></button>
 						</div>
 					</div>
 					<div class="cb-col-full cb-mt-5 cb-border-top">
@@ -106,6 +106,10 @@
 							<a class="cb-font-title cb-txt-primary-1 cb-font-size-xl" href="<?=site_url('tenant/profile/'.$model->item->tenant->id)?>">
 								<?=$model->item->tenant->tenant_name?>
 							</a>
+							<div class="item_rating cb-row cb-vertical-center cb-align-center">
+								<span class="cb-star cb-star-<?=$model->item->tenant->rating->rating_average_round?>"></span>
+								<span class="cb-row cb-align-center cb-ml-2"><?= ($model->item->tenant->rating->rating_count >= 50) ? "dari ".$model->item->tenant->rating->rating_count." transaksi" : ""?></span>
+							</div>
 							<div class="cb-col-full cb-row cb-align-center">
 								<button type="button" class="<?= $model->item->tenant->btn_class ?> cb-button cb-col-fourth-3" id="btn-toggle_tenant_favorite" onclick="toggle_tenant_favorite(<?=$model->item->tenant->id?>)"><?= $model->item->tenant->btn_text ?></button>
 							</div>
@@ -152,7 +156,7 @@
 											</div>
 											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $other_item->is_hot_item ? $other_item->price : "&nbsp;" ?>
+												<?= $other_item->is_hot_item ? $other_item->price : "" ?>
 											</div>
 											<div class="item_current_price">
 												<?= $other_item->is_hot_item ? $other_item->hot_item->promo_price : $other_item->price ?>
@@ -195,6 +199,17 @@
 										<div class="cb-col-full cb-font-size-lg cb-font-title cb-txt-primary-1"><?=$feedback->account_name?></div>
 										<div class="cb-star cb-star-sm cb-star-<?=$feedback->rating_class?>"></div>
 										<div class="cb-col-full"><?=$feedback->feedback_text?></div>
+										<?php
+											if ($feedback->feedback_reply)
+											{
+												?>
+												<div class="cb-pl-5 cb-pt-5 cb-col-full cb-row">
+													<div class="cb-pl-5 cb-col-full cb-font-size-lg cb-font-title cb-txt-primary-1"><?=$model->item->tenant->tenant_name?></div>
+													<div class="cb-pl-5 cb-col-full"><?=$feedback->feedback_reply?></div>
+												</div>
+												<?php
+											}
+										?>
 									</div>
 									<?php
 								}

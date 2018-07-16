@@ -19,7 +19,7 @@ $config['top_menu_guest'] = array(
 	'strip' => array(
 		'DASHBOARD' => array(
 			'text'	=> "BERANDA",
-			'url'	=> "",
+			'url'	=> "dashboard",
 			'notif'	=> "",
 			),
 		'PRODUCT' => array(
@@ -81,7 +81,7 @@ $config['top_menu_customer'] = array(
 	'strip' => array(
 		'DASHBOARD' => array(
 			'text'	=> "BERANDA",
-			'url'	=> "",
+			'url'	=> "dashboard",
 			'notif'	=> "",
 			),
 		'PRODUCT' => array(

@@ -37,7 +37,7 @@ class Billing extends CI_Controller {
 		
 		if ($this->session->type == TYPE['name']['TENANT'])
 		{
-			
+			redirect('');
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['ADMIN']) // dummy
 		{
