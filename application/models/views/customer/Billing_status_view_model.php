@@ -72,6 +72,7 @@ class Billing_status_view_model extends CI_Model {
 					$temp_order->posted_item_variance->posted_item->name = $order->posted_item_variance->posted_item->posted_item_name;
 					$temp_order->posted_item_variance->posted_item->price = $this->text_renderer->to_rupiah($order->sold_price);
 					$temp_order->posted_item_variance->posted_item->tenant_id = $order->posted_item_variance->posted_item->tenant_id;
+					$temp_order->posted_item_variance->posted_item->tenant_name = $order->posted_item_variance->posted_item->tenant->tenant_name;
 					// $temp_order->delivery_receipt_no = $order->delivery_receipt_no;
 					$temp_order->order_status = ORDER_STATUS['description'][$order->order_status];
 					$temp_order->is_received = (($order->order_status == ORDER_STATUS['name']['RECEIVED']) || ($order->order_status == ORDER_STATUS['name']['RECEIVED_BY_COURIER']));
