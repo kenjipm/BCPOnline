@@ -108,7 +108,7 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_address->ro_city_id	= $shipping_address->ro_city_id;
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
 		
-		$this->load->config('payment_method');
+		$this->load->config('payment_method_'.ENVIRONMENT);
 		if ($order_type == "REPAIR") 
 			$payment_method_list = $this->config->item('repair_payment_methods');
 		else //if ($order_type == "ORDER") 
@@ -200,7 +200,7 @@ class Billing_view_model extends CI_Model {
 		$this->billing->shipping_address->ro_city_id	= $shipping_address->ro_city_id;
 		$this->billing->shipping_address->full_address	= $shipping_address->get_full_address() ?? "";
 		
-		$this->load->config('payment_method');
+		$this->load->config('payment_method_'.ENVIRONMENT);
 		if ($order_type == "REPAIR") 
 			$payment_method_list = $this->config->item('repair_payment_methods');
 		else //if ($order_type == "ORDER") 

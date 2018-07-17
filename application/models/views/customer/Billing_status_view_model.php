@@ -33,7 +33,7 @@ class Billing_status_view_model extends CI_Model {
 		$this->billing->shipping_charge	= $this->text_renderer->to_rupiah($billing->shipping_charge->fee_amount);
 		$this->billing->total_not_paid	= $billing->total_payable; // awalnnya ikutin amount yg harus dibayar dulu
 		
-		$this->load->config('payment_method');
+		$this->load->config('payment_method_'.ENVIRONMENT);
 		foreach($payments as $payment)
 		{
 			$cur_payment_config = $this->config->item($payment->payment_method);

@@ -100,6 +100,17 @@ class Payment_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
+	public function get_from_natural_id($natural_id)
+	{
+		$where['payment_id'] = $natural_id;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_payment, 1);
+		$item = $query->row();
+		
+		return ($item !== null) ? $this->get_stub_from_db($item) : null;
+	}
+	
 	public function get_all()
 	{
 		$query = $this->db->get($this->table_payment);
