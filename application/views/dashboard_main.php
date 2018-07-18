@@ -313,6 +313,20 @@
 	</div>
 </div>
 
+<!-- POPUP BID SUCCESS DEPOSIT -->
+<input type="hidden" id="is_popup_bid_success_deposit_show" value="<?=($status=="dep")?"1":"0"?>"/>
+<div id="popup_bid_success_deposit" class="popup popup-md">
+	<div class="panel panel-default cb-row">
+		<div class="cb-col-full cb-row cb-bg-image cb-bg-image-popup_bidding cb-txt-primary-3 cb-font-title cb-align-center cb-border-round">
+			<div class="cb-col-full cb-row cb-font-size-dhuar cb-align-center cb-mt-xl">SELAMAT</div>
+			<div class="cb-col-full cb-row cb-font-size-xxl cb-align-center cb-pb-5">Deposit Anda telah terverifikasi, Anda dapat mengikuti lelang!</div>
+			<div class="cb-col-fifth cb-row cb-mb-5">
+				<button type="button" class="cb-button cb-button-alternative cb-col-full" onclick="popup.close('popup_bid_success_deposit')">OK</button>
+			</div>
+		</div>
+	</div>
+</div>
+
 <!-- POPUP BID DEPOSIT -->
 
 <div id="popup_bid_deposit" class="popup popup-md">
@@ -324,11 +338,13 @@
 			<form>
 				<div class="form-group">
 					<div class="col-sm-12">
-						Untuk dapat mengikuti lelang, harap melakukan deposit dulu melalui transfer ke rekening 123456789 BCA a/n PT SAMP sejumlah <b>Rp 100.000</b>
-						<button type="button" onclick="dummy_deposit_done()" class="btn btn-default">Deposit (dummy)</button>
+						Untuk dapat mengikuti lelang, harap melakukan pembayaran deposit dulu sejumlah <b>Rp 100.000</b>
+						<a class="cb-txt-primary-1" href="<?=site_url('about/bidding')?>">Pelajari Lebih Lanjut > ></a>
+						<?php /* <button type="button" onclick="dummy_deposit_done()" class="btn btn-default">Deposit (dummy)</button> */ ?>
 					</div>
+					<br/>
 					<div class="col-sm-12">
-						<a class="btn btn-default" href="<?=site_url('about/bidding')?>">Pelajari Lebih Lanjut</a>
+						<a href="<?=site_url('billing/confirm_deposit_bidding_do')?>" class="btn btn-default">DEPOSIT</a>
 						<button type="button" class="btn btn-default cb-pull-right" onclick="popup.close('popup_bid_deposit')">TUTUP</button>
 					</div>
 				</div>

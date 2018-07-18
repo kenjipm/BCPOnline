@@ -355,6 +355,7 @@ defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
 */
 defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberku');
 defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
+defined('DEPOSIT_BIDDING_PRICE') OR define('DEPOSIT_BIDDING_PRICE', '100000'); // harga bidding deposit
 // defined('EMAIL_RETRY_COUNT') OR define('EMAIL_RETRY_COUNT', 3);
 
 /*

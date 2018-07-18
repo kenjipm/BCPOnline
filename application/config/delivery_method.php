@@ -3,7 +3,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 $config['delivery_methods'] = array('CYBERKU', 'JNE', 'TIKI', 'POS');
 
-$config['no_tracking_delivery_methods'] = array('CYBERKU');
+$config['no_tracking_delivery_methods'] = array('cyberku');
 
 $config['order_delivery_methods'] = array('jne', 'tiki', 'pos');
 $config['repair_delivery_methods'] = array('cyberku');
@@ -28,7 +28,7 @@ $config['cyberku'] = array(
 	'name'				=> 'cyberku',
 	'description'		=> 'Cyberku Delivery',
 	'long_description'	=> '',
-	'ro_api_code'		=> '',
+	'ro_api_code'		=> 'cyberku',
 	'status_api_url'	=> '',
 );
 

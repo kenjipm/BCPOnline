@@ -70,20 +70,6 @@
 					</div>
 					<div class="cb-col-third pull-right cb-p-5">
 						<div class="cb-row">
-							<div class="cb-col-third-2">
-								Ongkos Kirim
-							</div>
-							<div class="cb-col-third pull-right">
-								<div class="cb-label cb-align-right"><?=$model->shipping_charge?></div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="cb-row">
-					<div class="cb-col-third-2">
-					</div>
-					<div class="cb-col-third pull-right cb-p-5">
-						<div class="cb-row">
 							<div class="cb-col-third">
 								Total
 							</div>
@@ -305,10 +291,22 @@
 				</div>
 				<div class="form-group">
 					<div class="col-sm-3">
+						<label>Provinsi</label>
+					</div>
+					<div class="col-sm-6">
+						<select id="ro_province_id" name="ro_province_id" class="form-control">
+						</select>
+						<input type="hidden" id="province" name="province"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<div class="col-sm-3">
 						<label>Kota</label>
 					</div>
 					<div class="col-sm-6">
-						<input type="text" name="city" class="form-control"/>
+						<select id="ro_city_id" name="ro_city_id" class="form-control">
+						</select>
+						<input type="hidden" id="city" name="city"/>
 					</div>
 				</div>
 				<div class="form-group">
@@ -349,7 +347,7 @@
 				</div> */ ?>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
-						<button type="submit" class="btn btn-default" id="btn-address_add">Tambah</button>
+						<button type="submit" class="btn btn-default" id="btn-address_add" >Tambah</button>
 						<button type="button" class="btn btn-default" onclick="popup.close('popup_address')">Batal</button>
 					</div>
 				</div>

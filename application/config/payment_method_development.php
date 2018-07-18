@@ -21,6 +21,14 @@ $config['COD'] = array(
 	'status_api_url'	=> '',
 );
 
+$config[''] = array(
+	'name'				=> '',
+	'description'		=> 'Other',
+	'long_description'	=> '',
+	'doku_channel_code'	=> '',
+	'status_api_url'	=> '',
+);
+
 $config['CREDITCARD'] = array(
 	'name'				=> 'CREDITCARD',
 	'description'		=> 'Kartu Kredit',

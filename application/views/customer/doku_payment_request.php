@@ -10,32 +10,32 @@
 		</script>
 	</head>
 	<body>
-		<form action="<?=$action_url?>" id="form_payment_request" method="POST">
-			<input type="hidden" name="BASKET" value="<?=$BASKET?>"/>
-			<input type="hidden" name="MALLID" value="<?=$MALLID?>"/>
-			<input type="hidden" name="CHAINMERCHANT" value="<?=$CHAINMERCHANT?>"/>
-			<input type="hidden" name="AMOUNT" value="<?=$AMOUNT?>"/>
-			<input type="hidden" name="PURCHASEAMOUNT" value="<?=$PURCHASEAMOUNT?>"/>
-			<input type="hidden" name="TRANSIDMERCHANT" value="<?=$TRANSIDMERCHANT?>"/>
-			<!--input type="hidden" name="PAYMENTTYPE" value="<?=$PAYMENTTYPE?>"/-->
-			<input type="hidden" name="WORDS" value="<?=$WORDS?>"/>
-			<input type="hidden" name="REQUESTDATETIME" value="<?=$REQUESTDATETIME?>"/>
-			<input type="hidden" name="CURRENCY" value="<?=$CURRENCY?>"/>
-			<input type="hidden" name="PURCHASECURRENCY" value="<?=$PURCHASECURRENCY?>"/>
-			<input type="hidden" name="SESSIONID" value="<?=$SESSIONID?>"/>
-			<input type="hidden" name="NAME" value="<?=$NAME?>"/>
-			<input type="hidden" name="EMAIL" value="<?=$EMAIL?>"/>
-			<input type="hidden" name="PAYMENTCHANNEL" value="<?=$PAYMENTCHANNEL?>"/>
-			<input type="hidden" name="ADDRESS" value=""/>
-			<input type="hidden" name="COUNTRY" value=""/>
-			<input type="hidden" name="STATE" value=""/>
-			<input type="hidden" name="CITY" value=""/>
-			<input type="hidden" name="PROVINCE" value=""/>
-			<input type="hidden" name="ZIPCODE" value=""/>
-			<input type="hidden" name="HOMEPHONE" value=""/>
-			<input type="hidden" name="MOBILEPHONE" value=""/>
-			<input type="hidden" name="WORKPHONE" value=""/>
-			<input type="hidden" name="BIRTHDATE" value=""/>
+		<form action="<?=$model->action_url?>" id="form_payment_request" method="POST">
+			<input type="hidden" name="BASKET" value="<?=$model->BASKET?>"/>
+			<input type="hidden" name="MALLID" value="<?=$model->MALLID?>"/>
+			<input type="hidden" name="CHAINMERCHANT" value="<?=$model->CHAINMERCHANT?>"/>
+			<input type="hidden" name="AMOUNT" value="<?=$model->AMOUNT?>"/>
+			<input type="hidden" name="PURCHASEAMOUNT" value="<?=$model->PURCHASEAMOUNT?>"/>
+			<input type="hidden" name="TRANSIDMERCHANT" value="<?=$model->TRANSIDMERCHANT?>"/>
+			<input type="hidden" name="PAYMENTTYPE" value="<?=$model->PAYMENTTYPE?>"/>
+			<input type="hidden" name="WORDS" value="<?=$model->WORDS?>"/>
+			<input type="hidden" name="REQUESTDATETIME" value="<?=$model->REQUESTDATETIME?>"/>
+			<input type="hidden" name="CURRENCY" value="<?=$model->CURRENCY?>"/>
+			<input type="hidden" name="PURCHASECURRENCY" value="<?=$model->PURCHASECURRENCY?>"/>
+			<input type="hidden" name="SESSIONID" value="<?=$model->SESSIONID?>"/>
+			<input type="hidden" name="NAME" value="<?=$model->NAME?>"/>
+			<input type="hidden" name="EMAIL" value="<?=$model->EMAIL?>"/>
+			<input type="hidden" name="PAYMENTCHANNEL" value="<?=$model->PAYMENTCHANNEL?>"/>
+			<input type="hidden" name="ADDRESS" value="<?=$model->ADDRESS?>"/>
+			<input type="hidden" name="COUNTRY" value="<?=$model->COUNTRY?>"/>
+			<input type="hidden" name="STATE" value="<?=$model->STATE?>"/>
+			<input type="hidden" name="CITY" value="<?=$model->CITY?>"/>
+			<input type="hidden" name="PROVINCE" value="<?=$model->PROVINCE?>"/>
+			<input type="hidden" name="ZIPCODE" value="<?=$model->ZIPCODE?>"/>
+			<input type="hidden" name="HOMEPHONE" value="<?=$model->HOMEPHONE?>"/>
+			<input type="hidden" name="MOBILEPHONE" value="<?=$model->MOBILEPHONE?>"/>
+			<input type="hidden" name="WORKPHONE" value="<?=$model->WORKPHONE?>"/>
+			<input type="hidden" name="BIRTHDATE" value="<?=$model->BIRTHDATE?>"/>
 		</form>
 	</body>
 </html>

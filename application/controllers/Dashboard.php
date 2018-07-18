@@ -47,7 +47,7 @@ class Dashboard extends CI_Controller {
 			
 			// Load Header
 			$data_header['css_list'] = array('ad_boxes', 'slider');
-			$data_header['js_list'] = array('slider');
+			$data_header['js_list'] = array('dashboard_main', 'slider');
 			
 			$last_bidding = null;
 			if ($bidding_item != null)
@@ -71,6 +71,7 @@ class Dashboard extends CI_Controller {
 			$this->load->model('views/dashboard_view_model');
 			$this->dashboard_view_model->get($categories, $hot_items, $flash_items, $tenant_items, $bidding_item, $last_bidding);
 			$data['model'] = $this->dashboard_view_model;
+			$data['status'] = $this->input->get('status') ?? "";
 			$this->load->view('dashboard_main', $data);
 		}
 		

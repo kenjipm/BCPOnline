@@ -23,6 +23,7 @@ class Billing_status_view_model extends CI_Model {
 		$cur_delivery_config = $this->config->item($billing->delivery_method);
 		
 		$this->billing->id				= $billing->id;
+		$this->billing->bill_id			= $billing->bill_id;
 		$this->billing->delivery_method	= $cur_delivery_config['description'];
 		$this->billing->delivery_type	= $billing->delivery_type;
 		$this->billing->date_created	= $billing->date_created;

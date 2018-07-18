@@ -43,7 +43,7 @@ class Billing_unconfirmed_view_model extends CI_Model {
 			$temp->posted_item_id	= $posted_item_variance->posted_item->id;
 			$temp->posted_item_name	= $posted_item_variance->posted_item->posted_item_name;
 			$temp->price			= $order_detail->sold_price;
-			$temp->image_one_name	= $posted_item_variance->image_two_name;
+			$temp->image_one_name	= site_url($posted_item_variance->posted_item->image_one_name);
 			$temp->var_type			= $posted_item_variance->var_type;
 			$temp->var_description	= $posted_item_variance->var_description;
 			

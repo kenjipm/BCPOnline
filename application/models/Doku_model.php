@@ -157,9 +157,7 @@ class Doku_model extends CI_Model {
 	
 	public function insert()
 	{
-		$this->load->model('doku_model');
-	
-		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
 		if ($this->db->insert($this->table_doku, $db_item))
 		{
 			$this->id = $this->db->insert_id();
@@ -168,6 +166,12 @@ class Doku_model extends CI_Model {
 	
 	public function update_from_notify()
 	{
+		$transidmerchant = $this->input->post('TRANSIDMERCHANT');
+		$this->db->where('transidmerchant', $transidmerchant);
+		$query = $this->db->get($this->table_doku, 1);
+		$result = $query->row();
+		$this->id = $result->id;
+		
 		$status = $this->input->post('RESULTMSG');
 		
         $this->transidmerchant 		= $this->input->post('TRANSIDMERCHANT');
@@ -177,7 +181,7 @@ class Doku_model extends CI_Model {
 		$this->response_code 		= $this->input->post('RESPONSECODE');
 		
 		$this->approvalcode			= $this->input->post('APPROVALCODE');
-		$this->paymentchannel		= $this->input->post('PAYMENTCHANNEL');
+		$this->payment_channel		= $this->input->post('PAYMENTCHANNEL');
 		$this->paymentcode			= $this->input->post('PAYMENTCODE');
 		$this->session_id			= $this->input->post('SESSIONID');
 		$this->bank_issuer			= $this->input->post('BANK');
@@ -190,12 +194,52 @@ class Doku_model extends CI_Model {
 		
 		$this->trxstatus			= ($status=="SUCCESS") ? 'Success' : 'Failed';
 		
-		$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
 		$where['transidmerchant'] = $this->transidmerchant;
 		$this->db->where($where);
 		$this->db->update($this->table_doku, $db_item);
 		
 		return $this->db->affected_rows();
+		
+		/*
+		$transidmerchant = $this->input->post('TRANSIDMERCHANT');
+		$this->db->where('transidmerchant', $transidmerchant);
+		$query = $this->db->get($this->table_doku, 1);
+		$result = $query->row();
+		
+		if ($result !== null)
+		{
+			$status = $this->input->post('RESULTMSG');
+			
+			$this->db->set('transidmerchant',	$this->input->post('TRANSIDMERCHANT'));
+			$this->db->set('totalamount',		$this->input->post('AMOUNT'));
+			$this->db->set('words',				$this->input->post('WORDS'));
+			$this->db->set('statustype',		$this->input->post('STATUSTYPE'));
+			$this->db->set('response_code',		$this->input->post('RESPONSECODE'));
+			
+			$this->db->set('approvalcod',		$this->input->post('APPROVALCODE'));
+			$this->db->set('payment_channel',	$this->input->post('PAYMENTCHANNEL'));
+			$this->db->set('paymentcode',		$this->input->post('PAYMENTCODE'));
+			$this->db->set('session_id',		$this->input->post('SESSIONID'));
+			$this->db->set('bank_issuer',		$this->input->post('BANK'));
+			
+			$this->db->set('cardnumber',		$this->input->post('MCN'));
+			$this->db->set('payment_date_time',	$this->input->post('PAYMENTDATETIME'));
+			$this->db->set('verifyid',			$this->input->post('VERIFYID'));
+			$this->db->set('verifyscore',		$this->input->post('VERIFYSCORE'));
+			$this->db->set('verifystatus',		$this->input->post('VERIFYSTATUS'));
+			
+			$this->db->set('trxstatus',			($status=="SUCCESS") ? 'Success' : 'Failed');
+			
+			// $db_item = $this->get_db_from_stub(); // ambil database object dari model ini
+			// $where['id'] = $doku->id;
+			$this->db->where('id', $result->id);
+			$this->db->update($this->table_doku);
+			
+			return $this->db->affected_rows();
+		}
+		return 0;
+		*/
 	}
 	
 	public function get_from_redirect()
@@ -207,11 +251,11 @@ class Doku_model extends CI_Model {
 			$this->transidmerchant 	= $this->input->post('TRANSIDMERCHANT');
 			$this->totalamount 		= $this->input->post('AMOUNT');
 			$this->words 			= $this->input->post('WORDS');
-			$this->paymentchannel	= $this->input->post('PAYMENTCHANNEL');
+			$this->payment_channel	= $this->input->post('PAYMENTCHANNEL');
 			$this->session_id		= $this->input->post('SESSIONID');
 			$this->paymentcode		= $this->input->post('PAYMENTCODE');
 			
-			$db_item = $this->get_db_from_stub($this); // ambil database object dari model ini
+			$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
 			$this->db->where('transidmerchant', $db_item->transidmerchant);
 			$query = $this->db->get($this->table_doku, 1);
 			$doku = $query->row();

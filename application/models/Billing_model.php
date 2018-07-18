@@ -38,8 +38,8 @@ class Billing_model extends CI_Model {
 		$this->date_closed			= date("Y-m-d H:i:s", strtotime("+".INVOICE_DUE." days"));
 		$this->total_payable		= 0;
 		$this->customer_id			= 0;
-		$this->shipping_address_id	= 0;
-		$this->shipping_charge_id	= 0;
+		$this->shipping_address_id	= NULL;
+		$this->shipping_charge_id	= NULL;
 		$this->setting_reward_id	= 0; // Dummy
 		
 		$this->load->model('customer_model');
@@ -203,7 +203,7 @@ class Billing_model extends CI_Model {
 		return $this;
 	}
 	
-	public function insert()
+	public function insert($custom_type="")
 	{
 		$this->load->library('id_generator');
 		
@@ -214,7 +214,7 @@ class Billing_model extends CI_Model {
 			$this->id	= $this->db->insert_id();
 		}
 		
-		$natural_id = $this->id_generator->generate(TYPE['name']['BILLING'], $this->id);
+		$natural_id = $this->id_generator->generate(TYPE['name']['BILLING'], $this->id, $custom_type);
 		$this->update_natural_id($natural_id);
 		
 		$this->db->trans_complete();

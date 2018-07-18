@@ -13,19 +13,30 @@ class Billing extends CI_Controller {
 	{
 		parent::__construct();
 		
-		if ($this->session->id == null)
-		{
-			redirect('');
-		}
+		// if ($this->session->id == null)
+		// {
+			// redirect('');
+		// }
 		
-		if (!in_array($this->session->type, $this::ALLOWED_ROLE))
+		// if (!in_array($this->session->type, $this::ALLOWED_ROLE))
+		// {
+			// redirect('login');
+		// }
+	}
+	
+	private function authorize()
+	{
+		if (!in_array($this->session->type, $this::ALLOWED_ROLE)) // check account type, kalau bukan admin, redirect ke login page
 		{
-			redirect('login');
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
 		}
 	}
 	
 	public function index()
 	{
+		$this->authorize();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -73,6 +84,8 @@ class Billing extends CI_Controller {
 	
 	public function detail($id)
 	{
+		$this->authorize();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array('billing');
@@ -114,6 +127,8 @@ class Billing extends CI_Controller {
 	// view billing dari shopping cart
 	public function cart()
 	{
+		$this->authorize();
+		
 		$is_cart_valid = true;
 		$cart = $this->session->cart;
 		$this->load->model('posted_item_variance_model');
@@ -165,9 +180,11 @@ class Billing extends CI_Controller {
 	// view billing dari billing_unconfirmed
 	public function confirm()
 	{
+		$this->authorize();
+		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array('billing');
+        $data_header['js_list'] = array('billing', 'ro_shipping_fee');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
@@ -199,6 +216,8 @@ class Billing extends CI_Controller {
 	
 	public function confirm_do()
 	{
+		$this->authorize();
+		
 		if (($this->session->type == TYPE['name']['CUSTOMER']) &&
 			($this->input->post('customer_id') == $this->session->child_id))
 		{
@@ -239,22 +258,38 @@ class Billing extends CI_Controller {
 				$this->load->model('order_details_model');
 				$order_details = new Order_details_model();
 				$order_details = $order_details->set_all_paid_from_billing_id($billing->id);
+			
+				// redirect to confirmation page
+				redirect('billing/status/'.$billing->id);
 			}
 			else // kalau nunggu pembayaran
 			{
 				$cur_payment_method = $this->config->item($this->input->post('payment_method'));
-				// insert billing using api
+				
+				// insert billing using api (insert row ke doku table, http post redirect ke doku)
+				$this->load->model('doku_model');
+				$new_doku = new doku_model();
+				$new_doku->transidmerchant	= $payment->payment_id;
+				$new_doku->insert();
+				
+				// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+				$this->load->model('views/customer/doku_payment_request_view_model');
+				$this->doku_payment_request_view_model->get_from_billing($billing, $payment);
+				$data_doku['model'] = $this->doku_payment_request_view_model;
+				$this->load->view('customer/doku_payment_request', $data_doku);
 			}
-			
-			// redirect to confirmation page
-			redirect('billing/status/'.$billing->id);
 		}
-		redirect('');
+		else
+		{
+			redirect('');
+		}
 	}
 	
 	//
 	public function status($id)
 	{
+		$this->authorize();
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array('customer/billing_status');
@@ -290,6 +325,8 @@ class Billing extends CI_Controller {
 	
 	public function create()
 	{
+		$this->authorize();
+		
 		// create new bill here
 		
 		// redirect to confirmation page
@@ -299,6 +336,8 @@ class Billing extends CI_Controller {
 	
 	public function create_from_cart()
 	{
+		$this->authorize();
+		
 		if (($this->session->type == TYPE['name']['CUSTOMER']) &&
 			($this->input->post('customer_id') == $this->session->child_id))
 		{
@@ -389,7 +428,7 @@ class Billing extends CI_Controller {
 			}
 			else // kalau nunggu pembayaran
 			{
-				$cur_payment_method = $this->config->item($this->input->post('payment_method'));
+				// $cur_payment_method = $this->config->item($this->input->post('payment_method'));
 				
 				// insert billing using api (insert row ke doku table, http post redirect ke doku)
 				$this->load->model('doku_model');
@@ -398,68 +437,9 @@ class Billing extends CI_Controller {
 				$new_doku->insert();
 				
 				// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
-				
-				// BASKET
-				$basket_str = "";
-				foreach($this->session->cart as $id => $cart_item)
-				{
-					$posted_item_variance = $this->posted_item_variance_model->get_from_id($id);
-					$posted_item_variance->init_posted_item();
-					
-					$basket_str .= (($basket_str == "") ? "" : ";") .
-						$posted_item_variance->posted_item->posted_item_name . "," .
-						number_format($cart_item['price'], 2, '.', "") . "," .
-						$cart_item['quantity'] . "," .
-						number_format($cart_item['quantity'] * $cart_item['price'], 2, '.', "");
-				}
-				
-				// MALL ID
-				$mall_id = $this->config->item('mall_id');
-				
-				// AMOUNT
-				$amount = number_format($billing->total_payable, 2, '.', "");
-				
-				// WORDS
-				$words = sha1($amount . $mall_id . $this->config->item('shared_key') . $payment->payment_id);
-				
-				// REQUESTDATETIME
-				$cur_date = date("YmdHis");
-				
-				// CURRENCY
-				$idr_currency_code = $this->config->item('idr_currency_code');
-				
-				// SESSIONID
-				$this->load->library('id_generator');
-				$session_id = $this->id_generator->generate_session(20);
-				
-				// NAME
-				$this->load->model('account_model');
-				$cur_account = $this->account_model->get_from_id($this->session->id);
-				$name = substr($cur_account->name, 0, 50);
-				
-				// EMAIL
-				$email = substr($cur_account->email, 0, 254);
-				
-				// PAYMENTCHANNEL
-				$payment_channel_code = $cur_payment_method['doku_channel_code'];
-				
-				$data_doku = array();
-				$data_doku['action_url'] = $this->config->item('payment_request_api_url');
-				$data_doku['BASKET'] = $basket_str;
-				$data_doku['MALLID'] = $mall_id;
-				$data_doku['CHAINMERCHANT'] = "NA";
-				$data_doku['AMOUNT'] = $amount;
-				$data_doku['PURCHASEAMOUNT'] = $amount;
-				$data_doku['TRANSIDMERCHANT'] = $payment->payment_id;
-				$data_doku['PAYMENTTYPE'] = "SALE";
-				$data_doku['WORDS'] = $words;
-				$data_doku['REQUESTDATETIME'] = $cur_date;
-				$data_doku['CURRENCY'] = $idr_currency_code;
-				$data_doku['PURCHASECURRENCY'] = $idr_currency_code;
-				$data_doku['SESSIONID'] = $session_id;
-				$data_doku['NAME'] = $name;
-				$data_doku['EMAIL'] = $email;
-				$data_doku['PAYMENTCHANNEL'] = $payment_channel_code;
+				$this->load->model('views/customer/doku_payment_request_view_model');
+				$this->doku_payment_request_view_model->get_from_cart($billing, $payment);
+				$data_doku['model'] = $this->doku_payment_request_view_model;
 				$this->load->view('customer/doku_payment_request', $data_doku);
 			}
 			// baru kosongkan cart nya
@@ -471,8 +451,10 @@ class Billing extends CI_Controller {
 		}
 	}
 	
-	public function payment_dummy_bayar($id)
+	/* public function payment_dummy_bayar($id)
 	{
+		$this->authorize();
+		
 		$this->db->trans_start();
 		
 			$this->load->model('payment_model');
@@ -538,21 +520,89 @@ class Billing extends CI_Controller {
 		
 		redirect('billing/status/'.$payment->billing->id);
 	}
+	*/
+	
+	public function confirm_deposit_bidding_do()
+	{
+		$this->authorize();
+		
+		$this->load->model('setting_reward_model');
+		$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+		
+		$this->load->model('billing_model');
+		$billing = new billing_model();
+		$billing->customer_id			= $this->session->child_id;
+		$billing->delivery_type			= "";
+		$billing->setting_reward_id		= $setting_reward->id;
+		$billing->total_payable			= DEPOSIT_BIDDING_PRICE;
+		$billing->insert("DEP");
+		
+		$this->load->model('payment_model');
+		$payment = new payment_model();
+		$payment->payment_method		= "";
+		$payment->paid_amount			= 0;
+		$payment->billing_id			= $billing->id;
+		$payment->insert();
+		
+		$this->load->model('doku_model');
+		$new_doku = new doku_model();
+		$new_doku->transidmerchant	= $payment->payment_id;
+		$new_doku->insert();
+		
+		// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+		$this->load->model('views/customer/doku_payment_request_view_model');
+		$this->doku_payment_request_view_model->get_from_billing($billing, $payment);
+		$data_doku['model'] = $this->doku_payment_request_view_model;
+		$this->load->view('customer/doku_payment_request', $data_doku);
+	}
+	
+	public function confirm_payment_do($id)
+	{
+		$this->authorize();
+		
+		$this->load->model('Payment_model');
+		$payment = $this->Payment_model->get_from_id($id);
+		$this->load->model('Billing_model');
+		$billing = $this->Billing_model->get_from_id($payment->billing_id);
+		
+		$this->load->model('doku_model');
+		$new_doku = new doku_model();
+		$new_doku->transidmerchant	= $payment->payment_id;
+		$new_doku->insert();
+		
+		// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+		$this->load->model('views/customer/doku_payment_request_view_model');
+		$this->doku_payment_request_view_model->get_from_billing($billing, $payment);
+		$data_doku['model'] = $this->doku_payment_request_view_model;
+		$this->load->view('customer/doku_payment_request', $data_doku);
+		
+	}
 	
 	public function payment_do($natural_id)
 	{
-		$this->db->trans_start();
+		$this->authorize();
 		
-			$this->load->model('payment_model');
-			$payment = new Payment_model();
-			$payment = $payment->get_from_natural_id($natural_id);
-			$payment->init_billing();
-			$total_paid = $payment->get_total_paid_from_billing_id($payment->billing->id);
-			$payment->paid_amount	= $payment->billing->total_payable - $total_paid; // dummy ceritanya bayar semua aja
-			$payable_left = $payment->set_paid($payment->id);
-			
-			if ($payable_left <= 0)
+		$this->load->model('payment_model');
+		$payment = new Payment_model();
+		$payment = $payment->get_from_natural_id($natural_id);
+		$payment->init_billing();
+		$total_paid = $payment->get_total_paid_from_billing_id($payment->billing->id);
+		$payment->paid_amount	= $payment->billing->total_payable - $total_paid; // dummy ceritanya bayar semua aja
+		$payable_left = $payment->set_paid($payment->id);
+		
+		if ($payable_left <= 0)
+		{
+			if (substr($payment->billing->bill_id, 0, 3) == "DEP") // if deposit
 			{
+				$this->load->model('customer_model');
+				$this->customer_model->deposit_status_set($payment->billing->customer_id, 1);
+				
+				redirect('?status=dep&id='.$payment->billing->customer_id);
+			}
+			else 
+			{
+				$this->db->trans_start();
+				
 				$this->load->model('order_details_model');
 				$order_details = new Order_details_model();
 				$order_details->set_all_paid_from_billing_id($payment->billing->id);
@@ -600,9 +650,9 @@ class Billing extends CI_Controller {
 						$sent_tenant_email[] = $email;
 					}
 				}
+				$this->db->trans_complete();
 			}
-			
-		$this->db->trans_complete();
+		}
 		
 		redirect('billing/status/'.$payment->billing->id);
 	}
@@ -645,6 +695,8 @@ class Billing extends CI_Controller {
 	
 	public function edit()
 	{
+		$this->authorize();
+		
 		// edit bill here
 		
 		// redirect to confirmation page

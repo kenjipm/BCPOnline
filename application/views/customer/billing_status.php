@@ -5,6 +5,21 @@
 	<div class="cb-row cb-p-5">
 		<div class="cb-col-fifth">
 			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Kode Invoice </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text" id="bill_id" name="bill_id" value="<?=$model->billing->bill_id?>" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
 				<div class="cb-label"> Tanggal </div>
 			</div>
 			<div class="cb-pull-right">
@@ -17,36 +32,50 @@
 			<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->date_created?>" readonly/>
 		</div>
 	</div>
-	<div class="cb-row cb-p-5">
-		<div class="cb-col-fifth">
-			<div class="cb-txt-primary-1 cb-pull-left">
-				<div class="cb-label"> Alamat </div>
-			</div>
-			<div class="cb-pull-right">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> : </div>
+	<?php
+		if ($model->billing->address != "")
+		{
+			?>
+			<div class="cb-row cb-p-5">
+				<div class="cb-col-fifth">
+					<div class="cb-txt-primary-1 cb-pull-left">
+						<div class="cb-label"> Alamat </div>
+					</div>
+					<div class="cb-pull-right">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> : </div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-fifth-2 cb-pl-3">
+					<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->address?>" readonly/>
 				</div>
 			</div>
-		</div>
-		<div class="cb-col-fifth-2 cb-pl-3">
-			<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->address?>" readonly/>
-		</div>
-	</div>
-	<div class="cb-row cb-p-5">
-		<div class="cb-col-fifth">
-			<div class="cb-txt-primary-1 cb-pull-left">
-				<div class="cb-label"> Pengiriman </div>
-			</div>
-			<div class="cb-pull-right">
-				<div class="cb-txt-primary-1">
-					<div class="cb-label"> : </div>
+			<?php
+		}
+	?>
+	<?php
+		if ($model->billing->delivery_method != "")
+		{
+			?>
+			<div class="cb-row cb-p-5">
+				<div class="cb-col-fifth">
+					<div class="cb-txt-primary-1 cb-pull-left">
+						<div class="cb-label"> Pengiriman </div>
+					</div>
+					<div class="cb-pull-right">
+						<div class="cb-txt-primary-1">
+							<div class="cb-label"> : </div>
+						</div>
+					</div>
+				</div>
+				<div class="cb-col-fifth-2 cb-pl-3">
+					<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->billing->delivery_method?> <?=($model->billing->delivery_type != "") ? "(".$model->billing->delivery_type.")" : ""?>" readonly/>
 				</div>
 			</div>
-		</div>
-		<div class="cb-col-fifth-2 cb-pl-3">
-			<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->billing->delivery_method?> (<?=$model->billing->delivery_type?>)" readonly/>
-		</div>
-	</div>
+			<?php
+		}
+	?>
 	<div class="cb-row cb-p-5">
 		<div class="cb-col-fifth">
 			<div class="cb-txt-primary-1 cb-pull-left">
@@ -274,8 +303,11 @@
 								<div class="cb-col-fifth-2">
 									<div class="cb-align-center"><?=$payment->paid_amount?>
 									<?php if (!$payment->is_paid) { ?>
-										<a class="cb-button-form" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
+										<?php /* <a class="cb-button-form" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
 											BAYAR (dummy)
+										</a> */ ?>
+										<a class="cb-button-form" href="<?=site_url('billing/confirm_payment_do/'.$payment->id)?>">
+											BAYAR
 										</a>
 									<?php } ?>
 									</div>
