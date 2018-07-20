@@ -661,13 +661,13 @@ class Customer extends CI_Controller {
 		echo json_encode($json_result);
 	}
 	
-	public function dummy_deposit_done()
-	{
-		$this->load->model('customer_model');
-		$this->customer_model->deposit_status_set($this->session->child_id, 1);
+	// public function dummy_deposit_done()
+	// {
+		// $this->load->model('customer_model');
+		// $this->customer_model->deposit_status_set($this->session->child_id, 1);
 		
-		echo "1";
-	}
+		// echo "1";
+	// }
 	
 	public function address_add_do()
 	{

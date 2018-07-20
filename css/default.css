@@ -971,7 +971,7 @@ h4 { font-weight: bold; }
 }
 
 .item_tenant_panel {
-	height: 300px;
+	height: fit-content;
 }
 
 .label_upload_file {

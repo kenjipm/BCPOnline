@@ -190,7 +190,7 @@ class Item extends CI_Controller {
 			$item_count = $this->item_model->count_all_service_items();
 			
 			$this->load->model('views/item_gallery_view_model');
-			$this->item_gallery_view_model->get($items);
+			$this->item_gallery_view_model->get($items, 'item/service/');
 			$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 			
 			$data['title'] = "SERVICE";
@@ -352,7 +352,7 @@ class Item extends CI_Controller {
 		$item_count = $this->item_model->count_all_hot_items();
 		
 		$this->load->model('views/item_gallery_view_model');
-		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->get($items, 'item/hot_items/');
 		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = "HOT ITEMS";
@@ -376,7 +376,7 @@ class Item extends CI_Controller {
 		$item_count = $this->item_model->count_all_flash_items();
 		
 		$this->load->model('views/item_gallery_view_model');
-		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->get($items, 'item/flash_items/');
 		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = "FLASH ITEMS";
@@ -403,7 +403,7 @@ class Item extends CI_Controller {
 		$item_count = $this->item_model->count_all_from_following_tenants($following_tenants);
 		
 		$this->load->model('views/item_gallery_view_model');
-		$this->item_gallery_view_model->get($items);
+		$this->item_gallery_view_model->get($items, 'item/tenant_items/');
 		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = "NEW ITEMS";

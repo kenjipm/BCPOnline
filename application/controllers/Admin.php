@@ -438,7 +438,7 @@ class Admin extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('tenant_model');
-		$tenants = $this->tenant_model->get_all();
+		$tenants = $this->tenant_model->get_all(true);
 		
 		$categories = $this->category_model->get_all();
 		

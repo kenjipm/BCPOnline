@@ -728,6 +728,9 @@ class Billing extends CI_Controller {
 		else // if ($result->trxstatus == "Failed")
 		{
 			// redirect ke payment gagal
+			$payment = $payment->get_from_natural_id($result->transidmerchant);
+			$payment->init_billing();
+			redirect('billing/status/'.$payment->billing->id);
 		}
 	}
 	

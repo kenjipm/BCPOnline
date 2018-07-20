@@ -108,7 +108,8 @@ function submit_bid()
 {
 	var bidding_item_id = $("#bidding_item_id").val();
 	var bidding_next_price = $("#bidding_next_price").val();
-	if (confirm("Apakah kamu yakin untuk memasang harga " + bidding_next_price + " untuk barang ini?"))
+	var bidding_next_price_str = $("#bidding_next_price_str").val();
+	if (confirm("Apakah kamu yakin untuk memasang harga " + bidding_next_price_str + " untuk barang ini?"))
 	{
 		$.ajax({
 			type: "POST",

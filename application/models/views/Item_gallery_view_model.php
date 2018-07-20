@@ -20,10 +20,10 @@ class Item_gallery_view_model extends CI_Model {
 		$this->item_per_page = 0;
 	}
 	
-	public function get($items)
+	public function get($items, $page_url)
 	{
 		$this->load->library('text_renderer');
-		$this->base_url = site_url('item/service/');
+		$this->base_url = site_url($page_url);
 		$this->item_per_page = PAGINATION['type']['LIMIT_ITEM'];
 		
 		foreach($items as $item)

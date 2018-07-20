@@ -141,14 +141,15 @@ class Tenant_model extends CI_Model {
 		return ($item !== null) ? $this->get_stub_from_db($item) : null;
 	}
 	
-	public function get_all()
+	public function get_all($include_admin=false, $order_by="ASC")
 	{
 		$this->load->model('Tenant_model');
 		
 		$this->db->select('*, tenant.id AS tenant_id');
-		$this->db->where('tenant.id != 0');
+		if (!$include_admin) $this->db->where('tenant.id != 0');
 		$this->db->join('account', 'account.id=' . $this->table_tenant . '.account_id', 'left');
 		
+		$this->db->order_by('tenant.tenant_name', $order_by);
 		$query = $this->db->get($this->table_tenant);
 		$items = $query->result();
 		
