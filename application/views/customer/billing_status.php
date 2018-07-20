@@ -89,7 +89,7 @@
 		</div>
 		<div class="cb-col-fifth-4 cb-pl-3">
 			<div class="cb-row cb-border-bottom">
-				<div class="cb-col-fifth-3">
+				<div class="cb-col-half">
 					<div class="cb-row cb-pb-3">
 						<div class="cb-col-fifth">
 							<div class="cb-label cb-align-center">Tenant</div>
@@ -105,9 +105,9 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-col-fifth-2">
+				<div class="cb-col-half">
 					<div class="cb-row">
-						<div class="cb-col-fifth-3">
+						<div class="cb-col-fifth-2">
 							<div class="cb-label cb-align-center">Status</div>
 						</div>
 					</div>
@@ -118,7 +118,7 @@
 		{
 			?>
 			<div class="cb-row cb-border-bottom cb-p-5">
-				<div class="cb-col-fifth-3">
+				<div class="cb-col-half">
 					<div class="cb-row">
 						<div class="cb-col-fifth">
 							<div class="cb-align-center"><?=$order->posted_item_variance->posted_item->tenant->tenant_name?> </div>
@@ -138,7 +138,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="cb-col-fifth-2">
+				<div class="cb-col-half">
 					<div class="cb-row">
 						<div class="cb-col-fifth-3">
 							<div class="cb-align-center cb-pl-5" id="order_status-<?=$order->id?>">
