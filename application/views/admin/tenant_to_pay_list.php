@@ -37,7 +37,7 @@
 				<input type="hidden" id="payment_period_end-<?=$tenant->tenant_id?>"		value="<?=$tenant->tenant_pay_receipt->payment_period_end?>"/>
 				<input type="hidden" id="payment_purpose-<?=$tenant->tenant_id?>"			value="<?=$tenant->tenant_pay_receipt->payment_purpose?>"/>
 					
-				<button type="button" class="cb-button-form" onclick="create_tenant_pay_receipt(<?=$tenant->tenant_id?>)">Cetak Bukti Pembayaran</button>
+				<button type="button" class="cb-button-form" onclick="create_tenant_pay_receipt(<?=$tenant->tenant_id?>)" id="btn-tnt_paid_receipt_id-<?=$tenant->tenant_id?>">Cetak Bukti Pembayaran</button>
 			</div>
 		</div>
 		<?php

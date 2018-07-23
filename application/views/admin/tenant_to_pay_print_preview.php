@@ -20,7 +20,7 @@
 			</div>
 			<div class="row">
 				<div class="col-xs-3"><label>Bank</label></div>
-				<div class="col-xs-9">: <?=$model->tenant->bank_account?></div>
+				<div class="col-xs-9">: <?=$model->tenant->bank_account?> (Bank <?=$model->tenant->bank_name?>, cabang <?=$model->tenant->bank_branch?>, a.n. <?=$model->tenant->bank_account_owner?>)</div>
 			</div>
 		
 			<div class="table-responsive">

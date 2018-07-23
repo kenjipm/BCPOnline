@@ -73,7 +73,7 @@ class report_by_tenant_view_model extends CI_Model {
 			$transaction->total_customer_paid_price 	= $this->text_renderer->to_rupiah($transaction->total_customer_paid_price);
 			$transaction->total_done_paid_price 		= $this->text_renderer->to_rupiah($transaction->total_done_paid_price);
 			$transaction->total_admin_paid_price 		= $this->text_renderer->to_rupiah($transaction->total_admin_paid_price);
-			$transaction->total_admin_not_paid_price 	= $this->text_renderer->to_rupiah($transaction->total_done_paid_price - $transaction->total_admin_paid_price);
+			$transaction->total_admin_not_paid_price 	= $this->text_renderer->to_rupiah($transaction->total_admin_not_paid_price);
 			
 			foreach ($transaction->posted_items as $posted_item)
 			{

@@ -48,7 +48,7 @@
 									<?php
 								}*/
 							?>
-							<span class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</span>
+							<a href="#feedback" class="cb-ml-2">dari <?= $model->item->rating->rating_count ?> ulasan</a>
 						</div>
 							<?php
 								if ($model->item->is_hot_item)

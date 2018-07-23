@@ -12,6 +12,7 @@ function create_tenant_pay_receipt(tenant_id)
 			
 			if (!isNaN(tnt_paid_receipt_id)) {
 				$("#tnt_paid_receipt_id-" + tenant_id).val(tnt_paid_receipt_id);
+				$("#btn-tnt_paid_receipt_id-" + tenant_id).prop("disabled", true);
 				$("#form_print-" + tenant_id).submit();
 			}
 			else {

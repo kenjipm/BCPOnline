@@ -59,6 +59,15 @@ $(document).ready(function(){
 		yearRange: "c-99:c+99"
 	});
 
+	$(".date_of_birth_adult").datepicker({
+		changeMonth: true,
+		changeYear: true,
+		dateFormat: "yy-m-dd",
+		minDate: "-99Y",
+		maxDate: "-17Y",
+		yearRange: "c-99:c+99"
+	});
+
 	$(".datepicker").datepicker({
 		changeMonth: true,
 		changeYear: true,

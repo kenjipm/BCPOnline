@@ -252,7 +252,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_service_items($offset=0, $limit=20, $order="RANDOM")
+	public function get_all_service_items($offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->where('item_type', 'REPAIR');
 		$this->db->order_by('id', $order);
@@ -307,7 +307,7 @@ class Item_model extends CI_Model {
 		return $this->get_all_from_category_id($item->category_id, 1, 10);
 	}
 	
-	public function get_all_from_category_id($category_id, $offset=0, $limit=16, $order="RANDOM")
+	public function get_all_from_category_id($category_id, $offset=0, $limit=16, $order="DESC")
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -317,7 +317,7 @@ class Item_model extends CI_Model {
 					  ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
-					  ->order_by($this->table_item.'.id', $order)
+					  ->order_by($this->table_item.'.date_updated', $order)
 					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
 					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 					  
@@ -358,7 +358,7 @@ class Item_model extends CI_Model {
 					  ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
-					  ->order_by($this->table_item.'.id', $order)
+					  ->order_by($this->table_item.'.date_updated', $order)
 					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
@@ -391,7 +391,7 @@ class Item_model extends CI_Model {
 	{
 		$this->db->where('tenant_id', $tenant_id);
 		$query = $this->db
-					  ->order_by('id', $order)
+					  ->order_by('date_updated', $order)
 					  ->get($this->table_item, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
@@ -429,7 +429,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_from_search($keywords, $offset=0, $limit=20, $order="RANDOM")
+	public function get_from_search($keywords, $offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -438,7 +438,7 @@ class Item_model extends CI_Model {
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
 		$this->db->distinct();
-		$this->db->order_by($this->table_item.'.id', $order);
+		$this->db->order_by($this->table_item.'.date_updated', $order);
 		// foreach (explode(" ", $keywords) as $keyword) // untuk search per word
 		// {
 			// $this->db->or_like('name', $keyword);
@@ -465,7 +465,7 @@ class Item_model extends CI_Model {
 		return $num_rows;
 	}
 	
-	public function get_all_hot_items($offset=0, $limit=20, $order="RANDOM")
+	public function get_all_hot_items($offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, ' . $this->table_item.'.id AS id');
 		$this->db->where('tenant_bill.payment_date != 0');
@@ -478,7 +478,7 @@ class Item_model extends CI_Model {
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->group_by('posted_item.id');
 		$query = $this->db
-					  ->order_by($this->table_hot_item.'.id', $order)
+					  ->order_by($this->table_item.'.date_updated', $order)
 					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		
 		$items = $query->result();
@@ -506,7 +506,7 @@ class Item_model extends CI_Model {
 	}
 	
 	
-	public function get_all_flash_items($offset=0, $limit=20, $order="RANDOM")
+	public function get_all_flash_items($offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->select('*, ' . $this->table_hot_item.'.posted_item_id AS posted_item_id, ' . $this->table_item.'.id AS id');
 		// $this->db->where('tenant_bill.payment_date != 0');
@@ -519,7 +519,7 @@ class Item_model extends CI_Model {
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->group_by('posted_item.id');
 		$query = $this->db
-					  ->order_by($this->table_hot_item.'.id', $order)
+					  ->order_by($this->table_item.'.date_updated', $order)
 					  ->get('tenant_bill', $limit??"", $limit?$offset:""); // kalau ga ada limit, jgn taro offset nya
 		
 		$items = $query->result();

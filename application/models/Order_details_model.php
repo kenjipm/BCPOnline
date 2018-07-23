@@ -155,6 +155,7 @@ class Order_details_model extends CI_Model {
 		$stub->voucher_id				= $db_item->voucher_id;
 		
 		$stub->posted_item_name			= $db_item->posted_item_name ?? "";
+		$stub->posted_item_description			= $db_item->posted_item_description ?? "";
 		$stub->voucher_worth 			= $db_item->voucher_worth ?? 0;
 		
 		$stub->posted_item_variance						= new Posted_item_variance_model();
@@ -478,6 +479,7 @@ class Order_details_model extends CI_Model {
 		$this->db->join('voucher', 'voucher.id = order_details.voucher_id', 'left');
 		
 		$this->db->where($where);
+		$this->db->where('tenant.id <> ', 0);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
@@ -628,6 +630,7 @@ class Order_details_model extends CI_Model {
 			
 		$this->db->trans_start();
 		
+		$is_voucher_used = false;
 		foreach ($cart as $id => $cart_item)
 		{
 			$order_details = new Order_details_model();
@@ -642,7 +645,9 @@ class Order_details_model extends CI_Model {
 			$order_details->order_status			= ORDER_STATUS['name']['WAITING_FOR_PAYMENT'];
 			$order_details->billing_id				= $billing_id;
 			$order_details->posted_item_variance_id	= $id;
-			$order_details->voucher_id				= $voucher_id;
+			$order_details->voucher_id				= !$is_voucher_used ? $voucher_id : null;
+			
+			$is_voucher_used = true;
 			
 			if ($this->db->insert($this->table_order_details, $order_details->get_db_from_stub()))
 			{
@@ -1170,6 +1175,7 @@ class Order_details_model extends CI_Model {
 		$where['order_details.tnt_paid_receipt_id'] = NULL;
 		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
 		$where['posted_item.item_type != '] = "BID";
+		$where['posted_item.item_type != '] = "FLASH";
 		
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');

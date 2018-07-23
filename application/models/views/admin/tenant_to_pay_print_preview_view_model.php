@@ -23,7 +23,12 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 		$this->tenant->tenant_name	= $tenant->tenant_name;
 		$this->tenant->unit_number	= $tenant->unit_number;
 		$this->tenant->floor		= $tenant->floor;
-		$this->tenant->bank_account	= $tenant->bank_account;
+		
+		$this->tenant->bank_account			= $tenant->bank_account;
+		$this->tenant->bank_account_owner	= $tenant->bank_account_owner;
+		$this->tenant->bank_name			= $tenant->bank_name;
+		$this->tenant->bank_branch			= $tenant->bank_branch;
+		
 		$this->tenant->total_unpaid = 0;
 		
 		$this->load->library('text_renderer');
@@ -31,7 +36,7 @@ class Tenant_to_pay_print_preview_view_model extends CI_Model {
 		{
 			$temp_order_detail = new class{};
 			
-			$temp_order_detail->posted_item_name	= $order_detail->posted_item_name;
+			$temp_order_detail->posted_item_name	= ($order_detail->posted_item_name != "") ? $order_detail->posted_item_name : $order_detail->posted_item_variance->posted_item->posted_item_description;
 			$temp_order_detail->quantity			= $order_detail->quantity;
 			$temp_order_detail->sold_price			= $this->text_renderer->to_rupiah($order_detail->sold_price);
 			

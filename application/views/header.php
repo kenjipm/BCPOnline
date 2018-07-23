@@ -113,69 +113,73 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="nav-cb">
 	<div class="navbar-cb-top cb-row cb-vertical-center">
-		<!-- logo -->
-		<a class="navbar-cb-logo cb-col-tenth-2 cb-p-5" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
-		
-		<!-- search -->
-		<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search cb-col-tenth-4 cb-p-5">
-			<?php
-				if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN") && ($this->session->type != "DELIVERER"))
-				{
-					?>
-						<div class="input-group">
-							<input name="keywords" type="text" class="form-control navbar-cb-top-search-input" placeholder="Search Items...">
-							<div class="input-group-btn">
-								<button class="btn btn-default navbar-cb-top-search-input" type="submit">
-									<i class="glyphicon glyphicon-search"></i>
-								</button>
-							</div>
-						</div>
-					<?php
-				}
-			?>
-		</form>
-		
-		<!-- top menu -->
-		<div class="navbar-cb-top-menu cb-col-fill cb-row cb-align-right cb-p-5">
-			<?php
-				foreach ($top_menu_items['top'] as $menu_item)
-				{
-					?>
-					<a href="<?= ($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>" class="navbar-cb-top-menu-text cb-col-third cb-row">
-						<span class="cb-icon cb-icon-sm cb-icon-p-sm cb-icon-<?=$menu_item['icon']?> cb-vertical-center"></span>
-						<?=$menu_item['text']?>
-						<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
-					</a>
-					<?php
-				}
-			?>
-		</div>
-		
-		<!-- profile -->
-		<div class="navbar-cb-top-profile cb-col-tenth cb-align-right cb-pb-5 cb-pt-5">
-			<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>
-			<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
+		<div class="cb-row cb-col-tenth-9 cb-vertical-center">
+			<!-- logo -->
+			<a class="navbar-cb-logo cb-col-tenth-2 cb-p-5" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
+			
+			<!-- search -->
+			<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search cb-col-tenth-4 cb-p-5">
 				<?php
-					if (isset($this->session->name))
+					if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN") && ($this->session->type != "DELIVERER"))
 					{
 						?>
-						<div class="cb-col-full cb-align-left cb-p-3">
-							<b>Halo, <?=$this->session->name?></b>
-						</div>
+							<div class="input-group">
+								<input name="keywords" type="text" class="form-control navbar-cb-top-search-input" placeholder="Search Items...">
+								<div class="input-group-btn">
+									<button class="btn btn-default navbar-cb-top-search-input" type="submit">
+										<i class="glyphicon glyphicon-search"></i>
+									</button>
+								</div>
+							</div>
 						<?php
 					}
 				?>
+			</form>
+			
+			<!-- top menu -->
+			<div class="navbar-cb-top-menu cb-col-fill cb-row cb-align-right cb-p-5">
 				<?php
-					foreach ($top_menu_items['profile'] as $menu_item)
+					foreach ($top_menu_items['top'] as $menu_item)
 					{
 						?>
-						<div class="cb-col-full cb-align-left cb-p-3"><a href="<?=($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
+						<a href="<?= ($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>" class="navbar-cb-top-menu-text cb-col-third cb-row">
+							<span class="cb-icon cb-icon-sm cb-icon-p-sm cb-icon-<?=$menu_item['icon']?> cb-vertical-center"></span>
 							<?=$menu_item['text']?>
 							<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
-						</a></div>
+						</a>
 						<?php
 					}
 				?>
+			</div>
+		</div>
+		
+		<div class="cb-row cb-col-tenth cb-align-right">
+			<!-- profile -->
+			<div class="navbar-cb-top-profile cb-align-right cb-pb-5 cb-pt-5">
+				<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>
+				<div class="hover_menu navbar-cb-top-profile-menu cb-row cb-col-full">
+					<?php
+						if (isset($this->session->name))
+						{
+							?>
+							<div class="cb-col-full cb-align-left cb-p-3">
+								<b>Halo, <?=$this->session->name?></b>
+							</div>
+							<?php
+						}
+					?>
+					<?php
+						foreach ($top_menu_items['profile'] as $menu_item)
+						{
+							?>
+							<div class="cb-col-full cb-align-left cb-p-3"><a href="<?=($menu_item['url'] != "") ? site_url($menu_item['url']) : "#" ?>" class="hover_menu-text navbar-cb-top-profile-menu-text">
+								<?=$menu_item['text']?>
+								<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
+							</a></div>
+							<?php
+						}
+					?>
+				</div>
 			</div>
 		</div>
 	</div>

@@ -28,19 +28,28 @@ class Report_model extends CI_Model {
 		$this->db->select('
 			billing.bill_id AS natural_billing_id,
 			billing.date_created AS date_bill_created,
+			voucher.voucher_worth AS voucher_worth,
 			SUM(order_details.sold_price * order_details.quantity) AS total_price,
 			SUM(CASE WHEN (
 					order_details.order_status <> \''.ORDER_STATUS['name']['WAITING_FOR_PAYMENT'].'\'
 				) THEN order_details.sold_price * order_details.quantity ELSE 0 END) AS total_customer_paid_price,
 			SUM(CASE WHEN (
 					order_details.order_status = \''.ORDER_STATUS['name']['DONE'].'\'
-				) THEN order_details.sold_price * order_details.quantity ELSE 0 END) AS total_done_paid_price,
+				) THEN order_details.sold_price * order_details.quantity + 
+					(CASE WHEN ( order_details.voucher_id IS NOT NULL ) THEN voucher.voucher_worth ELSE 0 END)
+				ELSE 0 END) AS total_done_paid_price,
 			SUM(CASE WHEN (
-					order_details.tnt_paid_receipt_id IS NOT NULL
-				) THEN order_details.sold_price * order_details.quantity ELSE 0 END) AS total_admin_paid_price
+					order_details.tnt_paid_receipt_id IS NOT NULL OR (tenant.id = 0 AND order_details.order_status = \''.ORDER_STATUS['name']['DONE'].'\')
+				) THEN order_details.sold_price * order_details.quantity +
+						(CASE WHEN ( order_details.voucher_id IS NOT NULL ) THEN voucher.voucher_worth ELSE 0 END)
+					ELSE 0 END) AS total_admin_paid_price
 		');
 		
 		$this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
+		$this->db->join('voucher', 'order_details.voucher_id = voucher.id', 'left');
+		$this->db->join('posted_item_variance', 'order_details.posted_item_variance_id = posted_item_variance.id', 'left');
+		$this->db->join('posted_item', 'posted_item_variance.posted_item_id = posted_item.id', 'left');
+		$this->db->join('tenant', 'posted_item.tenant_id = tenant.id', 'left');
 		$this->db->where('billing.date_created >= ', $start_date);
 		$this->db->where('billing.date_created <= ', "DATE_ADD('".$end_date."', INTERVAL 1 DAY)", false);
 		$this->db->group_by('billing.id');
@@ -73,13 +82,18 @@ class Report_model extends CI_Model {
 				) THEN order_details.sold_price * order_details.quantity ELSE 0 END AS total_customer_paid_price,
 			CASE WHEN (
 					order_details.order_status = \''.ORDER_STATUS['name']['DONE'].'\'
-				) THEN order_details.sold_price * order_details.quantity ELSE 0 END AS total_done_paid_price,
+				) THEN order_details.sold_price * order_details.quantity +
+					(CASE WHEN ( order_details.voucher_id IS NOT NULL ) THEN voucher.voucher_worth ELSE 0 END)
+				ELSE 0 END AS total_done_paid_price,
 			CASE WHEN (
-					order_details.tnt_paid_receipt_id IS NOT NULL
-				) THEN order_details.sold_price * order_details.quantity ELSE 0 END AS total_admin_paid_price
+					order_details.tnt_paid_receipt_id IS NOT NULL OR (tenant.id = 0 AND order_details.order_status = \''.ORDER_STATUS['name']['DONE'].'\')
+				) THEN order_details.sold_price * order_details.quantity +
+					(CASE WHEN ( order_details.voucher_id IS NOT NULL ) THEN voucher.voucher_worth ELSE 0 END)
+				ELSE 0 END AS total_admin_paid_price
 		');
 		
 		$this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
+		$this->db->join('voucher', 'order_details.voucher_id = voucher.id', 'left');
 		$this->db->join('posted_item_variance', 'order_details.posted_item_variance_id = posted_item_variance.id', 'left');
 		$this->db->join('posted_item', 'posted_item_variance.posted_item_id = posted_item.id', 'left');
 		$this->db->join('tenant', 'posted_item.tenant_id = tenant.id', 'left');

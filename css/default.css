@@ -85,7 +85,15 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 .cb-border-right	{ border-right: 1px solid #434747; }
 .cb-border-bottom	{ border-bottom: 1px solid #434747; }
 .cb-border-left		{ border-left: 1px solid #434747; }
-.cb-border-white	{ border-color: #ffffff; }
+
+.cb-border-bold			{ border: 3px solid; }
+.cb-border-bolder		{ border: 5px solid; }
+.cb-border-primary-1						{ border-color: #e55026; }
+.cb-border-primary-2						{ border-color: #faa528; }
+.cb-border-primary-3, .cb-border-white		{ border-color: #ffffff; }
+.cb-border-secondary-1						{ border-color: #434747; }
+.cb-border-secondary-2						{ border-color: #8c8b8a; }
+.cb-border-secondary-3						{ border-color: #e6e6e5; }
 
 .cb-pull-right { float: right; }
 .cb-pull-left { float: left; }

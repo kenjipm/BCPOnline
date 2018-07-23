@@ -348,7 +348,7 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('item_model');
-		$items = $this->item_model->get_all_hot_items();
+		$items = $this->item_model->get_all_hot_items(($page - 1) * PAGINATION['type']['LIMIT_HOT_ITEM']);
 		$item_count = $this->item_model->count_all_hot_items();
 		
 		$this->load->model('views/item_gallery_view_model');
@@ -372,7 +372,7 @@ class Item extends CI_Controller {
 		
 		// Load Body
 		$this->load->model('item_model');
-		$items = $this->item_model->get_all_flash_items();
+		$items = $this->item_model->get_all_flash_items(($page - 1) * PAGINATION['type']['LIMIT_FLASH_ITEM']);
 		$item_count = $this->item_model->count_all_flash_items();
 		
 		$this->load->model('views/item_gallery_view_model');
@@ -399,7 +399,7 @@ class Item extends CI_Controller {
 		$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
 		
 		$this->load->model('item_model');
-		$items = $this->item_model->get_all_from_following_tenants($following_tenants);
+		$items = $this->item_model->get_all_from_following_tenants($following_tenants, ($page - 1) * PAGINATION['type']['LIMIT_TENANT_ITEM']);
 		$item_count = $this->item_model->count_all_from_following_tenants($following_tenants);
 		
 		$this->load->model('views/item_gallery_view_model');

@@ -78,9 +78,13 @@ class Category_model extends CI_Model {
 	
 	public function get_all()
 	{
-		$query = $this->db
-					->order_by('category_name', 'ASC')
-					->get($this->table_category);
+		// $query = $this->db
+					// ->order_by('category_name', 'ASC')
+					// ->get($this->table_category);
+		$query = $this->db->query(
+			" SELECT * " .
+			" FROM " . $this->table_category .
+			" ORDER BY (CASE WHEN category_name LIKE '%Lainnya%' THEN 1 ELSE 0 END) ASC, category_name ASC");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
