@@ -3,6 +3,7 @@
 class Doku_model extends CI_Model {
 	
 	private $table_doku = 'doku';
+	private $table_billing = 'billing';
 	
 	// table attribute
 	public $id;
@@ -147,6 +148,17 @@ class Doku_model extends CI_Model {
 		return ($doku !== null) ? $this->get_stub_from_db($doku) : null;
 	}
 	
+	public function get_from_transidmerchant($transidmerchant)
+	{
+		$where['transidmerchant'] = $transidmerchant;
+		
+		$this->db->where($where);
+		$query = $this->db->get($this->table_doku, 1);
+		$doku = $query->row();
+		
+		return ($doku !== null) ? $this->get_stub_from_db($doku) : null;
+	}
+	
 	public function get_all()
 	{
 		$query = $this->db->get($this->table_doku);
@@ -154,6 +166,8 @@ class Doku_model extends CI_Model {
 		
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
+	
+	
 	
 	public function insert()
 	{
@@ -164,11 +178,24 @@ class Doku_model extends CI_Model {
 		}
 	}
 	
+	public function update_session_id($transidmerchant, $session_id)
+	{
+		$this->db->where('transidmerchant', $transidmerchant);
+		$this->db->set('session_id', $session_id);
+		$this->db->order_by('id', 'DESC');
+		$this->db->limit(1);
+		$this->db->update($this->table_doku);
+		
+		return $this->db->affected_rows();
+	}
+	
 	public function update_from_notify()
 	{
 		$transidmerchant = $this->input->post('TRANSIDMERCHANT');
 		$this->db->where('transidmerchant', $transidmerchant);
+		$this->db->order_by('id', 'DESC');
 		$query = $this->db->get($this->table_doku, 1);
+		// print_r($this->db->last_query());
 		$result = $query->row();
 		$this->id = $result->id;
 		
@@ -186,7 +213,7 @@ class Doku_model extends CI_Model {
 		$this->session_id			= $this->input->post('SESSIONID');
 		$this->bank_issuer			= $this->input->post('BANK');
 		
-		$this->cardnumber			= $this->input->post('MCN');
+		$this->creditcard			= $this->input->post('MCN');
 		$this->payment_date_time 	= $this->input->post('PAYMENTDATETIME');
 		$this->verifyid 			= $this->input->post('VERIFYID');
 		$this->verifyscore 			= $this->input->post('VERIFYSCORE');
@@ -195,6 +222,7 @@ class Doku_model extends CI_Model {
 		$this->trxstatus			= ($status=="SUCCESS") ? 'Success' : 'Failed';
 		
 		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
+		$where['id'] = $this->id;
 		$where['transidmerchant'] = $this->transidmerchant;
 		$this->db->where($where);
 		$this->db->update($this->table_doku, $db_item);
@@ -223,7 +251,7 @@ class Doku_model extends CI_Model {
 			$this->db->set('session_id',		$this->input->post('SESSIONID'));
 			$this->db->set('bank_issuer',		$this->input->post('BANK'));
 			
-			$this->db->set('cardnumber',		$this->input->post('MCN'));
+			$this->db->set('creditcard',		$this->input->post('MCN'));
 			$this->db->set('payment_date_time',	$this->input->post('PAYMENTDATETIME'));
 			$this->db->set('verifyid',			$this->input->post('VERIFYID'));
 			$this->db->set('verifyscore',		$this->input->post('VERIFYSCORE'));
@@ -244,10 +272,10 @@ class Doku_model extends CI_Model {
 	
 	public function get_from_redirect()
 	{
-		$status_code 	= $this->input->post('STATUSCODE');
+		// $status_code 	= $this->input->post('STATUSCODE');
 		
-		if ($status_code=="0000") // 0000 = Success
-		{
+		// if ($status_code=="0000") // 0000 = Success
+		// {
 			$this->transidmerchant 	= $this->input->post('TRANSIDMERCHANT');
 			$this->totalamount 		= $this->input->post('AMOUNT');
 			$this->words 			= $this->input->post('WORDS');
@@ -257,17 +285,78 @@ class Doku_model extends CI_Model {
 			
 			$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
 			$this->db->where('transidmerchant', $db_item->transidmerchant);
+			$this->db->order_by('id', 'DESC');
 			$query = $this->db->get($this->table_doku, 1);
 			$doku = $query->row();
 			
 			return ($doku !== null) ? $this->get_stub_from_db($doku) : null;
-		}
-		else
-		{
+		// }
+		// else
+		// {
 			
-		}
+		// }
 			
 	}
+	
+	
+	public function update_from_identify()
+	{
+		$transidmerchant = $this->input->post('TRANSIDMERCHANT');
+		$session_id = $this->input->post('SESSIONID');
+		
+		$this->db->set('totalamount',		$this->input->post('AMOUNT'));
+		$this->db->set('payment_channel',	$this->input->post('PAYMENTCHANNEL'));
+		// $this->db->set('session_id',		$this->input->post('SESSIONID'));
+		
+		$this->db->where('transidmerchant', $transidmerchant);
+		$this->db->where('session_id', $session_id);
+		
+		$this->db->update($this->table_doku);
+		return $this->db->affected_rows();
+	}
+	
+	
+	public function update_from_check_status($response_obj)
+	{
+		$transidmerchant = $response_obj->TRANSIDMERCHANT;
+		$this->db->where('transidmerchant', $transidmerchant);
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_doku, 1);
+		$result = $query->row();
+		$this->id = $result->id;
+		$this->statustype = $result->statustype;
+		
+		$status = $response_obj->RESULTMSG;
+		
+        $this->transidmerchant 		= $response_obj->TRANSIDMERCHANT;
+		$this->totalamount 			= $response_obj->AMOUNT;
+		$this->words    			= $response_obj->WORDS;
+		// $this->statustype 			= $response_obj->STATUSTYPE;
+		$this->response_code 		= $response_obj->RESPONSECODE;
+		
+		$this->approvalcode			= $response_obj->APPROVALCODE;
+		$this->payment_channel		= $response_obj->PAYMENTCHANNEL;
+		$this->paymentcode			= $response_obj->PAYMENTCODE;
+		$this->session_id			= $response_obj->SESSIONID;
+		$this->bank_issuer			= $response_obj->BANK;
+		
+		$this->creditcard			= $response_obj->MCN;
+		$this->payment_date_time 	= $response_obj->PAYMENTDATETIME;
+		$this->verifyid 			= $response_obj->VERIFYID;
+		$this->verifyscore 			= $response_obj->VERIFYSCORE;
+		$this->verifystatus 		= $response_obj->VERIFYSTATUS;
+		
+		$this->trxstatus			= ($status=="SUCCESS") ? 'Success' : 'Failed';
+		
+		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
+		$where['id'] = $this->id;
+		$where['transidmerchant'] = $this->transidmerchant;
+		$this->db->where($where);
+		$this->db->update($this->table_doku, $db_item);
+		
+		return $this->db->affected_rows();
+	}
+	
 }
 
 ?>

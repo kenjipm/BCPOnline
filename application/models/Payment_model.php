@@ -168,6 +168,13 @@ class Payment_model extends CI_Model {
 				 ->update($this->table_payment);
 	}
 	
+	public function update_payment_method()
+	{
+		$this->db->set('payment_method', $this->payment_method)
+				 ->where('id', $this->id)
+				 ->update($this->table_payment);
+	}
+	
 	public function set_paid($id)
 	{
 		$data['paid_amount'] = $this->paid_amount;

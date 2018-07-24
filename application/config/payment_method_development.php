@@ -9,9 +9,17 @@ $config['mall_id'] = "6075";
 $config['shared_key'] = "xgw322WPGb5B";
 $config['idr_currency_code'] = "360";
 $config['payment_request_api_url'] = "https://staging.doku.com/Suite/Receive";
+$config['check_status_api_url'] = "https://staging.doku.com/Suite/CheckStatus";
 
 $config['order_payment_methods'] = array('CREDITCARD', 'MANDIRI_VA', 'DOKU', 'MANDIRI_CLICKPAY');
 $config['repair_payment_methods'] = array('CREDITCARD', 'MANDIRI_VA', 'DOKU', 'MANDIRI_CLICKPAY');
+
+$config['channel_codes'] = array(
+	'15'	=> 'CREDITCARD',
+	'41'	=> 'MANDIRI_VA',
+	'04'	=> 'DOKU',
+	'02'	=> 'MANDIRI_CLICKPAY',
+);
 
 $config['COD'] = array(
 	'name'				=> 'COD',
@@ -23,7 +31,7 @@ $config['COD'] = array(
 
 $config[''] = array(
 	'name'				=> '',
-	'description'		=> 'Other',
+	'description'		=> '-',
 	'long_description'	=> '',
 	'doku_channel_code'	=> '',
 	'status_api_url'	=> '',

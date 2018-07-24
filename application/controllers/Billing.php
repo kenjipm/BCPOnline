@@ -26,7 +26,7 @@ class Billing extends CI_Controller {
 	
 	private function authorize()
 	{
-		if (!in_array($this->session->type, $this::ALLOWED_ROLE)) // check account type, kalau bukan admin, redirect ke login page
+		if ((!in_array($this->session->type, $this::ALLOWED_ROLE)) && ($this->input->post('TRANSIDMERCHANT') === null)) // check account type, kalau bukan admin, redirect ke login page
 		{
 			$return_url = $this->input->post_get('return_url') ?? "";
 			redirect('login?return_url='.$return_url);
@@ -578,7 +578,7 @@ class Billing extends CI_Controller {
 		
 	}
 	
-	public function payment_do($natural_id)
+	public function payment_do($natural_id, $is_redirect=true)
 	{
 		$this->authorize();
 		
@@ -586,75 +586,79 @@ class Billing extends CI_Controller {
 		$payment = new Payment_model();
 		$payment = $payment->get_from_natural_id($natural_id);
 		$payment->init_billing();
-		$total_paid = $payment->get_total_paid_from_billing_id($payment->billing->id);
-		$payment->paid_amount	= $payment->billing->total_payable - $total_paid; // dummy ceritanya bayar semua aja
-		$payable_left = $payment->set_paid($payment->id);
 		
-		if ($payable_left <= 0)
+		if ($payment->paid_amount == 0) // kalau blm ada pembayarannya
 		{
-			if (substr($payment->billing->bill_id, 0, 3) == "DEP") // if deposit
+			$total_paid = $payment->get_total_paid_from_billing_id($payment->billing->id);
+			$payment->paid_amount	= $payment->billing->total_payable - $total_paid; // dummy ceritanya bayar semua aja
+			$payable_left = $payment->set_paid($payment->id);
+			
+			if ($payable_left <= 0)
 			{
-				$this->load->model('customer_model');
-				$this->customer_model->deposit_status_set($payment->billing->customer_id, 1);
-				
-				redirect('?status=dep&id='.$payment->billing->customer_id);
-			}
-			else 
-			{
-				$this->db->trans_start();
-				
-				$this->load->model('order_details_model');
-				$order_details = new Order_details_model();
-				$order_details->set_all_paid_from_billing_id($payment->billing->id);
-				
-				$this->load->model('setting_reward_model');
-				$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
-				
-				$total_paid = $payment->paid_amount;
-				$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
-				
-				$this->recursive_point_increment($point_get, "", $payment->billing->id, $this->session->child_id);
-		
-				// kirim email ke tenant ybs
-				$order_details = $this->order_details_model->get_all_from_billing_id($payment->billing->id);
-				$sent_tenant_email = array();
-				
-				$this->load->library('email');
-				foreach($order_details as $order_detail)
+				if (substr($payment->billing->bill_id, 0, 3) == "DEP") // if deposit
 				{
-					$order_detail->init_posted_item_variance();
-					$order_detail->posted_item_variance->init_posted_item();
-					$order_detail->posted_item_variance->posted_item->init_tenant();
-					$order_detail->posted_item_variance->posted_item->tenant->init_account();
+					$this->load->model('customer_model');
+					$this->customer_model->deposit_status_set($payment->billing->customer_id, 1);
 					
-					$email = $order_detail->posted_item_variance->posted_item->tenant->account->email;
-					$tenant_name = $order_detail->posted_item_variance->posted_item->tenant->tenant_name;
-					
-					$is_email_sent = false;
-					$i = 0;
-					while (!$is_email_sent && ($i < count(ADMIN_EMAILS)))
-					{
-						$this->email->from(ADMIN_EMAILS[$i], 'Admin '.COMPANY_NAME);
-						$this->email->to($email);
-
-						$this->email->subject('Pesanan Baru!');
-						$this->email->message("Halo, ".$tenant_name."! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku");
-
-						$is_email_sent = $this->email->send();
-						
-						$i++;
-					}
-					
-					if ($is_email_sent)
-					{
-						$sent_tenant_email[] = $email;
-					}
+					redirect('?status=dep&id='.$payment->billing->customer_id);
 				}
-				$this->db->trans_complete();
+				else 
+				{
+					$this->db->trans_start();
+					
+					$this->load->model('order_details_model');
+					$order_details = new Order_details_model();
+					$order_details->set_all_paid_from_billing_id($payment->billing->id);
+					
+					$this->load->model('setting_reward_model');
+					$latest_setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+					
+					$total_paid = $payment->paid_amount;
+					$point_get = floor($total_paid / $latest_setting_reward->price_per_point) * $latest_setting_reward->point_get;
+					
+					$this->recursive_point_increment($point_get, "", $payment->billing->id, $payment->billing->customer_id);
+			
+					// kirim email ke tenant ybs
+					$order_details = $this->order_details_model->get_all_from_billing_id($payment->billing->id);
+					$sent_tenant_email = array();
+					
+					$this->load->library('email');
+					foreach($order_details as $order_detail)
+					{
+						$order_detail->init_posted_item_variance();
+						$order_detail->posted_item_variance->init_posted_item();
+						$order_detail->posted_item_variance->posted_item->init_tenant();
+						$order_detail->posted_item_variance->posted_item->tenant->init_account();
+						
+						$email = $order_detail->posted_item_variance->posted_item->tenant->account->email;
+						$tenant_name = $order_detail->posted_item_variance->posted_item->tenant->tenant_name;
+						
+						$is_email_sent = false;
+						$i = 0;
+						while (!$is_email_sent && ($i < count(ADMIN_EMAILS)))
+						{
+							$this->email->from(ADMIN_EMAILS[$i], 'Admin '.COMPANY_NAME);
+							$this->email->to($email);
+
+							$this->email->subject('Pesanan Baru!');
+							$this->email->message("Halo, ".$tenant_name."! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku");
+
+							$is_email_sent = $this->email->send();
+							
+							$i++;
+						}
+						
+						if ($is_email_sent)
+						{
+							$sent_tenant_email[] = $email;
+						}
+					}
+					$this->db->trans_complete();
+				}
 			}
 		}
 		
-		redirect('billing/status/'.$payment->billing->id);
+		if ($is_redirect) redirect('billing/status/'.$payment->billing->id);
 	}
 	
 	public function recursive_point_increment($point_get, $point_description, $billing_id, $customer_id, $repeat_count=0)
@@ -707,7 +711,10 @@ class Billing extends CI_Controller {
 	public function doku_notify()
 	{
 		$this->load->model('doku_model');
+		// $doku_item = new doku_model();
 		$result = $this->doku_model->update_from_notify();
+		
+		if ($this->doku_model->trxstatus == "Success") { $this->payment_do($this->doku_model->transidmerchant, false); }
 		
 		if ($result) { echo "CONTINUE"; }
 		else {
@@ -720,18 +727,115 @@ class Billing extends CI_Controller {
 		$this->load->model('doku_model');
 		$result = $this->doku_model->get_from_redirect();
 		
-		if ($result->trxstatus == "Success")
+		// $this->doku_check_status($result); // lgsg check status aja gitu? jangan ding kyny kalo baru request mah blm masuk data. tp coba tanganin dulu deh pake isset TRANSIDMERCHANT
+		
+		$status_code 	= $this->input->post('STATUSCODE');
+		// if ($status_code == "0000")
+		// {
+			$this->doku_check_status($result);
+		// }
+		// else
+		// {
+			// $this->load->model('payment_model');
+			// $payment = $this->payment_model->get_from_natural_id($result->transidmerchant);
+			// $payment->init_billing();
+			// redirect('billing/status/'.$payment->billing->id);
+		// }
+		// if (($result->trxstatus == "Success") && ($status_code == "0000")) // status code success
+		// {
+			// // redirect ke payment success
+			// redirect('billing/payment_do/'.$result->transidmerchant);
+		// }
+		// else // if ($result->trxstatus == "Failed")
+		// {
+			// $this->doku_check_status($result);
+		// }
+	}
+	
+	public function doku_identify()
+	{
+		$this->load->model('doku_model');
+		$result = $this->doku_model->update_from_identify();
+		
+		if ($result) // kalau payment channel ter update
 		{
-			// redirect ke payment success
-			redirect('billing/payment_do/'.$result->transidmerchant);
+			$transidmerchant = $this->input->post('TRANSIDMERCHANT');
+			$this->load->model('payment_model');
+			$payment = $this->payment_model->get_from_natural_id($transidmerchant);
+			
+			if ($payment != null)
+			{
+				$this->load->config('payment_method_'.ENVIRONMENT);
+				$channel_codes = $this->config->item('channel_codes');
+				
+				$payment_channel = $this->input->post('PAYMENTCHANNEL');
+				if (isset($channel_codes[$payment_channel]))
+				{
+					$payment->payment_method = $channel_codes[$payment_channel];
+					$payment->update_payment_method();
+				}
+			}
+			
 		}
-		else // if ($result->trxstatus == "Failed")
-		{
-			// redirect ke payment gagal
-			$payment = $payment->get_from_natural_id($result->transidmerchant);
-			$payment->init_billing();
-			redirect('billing/status/'.$payment->billing->id);
+		else {
+			// check status API ?
 		}
 	}
 	
+	private function doku_check_status($doku_item)
+	{
+		// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+		$this->load->model('views/customer/doku_check_status_view_model');
+		$this->doku_check_status_view_model->get($doku_item);
+		
+		$data = array(
+			'MALLID'			=> $this->doku_check_status_view_model->MALLID,
+			'CHAINMERCHANT'		=> $this->doku_check_status_view_model->CHAINMERCHANT,
+			'TRANSIDMERCHANT'	=> $this->doku_check_status_view_model->TRANSIDMERCHANT,
+			'SESSIONID'			=> $this->doku_check_status_view_model->SESSIONID,
+			'WORDS'				=> $this->doku_check_status_view_model->WORDS,
+			'CURRENCY'			=> $this->doku_check_status_view_model->CURRENCY,
+			'PURCHASECURRENCY'	=> $this->doku_check_status_view_model->PURCHASECURRENCY,
+			'PAYMENTTYPE'		=> $this->doku_check_status_view_model->PAYMENTTYPE,
+		);
+		$options = array(
+			'http' => array(
+					'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+					'method'  => 'POST',
+					'content' => http_build_query($data)
+				)
+			);
+		$context  = stream_context_create($options);
+		
+		$response = file_get_contents($this->doku_check_status_view_model->action_url, false, $context);
+		
+		/*$data_doku['model'] = $this->doku_check_status_view_model;
+		$response = $this->load->view('customer/doku_check_status', $data_doku, TRUE); // get data*/
+		
+		$response_obj = simplexml_load_string($response);
+		
+		//print_r($response_obj);
+		if ($response_obj !== false)
+		{
+			if (isset($response_obj->TRANSIDMERCHANT))
+			{
+				$this->load->model('doku_model');
+				$doku_item = new doku_model();
+				$result = $doku_item->update_from_check_status($response_obj);
+				
+				//if ($result) // kalau ada doku item yg ter update
+				{
+					if ($doku_item->trxstatus == "Success")
+					{
+						redirect('billing/payment_do/'.$doku_item->transidmerchant);
+					}
+				}
+			}
+		}
+		
+		$this->load->model('payment_model');
+		$payment = $this->payment_model->get_from_natural_id($doku_item->transidmerchant);
+		$payment->init_billing();
+		redirect('billing/status/'.$payment->billing->id);
+	}
 }

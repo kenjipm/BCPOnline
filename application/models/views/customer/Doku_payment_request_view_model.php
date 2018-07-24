@@ -146,6 +146,8 @@ class Doku_payment_request_view_model extends CI_Model {
 		
 		// SESSIONID
 		$session_id = $this->generate_session_id(20);
+		$this->load->model('doku_model');
+		$this->doku_model->update_session_id($payment->payment_id, $session_id);
 		
 		// NAME
 		$this->load->model('account_model');
@@ -175,7 +177,7 @@ class Doku_payment_request_view_model extends CI_Model {
 		$this->EMAIL			= $email;
 		
 		$this->PAYMENTTYPE		= "";
-		$this->PAYMENTCHANNEL	= $payment_channel_code;
+		$this->PAYMENTCHANNEL	= ""; // $payment_channel_code;
 		$this->ADDRESS			= "";
 		$this->COUNTRY			= "";
 		$this->STATE			= "";
