@@ -817,19 +817,22 @@ class Billing extends CI_Controller {
 		//print_r($response_obj);
 		if ($response_obj !== false)
 		{
-			if (isset($response_obj->TRANSIDMERCHANT))
+			if (isset($response_obj->RESPONSECODE))
 			{
-				$this->load->model('doku_model');
-				$doku_item = new doku_model();
-				$result = $doku_item->update_from_check_status($response_obj);
-				
-				//if ($result) // kalau ada doku item yg ter update
-				{
-					if ($doku_item->trxstatus == "Success")
-					{
-						redirect('billing/payment_do/'.$doku_item->transidmerchant);
-					}
-				}
+			    if ($response_obj->RESPONSECODE == "0000")
+			    {
+    				$this->load->model('doku_model');
+    				$doku_item = new doku_model();
+    				$result = $doku_item->update_from_check_status($response_obj);
+    				
+    				//if ($result) // kalau ada doku item yg ter update
+    				{
+    					if ($doku_item->trxstatus == "Success")
+    					{
+    						redirect('billing/payment_do/'.$doku_item->transidmerchant);
+    					}
+    				}
+			    }
 			}
 		}
 		
