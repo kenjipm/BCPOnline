@@ -227,9 +227,10 @@ class Admin extends CI_Controller {
 		$this->load->model('Item_model');
 		$this->load->model('Posted_item_variance_model');
 		$item_id = $this->Hot_item_model->get_posted_item_id($id);
+		$hot_item = $this->Hot_item_model->get_from_posted_item_id($item_id);
 		$item = $this->Item_model->get_from_id($item_id);
 		$this->load->model('views/admin/create_tenant_bill_view_model');
-		$this->create_tenant_bill_view_model->get($item, $id);
+		$this->create_tenant_bill_view_model->get($item, $id, $hot_item);
 		$data['model'] = $this->create_tenant_bill_view_model;
 		
 		$this->load->view('admin/create_tenant_bill', $data);
