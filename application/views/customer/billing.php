@@ -136,7 +136,8 @@
 				</div>
 			</div>
 		</div>
-		<div class="cb-row cb-p-5">
+		<input type="hidden" name="payment_method" value=""/>
+		<?php /* <div class="cb-row cb-p-5">
 			<div class="cb-col-fifth">
 				<div class="cb-txt-primary-1 cb-pull-left">
 					<div class="cb-label"> Pembayaran </div>
@@ -155,7 +156,7 @@
 						if ($i % 3 == 0) { ?> <div class="cb-row"> <?php $div_row_opened = true; } 
 						?>
 						<div class="cb-col-third cb-p-5">
-							<input type="radio" name="payment_method" id="payment_method-<?=$payment_method->name?>" value="<?=$payment_method->name /* hrsnya id, tp data nya ga disimpen?? */?>" <?=$payment_method->selected?"checked=\"checked\"":""?>/>
+							<input type="radio" name="payment_method" id="payment_method-<?=$payment_method->name?>" value="<?=$payment_method->name?>" <?=$payment_method->selected?"checked=\"checked\"":""?>/>
 							<label><?=$payment_method->description?></label>
 						</div>
 						<?php
@@ -165,7 +166,7 @@
 					if ($div_row_opened) { ?> </div> <?php }
 				?>
 			</div>
-		</div>
+		</div> */ ?>
 		<div class="cb-row cb-p-5">
 			<div class="cb-col-fifth">
 				<div class="cb-txt-primary-1 cb-pull-left">

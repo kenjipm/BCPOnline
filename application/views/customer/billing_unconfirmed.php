@@ -85,7 +85,7 @@
 						if (count($model->items) > 0)
 						{
 							?>
-							<a href="#" class="cb-button-form pull-right" onclick="confirm_bill();">Pilih Metode Pembayaran</a>
+							<a href="#" class="cb-button-form pull-right" onclick="confirm_bill();">Pilih Metode Pengiriman</a>
 							<?php
 						}
 						else
@@ -254,7 +254,7 @@
 								if (count($model->items) > 0)
 								{
 									?>
-									<a href="#" class="btn btn-default" onclick="confirm_bill();">Pilih Metode Pembayaran</a>
+									<a href="#" class="btn btn-default" onclick="confirm_bill();">Pilih Metode Pengiriman</a>
 									<?php
 								}
 								else

@@ -103,7 +103,7 @@
 						if (count($model->items) > 0)
 						{
 							?>
-							<a href="#" id="submit_button" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pembayaran</a>
+							<a href="#" id="submit_button" class="cb-button-form pull-right" onclick="submit_cart();">Pilih Metode Pengiriman</a>
 							<?php
 						}
 						else
@@ -282,7 +282,7 @@
 								if (count($model->items) > 0)
 								{
 									?>
-									<a href="#" class="btn btn-default" onclick="submit_cart();">Pilih Metode Pembayaran</a>
+									<a href="#" class="btn btn-default" onclick="submit_cart();">Pilih Metode Pengiriman</a>
 									<?php
 								}
 								else
