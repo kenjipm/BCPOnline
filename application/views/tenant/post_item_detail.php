@@ -224,8 +224,8 @@
 									<div class="cb-pull-right">:</div>
 								</div>
 								<div class="cb-col-fifth-2 cb-pl-3">
-									<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_str?>" readonly>
-									<input type="hidden" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value?>" readonly>
+									<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_hot_str?>" readonly>
+									<input type="hidden" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_hot?>" readonly>
 								</div>
 							</div>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>
@@ -259,8 +259,8 @@
 									<div class="cb-pull-right">:</div>
 								</div>
 								<div class="cb-col-fifth-2 cb-pl-3">
-									<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_str?>" readonly>
-									<input type="hidden" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value?>" readonly>
+									<input type="text" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_seo_str?>" readonly>
+									<input type="hidden" class="cb-row cb-col-full cb-input-text" value="<?=$model->posted_item->payment_value_seo?>" readonly>
 								</div>
 							</div>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>

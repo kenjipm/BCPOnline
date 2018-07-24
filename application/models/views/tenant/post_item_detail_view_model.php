@@ -103,8 +103,8 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			if ($tenant_bill != null)
 			{
 				$this->posted_item->is_hot_item_confirmed = true;
-				$this->posted_item->payment_value_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
-				$this->posted_item->payment_value = $tenant_bill->payment_value;
+				$this->posted_item->payment_value_hot_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
+				$this->posted_item->payment_value_hot = $tenant_bill->payment_value;
 				if ($tenant_bill->is_paid_hot_item())
 				{
 					$this->posted_item->is_hot_item_paid = true;
@@ -125,8 +125,8 @@ class Post_Item_Detail_View_Model extends CI_Model{
 			if (($tenant_bill != null) && ($tenant_bill->is_confirmed_seo_item()))
 			{
 				$this->posted_item->is_seo_item_confirmed = true;
-				$this->posted_item->payment_value_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
-				$this->posted_item->payment_value = $tenant_bill->payment_value;
+				$this->posted_item->payment_value_seo_str = $this->text_renderer->to_rupiah($tenant_bill->payment_value);
+				$this->posted_item->payment_value_seo = $tenant_bill->payment_value;
 				if ($tenant_bill->is_paid_seo_item())
 				{
 					$this->posted_item->is_seo_item_paid = true;

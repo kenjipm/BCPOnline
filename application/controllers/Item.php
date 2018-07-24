@@ -235,7 +235,7 @@ class Item extends CI_Controller {
 			$posted_item_variance = $this->Posted_item_variance_model->get_all($id);
 			
 			$this->load->model('hot_item_model');
-			$hot_item = $this->hot_item_model->get_from_posted_item_id($item->id);
+			$hot_item = $this->hot_item_model->get_from_posted_item_id($id);
 			
 			$this->load->model('tenant_bill_model');
 			$seo_item = $this->tenant_bill_model->get_registered_seo($id);

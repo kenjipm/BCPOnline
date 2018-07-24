@@ -8,7 +8,7 @@ class Create_tenant_bill_view_model extends CI_Model{
 	{	
 	}
 	
-	public function get($item, $id)
+	public function get($item, $id, $hot_item)
 	{
 		$this->tenant_bill = new class{};
 			
@@ -17,7 +17,7 @@ class Create_tenant_bill_view_model extends CI_Model{
 		$this->tenant_bill->posted_item_name		= $item->posted_item_name;
 		$this->tenant_bill->tenant_id				= $item->tenant_id;
 		$this->tenant_bill->tenant_name				= $item->tenant->tenant_name;
-		
+		$this->tenant_bill->date_expired			= $hot_item->date_expired_req;
 	}
 	
 	

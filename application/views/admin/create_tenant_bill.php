@@ -89,7 +89,7 @@
 				</div>
 			</div>
 			<div class="cb-row cb-col-fifth-3">
-				<input type="text" class="cb-input-text cb-col-full datetimepicker" name="payment_expiration"/>
+				<input type="text" class="cb-input-text cb-col-full datetimepicker" name="payment_expiration" value="<?=$model->tenant_bill->date_expired?>" />
 				<span class="text-danger"><?= form_error('payment_expiration'); ?></span>
 			</div>
 		</div>

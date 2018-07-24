@@ -139,6 +139,7 @@ class Tenant_bill_model extends CI_Model {
 	public function get_all_seo_unpaid_by_tenants()
 	{
 		$where[$this->table_tenant_bill.'.payment_date'] = null;
+		$where[$this->table_tenant_bill.'.hot_item_id'] = null;
 		
 		$this->db->select('*, ' . $this->table_tenant_bill.'.posted_item_id AS posted_item_id, '. $this->table_tenant_bill.'.id AS id');
 		$this->db->join($this->table_item, $this->table_item. '.id = '. $this->table_tenant_bill.'.posted_item_id', 'left');
@@ -296,7 +297,12 @@ class Tenant_bill_model extends CI_Model {
 		$this->db->where('id', $id);
 		$this->db->update($this->table_tenant_bill);
 		
-		$this->send_confirm_to_tenant($this->tenant_id);
+		$where['tenant_bill.id'] = $id;
+		$this->db->where($where);
+		$query = $this->db->get($this->table_tenant_bill, 1);
+		$tenant_bill = $query->row();
+		
+		$this->send_confirm_to_tenant($this->tenant_id, $tenant_bill->posted_item_id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
@@ -357,12 +363,12 @@ class Tenant_bill_model extends CI_Model {
 			$this->db->update($this->table_tenant_bill, $db_item);
 		}
 		
-		$this->send_confirm_to_tenant($this->tenant_id);
+		$this->send_confirm_to_tenant($this->tenant_id, $this->posted_item_id);
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
 	
-	public function send_confirm_to_tenant($tenant_id)
+	public function send_confirm_to_tenant($tenant_id, $posted_item_id)
 	{
 		$this->load->model('message_inbox_model');
 		$party_one_id = $this->session->id;
@@ -387,7 +393,9 @@ class Tenant_bill_model extends CI_Model {
 		$cur_message_text = new message_text_model();
 		$cur_message_text->message_inbox_id = $cur_message_inbox->id;
 		$cur_message_text->sender_id = $this->session->id;
-		$cur_message_text->text = "Barang promosi sudah dikonfirmasi. Silakan cek produk untuk pembayaran";
+		$cur_message_text->text = "Barang promosi sudah dikonfirmasi. Silakan cek " .
+				"<a href='" . site_url('item/post_item_detail/'.$posted_item_id) ."'>produk terkait </a>" .
+				"untuk pembayaran";
 		$cur_message_text->insert_from_stub();
 	}
 	
