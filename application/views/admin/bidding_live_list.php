@@ -4,9 +4,19 @@
 			<h3 class="cb-txt-primary-1 cb-font-title">LELANG TERAKHIR</h3>
 		</div>
 		<div class="cb-col-half cb-p-5">
+			<?php if ($model->active_flash) { ?>
+			<button class="cb-button-form pull-right" disabled>
+				Flash Sale sedang berlangsung
+			</button>
+			<?php } else if ($model->active_bid) { ?>
+			<button class="cb-button-form pull-right" disabled>
+				Lelang sedang berlangsung
+			</button>
+			<?php } else { ?>
 			<a class="cb-button-form pull-right" href="<?=site_url('Bidding_live/create_bidding_live')?>">
 				+ Tambah Barang Lelang
 			</a>
+			<?php } ?>
 		</div>
 	</div>
 </div>

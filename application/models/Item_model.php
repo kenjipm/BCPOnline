@@ -246,6 +246,7 @@ class Item_model extends CI_Model {
 	public function get_all_bidding_items()
 	{
 		$this->db->where('item_type', 'BID');
+		$this->db->where('date_expired >',  date('Y-m-d H:i:s'));
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		
@@ -274,6 +275,7 @@ class Item_model extends CI_Model {
 	public function get_all_flash_sale()
 	{
 		$this->db->where('item_type', 'FLASH');
+		$this->db->where('date_expired >',  date('Y-m-d H:i:s'));
 		$query = $this->db->get($this->table_item);
 		$items = $query->result();
 		

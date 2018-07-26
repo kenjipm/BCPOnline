@@ -4,9 +4,15 @@
 			<h3 class="cb-txt-primary-1 cb-font-title"><?=$title?></h3>
 		</div>
 		<div class="cb-col-half cb-p-5">
+			<?php if (($model->active_flash) || (!$model->active_bid)) { ?>
 			<a class="cb-button-form pull-right" href="<?=site_url('Admin/create_flash_sale')?>">
 				+ Tambah Barang Flash Sale
 			</a>
+			<?php } else { ?>
+			<button class="cb-button-form pull-right" disabled>
+				Lelang sedang berlangsung
+			</button>
+			<?php } ?>
 		</div>
 	</div>
 </div>

@@ -86,8 +86,10 @@ class Admin extends CI_Controller {
 		$this->load->model('Item_model');
 		$flash_sales = $this->Item_model->get_all_flash_sale();
 		
+		$bidding_item = $this->Item_model->get_last_bidding_item();
+			
 		$this->load->model('views/admin/flash_sale_view_model');
-		$this->flash_sale_view_model->get($flash_sales);
+		$this->flash_sale_view_model->get($flash_sales, $bidding_item);
 		
 		$data['model'] = $this->flash_sale_view_model;
 		$data['title'] = "Daftar Barang Flash Sale";

@@ -3,6 +3,8 @@
 class Flash_Sale_View_Model extends CI_Model{
 	
 	public $items;
+	public $active_flash;
+	public $active_bid;
 	
 	// constructor
 	public function __construct()
@@ -10,9 +12,11 @@ class Flash_Sale_View_Model extends CI_Model{
 		parent::__construct();
 		
 		$this->items = array();
+		$this->active_flash = false;
+		$this->active_bid = false;
 	}
 	
-	public function get($items)
+	public function get($items, $active_bid)
 	{
 		$i = 0;
 		$this->load->library('text_renderer');
@@ -28,6 +32,17 @@ class Flash_Sale_View_Model extends CI_Model{
 			$i++;
 		}
 		
+		if ($items) 
+		{
+			$this->active_flash = true;
+			$this->active_bid = false;
+		}
+		if ($active_bid) 
+		{
+			$this->active_flash = false;
+			$this->active_bid = true;
+		}
+
 	}
 	
 }

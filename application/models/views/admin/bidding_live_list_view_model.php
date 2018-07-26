@@ -4,6 +4,8 @@ class Bidding_live_list_view_model extends CI_Model {
 	
 	public $items;
 	public $biddings;
+	public $active_flash;
+	public $active_bid;
 	
 	// constructor
 	public function __construct()
@@ -12,9 +14,11 @@ class Bidding_live_list_view_model extends CI_Model {
 		
 		$this->items = array();
 		$this->biddings = array();
+		$this->active_flash = false;
+		$this->active_bid = false;
 	}
 	
-	public function get($items, $biddings)
+	public function get($items, $biddings, $active_flash)
 	{
 		$i = 0;
 		$this->load->library('text_renderer');
@@ -37,6 +41,17 @@ class Bidding_live_list_view_model extends CI_Model {
 			$this->biddings[$i]->bid_time		= $bidding->bid_time;
 			$this->biddings[$i]->bid_price		= $bidding->bid_price;
 			$this->biddings[$i]->posted_item_id	= $bidding->posted_item_id;
+		}
+		
+		if ($active_flash) 
+		{
+			$this->active_flash = true;
+			$this->active_bid = false;
+		}
+		if ($items) 
+		{
+			$this->active_flash = false;
+			$this->active_bid = true;
 		}
 	}
 }

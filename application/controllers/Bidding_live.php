@@ -54,8 +54,10 @@ class Bidding_live extends CI_Controller {
 		$this->load->model('Bidding_live_model');
 		$items = $this->Item_model->get_all_bidding_items();
 		$bidding_lives = $this->Bidding_live_model->get_all();
+		$this->load->model('Hot_item_model');
+		$flash_items = $this->Item_model->get_all_flash_sale();
 		$this->load->model('views/admin/bidding_live_list_view_model');
-		$this->bidding_live_list_view_model->get($items, $bidding_lives);
+		$this->bidding_live_list_view_model->get($items, $bidding_lives, $flash_items);
 		$data['model'] = $this->bidding_live_list_view_model;
 		$this->load->view('admin/bidding_live_list', $data);
 		
