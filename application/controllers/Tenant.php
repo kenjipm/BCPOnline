@@ -253,6 +253,7 @@ class Tenant extends CI_Controller {
 		echo json_encode($result);
 	}
 	
+	/*
 	public function bayar_hot_item_dummy()
 	{
 		$hot_item_id = $this->input->post('hot_item_id');
@@ -272,5 +273,6 @@ class Tenant extends CI_Controller {
 		
 		echo "1";
 	}
+	*/
 	
 }

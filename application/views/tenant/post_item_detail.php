@@ -229,7 +229,8 @@
 								</div>
 							</div>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>
-							<button type="button" class="cb-button cb-button-form cb-ml-3" onclick="bayar_hot_item_dummy(<?=$model->posted_item->hot_item_id?>)">Bayar (dummy)</button>
+							<?php /* <button type="button" class="cb-button cb-button-form cb-ml-3" onclick="bayar_hot_item_dummy(<?=$model->posted_item->hot_item_id?>)">Bayar (dummy)</button> */ ?>
+							<a class="cb-button cb-button-form cb-ml-3" href="<?=site_url('billing/confirm_pay_hot_item_do/'.$model->posted_item->hot_item_id)?>">Bayar</a>
 						<?php
 					}
 					else // if ($is_hot_item_paid)
@@ -264,7 +265,8 @@
 								</div>
 							</div>
 							<button type="button" class="cb-button cb-button-form cb-ml-3" disabled>Menunggu Pembayaran</button>
-							<button type="button" class="cb-button cb-button-form cb-ml-3" onclick="bayar_seo_item_dummy(<?=$model->posted_item->id?>)">Bayar (dummy)</button>
+							<?php /* <button type="button" class="cb-button cb-button-form cb-ml-3" onclick="bayar_seo_item_dummy(<?=$model->posted_item->id?>)">Bayar (dummy)</button> */ ?>
+							<a class="cb-button cb-button-form cb-ml-3" href="<?=site_url('billing/confirm_pay_promoted_item_do/'.$model->posted_item->id)?>">Bayar</a>
 						<?php
 					}
 					else // if ($is_seo_item_paid)

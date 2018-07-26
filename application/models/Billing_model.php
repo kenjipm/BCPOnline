@@ -203,7 +203,7 @@ class Billing_model extends CI_Model {
 		return $this;
 	}
 	
-	public function insert($custom_type="")
+	public function insert($custom_type="", $custom_id="")
 	{
 		$this->load->library('id_generator');
 		
@@ -214,7 +214,7 @@ class Billing_model extends CI_Model {
 			$this->id	= $this->db->insert_id();
 		}
 		
-		$natural_id = $this->id_generator->generate(TYPE['name']['BILLING'], $this->id, $custom_type);
+		$natural_id = $this->id_generator->generate(TYPE['name']['BILLING'], ($custom_id=="")?$this->id:$custom_id, $custom_type);
 		$this->update_natural_id($natural_id);
 		
 		$this->db->trans_complete();

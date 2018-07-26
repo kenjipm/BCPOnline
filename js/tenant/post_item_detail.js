@@ -4,7 +4,7 @@ function seo_item_do(posted_item_id) {
 	}
 }
 
-
+/*
 function bayar_hot_item_dummy(hot_item_id){
 	$.ajax({
 		type: "POST",
@@ -32,3 +32,4 @@ function bayar_seo_item_dummy(posted_item_id){
 		}
 	});
 }
+*/

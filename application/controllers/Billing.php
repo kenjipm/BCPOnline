@@ -578,6 +578,94 @@ class Billing extends CI_Controller {
 		
 	}
 	
+	public function confirm_pay_hot_item_do()
+	{
+		$this->authorize();
+		
+		$hot_item_id = $this->input->post('hot_item_id');
+		$this->load->model('tenant_bill_model');
+		$tenant_bill = $this->tenant_bill_model->get_from_hot_item_id($hot_item_id);
+		if ($tenant_bill != null)
+		{
+			$this->load->model('setting_reward_model');
+			$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			
+			$this->load->model('billing_model');
+			$billing = new billing_model();
+			$billing->customer_id			= NULL;
+			$billing->delivery_type			= "";
+			$billing->setting_reward_id		= $setting_reward->id;
+			$billing->total_payable			= $tenant_bill->payment_value;
+			$billing->insert("HOT", $hot_item_id);
+			
+			$this->load->model('payment_model');
+			$payment = new payment_model();
+			$payment->payment_method		= "";
+			$payment->paid_amount			= 0;
+			$payment->billing_id			= $billing->id;
+			$payment->insert();
+			
+			$this->load->model('doku_model');
+			$new_doku = new doku_model();
+			$new_doku->transidmerchant	= $payment->payment_id;
+			$new_doku->insert();
+			
+			// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+			$this->load->model('views/customer/doku_payment_request_view_model');
+			$this->doku_payment_request_view_model->get_from_billing($billing, $payment);
+			$data_doku['model'] = $this->doku_payment_request_view_model;
+			$this->load->view('customer/doku_payment_request', $data_doku);
+		}
+		else
+		{
+			redirect('');
+		}
+	}
+	
+	public function confirm_pay_promoted_item_do()
+	{
+		$this->authorize();
+		
+		$posted_item_id = $this->input->post('posted_item_id');
+		$this->load->model('tenant_bill_model');
+		$tenant_bill = $this->tenant_bill_model->get_from_seo_item_id($posted_item_id);
+		if ($tenant_bill != null)
+		{
+			$this->load->model('setting_reward_model');
+			$setting_reward = $this->setting_reward_model->get_latest_setting_reward();
+			
+			$this->load->model('billing_model');
+			$billing = new billing_model();
+			$billing->customer_id			= NULL;
+			$billing->delivery_type			= "";
+			$billing->setting_reward_id		= $setting_reward->id;
+			$billing->total_payable			= $tenant_bill->payment_value;
+			$billing->insert("PRO", $posted_item_id);
+			
+			$this->load->model('payment_model');
+			$payment = new payment_model();
+			$payment->payment_method		= "";
+			$payment->paid_amount			= 0;
+			$payment->billing_id			= $billing->id;
+			$payment->insert();
+			
+			$this->load->model('doku_model');
+			$new_doku = new doku_model();
+			$new_doku->transidmerchant	= $payment->payment_id;
+			$new_doku->insert();
+			
+			// SIAPIN DATA BUAT API PAYMENT REQUEST DOKU
+			$this->load->model('views/customer/doku_payment_request_view_model');
+			$this->doku_payment_request_view_model->get_from_billing($billing, $payment);
+			$data_doku['model'] = $this->doku_payment_request_view_model;
+			$this->load->view('customer/doku_payment_request', $data_doku);
+		}
+		else
+		{
+			redirect('');
+		}
+	}
+	
 	public function payment_do($natural_id, $is_redirect=true)
 	{
 		$this->authorize();
@@ -595,14 +683,43 @@ class Billing extends CI_Controller {
 			
 			if ($payable_left <= 0)
 			{
-				if (substr($payment->billing->bill_id, 0, 3) == "DEP") // if deposit
+				$billing_code = substr($payment->billing->bill_id, 0, 3);
+				if ($billing_code == "DEP") // if deposit
 				{
 					$this->load->model('customer_model');
 					$this->customer_model->deposit_status_set($payment->billing->customer_id, 1);
 					
 					redirect('?status=dep&id='.$payment->billing->customer_id);
 				}
-				else 
+				else if ($billing_code == "HOT") // if hot item
+				{
+					$hot_item_id = str_replace("HOT", "", $payment->billing->bill_id);
+					$hot_item_id = intval($hot_item_id);
+					
+					$this->load->model('hot_item_model');
+					$posted_item_id = $this->hot_item_model->get_posted_item_id($hot_item_id);
+					
+					if ($posted_item_id)
+					{
+						$this->load->model('tenant_bill_model');
+						$this->tenant_bill_model->set_paid($hot_item_id);
+					}
+					redirect('item/post_item_detail/'.$posted_item_id);
+					
+				}
+				else if ($billing_code == "PRO") // if promoted item
+				{
+					$posted_item_id = str_replace("PRO", "", $payment->billing->bill_id);
+					$posted_item_id = intval($posted_item_id);
+					
+					if ($posted_item_id)
+					{
+						$this->load->model('tenant_bill_model');
+						$this->tenant_bill_model->set_paid_seo($posted_item_id);
+					}
+					redirect('item/post_item_detail/'.$posted_item_id);
+				}
+				else // if ($billing_code == "BIL") // transaksi customer
 				{
 					$this->db->trans_start();
 					
@@ -839,6 +956,23 @@ class Billing extends CI_Controller {
 		$this->load->model('payment_model');
 		$payment = $this->payment_model->get_from_natural_id($doku_item->transidmerchant);
 		$payment->init_billing();
-		redirect('billing/status/'.$payment->billing->id);
+		
+		$billing_code = substr($payment->billing->bill_id, 0, 3);
+		if ($billing_code == "DEP") // if deposit
+		{
+			redirect('');
+		}
+		else if ($billing_code == "HOT") // if hot item
+		{
+			redirect('item/post_item_detail/'.$posted_item_id);
+		}
+		else if ($billing_code == "PRO") // if promoted item
+		{
+			redirect('item/post_item_detail/'.$posted_item_id);
+		}
+		else // if ($billing_code == "BIL") // if transaksi biasa
+		{
+			redirect('billing/status/'.$payment->billing->id);
+		}
 	}
 }

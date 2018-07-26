@@ -167,8 +167,6 @@ class Doku_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	
-	
 	public function insert()
 	{
 		$db_item = $this->get_db_from_stub(); // ambil database object dari model ini
@@ -298,7 +296,6 @@ class Doku_model extends CI_Model {
 			
 	}
 	
-	
 	public function update_from_identify()
 	{
 		$transidmerchant = $this->input->post('TRANSIDMERCHANT');
@@ -314,7 +311,6 @@ class Doku_model extends CI_Model {
 		$this->db->update($this->table_doku);
 		return $this->db->affected_rows();
 	}
-	
 	
 	public function update_from_check_status($response_obj)
 	{
