@@ -41,6 +41,7 @@ class Item_main_view_model extends CI_Model {
 		$item->init_tenant();
 		$this->item->tenant = new class{};
 		$this->item->tenant->id				= $item->tenant->id;
+		$this->item->tenant->account_id				= $item->tenant->account_id;
 		$this->item->tenant->tenant_name	= $item->tenant->tenant_name;
 		$this->item->tenant->is_followed	= ($item->tenant->is_followed($this->session->child_id) != null);
 		$this->item->tenant->btn_class	= ($this->item->tenant->is_followed ? "cb-button-secondary-selected" : "cb-button-form");

@@ -88,6 +88,7 @@ a:hover, .hoverable:hover { opacity: 0.8; cursor: pointer; }
 
 .cb-border-bold			{ border: 3px solid; }
 .cb-border-bolder		{ border: 5px solid; }
+.cb-border-boldest		{ border: 7px solid; }
 .cb-border-primary-1						{ border-color: #e55026; }
 .cb-border-primary-2						{ border-color: #faa528; }
 .cb-border-primary-3, .cb-border-white		{ border-color: #ffffff; }
