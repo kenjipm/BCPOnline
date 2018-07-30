@@ -101,7 +101,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				</div>
 				<div id="ad-sidebar-content" class="cb-row cb-col-tenth-9 cb-border-round cb-txt-primary-3">
 					<div class="cb-p-5 cb-col-full">
-						<img src="<?=site_url('img/ad_box/ad-sidebar.png')?>" alt="" class="cb-bg-primary-3 cb-m-5"/>
+						<img src="<?=site_url('img/ad_box/ad-sidebar.gif')?>" alt="" class="cb-m-5"/>
 					</div>
 				</div>
 			</div>

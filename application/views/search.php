@@ -32,7 +32,7 @@
 					{
 						?>
 						<a href="<?=site_url('item/'.$promoted_item->id)?>" class="cb-col-fourth cb-pb-3">
-							<div class="item_thumbnail cb-border cb-border-bolder cb-border-round cb-border-primary-2">
+							<div class="item_thumbnail cb-border cb-border-boldest cb-border-round cb-border-primary-2">
 								<div class="item_heart">
 									<div class="item_heart_icon cb-heart-red cb-heart">
 										<div class="item_heart_count"><?=$promoted_item->favorite->favorite_count?></div>

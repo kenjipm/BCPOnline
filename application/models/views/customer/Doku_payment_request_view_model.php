@@ -152,7 +152,7 @@ class Doku_payment_request_view_model extends CI_Model {
 		// NAME
 		$this->load->model('account_model');
 		$cur_account = $this->account_model->get_from_id($this->session->id);
-		$name = substr($cur_account->name, 0, 50);
+		$name = preg_replace('/[^a-zA-Z]/', '', substr($cur_account->name, 0, 50));
 		$phone_number = substr($cur_account->phone_number, 0, 12);
 		
 		// EMAIL

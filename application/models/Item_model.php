@@ -282,7 +282,7 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=6)
+	public function get_all_promoted_from_category_id($category_id, $offset=0, $limit=8)
 	{
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
@@ -409,7 +409,7 @@ class Item_model extends CI_Model {
 		return $num_rows;
 	}
 	
-	public function get_all_promoted_from_search($keywords, $offset=0, $limit=4)
+	public function get_all_promoted_from_search($keywords, $offset=0, $limit=8)
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
