@@ -46,7 +46,7 @@
 					<div class="cb-pull-right">:</div>
 				</div>
 				<div class="cb-col-fifth-2 cb-pl-3">
-					<input type="text" class="cb-row cb-col-full cb-input-text input_thousand_separator" realid="promo_price" value="0"/>
+					<input type="text" class="cb-row cb-col-full cb-input-text input_thousand_separator" realid="promo_price" value="0" id="promo_price_str"/>
 					<input type="hidden" id="promo_price" name="promo_price" value="0"/>
 				</div>
 			</div>

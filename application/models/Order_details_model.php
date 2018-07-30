@@ -1175,7 +1175,7 @@ class Order_details_model extends CI_Model {
 		$where['order_details.tnt_paid_receipt_id'] = NULL;
 		$where['order_details.order_status'] = ORDER_STATUS['name']['DONE'];
 		$where['posted_item.item_type != '] = "BID";
-		$where['posted_item.item_type != '] = "FLASH";
+		$where[' posted_item.item_type != '] = "FLASH";
 		
 		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
@@ -1185,7 +1185,6 @@ class Order_details_model extends CI_Model {
 		$this->db->distinct();
 		
 		$query = $this->db->get($this->table_order_details, 1);
-		
 		$result = $query->row();
 		
 		return ($result != null) ? $result->unpaid_tenant : 0;

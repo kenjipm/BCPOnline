@@ -22,6 +22,7 @@ class Hot_Item_View_Model extends CI_Model{
 			$this->hot_item_list[$i]->tenant_name		= $hot_item->tenant->tenant_name;
 			$this->hot_item_list[$i]->posted_item_id	= $hot_item->posted_item_id;
 			$this->hot_item_list[$i]->posted_item_name	= $hot_item->posted_item->posted_item_name;
+			$this->hot_item_list[$i]->price				= $this->text_renderer->to_rupiah($hot_item->posted_item->price);
 			$this->hot_item_list[$i]->promo_description	= $hot_item->promo_description;
 			$this->hot_item_list[$i]->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);
 			
