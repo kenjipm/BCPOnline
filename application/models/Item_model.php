@@ -288,7 +288,7 @@ class Item_model extends CI_Model {
 					  ->select('*, ' . $this->table_item.'.id AS id')
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
 					  ->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left')
-					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where($this->table_tenant_bill.'.payment_date > 0')
 					  ->where($this->table_tenant_bill.'.payment_expiration < CURDATE()')
 					  ->where('category_id', $category_id)
@@ -314,7 +314,7 @@ class Item_model extends CI_Model {
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
-					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
 					  ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
@@ -333,7 +333,7 @@ class Item_model extends CI_Model {
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
-					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
@@ -357,7 +357,7 @@ class Item_model extends CI_Model {
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
-					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->order_by($this->table_item.'.date_updated', $order)
@@ -380,7 +380,7 @@ class Item_model extends CI_Model {
 		$query = $this->db
 					  ->select('*, ' . $this->table_item.'.id AS id')
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
-					  ->where($this->table_item_variance.'.quantity_available > 0')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->get($this->table_item);
@@ -414,7 +414,7 @@ class Item_model extends CI_Model {
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
 		$this->db->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->where($this->table_tenant_bill.'.payment_date > 0');
 		$this->db->where($this->table_tenant_bill.'.payment_expiration > CURDATE()');
 		$this->db->like('posted_item_name', $keywords);
@@ -435,7 +435,7 @@ class Item_model extends CI_Model {
 	{
 		$this->db->select('*, ' . $this->table_item.'.id AS id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->where('item_type', 'ORDER');
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
@@ -455,7 +455,7 @@ class Item_model extends CI_Model {
 	{
 		$this->db->select($this->table_item.'.id');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->where('item_type', 'ORDER');
 		$this->db->like('posted_item_name', $keywords);
 		$this->db->group_by($this->table_item.'.id');
@@ -474,7 +474,7 @@ class Item_model extends CI_Model {
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->where($this->table_item.'.item_type', 'ORDER');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -495,7 +495,7 @@ class Item_model extends CI_Model {
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->where($this->table_item.'.item_type', 'ORDER');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -515,7 +515,7 @@ class Item_model extends CI_Model {
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->where($this->table_item.'.item_type', 'FLASH');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');
@@ -536,7 +536,7 @@ class Item_model extends CI_Model {
 		$this->db->where('tenant_bill.payment_expiration >',  date('Y-m-d H:i:s'));
 		$this->db->where('tenant_bill.hot_item_id is NOT NULL');
 		$this->db->where($this->table_item.'.item_type', 'FLASH');
-		$this->db->where($this->table_item_variance.'.quantity_available > 0');
+		// $this->db->where($this->table_item_variance.'.quantity_available > 0');
 		$this->db->join($this->table_hot_item, 'tenant_bill.hot_item_id' . ' = ' . $this->table_hot_item.'.id', 'left');
 		$this->db->join($this->table_item, $this->table_hot_item.'.posted_item_id' . ' = ' . $this->table_item.'.id', 'left');
 		$this->db->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left');

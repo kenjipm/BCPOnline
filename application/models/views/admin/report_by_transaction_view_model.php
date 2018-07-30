@@ -31,6 +31,7 @@ class report_by_transaction_view_model extends CI_Model {
 		{	
 			$this->transactions[$i] = new class{};
 			
+			$this->transactions[$i]->billing_id 	= $transaction->billing_id;
 			$this->transactions[$i]->natural_billing_id 	= $transaction->natural_billing_id;
 			$this->transactions[$i]->date_bill_created 	= $transaction->date_bill_created;
 			$this->transactions[$i]->total_price 	= $this->text_renderer->to_rupiah($transaction->total_price);

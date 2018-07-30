@@ -43,16 +43,16 @@
 							foreach($model->message_texts as $message_text)
 							{
 								?>
-								<div class="cb-row cb-mb-5">
+								<div class="cb-row cb-mb-5 <?=$message_text->sender->is_you ? 'cb-pull-right' : ''?>">
 									<div class="cb-col-tenth">
 									
 									</div>
-									<div class="cb-col-tenth-8 cb-row">
+									<div class="cb-col-tenth-8 cb-row <?=$message_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
 										<div class="cb-col-full">
-											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg <?=$message_text->sender->is_you ? 'cb-pull-right' : ''?>"><?=$message_text->sender->name?></span>
-											<span class="cb-ml-5 cb-mr-5 <?=$message_text->sender->is_you ? 'cb-pull-right' : ''?>"><?=$message_text->date_sent?></span>
+											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg"><?=$message_text->sender->name?></span>
+											<span class="cb-ml-5 cb-mr-5"><?=$message_text->date_sent?></span>
 										</div>
-										<div class="cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5 <?=$message_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
+										<div class="message_content cb-border-round cb-bg-secondary-3 cb-p-5">
 											<?=$message_text->text?>
 										</div>
 									</div>
@@ -72,7 +72,7 @@
 							<label for="image_name" class="cb-col-tenth cb-button cb-bg-secondary-2 cb-icon cb-icon-camera hoverable label_upload_file cb-vertical-center cb-row">
 								<div class="cb-icon cb-icon-sm cb-icon-add-item"></div>
 							</label>
-							<input id="message_input" type="text" name="text" placeholder="Kirim Pesan..." class="cb-col-tenth-8 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
+							<input value="<?=$model->default_message?>" id="message_input" type="text" name="text" placeholder="Kirim Pesan..." class="cb-col-tenth-8 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
 							<button onclick="send_message()" class="cb-col-tenth cb-button cb-button-form" id="btn-message_send">KIRIM</button>
 						</form>
 					</div>
@@ -88,12 +88,12 @@
 		<div class="cb-col-tenth">
 		
 		</div>
-		<div class="cb-col-tenth-8 cb-row">
+		<div class="cb-col-tenth-8 cb-row message_container">
 			<div class="cb-col-full">
 				<span class="message_sender_name cb-txt-primary-1 cb-font-title cb-font-size-lg"></span>
 				<span class="message_date_sent cb-ml-5 cb-mr-5"></span>
 			</div>
-			<div class="message_content cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5">
+			<div class="message_content cb-border-round cb-bg-secondary-3 cb-p-5">
 			</div>
 			<div class="cb-row message_image_container">
 				<div class="cb-col-half cb-border-round cb-bg-secondary-3 cb-p-5">

@@ -67,8 +67,10 @@ class Message extends CI_Controller {
 		if ($id == 0) { $message_texts = array(); }
 		else $message_texts = $this->message_text_model->get_all_from_message_inbox_id($id);
 		
+		$default_message = $this->session->flashdata('default_message');
+		
 		$this->load->model('views/message_detail_view_model');
-		$this->message_detail_view_model->get($message_inboxes, $message_inbox, $message_texts);
+		$this->message_detail_view_model->get($message_inboxes, $message_inbox, $message_texts, $default_message);
 		
 		// $data['title'] = "Percakapan dengan ";
 		$data['model'] = $this->message_detail_view_model;
@@ -102,6 +104,7 @@ class Message extends CI_Controller {
 	{
 		$party_one_id = $this->session->id;
 		$party_two_id = $this->input->post('receiver_account_id');
+		$default_message = $this->input->post('default_message');
 		
 		$this->load->model('message_inbox_model');
 		$message_inbox = $this->message_inbox_model->get_from_parties_id($party_one_id, $party_two_id);
@@ -111,6 +114,9 @@ class Message extends CI_Controller {
 			$message_inbox = new message_inbox_model();
 			$message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
 		}
+			
+		$this->session->set_flashdata('default_message', $default_message);
+		
 		redirect('message/detail/' . $message_inbox->id);
 	}
 	

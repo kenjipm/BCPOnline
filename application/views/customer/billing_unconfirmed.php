@@ -333,7 +333,7 @@
 						<input type="text" name="postal_code" class="form-control"/>
 					</div>
 				</div>
-				<?php /* <div class="form-group">
+				<div class="form-group">
 					<div class="col-sm-3">
 						<label>Peta</label>
 					</div>
@@ -344,7 +344,7 @@
 							</div>
 						</div>
 					</div>
-				</div> */ ?>
+				</div>
 				<div class="form-group">
 					<div class="col-sm-9 col-sm-offset-3">
 						<button type="submit" class="btn btn-default" id="btn-address_add" >Tambah</button>

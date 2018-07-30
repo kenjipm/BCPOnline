@@ -69,6 +69,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"RECEIVED"					=> "RECEIVED",
 			"RECEIVED_BY_COURIER"		=> "RECEIVED_BY_COURIER",
 			"DONE"						=> "DONE",
+			"CANCELLED"					=> "CANCELLED",
 			"PICKING_FROM_CUSTOMER"		=> "PICKING_FROM_CUSTOMER",
 			"DELIVERING_TO_TENANT"		=> "DELIVERING_TO_TENANT",
 			"TENANT_RECEIVED"			=> "TENANT_RECEIVED",
@@ -86,6 +87,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"RECEIVED"					=> "Telah diterima customer",
 			"RECEIVED_BY_COURIER"		=> "Telah diterima kurir",
 			"DONE"						=> "Selesai", // 2 x 24 jam auto selesai
+			"CANCELLED"					=> "Dibatalkan", // 2 x 24 jam auto selesai
 			"PICKING_FROM_CUSTOMER"		=> "Pengambilan dari customer",
 			"DELIVERING_TO_TENANT"		=> "Pengantaran ke tenant",
 			"TENANT_RECEIVED"			=> "Telah diterima oleh tenant",
@@ -103,6 +105,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"RECEIVED"					=> "11",
 			"RECEIVED_BY_COURIER"		=> "12",
 			"DONE"						=> "13",
+			"CANCELLED"					=> "16",
 			"PICKING_FROM_CUSTOMER"		=> "03",
 			"DELIVERING_TO_TENANT"		=> "04",
 			"TENANT_RECEIVED"			=> "05",
@@ -120,6 +123,7 @@ defined('ORDER_STATUS') OR define('ORDER_STATUS', array(
 			"RECEIVED"					=> FALSE,
 			"RECEIVED_BY_COURIER"		=> FALSE,
 			"DONE"						=> FALSE,
+			"CANCELLED"					=> FALSE,
 			"PICKING_FROM_CUSTOMER"		=> TRUE,
 			"DELIVERING_TO_TENANT"		=> TRUE,
 			"TENANT_RECEIVED"			=> TRUE,

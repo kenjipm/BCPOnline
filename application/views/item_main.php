@@ -92,6 +92,7 @@
 							<button type="button" class="cb-button-form cb-col-fourth" onclick="popup.open('popup_buy')" <?=$model->item->is_empty_stock ? "disabled='disabled'" : ($model->item->tenant->account->is_blocked ? "disabled='disabled'" : "")?>><?=$model->item->is_empty_stock ? "STOK HABIS" : ($model->item->tenant->account->is_blocked ? "TENANT TIDAK AKTIF" : "BELI")?></button>
 							<form method="post" action="<?=site_url('message/open_detail_do')?>" class="cb-row cb-col-fourth-2">
 								<input type="hidden" name="receiver_account_id" value="<?=$model->item->tenant->account_id?>"/>
+								<input type="hidden" name="default_message" value="<?=$model->item->posted_item_name?>"/>
 								<button type="submit" class="cb-col-full cb-ml-5 cb-button cb-button-form" id="btn-send_message">KIRIMKAN PESAN</button>
 							</form>
 						</div>

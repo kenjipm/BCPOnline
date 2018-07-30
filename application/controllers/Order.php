@@ -245,6 +245,11 @@ class Order extends CI_Controller {
 			$payment->billing_id			= $this->input->post('billing_id');
 			$payment->insert();
 			
+			$this->load->model('billing_model');
+			$cur_billing = new billing_model();
+			$cur_billing->id = $this->input->post('billing_id');
+			$cur_billing->update_date_closed();
+			
 			redirect('Order/order_list');
 		}
 	}

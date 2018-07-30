@@ -286,6 +286,26 @@ class Posted_item_variance_model extends CI_Model {
 		}
 	}
 	
+	public function quantity_add_batch($id_quantity_array)
+	{
+		if (count($id_quantity_array) > 0)
+		{
+			$id_str = "";
+			$query = "UPDATE `" . $this->table_posted_item_variance . "` SET `quantity_available` = CASE ";
+			foreach($id_quantity_array as $id => $quantity)
+			{
+				$query .= " WHEN `id` = " . $id . " THEN quantity_available + " . $quantity;
+				
+				if ($id_str != "") $id_str .= ",";
+				$id_str .= " ".$id;
+			}
+			$query .= " ELSE `quantity_available` END ";
+			$query .= " WHERE `id` IN (" . $id_str . ")";
+			
+			$this->db->query($query);
+		}
+	}
+	
 	public function upload_image($id, $index)
 	{
 		$data['error'] = array();
