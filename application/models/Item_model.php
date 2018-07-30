@@ -292,7 +292,7 @@ class Item_model extends CI_Model {
 					  ->where($this->table_tenant_bill.'.payment_date > 0')
 					  ->where($this->table_tenant_bill.'.payment_expiration < CURDATE()')
 					  ->where('category_id', $category_id)
-					  // ->where('item_type', 'ORDER')
+					  ->where('item_type', 'ORDER')
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->order_by('id', 'RANDOM')

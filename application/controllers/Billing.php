@@ -33,7 +33,7 @@ class Billing extends CI_Controller {
 		}
 	}
 	
-	public function index()
+	public function index($page=1)
 	{
 		$this->authorize();
 		
@@ -68,7 +68,8 @@ class Billing extends CI_Controller {
 			$this->load->view('customer/repair_list', $data);
 			
 			$this->load->model('billing_model');
-			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id);
+			$billings = $this->billing_model->get_all_from_customer_id($this->session->child_id, (($page - 1) * PAGINATION['type']['LIMIT_TABLE_ROW']));
+			$billing_count = $this->billing_model->count_all_from_customer_id($this->session->child_id);
 			
 			$data['title'] = "HISTORI TRANSAKSI";
 			$this->load->model('views/customer/billing_list_view_model');
@@ -76,6 +77,13 @@ class Billing extends CI_Controller {
 			
 			$data['model'] = $this->billing_list_view_model;
 			$this->load->view('customer/billing_list', $data);
+			
+			$this->load->library('paginator');
+			$this->paginator->base_url = site_url('billing/');
+			$this->paginator->calculate($billing_count, PAGINATION['type']['LIMIT_TABLE_ROW'], $page);
+			
+			$paginator_data['paginator'] = $this->paginator;
+			$this->load->view('pagination', $paginator_data);
 		}
 		
 		// Load Footer

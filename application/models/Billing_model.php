@@ -150,16 +150,30 @@ class Billing_model extends CI_Model {
 	}
 	
 	//get all billing
-	public function get_all_from_customer_id($customer_id)
+	public function get_all_from_customer_id($customer_id, $offset=0, $limit="", $order="DESC")
+	{
+		if ($limit=="") $limit = PAGINATION['type']['LIMIT_TABLE_ROW'];
+		
+		$this->load->model('Billing_model');
+		
+		$this->db->where('customer_id', $customer_id);
+		$this->db->order_by('date_created', $order);
+		$query = $this->db->get($this->table_billing, $limit??"", $limit?$offset:"");
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	//count all billing
+	public function count_all_from_customer_id($customer_id)
 	{
 		$this->load->model('Billing_model');
 		
 		$this->db->where('customer_id', $customer_id);
-		$this->db->order_by('date_created', 'DESC');
 		$query = $this->db->get($this->table_billing);
-		$items = $query->result();
+		$num_rows = $query->num_rows();
 		
-		return ($items !== null) ? $this->map_list($items) : array();
+		return $num_rows;
 	}
 	
 	// get item detail

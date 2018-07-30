@@ -28,7 +28,17 @@
 					<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Tidak ada pesan di kotak masuk</h4>
 					<?php
 				}
-				?>
+			?>
+		</div>
+		<div class="cb-row cb-col-full cb-pt-5">
+			<?php
+				if ($model->back_button_url != "")
+				{
+					?>
+					<a href="<?=site_url($model->back_button_url)?>" class="cb-align-center cb-col-full cb-button cb-button-form">KEMBALI</a>
+					<?php
+				}
+			?>
 		</div>
 	</div>
 	<?php
