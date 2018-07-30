@@ -348,11 +348,11 @@ $config['dashboard_menu_admin'] = array(
 			'url'	=> "admin/report",
 			'notif' => "",
 			),
-		'BILLING' => array(
-			'text'	=> "BILLING",
-			'url'	=> "billing",
-			'notif' => "",
-			),
+		// 'BILLING' => array(
+			// 'text'	=> "BILLING",
+			// 'url'	=> "billing",
+			// 'notif' => "",
+			// ),
 		),
 	);
 
