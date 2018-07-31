@@ -26,13 +26,15 @@ class Billing_status_view_model extends CI_Model {
 		$this->billing->bill_id			= $billing->bill_id;
 		$this->billing->delivery_method	= $cur_delivery_config['description'];
 		$this->billing->delivery_type	= $billing->delivery_type;
-		$this->billing->date_created	= $billing->date_created;
-		$this->billing->date_closed		= $billing->date_closed;
+		$this->billing->date_created	= date("d-m-Y H:i:s", strtotime($billing->date_created));
+		$this->billing->date_closed		= date("d-m-Y H:i:s", strtotime($billing->date_closed));
 		$this->billing->total_payable	= $billing->total_payable;
+		$this->billing->is_expired		= $billing->is_expired();
 		
 		$this->billing->address			= $billing->shipping_address->get_full_address();
 		$this->billing->shipping_charge	= $this->text_renderer->to_rupiah($billing->shipping_charge->fee_amount);
 		$this->billing->total_not_paid	= $billing->total_payable; // awalnnya ikutin amount yg harus dibayar dulu
+		$this->billing->is_paid_once	= false;
 		
 		$this->load->config('payment_method_'.ENVIRONMENT);
 		foreach($payments as $payment)
@@ -51,6 +53,7 @@ class Billing_status_view_model extends CI_Model {
 			// $temp_payment->description					= $temp_payment->paid ? "Lunas" : "Menunggu Pembayaran";
 			
 			$this->billing->total_not_paid				-= $payment->paid_amount; // kurangi dari tiap payment
+			if ($temp_payment->is_paid) $this->billing->is_paid_once = true;
 			
 			$this->payments[] = $temp_payment;
 		}

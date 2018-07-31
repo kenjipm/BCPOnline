@@ -119,7 +119,7 @@ class Order extends CI_Controller {
 		$this->load->view('footer_print_preview');
 	}
 	
-	public function order_list()
+	public function order_list($page=1)
 	{
 		// Load Header
         $data_header['css_list'] = array();
@@ -153,13 +153,21 @@ class Order extends CI_Controller {
 			if ($this->input->method() == "post") $this->get_item_tenant_do();
 			
 			$this->load->model('Order_details_model');
-			$orders = $this->Order_details_model->get_all_from_tenant_id();
+			$orders = $this->Order_details_model->get_all_from_tenant_id(($page - 1) * PAGINATION['type']['LIMIT_TABLE_ROW']);
 			
 			$this->load->model('views/tenant/order_list_view_model');
 			$this->order_list_view_model->get($orders);
 			
 			$data['model'] = $this->order_list_view_model;
 			$this->load->view('tenant/order_list', $data);
+			
+			$order_count = $this->Order_details_model->count_all_from_tenant_id();
+			$this->load->library('paginator');
+			$this->paginator->base_url = site_url('order/order_list/');
+			$this->paginator->calculate($order_count, PAGINATION['type']['LIMIT_TABLE_ROW'], $page);
+			
+			$paginator_data['paginator'] = $this->paginator;
+			$this->load->view('pagination', $paginator_data);
 		}
 		else if ($this->session->userdata('type') == TYPE['name']['DELIVERER'])
 		{
@@ -244,6 +252,11 @@ class Order extends CI_Controller {
 			$payment->paid_amount			= 0;
 			$payment->billing_id			= $this->input->post('billing_id');
 			$payment->insert();
+			
+			$this->load->model('billing_model');
+			$cur_billing = new billing_model();
+			$cur_billing->id = $this->input->post('billing_id');
+			$cur_billing->update_date_closed();
 			
 			redirect('Order/order_list');
 		}

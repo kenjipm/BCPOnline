@@ -39,14 +39,16 @@ function refresh_chat_area()
 					$("#dispute_template").find('.dispute_sender_name').addClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_date_sent').addClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').addClass('cb-pull-right');
-					$("#dispute_template").find('.dispute_content').addClass('cb-align-right');
+					$("#dispute_template").find('.dispute_container').addClass('cb-align-right');
+					// $("#dispute_template").find('.dispute_content').addClass('cb-align-right');
 					$("#dispute_template").find('.dispute_image_container').addClass('cb-align-right');
 				}
 				else {
 					$("#dispute_template").find('.dispute_sender_name').removeClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_date_sent').removeClass('cb-pull-right');
 					$("#dispute_template").find('.dispute_content').removeClass('cb-pull-right');
-					$("#dispute_template").find('.dispute_content').removeClass('cb-align-right');
+					$("#dispute_template").find('.dispute_container').removeClass('cb-align-right');
+					// $("#dispute_template").find('.dispute_content').removeClass('cb-align-right');
 					$("#dispute_template").find('.dispute_image_container').removeClass('cb-align-right');
 				}
 				

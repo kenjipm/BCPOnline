@@ -285,8 +285,10 @@ class Order_details_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
-	public function get_all_from_tenant_id()
+	public function get_all_from_tenant_id($offset=0, $limit="", $order="DESC")
 	{
+		if ($limit=="") $limit = PAGINATION['type']['LIMIT_TABLE_ROW'];
+		
 		$this->load->model('Tenant_model');
 		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
 		
@@ -299,11 +301,28 @@ class Order_details_model extends CI_Model {
 		$this->db->join('customer', 'billing.customer_id=customer.id', 'left');
 		$this->db->join('account', 'account.id=customer.account_id', 'left');
 		$this->db->where($where);
-		$this->db->order_by('date_created', 'DESC');
-		$query = $this->db->get($this->table_order_details);
+		$this->db->order_by('date_created', $order);
+		$query = $this->db->get($this->table_order_details, $limit??"", $limit?$offset:"");
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_from_tenant_id()
+	{
+		$this->load->model('Tenant_model');
+		$cur_tenant = $this->Tenant_model->get_by_account_id($this->session->userdata('id'));
+		
+		$where['posted_item.tenant_id'] = $cur_tenant->id;
+		
+		$this->db->select('*, ' . $this->table_order_details.'.id AS id');
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=' . $this->table_order_details . '.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get($this->table_order_details);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
 	}
 	
 	public function get_all_from_customer_id($customer_id)
@@ -710,6 +729,54 @@ class Order_details_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_by_expired_billing()
+	{
+		$this->db->select('
+			order_details.id AS order_details_id,
+			order_details.quantity AS quantity,
+			posted_item_variance.id AS posted_item_variance_id
+		');
+		
+		$this->db->join('billing', 'order_details.billing_id = billing.id', 'left');
+		$this->db->join('posted_item_variance', 'order_details.posted_item_variance_id = posted_item_variance.id', 'left');
+		
+		$this->db->where('order_details.order_status', ORDER_STATUS['name']['WAITING_FOR_PAYMENT']);
+		$this->db->where('billing.date_closed < NOW()');
+		
+		$query = $this->db->get($this->table_order_details);
+		
+		$result = $query->result();
+		
+		return $result;
+	}
+	
+	public function update_batch_order_status($id_array, $order_status)
+	{
+		if (count($id_array) > 0)
+		{
+			$this->load->model('order_status_history_model');
+			
+			$update_data = array();
+			$insert_data = array();
+			foreach($id_array as $id)
+			{
+				$update_data[] = array(
+					'id' => $id,
+					'order_status' => $order_status
+				);
+				
+				$order_status_history = new order_status_history_model();
+				$order_status_history->order_details_id = $id;
+				$order_status_history->status = $order_status;
+				$insert_data[] = $order_status_history;
+			}
+
+			$this->db->update_batch($this->table_order_details, $update_data, 'id');
+			
+			$this->db->insert_batch($this->table_order_status_history, $insert_data);
+		}
 	}
 	
 	public function assign_deliverer()

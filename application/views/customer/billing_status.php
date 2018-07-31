@@ -29,7 +29,22 @@
 			</div>
 		</div>
 		<div class="cb-col-fifth-2 cb-pl-3">
-			<input type="text" class="cb-row cb-col-full cb-input-text" id="customer_id" name="customer_id" value="<?=$model->billing->date_created?>" readonly/>
+			<input type="text" class="cb-row cb-col-full cb-input-text" id="date_created" name="date_created" value="<?=$model->billing->date_created?>" readonly/>
+		</div>
+	</div>
+	<div class="cb-row cb-p-5">
+		<div class="cb-col-fifth">
+			<div class="cb-txt-primary-1 cb-pull-left">
+				<div class="cb-label"> Jatuh Tempo </div>
+			</div>
+			<div class="cb-pull-right">
+				<div class="cb-txt-primary-1">
+					<div class="cb-label"> : </div>
+				</div>
+			</div>
+		</div>
+		<div class="cb-col-fifth-2 cb-pl-3">
+			<input type="text" class="cb-row cb-col-full cb-input-text" id="date_closed" name="date_closed" value="<?=$model->billing->date_closed?>" readonly/>
 		</div>
 	</div>
 	<?php
@@ -157,22 +172,26 @@
 								}
 							?>
 							<?php
-								if (!$order->is_done)
-								{
-									?>
-									<button type="button" class="cb-button-form" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">KOMPLAIN</button>
-									<form id="form-create_dispute-<?=$order->id?>" method="post" action="<?=site_url('customer/create_dispute')?>">
-										<input type="hidden" name="order_detail_id" value="<?=$order->id?>"/>
-										<input type="hidden" name="tenant_id" value="<?=$order->posted_item_variance->posted_item->tenant_id?>"/>
-									</form>
-									<?php
-								}
-								else
-								{
-									?>
-									<button type="button" class="cb-button-form" id="btn-create_feedback-<?=$order->id?>" onclick="open_popup_feedback(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">ULASAN</button>
-									<?php
-								}
+								
+									if (!$order->is_done)
+									{
+										if ($model->billing->is_paid_once)
+										{
+											?>
+											<button type="button" class="cb-button-form" id="btn-create_dispute-<?=$order->id?>" onclick="create_dispute(<?=$order->id?>)">KOMPLAIN</button>
+											<form id="form-create_dispute-<?=$order->id?>" method="post" action="<?=site_url('customer/create_dispute')?>">
+												<input type="hidden" name="order_detail_id" value="<?=$order->id?>"/>
+												<input type="hidden" name="tenant_id" value="<?=$order->posted_item_variance->posted_item->tenant_id?>"/>
+											</form>
+											<?php
+										}
+									}
+									else
+									{
+										?>
+										<button type="button" class="cb-button-form" id="btn-create_feedback-<?=$order->id?>" onclick="open_popup_feedback(<?=$order->id?>, <?=$order->posted_item_variance->posted_item->tenant_id?>)">ULASAN</button>
+										<?php
+									}
 							?>
 							</div>
 						</div>
@@ -302,7 +321,7 @@
 								</div>
 								<div class="cb-col-fifth-2">
 									<div class="cb-align-center"><?=$payment->paid_amount?>
-									<?php if (!$payment->is_paid) { ?>
+									<?php if ((!$payment->is_paid) && (!$model->billing->is_expired)) { ?>
 										<?php /* <a class="cb-button-form" href="<?=site_url('billing/payment_dummy_bayar/'.$payment->id)?>">
 											BAYAR (dummy)
 										</a> */ ?>

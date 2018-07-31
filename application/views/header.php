@@ -86,7 +86,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <?php
 	////////////// CONFIG ///////////////
-	/* kalau mau ada ad-sidebar, kasih 2 slash di awal baris ini. kalau ga ada, hapus 2 slash di awal baris ini.
+	// /* kalau mau ada ad-sidebar, kasih 2 slash di awal baris ini. kalau ga ada, hapus 2 slash di awal baris ini.
 	if (($user_type == "CUSTOMER") || ($user_type == "GUEST"))
 	{
 		?>
@@ -94,7 +94,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="cb-row cb-col-full">
 				<div id="ad-sidebar-handle" class="cb-row cb-col-tenth cb-border-round cb-txt-primary-3 cb-p-5" onclick="toggle_ad_sidebar()">
 					<div id="ad-sidebar-toggle" class="">
-						<div id="ad-sidebar-toggle-button" class="cb-arrow cb-arrow-right">
+						<div id="ad-sidebar-toggle-button" class="cb-arrow cb-arrow-right cb-arrow-black">
 						</div>
 					</div>
 					<span id="ad-sidebar-text"></span>
@@ -113,12 +113,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 <div class="nav-cb">
 	<div class="navbar-cb-top cb-row cb-vertical-center">
-		<div class="cb-row cb-col-tenth-9 cb-vertical-center">
+		<div class="cb-row cb-col-half cb-vertical-center">
 			<!-- logo -->
-			<a class="navbar-cb-logo cb-col-tenth-2 cb-p-5" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
+			<a class="navbar-cb-logo cb-col-tenth-3 cb-p-5" href="<?=site_url('')?>"><img src="<?=site_url('img/Logo-header-03.png')?>" alt="Logo" class="logo-header" /></a>
 			
 			<!-- search -->
-			<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search cb-col-tenth-4 cb-p-5">
+			<form action="<?=site_url('item/search')?>" method="get" class="navbar-cb-top-search cb-col-fill cb-p-5">
 				<?php
 					if (($this->session->type != "TENANT") && ($this->session->type != "ADMIN") && ($this->session->type != "DELIVERER"))
 					{
@@ -135,7 +135,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				?>
 			</form>
+		</div>
 			
+		<div class="cb-row cb-col-half cb-align-right navbar-cb-top-right ">
 			<!-- top menu -->
 			<div class="navbar-cb-top-menu cb-col-fill cb-row cb-align-right cb-p-5">
 				<?php
@@ -151,9 +153,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 				?>
 			</div>
-		</div>
 		
-		<div class="cb-row cb-col-tenth cb-align-right">
 			<!-- profile -->
 			<div class="navbar-cb-top-profile cb-align-right cb-pb-5 cb-pt-5">
 				<img src="<?=$profile_pic?>" alt="Profile Picture" class="navbar-cb-top-profile-photo cb-border-round cb-bg-secondary-3"/>

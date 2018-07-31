@@ -67,14 +67,14 @@ class Billing_model extends CI_Model {
 		$this->shipping_address_id	= $db_item->shipping_address_id;
 		$this->shipping_charge_id	= $db_item->shipping_charge_id;
 		
+		$this->customer				= new Customer_model();
+		$this->shipping_address		= new Shipping_address_model();
+		$this->shipping_charge		= new Shipping_charge_model();
+		
 		$this->customer->account				= new Account_model();
 		$this->customer->account->name			= $db_item->name ?? "";
 		$this->shipping_address->address_detail	= $db_item->address_detail ?? "";
 		$this->shipping_charge->fee_amount		= $db_item->fee_amount ?? 0;
-		
-		$this->customer				= new Customer_model();
-		$this->shipping_address		= new Shipping_address_model();
-		$this->shipping_charge		= new Shipping_charge_model();
 		
 		return $this;
 	}
@@ -150,16 +150,30 @@ class Billing_model extends CI_Model {
 	}
 	
 	//get all billing
-	public function get_all_from_customer_id($customer_id)
+	public function get_all_from_customer_id($customer_id, $offset=0, $limit="", $order="DESC")
+	{
+		if ($limit=="") $limit = PAGINATION['type']['LIMIT_TABLE_ROW'];
+		
+		$this->load->model('Billing_model');
+		
+		$this->db->where('customer_id', $customer_id);
+		$this->db->order_by('date_created', $order);
+		$query = $this->db->get($this->table_billing, $limit??"", $limit?$offset:"");
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	//count all billing
+	public function count_all_from_customer_id($customer_id)
 	{
 		$this->load->model('Billing_model');
 		
 		$this->db->where('customer_id', $customer_id);
-		$this->db->order_by('date_created', 'DESC');
 		$query = $this->db->get($this->table_billing);
-		$items = $query->result();
+		$num_rows = $query->num_rows();
 		
-		return ($items !== null) ? $this->map_list($items) : array();
+		return $num_rows;
 	}
 	
 	// get item detail
@@ -310,6 +324,21 @@ class Billing_model extends CI_Model {
 		$this->db->set('bill_id', $natural_id)
 				 ->where('id', $this->id)
 				 ->update($this->table_billing);
+	}
+	
+	public function update_date_closed()
+	{
+		$date_closed = date("Y-m-d H:i:s", strtotime("+".INVOICE_DUE." days"));
+		$this->date_closed = $date_closed;
+		
+		$this->db->set('date_closed', $date_closed)
+				 ->where('id', $this->id)
+				 ->update($this->table_billing);
+	}
+	
+	public function is_expired()
+	{
+		return (time() > strtotime($this->date_closed));
 	}
 	
 	public function init_customer()

@@ -401,6 +401,11 @@ class Item extends CI_Controller {
 		$this->load->model('item_model');
 		$items = $this->item_model->get_all_from_following_tenants($following_tenants, ($page - 1) * PAGINATION['type']['LIMIT_TENANT_ITEM']);
 		$item_count = $this->item_model->count_all_from_following_tenants($following_tenants);
+		if (count($items) <= 0)
+		{
+			$items = $this->item_model->get_all_except_following_tenants($following_tenants, ($page - 1) * PAGINATION['type']['LIMIT_TENANT_ITEM']);
+			$item_count = $this->item_model->count_all_except_following_tenants($following_tenants);
+		}
 		
 		$this->load->model('views/item_gallery_view_model');
 		$this->item_gallery_view_model->get($items, 'item/tenant_items/');

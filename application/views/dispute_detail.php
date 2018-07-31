@@ -53,12 +53,12 @@
 									<div class="cb-col-tenth">
 									
 									</div>
-									<div class="cb-col-tenth-8 cb-row">
+									<div class="cb-col-tenth-8 cb-row <?=$dispute_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
 										<div class="cb-col-full">
-											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg <?=$dispute_text->sender->is_you ? 'cb-pull-right' : ''?>"></span><?=$dispute_text->sender->name?></span>
-											<span class="cb-ml-5 cb-mr-5 <?=$dispute_text->sender->is_you ? 'cb-pull-right' : ''?>"><?=$dispute_text->date_sent?></span>
+											<span class="cb-txt-primary-1 cb-font-title cb-font-size-lg"></span><?=$dispute_text->sender->name?></span>
+											<span class="cb-ml-5 cb-mr-5"><?=$dispute_text->date_sent?></span>
 										</div>
-										<div class="cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5 <?=$dispute_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
+										<div class="dispute_content cb-border-round cb-bg-secondary-3 cb-p-5 <?=$dispute_text->sender->is_you ? 'cb-align-right cb-pull-right' : ''?>">
 											<?=$dispute_text->text?>
 										</div>
 									</div>
@@ -93,12 +93,12 @@
 	<div class="cb-row cb-mb-5">
 		<div class="cb-col-tenth">
 		</div>
-		<div class="cb-col-tenth-8 cb-row">
+		<div class="cb-col-tenth-8 cb-row dispute_container">
 			<div class="cb-col-full">
 				<span class="dispute_sender_name cb-txt-primary-1 cb-font-title cb-font-size-lg"></span>
 				<span class="dispute_date_sent cb-ml-5 cb-mr-5"></span>
 			</div>
-			<div class="dispute_content cb-col-full cb-border-round cb-bg-secondary-3 cb-p-5">
+			<div class="dispute_content cb-border-round cb-bg-secondary-3 cb-p-5">
 			</div>
 			<div class="cb-row dispute_image_container">
 				<div class="cb-col-half cb-border-round cb-bg-secondary-3 cb-p-5">

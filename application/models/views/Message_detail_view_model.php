@@ -5,6 +5,8 @@ class Message_detail_view_model extends CI_Model {
 	public $message_inboxes;
 	public $message_inbox;
 	public $message_texts;
+	public $default_message;
+	public $back_button_url;
 	
 	// constructor
 	public function __construct()
@@ -12,9 +14,11 @@ class Message_detail_view_model extends CI_Model {
 		$this->message_inboxes = array();
 		$this->message_inbox = new class{};
 		$this->message_texts = array();
+		$this->default_message = "";
+		$this->back_button_url = "";
 	}
 	
-	public function get($message_inboxes, $selected_message_inbox, $message_texts)
+	public function get($message_inboxes, $selected_message_inbox, $message_texts, $default_message=null, $back_button_url=null)
 	{
 		$this->load->model('tenant_model');
 		foreach ($message_inboxes as $message_inbox)
@@ -84,6 +88,9 @@ class Message_detail_view_model extends CI_Model {
 			
 			$this->message_texts[] = $temp;
 		}
+		
+		if ($default_message != null) $this->default_message = $default_message;
+		if ($back_button_url != null) $this->back_button_url = $back_button_url;
 	}
 	
 	public function get_detail($selected_message_inbox, $message_texts)

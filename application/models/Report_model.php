@@ -26,6 +26,7 @@ class Report_model extends CI_Model {
 	public function get_all_transaction_from_date($start_date, $end_date)
 	{
 		$this->db->select('
+			billing.id AS billing_id,
 			billing.bill_id AS natural_billing_id,
 			billing.date_created AS date_bill_created,
 			voucher.voucher_worth AS voucher_worth,

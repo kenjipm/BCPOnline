@@ -323,6 +323,25 @@ class Account extends CI_Controller {
 			
 			$this->Account_model->insert_from_post(TYPE['name']['CUSTOMER']);
 			
+			$user = $this->Account_model->get_from_login($this->input->post('email'), $this->input->post('password'));
+			
+			if ($user !== null)
+			{
+				$userdata = array(
+					'id' => $user->id,
+					'name' => $user->name,
+					'child_id' => $user->child_id,
+					'account_id' => $user->account_id,
+					'profile_pic' => $user->profile_pic,
+					'type' => $user->type,
+					'cart' => array()
+				);
+				
+				$this->session->set_userdata($userdata);
+				
+				redirect('');
+			}
+			
 			redirect('account/signup_success');
 		}
 	}

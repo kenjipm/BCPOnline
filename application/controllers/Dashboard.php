@@ -42,6 +42,9 @@ class Dashboard extends CI_Controller {
 			$this->load->model('item_model');
 			$tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
 			
+			if (count($tenant_items) <= 0)
+			$tenant_items = $this->item_model->get_all_except_following_tenants($following_tenants, 0, 20, "RANDOM");
+			
 			$bidding_item = $this->item_model->get_last_bidding_item();
 			$this->load->model('bidding_live_model');
 			

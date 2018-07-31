@@ -40,14 +40,16 @@ function refresh_chat_area()
 					$("#message_template").find('.message_sender_name').addClass('cb-pull-right');
 					$("#message_template").find('.message_date_sent').addClass('cb-pull-right');
 					$("#message_template").find('.message_content').addClass('cb-pull-right');
-					$("#message_template").find('.message_content').addClass('cb-align-right');
+					$("#message_template").find('.message_container').addClass('cb-align-right');
+					// $("#message_template").find('.message_content').addClass('cb-align-right');
 					$("#message_template").find('.message_image_container').addClass('cb-align-right');
 				}
 				else {
 					$("#message_template").find('.message_sender_name').removeClass('cb-pull-right');
 					$("#message_template").find('.message_date_sent').removeClass('cb-pull-right');
 					$("#message_template").find('.message_content').removeClass('cb-pull-right');
-					$("#message_template").find('.message_content').removeClass('cb-align-right');
+					$("#message_template").find('.message_container').removeClass('cb-align-right');
+					// $("#message_template").find('.message_content').removeClass('cb-align-right');
 					$("#message_template").find('.message_image_container').removeClass('cb-align-right');
 				}
 				
