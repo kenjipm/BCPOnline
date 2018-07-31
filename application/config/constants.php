@@ -3,9 +3,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 /*
 |--------------------------------------------------------------------------
-| Application Constants
+| Dynamics
 |--------------------------------------------------------------------------
 */
+
+defined('AD_SIDEBAR_ENABLED') OR define('AD_SIDEBAR_ENABLED', true); // iklan sidebar (true = muncul, false = hilang)
+defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
+defined('DEPOSIT_BIDDING_PRICE') OR define('DEPOSIT_BIDDING_PRICE', '100000'); // harga bidding deposit
+
+defined('ADMIN_EMAILS') OR define('ADMIN_EMAILS', array(
+		0 => "admin0@cyberia.co.id",
+		1 => "admin1@cyberia.co.id",
+		2 => "admin2@cyberia.co.id",
+		3 => "admin3@cyberia.co.id",
+	)
+);
+
+defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
+		0 => "tenant.admin@cyberia.com",
+	)
+);
+
+defined('POSTED_ITEM_VARIANCE_TYPE') OR define('POSTED_ITEM_VARIANCE_TYPE', array(
+		'type' => array(
+			"WARNA"				=> "Warna",
+			"UKURAN"			=> "Ukuran",
+		),
+	)
+);
+
+
+/*
+|--------------------------------------------------------------------------
+| Constants
+|--------------------------------------------------------------------------
+*/
+
+defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberku');
 
 defined('DEFAULT_PROFILE_PIC') OR define('DEFAULT_PROFILE_PIC', 'img/profpic.png');
 defined('DEFAULT_PROFILE_PIC_TENANT') OR define('DEFAULT_PROFILE_PIC_TENANT', 'img/profpic-tenant.png');
@@ -144,14 +178,6 @@ defined('DISPUTE_STATUS') OR define('DISPUTE_STATUS', array(
 		'description' => array(
 			"ON_PROGRESS"		=> "Dalam proses",
 			"RESOLVED"			=> "Selesai",
-		),
-	)
-);
-
-defined('POSTED_ITEM_VARIANCE_TYPE') OR define('POSTED_ITEM_VARIANCE_TYPE', array(
-		'type' => array(
-			"WARNA"				=> "Warna",
-			"UKURAN"			=> "Ukuran",
 		),
 	)
 );
@@ -342,28 +368,13 @@ defined('TYPE') OR define('TYPE', array(
 	)
 );
 
-defined('ADMIN_EMAILS') OR define('ADMIN_EMAILS', array(
-		0 => "admin0@cyberia.co.id",
-		1 => "admin1@cyberia.co.id",
-		2 => "admin2@cyberia.co.id",
-		3 => "admin3@cyberia.co.id",
-	)
-);
-
-defined('TENANT_ADMIN_EMAILS') OR define('TENANT_ADMIN_EMAILS', array(
-		0 => "tenant.admin@cyberia.com",
-	)
-);
-
 
 /*
 |--------------------------------------------------------------------------
 | Application Production
 |--------------------------------------------------------------------------
 */
-defined('COMPANY_NAME') OR define('COMPANY_NAME', 'Cyberku');
-defined('INVOICE_DUE') OR define('INVOICE_DUE', '1'); // hari lamanya invoice jatuh tempo
-defined('DEPOSIT_BIDDING_PRICE') OR define('DEPOSIT_BIDDING_PRICE', '100000'); // harga bidding deposit
+
 // defined('EMAIL_RETRY_COUNT') OR define('EMAIL_RETRY_COUNT', 3);
 
 /*

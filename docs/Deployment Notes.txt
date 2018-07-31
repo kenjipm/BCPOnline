@@ -1,5 +1,6 @@
 Database:
-tenant: id 0 = Tenant Admin
+tenant: id 0 = Tenant Admin, email hrs terdaftar di constants.php di dlm const TENANT_ADMIN_EMAILS
+admin: id 0 = Admin Cyberku, email hrs terdaftar di constants.php di dlm const ADMIN_EMAILS & di cpanel
 
 
 Cron jobs:
