@@ -246,11 +246,11 @@ class Item_model extends CI_Model {
 	public function get_all_bidding_items()
 	{
 		$this->db->where('item_type', 'BID');
-		$this->db->where('date_expired >',  date('Y-m-d H:i:s'));
-		$query = $this->db->get($this->table_item);
-		$items = $query->result();
+		$this->db->order_by('id', 'DESC');
+		$query = $this->db->get($this->table_item, 1);
+		$item = $query->row();
 		
-		return ($items !== null) ? $this->map_list($items) : array();
+		return ($item !== null) ? $this->get_stub_from_db($item) : array();
 	}
 	
 	public function get_all_service_items($offset=0, $limit=20, $order="DESC")
@@ -618,6 +618,19 @@ class Item_model extends CI_Model {
 	public function get_bid_time_left()
 	{
 		return strtotime($this->date_expired) - time();
+	}
+	
+	public function is_winner($posted_item_id)
+	{
+		$where['posted_item_variance.posted_item_id'] = $posted_item_id;
+		
+		$this->db->join('posted_item_variance', 'posted_item_variance.id=order_details.posted_item_variance_id', 'left');
+		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
+		$this->db->where($where);
+		$query = $this->db->get('order_details');
+		$items = $query->result();
+		
+		return ($items !== null);
 	}
 	
 	public function is_expired()

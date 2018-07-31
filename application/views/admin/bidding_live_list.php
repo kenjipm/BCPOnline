@@ -23,33 +23,27 @@
 
 <div class="cb-panel-body cb-p-5">
 	<div class="item-showcase cb-row">
+		<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$model->item->id)?>" class="cb-col-fifth cb-pb-3">
+			<div class="item_thumbnail cb-border-round">
+				<div class="item_photo">
+					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>"/>
+				</div>
+				<div class="item_tenant_name">
+				</div>
+				<div class="item_name">
+					<?=$model->item->posted_item_name?>
+				</div>
+			</div>
+		</a>
 		<?php
-			foreach($model->items as $posted_item)
-			{
+		if (count($model->item) <= 0)
+		{
 			?>
-			<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$posted_item->id)?>" class="cb-col-fifth cb-pb-3">
-				<div class="item_thumbnail cb-border-round">
-					<div class="item_photo">
-						<img src="<?=$posted_item->image_one_name?>" alt="<?=$posted_item->posted_item_name?>"/>
-					</div>
-					<div class="item_tenant_name">
-					</div>
-					<div class="item_name">
-						<?=$posted_item->posted_item_name?>
-					</div>
-				</div>
-			</a>
+			<div class="col-md-4">
+				<label>Tidak ada Barang Lelang</label>
+			</div>
 			<?php
-			}
-			if (count($model->items) <= 0)
-			{
-				?>
-				<div class="col-md-4">
-					<label>Tidak ada Barang Lelang</label>
-				</div>
-				<?php
-			}
-			?>
+		}
 		?>
 	</div>
 </div>
