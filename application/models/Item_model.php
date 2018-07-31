@@ -389,6 +389,47 @@ class Item_model extends CI_Model {
 		return $num_rows;
 	}
 	
+	public function get_all_except_following_tenants($following_tenants, $offset=0, $limit=20, $order="DESC")
+	{
+		$this->db->where('item_type', "ORDER");
+		foreach ($following_tenants as $following_tenant)
+		{
+			$this->db->where('tenant_id <>', $following_tenant->tenant_id);
+		}
+		
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->order_by($this->table_item.'.date_updated', $order)
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_all_except_following_tenants($following_tenants)
+	{
+		$this->db->where('item_type', "ORDER");
+		foreach ($following_tenants as $following_tenant)
+		{
+			$this->db->where('tenant_id <>', $following_tenant->tenant_id);
+		}
+		
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->get($this->table_item);
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
+	
 	public function get_all_from_tenant_id($tenant_id, $offset=0, $limit=20, $order="DESC")
 	{
 		$this->db->where('tenant_id', $tenant_id);
