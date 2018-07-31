@@ -12,25 +12,23 @@ class Bidding_live_list_view_model extends CI_Model {
 	{
 		parent::__construct();
 		
-		$this->items = array();
+		$this->item = new class{};
 		$this->biddings = array();
 		$this->active_flash = false;
 		$this->active_bid = false;
 	}
 	
-	public function get($items, $biddings, $active_flash)
+	public function get($item, $biddings, $active_flash)
 	{
 		$i = 0;
 		$this->load->library('text_renderer');
-		foreach ($items as $item)
-		{	
-			$this->items[$i] = new class{};
-			
-			$this->items[$i]->id 				= $item->id;
-			$this->items[$i]->image_one_name	= site_url($item->image_one_name);
-			$this->items[$i]->posted_item_name 	= $item->posted_item_name;
-			$this->items[$i]->posted_item_description 	= $item->posted_item_description;
-		}
+
+		$this->item->id 				= $item->id;
+		$this->item->image_one_name		= site_url($item->image_one_name);
+		$this->item->posted_item_name 	= $item->posted_item_name;
+		$this->item->posted_item_description 	= $item->posted_item_description;
+		$this->item->is_confirmed 		= $item->is_confirmed;
+		$this->item->is_winner	 		= $item->is_winner;
 		
 		foreach ($biddings as $bidding)
 		{	
@@ -48,10 +46,14 @@ class Bidding_live_list_view_model extends CI_Model {
 			$this->active_flash = true;
 			$this->active_bid = false;
 		}
-		if ($items) 
+		if (($item) &&  ($this->item->is_confirmed))
 		{
 			$this->active_flash = false;
 			$this->active_bid = true;
+			if ($this->item->is_winner)
+			{
+				$this->active_bid = false;
+			}
 		}
 	}
 }
