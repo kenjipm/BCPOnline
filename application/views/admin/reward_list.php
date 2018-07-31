@@ -11,7 +11,7 @@
 
 <div class="cb-panel-body cb-bg-primary-3 cb-m-5 cb-p-5">
 	<div class="cb-row">
-		<div class="cb-col-fifth-2">
+		<div class="cb-col-tenth-3">
 			<div class="cb-label cb-font-title cb-align-center"> Reward </div>
 		</div>
 		<div class="cb-col-fifth">
@@ -20,13 +20,17 @@
 		<div class="cb-col-fifth-2">
 			<div class="cb-label cb-font-title cb-align-center"> Tanggal Berlaku </div>
 		</div>
+		<div class="cb-col-fifth">
+			<div class="cb-label cb-font-title cb-align-center">  </div>
+		</div>
 	</div>
 	<?php
+	$i = 0;
 	foreach($model->rewards as $reward)
 	{
 		?>
 		<div class="cb-row cb-p-5 cb-border-top cb-table-striped">
-			<div class="cb-col-fifth-2">
+			<div class="cb-col-tenth-3">
 				<div class=" cb-align-center"> <?=$reward->reward_description?> </div>
 			</div>
 			<div class="cb-col-fifth">
@@ -35,40 +39,59 @@
 			<div class="cb-col-fifth-2">
 				<div class="cb-align-center"> <?=$reward->date_added?> s/d <?=$reward->date_expired?> </div>
 			</div>
-			<div id="popup_reward_detail" class="popup popup-md">
+			<div class="cb-col-tenth">
+				<a class="cb-button-form" onclick=<?="popup.open('popup_reward_detail-" . $i . "')"?>>
+					LIHAT
+				</a>
+			</div>
+			<div id=<?="popup_reward_detail-" . $i ?> class="popup popup-md">
 				<div class="panel panel-default">
 					<div class="panel-heading">
-						Detil Reward
+						Daftar Redeem Customer
 					</div>
 					<div class="panel-body">
 						<form class="form-horizontal">
-							<div class="form-group">
-								<div class="col-sm-4">
-									<label>Deskripsi:</label>
+							<div class="cb-row">
+								<div class="col-sm-3">
+									<label> Nama </label>
 								</div>
-								<div class="col-sm-8">
-									<input type="text" value="<?=$reward->reward_description?>" class="form-control" id="voucher_description" readonly>
-								</div>
-							</div>
-							<div class="form-group">
-								<div class="col-sm-4">
-									<label>Nilai Voucher:</label>
-								</div>
-								<div class="col-sm-8">
-									<input type="text" value="<?=$reward->points_needed?>" class="form-control" id="voucher_worth" readonly>
+								<div class="col-sm-6">
+									<label> Tanggal </label>
 								</div>
 							</div>
-							<div class="form-group">
-								<div class="col-sm-4">
-									<label>Jumlah Stok:</label>
+							<?php
+							foreach($reward->redeem_reward as $redeem_reward)
+							{
+								?>
+								<div class="cb-row">
+									<div class="col-sm-3">
+										<input type="text" value="<?=$redeem_reward->customer_name?>" class="form-control" readonly>
+									</div>
+									<div class="col-sm-6">
+										<input type="text" value="<?=$redeem_reward->date_redeemed?>" class="form-control" readonly>
+									</div>
+									<?php if ($redeem_reward->status == "PENDING")
+									{
+									?>
+									<div class="col-sm-2">
+										<button type="button" class="cb-button-form" onclick="redeem_reward(<?=$redeem_reward->id?>)">REDEEM</button>
+									</div>
+									<?php } else // ($redeem_reward->status == "APPROVED")
+									{
+									?>
+									<div class="col-sm-2">
+										<button type="button" class="cb-button-form" disabled>REDEEMED</button>
+									</div>
+									<?php }
+									?>
 								</div>
-								<div class="col-sm-8">
-									<input type="text" value="<?=$reward->date_added?> s/d <?=$reward->date_expired?>" class="form-control" name="voucher_stock" readonly>
-								</div>
-							</div>
+								<?php
+							}
+							?>
+							
 							<div class="form-group">
 								<div class="col-sm-7 col-sm-offset-4">
-									<button type="button" class="cb-button-form" onclick="popup.close('popup_reward_detail')">Tutup</button>
+									<button type="button" class="cb-button-form" onclick=<?="popup.close('popup_reward_detail-" . $i . "')"?>>Tutup</button>
 								</div>
 							</div>
 						</form>
@@ -77,6 +100,7 @@
 			</div>
 		</div>
 		<?php
+		$i++;
 	}
 	?>
 	<div class="cb-row cb-p-5">

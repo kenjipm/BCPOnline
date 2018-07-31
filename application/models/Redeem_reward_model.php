@@ -71,6 +71,10 @@ class Redeem_reward_model extends CI_Model {
 		$stub->date_redeemed		= $db_item->date_redeemed;
 		$stub->status				= $db_item->status;
 		
+		$stub->customer				= new Customer_model();
+		$stub->customer->account	= new Account_model();
+		$stub->customer->account->name	= $db_item->name ?? "";
+		
 		return $stub;
 	}
 	
@@ -94,6 +98,29 @@ class Redeem_reward_model extends CI_Model {
 		$redeem_reward = $query->row();
 		
 		return ($redeem_reward !== null) ? $this->get_stub_from_db($redeem_reward) : null;
+	}
+	
+	public function get_redeem_from_reward_id($reward_id)
+	{
+		$where['reward_id'] = $reward_id;
+		
+		$this->db->select('*, ' . $this->table_redeem_reward.'.id AS id,' . $this->table_redeem_reward.'.status AS status, ' . 'account.id AS account_id');
+		$this->db->where($where);
+		$this->db->join('customer', 'customer.id=redeem_reward.customer_id', 'left');
+		$this->db->join('account', 'account.id=customer.account_id', 'left');
+		$query = $this->db
+					->order_by('redeem_reward.date_redeemed', 'DESC')
+					->get($this->table_redeem_reward);
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function confirm_redeem_reward($redeem_reward_id)
+	{
+		$this->db->set('status', 'DONE')
+				 ->where('id', $redeem_reward_id)
+				 ->update($this->table_redeem_reward);
 	}
 	
 	public function get_all()

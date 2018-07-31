@@ -22,6 +22,7 @@
 		</div>
 	</div>
 	<?php
+	$i = 0;
 	foreach($model->vouchers as $voucher)
 	{
 		?>
@@ -36,9 +37,9 @@
 				<div class="cb-align-center"> <?=$voucher->voucher_description?> </div>
 			</div>
 			<div class="cb-col-fifth">
-				<button class="cb-button-form" onclick="popup.open('popup_voucher_detail')">LIHAT</button>
+				<button class="cb-button-form" onclick=<?="popup.open('popup_voucher_detail-" . $i . "')"?>>LIHAT</button>
 			</div>
-			<div id="popup_voucher_detail" class="popup popup-md">
+			<div id=<?="popup_voucher_detail-" . $i ?> class="popup popup-md">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Detil Voucher
@@ -110,7 +111,7 @@
 							</div>
 							<div class="form-group">
 								<div class="col-sm-7 col-sm-offset-4">
-									<button type="button" class="cb-button-form" onclick="popup.close('popup_voucher_detail')">Tutup</button>
+									<button type="button" class="cb-button-form" onclick=<?="popup.close('popup_voucher_detail-" . $i . "')"?>>Tutup</button>
 								</div>
 							</div>
 						</form>
@@ -119,6 +120,7 @@
 			</div>
 		</div>
 		<?php
+		$i++;
 	}
 	?>
 </div>

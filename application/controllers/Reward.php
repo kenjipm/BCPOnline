@@ -36,7 +36,25 @@ class Reward extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
-	// Admin view
+	public function confirm_redeem_reward()
+	{
+		if ($this->session->type == TYPE['name']['ADMIN'])
+		{
+			$redeem_reward_id 	= $this->input->post('redeem_reward_id');
+			
+			$this->load->model('Redeem_reward_model');
+			$redeem_reward = $this->Redeem_reward_model->get_from_id($redeem_reward_id);
+			
+			// validasi, kalau redeem ga ada (error)
+			if ($redeem_reward == null) { echo "-1"; return -1; }
+			
+			$this->Redeem_reward_model->confirm_redeem_reward($redeem_reward_id);
+			
+			echo "1"; return "1";
+		}
+	}
+	
+	// Admin view	
 	public function reward_list()
 	{
 		if ($this->session->type != TYPE['name']['ADMIN']) // check account type, kalau bukan admin, redirect ke login page
@@ -47,16 +65,23 @@ class Reward extends CI_Controller {
 		
 		// Load Header
         $data_header['css_list'] = array();
-        $data_header['js_list'] = array();
+        $data_header['js_list'] = array('admin/reward_list');
 		$this->load->view('header', $data_header);
 		
 		// Load Body
 		$this->load->model('Reward_model');
+		$this->load->model('Redeem_reward_model');
 		$this->load->model('Setting_reward_model');
 		$rewards = $this->Reward_model->get_all();
+		$i = 0;
+		foreach($rewards as $reward)
+		{
+			$redeems[$i] = $this->Redeem_reward_model->get_redeem_from_reward_id($reward->id);
+			$i++;
+		}
 		$setting_reward = $this->Setting_reward_model->get_latest_setting_reward();
 		$this->load->model('views/admin/reward_list_view_model');
-		$this->reward_list_view_model->get($rewards);
+		$this->reward_list_view_model->get($rewards, $redeems);
 		$this->reward_list_view_model->get_setting($setting_reward);
 		$data['model'] = $this->reward_list_view_model;
 		$this->load->view('admin/reward_list', $data);
