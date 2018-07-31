@@ -1,0 +1,9 @@
+Database:
+tenant: id 0 = Tenant Admin
+
+
+Cron jobs:
+/usr/local/bin/php /home/cyberiac/public_html/BCPOnline/index.php billing cancel_expired_billings
+
+
+

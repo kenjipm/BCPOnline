@@ -82,7 +82,7 @@
 							<label for="image_name" class="cb-col-tenth cb-button cb-bg-secondary-2 cb-icon cb-icon-camera hoverable label_upload_file cb-vertical-center cb-row">
 								<div class="cb-icon cb-icon-sm cb-icon-add-item"></div>
 							</label>
-							<input value="<?=$model->default_message?>" id="message_input" type="text" name="text" placeholder="Kirim Pesan..." class="cb-col-tenth-8 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
+							<input value="" id="message_input" type="text" name="text" placeholder="Kirim Pesan..." class="cb-col-tenth-8 cb-input-text cb-border-round cb-bg-secondary-3 cb-p-5"/>
 							<button onclick="send_message()" class="cb-col-tenth cb-button cb-button-form" id="btn-message_send">KIRIM</button>
 						</form>
 					</div>

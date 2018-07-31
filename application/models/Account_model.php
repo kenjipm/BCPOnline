@@ -276,6 +276,7 @@ class Account_model extends CI_Model {
 		if ($this->db->insert($this->table_account, $db_item))
 		{
 			$db_item->id	= $this->db->insert_id();
+			$this->id	= $this->db->insert_id();
 			
 			// insert data ke tabel customer / tenant / deliverer / admin
 			$this->load->model(TYPE['model'][$type], 'child_model');

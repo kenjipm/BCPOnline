@@ -117,6 +117,16 @@ class Message extends CI_Controller {
 			$message_inbox->insert_from_parties_id($party_one_id, $party_two_id);
 		}
 			
+		if ($default_message != null)
+		{
+			$this->load->model('message_text_model');
+			$message_text = new message_text_model();
+			$message_text->text = $default_message;
+			$message_text->sender_id = $this->session->id;
+			$message_text->message_inbox_id = $message_inbox->id;
+			$message_text->insert_from_stub();
+		}
+			
 		$this->session->set_flashdata('default_message', $default_message);
 		$this->session->set_flashdata('back_button_url', $back_button_url);
 		
