@@ -85,8 +85,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
 
 <?php
-	////////////// CONFIG ///////////////
-	// /* kalau mau ada ad-sidebar, kasih 2 slash di awal baris ini. kalau ga ada, hapus 2 slash di awal baris ini.
+	////////////// SIDEBAR ///////////////
+	if (AD_SIDEBAR_ENABLED)
 	if (($user_type == "CUSTOMER") || ($user_type == "GUEST"))
 	{
 		?>
@@ -108,7 +108,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		</div> <!-- div ad-sidebar -->
 		<?php
 	}
-	// */
 ?>
 
 <div class="nav-cb">
