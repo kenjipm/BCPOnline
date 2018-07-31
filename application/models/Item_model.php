@@ -785,7 +785,10 @@ class Item_model extends CI_Model {
 		$this->db->where('id', $db_item->id);
 		$this->db->update($this->table_item, $db_item);
 		
-		$this->upload_image($this->id);
+		if ($_FILES['image_one_name']['name'])
+		{
+			$this->upload_image($this->id);
+		}
 		
 		$this->db->trans_complete(); // selesai nge lock db transaction
 	}
@@ -852,7 +855,6 @@ class Item_model extends CI_Model {
 			else
 			{
 				$file_path['image_one_name'] = $config_upload_image['upload_path'].$this->upload->data('file_name');
-				
 				$config_compress_image['source_image'] = $file_path['image_one_name'];
 				$this->image_lib->initialize($config_compress_image);
 				if (!$this->image_lib->resize())
