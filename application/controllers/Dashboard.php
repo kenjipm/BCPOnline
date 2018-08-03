@@ -111,4 +111,16 @@ class Dashboard extends CI_Controller {
 		// Load Footer
 		$this->load->view('footer');
 	}
+	
+	/*
+	public function tesdulu()
+	{
+		$this->load->library('emailer');
+		$email = 'kenji.prahyudi@gmail.com';
+		$subject = 'Pesanan Baru!';
+		$content = "Halo, Kenji! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku";
+		$this->emailer->send_from_admin($email, $subject, $content);
+	}
+	*/
+	
 }

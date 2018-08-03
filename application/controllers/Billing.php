@@ -745,7 +745,8 @@ class Billing extends CI_Controller {
 					$order_details = $this->order_details_model->get_all_from_billing_id($payment->billing->id);
 					$sent_tenant_email = array();
 					
-					$this->load->library('email');
+					// $this->load->library('email');
+					$this->load->library('emailer');
 					foreach($order_details as $order_detail)
 					{
 						$order_detail->init_posted_item_variance();
@@ -756,26 +757,35 @@ class Billing extends CI_Controller {
 						$email = $order_detail->posted_item_variance->posted_item->tenant->account->email;
 						$tenant_name = $order_detail->posted_item_variance->posted_item->tenant->tenant_name;
 						
-						$is_email_sent = false;
-						$i = 0;
-						while (!$is_email_sent && ($i < count(ADMIN_EMAILS)))
-						{
-							$this->email->from(ADMIN_EMAILS[$i], 'Admin '.COMPANY_NAME);
-							$this->email->to($email);
-
-							$this->email->subject('Pesanan Baru!');
-							$this->email->message("Halo, ".$tenant_name."! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku");
-
-							$is_email_sent = $this->email->send();
-							
-							$i++;
-						}
+						$subject = 'Pesanan Baru!';
+						$content = "Halo, ".$tenant_name."! Ada pesanan baru di ".COMPANY_NAME.", silakan cek di bagian Penjualanku";
+						$is_email_sent = $this->emailer->send_from_admin($email, $subject, $content);
 						
-						if ($is_email_sent)
+						if (($is_email_sent) && !in_array($email, $sent_tenant_email))
 						{
 							$sent_tenant_email[] = $email;
 						}
 					}
+					
+					$payment->billing->init_customer();
+					$payment->billing->customer->init_account();
+					$cur_account = $payment->billing->customer->account;
+					
+					if ($cur_account != null)
+					{
+						$this->load->config('payment_method_'.ENVIRONMENT);
+						$cur_payment = $this->config->item($payment->payment_method);
+						
+						if ($cur_payment)
+						{
+							$this->load->library('text_renderer');
+							
+							$subject = 'Pembayaran diterima';
+							$content = "Halo, ".$cur_account->name."! Pembayaran Anda sebesar " .$this->text_renderer->to_rupiah($payment->paid_amount). " untuk invoice " .$payment->billing->bill_id. " telah diterima oleh kami melalui " .$cur_payment['description']. ". Silakan pantau pesanan Anda di bagian transaksi.";
+							//$is_email_sent = $this->emailer->send_from_admin($cur_account->email, $subject, $content);
+						}
+					}
+					
 					$this->db->trans_complete();
 				}
 			}
