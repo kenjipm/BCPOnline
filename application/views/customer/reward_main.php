@@ -38,7 +38,7 @@
 					</div>
 					<div class="cb-col-fifth">
 						<div class="cb-align-center"> 
-							<button type="button" class="cb-button-form" <?=$reward->is_claimable?"":"disabled='disabled'"?> onclick="redeem_reward(<?=$reward->id?>, <?=$reward->points_needed?>)">Redeem</button>
+							<button type="button" class="cb-button-form" <?=$reward->is_claimable?"":"disabled='disabled'"?> onclick="redeem_reward(<?=$reward->id?>, '<?=$reward->points_needed?>')">Redeem</button>
 						</div>
 					</div>
 				</div>
