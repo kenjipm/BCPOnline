@@ -9,7 +9,7 @@
 		<div class="cb-col-tenth-2">
 			<div class="cb-label cb-font-title cb-align-center"> Tanggal Billing </div>
 		</div>
-		<div class="cb-col-tenth">
+		<div class="cb-col-tenth-2">
 			<div class="cb-label cb-font-title cb-align-right"> Total Billing</div>
 		</div>
 		<div class="cb-col-tenth-2">
@@ -17,8 +17,6 @@
 		</div>
 		<div class="cb-col-tenth-2">
 			<div class="cb-label cb-font-title cb-align-right"> Sisa Cashback </div>
-		</div>
-		<div class="cb-col-tenth">
 		</div>
 	</div>
 	<?php
@@ -33,12 +31,12 @@
 						<div class="cb-align-center"> <?=$i?> </div>
 					</div>
 					<div class="cb-col-tenth">
-						<div class="cb-align-center"> <?=$transaction->natural_billing_id?> </div>
+						<div class="cb-align-center"> <a href="<?=site_url('billing/detail/'.$transaction->billing_id)?>" target="_blank"><?=$transaction->natural_billing_id?></a> </div>
 					</div>
 					<div class="cb-col-tenth-2">
 						<div class="cb-align-center"> <?=$transaction->date_bill_created?> </div>
 					</div>
-					<div class="cb-col-tenth">
+					<div class="cb-col-tenth-2">
 						<div class="cb-align-right"> <?=$transaction->total_price?> </div>
 					</div>
 					<div class="cb-col-tenth-2">
@@ -46,9 +44,6 @@
 					</div>
 					<div class="cb-col-tenth-2">
 						<div class="cb-align-right"> <?=$transaction->total_admin_not_paid_price?> </div>
-					</div>
-					<div class="cb-col-tenth">
-						<div class="cb-align-right"> <a class="cb-button cb-button-form" href="<?=site_url('billing/detail/'.$transaction->billing_id)?>" target="_blank">LIHAT</a></div>
 					</div>
 				</div>
 				<?php
@@ -65,7 +60,7 @@
 				<div class="cb-col-tenth-2">
 					<div class="cb-align-center"></div>
 				</div>
-				<div class="cb-col-tenth">
+				<div class="cb-col-tenth-2">
 					<div class="cb-align-right"> <b><?=$model->total_price?></b> </div>
 				</div>
 				<div class="cb-col-tenth-2">
@@ -73,8 +68,6 @@
 				</div>
 				<div class="cb-col-tenth-2">
 					<div class="cb-align-right"> <b><?=$model->total_admin_not_paid_price?></b> </div>
-				</div>
-				<div class="cb-col-tenth">
 				</div>
 			</div>
 			<?php

@@ -589,6 +589,32 @@ class Admin extends CI_Controller {
 		$this->load->view('footer_print_preview');
 	}
 	
+	public function cancel_order($id)
+	{
+		$this->load->model('order_details_model');
+		$this->load->model('posted_item_variance_model');
+		
+		$order_detail = $this->order_details_model->get_from_id($id);
+		
+		$id_array = array();
+		$id_quantity_array = array();
+		
+		// buat update status order jadi cancelled
+		$id_array[] = $order_detail->id;
+		
+		// buat update quantity stok barang tenant
+		if (!isset($id_quantity_array[$order_detail->posted_item_variance_id]))
+			$id_quantity_array[$order_detail->posted_item_variance_id] = 0;
+		
+		$id_quantity_array[$order_detail->posted_item_variance_id] += $order_detail->quantity;
+		
+		// update status order jadi cancelled
+		$this->order_details_model->update_batch_order_status($id_array, ORDER_STATUS['name']['CANCELLED']);
+		
+		// update quantity stok barang tenant
+		$this->posted_item_variance_model->quantity_add_batch($id_quantity_array);
+	}
+	
 	public function validate_superadmin()
 	{
 		$password = $this->input->post('password');

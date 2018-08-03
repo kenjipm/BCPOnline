@@ -97,7 +97,6 @@ class Billing extends CI_Controller {
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array('billing');
-		$this->load->view('header', $data_header);
 		
 		// Load Body
 		$data['title'] = "Billing";
@@ -105,10 +104,14 @@ class Billing extends CI_Controller {
 		
 		if ($this->session->userdata('type') == "TENANT") // dummy
 		{
+			$this->load->view('header', $data_header);
 			$this->load->view('tenant/billing_detail', $data);
 		}
 		if ($this->session->userdata('type') == "ADMIN") // dummy
 		{
+			$data_header['js_list'][] = 'admin/billing_detail';
+			$this->load->view('header', $data_header);
+			
 			$this->load->model('Order_details_model');
 			$this->load->model('Billing_model');
 			$orders = $this->Order_details_model->get_all_from_billing_id($id);
@@ -122,6 +125,7 @@ class Billing extends CI_Controller {
 		else
 		{
 			// if not paid
+			$this->load->view('header', $data_header);
 			$this->load->view('customer/billing', $data);
 			
 			// if paid
