@@ -32,6 +32,7 @@ class Bidding_live_list_view_model extends CI_Model {
 			$this->items[$i]->posted_item_name 	= $item->posted_item_name;
 			$this->items[$i]->posted_item_description 	= $item->posted_item_description;
 			$this->items[$i]->is_confirmed 		= $item->is_confirmed;
+			$this->items[$i]->is_expired 		= $item->is_expired();
 			if ($i == 0) $this->items[$i]->is_winner = $item->is_winner;
 			
 			$i++;

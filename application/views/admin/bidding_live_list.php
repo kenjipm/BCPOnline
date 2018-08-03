@@ -27,7 +27,7 @@
 		{
 		?>
 		<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$item->id)?>" class="cb-col-fifth cb-pb-3">
-			<div class="item_thumbnail cb-border-round">
+			<div class="item_thumbnail cb-border-round <?= (!$item->is_expired && $item->is_confirmed) ? "cb-border cb-border-boldest cb-border-primary-2" : "" ?>">
 				<div class="item_photo">
 					<img src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
 				</div>
