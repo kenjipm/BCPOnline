@@ -23,20 +23,24 @@
 
 <div class="cb-panel-body cb-p-5">
 	<div class="item-showcase cb-row">
-		<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$model->item->id)?>" class="cb-col-fifth cb-pb-3">
+		<?php foreach ($model->items as $item) 
+		{
+		?>
+		<a href="<?=site_url('Bidding_live/bidding_live_detail/'.$item->id)?>" class="cb-col-fifth cb-pb-3">
 			<div class="item_thumbnail cb-border-round">
 				<div class="item_photo">
-					<img src="<?=$model->item->image_one_name?>" alt="<?=$model->item->posted_item_name?>"/>
+					<img src="<?=$item->image_one_name?>" alt="<?=$item->posted_item_name?>"/>
 				</div>
 				<div class="item_tenant_name">
 				</div>
 				<div class="item_name">
-					<?=$model->item->posted_item_name?>
+					<?=$item->posted_item_name?>
 				</div>
 			</div>
 		</a>
 		<?php
-		if (count($model->item) <= 0)
+		}
+		if (count($model->items) <= 0)
 		{
 			?>
 			<div class="col-md-4">

@@ -247,10 +247,10 @@ class Item_model extends CI_Model {
 	{
 		$this->db->where('item_type', 'BID');
 		$this->db->order_by('id', 'DESC');
-		$query = $this->db->get($this->table_item, 1);
-		$item = $query->row();
+		$query = $this->db->get($this->table_item);
+		$items = $query->result();
 		
-		return ($item !== null) ? $this->get_stub_from_db($item) : array();
+		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
 	public function get_all_service_items($offset=0, $limit=20, $order="DESC")

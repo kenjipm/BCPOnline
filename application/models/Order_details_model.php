@@ -1230,7 +1230,7 @@ class Order_details_model extends CI_Model {
 		$this->db->join('posted_item', 'posted_item.id=posted_item_variance.posted_item_id', 'left');
 		$this->db->join('billing', 'billing.id=' .$this->table_order_details . '.billing_id', 'left');
 		$this->db->where($where);
-		$this->db->where('billing.date_closed >',  date('Y-m-d H:i:s'));
+		$this->db->where('order_status != ', ORDER_STATUS['name']['CANCELLED']);
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
