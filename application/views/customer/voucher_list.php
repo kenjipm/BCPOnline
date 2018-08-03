@@ -3,9 +3,7 @@
 		<div class="cb-col-half">
 			<h3 class="cb-txt-primary-1 cb-font-title">DAFTAR VOUCHER</h3>
 		</div>
-		<div class="cb-col-half cb-p-5">
-			<a href="<?=site_url('voucher/create_voucher')?>" class="cb-button-form pull-right">+ TAMBAH VOUCHER</a>
-		</div>
+
 	</div>
 </div>
 
