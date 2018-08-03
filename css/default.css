@@ -598,7 +598,7 @@ h4 { font-weight: bold; }
 #ad-sidebar {
 	position: fixed;
 	z-index: 10000;
-	top: 30%;
+	bottom: 0%;
 	/* right: -370px; */
 	right: 0px;
 	transform: translate(0, -50%);
