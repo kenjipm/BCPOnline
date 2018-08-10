@@ -169,6 +169,7 @@ class Order_details_model extends CI_Model {
 		$stub->posted_item_variance->posted_item->tenant_id			= $db_item->tenant_id ?? "";
 		
 		$stub->billing						= new Billing_model();
+		$stub->billing->bill_id				= $db_item->bill_id ?? "";
 		$stub->billing->shipping_address_id	= $db_item->shipping_address_id ?? "";
 		$stub->billing->date_created		= $db_item->date_created ?? "";
 		$stub->billing->date_closed			= $db_item->date_closed ?? "";
@@ -180,6 +181,7 @@ class Order_details_model extends CI_Model {
 		$stub->billing->customer->account			= new Account_model();
 		$stub->billing->customer->account->id		= $db_item->account_id ?? "";
 		$stub->billing->customer->account->name		= $db_item->name ?? "";
+		$stub->billing->customer->account->email	= $db_item->email ?? "";
 		
 		$stub->billing->shipping_address					= new Shipping_address_model();
 		$stub->billing->shipping_address->address_detail	= $db_item->address_detail ?? "";
@@ -377,9 +379,30 @@ class Order_details_model extends CI_Model {
 		$query = $this->db->get($this->table_order_details);
 		$items = $query->result();
 		
+		$this->load->library('emailer');
+		$item_list_strs = array();
 		foreach($items as $item)
 		{
 			$this->update_order_status($item->id, ORDER_STATUS['name']['PICKING_FROM_TENANT'], ORDER_STATUS['name']['DELIVERING_TO_CUSTOMER']);
+			
+			$cur_order_detail = $this->get_from_id($item->id);
+			$email = $cur_order_detail->billing->customer->account->email;
+			if (!isset($item_list_strs[$email])) {
+				$item_list_strs[$email] = new class{};
+				$item_list_strs[$email]->name = $cur_order_detail->billing->customer->account->name;
+				$item_list_strs[$email]->bill_id = $cur_order_detail->billing->bill_id;
+				$item_list_strs[$email]->item_list = "";
+			} else {
+				$item_list_strs[$email]->item_list .= ", ";
+			}
+			$item_list_strs[$email]->item_list .= $cur_order_detail->posted_item_name;
+		}
+		
+		$subject = 'Pesanan Telah Diantar!';
+		foreach($item_list_strs as $email => $item_list_str)
+		{
+			$content = "Halo, ".$item_list_str->name."! Barang pesanan Anda: " . $item_list_str->item_list . " untuk invoice " . $item_list_str->bill_id . " telah dikirim. Silakan pantau di " . COMPANY_NAME . " bagian Transaksi.";
+			$is_email_sent = $this->emailer->send_from_admin($email, $subject, $content);
 		}
 		
 		return ($items !== null) ? $this->map_list($items) : array();
