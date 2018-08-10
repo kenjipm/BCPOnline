@@ -37,7 +37,7 @@ class Bidding_live_list_view_model extends CI_Model {
 			
 			$i++;
 		}
-		
+		// print_r($this->items);
 		$i = 0;
 		foreach ($biddings as $bidding)
 		{	
@@ -57,7 +57,7 @@ class Bidding_live_list_view_model extends CI_Model {
 			$this->active_flash = true;
 			$this->active_bid = false;
 		}
-		if (($items) &&  ($this->items[0]->is_confirmed))
+		if (($this->items) &&  ($this->items[0]->is_confirmed))
 		{
 			$this->active_flash = false;
 			$this->active_bid = true;

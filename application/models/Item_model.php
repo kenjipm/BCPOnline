@@ -630,7 +630,7 @@ class Item_model extends CI_Model {
 		$query = $this->db->get('order_details');
 		$items = $query->result();
 		
-		return ($items !== null);
+		return (!empty($items));
 	}
 	
 	public function is_expired()
