@@ -188,6 +188,7 @@ defined('PAGINATION') OR define('PAGINATION', array(
 			"LIMIT_CATEGORY"	=> 16,
 			"LIMIT_FLASH_ITEM"	=> 20,
 			"LIMIT_TENANT_ITEM"	=> 20,
+			"LIMIT_NEW_ITEM"	=> 20,
 			"LIMIT_HOT_ITEM"	=> 20,
 			"LIMIT_TABLE_ROW"	=> 20,
 		),

@@ -40,10 +40,11 @@ class Dashboard extends CI_Controller {
 			$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
 			
 			$this->load->model('item_model');
-			$tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
+			// $tenant_items = $this->item_model->get_all_from_following_tenants($following_tenants);
 			
-			if (count($tenant_items) <= 0)
-			$tenant_items = $this->item_model->get_all_except_following_tenants($following_tenants, 0, 20, "RANDOM");
+			// if (count($tenant_items) <= 0)
+			// $tenant_items = $this->item_model->get_all_except_following_tenants($following_tenants, 0, 20, "RANDOM");
+			$new_items = $this->item_model->get_all_by_newest(0, 20);
 			
 			$bidding_item = $this->item_model->get_last_bidding_item();
 			$this->load->model('bidding_live_model');
@@ -72,7 +73,7 @@ class Dashboard extends CI_Controller {
 			$this->load->view('header', $data_header);
 			
 			$this->load->model('views/dashboard_view_model');
-			$this->dashboard_view_model->get($categories, $hot_items, $flash_items, $tenant_items, $bidding_item, $last_bidding);
+			$this->dashboard_view_model->get($categories, $hot_items, $flash_items, $new_items, $bidding_item, $last_bidding);
 			$data['model'] = $this->dashboard_view_model;
 			$data['status'] = $this->input->get('status') ?? "";
 			$this->load->view('dashboard_main', $data);

@@ -389,6 +389,12 @@ class Item extends CI_Controller {
 	
 	public function tenant_items($page=1)
 	{
+		if ($this->session->type != TYPE['name']['CUSTOMER']) // check account type, kalau bukan customer, redirect ke login page
+		{
+			$return_url = $this->input->post_get('return_url') ?? "";
+			redirect('login?return_url='.$return_url);
+		}
+		
 		// Load Header
         $data_header['css_list'] = array();
         $data_header['js_list'] = array();
@@ -409,6 +415,33 @@ class Item extends CI_Controller {
 		
 		$this->load->model('views/item_gallery_view_model');
 		$this->item_gallery_view_model->get($items, 'item/tenant_items/');
+		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
+		
+		$data['title'] = "TENANT ITEMS";
+		$data['model'] = $this->item_gallery_view_model;
+		$this->load->view('item_gallery', $data);
+			
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
+	public function new_items($page=1)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('following_tenant_model');
+		$following_tenants = $this->following_tenant_model->get_all_from_customer_id($this->session->child_id, null);
+		
+		$this->load->model('item_model');
+		$items = $this->item_model->get_all_by_newest(($page - 1) * PAGINATION['type']['LIMIT_NEW_ITEM']);
+		$item_count = $this->item_model->count_all_by_newest();
+		
+		$this->load->model('views/item_gallery_view_model');
+		$this->item_gallery_view_model->get($items, 'item/new_items/');
 		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
 		
 		$data['title'] = "NEW ITEMS";

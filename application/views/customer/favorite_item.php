@@ -46,7 +46,9 @@
 			if (count($model->favorite_items) <= 0)
 			{
 				?>
-				<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Belum ada barang yang difavoritkan</h4>
+				<div class="cb-row cb-col-full cb-bg-secondary-3 cb-border-round cb-p-5">
+					<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Belum ada barang yang masuk wishlist</h4>
+				</div>
 				<?php
 			}
 			?>
