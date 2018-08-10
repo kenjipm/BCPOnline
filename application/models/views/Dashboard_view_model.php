@@ -5,7 +5,7 @@ class Dashboard_view_model extends CI_Model {
 	public $ad_boxes;
 	
 	public $categories;
-	public $tenant_items;
+	public $new_items;
 	public $hot_items;
 	public $flash_items;
 	public $bidding_item;
@@ -15,13 +15,13 @@ class Dashboard_view_model extends CI_Model {
 	{
 		$this->ad_boxes = array();
 		$this->categories = array();
-		$this->tenant_items = array();
+		$this->new_items = array();
 		$this->hot_items = array();
 		$this->flash_items = array();
 		$this->bidding_item = null;
 	}
 	
-	public function get($categories, $hot_items, $flash_items, $tenant_items, $bidding_item, $last_bidding)
+	public function get($categories, $hot_items, $flash_items, $new_items, $bidding_item, $last_bidding)
 	{
 		$this->load->library('text_renderer');
 		
@@ -76,29 +76,29 @@ class Dashboard_view_model extends CI_Model {
 			$this->flash_items[] = $temp;
 		}
 		
-		foreach ($tenant_items as $tenant_item)
+		foreach ($new_items as $new_item)
 		{
 			$temp = new class{};
-			$temp->id				= $tenant_item->id;
-			$temp->posted_item_name	= $tenant_item->posted_item_name;
-			$temp->price			= $this->text_renderer->to_rupiah($tenant_item->price);
-			$temp->image_one_name	= site_url(($tenant_item->image_one_name !== "") ? $tenant_item->image_one_name : DEFAULT_ITEM_PICTURE[$tenant_item->item_type]);
-			$temp->rating			= $tenant_item->calculate_rating();
-			$temp->favorite			= $tenant_item->calculate_favorite();
+			$temp->id				= $new_item->id;
+			$temp->posted_item_name	= $new_item->posted_item_name;
+			$temp->price			= $this->text_renderer->to_rupiah($new_item->price);
+			$temp->image_one_name	= site_url(($new_item->image_one_name !== "") ? $new_item->image_one_name : DEFAULT_ITEM_PICTURE[$new_item->item_type]);
+			$temp->rating			= $new_item->calculate_rating();
+			$temp->favorite			= $new_item->calculate_favorite();
 			
-			$tenant_item->init_tenant();
+			$new_item->init_tenant();
 			$temp->tenant = new class{};
-			$temp->tenant->tenant_name	= $tenant_item->tenant->tenant_name;
+			$temp->tenant->tenant_name	= $new_item->tenant->tenant_name;
 			
-			$tenant_item->get_hot_item();
-			$temp->is_hot_item = ($tenant_item->hot_item != null);
-			if ($tenant_item->hot_item != null)
+			$new_item->get_hot_item();
+			$temp->is_hot_item = ($new_item->hot_item != null);
+			if ($new_item->hot_item != null)
 			{
 				$temp->hot_item = new class{};
-				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($tenant_item->hot_item->promo_price);
+				$temp->hot_item->promo_price = $this->text_renderer->to_rupiah($new_item->hot_item->promo_price);
 			}
 			
-			$this->tenant_items[] = $temp;
+			$this->new_items[] = $temp;
 		}
 		
 		// if ($bidding_item != null)

@@ -29,6 +29,11 @@ $config['top_menu_guest'] = array(
 			),
 		'FAVORITE_ITEM' => array(
 			'text'	=> "FAVORIT",
+			'url'	=> "item/tenant_items",
+			'notif'	=> "",
+			),
+		'WISHLIST' => array(
+			'text'	=> "WISHLIST",
 			'url'	=> "customer/favorite_item",
 			'notif'	=> "",
 			),
@@ -91,6 +96,11 @@ $config['top_menu_customer'] = array(
 			),
 		'FAVORITE_ITEM' => array(
 			'text'	=> "FAVORIT",
+			'url'	=> "item/tenant_items",
+			'notif'	=> "",
+			),
+		'WISHLIST' => array(
+			'text'	=> "WISHLIST",
 			'url'	=> "customer/favorite_item",
 			'notif'	=> "",
 			),

@@ -234,7 +234,7 @@
 </div>
 
 <?php
-	if (count($model->tenant_items) > 0)
+	if (count($model->new_items) > 0)
 	{
 		?>
 		<div class="cb-row">
@@ -246,35 +246,35 @@
 					<div class="cb-panel-body cb-pl-2 cb-pr-2">
 						<div class="item-showcase cb-row">
 							<?php
-								foreach($model->tenant_items as $tenant_item)
+								foreach($model->new_items as $new_item)
 								{
 									?>
-									<a href="<?=site_url('item/'.$tenant_item->id)?>" class="cb-col-fifth">
+									<a href="<?=site_url('item/'.$new_item->id)?>" class="cb-col-fifth">
 										<div class="item_thumbnail cb-border-round">
 											<div class="item_heart">
 												<div class="item_heart_icon cb-heart-red cb-heart">
-													<div class="item_heart_count"><?=$tenant_item->favorite->favorite_count?></div>
+													<div class="item_heart_count"><?=$new_item->favorite->favorite_count?></div>
 												</div>
 											</div>
 											<div class="item_photo">
-												<img src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
+												<img src="<?=$new_item->image_one_name?>" alt="<?=$new_item->posted_item_name?>"/>
 											</div>
 											<div class="item_tenant_name">
-												<?=$tenant_item->tenant->tenant_name?>
+												<?=$new_item->tenant->tenant_name?>
 											</div>
 											<div class="item_name">
-												<?=$tenant_item->posted_item_name?>
+												<?=$new_item->posted_item_name?>
 											</div>
 											<div class="item_separator"></div>
 											<div class="item_initial_price">
-												<?= $tenant_item->is_hot_item ? $tenant_item->price : "" ?>
+												<?= $new_item->is_hot_item ? $new_item->price : "" ?>
 											</div>
 											<div class="item_current_price">
-												<?= $tenant_item->is_hot_item ? $tenant_item->hot_item->promo_price : $tenant_item->price ?>
+												<?= $new_item->is_hot_item ? $new_item->hot_item->promo_price : $new_item->price ?>
 											</div>
 											<div class="item_rating cb-row cb-vertical-center cb-align-center">
-												<span class="cb-star cb-star-<?=$tenant_item->rating->rating_average_round?>"></span>
-												<span class="cb-ml-2">(<?= $tenant_item->rating->rating_count ?>)</span>
+												<span class="cb-star cb-star-<?=$new_item->rating->rating_average_round?>"></span>
+												<span class="cb-ml-2">(<?= $new_item->rating->rating_count ?>)</span>
 											</div>
 										</div>
 									</a>
@@ -282,7 +282,7 @@
 								}
 							?>
 						</div>
-						<a class="cb-row cb-border-round cb-align-center cb-pt-3 cb-pb-3 cb-mt-5 cb-mb-5 cb-bg-primary-2 cb-font-title cb-font-size-xl cb-txt-secondary-1" href="<?=site_url('item/tenant_items')?>">
+						<a class="cb-row cb-border-round cb-align-center cb-pt-3 cb-pb-3 cb-mt-5 cb-mb-5 cb-bg-primary-2 cb-font-title cb-font-size-xl cb-txt-secondary-1" href="<?=site_url('item/new_items')?>">
 							LIHAT SELEBIHNYA
 						</a>
 					</div>
@@ -514,7 +514,7 @@
 	
 		<!-------- FOLLOWING TENANT NEW ITEMS -------->
 		<?php
-			/*if (count($model->tenant_items) > 0)
+			/*if (count($model->new_items) > 0)
 			{
 				?>
 				<div class="panel panel-default">
@@ -524,18 +524,18 @@
 					<div class="panel-body">
 						<div class="row">
 							<?php
-							foreach($model->tenant_items as $tenant_item)
+							foreach($model->new_items as $new_item)
 							{
 								?>
 									<div class="col-md-4">
 										<div class="panel panel-default">
-											<a href="<?=site_url('item/'.$tenant_item->id)?>">
+											<a href="<?=site_url('item/'.$new_item->id)?>">
 												<div class="panel-body">
-													<img class="col-md-12" src="<?=$tenant_item->image_one_name?>" alt="<?=$tenant_item->posted_item_name?>"/>
+													<img class="col-md-12" src="<?=$new_item->image_one_name?>" alt="<?=$new_item->posted_item_name?>"/>
 												</div>
 												<div class="panel-footer">
-													<label class="control-label"><?=$tenant_item->posted_item_name?></label><br/>
-													<label class="control-label"><?=$tenant_item->price?></label>
+													<label class="control-label"><?=$new_item->posted_item_name?></label><br/>
+													<label class="control-label"><?=$new_item->price?></label>
 												</div>
 											</a>
 										</div>
