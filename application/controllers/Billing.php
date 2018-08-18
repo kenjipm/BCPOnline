@@ -264,15 +264,21 @@ class Billing extends CI_Controller {
 			$payment->billing_id			= $billing->id;
 			$payment->insert();
 			
-			$this->load->config('payment_method_'.ENVIRONMENT);
-			if (in_array($this->input->post('payment_method'), $this->config->item('no_wait_payment_methods'))) // kalau customer milih payment method yg ga perlu nunggu pembayaran (lgsg kirim)
+			// $this->load->config('payment_method_'.ENVIRONMENT);
+			$this->load->config('delivery_method');
+			if (in_array($this->input->post('delivery_method'), $this->config->item('no_payment_delivery_methods'))) // kalau customer milih delivery method yg ga perlu nunggu pembayaran (lgsg kirim / COD)
 			{
-				$this->load->model('order_details_model');
-				$order_details = new Order_details_model();
-				$order_details = $order_details->set_all_paid_from_billing_id($billing->id);
+				// $this->load->model('order_details_model');
+				// $order_details = new Order_details_model();
+				// $order_details = $order_details->set_all_paid_from_billing_id($billing->id);
+				
+				// baru kosongkan cart nya
+				$this->session->cart = array();
 			
 				// redirect to confirmation page
-				redirect('billing/status/'.$billing->id);
+				// redirect('billing/status/'.$billing->id);
+				
+				$this->payment_do($payment->payment_id, true, true);
 			}
 			else // kalau nunggu pembayaran
 			{
@@ -425,18 +431,21 @@ class Billing extends CI_Controller {
 			$this->load->model('posted_item_variance_model');
 			$this->posted_item_variance_model->quantity_sub_from_cart($this->session->cart);
 			
-			$this->load->config('payment_method_'.ENVIRONMENT);
-			if (in_array($this->input->post('payment_method'), $this->config->item('no_wait_payment_methods'))) // kalau customer milih payment method yg ga perlu nunggu pembayaran (lgsg kirim)
+			// $this->load->config('payment_method_'.ENVIRONMENT);
+			$this->load->config('delivery_method');
+			if (in_array($this->input->post('delivery_method'), $this->config->item('no_payment_delivery_methods'))) // kalau customer milih delivery method yg ga perlu nunggu pembayaran (lgsg kirim / COD)
 			{
-				$this->load->model('order_details_model');
-				$order_details = new Order_details_model();
-				$order_details = $order_details->set_all_paid_from_billing_id($billing->id);
+				// $this->load->model('order_details_model');
+				// $order_details = new Order_details_model();
+				// $order_details = $order_details->set_all_paid_from_billing_id($billing->id);
 				
 				// baru kosongkan cart nya
 				$this->session->cart = array();
 			
 				// redirect to confirmation page
-				redirect('billing/status/'.$billing->id);
+				// redirect('billing/status/'.$billing->id);
+				
+				$this->payment_do($payment->payment_id, true, true);
 			}
 			else // kalau nunggu pembayaran
 			{
@@ -577,6 +586,12 @@ class Billing extends CI_Controller {
 		$this->load->model('Billing_model');
 		$billing = $this->Billing_model->get_from_id($payment->billing_id);
 		
+		$this->load->config('delivery_method');
+		if (in_array($billing->delivery_method, $this->config->item('no_payment_delivery_methods'))) // kalau customer milih delivery method yg ga perlu nunggu pembayaran (lgsg kirim / COD)
+		{
+			$this->payment_do($payment->payment_id, true, true);
+		}
+		
 		$this->load->model('doku_model');
 		$new_doku = new doku_model();
 		$new_doku->transidmerchant	= $payment->payment_id;
@@ -676,7 +691,7 @@ class Billing extends CI_Controller {
 		}
 	}
 	
-	public function payment_do($natural_id, $is_redirect=true)
+	public function payment_do($natural_id, $is_redirect=true, $is_cod=false)
 	{
 		$this->authorize();
 		
@@ -784,9 +799,18 @@ class Billing extends CI_Controller {
 						{
 							$this->load->library('text_renderer');
 							
-							$subject = 'Pembayaran diterima';
-							$content = "Halo, ".$cur_account->name."! Pembayaran Anda sebesar " .$this->text_renderer->to_rupiah($payment->paid_amount). " untuk invoice " .$payment->billing->bill_id. " telah diterima oleh kami melalui " .$cur_payment['description']. ". Silakan pantau pesanan Anda di bagian transaksi.";
-							//$is_email_sent = $this->emailer->send_from_admin($cur_account->email, $subject, $content);
+							if (!$is_cod)
+							{
+								$subject = 'Pembayaran diterima';
+								$content = "Halo, ".$cur_account->name."! Pembayaran Anda sebesar " .$this->text_renderer->to_rupiah($payment->paid_amount). " untuk invoice " .$payment->billing->bill_id. " telah diterima oleh kami melalui " .$cur_payment['description']. ". Silakan pantau pesanan Anda di bagian transaksi.";
+								//$is_email_sent = $this->emailer->send_from_admin($cur_account->email, $subject, $content);
+							}
+							else // if ($is_cod)
+							{
+								$subject = 'Pengiriman COD siap dilakukan';
+								$content = "Halo, ".$cur_account->name."! Tagihan Anda sebesar " .$this->text_renderer->to_rupiah($payment->paid_amount). " untuk invoice " .$payment->billing->bill_id. " akan dilakukan melalui " .$cur_payment['description']. ". Silakan pantau pesanan Anda di bagian transaksi dan lakukan pembayaran kepada kurir kami.";
+								//$is_email_sent = $this->emailer->send_from_admin($cur_account->email, $subject, $content);
+							}
 						}
 					}
 					

@@ -72,7 +72,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		
 		$top_menu_items = $this->config->item(TYPE['TOP_MENU'][$user_type]);
 		
-		$categories = $this->category_model->get_all();
+		$categories = $this->category_model->get_all_with_brand();
+		// print_r($categories);
 	?>
 	
 </head>
@@ -200,18 +201,58 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 		?>
 		<div></div>
 	</div>
+	
 	<ul class="hover_menu navbar-cb-strip-product">
 		<?php
+			$processed_category_ids = array();
+			$i = 0;
 			foreach ($categories as $category)
 			{
-				?>
-				<li><a href="<?=site_url('item/category/'.$category->id)?>" class="hover_menu-text navbar-cb-strip-product-text">
-					<?=$category->category_name?>
-				</a></li>
-				<?php
+				if (!in_array($category->id, $processed_category_ids))
+				{
+					
+					?>
+					<li><a class="hover_menu-text navbar-cb-strip-product-text" menu_element="navbar-cb-strip-category-<?=$category->id?>" idx="<?=$i?>">
+						<?=$category->category_name?>
+					</a></li>
+					<?php
+					$processed_category_ids[] = $category->id;
+					$i++;
+				}
 			}
 		?>
 	</ul>
+	
+	<?php
+		$processed_category_ids = array();
+		$i = 0;
+		foreach ($categories as $category)
+		{
+			if (!in_array($category->id, $processed_category_ids))
+			{
+				?>
+				<ul class="hover_menu navbar-cb-strip-category" id="navbar-cb-strip-category-<?=$category->id?>">
+				<?php
+				$processed_category_ids[] = $category->id;
+			}
+			
+			?>
+				
+				<li><a href="<?=site_url('item/brand/'.$category->id.'/'.$category->brand_id)?>" class="hover_menu-text navbar-cb-strip-category-text">
+					<?=$category->brand_name?>
+				</a></li>
+				
+			<?php
+			
+			$i++;
+			if (!isset($categories[$i]) || ($categories[$i]->id != $categories[$i-1]->id))
+			{
+				?>
+				</ul>
+				<?php
+			}
+		}
+	?>
 	
 </div>
 

@@ -4,8 +4,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 $config['delivery_methods'] = array('CYBERKU', 'JNE', 'TIKI', 'POS');
 
 $config['no_tracking_delivery_methods'] = array('cyberku');
+$config['no_payment_delivery_methods'] = array('cyberku');
 
-$config['order_delivery_methods'] = array('jne', 'tiki', 'pos');
+$config['order_delivery_methods'] = array('cyberku', 'jne', 'tiki', 'pos');
 $config['repair_delivery_methods'] = array('cyberku');
 
 $config['store_city_id'] = 55;
@@ -26,7 +27,7 @@ $config['ro_fee_to_store_api_url'] = 'https://api.rajaongkir.com/starter/cost?ke
 
 $config['cyberku'] = array(
 	'name'				=> 'cyberku',
-	'description'		=> 'Cyberku Delivery',
+	'description'		=> 'COD',
 	'long_description'	=> '',
 	'ro_api_code'		=> 'cyberku',
 	'status_api_url'	=> '',

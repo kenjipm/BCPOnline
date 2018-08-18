@@ -569,6 +569,24 @@ h4 { font-weight: bold; }
 	color: #434747;
 }
 
+.hover_menu.navbar-cb-strip-category {
+	position: absolute;
+	top: 145px;
+	left: 360px;
+    border-radius: 7px;
+	z-index: 100;
+	width: 240px;
+	background-color: #e55026;
+}
+
+.hover_menu-text.navbar-cb-strip-category-text {
+	color: #ffffff;
+}
+
+.hover_menu-text.navbar-cb-strip-category-text:hover {
+	color: #434747;
+}
+
 /*.navbar-cb-top-profile-menu > li {
 	list-style: none;
 	line-height: 30px;

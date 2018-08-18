@@ -3,6 +3,8 @@
 class Category_model extends CI_Model {
 	
 	private $table_category = 'category';
+	private $table_posted_item = 'posted_item';
+	private $table_brand = 'brand';
 	
 	// table attribute
 	public $id;
@@ -88,6 +90,24 @@ class Category_model extends CI_Model {
 		$items = $query->result();
 		
 		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function get_all_with_brand()
+	{
+		$query = $this->db->query(
+			" SELECT DISTINCT *, category.id AS id, brand.id AS brand_id" .
+			" FROM " . $this->table_brand . //table_category .
+				//" LEFT JOIN " . $this->table_posted_item . " ON category.id = posted_item.category_id " .
+				//" LEFT JOIN " . $this->table_brand . " ON posted_item.brand_id = brand.id " .
+				" LEFT JOIN " . $this->table_posted_item . " ON brand.id = posted_item.brand_id " .
+				" LEFT JOIN " . $this->table_category . " ON posted_item.category_id = category.id " .
+			" WHERE item_type = 'ORDER' " .
+			" GROUP BY category.id, brand.id " .
+			" ORDER BY (CASE WHEN category_name LIKE '%Lainnya%' THEN 1 ELSE 0 END) ASC, category_name ASC,
+					   (CASE WHEN brand_name LIKE '%Lainnya%' THEN 1 ELSE 0 END) ASC, brand_name ASC");
+		$items = $query->result();
+		
+		return $items ?? array();
 	}
 	
 	// insert new account from form post

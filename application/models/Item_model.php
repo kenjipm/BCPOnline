@@ -304,6 +304,29 @@ class Item_model extends CI_Model {
 		return ($items !== null) ? $this->map_list($items) : array();
 	}
 	
+	public function get_all_promoted_from_category_id_brand_id($category_id, $brand_id, $offset=0, $limit=8)
+	{
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  ->join($this->table_tenant_bill, $this->table_item.'.id' . ' = ' . $this->table_tenant_bill.'.posted_item_id', 'left')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->where($this->table_tenant_bill.'.payment_date > 0')
+					  ->where($this->table_tenant_bill.'.payment_expiration < CURDATE()')
+					  ->where('category_id', $category_id)
+					  ->where('brand_id', $brand_id)
+					  ->where('item_type', 'ORDER')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->order_by('id', 'RANDOM')
+					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
+					  
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
 	public function get_related_items($item)
 	{
 		return $this->get_all_from_category_id($item->category_id, 1, 10);
@@ -335,6 +358,43 @@ class Item_model extends CI_Model {
 					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
 					  // ->where($this->table_item_variance.'.quantity_available > 0')
 					  ->where('category_id', $category_id)
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->get($this->table_item);
+					  
+		$num_rows = $query->num_rows();
+		
+		return $num_rows;
+	}
+	
+	public function get_all_from_category_id_brand_id($category_id, $brand_id, $offset=0, $limit=16, $order="DESC")
+	{
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->where('category_id', $category_id)
+					  ->where('brand_id', $brand_id)
+					  ->where('item_type', 'ORDER')
+					  ->group_by($this->table_item.'.id')
+					  ->distinct()
+					  ->order_by($this->table_item.'.date_updated', $order)
+					  //->join($this->table_category, $this->table_category.'.id' . ' = ' . $this->table_item.'.category_id', 'left');
+					  ->get($this->table_item, $limit??"", $limit?$offset:"");
+					  
+		$items = $query->result();
+		
+		return ($items !== null) ? $this->map_list($items) : array();
+	}
+	
+	public function count_from_category_id_brand_id($category_id, $brand_id)
+	{
+		$query = $this->db
+					  ->select('*, ' . $this->table_item.'.id AS id')
+					  ->join($this->table_item_variance, $this->table_item.'.id' . ' = ' . $this->table_item_variance.'.posted_item_id', 'left')
+					  // ->where($this->table_item_variance.'.quantity_available > 0')
+					  ->where('category_id', $category_id)
+					  ->where('brand_id', $brand_id)
 					  ->group_by($this->table_item.'.id')
 					  ->distinct()
 					  ->get($this->table_item);

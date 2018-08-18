@@ -15,14 +15,16 @@ var popup = {
 	}
 }
 
-function init_hover_menu(hovered_element, menu_element) {
-	$(hovered_element + ", " + menu_element).hover(function(){
+function init_hover_menu(hovered_element, menu_element, submenu_element="") {
+	if (submenu_element != "") submenu_element = ", " + submenu_element;
+	
+	$(hovered_element + ", " + menu_element + submenu_element).hover(function(){
 		$(menu_element).show();
 	}, function(){
 		$(menu_element).hide();
 	});
 	
-	$(hovered_element + ", " + menu_element).click(function(){
+	$(hovered_element).click(function(){
 		if ($(menu_element).is(":visible")) {
 			$(menu_element).hide();
 		} else {
@@ -31,11 +33,63 @@ function init_hover_menu(hovered_element, menu_element) {
 	});
 }
 
+var menu_height_fixed = 30;
+function init_hover_menu_auto(hovered_element) {
+	
+	$(hovered_element).hover(function(){
+		var menu_element = "#" + $(this).attr('menu_element');
+		var idx = $(this).attr('idx');
+		var menu_height = $(this).height();
+		var navbar_cb_height = $(".navbar-cb-top").height() + $(".navbar-cb-strip").height();
+		$(menu_element).css('top', (idx * menu_height_fixed + navbar_cb_height) + 'px');
+		$(menu_element).show();
+		
+		$(menu_element).hover(function(){
+			$(this).show();
+		}, function(){
+			$(this).hide();
+		});
+	}, function(){
+		var menu_element = "#" + $(this).attr('menu_element');
+		$(menu_element).hide();
+	});
+	
+	$(hovered_element).click(function(){
+		var menu_element = "#" + $(this).attr('menu_element');
+		
+		if ($(menu_element).is(":visible")) {
+			$(menu_element).hide();
+		} else {
+			var idx = $(this).attr('idx');
+			var menu_height = $(this).height();
+			var navbar_cb_height = $(".navbar-cb-top").height() + $(".navbar-cb-strip").height();
+			$(menu_element).css('top', (idx * menu_height_fixed + navbar_cb_height) + 'px');
+			$(menu_element).show();
+		}
+	});
+	
+	
+}
+
 $(document).ready(function(){
 	// toggle_ad_sidebar(); // kalau ad-sidebar mau default terbuka, ini di comment
 	
 	init_hover_menu(".navbar-cb-top-profile-photo", ".navbar-cb-top-profile-menu");
-	init_hover_menu("#navbar-cb-strip-PRODUCT", ".navbar-cb-strip-product");
+	init_hover_menu("#navbar-cb-strip-PRODUCT", ".navbar-cb-strip-product", ".navbar-cb-strip-category");
+	init_hover_menu_auto(".navbar-cb-strip-product-text");
+	
+	$("#navbar-cb-strip-PRODUCT").hover(function(){
+		var navbar_cb_height = $(".navbar-cb-top").height() + $(".navbar-cb-strip").height();
+		$(".navbar-cb-strip-product").css('top', navbar_cb_height + 'px');
+	});
+	
+	// $(".navbar-cb-strip-product-text").each(function(idx, element){
+		// var menu_element = "#" + $(element).attr('menu_element');
+		// var menu_height = $(element).height();
+		// console.log(menu_height);
+		// $(menu_element).css('top', (idx * menu_height + 145) + 'px');
+	// });
+	
 	// $(".navbar-cb-top-profile-photo, .navbar-cb-top-profile-menu").hover(function(){
 		// $(".navbar-cb-top-profile-menu").show();
 	// }, function(){
