@@ -49,6 +49,9 @@ class Search_view_model extends CI_Model {
 			$temp->rating = $promoted_item->calculate_rating();
 			$temp->favorite = $promoted_item->calculate_favorite();
 			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$promoted_item->init_tenant();
 			$temp->tenant = new class{};
 			$temp->tenant->tenant_name	= $promoted_item->tenant->tenant_name;
@@ -73,6 +76,9 @@ class Search_view_model extends CI_Model {
 			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			$temp->favorite = $item->calculate_favorite();
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$item->init_tenant();
 			$temp->tenant = new class{};
@@ -119,6 +125,9 @@ class Search_view_model extends CI_Model {
 			$temp->rating = $promoted_item->calculate_rating();
 			$temp->favorite = $promoted_item->calculate_favorite();
 			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$promoted_item->init_tenant();
 			$temp->tenant = new class{};
 			$temp->tenant->tenant_name	= $promoted_item->tenant->tenant_name;
@@ -143,6 +152,9 @@ class Search_view_model extends CI_Model {
 			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			$temp->favorite = $item->calculate_favorite();
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$item->init_tenant();
 			$temp->tenant = new class{};

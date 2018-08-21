@@ -30,6 +30,9 @@ class Favorite_item_view_model extends CI_Model {
 			$favorite_item_temp->rating				= $favorite_item->posted_item->calculate_rating();
 			$favorite_item_temp->favorite			= $favorite_item->posted_item->calculate_favorite();
 			
+			if (strlen($favorite_item_temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$favorite_item_temp->posted_item_name = substr($favorite_item_temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$favorite_item->posted_item->init_tenant();
 			$favorite_item_temp->tenant = new class{};
 			$favorite_item_temp->tenant->tenant_name	= $favorite_item->posted_item->tenant->tenant_name;

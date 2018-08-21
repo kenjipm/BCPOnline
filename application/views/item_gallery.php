@@ -49,7 +49,6 @@
 				<h4 class="cb-txt-secondary-1 cb-font-title cb-pl-5 cb-pr-5">Hasil pencarian tidak ditemukan</h4>
 				<?php
 			}
-			?>
 		?>
 	</div>
 </div>

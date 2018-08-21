@@ -24,7 +24,7 @@ function init_hover_menu(hovered_element, menu_element, submenu_element="") {
 		$(menu_element).hide();
 	});
 	
-	$(hovered_element).click(function(){
+	$(hovered_element).on('touchend', function(){
 		if ($(menu_element).is(":visible")) {
 			$(menu_element).hide();
 		} else {
@@ -54,7 +54,7 @@ function init_hover_menu_auto(hovered_element) {
 		$(menu_element).hide();
 	});
 	
-	$(hovered_element).click(function(){
+	$(hovered_element).on('touchend', function(){
 		var menu_element = "#" + $(this).attr('menu_element');
 		
 		if ($(menu_element).is(":visible")) {
