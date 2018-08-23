@@ -135,13 +135,22 @@ class Admin extends CI_Controller {
 			$this->form_validation->set_rules('posted_item_name', 'Nama', 'required');
 			$this->form_validation->set_rules('price', 'Harga awal', 'required|integer');
 			$this->form_validation->set_rules('promo_price', 'Harga promo', 'required|integer');
-			$this->form_validation->set_rules('quantity_available', 'Jumlah Stok', 'required|integer');
 			$this->form_validation->set_rules('unit_weight', 'Berat', 'integer');
 			$this->form_validation->set_rules('posted_item_description', 'Deskripsi', 'required');
-			$this->form_validation->set_rules('var_desc', 'Deskripsi Varian', 'required');
 			$this->form_validation->set_rules('date_expired', 'Tanggal Berlaku', 'required');
 			$this->form_validation->set_rules('category_id', 'Kategori', 'required');
 			$this->form_validation->set_rules('brand_id', 'Brand', 'required');
+			
+			$variance = $this->input->post('var_desc');
+			$quantity = $this->input->post('quantity_available');
+			for($i = 0; $i < count($variance); $i++) 
+			{
+				$var_desc = $variance[$i];
+				$quantity_available = $quantity[$i];
+
+				$this->form_validation->set_rules($var_desc, "Deskripsi Varian", "required");
+				$this->form_validation->set_rules($quantity_available, "Jumlah Stok", "required|integer");
+			}
 		} 
 		
 		if ($this->form_validation->run() == TRUE)
@@ -155,7 +164,7 @@ class Admin extends CI_Controller {
 			$this->Posted_item_variance_model->insert_from_post($this->Item_model->id);
 			$this->Tag_model->insert_from_post($this->Item_model->id);
 			$this->Hot_item_model->insert_flash_item($this->Item_model->id);
-			print_r($this->Hot_item_model->id);
+			
 			$this->Tenant_bill_model->insert_flash_item($this->Item_model->id, $this->Hot_item_model->id);
 			
 			redirect('admin/flash_sale_list');
