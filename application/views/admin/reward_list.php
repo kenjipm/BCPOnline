@@ -52,11 +52,11 @@
 					<div class="panel-body">
 						<form class="form-horizontal">
 							<div class="cb-row">
-								<div class="col-sm-3">
-									<label> Nama </label>
+								<div class="col-sm-2">
+									
 								</div>
-								<div class="col-sm-3">
-									<label> No. HP </label>
+								<div class="col-sm-4">
+									<label> Nama </label>
 								</div>
 								<div class="col-sm-3">
 									<label> Tanggal </label>
@@ -67,15 +67,16 @@
 							{
 								?>
 								<div class="cb-row">
-									<div class="col-sm-3">
-										<input type="text" value="<?=$redeem_reward->customer_name?>" class="form-control" readonly>
+									<div class="col-sm-2">
+										<a target = '_blank' href=<?=site_url('account/account_detail/' . $redeem_reward->account_id)?> class="cb-button-form cb-alig"> LIHAT </a>
 									</div>
-									<div class="col-sm-3">
-										<input type="text" value="<?=$redeem_reward->phone_number?>" class="form-control" readonly>
+									<div class="col-sm-4">
+										<input type="text" value="<?=$redeem_reward->customer_name?>" class="form-control" readonly>
 									</div>
 									<div class="col-sm-3">
 										<input type="text" value="<?=$redeem_reward->date_redeemed?>" class="form-control" readonly>
 									</div>
+									
 									<?php if ($redeem_reward->status == "PENDING")
 									{
 									?>
@@ -97,7 +98,7 @@
 							
 							<div class="form-group">
 								<div class="col-sm-7 col-sm-offset-4">
-									<button type="button" class="cb-button-form" onclick=<?="popup.close('popup_reward_detail-" . $i . "')"?>>Tutup</button>
+									<button type="button" class="cb-button-form" onclick=<?="popup.close('popup_reward_detail-" . $i . "')"?>>TUTUP</button>
 								</div>
 							</div>
 						</form>
