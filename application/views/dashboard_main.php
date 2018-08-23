@@ -126,7 +126,7 @@
 			<input type="hidden" id="bidding_cur_price" value="<?=$model->bidding_item->price?>"/>
 			<input type="hidden" id="bidding_step" value="<?=$model->bidding_item->bidding_step?>"/>
 			
-			<div class="cb-col-half cb-p-2">
+			<div class="<?=(count($model->hot_items) > 0)?'cb-col-half':'cb-col-full'?> cb-p-2">
 				<div class="cb-panel cb-bg-primary-2 cb-border-round cb-p-2">
 					<div class="cb-panel-heading cb-row">
 						<div class="cb-icon cb-icon-sm cb-icon-speaker cb-mr-2"></div>

@@ -42,7 +42,7 @@ class Dashboard_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $hot_item->posted_item_id;
-			$temp->posted_item_name	= $hot_item->posted_item->posted_item_name;
+			$temp->posted_item_name	= ($hot_item->posted_item->posted_item_name != "") ? $hot_item->posted_item->posted_item_name : $hot_item->posted_item->posted_item_description;
 			$temp->initial_price	= $this->text_renderer->to_rupiah($hot_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($hot_item->promo_price);
 			$temp->image_one_name	= site_url(($hot_item->posted_item->image_one_name !== "") ? $hot_item->posted_item->image_one_name : DEFAULT_ITEM_PICTURE[$hot_item->posted_item->item_type]);
@@ -50,6 +50,9 @@ class Dashboard_view_model extends CI_Model {
 			$hot_item->init_posted_item();
 			$temp->rating			= $hot_item->posted_item->calculate_rating();
 			$temp->favorite			= $hot_item->posted_item->calculate_favorite();
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$hot_item->posted_item->init_tenant();
 			$temp->tenant = new class{};
@@ -63,11 +66,14 @@ class Dashboard_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $flash_item->posted_item_id;
-			$temp->posted_item_name	= $flash_item->posted_item->posted_item_name;
+			$temp->posted_item_name	= ($flash_item->posted_item->posted_item_name != "") ? $flash_item->posted_item->posted_item_name : $flash_item->posted_item->posted_item_description;
 			$temp->initial_price	= $this->text_renderer->to_rupiah($flash_item->posted_item->price);
 			$temp->promo_price		= $this->text_renderer->to_rupiah($flash_item->promo_price);
 			$temp->image_one_name	= site_url(($flash_item->posted_item->image_one_name !== "") ? $flash_item->posted_item->image_one_name : DEFAULT_ITEM_PICTURE[$flash_item->posted_item->item_type]);
 			// $temp->payment_expiration	= $flash_item->payment_expiration;
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$flash_item->init_posted_item();
 			$temp->rating			= $flash_item->posted_item->calculate_rating();
@@ -80,11 +86,14 @@ class Dashboard_view_model extends CI_Model {
 		{
 			$temp = new class{};
 			$temp->id				= $new_item->id;
-			$temp->posted_item_name	= $new_item->posted_item_name;
+			$temp->posted_item_name	= ($new_item->posted_item_name != "") ? $new_item->posted_item_name : $new_item->posted_item_description;
 			$temp->price			= $this->text_renderer->to_rupiah($new_item->price);
 			$temp->image_one_name	= site_url(($new_item->image_one_name !== "") ? $new_item->image_one_name : DEFAULT_ITEM_PICTURE[$new_item->item_type]);
 			$temp->rating			= $new_item->calculate_rating();
 			$temp->favorite			= $new_item->calculate_favorite();
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$new_item->init_tenant();
 			$temp->tenant = new class{};
@@ -121,11 +130,14 @@ class Dashboard_view_model extends CI_Model {
 		{
 			$this->bidding_item = new class{};
 			$this->bidding_item->id = $bidding_item->id;
-			$this->bidding_item->posted_item_name = $bidding_item->posted_item_name;
+			$this->bidding_item->posted_item_name = ($bidding_item->posted_item_name != "") ? $bidding_item->posted_item_name : $bidding_item->posted_item_description;
 			$this->bidding_item->price = $bidding_item->price;
 			$this->bidding_item->bidding_step = $bidding_item->bidding_max_range;
 			$this->bidding_item->price_str = $this->text_renderer->to_rupiah($bidding_item->price);
 			$this->bidding_item->image_one_name	= site_url(($bidding_item->image_one_name !== "") ? $bidding_item->image_one_name : DEFAULT_ITEM_PICTURE[$bidding_item->item_type]);
+			
+			if (strlen($this->bidding_item->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$this->bidding_item->posted_item_name = substr($this->bidding_item->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$this->bidding_item->start_bid_price	= $bidding_item->price + $bidding_item->bidding_max_range;
 		}

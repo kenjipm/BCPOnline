@@ -46,6 +46,8 @@ defined('DEFAULT_PROFILE_PIC_TENANT') OR define('DEFAULT_PROFILE_PIC_TENANT', 'i
 defined('DEFAULT_IDENTIFICATION_PIC') OR define('DEFAULT_IDENTIFICATION_PIC', 'img/idpic.png');
 defined('DEFAULT_ITEM_IMAGE') OR define('DEFAULT_ITEM_IMAGE', 'img/default_item.png');
 
+defined('ITEM_NAME_THUMBNAIL_MAX_CHAR') OR define('ITEM_NAME_THUMBNAIL_MAX_CHAR', 64);
+
 defined('DEFAULT_ITEM_PICTURE') OR define('DEFAULT_ITEM_PICTURE', array(
 	'ORDER' => 'img/default_item_order.png',
 	'BID' => 'img/default_item_bid.png',

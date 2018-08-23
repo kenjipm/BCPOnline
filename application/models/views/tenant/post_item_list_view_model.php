@@ -27,6 +27,9 @@ class Post_Item_List_View_Model extends CI_Model{
 			$this->posted_items[$i]->item_type 			= $item->item_type;
 			$this->posted_items[$i]->price				= $this->text_renderer->to_rupiah($item->price);
 			
+			if (count($this->posted_items[$i]->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$this->posted_items[$i]->posted_item_name = substr($this->posted_items[$i]->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$this->posted_items[$i]->rating = $item->calculate_rating();
 			$this->posted_items[$i]->favorite = $item->calculate_favorite();
 			

@@ -339,6 +339,35 @@ class Item extends CI_Controller {
 		$this->load->view('footer');
 	}
 	
+	public function brand($category_id, $brand_id, $page=1)
+	{
+		// Load Header
+        $data_header['css_list'] = array();
+        $data_header['js_list'] = array();
+		$this->load->view('header', $data_header);
+		
+		// Load Body
+		$this->load->model('item_model');
+		$promoted_items = $this->item_model->get_all_promoted_from_category_id_brand_id($category_id, $brand_id);
+		$items = $this->item_model->get_all_from_category_id_brand_id($category_id, $brand_id, (($page - 1) * PAGINATION['type']['LIMIT_CATEGORY']));
+		$item_count = $this->item_model->count_from_category_id_brand_id($category_id, $brand_id);
+		
+		$this->load->model('views/item_gallery_view_model');
+		$this->item_gallery_view_model->get($items, 'item/hot_items/');
+		$this->item_gallery_view_model->calculate_pagination($item_count, $page);
+		
+		$category = $this->category_model->get_from_id($category_id);
+		$this->load->model('brand_model');
+		$brand = $this->brand_model->get_from_id($brand_id);
+		
+		$data['title'] = strtoupper($category->category_name . " - " . $brand->brand_name);
+		$data['model'] = $this->item_gallery_view_model;
+		$this->load->view('item_gallery', $data);
+		
+		// Load Footer
+		$this->load->view('footer');
+	}
+	
 	public function hot_items($page=1)
 	{
 		// Load Header

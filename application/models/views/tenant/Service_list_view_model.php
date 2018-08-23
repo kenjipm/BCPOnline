@@ -25,6 +25,9 @@ class Service_list_view_model extends CI_Model {
 			$item_temp->rating				= $item->calculate_rating();
 			$item_temp->favorite			= $item->calculate_favorite();
 			
+			if (strlen($item_temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$item_temp->posted_item_name = substr($item_temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$item->init_tenant();
 			$item_temp->tenant = new class{};
 			$item_temp->tenant->tenant_name	= $item->tenant->tenant_name;

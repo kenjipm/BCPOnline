@@ -43,6 +43,9 @@ class Tenant_public_profile_main_view_model extends CI_Model {
 			$temp->favorite = $item->calculate_favorite();
 			$temp->item_type = $item->item_type;
 			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$item->get_hot_item();
 			$temp->is_hot_item = ($item->hot_item != null);
 			if ($item->hot_item != null)

@@ -36,6 +36,9 @@ class Item_gallery_view_model extends CI_Model {
 			$item_temp->rating				= $item->calculate_rating();
 			$item_temp->favorite			= $item->calculate_favorite();
 			
+			if (strlen($item_temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$item_temp->posted_item_name = substr($item_temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$item->init_tenant();
 			$item_temp->tenant = new class{};
 			$item_temp->tenant->tenant_name	= $item->tenant->tenant_name;
@@ -67,6 +70,9 @@ class Item_gallery_view_model extends CI_Model {
 			$temp->image_one_name = site_url(($item->image_one_name !== "") ? $item->image_one_name : DEFAULT_ITEM_PICTURE[$item->item_type]);
 			$temp->rating = $item->calculate_rating();
 			$temp->favorite = $item->calculate_favorite();
+			
+			if (strlen($temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$temp->posted_item_name = substr($temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
 			
 			$item->init_tenant();
 			$temp->tenant = new class{};

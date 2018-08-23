@@ -96,6 +96,9 @@ class Item_main_view_model extends CI_Model {
 			$other_item_temp->rating = $other_item->calculate_rating();
 			$other_item_temp->favorite = $other_item->calculate_favorite();
 			
+			if (strlen($other_item_temp->posted_item_name) > ITEM_NAME_THUMBNAIL_MAX_CHAR)
+			$other_item_temp->posted_item_name = substr($other_item_temp->posted_item_name, 0, ITEM_NAME_THUMBNAIL_MAX_CHAR - 3) . "...";
+			
 			$other_item->init_tenant();
 			$other_item_temp->tenant = new class{};
 			$other_item_temp->tenant->tenant_name	= $other_item->tenant->tenant_name;
