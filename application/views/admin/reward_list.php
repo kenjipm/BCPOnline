@@ -44,7 +44,7 @@
 					LIHAT
 				</a>
 			</div>
-			<div id=<?="popup_reward_detail-" . $i ?> class="popup popup-md">
+			<div id=<?="popup_reward_detail-" . $i ?> class="popup popup-lg">
 				<div class="panel panel-default">
 					<div class="panel-heading">
 						Daftar Redeem Customer
@@ -55,7 +55,10 @@
 								<div class="col-sm-3">
 									<label> Nama </label>
 								</div>
-								<div class="col-sm-6">
+								<div class="col-sm-3">
+									<label> No. HP </label>
+								</div>
+								<div class="col-sm-3">
 									<label> Tanggal </label>
 								</div>
 							</div>
@@ -67,7 +70,10 @@
 									<div class="col-sm-3">
 										<input type="text" value="<?=$redeem_reward->customer_name?>" class="form-control" readonly>
 									</div>
-									<div class="col-sm-6">
+									<div class="col-sm-3">
+										<input type="text" value="<?=$redeem_reward->phone_number?>" class="form-control" readonly>
+									</div>
+									<div class="col-sm-3">
 										<input type="text" value="<?=$redeem_reward->date_redeemed?>" class="form-control" readonly>
 									</div>
 									<?php if ($redeem_reward->status == "PENDING")
