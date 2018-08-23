@@ -74,6 +74,7 @@ class Redeem_reward_model extends CI_Model {
 		$stub->customer				= new Customer_model();
 		$stub->customer->account	= new Account_model();
 		$stub->customer->account->name	= $db_item->name ?? "";
+		$stub->customer->account->phone_number	= $db_item->phone_number ?? "";
 		
 		return $stub;
 	}

@@ -17,8 +17,8 @@
 	</div>
 </div>
 
-<div class="cb-panel-body cb-p-5">
-	<div class="item-showcase cb-row">
+<div class="cb-panel-body cb-bg-primary-3 cb-p-5">
+	<div class="cb-row">
 		<?php
 			foreach($model->items as $flash_sale)
 			{
@@ -45,7 +45,6 @@
 				</div>
 				<?php
 			}
-			?>
 		?>
 	</div>
 </div>

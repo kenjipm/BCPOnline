@@ -35,6 +35,7 @@ class Reward_List_View_Model {
 				$this->rewards[$i]->redeem_reward[$j] = new class{};
 				$this->rewards[$i]->redeem_reward[$j]->id			 = $redeem_reward->id;
 				$this->rewards[$i]->redeem_reward[$j]->customer_name = $redeem_reward->customer->account->name;
+				$this->rewards[$i]->redeem_reward[$j]->phone_number	 = $redeem_reward->customer->account->phone_number;
 				$this->rewards[$i]->redeem_reward[$j]->date_redeemed = $redeem_reward->date_redeemed;
 				$this->rewards[$i]->redeem_reward[$j]->status		 = $redeem_reward->status;
 				$j++;
