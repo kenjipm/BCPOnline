@@ -27,7 +27,7 @@
 					{
 						?>
 						<div class="cb-row cb-border-bottom cb-border-white">
-							<a href="<?=site_url($menu_item['url'])?>" class="category cb-col-full cb-font-primary-2" target="_blank">
+							<a href="<?=site_url($menu_item['url'])?>" class="category cb-col-full cb-font-primary-2">
 								<div class="panel-body cb-txt-secondary-3">
 									<?php if ($notifs[$menu_item['notif']] > 0) { ?> <span class="circle circle-sm cb-bg-primary-2"></span> <?php } ?>
 									<b><?=$menu_item['text']?></b>
