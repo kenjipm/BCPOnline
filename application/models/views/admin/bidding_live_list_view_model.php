@@ -61,7 +61,7 @@ class Bidding_live_list_view_model extends CI_Model {
 		{
 			$this->active_flash = false;
 			$this->active_bid = true;
-			if ($this->items[0]->is_winner)
+			if (($this->items[0]->is_winner) || ($this->items[0]->is_expired))
 			{
 				$this->active_bid = false;
 			}
